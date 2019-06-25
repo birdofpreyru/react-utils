@@ -1,12 +1,14 @@
-![Dev Build Status](https://img.shields.io/circleci/project/github/topcoder-platform/topcoder-react-utils/develop.svg?label=develop)
-![Master Build Status](https://img.shields.io/circleci/project/github/topcoder-platform/topcoder-react-utils/master.svg?label=master)
-![Latest NPM Release](https://img.shields.io/npm/v/topcoder-react-utils.svg)
-![NPM Downloads](https://img.shields.io/npm/dm/topcoder-react-utils.svg)
+![Master Build Status](https://img.shields.io/circleci/project/github/birdofpreyru/react-utils/master.svg?label=master)
+![Dev Build Status](https://img.shields.io/circleci/project/github/birdofpreyru/react-utils/develop.svg?label=develop)
+![Latest NPM Release](https://img.shields.io/npm/v/dr-pogodin-react-utils.svg)
+![NPM Downloads](https://img.shields.io/npm/dm/dr-pogodin-react-utils.svg)
 
-# Topcoder React Utils
-The [Topcoder](https://www.topcoder.com) collection of generic ReactJS
-configurations, components and utilities to be shared between all internal and
-external ReactJS projects developed by the Topcoder community.
+# Dr. Pogodin React Utils
+
+A collection of generic ReactJS configurations, components, and utilities.
+
+Forked from
+[Topcoder React Utils](https://github.com/topcoder-platform/topcoder-react-utils).
 
 ## Content
 - [Installation](#installation)
@@ -24,23 +26,23 @@ external ReactJS projects developed by the Topcoder community.
 ## Installation
 Install the package as
 ```bash
-$ npm install --save topcoder-react-utils
-$ ./node_modules/.bin/topcoder-lib-setup
+$ npm install --save dr-pogodin-react-utils
+$ ./node_modules/.bin/dr-pogodin-lib-setup
 ```
 Then import the global stylesheet into the root ReactJS component of your app:
 ```jsx
 /* eslint-disable global-require */
 if (process.env.NODE_ENV === 'production') {
-  require('topcoder-react-utils/dist/prod/style.css');
+  require('dr-pogodin-react-utils/dist/prod/style.css');
 } else {
-  require('topcoder-react-utils/dist/dev/style.css');
+  require('dr-pogodin-react-utils/dist/dev/style.css');
 }
 /* eslint-enable global-require */
 ```
 
 To upgrade this library to the latest version just execute again
 ```bash
-$ ./node_modules/.bin/topcoder-lib-setup
+$ ./node_modules/.bin/dr-pogodin-lib-setup
 ```
 
 ## Reference
@@ -70,8 +72,8 @@ $ ./node_modules/.bin/topcoder-lib-setup
   the specified aspect ratio regardless the width you set.
 
 ### NodeJS Scripts
-- [**topcoder-lib-setup**](docs/topcoder-lib-setup-script.md) &ndash; Helps to
-  install and upgrade **topcoder-react-utils** and other similar libraries.
+- [**dr-pogodin-lib-setup**](docs/dr-pogodin-lib-setup-script.md) &ndash; Helps to
+  install and upgrade **dr-pogodin-react-utils** and other similar libraries.
 
 ### Redux Templates
 - [**Item**](docs/redux-item.md) &ndash; An async piece of data in Redux store.
@@ -149,4 +151,4 @@ To release updated library version to NPM do the following:
 - Commit the tag to GitHub repository.
 
 ## License
-Topcoder React Utils is [MIT Licensed](LICENSE.md)
+Dr. Pogodin React Utils are [MIT Licensed](LICENSE.md).

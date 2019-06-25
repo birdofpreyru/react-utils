@@ -1,3 +1,7 @@
+# Dr. Pogodin React Utils Changelog
+
+See [release notes on GitHub](https://github.com/birdofpreyru/react-utils/releases).
+
 # Topcoder React Utils Changelog
 
 ### v0.9.0

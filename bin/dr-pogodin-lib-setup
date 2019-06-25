@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-/* Auxiliary script that helps to install and upgrade Topcoder libraries
+/* Auxiliary script that helps to install and upgrade libraries
  * published to NPM. */
 /* eslint-disable import/no-extraneous-dependencies, no-console  */
 
@@ -29,11 +29,11 @@ const OPTIONS = [{
 
 /* Definition of help information. */
 const HELP = [{
-  content: 'Usage: {cyanBright topcoder-lib-setup [OPTION]... LIBRARY...}',
+  content: 'Usage: {cyanBright dr-pogodin-lib-setup [OPTION]... LIBRARY...}',
 }, {
   header: 'Description',
   content:
-    `Installs or upgrades Topcoder's ReactJS libraries released to NPM.
+    `Installs or upgrades ReactJS libraries released to NPM.
     {cyanBright [OPTION]...} is the list of options (see below);
     {cyanBright LIBRARY...} is the list of libraries to install/upgrade`,
 }, {
@@ -83,8 +83,8 @@ function getHostPackageJson() {
  * @param {String} package Package name.
  * @return {Object} Data from `package.json` parsed into JSON.
  */
-function getPackageJson(packageName = 'topcoder-react-utils') {
-  let url = packageName === 'topcoder-react-utils' ? '..' : packageName;
+function getPackageJson(packageName = 'dr-pogodin-react-utils') {
+  let url = packageName === 'dr-pogodin-react-utils' ? '..' : packageName;
   url = path.dirname(require.resolve(url));
   for (;;) {
     const files = fs.readdirSync(url);
@@ -134,7 +134,7 @@ function updateProdDependencies(donorData, hostData) {
 
 const options = commandLineArgs(OPTIONS);
 if (!options.libraries) {
-  options.libraries = ['topcoder-react-utils'];
+  options.libraries = ['dr-pogodin-react-utils'];
 }
 
 if (options.help) showHelp();

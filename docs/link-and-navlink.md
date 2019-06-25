@@ -76,7 +76,7 @@ for more information.
 
 Minimal `<Link>` example:
 ```js
-import { Link } from 'topcoder-react-utils';
+import { Link } from 'dr-pogodin-react-utils';
 
 export default function LinksExample() {
   return <Link to="some/url">Link to Some URL</a>;

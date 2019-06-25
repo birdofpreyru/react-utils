@@ -22,7 +22,7 @@ This module provides the following functions:
   e.g.:
 
   ```jsx
-  import { JU } from 'topcoder-react-utils';
+  import { JU } from 'dr-pogodin-react-utils';
 
   console.log(JU.render(<div>Example</div>));
   ```
@@ -32,7 +32,7 @@ This module provides the following functions:
   a rendered node in the resulting tree, you can do it like this:
   ```jsx
   import React from 'react';
-  import { JU } from 'topcoder-react-utils/jest-utils';
+  import { JU } from 'dr-pogodin-react-utils/jest-utils';
 
   const dom = JU.renderDom(
     <div>
@@ -50,7 +50,7 @@ This module provides the following functions:
   and returns the result.
 
   ```jsx
-  import { JU } from 'topcoder-react-utils/jest-utils';
+  import { JU } from 'dr-pogodin-react-utils/jest-utils';
 
   console.log(JU.shallowRender(<div>Example</div>));
   ```
@@ -64,7 +64,7 @@ This module provides the following functions:
   ```jsx
   // Sample Jest test.
 
-  import { JU } from 'topcoder-react-utils/jest-utils';
+  import { JU } from 'dr-pogodin-react-utils/jest-utils';
 
   test('A snapshot test', () => {
     console.log(JU.shallowSnapshot(<div>Example</div>));
@@ -83,7 +83,7 @@ This module provides the following functions:
   ```jsx
   // Sample Jest test.
 
-  import { JU } from 'topcoder-react-utils/jest-utils';
+  import { JU } from 'dr-pogodin-react-utils/jest-utils';
 
   test('A snapshot test', () => {
     console.log(JU.snapshot(<div>Example</div>));

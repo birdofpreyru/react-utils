@@ -170,7 +170,7 @@ module.exports = function configFactory(ops) {
           babelrc: false,
           configFile: false,
           envName: o.babelEnv,
-          presets: ['topcoder-react-utils/config/babel/webpack'],
+          presets: ['dr-pogodin-react-utils/config/babel/webpack'],
         },
       }, {
         /* Loads image assets. */

@@ -66,7 +66,7 @@ URL/location.
 ### <a name="examples">Examples</a>
 ```jsx
 import React from 'react';
-import { Button } from 'topcoder-react-utils';
+import { Button } from 'dr-pogodin-react-utils';
 
 export default function Example() {
   return <Button to="https://topcoder.com">Simple Button</Button>;

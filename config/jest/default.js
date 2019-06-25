@@ -22,7 +22,7 @@ module.exports = {
   ],
   testURL: 'http://localhost',
   transformIgnorePatterns: [
-    '/node_modules/(?!topcoder-react-utils)',
+    '/node_modules/(?!dr-pogodin-react-utils)',
   ],
   setupTestFrameworkScriptFile: '<rootDir>/config/jest/setup.js',
 };

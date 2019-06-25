@@ -3,7 +3,7 @@
  * serving as the split points. Because it is quite complex, here are only
  * some technical comments in the code. For instructions on how to use it
  * refer to
- * https://github.com/topcoder-platform/community-app/blob/develop/docs/code-splitting.md
+ * https://github.com/dr-pogodin-platform/community-app/blob/develop/docs/code-splitting.md
  */
 
 /* global document, window */

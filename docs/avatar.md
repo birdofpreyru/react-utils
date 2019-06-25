@@ -34,7 +34,7 @@ the default avatar image, e.g.:
 // MyThemedAvatar.jsx
 
 import React from 'react';
-import { Avatar } from 'topcoder-react-utils';
+import { Avatar } from 'dr-pogodin-react-utils';
 import { themr } from 'react-css-super-themr';
 
 import DefaultAvatarImage from './default-avatar-image.svg';

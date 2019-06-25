@@ -25,7 +25,7 @@ the native NodeJS server that exposes ExpressJS to the outside world.
 
 For the practical use, staring the server is as easy as:
 ```js
-import { server } from 'topcoder-react-utils`;
+import { server } from 'dr-pogodin-react-utils`;
 import webpackConfig from 'config/webpack/production.js`;
 
 const options = {}; // A number of extra options can be provided here.

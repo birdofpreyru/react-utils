@@ -5,5 +5,5 @@ const ROOT = path.resolve(__dirname, '../../../..');
 
 /* eslint-disable global-require, import/no-dynamic-require */
 module.exports = modulePath => require(
-  modulePath.replace(/^topcoder-react-utils\/dist\/dev/, ROOT),
+  modulePath.replace(/^dr-pogodin-react-utils\/dist\/dev/, ROOT),
 );

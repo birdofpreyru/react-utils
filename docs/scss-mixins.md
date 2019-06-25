@@ -7,7 +7,7 @@ and implmented in a standard way.
 
 To use, import the main mixins file into your SCSS, e.g.:
 ```scss
-@import "topcoder-react-utils/src/styles/mixins";
+@import "dr-pogodin-react-utils/src/styles/mixins";
 ```
 
 ### Font Mixins

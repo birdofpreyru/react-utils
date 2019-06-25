@@ -67,7 +67,7 @@ For `myData` actions module you should do:
 ```js
 // src/shared/actions/myData.js
 
-import { actions, redux } from 'topcoder-react-utils';
+import { actions, redux } from 'dr-pogodin-react-utils';
 
 const itemActions = actions.item;
 
@@ -98,7 +98,7 @@ our standard practice):
 // src/shared/reducers/myData.js
 
 import actions from 'actions/myData';
-import { actions as truActions, reducers, redux } from 'topcoder-react-utils';
+import { actions as truActions, reducers, redux } from 'dr-pogodin-react-utils';
 
 const itemActions = truActions.item;
 const itemReducer = reducers.item;
@@ -166,7 +166,7 @@ import Example from 'components/Example';
 import PT from 'prop-types';
 import React from 'react';
 import shortId from 'shortid';
-import { redux } from 'topcoder-react-utils';
+import { redux } from 'dr-pogodin-react-utils';
 
 const MAX_AGE = 5 * 60 * 1000; // 5 min.
 const RELOAD_AGE = 1 * 60 * 1000; // 1 min.

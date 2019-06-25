@@ -11,7 +11,7 @@ This package provides the following ESLint configurations:
 To use them just create the following `.eslintrc` in your code:
 ```json
 {
-  "extends": "./node_modules/topcoder-react-utils/config/eslint/default.json"
+  "extends": "./node_modules/dr-pogodin-react-utils/config/eslint/default.json"
 }
 ```
 `.eslintrc` allows you to further modify ESLint configuration, but it is not recommended without a very good and special reason.
