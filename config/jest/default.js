@@ -24,5 +24,7 @@ module.exports = {
   transformIgnorePatterns: [
     '/node_modules/(?!dr-pogodin-react-utils)',
   ],
-  setupTestFrameworkScriptFile: '<rootDir>/config/jest/setup.js',
+  setupFilesAfterEnv: [
+    '<rootDir>/config/jest/setup.js',
+  ],
 };

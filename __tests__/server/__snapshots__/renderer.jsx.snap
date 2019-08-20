@@ -108,7 +108,7 @@ exports[`Hemlet integration works 1`] = `
           </head>
           <body>
             
-            <div id=\\"react-view\\"><div data-reactroot=\\"\\"><p>Hello World!</p><p>Goodbye World!</p></div></div>
+            <div id=\\"react-view\\"><div><p>Hello World!</p><p>Goodbye World!</p></div></div>
             <script id=\\"inj\\" type=\\"application/javascript\\">
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1TZonSyrmykHqLzmKxXS0DK59BGs6WiptmyS+pXhsvdE\\"
@@ -235,7 +235,7 @@ exports[`Setting of response HTTP status the server-side rendering 1`] = `
           </head>
           <body>
             
-            <div id=\\"react-view\\"><div data-reactroot=\\"\\">404 Error Test</div></div>
+            <div id=\\"react-view\\"><div>404 Error Test</div></div>
             <script id=\\"inj\\" type=\\"application/javascript\\">
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1TZonSyrmykHqLzmKxXS0DK59BGs6WiptmyS+pXhsvdE\\"

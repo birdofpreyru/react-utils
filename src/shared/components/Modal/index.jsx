@@ -43,19 +43,20 @@ class BaseModal extends React.Component {
     } = this.props;
     return ReactDom.createPortal(
       (
-        <React.Fragment>
+        <>
           <div
             className={theme.container}
-            onWheel={event => event.stopPropagation()}
+            onWheel={(event) => event.stopPropagation()}
           >
             {children}
           </div>
           <button
+            aria-label="Cancel"
             onClick={() => onCancel()}
             className={theme.overlay}
             type="button"
           />
-        </React.Fragment>
+        </>
       ),
       this.portal,
     );

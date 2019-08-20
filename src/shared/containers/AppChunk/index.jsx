@@ -189,7 +189,7 @@ export default class SplitRoute extends React.Component {
                 });
                 arr.sort((a, b) => a.chunkOrder - b.chunkOrder);
                 arr.slice(0, unused.length - MAX_UNUSED_STYLESHEETS)
-                  .forEach(x => head.removeChild(x));
+                  .forEach((x) => head.removeChild(x));
               }
             }
 

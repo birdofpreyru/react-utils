@@ -79,4 +79,4 @@ MetaTags.propTypes = {
 /* TODO: It is not good to depend on the domain written into redux state here,
  * better pass it via the renderer context at the server side, and get it from
  * the location at the frontend side, or something similar? */
-export default connect(state => ({ domain: state.domain }))(MetaTags);
+export default connect((state) => ({ domain: state.domain }))(MetaTags);

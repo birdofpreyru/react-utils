@@ -122,8 +122,9 @@ module.exports = function configFactory(ops) {
             loader: 'css-loader',
             options: {
               importLoaders: 3,
-              localIdentName: ops.cssLocalIdent,
-              modules: true,
+              modules: {
+                localIdentName: ops.cssLocalIdent,
+              },
             },
           }, {
             loader: 'postcss-loader',

@@ -34,7 +34,7 @@ export default async function factory(webpackConfig, options) {
   server.use(cookieParser());
   server.use(requestIp.mw());
 
-  loggerMiddleware.token('ip', req => req.clientIp);
+  loggerMiddleware.token('ip', (req) => req.clientIp);
   const FORMAT = ':ip > :status :method :url :response-time ms :res[content-length] :referrer :user-agent';
   server.use(loggerMiddleware(FORMAT, {
     stream: new stream.Writable({

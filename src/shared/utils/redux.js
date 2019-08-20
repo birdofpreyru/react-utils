@@ -83,10 +83,10 @@ export function proxyReducer(reducer, actionCreator) {
  * @return Promise which resolves to the operation result.
  */
 export function resolveAction(action) {
-  return action.payload.then(data => ({
+  return action.payload.then((data) => ({
     ...action,
     payload: data,
-  }), error => ({
+  }), (error) => ({
     ...action,
     payload: error,
     error: true,
