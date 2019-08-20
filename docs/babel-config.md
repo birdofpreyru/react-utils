@@ -16,7 +16,7 @@ compilation of JS and JSX modules.
 Use them as presets in your `.babelrc`, e.g.
 ```json
 {
-  "presets": ["dr-pogodin-react-utils/config/babel/node-ssr"]
+  "presets": ["@dr.pogodin/react-utils/config/babel/node-ssr"]
 }
 ```
 
@@ -24,7 +24,7 @@ To set options provided by a preset:
 ```json
 {
   "presets": [
-    ["dr-pogodin-react-utils/config/babel/node-ssr", {
+    ["@dr.pogodin/react-utils/config/babel/node-ssr", {
       "someOption": "optionValue"
     }]
   ]

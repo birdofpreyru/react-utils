@@ -13,7 +13,7 @@ window.TRU_FRONT_END = true;
 const block = document.querySelector('script[id="inj"]');
 document.getElementsByTagName('body')[0].removeChild(block);
 
-/* TODO: A proper logger should be moved to `dr-pogodin-react-utils`. */
+/* TODO: A proper logger should be moved to `@dr.pogodin/react-utils`. */
 /* eslint-disable no-console */
 const { useServiceWorker } = window.TRU_BUILD_INFO;
 if (useServiceWorker) {

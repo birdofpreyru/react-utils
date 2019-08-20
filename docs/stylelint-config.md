@@ -18,7 +18,7 @@ Stylelint: `@content`, `@extend`, `@for`, `@include`, `@mixin`, `:global`.
 To use it, just create the following `.stylelintrc`:
 ```json
 {
-  "extends": "./node_modules/dr-pogodin-react-utils/config/stylelint/default.json"
+  "extends": "./node_modules/@dr.pogodin/react-utils/config/stylelint/default.json"
 }
 ```
 

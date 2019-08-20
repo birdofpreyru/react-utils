@@ -117,7 +117,7 @@
   "name": "@dr.pogodin/react-utils",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/birdofpreyru/dr-pogodin-react-utils.git"
+    "url": "git+https://github.com/birdofpreyru/@dr.pogodin/react-utils.git"
   },
   "scripts": {
     "build": "npm run build:dev && npm run build:prod",

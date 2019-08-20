@@ -83,8 +83,8 @@ function getHostPackageJson() {
  * @param {String} package Package name.
  * @return {Object} Data from `package.json` parsed into JSON.
  */
-function getPackageJson(packageName = 'dr-pogodin-react-utils') {
-  let url = packageName === 'dr-pogodin-react-utils' ? '..' : packageName;
+function getPackageJson(packageName = '@dr.pogodin/react-utils') {
+  let url = packageName === '@dr.pogodin/react-utils' ? '..' : packageName;
   url = path.dirname(require.resolve(url));
   for (;;) {
     const files = fs.readdirSync(url);
@@ -134,7 +134,7 @@ function updateProdDependencies(donorData, hostData) {
 
 const options = commandLineArgs(OPTIONS);
 if (!options.libraries) {
-  options.libraries = ['dr-pogodin-react-utils'];
+  options.libraries = ['@dr.pogodin/react-utils'];
 }
 
 if (options.help) showHelp();

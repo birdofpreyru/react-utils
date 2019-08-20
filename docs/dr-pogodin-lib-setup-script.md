@@ -1,6 +1,6 @@
 # `dr-pogodin-lib-setup` script
 
-NodeJS script that helps to install and upgrade `dr-pogodin-react-utils` and other
+NodeJS script that helps to install and upgrade `@dr.pogodin/react-utils` and other
 similar NPM libraries.
 
 **Why?** &mdash; When library version is upgraded manually, it is difficult
@@ -17,7 +17,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup [OPTION]... [LIBRARY]...
 ```
 Where `[OPTIONS]...` is an optional, whitespace-separated list of options (see
 below); and `[LIBRARY]...` is an optional, whitespace-separated list of libraries
-to update. If no library names are given, `dr-pogodin-react-utils` is assumed by
+to update. If no library names are given, `@dr.pogodin/react-utils` is assumed by
 default.
 
 For each `library` specified in the `[LIBRARY]...` list, this script does the

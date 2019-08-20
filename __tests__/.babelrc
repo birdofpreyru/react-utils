@@ -7,7 +7,7 @@
       "module-resolver",
       {
         "alias": {
-          "dr-pogodin-react-utils/dist": "./src"
+          "@dr.pogodin/react-utils/dist": "./src"
         }
       }
     ]

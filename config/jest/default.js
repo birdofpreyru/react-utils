@@ -22,7 +22,7 @@ module.exports = {
   ],
   testURL: 'http://localhost',
   transformIgnorePatterns: [
-    '/node_modules/(?!dr-pogodin-react-utils)',
+    '/node_modules/(?!@dr.pogodin/react-utils)',
   ],
   setupFilesAfterEnv: [
     '<rootDir>/config/jest/setup.js',

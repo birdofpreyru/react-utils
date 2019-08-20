@@ -7,7 +7,7 @@ web app, so here we provide it.
 The global stylesheets are include into your app when you add to your root
 ReactJS component the import
 ```js
-import 'dr-pogodin-react-utils/dist/style.css';
+import '@dr.pogodin/react-utils/dist/style.css';
 ```
 
 This stylesheet, beside bundled-in styles necessary for components provided by

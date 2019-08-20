@@ -4,7 +4,7 @@ Implements a simple themeable modal window.
 
 *TODO: This is a raw description of the component, should be improved*
 
-**dr-pogodin-react-utils** exports two versions of the modal component,
+**@dr.pogodin/react-utils** exports two versions of the modal component,
 `BaseModal` implements a non-themed version, and `Modal` is its version
 wrapped into a default style, using `react-css-super-themr` lib.
 

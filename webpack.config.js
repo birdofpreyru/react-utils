@@ -5,7 +5,7 @@ module.exports = function buildConfig(env) {
   const config = require(`./config/webpack/lib-${env}.js`)({
     context: __dirname,
     entry: './src',
-    library: 'dr-pogodin-react-utils',
+    library: '@dr.pogodin/react-utils',
   });
 
   /* The lib config is intended for use outside of this very package,
