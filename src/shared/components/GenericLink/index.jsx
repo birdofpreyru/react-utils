@@ -39,8 +39,8 @@ export default function GenericLink(props) {
         className={className}
         disabled={disabled}
         href={to}
-        onClick={disabled ? e => e.preventDefault() : onClick}
-        onMouseDown={disabled ? e => e.preventDefault() : onMouseDown}
+        onClick={disabled ? (e) => e.preventDefault() : onClick}
+        onMouseDown={disabled ? (e) => e.preventDefault() : onMouseDown}
         rel="noopener noreferrer"
         styleName="link"
         target={openNewTab ? '_blank' : ''}

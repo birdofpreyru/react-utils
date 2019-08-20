@@ -94,7 +94,8 @@ module.exports = function configFactory(ops) {
   }
 
   entry.polyfills = _.union(entry.polyfills, [
-    '@babel/polyfill',
+    'core-js/stable',
+    'regenerator-runtime/runtime',
     'nodelist-foreach-polyfill',
   ]);
 
@@ -170,7 +171,7 @@ module.exports = function configFactory(ops) {
           babelrc: false,
           configFile: false,
           envName: o.babelEnv,
-          presets: ['dr-pogodin-react-utils/config/babel/webpack'],
+          presets: ['@dr.pogodin/react-utils/config/babel/webpack'],
         },
       }, {
         /* Loads image assets. */
@@ -187,8 +188,9 @@ module.exports = function configFactory(ops) {
           MiniCssExtractPlugin.loader, {
             loader: 'css-loader',
             options: {
-              localIdentName: o.cssLocalIdent,
-              modules: true,
+              modules: {
+                localIdentName: o.cssLocalIdent,
+              },
             },
           }, {
             loader: 'postcss-loader',

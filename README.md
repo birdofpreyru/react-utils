@@ -1,7 +1,7 @@
 ![Master Build Status](https://img.shields.io/circleci/project/github/birdofpreyru/react-utils/master.svg?label=master)
 ![Dev Build Status](https://img.shields.io/circleci/project/github/birdofpreyru/react-utils/develop.svg?label=develop)
-![Latest NPM Release](https://img.shields.io/npm/v/dr-pogodin-react-utils.svg)
-![NPM Downloads](https://img.shields.io/npm/dm/dr-pogodin-react-utils.svg)
+![Latest NPM Release](https://img.shields.io/npm/v/@dr.pogodin/react-utils.svg)
+![NPM Downloads](https://img.shields.io/npm/dm/@dr.pogodin/react-utils.svg)
 
 # Dr. Pogodin React Utils
 
@@ -26,16 +26,16 @@ Forked from
 ## Installation
 Install the package as
 ```bash
-$ npm install --save dr-pogodin-react-utils
+$ npm install --save @dr.pogodin/react-utils
 $ ./node_modules/.bin/dr-pogodin-lib-setup
 ```
 Then import the global stylesheet into the root ReactJS component of your app:
 ```jsx
 /* eslint-disable global-require */
 if (process.env.NODE_ENV === 'production') {
-  require('dr-pogodin-react-utils/dist/prod/style.css');
+  require('@dr.pogodin/react-utils/dist/prod/style.css');
 } else {
-  require('dr-pogodin-react-utils/dist/dev/style.css');
+  require('@dr.pogodin/react-utils/dist/dev/style.css');
 }
 /* eslint-enable global-require */
 ```
@@ -73,7 +73,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 
 ### NodeJS Scripts
 - [**dr-pogodin-lib-setup**](docs/dr-pogodin-lib-setup-script.md) &ndash; Helps to
-  install and upgrade **dr-pogodin-react-utils** and other similar libraries.
+  install and upgrade **@dr.pogodin/react-utils** and other similar libraries.
 
 ### Redux Templates
 - [**Item**](docs/redux-item.md) &ndash; An async piece of data in Redux store.

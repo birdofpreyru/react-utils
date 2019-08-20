@@ -21,7 +21,7 @@ function getConfig(babel, ops = {}) {
   ]);
 
   const moduleResolverPluginOps = config.plugins.find(
-    x => x[0] === 'module-resolver',
+    (x) => x[0] === 'module-resolver',
   )[1];
 
   moduleResolverPluginOps.transformFunctions = [

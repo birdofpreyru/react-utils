@@ -8,7 +8,7 @@ both at server- and client-side.
 
 Use it this way:
 ```js
-import { config } from 'dr-pogodin-react-utils';
+import { config } from '@dr.pogodin/react-utils';
 
 // Some code relying on the config.
 ```

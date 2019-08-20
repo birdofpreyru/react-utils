@@ -180,7 +180,7 @@ export default function factory(webpackConfig, options) {
         let assets = assetsByChunkName[chunk];
         if (!assets) return;
         if (!_.isArray(assets)) assets = [assets];
-        assets = assets.filter(asset => asset.endsWith('.css'));
+        assets = assets.filter((asset) => asset.endsWith('.css'));
         assets.forEach((asset) => {
           styles.push((
             `<link data-chunk="${chunk}" id="tru-style" href="${publicPath}${asset}" rel="stylesheet" />`
@@ -193,19 +193,19 @@ export default function factory(webpackConfig, options) {
       let headOpenExtraScripts;
       if (extraScripts) {
         bodyOpenExtraScripts = extraScripts
-          .filter(script => _.isObject(script)
+          .filter((script) => _.isObject(script)
             && script.location === SCRIPT_LOCATIONS.BODY_OPEN)
-          .map(script => script.code)
+          .map((script) => script.code)
           .join('');
         defaultExtraScripts = extraScripts
-          .filter(script => _.isString(script)
+          .filter((script) => _.isString(script)
             || script.location === SCRIPT_LOCATIONS.DEFAULT)
-          .map(script => (_.isString(script) ? script : script.code))
+          .map((script) => (_.isString(script) ? script : script.code))
           .join('');
         headOpenExtraScripts = extraScripts
-          .filter(script => _.isObject(script)
+          .filter((script) => _.isObject(script)
             && script.location === SCRIPT_LOCATIONS.HEAD_OPEN)
-          .map(script => script.code)
+          .map((script) => script.code)
           .join('');
       }
 

@@ -12,7 +12,7 @@ beforeAll(() => {
   /* Modal uses ReactJS portals to ensure proper rendering. react-test-renderer,
    * used by utils/jest under the hood, does not support it properly, thus this
    * simple mock for the createPortal(..) function. */
-  ReactDom.createPortal = jest.fn(element => (
+  ReactDom.createPortal = jest.fn((element) => (
     <div className="MOCK_PORTAL">
       {element}
     </div>
