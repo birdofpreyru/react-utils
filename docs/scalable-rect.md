@@ -43,7 +43,7 @@ component hides all technical aspects of that solution under the hood.
 // index.scss
 
 import React from 'react';
-import { ScalableRect } from 'topcoder-react-utils';
+import { ScalableRect } from '@dr.pogodin/react-utils';
 
 import './style.scss';
 

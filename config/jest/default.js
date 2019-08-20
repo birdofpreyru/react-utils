@@ -1,9 +1,17 @@
+const path = require('path');
+
+const globalLibDir = path.resolve(process.execPath, '../../lib/node_modules');
+
 module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     'src/**/*.{js,jsx}',
   ],
   coverageDirectory: '__coverage__',
+  moduleDirectories: [
+    'node_modules',
+    globalLibDir,
+  ],
   moduleNameMapper: {
     '\\.(scss|css)$': 'identity-obj-proxy',
   },
@@ -14,7 +22,9 @@ module.exports = {
   ],
   testURL: 'http://localhost',
   transformIgnorePatterns: [
-    '/node_modules/(?!topcoder-react-utils)',
+    '/node_modules/(?!@dr.pogodin/react-utils)',
   ],
-  setupTestFrameworkScriptFile: '<rootDir>/config/jest/setup.js',
+  setupFilesAfterEnv: [
+    '<rootDir>/config/jest/setup.js',
+  ],
 };

@@ -3,7 +3,7 @@
  * serving as the split points. Because it is quite complex, here are only
  * some technical comments in the code. For instructions on how to use it
  * refer to
- * https://github.com/topcoder-platform/community-app/blob/develop/docs/code-splitting.md
+ * https://github.com/dr-pogodin-platform/community-app/blob/develop/docs/code-splitting.md
  */
 
 /* global document, window */
@@ -189,7 +189,7 @@ export default class SplitRoute extends React.Component {
                 });
                 arr.sort((a, b) => a.chunkOrder - b.chunkOrder);
                 arr.slice(0, unused.length - MAX_UNUSED_STYLESHEETS)
-                  .forEach(x => head.removeChild(x));
+                  .forEach((x) => head.removeChild(x));
               }
             }
 

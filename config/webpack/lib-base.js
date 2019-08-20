@@ -37,7 +37,7 @@ module.exports = function configFactory(ops) {
     context: ops.context,
     entry: ops.entry,
     externals: [
-      /babel-runtime/,
+      /@babel\/runtime/,
       'lodash',
       'moment',
       'prop-types',
@@ -55,7 +55,7 @@ module.exports = function configFactory(ops) {
       'redux-devtools-log-monitor',
       'redux-promise',
       'shortid',
-      'topcoder-react-utils',
+      '@dr.pogodin/react-utils',
       'url-parse',
     ],
     mode: ops.mode,
@@ -110,8 +110,8 @@ module.exports = function configFactory(ops) {
         loader: 'babel-loader',
         options: {
           babelrc: false,
-          forceEnv: ops.babelEnv,
-          presets: ['topcoder-react-utils/config/babel/webpack'],
+          envName: ops.babelEnv,
+          presets: ['@dr.pogodin/react-utils/config/babel/webpack'],
         },
       }, {
         /* Loads SCSS stylesheets. */
@@ -122,8 +122,9 @@ module.exports = function configFactory(ops) {
             loader: 'css-loader',
             options: {
               importLoaders: 3,
-              localIdentName: ops.cssLocalIdent,
-              modules: true,
+              modules: {
+                localIdentName: ops.cssLocalIdent,
+              },
             },
           }, {
             loader: 'postcss-loader',

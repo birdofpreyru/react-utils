@@ -31,7 +31,7 @@ function MetaTags({
       <title>
         {title}
       </title>
-      <meta property="description" content={description} />
+      <meta name="description" content={description} />
 
       {/* Twitter cards. */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -45,14 +45,14 @@ function MetaTags({
       }
 
       {/* Open Graph data. */}
-      <meta property="og:title" content={socTitle} />
-      { image ? <meta property="og:image" content={img} /> : null }
-      { image ? <meta property="og:image:alt" content={socTitle} /> : null }
-      <meta property="og:description" content={socDesc} />
+      <meta name="og:title" content={socTitle} />
+      { image ? <meta name="og:image" content={img} /> : null }
+      { image ? <meta name="og:image:alt" content={socTitle} /> : null }
+      <meta name="og:description" content={socDesc} />
       {
-        siteName ? (<meta property="og:sitename" content={siteName} />) : null
+        siteName ? (<meta name="og:sitename" content={siteName} />) : null
       }
-      { url ? (<meta property="og:url" content={url} />) : null }
+      { url ? (<meta name="og:url" content={url} />) : null }
     </Helmet>
   );
 }
@@ -79,4 +79,4 @@ MetaTags.propTypes = {
 /* TODO: It is not good to depend on the domain written into redux state here,
  * better pass it via the renderer context at the server side, and get it from
  * the location at the frontend side, or something similar? */
-export default connect(state => ({ domain: state.domain }))(MetaTags);
+export default connect((state) => ({ domain: state.domain }))(MetaTags);

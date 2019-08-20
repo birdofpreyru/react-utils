@@ -27,12 +27,14 @@ export default async function factory(webpackConfig, options) {
     server.use(favicon(options.favicon));
   }
 
+  server.use('/robots.txt', (req, res) => res.send('User-agent: *\nDisallow:'));
+
   server.use(bodyParser.json({ limit: '300kb' }));
   server.use(bodyParser.urlencoded({ extended: false }));
   server.use(cookieParser());
   server.use(requestIp.mw());
 
-  loggerMiddleware.token('ip', req => req.clientIp);
+  loggerMiddleware.token('ip', (req) => req.clientIp);
   const FORMAT = ':ip > :status :method :url :response-time ms :res[content-length] :referrer :user-agent';
   server.use(loggerMiddleware(FORMAT, {
     stream: new stream.Writable({
@@ -43,6 +45,12 @@ export default async function factory(webpackConfig, options) {
       },
     }),
   }));
+
+  /* Ensures no caching for the service worker script. */
+  server.use(`${publicPath}service-worker.js`, (req, res, next) => {
+    res.header('Cache-Control', 'no-cache');
+    next();
+  });
 
   /* Setup of Hot Module Reloading for development environment.
    * These dependencies are not used, nor installed for production use,
@@ -68,6 +76,7 @@ export default async function factory(webpackConfig, options) {
   /* eslint-enable import/no-unresolved */
 
   server.use(publicPath, express.static(webpackConfig.output.path));
+
   if (options.onExpressJsSetup) {
     await options.onExpressJsSetup(server);
   }

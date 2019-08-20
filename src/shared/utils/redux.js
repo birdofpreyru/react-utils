@@ -11,9 +11,7 @@ import { connect } from 'react-redux';
 import { isDevBuild } from './isomorphy';
 
 /* Auxiliary aliases. */
-module.exports.connect = connect;
-module.exports.createActions = createActions;
-module.exports.handleActions = handleActions;
+export { connect, createActions, handleActions };
 
 /**
  * Reduce multiple reducers into a single reducer from left to right.
@@ -85,10 +83,10 @@ export function proxyReducer(reducer, actionCreator) {
  * @return Promise which resolves to the operation result.
  */
 export function resolveAction(action) {
-  return action.payload.then(data => ({
+  return action.payload.then((data) => ({
     ...action,
     payload: data,
-  }), error => ({
+  }), (error) => ({
     ...action,
     payload: error,
     error: true,

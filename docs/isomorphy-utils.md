@@ -9,7 +9,7 @@ proceed depending on that. This module provides functions that allow to do such
 checks, and to get some additional information about the currently running code.
 
 **Important Notes:**
-- All functionality of this module relies on `topcoder-react-utils`
+- All functionality of this module relies on `@dr.pogodin/react-utils`
   configuration / client initialization / server code beign used in your
   project;
 - `isDevBuild()` and `isProdBuild()` functions return dev/prod mode of the
@@ -40,7 +40,7 @@ checks, and to get some additional information about the currently running code.
 
 ### Example
 ```js
-import { isomorphy } from 'topcoder-react-utils';
+import { isomorphy } from '@dr.pogodin/react-utils';
 
 if (isomorphy.isClientSide()) {
   // Do some useful staff here, if executed at the client-side.

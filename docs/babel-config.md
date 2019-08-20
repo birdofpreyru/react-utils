@@ -16,7 +16,7 @@ compilation of JS and JSX modules.
 Use them as presets in your `.babelrc`, e.g.
 ```json
 {
-  "presets": ["topcoder-react-utils/config/babel/node-ssr"]
+  "presets": ["@dr.pogodin/react-utils/config/babel/node-ssr"]
 }
 ```
 
@@ -24,7 +24,7 @@ To set options provided by a preset:
 ```json
 {
   "presets": [
-    ["topcoder-react-utils/config/babel/node-ssr", {
+    ["@dr.pogodin/react-utils/config/babel/node-ssr", {
       "someOption": "optionValue"
     }]
   ]
@@ -38,8 +38,8 @@ ReactJS app, feel free to open GitHub issue ticket to discuss an update of our
 default configurations.
 
 These presets may behave differently in different Babel environments. You can
-set the environment with `BABEL_ENV` environment variable, or with `forceEnv`
-option of the Webpack's `babel-loader`.
+set the environment with `BABEL_ENV` environment variable, or `envName` Babel
+option.
 
 ### Configuration Details
 
