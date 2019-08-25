@@ -39,6 +39,7 @@
     "serialize-javascript": "^1.8.0",
     "serve-favicon": "^2.5.0",
     "shortid": "^2.2.14",
+    "source-map-support": "^0.5.13",
     "url-parse": "^1.4.7"
   },
   "description": "Collection of generic ReactJS components and utils",
@@ -50,7 +51,7 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.6.1",
-    "babel-eslint": "^10.0.2",
+    "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-css-modules-transform": "^1.6.2",
@@ -134,5 +135,5 @@
     "mkDistDir:prod": "mkdir -p dist/prod/shared/utils && mkdir -p dist/prod/client",
     "test": "npm run lint && npm run jest"
   },
-  "version": "0.10.2"
+  "version": "0.10.3"
 }

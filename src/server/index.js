@@ -2,6 +2,8 @@
  * Standard web servers.
  */
 
+import 'source-map-support/register';
+
 import _ from 'lodash';
 import http from 'http';
 import https from 'https';
