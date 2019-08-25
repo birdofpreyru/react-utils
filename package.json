@@ -60,14 +60,14 @@
     "babel-plugin-react-css-modules": "^5.2.6",
     "babel-plugin-transform-assets": "^1.0.2",
     "css-loader": "^3.2.0",
-    "eslint": "^6.2.1",
+    "eslint": "^6.2.2",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-import-resolver-babel-module": "^5.1.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^22.15.1",
+    "eslint-plugin-jest": "^22.15.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
-    "eslint-plugin-react-hooks": "^1.7.0",
+    "eslint-plugin-react-hooks": "^2.0.1",
     "file-loader": "^4.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
@@ -117,7 +117,7 @@
   "name": "@dr.pogodin/react-utils",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/birdofpreyru/@dr.pogodin/react-utils.git"
+    "url": "git+https://github.com/birdofpreyru/react-utils.git"
   },
   "scripts": {
     "build": "npm run build:dev && npm run build:prod",
@@ -134,5 +134,5 @@
     "mkDistDir:prod": "mkdir -p dist/prod/shared/utils && mkdir -p dist/prod/client",
     "test": "npm run lint && npm run jest"
   },
-  "version": "0.10.0"
+  "version": "0.10.2"
 }
