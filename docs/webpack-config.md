@@ -57,6 +57,8 @@ mutation of the config object.
       re-generation of the build info file created during a previous build
       (and thus bundled into the frontend bundle). Defaults to `false`.
     - **`mode`** &ndash; *String* &ndash; [Webpack mode](https://webpack.js.org/concepts/mode/).
+    - **`outputPath`** &ndash; *String* &ndash; Optional. Output path for
+      the build. Defaults to `build` folder inside the `context` path.
     - **`publicPath`** &mdash; *String* &mdash; Base URL for the output of
       the build assets;
     - **`workbox`** &ndash; *Boolean*|*Object* &ndash; Optional. If evaluates to

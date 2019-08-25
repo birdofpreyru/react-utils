@@ -51,11 +51,15 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
  *  server startup, without re-writing the build info generated previously
  *  during the bundling. Defaults to `false`.
  *
+ * @param {String} [ops.outputPath] Optional. Output path for the build.
+ *  Defaults to `build` folder inside the `context` path.
+ *
  * @param {String} ops.publicPath Base URL for the output of the build assets.
  */
 module.exports = function configFactory(ops) {
   const o = _.defaults(_.clone(ops), {
     cssLocalIdent: '[hash:base64:6]',
+    outputPath: 'build',
     publicPath: '',
   });
 
@@ -134,7 +138,7 @@ module.exports = function configFactory(ops) {
     output: {
       chunkFilename: `[name]-${now.valueOf()}.js`,
       filename: `[name]-${now.valueOf()}.js`,
-      path: path.resolve(__dirname, o.context, 'build'),
+      path: path.resolve(__dirname, o.context, o.outputPath),
       publicPath: `${o.publicPath}/`,
     },
     plugins,
