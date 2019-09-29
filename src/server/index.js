@@ -30,32 +30,37 @@ function normalizePort(value) {
  * Creates and starts a new webserver.
  * @param {Object} webpackConfig The Webpack config that was used to build the
  *  frontend bundle.
- * @param {config} options Additional options:
- *  - Application {Function} - Optional. The root ReactJS component of the app
- *    to use for server-side rendering;
- *  - devMode {Boolean} - Whether the server should be started in dev mode;
- *  - favicon {String} - Path of the favicon to be used by the server;
- *  - logger {Object} - Optional. The logger to use. By default, the console
- *    is used (which is not a good decision performancewise, but it will be
- *    changed soon);
- *  - https {Object} - Optional. If given, HTTPS server will be started with
- *    the specified settings. HTTP server that hanles HTTP > HTTPS redirection
- *    will be also started at the specified port. Expected fields:
- *    - cert {String} - SSL Certificate;
- *    - key {String} - SSL key;
- *  - beforeRender {Function} - The hook into server-side rendering. It will get
- *    incoming request as the argument and it should return a promise that will
- *    resolve to the object with the following fields all optional:
+ * @param {Object} options Additional options.
+ * @param {Function} [options.Application=null] Optional. The root ReactJS
+ *  component of the app to use for server-side rendering.
+ * @param {Boolean} [options.devMode=false] Whether the server should be
+ *  started in the dev mode.
+ * @param {String} [options.favicon=""] Path of the favicon to be used by
+ *  the server.
+ * @param {Object} [options.logger=console] The logger to use. By default,
+ *  the console is used (which is not a good decision performancewise, but it
+ *  will be changed soon).
+ * @param {Object} [options.https=undefined] Optional. If given, HTTPS server
+ *  will be started with the specified settings. HTTP server that hanles HTTP >
+ *  HTTPS redirection will be also started at the specified port.
+ * @param {String} options.https.cert SSL Certificate.
+ * @param {String} options.https.key SSL key.
+ * @param {Boolean} [options.httpsRedirect=true] When true, all incoming HTTP
+ *  requests will be redirected to HTTPS.
+ * @param {Function} [options.beforeRender=null] The hook into server-side
+ *  rendering. It will get incoming request as the argument and it should
+ *  return a promise that will resolve to the object with the following fields
+ *  all optional:
  *    - config {Object} - Config object to be injected into the page;
  *    - extraScripts {Array} - Any additional scripts to be injected into
  *      HTML template;
  *    - store {Object} - Redux store, which state should be used for server-side
  *      rendering, if it is performed, and also injected into HTML template as
  *      the initial state.
- *  - onExpressJsSetup {Function} - Custom setup of ExpressJS server.
- *  - port {String} - Optional. The port to listen (number or name). If not
- *    specified the value will be taken from PORT environmental variable, or
- *    default to 3000 otherwise.
+ * @param {Function} options.onExpressJsSetup Custom setup of ExpressJS server.
+ * @param {String} [options.port=3000] The port to listen (number or name).
+ *  When not specified the value will be taken from PORT environmental variable,
+ *  or default to 3000 otherwise.
  * @return {Promise} Resolves to the result object has two fields:
  *  - express {Object} - ExpressJS server;
  *  - httpServer {Object} - NodeJS HTTP(S) server.
@@ -65,6 +70,7 @@ async function launch(webpackConfig, options) {
   const ops = options ? _.clone(options) : {};
   ops.port = normalizePort(ops.port || process.env.PORT || 3000);
   _.defaults(ops, {
+    httpsRedirect: true,
     logger: console,
   });
 

@@ -20,6 +20,19 @@ export default async function factory(webpackConfig, options) {
   const { publicPath } = webpackConfig.output;
 
   const server = express();
+
+  if (options.httpsRedirect) {
+    server.use((req, res, next) => {
+      const schema = req.headers['x-forwarded-proto'];
+      if (schema === 'http') {
+        let url = `https://${req.headers.host}`;
+        if (req.originalUrl !== '/') url += req.originalUrl;
+        return res.redirect(url);
+      }
+      return next();
+    });
+  }
+
   server.use(compression());
   server.use(helmet());
 
