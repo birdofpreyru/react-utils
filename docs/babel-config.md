@@ -60,8 +60,9 @@ rendering);
   - Uses [`babel-plugin-dynamic-import-node`](https://www.npmjs.com/package/babel-plugin-dynamic-import-node)
   to support dynamic `import(..)` statemens;
 
-  - Uses [`babel-plugin-inline-react-svg`](https://www.npmjs.com/package/babel-plugin-inline-react-svg)
-  to embed imported SVG files into the complied JS modules;
+  - Uses [`@dr.pogodin/babel-preset-svgr`](https://www.npmjs.com/package/@dr.pogodin/babel-preset-svgr)
+  to embed imported SVG files into the complied JS modules with the help of
+  [SVGR library](https://github.com/smooth-code/svgr);
 
   - Uses [`babel-plugin-module-resolver`](https://www.npmjs.com/package/babel-plugin-module-resolver)
   to setup the following paths as the roots for resolution of relative imports:
@@ -92,8 +93,9 @@ for Webpack compilation of JS and JSX modules.
   [react](https://www.npmjs.com/package/babel-preset-react),
   [stage-2](https://www.npmjs.com/package/babel-preset-stage-2);
 
-  - Uses [`babel-plugin-inline-react-svg`](https://www.npmjs.com/package/babel-plugin-inline-react-svg)
-  to embed imported SVG files into the complied JS modules;
+  - Uses [`@dr.pogodin/babel-preset-svgr`](https://www.npmjs.com/package/@dr.pogodin/babel-preset-svgr)
+  to embed imported SVG files into the complied JS modules with the help of
+  [SVGR library](https://github.com/smooth-code/svgr);
 
   - Uses [`babel-plugin-module-resolver`](https://www.npmjs.com/package/babel-plugin-module-resolver)
   to setup the following paths as the roots for resolution of relative imports:

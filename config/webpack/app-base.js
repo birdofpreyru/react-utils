@@ -187,7 +187,7 @@ module.exports = function configFactory(ops) {
         },
       }, {
         /* Loads SCSS stylesheets. */
-        test: /\.scss/,
+        test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader, {
             loader: 'css-loader',

@@ -87,6 +87,8 @@ props:
   string fields:
   - **`cert`** &ndash; *String* &ndash; SSL sertificate;
   - **`key`** &ndash; *String* &ndash; SSL key.
+- **`httpsRedirect`** &ndash; *Boolean* &ndash; Redirects all incoming HTTP
+  requests to the https access.
 
   For this to work on *localhost* you'll have to create and properly install
   a self-signed SSL certificate on your system. Instructions in this article
