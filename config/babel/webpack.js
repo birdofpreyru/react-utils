@@ -6,6 +6,7 @@ const config = {
   presets: [
     '@babel/env',
     '@babel/react',
+    '@dr.pogodin/babel-preset-svgr',
   ],
   plugins: [
     ['module-resolver', {
@@ -16,7 +17,6 @@ const config = {
       ],
     }],
     '@babel/syntax-dynamic-import',
-    'inline-react-svg',
     '@babel/transform-runtime',
     ['react-css-modules', {
       filetypes: {
