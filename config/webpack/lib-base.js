@@ -40,6 +40,7 @@ module.exports = function configFactory(ops) {
       /@babel\/runtime/,
       'lodash',
       'moment',
+      /process/,
       'prop-types',
       'react',
       'react-css-super-themr',
@@ -57,6 +58,7 @@ module.exports = function configFactory(ops) {
       'shortid',
       '@dr.pogodin/react-utils',
       'url-parse',
+      /webpack/,
     ],
     mode: ops.mode,
     output: {
