@@ -38,7 +38,7 @@ const HELP = [{
     {cyanBright LIBRARY...} is the list of libraries to install/upgrade`,
 }, {
   header: 'Options',
-  optionList: OPTIONS.filter(x => !x.defaultOption),
+  optionList: OPTIONS.filter((x) => !x.defaultOption),
 }];
 
 /**
@@ -125,7 +125,7 @@ function showHelp() {
 function updateProdDependencies(donorData, hostData) {
   let deps = Object.entries(donorData.dependencies || {});
   const hostDeps = hostData.dependencies || {};
-  deps = deps.filter(x => hostDeps[x[0]]);
+  deps = deps.filter((x) => hostDeps[x[0]]);
   deps = deps.map(generateTargetPackage);
   spawnSync('npm', ['install', '--save'].concat(deps), { stdio: 'inherit' });
 }

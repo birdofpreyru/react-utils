@@ -92,6 +92,6 @@ GenericLink.propTypes = {
   onMouseDown: PT.func,
   openNewTab: PT.bool,
   replace: PT.bool,
-  routerLinkType: PT.func.isRequired,
+  routerLinkType: PT.elementType.isRequired,
   to: PT.oneOfType([PT.object, PT.string]),
 };
