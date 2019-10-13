@@ -1,6 +1,7 @@
 {
   "bin": {
-    "dr-pogodin-lib-setup": "./bin/dr-pogodin-lib-setup"
+    "react-utils-build": "bin/build",
+    "dr-pogodin-lib-setup": "bin/dr-pogodin-lib-setup"
   },
   "bugs": {
     "url": "https://github.com/birdofpreyru/react-utils/issues"
@@ -11,6 +12,7 @@
     "body-parser": "^1.19.0",
     "command-line-args": "^5.1.1",
     "command-line-usage": "^6.0.2",
+    "commander": "^3.0.2",
     "compression": "^1.7.4",
     "config": "^3.2.3",
     "cookie-parser": "^1.4.4",
@@ -37,11 +39,13 @@
     "redux-devtools-log-monitor": "^1.4.0",
     "redux-promise": "^0.6.0",
     "request-ip": "^2.1.3",
+    "rimraf": "^3.0.0",
     "serialize-javascript": "^2.1.0",
     "serve-favicon": "^2.5.0",
     "shortid": "^2.2.15",
     "source-map-support": "^0.5.13",
-    "url-parse": "^1.4.7"
+    "url-parse": "^1.4.7",
+    "webpack": "^4.41.1"
   },
   "description": "Collection of generic ReactJS components and utils",
   "devDependencies": {
@@ -87,12 +91,9 @@
     "react-test-renderer": "^16.10.2",
     "regenerator-runtime": "^0.13.3",
     "resolve-url-loader": "^3.1.0",
-    "rimraf": "^3.0.0",
     "sass-loader": "^8.0.0",
     "stylelint": "^11.1.1",
     "stylelint-config-standard": "^19.0.0",
-    "webpack": "^4.41.1",
-    "webpack-cli": "^3.3.9",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-merge": "^4.2.2",
@@ -124,18 +125,11 @@
     "url": "git+https://github.com/birdofpreyru/react-utils.git"
   },
   "scripts": {
-    "build": "npm run build:dev && npm run build:prod",
-    "build:dev": "npm run clean:dev && npm run mkDistDir:dev && ./node_modules/.bin/webpack --env=development --bail --colors --display-optimization-bailout --profile --progress && BABEL_ENV=development babel src/server --out-dir dist/dev/server && BABEL_ENV=development babel src/shared/utils/jest.jsx --out-file dist/dev/shared/utils/jest.js && BABEL_ENV=development babel src/client/init.js --out-file dist/dev/client/init.js",
-    "build:dev:watch": "npm run clean:dev && npm run mkDistDir:dev && (./node_modules/.bin/webpack --env=development --bail --colors --display-optimization-bailout --profile --progress --watch | BABEL_ENV=development babel src/server --out-dir dist/dev/server --watch | BABEL_ENV=development babel src/shared/utils/jest.jsx --out-file dist/dev/shared/utils/jest.js --watch | BABEL_ENV=development babel src/client/init.js --out-file dist/dev/client/init.js --watch)",
-    "build:prod": "npm run clean:prod && npm run mkDistDir:prod && BABEL_ENV=production ./node_modules/.bin/webpack --env=production --colors --display-optimization-bailout --profile --progress && BABEL_ENV=production babel src/server --out-dir dist/prod/server && BABEL_ENV=production babel src/shared/utils/jest.jsx --out-file dist/prod/shared/utils/jest.js && BABEL_ENV=production babel src/client/init.js --out-file dist/prod/client/init.js",
-    "clean:dev": "./node_modules/.bin/rimraf dist/dev",
-    "clean:prod": "./node_modules/.bin/rimraf dist/prod",
+    "build": "bin/build -t development && bin/build -t production",
     "jest": "NODE_CONFIG_ENV=test jest --no-cache --maxWorkers=4 --config config/jest/default.js",
     "lint": "npm run lint:js && npm run lint:scss",
     "lint:js": "eslint --ext .js,.jsx . && eslint bin/*",
     "lint:scss": "./node_modules/.bin/stylelint **/*.scss --syntax scss",
-    "mkDistDir:dev": "mkdir -p dist/dev/shared/utils && mkdir -p dist/dev/client",
-    "mkDistDir:prod": "mkdir -p dist/prod/shared/utils && mkdir -p dist/prod/client",
     "test": "npm run lint && npm run jest"
   },
   "version": "0.10.7"

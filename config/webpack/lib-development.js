@@ -26,6 +26,6 @@ module.exports = function configFactory(ops) {
     babelEnv: 'development',
     cssLocalIdent: '[path][name]___[local]___[hash:base64:6]',
     mode: 'development',
-    outputPath: path.resolve(__dirname, ops.context, 'dist/dev'),
+    outputPath: path.resolve(__dirname, ops.context, 'build/development'),
   });
 };

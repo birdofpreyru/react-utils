@@ -200,10 +200,10 @@ mutation of the config object.
       them;
     - Bundle SCSS files from any folder of your source code, beside
       `node_modules` and its subfolders. The files will be compiled,
-      bundled and extracted into the `dist/style.css`
+      bundled and extracted into the `build/{type}/style.css`
       bundles;
     - Bundle JS, JSX, and SVG files; they will be compiled into the
-      `dist/index.js` bundles, using the Babel environment
+      `build/{type}/web.bundle.js` bundles, using the Babel environment
       specified in the factory options, and
       [`config/babel/webpack`](./babel-config.js#webpack) config.
 

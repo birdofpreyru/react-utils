@@ -17,10 +17,10 @@ other use case, don't hesitate to attract attention to your issues and propose
 fixes/enhancements!
 
 ### Details
-Technically, our server solution consists of three parts: `dist/server/renderer`
+Technically, our server solution consists of three parts: `build/{type}/server/renderer`
 takes care about the actual rendering of HTML template, injection of config and
-server-side rendered ReactJS markup; `dist/server/server` creates and configures
-ExpressJS server; and `dist/server` assemble them together, sets up and launches
+server-side rendered ReactJS markup; `build/{type}/server/server` creates and configures
+ExpressJS server; and `build/{type}/server` assemble them together, sets up and launches
 the native NodeJS server that exposes ExpressJS to the outside world.
 
 For the practical use, staring the server is as easy as:

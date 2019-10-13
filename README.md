@@ -33,9 +33,9 @@ Then import the global stylesheet into the root ReactJS component of your app:
 ```jsx
 /* eslint-disable global-require */
 if (process.env.NODE_ENV === 'production') {
-  require('@dr.pogodin/react-utils/dist/prod/style.css');
+  require('@dr.pogodin/react-utils/build/production/style.css');
 } else {
-  require('@dr.pogodin/react-utils/dist/dev/style.css');
+  require('@dr.pogodin/react-utils/build/development/style.css');
 }
 /* eslint-enable global-require */
 ```
@@ -75,6 +75,8 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 ### NodeJS Scripts
 - [**dr-pogodin-lib-setup**](docs/dr-pogodin-lib-setup-script.md) &ndash; Helps to
   install and upgrade **@dr.pogodin/react-utils** and other similar libraries.
+- [react-utils-build](docs/bin-build.md) &ndash; encapsulates Babel and Webpack
+  build process; also provides a working alternative to the `npm link` command.
 
 ### Redux Templates
 - [**Item**](docs/redux-item.md) &ndash; An async piece of data in Redux store.
