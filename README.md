@@ -70,6 +70,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [**`Modal`**](docs/modal.md) &ndash; Themeable modal component;
 - [**`ScalableRect`**](docs/scalable-rect.md) &ndash; Container that keeps
   the specified aspect ratio regardless the width you set.
+- [Tooltip](docs/tooltip.md) &ndash; the chosen tooltip component.
 
 ### NodeJS Scripts
 - [**dr-pogodin-lib-setup**](docs/dr-pogodin-lib-setup-script.md) &ndash; Helps to
