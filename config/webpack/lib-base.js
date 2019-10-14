@@ -48,6 +48,7 @@ module.exports = function configFactory(ops) {
       /react-hot-loader/,
       'react-redux',
       'react-router-dom',
+      'react-tooltip',
       'redux',
       'redux-actions',
       'redux-devtools',
