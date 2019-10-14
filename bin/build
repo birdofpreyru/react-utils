@@ -1,0 +1,147 @@
+#!/usr/bin/env node
+
+/**
+ * Library build script.
+ */
+/* eslint-disable import/no-dynamic-require */
+
+const childProcess = require('child_process');
+const fs = require('fs');
+const path = require('path');
+
+const _ = require('lodash');
+const commander = require('commander');
+const rimraf = require('rimraf');
+const webpack = require('webpack');
+
+const BUILD_TYPES = {
+  DEVELOPMENT: 'development',
+  PRODUCTION: 'production',
+};
+
+const VALID_BUILD_TYPES = Object.values(BUILD_TYPES);
+
+/**
+ * Auxiliary wrapper around the command execution in a child process.
+ *
+ * TODO: Move to a server-side unitility module.
+ *
+ * @param {String} command Command to execute;
+ * @param {Object} [options] See https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback
+ * @return {Promise} Resolves to { error, stdout, stderr }.
+ */
+async function exec(command, options = {}) {
+  return new Promise((resolve) => {
+    const child = childProcess.exec(
+      command,
+      options,
+      (...args) => resolve(args)
+    );
+    child.stderr.pipe(process.stderr);
+    child.stdout.pipe(process.stdout);
+  });
+}
+
+/* Command-line config. */
+commander
+  .description('Library build script')
+  .option('-i, --in-dir <path>', 'input folder for the build', 'src')
+  .option('-o, --out-dir <path>', 'output folder for the build', 'build')
+  .option(
+    '-t, --build-type <type>',
+    `build type: ${VALID_BUILD_TYPES.join(', ')}`,
+  )
+  .option('-w, --watch', 'build, watch, and rebuild on source changes')
+  .option(
+    '--webpack-config <path>',
+    'path to the webpack config',
+    'webpack.config.js',
+  );
+
+commander.parse(process.argv);
+
+/* Validates the build type argument,  */
+if (!VALID_BUILD_TYPES.includes(commander.buildType)) {
+  throw new Error('Invalid build type');
+}
+
+/* Resolves the target build directory. */
+const cwd = process.cwd();
+const inDir = path.resolve(cwd, commander.inDir);
+const outDir = path.resolve(cwd, commander.outDir, commander.buildType);
+
+/* Prepares output directory: cleans existing files, creates the folders. */
+rimraf.sync(outDir);
+fs.mkdirSync(outDir, { recursive: true });
+
+
+/******************************************************************************/
+/* Webpack compilation of isomorphic library bundle.                          */
+
+let webpackConfig = require(path.resolve(cwd, commander.webpackConfig));
+if (_.isFunction(webpackConfig)) {
+  webpackConfig = webpackConfig(commander.buildType);
+}
+
+_.merge(webpackConfig, {
+  output: { path: outDir },
+  stats: {
+    maxModules: Infinity,
+    optimizationBailout: true,
+  },
+});
+
+const webpackCompiler = webpack(webpackConfig);
+webpackCompiler.apply(new webpack.ProgressPlugin());
+
+let firstWebpackStats = true;
+
+/**
+ * The handler of Webpack compilation results, written according to Webpack docs
+ * https://webpack.js.org/api/node/#error-handling
+ * @param {Object} error
+ * @param {Object} stats
+ */
+function handleWebpackCompilationResults(error, stats) {
+  if (error) {
+    console.error(error.stack || error);
+    if (error.details) console.error(error.details);
+    return;
+  }
+
+  const info = stats.toJson();
+  if (stats.hasErrors()) console.error(info.errors);
+  else if (stats.hasWarnings()) console.warn(info.warnings);
+
+  const logOps = { colors: true };
+  if (firstWebpackStats) {
+    firstWebpackStats = false;
+    logOps.all = true;
+  }
+  console.log(stats.toString(logOps));
+}
+
+if (commander.watch) webpackCompiler.watch({}, handleWebpackCompilationResults);
+else webpackCompiler.run(handleWebpackCompilationResults);
+
+/******************************************************************************/
+/* Babel compilation of JS, JSX, and SVG files.                               */
+
+const BABEL_EXEC_OPTIONS = {
+  env: {
+    ...process.env,
+    BABEL_ENV: commander.buildType,
+  },
+};
+
+let BABEL_CMD_JS = `${cwd}/node_modules/.bin/babel`;
+BABEL_CMD_JS += ` ${inDir} --out-dir ${outDir} --source-maps`;
+if (commander.buildType === BUILD_TYPES.PRODUCTION) {
+  BABEL_CMD_JS += ' --minified';
+}
+if (commander.watch) BABEL_CMD_JS += ' --watch';
+
+const BABEL_CMD_SVG = `${BABEL_CMD_JS} --extensions ".svg" --keep-file-extension`;
+
+exec(BABEL_CMD_JS, BABEL_EXEC_OPTIONS);
+exec(BABEL_CMD_SVG, BABEL_EXEC_OPTIONS);
