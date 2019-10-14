@@ -97,6 +97,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
   with standard configuration, that serves a ReactJS application with or without
   server-side rendering, supports development tools (Hop Module Reloading), and
   can be further configured for the needs of specific projects.
+- [time](docs/auto/time.md) &ndash; Date & time utilities.
 - [**Webpack**](docs/webpack-utils.md) &ndash; Various utils related to the
   Webpack bundling process.
 

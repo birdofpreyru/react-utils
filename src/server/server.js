@@ -11,7 +11,6 @@ import favicon from 'serve-favicon';
 import helmet from 'helmet';
 import loggerMiddleware from 'morgan';
 import requestIp from 'request-ip';
-import stream from 'stream';
 
 import rendererFactory from './renderer';
 

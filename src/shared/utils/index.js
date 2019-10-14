@@ -3,6 +3,7 @@ import path from 'path';
 import config from './config';
 import * as isomorphy from './isomorphy';
 import * as redux from './redux';
+import * as time from './time';
 import * as webpack from './webpack';
 
 const juUrl = module.webpackPolyfill ? './shared/utils/jest'
@@ -17,5 +18,6 @@ export {
   isomorphy,
   JU,
   redux,
+  time,
   webpack,
 };
