@@ -11,6 +11,8 @@ import https from 'https';
 /* Polyfill required by ReactJS. */
 import 'raf/polyfill';
 
+import winston from 'winston';
+
 import serverFactory from './server';
 import { SCRIPT_LOCATIONS } from './renderer';
 
@@ -37,9 +39,8 @@ function normalizePort(value) {
  *  started in the dev mode.
  * @param {String} [options.favicon=""] Path of the favicon to be used by
  *  the server.
- * @param {Object} [options.logger=console] The logger to use. By default,
- *  the console is used (which is not a good decision performancewise, but it
- *  will be changed soon).
+ * @param {Object} [options.logger] The logger to use. By default Winston logger
+ *  with console transport is used.
  * @param {Object} [options.https=undefined] Optional. If given, HTTPS server
  *  will be started with the specified settings. HTTP server that hanles HTTP >
  *  HTTPS redirection will be also started at the specified port.
@@ -71,8 +72,15 @@ async function launch(webpackConfig, options) {
   ops.port = normalizePort(ops.port || process.env.PORT || 3000);
   _.defaults(ops, {
     httpsRedirect: true,
-    logger: console,
   });
+
+  if (_.isUndefined(ops.logger)) {
+    ops.logger = winston.createLogger({
+      level: 'info',
+      format: winston.format.cli(),
+      transports: [new winston.transports.Console()],
+    });
+  }
 
   /* Creates servers, resolves and sets the port. */
   const expressServer = await serverFactory(webpackConfig, ops);

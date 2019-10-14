@@ -94,10 +94,8 @@ props:
   a self-signed SSL certificate on your system. Instructions in this article
   should help: [How to get HTTPS working on your local development environment in 5 minutes](https://medium.freecodecamp.org/how-to-get-https-working-on-your-local-development-environment-in-5-minutes-7af615770eec)
 
-- **`logger`** &mdash; *Object* &mdash; Optional. The logger to be used for
-  logging. Defaults to `console`, otherwise it is expected to provide the same
-  interface. Note that `console` is not efficient for production use, because
-  it is not async in NodeJS.
+- **`logger`** &ndash; *Object* &ndash; The logger to use. By default Winston
+  logger with console transport is used.
 - **`onExpressJsSetup`** &mdash; *Function* &mdash; Custom setup of ExpressJS
   server. Express server instance will be passed in as the only argument to this
   function.

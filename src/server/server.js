@@ -50,13 +50,9 @@ export default async function factory(webpackConfig, options) {
   loggerMiddleware.token('ip', (req) => req.clientIp);
   const FORMAT = ':ip > :status :method :url :response-time ms :res[content-length] :referrer :user-agent';
   server.use(loggerMiddleware(FORMAT, {
-    stream: new stream.Writable({
-      decodeStrings: false,
-      write: (chunk, encoding, cb) => {
-        options.logger.log(chunk);
-        cb();
-      },
-    }),
+    stream: {
+      write: options.logger.info.bind(options.logger),
+    },
   }));
 
   /* Ensures no caching for the service worker script. */

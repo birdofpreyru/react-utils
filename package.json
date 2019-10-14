@@ -45,7 +45,8 @@
     "shortid": "^2.2.15",
     "source-map-support": "^0.5.13",
     "url-parse": "^1.4.7",
-    "webpack": "^4.41.1"
+    "webpack": "^4.41.1",
+    "winston": "^3.2.1"
   },
   "description": "Collection of generic ReactJS components and utils",
   "devDependencies": {
