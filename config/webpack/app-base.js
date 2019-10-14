@@ -59,7 +59,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 module.exports = function configFactory(ops) {
   const o = _.defaults(_.clone(ops), {
     cssLocalIdent: '[hash:base64:6]',
-    outputPath: 'build',
+    outputPath: 'build/web-public',
     publicPath: '',
   });
 

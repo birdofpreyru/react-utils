@@ -45,6 +45,7 @@ async function exec(command, options = {}) {
 /* Command-line config. */
 commander
   .description('Library build script')
+  .option('--lib', 'library build', false)
   .option('-i, --in-dir <path>', 'input folder for the build', 'src')
   .option('-o, --out-dir <path>', 'output folder for the build', 'build')
   .option(
@@ -68,7 +69,9 @@ if (!VALID_BUILD_TYPES.includes(commander.buildType)) {
 /* Resolves the target build directory. */
 const cwd = process.cwd();
 const inDir = path.resolve(cwd, commander.inDir);
-const outDir = path.resolve(cwd, commander.outDir, commander.buildType);
+
+let outDir = path.resolve(cwd, commander.outDir);
+if (commander.lib) outDir += `/${commander.buildType}`;
 
 /* Prepares output directory: cleans existing files, creates the folders. */
 rimraf.sync(outDir);
@@ -83,8 +86,11 @@ if (_.isFunction(webpackConfig)) {
   webpackConfig = webpackConfig(commander.buildType);
 }
 
+let webpackOutDir = outDir;
+if (!commander.lib) webpackOutDir += '/web-public';
+
 _.merge(webpackConfig, {
-  output: { path: outDir },
+  output: { path: webpackOutDir },
   stats: {
     maxModules: Infinity,
     optimizationBailout: true,
@@ -155,5 +161,9 @@ const BABEL_CMD_SVG = `${BABEL_CMD_JS} --extensions ".svg" --keep-file-extension
 
 BABEL_CMD_JS += ' --copy-files';
 
-exec(BABEL_CMD_JS, BABEL_EXEC_OPTIONS);
-exec(BABEL_CMD_SVG, BABEL_EXEC_OPTIONS);
+async function babelBuild() {
+  await exec(BABEL_CMD_JS, BABEL_EXEC_OPTIONS);
+  await exec(BABEL_CMD_SVG, BABEL_EXEC_OPTIONS);
+}
+
+babelBuild();

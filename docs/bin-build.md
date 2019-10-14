@@ -40,6 +40,7 @@ Usage: build [options]
 Library build script
 
 Options:
+  --lib                    library build (default: false)
   -i, --in-dir <path>      input folder for the build (default: "src")
   -o, --out-dir <path>     output folder for the build (default: "build")
   -t, --build-type <type>  build type: development, production
@@ -52,15 +53,28 @@ Options:
 To just build the package in development and production (with optimizations)
 modes we do:
 ```bash
-$ ./bin/build -t development
-$ ./bin/build -t production
+$ ./bin/build -t development --lib
+$ ./bin/build -t production --lib
 ```
 
 These commands take the source code from `src` folder in the current directory,
 and build it to the `build/development` and `build/production` output folders.
 `-i` and `-o` options allow to specify different input and output folders
 (`/development` or `/production` suffixes are append automatically to
-the output path specified by `-o` option). `--webpack-config` option allows
+the output path specified by `-o` option, if `--lib` flag is set).
+
+For a web app build, omit the `--lib` flag. Without it Babel part of the build
+will output directly to the specified output directory, and Webpack part of
+the build will output inside `web-public` folder inside it (we assume that
+a web app will publically share outcomes of the Webpack build, thus compiling
+the bundle to the dedicated folder allows to not expose the outputs of Babel
+compilation, intended for server-side use only).
+
+**BEWARE:** To achieve folder structure described above this build script has
+to overwrite `context` and `publicPath` fields of the Webpack config you pass
+in.
+
+`--webpack-config` option allows
 to specify the Webpack config file (by default it is expected to be inside
 the `webpack.config.js` file in the current working directory).
 
@@ -78,7 +92,7 @@ install a local copy of `B` into `A` like this:
 
 - Build and pack `B`, doing inside its root:
   ```bash
-  $ ./bin/build -t development && ./bin/build -t production
+  $ ./bin/build --lib -t development && ./bin/build --lib -t production
   $ npm pack
   ```
   It will product the file `B-<version>.tgz` inside `B` codebase.
@@ -94,7 +108,7 @@ install a local copy of `B` into `A` like this:
   development or production version (whatever you need for your testing and
   development case):
   ```bash
-  $ ./bin/build -t development -w -o /path/to/A/node_modules/B/build
+  $ ./bin/build --lib -t development -w -o /path/to/A/node_modules/B/build
   ```
 
 - Now you can start `A` and verify that any changes of `B` are propagated into
@@ -108,6 +122,6 @@ install a local copy of `B` into `A` like this:
 If you know what you are doing, most probably you do not need all these steps,
 and just running
 ```bash
-$ /path/to/B/bin/build -t development -w -o /path/to/A/node_modules/B/build
+$ /path/to/B/bin/build --lib -t development -w -o /path/to/A/node_modules/B/build
 ```
 will work for you the same.

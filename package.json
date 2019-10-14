@@ -125,8 +125,8 @@
     "url": "git+https://github.com/birdofpreyru/react-utils.git"
   },
   "scripts": {
-    "build": "bin/build -t development && bin/build -t production",
-    "jest": "NODE_CONFIG_ENV=test jest --no-cache --maxWorkers=4 --config config/jest/default.js",
+    "build": "bin/build -t development --lib && bin/build -t production --lib",
+    "jest": "NODE_CONFIG_ENV=test jest --config config/jest/default.js",
     "lint": "npm run lint:js && npm run lint:scss",
     "lint:js": "eslint --ext .js,.jsx . && eslint bin/*",
     "lint:scss": "./node_modules/.bin/stylelint **/*.scss --syntax scss",
