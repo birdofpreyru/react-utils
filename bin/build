@@ -3,7 +3,7 @@
 /**
  * Library build script.
  */
-/* eslint-disable import/no-dynamic-require */
+/* eslint-disable import/no-dynamic-require, no-console */
 
 const childProcess = require('child_process');
 const fs = require('fs');
@@ -35,7 +35,7 @@ async function exec(command, options = {}) {
     const child = childProcess.exec(
       command,
       options,
-      (...args) => resolve(args)
+      (...args) => resolve(args),
     );
     child.stderr.pipe(process.stderr);
     child.stdout.pipe(process.stdout);
@@ -75,7 +75,7 @@ rimraf.sync(outDir);
 fs.mkdirSync(outDir, { recursive: true });
 
 
-/******************************************************************************/
+/* ************************************************************************** */
 /* Webpack compilation of isomorphic library bundle.                          */
 
 let webpackConfig = require(path.resolve(cwd, commander.webpackConfig));
@@ -124,7 +124,8 @@ function handleWebpackCompilationResults(error, stats) {
 if (commander.watch) webpackCompiler.watch({}, handleWebpackCompilationResults);
 else webpackCompiler.run(handleWebpackCompilationResults);
 
-/******************************************************************************/
+
+/* ************************************************************************** */
 /* Babel compilation of JS, JSX, and SVG files.                               */
 
 const BABEL_EXEC_OPTIONS = {
@@ -139,9 +140,20 @@ BABEL_CMD_JS += ` ${inDir} --out-dir ${outDir} --source-maps`;
 if (commander.buildType === BUILD_TYPES.PRODUCTION) {
   BABEL_CMD_JS += ' --minified';
 }
+/* TODO: The watch is deactivated for Babel compilation because of SVG files:
+ * currently there is no way to tell Babel that SVG files should be compiled
+ * keeping their SVG extensions, while JS and JSX are compiled with extensions
+ * turned into JS, and any other files should be just copied over. For non-watch
+ * builds it is not a grave problem, as we can do two passes: first compiling
+ * JS, JSX, and copying all other files; then the second pass to compile SVG
+ * files keeping extensions. */
+/*
 if (commander.watch) BABEL_CMD_JS += ' --watch';
+*/
 
 const BABEL_CMD_SVG = `${BABEL_CMD_JS} --extensions ".svg" --keep-file-extension`;
+
+BABEL_CMD_JS += ' --copy-files';
 
 exec(BABEL_CMD_JS, BABEL_EXEC_OPTIONS);
 exec(BABEL_CMD_SVG, BABEL_EXEC_OPTIONS);

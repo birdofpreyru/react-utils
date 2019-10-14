@@ -64,6 +64,10 @@ the output path specified by `-o` option). `--webpack-config` option allows
 to specify the Webpack config file (by default it is expected to be inside
 the `webpack.config.js` file in the current working directory).
 
+**WARNING:** The `--watch` option described below currently works only for
+Webpack part of the build. To enable it for Babel part requires a small update
+of Babel CLI: https://github.com/babel/babel/issues/10551
+
 To use this script as an alternative for `npm link`, as explained
 [above](#npm-link-issue), add `-w` option, and use `-o` to specify
 the correct output path inside the target host package. For example,
