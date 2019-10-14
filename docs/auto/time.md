@@ -1,6 +1,9 @@
 <a name="module_time"></a>
 
 ## time
+```js
+import { time } from '@dr.pogodin/react-utils';
+```
 Date & time utilities.
 
 In most cases you will rely on JS
@@ -8,12 +11,6 @@ In most cases you will rely on JS
 and [`moment`](https://momentjs.com/docs/) library for your date & time
 operations. This module provides a few date & time related things not covered
 by `Date` and `moment`.
-
-Import `time` as
-```js
-import { time } from '@dr.pogodin/react-utils';
-```
-it gives you access to the following constants and functions:
 
 
 * [time](#module_time)
