@@ -1,6 +1,7 @@
 import path from 'path';
 
 import * as api from 'axios';
+import * as PT from 'prop-types';
 
 import config from './config';
 import * as isomorphy from './isomorphy';
@@ -21,6 +22,7 @@ export {
   config,
   isomorphy,
   JU,
+  PT,
   redux,
   time,
   url,

@@ -70,6 +70,8 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [**`Modal`**](docs/modal.md) &ndash; Themeable modal component;
 - [**`ScalableRect`**](docs/scalable-rect.md) &ndash; Container that keeps
   the specified aspect ratio regardless the width you set.
+- [Throbber](docs/throbber.md) &ndash; simple activity indicator (three bouncing
+  circles).
 - [Tooltip](docs/tooltip.md) &ndash; the chosen tooltip component.
 
 ### NodeJS Scripts
@@ -91,6 +93,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
   with isomorphic aspects of the code;
 - [**Jest utils**](docs/jest-utils.md) &ndash; Collection of helpers to be used
   in Jest tests code;
+- [PT](docs/prop-types.md) &ndash; encapsulates React's `prop-types`;
 - [**Redux utils**](docs/redux-utils.md) &ndash; *TO BE DOCUMENTED*
 - [**SCSS Mixins**](docs/scss-mixins.md) &ndash; Collection of useful style
   mixins;

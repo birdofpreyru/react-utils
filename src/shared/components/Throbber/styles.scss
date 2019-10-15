@@ -1,0 +1,22 @@
+.container {
+  align-items: center;
+  display: flex;
+}
+
+.circle {
+  @keyframes bouncing {
+    from { top: -0.3em; }
+    to { top: 0.3em; }
+  }
+
+  animation: bouncing 0.4s ease-in infinite alternate;
+  background: black;
+  border-radius: 0.3em;
+  height: 0.6em;
+  margin: 0 0.1em;
+  position: relative;
+  width: 0.6em;
+
+  &:first-child { animation-delay: -0.2s; }
+  &:last-child { animation-delay: 0.2s; }
+}
