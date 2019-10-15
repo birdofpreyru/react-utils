@@ -52,6 +52,8 @@ module.exports = function configFactory(ops) {
   res.entry.main = [
     'webpack-hot-middleware/client?reload=true',
   ].concat(res.entry.main);
-  res.entry.polyfills.push('@dr.pogodin/react-utils/dist/dev/client/init');
+  res.entry.polyfills.push(
+    '@dr.pogodin/react-utils/build/development/client/init',
+  );
   return res;
 };

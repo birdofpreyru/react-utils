@@ -51,6 +51,8 @@ module.exports = function configFactory(ops) {
       }),
     ],
   });
-  res.entry.polyfills.push('@dr.pogodin/react-utils/dist/prod/client/init');
+  res.entry.polyfills.push(
+    '@dr.pogodin/react-utils/build/production/client/init',
+  );
   return res;
 };

@@ -38,6 +38,7 @@ module.exports = function configFactory(ops) {
     entry: ops.entry,
     externals: [
       /@babel\/runtime/,
+      'axios',
       'lodash',
       'moment',
       'prop-types',
@@ -48,6 +49,7 @@ module.exports = function configFactory(ops) {
       /react-hot-loader/,
       'react-redux',
       'react-router-dom',
+      'react-tooltip',
       'redux',
       'redux-actions',
       'redux-devtools',
@@ -60,7 +62,7 @@ module.exports = function configFactory(ops) {
     ],
     mode: ops.mode,
     output: {
-      filename: 'index.js',
+      filename: 'web.bundle.js',
 
       // Workaround to fix umd build, restore webpack v3 behaviour
       // https://github.com/webpack/webpack/issues/6677

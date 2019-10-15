@@ -36,6 +36,7 @@ afterEach(() => {
 test('Favicon support', () => {
   const server = serverFactory(TEST_WEBPACK_CONFIG, {
     favicon: _.clone(TEST_FAVICON_PATH),
+    logger: console,
   });
   expect(require('serve-favicon')).toHaveBeenCalledWith(TEST_FAVICON_PATH);
   return server;
@@ -43,6 +44,6 @@ test('Favicon support', () => {
 
 test('Launch with dev tools', () => {
   process.env.DEV_TOOLS = true;
-  const server = serverFactory(TEST_WEBPACK_CONFIG, {});
+  const server = serverFactory(TEST_WEBPACK_CONFIG, { logger: console });
   return server;
 });

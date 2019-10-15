@@ -7,7 +7,7 @@
 /* eslint-disable global-require, import/no-unresolved */
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./dist/prod');
+  module.exports = require('./build/production/web.bundle.js');
 } else {
-  module.exports = require('./dist/dev');
+  module.exports = require('./build/development/web.bundle.js');
 }

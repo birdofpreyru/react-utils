@@ -1,14 +1,15 @@
-# SCSS Mixins
-Collection of useful style mixins.
+```scss
+// Inside your SCSS code.
+@import "@dr.pogodin/react-utils/src/styles/mixins";
+```
 
-**Why?** &mdash; Some pieces of SCSS code are often reused in different
+**Why?** &ndash; Some pieces of SCSS code are often reused in different
 stylesheets of different apps, thus it is useful to have them all in one place,
 and implmented in a standard way.
 
-To use, import the main mixins file into your SCSS, e.g.:
-```scss
-@import "@dr.pogodin/react-utils/src/styles/mixins";
-```
+- [Font Mixins](#font-mixins)
+- [Media Mixins](#media-mixins)
+- [Simple Typography](#simple-typography)
 
 ### Font Mixins
 - **`@mixin font-family($name, $weight, $style, $url, $file);`**
@@ -75,5 +76,15 @@ The both kinds of these mixins you can use the same way:
   @include xs-to-sm {
     background: red;
   }
+}
+```
+
+### Simple Typography
+When you did not have time yet to care about typography in your project, but you
+already need to display a textual content better than [CSS reset](global-styles.md)
+makes it to look, here is a drop-in temporary typography mixin:
+```scss
+.someClass {
+  @include typography;
 }
 ```

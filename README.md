@@ -3,7 +3,7 @@
 ![Latest NPM Release](https://img.shields.io/npm/v/@dr.pogodin/react-utils.svg)
 ![NPM Downloads](https://img.shields.io/npm/dm/@dr.pogodin/react-utils.svg)
 
-# Dr. Pogodin React Utils
+# Dr. Pogodin's React Utils
 
 A collection of generic ReactJS configurations, components, and utilities.
 
@@ -33,9 +33,9 @@ Then import the global stylesheet into the root ReactJS component of your app:
 ```jsx
 /* eslint-disable global-require */
 if (process.env.NODE_ENV === 'production') {
-  require('@dr.pogodin/react-utils/dist/prod/style.css');
+  require('@dr.pogodin/react-utils/build/production/style.css');
 } else {
-  require('@dr.pogodin/react-utils/dist/dev/style.css');
+  require('@dr.pogodin/react-utils/build/development/style.css');
 }
 /* eslint-enable global-require */
 ```
@@ -70,15 +70,21 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [**`Modal`**](docs/modal.md) &ndash; Themeable modal component;
 - [**`ScalableRect`**](docs/scalable-rect.md) &ndash; Container that keeps
   the specified aspect ratio regardless the width you set.
+- [Throbber](docs/throbber.md) &ndash; simple activity indicator (three bouncing
+  circles).
+- [Tooltip](docs/tooltip.md) &ndash; the chosen tooltip component.
 
 ### NodeJS Scripts
 - [**dr-pogodin-lib-setup**](docs/dr-pogodin-lib-setup-script.md) &ndash; Helps to
   install and upgrade **@dr.pogodin/react-utils** and other similar libraries.
+- [react-utils-build](docs/bin-build.md) &ndash; encapsulates Babel and Webpack
+  build process; also provides a working alternative to the `npm link` command.
 
 ### Redux Templates
 - [**Item**](docs/redux-item.md) &ndash; An async piece of data in Redux store.
 
 ### Utilities
+- [api](docs/api.md) &ndash; API (HTTP) client & utils (encapsulates `axios`).
 - [**Client**](docs/client.md) &ndash; Client-side initialization code.
 - [**Config**](docs/config.md) &ndash; Isomorphic app config;
 - [**Global Styles**](docs/global-styles.md) &ndash; Global styles necessary for
@@ -87,6 +93,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
   with isomorphic aspects of the code;
 - [**Jest utils**](docs/jest-utils.md) &ndash; Collection of helpers to be used
   in Jest tests code;
+- [PT](docs/prop-types.md) &ndash; encapsulates React's `prop-types`;
 - [**Redux utils**](docs/redux-utils.md) &ndash; *TO BE DOCUMENTED*
 - [**SCSS Mixins**](docs/scss-mixins.md) &ndash; Collection of useful style
   mixins;
@@ -94,6 +101,8 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
   with standard configuration, that serves a ReactJS application with or without
   server-side rendering, supports development tools (Hop Module Reloading), and
   can be further configured for the needs of specific projects.
+- [time](docs/time.md) &ndash; Date & time utils (encapsulates `moment`).
+- [url](docs/url.md) &ndash; URL utils.
 - [**Webpack**](docs/webpack-utils.md) &ndash; Various utils related to the
   Webpack bundling process.
 

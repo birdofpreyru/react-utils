@@ -35,7 +35,7 @@ function getPreset(babel) {
     ([name]) => name === 'react-css-modules',
   )[1];
 
-  switch (babel.getEnv()) {
+  switch (babel.env()) {
     case 'development':
       reactCssModulePluginOptions
         .generateScopedName = '[path][name]___[local]___[hash:base64:6]';

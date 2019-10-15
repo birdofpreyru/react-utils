@@ -1,4 +1,4 @@
 __coverage__
-dist
+build/*
 node_modules
 dr.pogodin-react-utils-*.*.*.tgz

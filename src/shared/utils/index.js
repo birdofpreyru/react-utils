@@ -1,8 +1,13 @@
 import path from 'path';
 
+import * as api from 'axios';
+import * as PT from 'prop-types';
+
 import config from './config';
 import * as isomorphy from './isomorphy';
 import * as redux from './redux';
+import time from './time';
+import * as url from './url';
 import * as webpack from './webpack';
 
 const juUrl = module.webpackPolyfill ? './shared/utils/jest'
@@ -13,9 +18,13 @@ const JU = isomorphy.isServerSide()
   ? webpack.requireWeak(juUrl) : null;
 
 export {
+  api,
   config,
   isomorphy,
   JU,
+  PT,
   redux,
+  time,
+  url,
   webpack,
 };

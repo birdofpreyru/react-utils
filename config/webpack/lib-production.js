@@ -28,7 +28,7 @@ module.exports = function configFactory(ops) {
     babelEnv: 'production',
     cssLocalIdent: '[hash:base64:6]',
     mode: 'production',
-    outputPath: path.resolve(__dirname, ops.context, 'dist/prod'),
+    outputPath: path.resolve(__dirname, ops.context, 'build/production'),
   });
   return webpackMerge(baseConfig, {
     plugins: [

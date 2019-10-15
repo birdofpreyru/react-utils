@@ -17,10 +17,10 @@ other use case, don't hesitate to attract attention to your issues and propose
 fixes/enhancements!
 
 ### Details
-Technically, our server solution consists of three parts: `dist/server/renderer`
+Technically, our server solution consists of three parts: `build/{type}/server/renderer`
 takes care about the actual rendering of HTML template, injection of config and
-server-side rendered ReactJS markup; `dist/server/server` creates and configures
-ExpressJS server; and `dist/server` assemble them together, sets up and launches
+server-side rendered ReactJS markup; `build/{type}/server/server` creates and configures
+ExpressJS server; and `build/{type}/server` assemble them together, sets up and launches
 the native NodeJS server that exposes ExpressJS to the outside world.
 
 For the practical use, staring the server is as easy as:
@@ -94,10 +94,8 @@ props:
   a self-signed SSL certificate on your system. Instructions in this article
   should help: [How to get HTTPS working on your local development environment in 5 minutes](https://medium.freecodecamp.org/how-to-get-https-working-on-your-local-development-environment-in-5-minutes-7af615770eec)
 
-- **`logger`** &mdash; *Object* &mdash; Optional. The logger to be used for
-  logging. Defaults to `console`, otherwise it is expected to provide the same
-  interface. Note that `console` is not efficient for production use, because
-  it is not async in NodeJS.
+- **`logger`** &ndash; *Object* &ndash; The logger to use. By default Winston
+  logger with console transport is used.
 - **`onExpressJsSetup`** &mdash; *Function* &mdash; Custom setup of ExpressJS
   server. Express server instance will be passed in as the only argument to this
   function.

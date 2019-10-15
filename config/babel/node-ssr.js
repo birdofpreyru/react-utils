@@ -29,7 +29,7 @@ function getConfig(babel, ops = {}) {
     'webpack.resolveWeak',
   ];
 
-  switch (babel.getEnv()) {
+  switch (babel.env()) {
     case 'development':
       _.pull(config.plugins, 'react-hot-loader/babel');
       cssModulesTransformPluginOps.generateScopedName = '[path][name]___[local]___[hash:base64:6]';
