@@ -1,0 +1,44 @@
+/**
+ * A simple drop-in typography mixin.
+ */
+
+@mixin typography {
+  font: 14pt/1.5 Arial, Helvetica, sans-serif;
+  code { font-family: monospace; }
+  em { font-style: italic; }
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.75em; }
+  h3 { font-size: 1.5em; }
+  h4 { font-size: 1.3em; }
+  h5 { font-size: 1.2em; }
+  h6 { font-size: 1.1em; }
+  strong { font-weight: bold; }
+  sub { bottom: -0.25em; }
+  sup { top: -0.5em; }
+
+  ol {
+    list-style-type: decimal;
+    padding-left: 1.2em;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 1.2em;
+  }
+
+  div,
+  li,
+  ol,
+  p,
+  ul {
+    margin: 0.6em 0;
+  }
+
+  sub,
+  sup {
+    font-size: 0.75em;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+}
