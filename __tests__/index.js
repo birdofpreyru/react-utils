@@ -8,9 +8,13 @@ afterEach(() => delete window.TRU_FRONT_END);
 
 test('Export at client side', () => {
   window.TRU_FRONT_END = true;
-  expect(require('../src')).toMatchSnapshot();
+  const lib = require('../src');
+  expect(lib).toMatchSnapshot();
+  expect(lib.time).toMatchSnapshot();
 });
 
 test('Export at server side', () => {
-  expect(require('../src')).toMatchSnapshot();
+  const lib = require('../src');
+  expect(lib).toMatchSnapshot();
+  expect(lib.time).toMatchSnapshot();
 });

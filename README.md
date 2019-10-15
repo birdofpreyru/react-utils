@@ -3,7 +3,7 @@
 ![Latest NPM Release](https://img.shields.io/npm/v/@dr.pogodin/react-utils.svg)
 ![NPM Downloads](https://img.shields.io/npm/dm/@dr.pogodin/react-utils.svg)
 
-# Dr. Pogodin React Utils
+# Dr. Pogodin's React Utils
 
 A collection of generic ReactJS configurations, components, and utilities.
 
@@ -82,6 +82,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [**Item**](docs/redux-item.md) &ndash; An async piece of data in Redux store.
 
 ### Utilities
+- [api](docs/api.md) &ndash; API (HTTP) client & utils (encapsulates `axios`).
 - [**Client**](docs/client.md) &ndash; Client-side initialization code.
 - [**Config**](docs/config.md) &ndash; Isomorphic app config;
 - [**Global Styles**](docs/global-styles.md) &ndash; Global styles necessary for
@@ -97,7 +98,8 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
   with standard configuration, that serves a ReactJS application with or without
   server-side rendering, supports development tools (Hop Module Reloading), and
   can be further configured for the needs of specific projects.
-- [time](docs/time.md) &ndash; Date & time utilities.
+- [time](docs/time.md) &ndash; Date & time utils (encapsulates `moment`).
+- [url](docs/url.md) &ndash; URL utils.
 - [**Webpack**](docs/webpack-utils.md) &ndash; Various utils related to the
   Webpack bundling process.
 

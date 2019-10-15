@@ -1,9 +1,8 @@
 ```js
 import { time } from '@dr.pogodin/react-utils';
 ```
-Date & time constants and utilities, not found in
-the [moment](https://momentjs.com/docs/) library, and the standard
-[JS Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date).
+Date & time utils. `time` is an alias for the [moment](https://momentjs.com/docs/) library, i.e. you can use `time()` the same way you would use `moment()`. Also
+`time` has the following extra stuff attached.
 
 ### Constants
 
@@ -13,7 +12,6 @@ Some time intervals expressed in milliseconds:
 - `time.HOUR_MS`
 - `time.DAY_MS`
 - `time.YEAR_MS`
-
 
 ### Functions
 

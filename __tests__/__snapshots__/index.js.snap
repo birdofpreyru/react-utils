@@ -37,6 +37,64 @@ Object {
       "updateReferenceCounter": [Function],
     },
   },
+  "api": Object {
+    "Axios": [Function],
+    "Cancel": [Function],
+    "CancelToken": [Function],
+    "all": [Function],
+    "create": [Function],
+    "default": [Function],
+    "defaults": Object {
+      "adapter": [Function],
+      "headers": Object {
+        "common": Object {
+          "Accept": "application/json, text/plain, */*",
+        },
+        "delete": Object {},
+        "get": Object {},
+        "head": Object {},
+        "patch": Object {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        "post": Object {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        "put": Object {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      },
+      "maxContentLength": -1,
+      "timeout": 0,
+      "transformRequest": Array [
+        [Function],
+      ],
+      "transformResponse": Array [
+        [Function],
+      ],
+      "validateStatus": [Function],
+      "xsrfCookieName": "XSRF-TOKEN",
+      "xsrfHeaderName": "X-XSRF-TOKEN",
+    },
+    "delete": [Function],
+    "get": [Function],
+    "getUri": [Function],
+    "head": [Function],
+    "interceptors": Object {
+      "request": InterceptorManager {
+        "handlers": Array [],
+      },
+      "response": InterceptorManager {
+        "handlers": Array [],
+      },
+    },
+    "isCancel": [Function],
+    "options": [Function],
+    "patch": [Function],
+    "post": [Function],
+    "put": [Function],
+    "request": [Function],
+    "spread": [Function],
+  },
   "client": [Function],
   "config": undefined,
   "isomorphy": Object {
@@ -62,13 +120,10 @@ Object {
     "storeFactory": [Function],
   },
   "server": null,
-  "time": Object {
-    "DAY_MS": 86400000,
-    "HOUR_MS": 3600000,
-    "MIN_MS": 60000,
-    "SEC_MS": 1000,
-    "YEAR_MS": 31536000000,
-    "timer": [Function],
+  "time": [Function],
+  "url": Object {
+    "default": null,
+    "parent": [Function],
   },
   "webpack": Object {
     "requireWeak": [Function],
@@ -76,6 +131,8 @@ Object {
   },
 }
 `;
+
+exports[`Export at client side 2`] = `[Function]`;
 
 exports[`Export at server side 1`] = `
 Object {
@@ -208,6 +265,64 @@ Object {
       "updateReferenceCounter": [Function],
     },
   },
+  "api": Object {
+    "Axios": [Function],
+    "Cancel": [Function],
+    "CancelToken": [Function],
+    "all": [Function],
+    "create": [Function],
+    "default": [Function],
+    "defaults": Object {
+      "adapter": [Function],
+      "headers": Object {
+        "common": Object {
+          "Accept": "application/json, text/plain, */*",
+        },
+        "delete": Object {},
+        "get": Object {},
+        "head": Object {},
+        "patch": Object {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        "post": Object {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        "put": Object {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      },
+      "maxContentLength": -1,
+      "timeout": 0,
+      "transformRequest": Array [
+        [Function],
+      ],
+      "transformResponse": Array [
+        [Function],
+      ],
+      "validateStatus": [Function],
+      "xsrfCookieName": "XSRF-TOKEN",
+      "xsrfHeaderName": "X-XSRF-TOKEN",
+    },
+    "delete": [Function],
+    "get": [Function],
+    "getUri": [Function],
+    "head": [Function],
+    "interceptors": Object {
+      "request": InterceptorManager {
+        "handlers": Array [],
+      },
+      "response": InterceptorManager {
+        "handlers": Array [],
+      },
+    },
+    "isCancel": [Function],
+    "options": [Function],
+    "patch": [Function],
+    "post": [Function],
+    "put": [Function],
+    "request": [Function],
+    "spread": [Function],
+  },
   "client": [Function],
   "config": Config {
     "SECRET": Object {
@@ -238,13 +353,10 @@ Object {
     "storeFactory": [Function],
   },
   "server": [Function],
-  "time": Object {
-    "DAY_MS": 86400000,
-    "HOUR_MS": 3600000,
-    "MIN_MS": 60000,
-    "SEC_MS": 1000,
-    "YEAR_MS": 31536000000,
-    "timer": [Function],
+  "time": [Function],
+  "url": Object {
+    "default": null,
+    "parent": [Function],
   },
   "webpack": Object {
     "requireWeak": [Function],
@@ -252,3 +364,5 @@ Object {
   },
 }
 `;
+
+exports[`Export at server side 2`] = `[Function]`;

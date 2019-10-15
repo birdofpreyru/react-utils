@@ -38,6 +38,7 @@ module.exports = function configFactory(ops) {
     entry: ops.entry,
     externals: [
       /@babel\/runtime/,
+      'axios',
       'lodash',
       'moment',
       'prop-types',
