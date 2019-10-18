@@ -217,15 +217,27 @@ mutation of the config object.
     with resolution of assets from packages linked with `npm link`.
 
   - The following packages are declared as externals:
-    - `babel-runtime`,
-    - `lodash`,
-    - `moment`,
-    - `prop-types`,
-    - `react`,
-    - `react-css-super-themr`,
-    - `react-dom`,
-    - `react-router-dom`,
-    - `@dr.pogodin/react-utils`,
+    - `@babel/runtime`
+    - `@dr.pogodin/react-themes`
+    - `axios`
+    - `lodash`
+    - `moment`
+    - `prop-types`
+    - `react`
+    - `react-dom`
+    - `react-helmet`
+    - `react-hot-loader`
+    - `react-redux`
+    - `react-router-dom`
+    - `react-tooltip`
+    - `redux`
+    - `redux-actions`
+    - `redux-devtools`
+    - `redux-devtools-dock-monitor`
+    - `redux-devtools-log-monitor`
+    - `redux-promise`
+    - `shortid`
+    - `@dr.pogodin/react-utils`
     - `url-parse`
 
 - <a name="lib-development">**`config/webpack/lib-development`**</a>

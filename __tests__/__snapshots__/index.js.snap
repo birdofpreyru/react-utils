@@ -16,7 +16,10 @@ Object {
     "displayName": "Connect(MetaTags)",
     "type": [Function],
   },
-  "Modal": [Function],
+  "Modal": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "NavLink": [Function],
   "PT": Object {
     "PropTypes": Object {
@@ -87,6 +90,7 @@ Object {
     "symbol": [Function],
   },
   "ScalableRect": [Function],
+  "ThemeProvider": [Function],
   "Throbber": [Function],
   "Tooltip": [Function],
   "actions": Object {
@@ -189,6 +193,7 @@ Object {
     "storeFactory": [Function],
   },
   "server": null,
+  "themed": [Function],
   "time": [Function],
   "url": Object {
     "default": null,
@@ -313,7 +318,10 @@ Object {
     "displayName": "Connect(MetaTags)",
     "type": [Function],
   },
-  "Modal": [Function],
+  "Modal": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "NavLink": [Function],
   "PT": Object {
     "PropTypes": Object {
@@ -384,6 +392,7 @@ Object {
     "symbol": [Function],
   },
   "ScalableRect": [Function],
+  "ThemeProvider": [Function],
   "Throbber": [Function],
   "Tooltip": [Function],
   "actions": Object {
@@ -491,6 +500,7 @@ Object {
     "storeFactory": [Function],
   },
   "server": [Function],
+  "themed": [Function],
   "time": [Function],
   "url": Object {
     "default": null,

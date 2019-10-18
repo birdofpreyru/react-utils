@@ -94,6 +94,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [**Jest utils**](docs/jest-utils.md) &ndash; Collection of helpers to be used
   in Jest tests code;
 - [PT](docs/prop-types.md) &ndash; encapsulates React's `prop-types`;
+- [React Themes](docs/react-themes) &ndash; encapsulates `dr.pogodin/react-themes`
 - [**Redux utils**](docs/redux-utils.md) &ndash; *TO BE DOCUMENTED*
 - [**SCSS Mixins**](docs/scss-mixins.md) &ndash; Collection of useful style
   mixins;

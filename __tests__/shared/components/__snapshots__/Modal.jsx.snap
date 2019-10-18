@@ -5,14 +5,14 @@ exports[`Snapshot match 1`] = `
   className="MOCK_PORTAL"
 >
   <div
-    className="src-shared-components-Modal-style___container___1SoeQl"
+    className="src-shared-components-Modal-base-theme___container___2KWPk0"
     onWheel={[Function]}
   >
     CONTENT
   </div>
   <button
     aria-label="Cancel"
-    className="src-shared-components-Modal-style___overlay___X12tn9"
+    className="src-shared-components-Modal-base-theme___overlay___1UDTFY"
     onClick={[Function]}
     type="button"
   />

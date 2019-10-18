@@ -1,5 +1,11 @@
 import path from 'path';
 
+import themed, {
+  COMPOSE,
+  PRIORITY,
+  ThemeProvider,
+} from '@dr.pogodin/react-themes';
+
 import 'styles/global.scss';
 
 import actions from 'actions';
@@ -24,6 +30,9 @@ const serverUrl = module.webpackPolyfill ? './server'
   : path.resolve(__dirname, './server');
 const server = utils.isomorphy.isServerSide() ? requireWeak(serverUrl) : null;
 
+themed.COMPOSE = COMPOSE;
+themed.PRIORITY = PRIORITY;
+
 export {
   actions,
   AppChunk,
@@ -37,10 +46,12 @@ export {
   MetaTags,
   Modal,
   ScalableRect,
+  ThemeProvider,
   Tooltip,
   Throbber,
   reducers,
   server,
+  themed,
 };
 
 export * from 'utils';
