@@ -46,7 +46,7 @@
     "shortid": "^2.2.15",
     "source-map-support": "^0.5.13",
     "url-parse": "^1.4.7",
-    "webpack": "^4.41.1",
+    "webpack": "^4.41.2",
     "winston": "^3.2.1"
   },
   "description": "Collection of generic ReactJS components and utils",
@@ -59,7 +59,7 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "@dr.pogodin/babel-preset-svgr": "^1.0.0",
-    "autoprefixer": "^9.6.4",
+    "autoprefixer": "^9.6.5",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
@@ -67,7 +67,7 @@
     "babel-plugin-dynamic-import-node": "^2.3.0",
     "babel-plugin-module-resolver": "^3.2.0",
     "babel-plugin-transform-assets": "^1.0.2",
-    "core-js": "^3.2.1",
+    "core-js": "^3.3.2",
     "css-loader": "^3.2.0",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",
@@ -103,8 +103,8 @@
     "workbox-webpack-plugin": "^4.3.1"
   },
   "engines": {
-    "node": "~10.16.3",
-    "npm": "~6.9.0"
+    "node": "~12.12.0",
+    "npm": "~6.11.3"
   },
   "homepage": "https://github.com/birdofpreyru/react-utils#readme",
   "keywords": [
