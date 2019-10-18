@@ -1,5 +1,7 @@
 import path from 'path';
 
+import _ from 'lodash';
+
 import themed, {
   COMPOSE,
   PRIORITY,
@@ -34,6 +36,7 @@ themed.COMPOSE = COMPOSE;
 themed.PRIORITY = PRIORITY;
 
 export {
+  _,
   actions,
   AppChunk,
   Avatar,
