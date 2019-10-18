@@ -19,6 +19,7 @@ export default async function factory(webpackConfig, options) {
   const { publicPath } = webpackConfig.output;
 
   const server = express();
+  server.logger = options.logger;
 
   if (options.httpsRedirect) {
     server.use((req, res, next) => {

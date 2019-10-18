@@ -1,102 +1,129 @@
-# Server
-Easy creation and launch of web-server with standard configuration, that serves
-a ReactJS application with or without server-side rendering, supports
-development tools (Hot Module Reloading), and can be further configured for
-the needs of specific projects.
+# Web Server for ReactJS App
 
-**Why?** &mdash; Each ReactJS application demands a web-server, and there is
-a bunch of generic boilerplate code involved. Here is our solution to this,
-which allows to create a simple, but functional, web-server in a moment, and
-permits to further configurate it for specific use.
-
-*NOTE:* It is supposed that this server, even with zero configration, supports
-most standard ReactJS setups: i.e. with or without server-side rendering and/or
-Redux. However, the current code was spawned out from a specific codebase that
-used Redux and server-side rendering. Should you experience any problems in any
-other use case, don't hesitate to attract attention to your issues and propose
-fixes/enhancements!
-
-### Details
-Technically, our server solution consists of three parts: `build/{type}/server/renderer`
-takes care about the actual rendering of HTML template, injection of config and
-server-side rendered ReactJS markup; `build/{type}/server/server` creates and configures
-ExpressJS server; and `build/{type}/server` assemble them together, sets up and launches
-the native NodeJS server that exposes ExpressJS to the outside world.
-
-For the practical use, staring the server is as easy as:
 ```js
 import { server } from '@dr.pogodin/react-utils`;
-import webpackConfig from 'config/webpack/production.js`;
+import webpackConfig from 'path/to/your/webpack.config';
 
-const options = {}; // A number of extra options can be provided here.
+server(webpackConfig);
 
-server(webpackConfig, options);
+/* Web server is up, running, and serving the app specified by the provided
+ * Webpack config */
 ```
 
-The `serverFactory(webpackConfig, options)` function initializes, and launches
-the server, and it returns a Promise that resolves to an object with two fields,
-`expressServer` and `httpServer` that contain the created and launched servers.
+All you need to create and launch a web-server for your ReactJS application.
+Allows zero or detailed configuration, supports server-side rendering, and
+development tools, including Hot Module Reloading (HMR).
 
-The first argument of the factory, `webpackConfig` is the Webpack config used to
-build the frontend bundle: in production mode server takes out of it `context`,
-`publicPath`, and some other params; in development mode the entire config is
-necessary to run ExpressJS in development mode.
+### Reference
 
-The second argument, `options`, is optional; it allows to pass in the following
-props:
-- **`Application`** &mdash; *Component* &mdash; Optional. The root ReactJS
-  component of the app. If provided, server will perform server-side rendering,
-  and it will inject the rendered markup into the HTML template it serves.
-- **`beforeRender`** &mdash; *Function(req, config)* &mdash; Optional. The hook to be
-  executed right before the generation of HTML template of the page.
+- `async server(webpackConfig, [options])` &rArr; `Promise` &rArr;
+  `{ expressServer, httpServer }`
 
-  **Arguments:**
-  - **`req`** &mdash; *Object* &mdash; ExpressJS HTTP request;
-  - **`config`** &mdash; *Object* &mdash; App config that server wants to inject
-    into HTML page template;
+  **Arguments**
+
+  - `webpackConfig` (_Object_) &ndash; Webpack configuration used to build
+    the frontend bundle. In production mode the server will read out of it
+    `context`, `publicPath`, and a few other parameters, necessary to locate
+    and serve the app bundle. In development mode the server will use entire
+    provided config to build the app bundle in memory, and further watch and
+    update it via HMR.
+
+  - `[options]` (_Object_) &ndash; Optional. Additional parameters.
+
+  - `[options.Application]` (_Component_) &ndash; Optional. The root ReactJS
+    component of the app to use for the server-side rendering. When not provided
+    the server-side rendering is disabled.
+
+  - `[options.beforeRender]` ([_Before Render Hook_](#before-render-hook))
+    &ndash; Optional. The hook to run just before the server-side rendering.
+    For each incoming request, it will be executed just before the HTML markup
+    is generated at the server. It allows to load and provide the data necessary
+    for server-side rendering, and also to inject additional configuration and
+    scripts into the generated HTML code.
+
+  - `[options.devMode]` (_Boolean_) &ndash; Optional. Pass in `true` to start
+    the server in development mode.
+
+  - `[options.favicon]` (_String_) &ndash; Optional. Path to the favicon to use
+    by the server. By default no favicon is used.
+
+  - `[options.https]` (_Object_) &ndash; Optional. If provided, HTTPS server
+    will be started, instead of HTTP otherwise. The object should provide SSL
+    certificate and key via two string fields: `cert`, and `key`.
+
+  - `[options.httpsRedirect]` (_Boolean_) &ndash; Optional. Pass in `true`
+    to enable automatic redirection of all incoming HTTP requests to HTTPS.
+
+    To smoothly use it at `localhost` you need to run the server in HTTPS mode,
+    and also properly create and install a self-signed SSL sertificate on your
+    system. This article is helpful:
+    [How to get HTTPS working on your local development environment in 5 minutes](https://medium.freecodecamp.org/how-to-get-https-working-on-your-local-development-environment-in-5-minutes-7af615770eec)
+
+  - `[options.logger]` (_Object_) &ndash; Optional. The logger to use at server
+    side. By default [`winston`](https://www.npmjs.com/package/winston) logger
+    with console transport is used. The logger you provide, or the default
+    `winston` logger otherwise, will be attached to the created ExpressJS server
+    object.
+
+  - `[options.onExpressJsSetup]` (_Function_) &ndash; Optional. An async hook
+    to run upon ExpressJS server configuration:
+    
+    `async onExpressJsSetupHook(server)` &rArr; `Promise`
+
+    If provided, it will be called with the created ExpressJS `server` passed in
+    as the only argument. The call will happen when the server is mostly ready,
+    just before the server-side renderer, and the error handler are attached
+    to it. You can use it to mount custom API routes to the server.
+    You can access the server-side logger as `server.logger`. The caller code
+    will wait for resolution of `Promise` returned by the hook.
+
+  - `[port]` (_Number_ or _String_) &ndash; Optional. The port to start
+    the server on. Defaults **3000**.
+
+  **Returns** `Promise`resolving to the object with fields
+
+  - `expressServer` (_Object_) &ndash; Created ExpressJS server, with
+    the provided, or default logger attached as `expressServer.logger`.
+
+  - `httpServer` (Object) &ndash; Created HTTP(S) server.
+
+- <a name="before-render-hook"></a>
+  `async beforeRenderHook(req, config)` &rArr; `Promise` &rArr;
+  `{ configToInject, extraScripts, store }`
+
+  **Arguments**
+
+  - `req` (_Object_) &ndash; Incoming ExpressJS HTTP request.
+
+  - `config` (_Object_) &ndash; Application config that server wants to
+    inject into generated HTML template.
+
+  **Returns** `Promise` resolving to the object with fields
   
-  **Returns:** Promise that resolves to an object with the following fields:
-  - **`configToInject`** &mdash; *Object* &mdash; Optional. The actual config
-    object
-    to be injected into the page. If omitted, the one proposed by the server
-    will be used.
-  - **`extraScripts`** &mdash; *Object[]* | *String[]* &mdash; Additional script
-    tags to be injected into the page. Each script given as a string will be
-    injected in the end of document's `<body>`, but immediately before the main
-    application bundle. Each script given as object should have two fields:
-    `code` specifies the actual code to inject, and `location` which specifies
-    location, where the script should be injected. Possible locations are
-    given in the `server.SCRIPT_LOCATIONS` object:
-    - `server.SCRIPT_LOCATIONS.BODY_OPEN` - right after the openning `<body>`
-      tag;
-    - `server.SCRIPT_LOCATIONS.DEFAULT` - default locations described above;
-    - `server.SCRIPT_LOCATIONS.HEAD_OPEN` - right after the openning `<head>`
-      tag;
+  - `[configToInject]` (_Object_) &ndash; Optional. The actual config object to
+    inject into the generated page. If not provided, the `config` provided as
+    argument will be injected as is.
 
-    When a few scripts have the same location, they all are injected into that
-    location in the order they are given in the `extraScripts` array.
+  - `[extraScripts]` (_Array of Objects and/or Strings_) &ndash; Optional.
+    Additional scripts to inject into the generated page. Each script given
+    as a string will be injected as is in the end of generated document's
+    `<body>`, just before the main application bundle. Each script given as
+    an object is expected to have two fields: `code` holding the actual code
+    to inject, and `location` specifying where to inject that `code`. The valid
+    locations are exposed via
+    the [`server.SCRIPT_LOCATIONS`](#script-locations) object. The scripts
+    intended for the same location are injected in the order they are listed
+    in the `extraScript` array.
 
-  - **`store`** &mdash; *Object* &mdash; Redux store which state will be
-    injected into HTML template as the initial state of the app.
+  - `[store]` (_Object_) &ndash; Optional. Redux store to provide to the app for
+    server-side rendering. Its state will be also injected into the generated
+    HTML code to use as the initial state at the frontend.
 
-- **`devMode`** &mdash; *Boolean* &mdash; Optional. Specifies, whether the
-  server should be launched in the development mode.
-- **`favicon`** &mdash; *String* &mdash; Optional. Path to the favicon to be
-  served by the server.
-- **`https`** &ndash; *Object* &ndash; Optional. Should be an object with two
-  string fields:
-  - **`cert`** &ndash; *String* &ndash; SSL sertificate;
-  - **`key`** &ndash; *String* &ndash; SSL key.
-- **`httpsRedirect`** &ndash; *Boolean* &ndash; Redirects all incoming HTTP
-  requests to the https access.
-
-  For this to work on *localhost* you'll have to create and properly install
-  a self-signed SSL certificate on your system. Instructions in this article
-  should help: [How to get HTTPS working on your local development environment in 5 minutes](https://medium.freecodecamp.org/how-to-get-https-working-on-your-local-development-environment-in-5-minutes-7af615770eec)
-
-- **`logger`** &ndash; *Object* &ndash; The logger to use. By default Winston
-  logger with console transport is used.
-- **`onExpressJsSetup`** &mdash; *Function* &mdash; Custom setup of ExpressJS
-  server. Express server instance will be passed in as the only argument to this
-  function.
-- **`port`** &mdash; *Number|String* &mdash; The port to be used by the server.
+- <a name="script-locations"></a> `server.SCRIPT_LOCATIONS`
+  
+  - `server.SCRIPT_LOCATIONS.BODY_OPEN` &ndash; Right after the opening `<body>`
+    tag.
+  - `server.SCRIPT_LOCATIONS.DEFAULT` &ndash; In the end of `<body>` block, just
+    before the main application bundle.
+  - `server.SCRIPT_LOCATIONS.HEAD_OPEN` &ndash; Right after the opening `<head>`
+    tag.
