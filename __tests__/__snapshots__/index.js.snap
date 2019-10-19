@@ -89,6 +89,10 @@ Object {
     "string": [Function],
     "symbol": [Function],
   },
+  "PageLayout": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "ScalableRect": [Function],
   "ThemeProvider": [Function],
   "Throbber": [Function],
@@ -753,6 +757,10 @@ Object {
     "shape": [Function],
     "string": [Function],
     "symbol": [Function],
+  },
+  "PageLayout": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "ScalableRect": [Function],
   "ThemeProvider": [Function],

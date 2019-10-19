@@ -56,19 +56,21 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [Webpack](docs/webpack-config.md)
 
 ### Components
-- [`Avatar`](docs/avatar.md) &ndash; The standard component for user avatars.
-- [`Button`](docs/button.md) &ndash; Handles buttons and button-like links
+- [`<Avatar>`](docs/avatar.md) &ndash; The standard component for user avatars.
+- [`<Button>`](docs/button.md) &ndash; Handles buttons and button-like links
   (components that look like regular buttons, but behave as links) in the same
   uniform manner.
-- [`Link` and `NavLink`](docs/link-and-navlink.md) &ndash; Auxiliary wrappers
-  around the React Router's components of the same names. Allow to handle
-  external and internal links in the same uniform manner.
-- [`Modal`](docs/modal.md) &ndash; Themeable modal component/
-- [`ScalableRect`](docs/scalable-rect.md) &ndash; Container that keeps
+- [`<Link>` and `<NavLink>`](docs/link-and-navlink.md) &ndash; Auxiliary
+  wrappers around the React Router's components of the same names. Allow
+  to handle external and internal links in the same uniform manner.
+- [`<Modal>`](docs/modal.md) &ndash; Themeable modal component.
+- [`<PageLayout>`](docs/page-layout.md) &ndash; Simple and configurable
+  page layout.
+- [`<ScalableRect>`](docs/scalable-rect.md) &ndash; Container that keeps
   the specified aspect ratio regardless the width you set.
-- [`Throbber`](docs/throbber.md) &ndash; Simple activity indicator (three bouncing
-  circles).
-- [`Tooltip`](docs/tooltip.md) &ndash; Tooltip component.
+- [`<Throbber>`](docs/throbber.md) &ndash; Simple activity indicator
+  (three bouncing circles).
+- [`<Tooltip>`](docs/tooltip.md) &ndash; Tooltip component.
 
 ### NodeJS Scripts
 - [`dr-pogodin-lib-setup`](docs/dr-pogodin-lib-setup-script.md) &ndash; Helps to

@@ -1,0 +1,32 @@
+/**
+ * Base theme: symmetric 3-columns layout, with the center column occupying all
+ * screen up to mid screen size. For larger screen sizes the main column is
+ * limited by the mid screen size, and the free space is filled with side
+ * columns on left and right.
+ */
+
+@import "~styles/mixins";
+
+*,
+.context,
+.ad.hoc {
+  &.container {
+    align-items: stretch;
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &.mainPanel {
+    max-width: $screen-md;
+    overflow: hidden;
+    padding: 1.2em;
+    width: 100%;
+  }
+
+  &.sidePanel {
+    flex: 1;
+    overflow: hidden;
+  }
+}
