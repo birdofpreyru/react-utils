@@ -77,7 +77,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
   build process; also provides a working alternative to the `npm link` command.
 
 ### Redux Templates
-- [**Item**](docs/redux-item.md) &ndash; An async piece of data in Redux store.
+- [Item](docs/redux-item.md) &ndash; An async piece of data in Redux store.
 
 ### Utilities
 - [`_`](docs/lodash.md) &ndash; Alias for `lodash` (JS utilities).

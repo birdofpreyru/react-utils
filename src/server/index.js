@@ -32,7 +32,7 @@ function normalizePort(value) {
  * Creates and starts a new webserver.
  * @param {Object} webpackConfig The Webpack config that was used to build the
  *  frontend bundle.
- * @param {Object} options Additional options.
+ * @param {Object} [options] Additional options.
  * @param {Function} [options.Application=null] Optional. The root ReactJS
  *  component of the app to use for server-side rendering.
  * @param {Boolean} [options.devMode=false] Whether the server should be
@@ -44,8 +44,8 @@ function normalizePort(value) {
  * @param {Object} [options.https=undefined] Optional. If given, HTTPS server
  *  will be started with the specified settings. HTTP server that hanles HTTP >
  *  HTTPS redirection will be also started at the specified port.
- * @param {String} options.https.cert SSL Certificate.
- * @param {String} options.https.key SSL key.
+ * @param {String} [options.https.cert] SSL Certificate.
+ * @param {String} [options.https.key] SSL key.
  * @param {Boolean} [options.httpsRedirect=true] When true, all incoming HTTP
  *  requests will be redirected to HTTPS.
  * @param {Function} [options.beforeRender=null] The hook into server-side
@@ -58,7 +58,7 @@ function normalizePort(value) {
  *    - store {Object} - Redux store, which state should be used for server-side
  *      rendering, if it is performed, and also injected into HTML template as
  *      the initial state.
- * @param {Function} options.onExpressJsSetup Custom setup of ExpressJS server.
+ * @param {Function} [options.onExpressJsSetup] Custom setup of ExpressJS server.
  * @param {String} [options.port=3000] The port to listen (number or name).
  *  When not specified the value will be taken from PORT environmental variable,
  *  or default to 3000 otherwise.
