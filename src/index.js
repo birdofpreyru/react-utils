@@ -5,7 +5,7 @@ import 'styles/global.scss';
 import actions from 'actions';
 import AppChunk from 'containers/AppChunk';
 import Avatar from 'components/Avatar';
-import Button from 'components/Button';
+import Button, { BaseButton } from 'components/Button';
 import client from 'client';
 import DevTools from 'components/DevTools';
 import Link from 'components/Link';
@@ -29,6 +29,7 @@ export {
   actions,
   AppChunk,
   Avatar,
+  BaseButton,
   BaseModal,
   Button,
   client,

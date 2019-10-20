@@ -21,7 +21,8 @@ the page, surrounded by side panels, where additional content can be displayed.
 The component is [themed](react-themes.md), thus its appearance can be easily
 modified.
 
-- `<PageLayout>`
+- `<PageLayout>` &ndash; Themed page layout. The context style is picked up from
+  the `PageLayout` context theme.
 
   **Children**
 
