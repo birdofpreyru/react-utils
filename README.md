@@ -73,10 +73,12 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [`<Tooltip>`](docs/tooltip.md) &ndash; Tooltip component.
 
 ### NodeJS Scripts
-- [`dr-pogodin-lib-setup`](docs/dr-pogodin-lib-setup-script.md) &ndash; Helps to
-  install and upgrade the library.
-- [`react-utils-build`](docs/bin-build.md) &ndash; encapsulates Babel and Webpack
-  build process; also provides a working alternative to the `npm link` command.
+- [`react-utils-build`](docs/react-utils-build.md) &ndash; The script for Babel,
+  and Webpack build of the library and derived apps. Can be used to work around
+  issues with `npm link` command for the library development within dependant
+  projects.
+- [`react-utils-setup`](docs/bin-setup.md) &ndash; The script for library
+  installation and upgrades.
 
 ### Redux Templates
 - [Item](docs/redux-item.md) &ndash; An async piece of data in Redux store.
