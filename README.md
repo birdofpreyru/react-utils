@@ -84,8 +84,8 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [Item](docs/redux-item.md) &ndash; An async piece of data in Redux store.
 
 ### Utilities
-- [`_`](docs/lodash.md) &ndash; Alias for `lodash` (JS utilities).
-- [`api`](docs/api.md) &ndash; Alias for `axios` (HTTP client).
+- [`_`](docs/lodash.md) &ndash; Alias of `lodash` (JS utilities).
+- [`api`](docs/api.md) &ndash; Alias of `axios` (API / HTTP client).
 - [`client`](docs/client.md) &ndash; Client-side initialization code.
 - [`config`](docs/config.md) &ndash; Isomorphic app config.
 - [Global Styles](docs/global-styles.md) &ndash; Global SCSS styles necessary for
@@ -93,17 +93,17 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [`isomorphy`](docs/isomorphy-utils.md) &ndash; Collection of helpers to deal
   with isomorphic aspects of the code.
 - [`JU`](docs/jest-utils.md) &ndash; `jest` utilities.
-- [`PT`](docs/prop-types.md) &ndash; Alias for `prop-types`.
+- [`PT`](docs/prop-types.md) &ndash; Alias of `prop-types`.
 - [React Themes](docs/react-themes) &ndash; Aliases for `dr.pogodin/react-themes`.
   UI styles for React components with theme composition.
-- [`redux`](docs/redux-utils.md) &ndash; Alias for `redux` + related utils.
+- [`redux`](docs/redux-utils.md) &ndash; Alias of `redux` + related utils.
 - [SCSS Mixins](docs/scss-mixins.md) &ndash; Collection of useful style
   mixins;
 - [`server`](docs/server.md) &ndash; Easy creation and launch of web-server
   with standard configuration, that serves a ReactJS application with or without
   server-side rendering, supports development tools (Hop Module Reloading), and
   can be further configured for the needs of specific projects.
-- [`time`](docs/time.md) &ndash; Alias for `moment` + related utils. Everything
+- [`time`](docs/time.md) &ndash; Alias of `moment` + related utils. Everything
   needed to deal with date & times.
 - [`url`](docs/url.md) &ndash; URL utils.
 - [`webpack`](docs/webpack-utils.md) &ndash; Various utils related to the

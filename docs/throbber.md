@@ -1,6 +1,9 @@
+# Throbber (Activity Indicator)
+
 ```jsx
 import { Throbber } from '@dr.pogodin/react-utils';
 ```
+
 `<Throbber />` renders three bouncing circles as a simple pending activity
 indicator.
 
