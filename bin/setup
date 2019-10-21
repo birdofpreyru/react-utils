@@ -38,7 +38,7 @@ commander
   .name('react-utils-setup')
   .arguments('[libraries...]')
   .action((libraries) => {
-    libs = libraries || ['@dr.pogodin/react-utils'];
+    libs = libraries.length ? libraries : ['@dr.pogodin/react-utils'];
   })
   .description(COMMAND_DESCRIPTION)
   .option(
