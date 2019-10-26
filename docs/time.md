@@ -17,6 +17,10 @@ Some time intervals expressed in milliseconds:
 
 ### Functions
 
+- `time.now()`
+
+  Alias for `Date.now()` &ndash; returns current time in [ms].
+
 - `time.timer(timeout)` &rArr; `Promise`
   
   Waits for the `timeout` interval, specified as a number [ms].
