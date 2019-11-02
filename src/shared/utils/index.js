@@ -14,6 +14,7 @@ import * as PT from 'prop-types';
 import config from './config';
 import * as isomorphy from './isomorphy';
 import * as redux from './redux';
+import hooks from './hooks';
 import time from './time';
 import * as url from './url';
 import * as webpack from './webpack';
@@ -32,6 +33,7 @@ export {
   _,
   api,
   config,
+  hooks,
   isomorphy,
   JU,
   PT,

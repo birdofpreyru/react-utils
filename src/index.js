@@ -2,6 +2,8 @@ import path from 'path';
 
 import 'styles/global.scss';
 
+import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
+
 import actions from 'actions';
 import AppChunk from 'containers/AppChunk';
 import Avatar from 'components/Avatar';
@@ -34,6 +36,7 @@ export {
   Button,
   client,
   DevTools,
+  GlobalStateProvider,
   Link,
   NavLink,
   MetaTags,

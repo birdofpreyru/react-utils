@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.6.3",
+    "@dr.pogodin/react-global-state": "0.0.4",
     "@dr.pogodin/react-themes": "^1.0.2",
     "axios": "^0.19.0",
     "babel-plugin-react-css-modules": "^5.2.6",

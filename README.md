@@ -60,6 +60,8 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [`<Button>`](docs/button.md) &ndash; Handles buttons and button-like links
   (components that look like regular buttons, but behave as links) in the same
   uniform manner.
+- [`<GlobalStateProvider>`](docs/global-state-provider.md) &ndash; Alias
+  for `<GlobalStateProvider>` from `@dr.pogodin/react-global-state`.
 - [`<Link>` and `<NavLink>`](docs/link-and-navlink.md) &ndash; Auxiliary
   wrappers around the React Router's components of the same names. Allow
   to handle external and internal links in the same uniform manner.
@@ -90,6 +92,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [`config`](docs/config.md) &ndash; Isomorphic app config.
 - [Global Styles](docs/global-styles.md) &ndash; Global SCSS styles necessary for
   a generic application.
+- [`hooks`](docs/hooks.md) &ndash; Different React hooks.
 - [`isomorphy`](docs/isomorphy-utils.md) &ndash; Collection of helpers to deal
   with isomorphic aspects of the code.
 - [`JU`](docs/jest-utils.md) &ndash; `jest` utilities.

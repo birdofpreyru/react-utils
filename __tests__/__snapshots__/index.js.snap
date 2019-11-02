@@ -11,6 +11,7 @@ Object {
     "render": [Function],
   },
   "DevTools": [Function],
+  "GlobalStateProvider": [Function],
   "JU": null,
   "Link": [Function],
   "MetaTags": Object {
@@ -179,6 +180,10 @@ Object {
   },
   "client": [Function],
   "config": undefined,
+  "hooks": Object {
+    "useAsyncData": [Function],
+    "useGlobalState": [Function],
+  },
   "isomorphy": Object {
     "buildTimestamp": [Function],
     "isClientSide": [Function],
@@ -590,6 +595,7 @@ Object {
     "render": [Function],
   },
   "DevTools": [Function],
+  "GlobalStateProvider": [Function],
   "JU": Object {
     "findInDomByClass": [Function],
     "findInDomManyByClass": [Function],
@@ -856,6 +862,10 @@ Object {
       "dummySecretKey": "Dummy Secret Value",
     },
     "dummyKey": "Dummy Value",
+  },
+  "hooks": Object {
+    "useAsyncData": [Function],
+    "useGlobalState": [Function],
   },
   "isomorphy": Object {
     "buildTimestamp": [Function],
