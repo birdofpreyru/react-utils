@@ -4,25 +4,26 @@
  * The comments in this file explain how to write a custom button theme.
  */
 
-/* Generic button of medium size. */
-.button {
-  align-items: center;
-  background-image: linear-gradient(to top, lightgray, white 50%, white);
-  border: solid 1px gray;
-  border-radius: 3px;
-  color: inherit;
-  display: inline-flex;
-  font: inherit;
-  justify-content: center;
-  min-height: 36px;
-  margin: 6px;
-  padding: 6px 24px;
-  text-align: center;
-  text-decoration: none;
-  vertical-align: middle;
-
-  /* NOTE: All CSS rules below are nested to have higher specifity, thus
-   * avoiding overriding of these rules by parent rules in some scenarious. */
+*,
+.context,
+.ad.hoc {
+  /* Generic button of medium size. */
+  &.button {
+    align-items: center;
+    background-image: linear-gradient(to top, lightgray, white 50%, white);
+    border: solid 1px gray;
+    border-radius: 3px;
+    color: inherit;
+    display: inline-flex;
+    font: inherit;
+    justify-content: center;
+    min-height: 36px;
+    margin: 6px;
+    padding: 6px 24px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+  }
 
   /* Additional styling of disabled buttons. */
   &.disabled {
@@ -35,7 +36,7 @@
   &.link,
   &.regular {
     /* To prevent different styling of the button-like link once it has been
-     * visited. */
+    * visited. */
     &:visited {
       color: inherit;
     }
@@ -59,6 +60,7 @@
     }
   }
 
+  /* Alternative button sizes. */
   &.xs {
     border-radius: 1px;
     min-height: 24px;

@@ -10,7 +10,7 @@ its logic, and ensures that it works the same across our projects.
 **Accepted Props:**
 - **`DefaultAvatar`** &mdash; *ReactJS Node* &mdash; ReactJS component to render
   as a default avatar image;
-- **`theme`** &mdash; *Object* &mdash; `react-css-super-themr` map to apply to
+- **`theme`** &mdash; *Object* &mdash; UI theme to apply to
   the `Avatar`. At the moment, only one field is accepted:
   - **`avatar`** &mdash; *String* &mdash; CSS class to apply to the rendered
     avatar;
@@ -34,8 +34,7 @@ the default avatar image, e.g.:
 // MyThemedAvatar.jsx
 
 import React from 'react';
-import { Avatar } from '@dr.pogodin/react-utils';
-import { themr } from 'react-css-super-themr';
+import { Avatar, themed } from '@dr.pogodin/react-utils';
 
 import DefaultAvatarImage from './default-avatar-image.svg';
 import theme from './theme.scss';
@@ -52,10 +51,14 @@ Now, in your code you can render your themed avatar as:
 
 /* To demonstrate ad-hoc styling, say you need larger size of the avatar
  * in some specific place. */
-.largeAvatar {
-  border-radius: 128px;
-  height: 256px;
-  width: 256px;
+*,
+.context,
+.ad.hoc {
+  &.avatar {
+    border-radius: 128px;
+    height: 256px;
+    width: 256px;
+  }
 }
 ```
 
@@ -78,7 +81,7 @@ export default function Example() {
       <Avatar url="url/of/the/user/avatar/image.jpg" />
 
       {/* A large avatar. */}
-      <Avatar theme={{ avatar: style.largeAvatar }} />
+      <Avatar theme={style} />
     </div>
   );
 }

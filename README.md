@@ -46,64 +46,70 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 ```
 
 ## Reference
-### Configurations
-- [**Babel Configurations**](docs/babel-config.md) &ndash; Standard
-  configurations for [Babel](https://babeljs.io/);
-- [**ESLint Configurations**](docs/eslint-config.md) &ndash; Standard
-  configurations for [ESLint](https://eslint.org/);
-- [**Jest Configurations**](docs/jest-config.md) &ndash; Standard configurations
-  for [Jest](https://facebook.github.io/jest/);
-- [**Stylelint Configurations**](docs/stylelint-config.md) &ndash; Standard
-  configurations for [Stylelint](https://stylelint.io)
-- [**Webpack Configurations**](docs/webpack-config.md) &ndash; Standard
-  configurations for [Webpack](https://webpack.js.org/).
+
+### Standard Configurations
+
+- [Babel](docs/babel-config.md)
+- [ESLint](docs/eslint-config.md)
+- [Jest](docs/jest-config.md)
+- [Stylelint](docs/stylelint-config.md)
+- [Webpack](docs/webpack-config.md)
 
 ### Components
-- [**`Avatar`**](docs/avatar.md) &ndash; The standard component for user avatars;
-- [**`Button`**](docs/button.md) &ndash; Handles buttons and button-like links
+- [`<Avatar>`](docs/avatar.md) &ndash; The standard component for user avatars.
+- [`<Button>`](docs/button.md) &ndash; Handles buttons and button-like links
   (components that look like regular buttons, but behave as links) in the same
-  uniform manner;
-- [**`Link` and `NavLink`**](docs/link-and-navlink.md) &ndash; Auxiliary wrappers
-  around [React Router](https://github.com/ReactTraining/react-router)'s `<Link>`
-  and `<NavLink>` components; they help to handle external and internal links in
-  the same uniform manner;
-- [**`Modal`**](docs/modal.md) &ndash; Themeable modal component;
-- [**`ScalableRect`**](docs/scalable-rect.md) &ndash; Container that keeps
+  uniform manner.
+- [`<GlobalStateProvider>`](docs/global-state-provider.md) &ndash; Alias
+  for `<GlobalStateProvider>` from `@dr.pogodin/react-global-state`.
+- [`<Link>` and `<NavLink>`](docs/link-and-navlink.md) &ndash; Auxiliary
+  wrappers around the React Router's components of the same names. Allow
+  to handle external and internal links in the same uniform manner.
+- [`<Modal>`](docs/modal.md) &ndash; Themeable modal component.
+- [`<PageLayout>`](docs/page-layout.md) &ndash; Simple and configurable
+  page layout.
+- [`<ScalableRect>`](docs/scalable-rect.md) &ndash; Container that keeps
   the specified aspect ratio regardless the width you set.
-- [Throbber](docs/throbber.md) &ndash; simple activity indicator (three bouncing
-  circles).
-- [Tooltip](docs/tooltip.md) &ndash; the chosen tooltip component.
+- [`<Throbber>`](docs/throbber.md) &ndash; Simple activity indicator
+  (three bouncing circles).
+- [`<Tooltip>`](docs/tooltip.md) &ndash; Tooltip component.
 
 ### NodeJS Scripts
-- [**dr-pogodin-lib-setup**](docs/dr-pogodin-lib-setup-script.md) &ndash; Helps to
-  install and upgrade **@dr.pogodin/react-utils** and other similar libraries.
-- [react-utils-build](docs/bin-build.md) &ndash; encapsulates Babel and Webpack
-  build process; also provides a working alternative to the `npm link` command.
+- [`react-utils-build`](docs/react-utils-build.md) &ndash; The script for Babel,
+  and Webpack build of the library and derived apps. Can be used to work around
+  issues with `npm link` command for the library development within dependant
+  projects.
+- [`react-utils-setup`](docs/bin-setup.md) &ndash; The script for library
+  installation and upgrades.
 
 ### Redux Templates
-- [**Item**](docs/redux-item.md) &ndash; An async piece of data in Redux store.
+- [Item](docs/redux-item.md) &ndash; An async piece of data in Redux store.
 
 ### Utilities
-- [api](docs/api.md) &ndash; API (HTTP) client & utils (encapsulates `axios`).
-- [**Client**](docs/client.md) &ndash; Client-side initialization code.
-- [**Config**](docs/config.md) &ndash; Isomorphic app config;
-- [**Global Styles**](docs/global-styles.md) &ndash; Global styles necessary for
-  a generic application;
-- [**Isomorphy**](docs/isomorphy-utils.md) &ndash; Collection of helpers to deal
-  with isomorphic aspects of the code;
-- [**Jest utils**](docs/jest-utils.md) &ndash; Collection of helpers to be used
-  in Jest tests code;
-- [PT](docs/prop-types.md) &ndash; encapsulates React's `prop-types`;
-- [**Redux utils**](docs/redux-utils.md) &ndash; *TO BE DOCUMENTED*
-- [**SCSS Mixins**](docs/scss-mixins.md) &ndash; Collection of useful style
+- [`_`](docs/lodash.md) &ndash; Alias of `lodash` (JS utilities).
+- [`api`](docs/api.md) &ndash; Alias of `axios` (API / HTTP client).
+- [`client`](docs/client.md) &ndash; Client-side initialization code.
+- [`config`](docs/config.md) &ndash; Isomorphic app config.
+- [Global Styles](docs/global-styles.md) &ndash; Global SCSS styles necessary for
+  a generic application.
+- [`hooks`](docs/hooks.md) &ndash; Different React hooks.
+- [`isomorphy`](docs/isomorphy-utils.md) &ndash; Collection of helpers to deal
+  with isomorphic aspects of the code.
+- [`JU`](docs/jest-utils.md) &ndash; `jest` utilities.
+- [`PT`](docs/prop-types.md) &ndash; Alias of `prop-types`.
+- [React Themes](docs/react-themes) &ndash; Aliases for `dr.pogodin/react-themes`.
+  UI styles for React components with theme composition.
+- [`redux`](docs/redux-utils.md) &ndash; Alias of `redux` + related utils.
+- [SCSS Mixins](docs/scss-mixins.md) &ndash; Collection of useful style
   mixins;
-- [**Server**](docs/server.md) &ndash; Easy creation and launch of web-server
+- [`server`](docs/server.md) &ndash; Easy creation and launch of web-server
   with standard configuration, that serves a ReactJS application with or without
   server-side rendering, supports development tools (Hop Module Reloading), and
   can be further configured for the needs of specific projects.
-- [time](docs/time.md) &ndash; Date & time utils (encapsulates `moment`).
-- [url](docs/url.md) &ndash; URL utils.
-- [**Webpack**](docs/webpack-utils.md) &ndash; Various utils related to the
+- [`time`](docs/time.md) &ndash; Alias of `moment` + related utils. Everything
+  needed to deal with date & times.
+- [`url`](docs/url.md) &ndash; URL utils.
+- [`webpack`](docs/webpack-utils.md) &ndash; Various utils related to the
   Webpack bundling process.
 
 ## Development

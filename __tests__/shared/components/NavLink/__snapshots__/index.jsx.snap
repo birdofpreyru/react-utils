@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matches snapshots 1`] = `
+<GenericLink
+  className={null}
+  disabled={false}
+  enforceA={false}
+  onClick={null}
+  onMouseDown={null}
+  openNewTab={false}
+  replace={false}
+  routerLinkType={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "displayName": "NavLink",
+      "propTypes": Object {
+        "activeClassName": [Function],
+        "activeStyle": [Function],
+        "aria-current": [Function],
+        "className": [Function],
+        "exact": [Function],
+        "innerRef": [Function],
+        "isActive": [Function],
+        "location": [Function],
+        "onClick": [Function],
+        "replace": [Function],
+        "strict": [Function],
+        "style": [Function],
+        "target": [Function],
+        "to": [Function],
+      },
+      "render": [Function],
+    }
+  }
+  to=""
+/>
+`;
+
+exports[`Matches snapshots 2`] = `
+<GenericLink
+  className="__tests__-shared-components-NavLink-___styles__navLink___2sqdp"
+  disabled={false}
+  enforceA={false}
+  onClick={null}
+  onMouseDown={null}
+  openNewTab={false}
+  replace={false}
+  routerLinkType={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "displayName": "NavLink",
+      "propTypes": Object {
+        "activeClassName": [Function],
+        "activeStyle": [Function],
+        "aria-current": [Function],
+        "className": [Function],
+        "exact": [Function],
+        "innerRef": [Function],
+        "isActive": [Function],
+        "location": [Function],
+        "onClick": [Function],
+        "replace": [Function],
+        "strict": [Function],
+        "style": [Function],
+        "target": [Function],
+        "to": [Function],
+      },
+      "render": [Function],
+    }
+  }
+  to=""
+/>
+`;

@@ -1,14 +1,26 @@
 import path from 'path';
 
+import _ from 'lodash';
+
+import themed, {
+  COMPOSE,
+  PRIORITY,
+  ThemeProvider,
+} from '@dr.pogodin/react-themes';
+
 import * as api from 'axios';
 import * as PT from 'prop-types';
 
 import config from './config';
 import * as isomorphy from './isomorphy';
 import * as redux from './redux';
+import hooks from './hooks';
 import time from './time';
 import * as url from './url';
 import * as webpack from './webpack';
+
+themed.COMPOSE = COMPOSE;
+themed.PRIORITY = PRIORITY;
 
 const juUrl = module.webpackPolyfill ? './shared/utils/jest'
   : path.resolve(__dirname, './jest');
@@ -18,12 +30,16 @@ const JU = isomorphy.isServerSide()
   ? webpack.requireWeak(juUrl) : null;
 
 export {
+  _,
   api,
   config,
+  hooks,
   isomorphy,
   JU,
   PT,
   redux,
+  themed,
+  ThemeProvider,
   time,
   url,
   webpack,

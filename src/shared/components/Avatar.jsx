@@ -1,6 +1,6 @@
 /**
  * The standard Avatar component.
- * To use it you will have to properly wrap it with react-css-super-themr,
+ * To use it you will have to properly wrap it with React Themes,
  * the component provided here takes care about the code interface and logic
  * only.
  */

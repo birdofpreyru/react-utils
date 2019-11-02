@@ -10,9 +10,11 @@ import React from 'react';
 
 import Link from 'components/Link';
 
+import { themed } from 'utils';
+
 import defaultTheme from './style.scss';
 
-export default function Button({
+export function BaseButton({
   active,
   children,
   disabled,
@@ -80,7 +82,7 @@ export default function Button({
   );
 }
 
-Button.defaultProps = {
+BaseButton.defaultProps = {
   active: false,
   children: null,
   disabled: false,
@@ -95,7 +97,7 @@ Button.defaultProps = {
   type: 'button',
 };
 
-Button.propTypes = {
+BaseButton.propTypes = {
   active: PT.bool,
   children: PT.node,
   disabled: PT.bool,
@@ -115,3 +117,5 @@ Button.propTypes = {
   to: PT.oneOfType([PT.object, PT.string]),
   type: PT.oneOf(['button', 'reset', 'submit']),
 };
+
+export default themed('Button', defaultTheme)(BaseButton);

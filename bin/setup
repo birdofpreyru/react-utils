@@ -4,42 +4,49 @@
  * published to NPM. */
 /* eslint-disable import/no-extraneous-dependencies, no-console  */
 
-const commandLineArgs = require('command-line-args');
-const commandLineUsage = require('command-line-usage');
+const { spawnSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
-const { spawnSync } = require('child_process');
 
-/* Definition of command-line arguments. */
-const OPTIONS = [{
-  name: 'help',
-  alias: 'h',
-  description: 'Shows usage instructions',
-  type: Boolean,
-}, {
-  name: 'just-fix-deps',
-  description: 'Skips installation of libraries, just fixes dependencies',
-  type: Boolean,
-}, {
-  name: 'libraries',
-  defaultOption: true,
-  multiple: true,
-  type: String,
-}];
+const commander = require('commander');
 
-/* Definition of help information. */
-const HELP = [{
-  content: 'Usage: {cyanBright dr-pogodin-lib-setup [OPTION]... LIBRARY...}',
-}, {
-  header: 'Description',
-  content:
-    `Installs or upgrades ReactJS libraries released to NPM.
-    {cyanBright [OPTION]...} is the list of options (see below);
-    {cyanBright LIBRARY...} is the list of libraries to install/upgrade`,
-}, {
-  header: 'Options',
-  optionList: OPTIONS.filter((x) => !x.defaultOption),
-}];
+const COMMAND_DESCRIPTION = `\
+Automates library installation and upgrades.
+
+Installs the latest version of each library from the whitespace separated list
+[libraries...]. After installing each library, it also installs into the current
+package:
+1.  All development dependencies of that library, with the versions specified by
+    the library, and it saves them as dev dependencies of the current package.
+2.  All production dependencies, common between the library and the current
+    project, using the versions specified by the library. These dependencies
+    and their versions are saved as prod dependencies of the current package.
+
+If no [libraries...] are specified, it installs "@dr.pogodin/react-utils" by
+default.
+
+"--just-fix-deps" option allows to skip the actual libirary installations,
+it just checks the libirary versions currently installed, and installs their
+development, and production dependencies, into the current package, the way
+described above.`;
+
+let libs;
+
+/* Command-line config. */
+commander
+  .version('0.1.1')
+  .name('react-utils-setup')
+  .arguments('[libraries...]')
+  .action((libraries) => {
+    libs = libraries.length ? libraries : ['@dr.pogodin/react-utils'];
+  })
+  .description(COMMAND_DESCRIPTION)
+  .option(
+    '--just-fix-deps',
+    'Skips library installation, just fixes dependencies.',
+    false,
+  )
+  .parse(process.argv);
 
 /**
  * Generates a string containing name and version of the package to be
@@ -110,13 +117,6 @@ function install(library) {
 }
 
 /**
- * Outputs help information to console.
- */
-function showHelp() {
-  console.log(commandLineUsage(HELP));
-}
-
-/**
  * Updates prod dependencies of `host` package that are also prod dependencies
  * of `donor` to the same versions specified in the donor's `package.json`.
  * @param {Object} donorData Data from donor's `package.json`.
@@ -132,19 +132,11 @@ function updateProdDependencies(donorData, hostData) {
 
 /* Entry point. */
 
-const options = commandLineArgs(OPTIONS);
-if (!options.libraries) {
-  options.libraries = ['@dr.pogodin/react-utils'];
-}
-
-if (options.help) showHelp();
-else {
-  const hostData = getHostPackageJson();
-  options.libraries.forEach((library) => {
-    if (!options['just-fix-deps']) install(library);
-    const libData = getPackageJson(library);
-    adoptDevDependencies(libData, hostData);
-    updateProdDependencies(libData, hostData);
-  });
-  spawnSync('npm', ['install'], { stdio: 'inherit' });
-}
+const hostData = getHostPackageJson();
+libs.forEach((library) => {
+  if (!commander.justFixDeps) install(library);
+  const libData = getPackageJson(library);
+  adoptDevDependencies(libData, hostData);
+  updateProdDependencies(libData, hostData);
+});
+spawnSync('npm', ['install'], { stdio: 'inherit' });

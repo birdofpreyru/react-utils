@@ -6,7 +6,7 @@ Implements a simple themeable modal window.
 
 **@dr.pogodin/react-utils** exports two versions of the modal component,
 `BaseModal` implements a non-themed version, and `Modal` is its version
-wrapped into a default style, using `react-css-super-themr` lib.
+wrapped into a default style, using [React Themes](react-themes.md).
 
 ### Props
 

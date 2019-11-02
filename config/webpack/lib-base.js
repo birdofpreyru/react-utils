@@ -38,12 +38,12 @@ module.exports = function configFactory(ops) {
     entry: ops.entry,
     externals: [
       /@babel\/runtime/,
+      '@dr.pogodin/react-themes',
       'axios',
       'lodash',
       'moment',
       'prop-types',
       'react',
-      'react-css-super-themr',
       /react-dom/,
       'react-helmet',
       /react-hot-loader/,

@@ -89,7 +89,15 @@ export default function factory(webpackConfig, options) {
 
   global.TRU_BUILD_INFO = buildInfo;
 
-  const WEBPACK_STATS = getWebpackStats(webpackConfig.output.path);
+  /* It is supposed to end with '/' symbol as path separator. */
+  const { publicPath, path: outputPath } = webpackConfig.output;
+
+  let manifestLink = fs.existsSync(`${outputPath}/manifest.json`);
+  manifestLink = manifestLink ? (
+    `<link rel="manifest" href="${publicPath}manifest.json"></link>`
+  ) : '';
+
+  const WEBPACK_STATS = getWebpackStats(outputPath);
 
   const ops = _.defaults(_.clone(options), {
     beforeRender: () => Promise.resolve({}),
@@ -162,9 +170,6 @@ export default function factory(webpackConfig, options) {
       cipher.finish();
       const INJ = forge.util.encode64(`${iv}${cipher.output.data}`);
 
-      /* It is supposed to end with '/' symbol as path separator. */
-      const { publicPath } = webpackConfig.output;
-
       let assetsByChunkName;
       const { webpackStats } = res.locals;
       if (webpackStats) {
@@ -217,7 +222,7 @@ export default function factory(webpackConfig, options) {
             ${helmet ? helmet.title.toString() : ''}
             ${helmet ? helmet.meta.toString() : ''}
             <meta name="theme-color" content="#FFFFFF"/>
-            <link rel="manifest" href="${publicPath}manifest.json">
+            ${manifestLink}
             <link
               href="${publicPath}main-${timestamp}.css"
               id="tru-style"

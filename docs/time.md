@@ -1,3 +1,5 @@
+# Date & Time Utilities
+
 ```js
 import { time } from '@dr.pogodin/react-utils';
 ```
@@ -14,6 +16,10 @@ Some time intervals expressed in milliseconds:
 - `time.YEAR_MS`
 
 ### Functions
+
+- `time.now()`
+
+  Alias for `Date.now()` &ndash; returns current time in [ms].
 
 - `time.timer(timeout)` &rArr; `Promise`
   

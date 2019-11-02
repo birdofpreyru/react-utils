@@ -13,9 +13,9 @@ import _ from 'lodash';
 import React from 'react';
 import ReactDom from 'react-dom';
 import PT from 'prop-types';
-import { themr } from 'react-css-super-themr';
+import themed from '@dr.pogodin/react-themes';
 
-import defaultStyle from './style.scss';
+import baseTheme from './base-theme.scss';
 
 /* NOTE: Modal component is implemented as class, as it demands advanced
  * interaction with DOM upon mount and unmount. */
@@ -78,4 +78,4 @@ BaseModal.propTypes = {
 /* Non-themed version of the Modal. */
 export { BaseModal };
 
-export default themr('Modal', defaultStyle)(BaseModal);
+export default themed('Modal', baseTheme)(BaseModal);

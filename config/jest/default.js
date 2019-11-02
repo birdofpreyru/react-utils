@@ -15,6 +15,7 @@ module.exports = {
   moduleNameMapper: {
     '\\.(scss|css)$': 'identity-obj-proxy',
   },
+  modulePathIgnorePatterns: ['<rootDir>/build/'],
   rootDir: '../..',
   testMatch: ['**/__tests__/**/*.js?(x)'],
   testPathIgnorePatterns: [
