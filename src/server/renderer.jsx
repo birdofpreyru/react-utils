@@ -134,15 +134,6 @@ export default function factory(webpackConfig, options) {
       let App = options.Application;
       const ssrContext = { state: _.cloneDeep(initialState || {}) };
       if (App) {
-        App = (
-          <StaticRouter
-            context={context}
-            location={req.url}
-          >
-            <App />
-          </StaticRouter>
-        );
-
         let markup;
         for (let round = 0; round < 3; round += 1) {
           /* eslint-disable no-await-in-loop */
@@ -151,7 +142,12 @@ export default function factory(webpackConfig, options) {
               initialState={ssrContext.state}
               ssrContext={ssrContext}
             >
-              {App}
+              <StaticRouter
+                context={context}
+                location={req.url}
+              >
+                <App />
+              </StaticRouter>
             </GlobalStateProvider>
           ));
           if (ssrContext.dirty) {
