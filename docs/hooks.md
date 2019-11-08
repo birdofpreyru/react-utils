@@ -1,10 +1,12 @@
 # Hooks
 
 ```jsx
-import {
+import { hooks } from '@dr.pogodin/react-utils';
+
+const {
   useAsyncData,
   useGlobalState,
-} from '@dr.pogodin/react-utils';
+} = hooks;
 ```
 
 `useAsyncData(..)` and `useGlobalState(..)` are aliases of the same named hooks
