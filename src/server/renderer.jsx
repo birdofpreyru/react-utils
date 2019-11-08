@@ -2,6 +2,8 @@
  * ExpressJS middleware for server-side rendering of a ReactJS app.
  */
 
+import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
+
 import _ from 'lodash';
 import config from 'config';
 import forge from 'node-forge';
@@ -13,7 +15,6 @@ import ReactDOM from 'react-dom/server';
 import serializeJs from 'serialize-javascript';
 
 import { Helmet } from 'react-helmet';
-import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 
 const sanitizedConfig = _.omit(config, 'SECRET');
@@ -108,7 +109,7 @@ export default function factory(webpackConfig, options) {
       const [{
         configToInject,
         extraScripts,
-        store,
+        initialState,
       }, {
         cipher,
         iv,
@@ -125,33 +126,36 @@ export default function factory(webpackConfig, options) {
 
         /* Pre-rendered HTML markup for dynamic chunks. */
         splits: {},
-
-        store,
       };
 
       let helmet;
 
       /* Optional server-side rendering. */
       let App = options.Application;
+      const ssrContext = { state: _.cloneDeep(initialState || {}) };
       if (App) {
-        App = (
-          <StaticRouter
-            context={context}
-            location={req.url}
-          >
-            <App />
-          </StaticRouter>
-        );
-
-        if (store) {
-          App = (
-            <Provider store={store}>
-              {App}
-            </Provider>
-          );
+        let markup;
+        for (let round = 0; round < 3; round += 1) {
+          /* eslint-disable no-await-in-loop */
+          markup = ReactDOM.renderToString((
+            <GlobalStateProvider
+              initialState={ssrContext.state}
+              ssrContext={ssrContext}
+            >
+              <StaticRouter
+                context={context}
+                location={req.url}
+              >
+                <App />
+              </StaticRouter>
+            </GlobalStateProvider>
+          ));
+          if (ssrContext.dirty) {
+            await Promise.allSettled(ssrContext.pending);
+          } else break;
+          /* eslint-enable no-await-in-loop */
         }
-
-        App = ReactDOM.renderToString(App);
+        App = markup;
 
         /* This takes care about server-side rendering of page title and meta tags
         * (still demands injection into HTML template, which happens below). */
@@ -165,7 +169,7 @@ export default function factory(webpackConfig, options) {
       * better than injection of a plain text. */
       cipher.update(forge.util.createBuffer(JSON.stringify({
         CONFIG: configToInject || sanitizedConfig,
-        ISTATE: store ? store.getState() : null,
+        ISTATE: ssrContext.state,
       }), 'utf8'));
       cipher.finish();
       const INJ = forge.util.encode64(`${iv}${cipher.output.data}`);

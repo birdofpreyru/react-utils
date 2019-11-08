@@ -2,19 +2,18 @@
  * Auxiliary wrapper around React Helmet that helps to generate meta tags for
  * generic use cases.
  *
- * NOTE: This component relies on `domain` path of Redux store to hold
+ * NOTE: This component relies on `domain` path of global state to hold
  * the current app domain, which will serve as the base path for the bundled
  * images.
  */
 
+import { useGlobalState } from '@dr.pogodin/react-global-state';
 import PT from 'prop-types';
 import React from 'react';
-import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 
-function MetaTags({
+export default function MetaTags({
   description,
-  domain,
   image,
   siteName,
   socialDescription,
@@ -22,6 +21,7 @@ function MetaTags({
   title,
   url,
 }) {
+  const [domain] = useGlobalState('domain');
   const img = `${domain}${image}`;
   const socTitle = socialTitle || title;
   const socDesc = socialDescription || description;
@@ -67,7 +67,6 @@ MetaTags.defaultProps = {
 
 MetaTags.propTypes = {
   description: PT.string.isRequired,
-  domain: PT.string.isRequired,
   image: PT.string,
   siteName: PT.string,
   socialDescription: PT.string,
@@ -75,8 +74,3 @@ MetaTags.propTypes = {
   title: PT.string.isRequired,
   url: PT.string,
 };
-
-/* TODO: It is not good to depend on the domain written into redux state here,
- * better pass it via the renderer context at the server side, and get it from
- * the location at the frontend side, or something similar? */
-export default connect((state) => ({ domain: state.domain }))(MetaTags);

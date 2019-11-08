@@ -4,30 +4,30 @@
 
 /* global document, window */
 
+import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
+
 import React from 'react';
 import ReactDom from 'react-dom';
 import shortId from 'shortid';
-import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 /**
- * Renders given application into DOM, providing it with Redux store, if given.
+ * Renders given application into DOM, providing it with the initial global
+ * state.
  * @param {Function} Application Root ReactJS component of the app.
- * @param {Object} store Optional. Redux store.
+ * @param {Object} initialState Optional. Initial value of the global state.
  */
-function render(Application, store) {
+function render(Application, initialState) {
   let app = (
     <BrowserRouter>
       <Application />
     </BrowserRouter>
   );
-  if (store) {
-    app = (
-      <Provider store={store}>
-        {app}
-      </Provider>
-    );
-  }
+  app = (
+    <GlobalStateProvider initialState={initialState}>
+      {app}
+    </GlobalStateProvider>
+  );
   ReactDom.hydrate(app, document.getElementById('react-view'));
 }
 
@@ -38,23 +38,17 @@ function render(Application, store) {
  * @param {String} applicationModulePath Optional.
  * @param {Function} getApplication
  * @param {Object} moduleHot
- * @param {Function} storeFactory Optional.
  */
 export default async function Launch({
   applicationModulePath,
   getApplication,
   moduleHot,
-  storeFactory,
 }) {
-  let store;
-  if (storeFactory) {
-    store = await storeFactory(window.ISTATE);
-  }
-  render(getApplication(), store);
+  render(getApplication(), window.ISTATE);
 
   if (moduleHot && applicationModulePath) {
     moduleHot.accept(applicationModulePath,
-      () => render(getApplication(), store));
+      () => render(getApplication(), window.ISTATE));
 
     /* HMR of CSS code each time webpack hot middleware updates the code. */
     moduleHot.addStatusHandler((status) => {

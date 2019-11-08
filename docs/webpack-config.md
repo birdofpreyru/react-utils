@@ -141,8 +141,6 @@ mutation of the config object.
   - Emulates the following environment variables:
     - **`BABEL_ENV`** &mdash; It is set to *development* to inform any
       interested code that it is running in dev mode;
-    - **`DEV_TOOLS`** &mdash; It is set to *true* to signal the code that
-      Redux dev tools should be enabled;
     - **`NODE_ENV`** &mdash; It is set to *development*.
   - Adds the following plugins:
     - [HotModuleReplacementPlugin](https://webpack.js.org/plugins/hot-module-replacement-plugin/);
@@ -218,7 +216,9 @@ mutation of the config object.
 
   - The following packages are declared as externals:
     - `@babel/runtime`
+    - `@dr.pogodin/react-global-state`
     - `@dr.pogodin/react-themes`
+    - `@dr.pogodin/react-utils`
     - `axios`
     - `lodash`
     - `moment`
@@ -227,17 +227,9 @@ mutation of the config object.
     - `react-dom`
     - `react-helmet`
     - `react-hot-loader`
-    - `react-redux`
     - `react-router-dom`
     - `react-tooltip`
-    - `redux`
-    - `redux-actions`
-    - `redux-devtools`
-    - `redux-devtools-dock-monitor`
-    - `redux-devtools-log-monitor`
-    - `redux-promise`
     - `shortid`
-    - `@dr.pogodin/react-utils`
     - `url-parse`
 
 - <a name="lib-development">**`config/webpack/lib-development`**</a>
