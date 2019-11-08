@@ -4,18 +4,15 @@ import 'styles/global.scss';
 
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
 
-import actions from 'actions';
 import AppChunk from 'containers/AppChunk';
 import Avatar from 'components/Avatar';
 import Button, { BaseButton } from 'components/Button';
 import client from 'client';
-import DevTools from 'components/DevTools';
 import Link from 'components/Link';
 import PageLayout from 'components/PageLayout';
 import MetaTags from 'components/MetaTags';
 import Modal, { BaseModal } from 'components/Modal';
 import NavLink from 'components/NavLink';
-import reducers from 'reducers';
 import ScalableRect from 'components/ScalableRect';
 import Throbber from 'components/Throbber';
 import Tooltip from 'components/Tooltip';
@@ -28,14 +25,12 @@ const serverUrl = module.webpackPolyfill ? './server'
 const server = utils.isomorphy.isServerSide() ? requireWeak(serverUrl) : null;
 
 export {
-  actions,
   AppChunk,
   Avatar,
   BaseButton,
   BaseModal,
   Button,
   client,
-  DevTools,
   GlobalStateProvider,
   Link,
   NavLink,
@@ -45,7 +40,6 @@ export {
   ScalableRect,
   Tooltip,
   Throbber,
-  reducers,
   server,
 };
 

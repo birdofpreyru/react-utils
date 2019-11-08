@@ -55,9 +55,7 @@ function normalizePort(value) {
  *    - config {Object} - Config object to be injected into the page;
  *    - extraScripts {Array} - Any additional scripts to be injected into
  *      HTML template;
- *    - store {Object} - Redux store, which state should be used for server-side
- *      rendering, if it is performed, and also injected into HTML template as
- *      the initial state.
+ *    - initialState {Any} - Initial value of the global state.
  * @param {Function} [options.onExpressJsSetup] Custom setup of ExpressJS server.
  * @param {String} [options.port=3000] The port to listen (number or name).
  *  When not specified the value will be taken from PORT environmental variable,

@@ -16,7 +16,6 @@ Forked from
   - [Configurations](#configurations)
   - [Components](#components)
   - [NodeJS Scripts](#nodejs-scripts)
-  - [Redux Templates](#redux-templates)
   - [Utilities](#utilities)
 - [Development](#development)
   - [Local Testing of Library Updates within a Host Project](#local-testing-of-library-updates-within-a-host-project)
@@ -82,9 +81,6 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [`react-utils-setup`](docs/bin-setup.md) &ndash; The script for library
   installation and upgrades.
 
-### Redux Templates
-- [Item](docs/redux-item.md) &ndash; An async piece of data in Redux store.
-
 ### Utilities
 - [`_`](docs/lodash.md) &ndash; Alias of `lodash` (JS utilities).
 - [`api`](docs/api.md) &ndash; Alias of `axios` (API / HTTP client).
@@ -99,7 +95,6 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [`PT`](docs/prop-types.md) &ndash; Alias of `prop-types`.
 - [React Themes](docs/react-themes) &ndash; Aliases for `dr.pogodin/react-themes`.
   UI styles for React components with theme composition.
-- [`redux`](docs/redux-utils.md) &ndash; Alias of `redux` + related utils.
 - [SCSS Mixins](docs/scss-mixins.md) &ndash; Collection of useful style
   mixins;
 - [`server`](docs/server.md) &ndash; Easy creation and launch of web-server

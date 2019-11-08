@@ -13,7 +13,6 @@ import * as PT from 'prop-types';
 
 import config from './config';
 import * as isomorphy from './isomorphy';
-import * as redux from './redux';
 import hooks from './hooks';
 import time from './time';
 import * as url from './url';
@@ -37,7 +36,6 @@ export {
   isomorphy,
   JU,
   PT,
-  redux,
   themed,
   ThemeProvider,
   time,

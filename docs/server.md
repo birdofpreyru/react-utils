@@ -115,9 +115,7 @@ development tools, including Hot Module Reloading (HMR).
     intended for the same location are injected in the order they are listed
     in the `extraScript` array.
 
-  - `[store]` (_Object_) &ndash; Optional. Redux store to provide to the app for
-    server-side rendering. Its state will be also injected into the generated
-    HTML code to use as the initial state at the frontend.
+  - `[initialState]` (_Object_) &ndash; Optional. Initial value of the global state.
 
 - <a name="script-locations"></a> `server.SCRIPT_LOCATIONS`
   
