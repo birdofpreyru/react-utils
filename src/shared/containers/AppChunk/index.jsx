@@ -8,13 +8,14 @@
 
 /* global document, window */
 
+import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
+
 import _ from 'lodash';
 import moment from 'moment';
 import PT from 'prop-types';
 import React from 'react';
 import ReactDomServer from 'react-dom/server';
 import shortid from 'shortid';
-import { Provider } from 'react-redux';
 import { Route, StaticRouter } from 'react-router-dom';
 import { buildTimestamp, isServerSide } from 'utils/isomorphy';
 
@@ -83,14 +84,19 @@ export default class SplitRoute extends React.Component {
              *    the code. */
             const render = renderServer || renderPlaceholder || (() => <div />);
             const html = ReactDomServer.renderToString((
-              <Provider store={props.staticContext.store}>
+              /* TODO: The SSR is broken here, because the state, and info on
+               * pending async ops, are not propagated here into the split
+               * chunks. Implementing SSR across split points with
+               * react-global-state requires some re-engineering of this
+               * chunk-splitter, which will be done later. */
+              <GlobalStateProvider>
                 <StaticRouter
                   context={props.staticContext}
                   location={props.location}
                 >
                   {render(props)}
                 </StaticRouter>
-              </Provider>
+              </GlobalStateProvider>
             ));
 
             /* 2. The rendered HTML string is added to the router context,

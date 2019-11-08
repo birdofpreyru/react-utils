@@ -18,6 +18,6 @@ to normalization during injection into the HTML page template:
 - Some sensitive config params can be trimmed out of the injected config (by
   default we remove `SECRET` key);
 - Some extra data can be appended to the config, anything that does not come
-  from `node-config`, and is not stored in Redux state (although, most probably,
+  from `node-config`, and is not stored in the global state (although, most probably,
   it should be), but still should be transmitted to the client side and be
   available inside JS.

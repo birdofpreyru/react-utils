@@ -5,7 +5,6 @@ import React from 'react';
 
 import { Helmet } from 'react-helmet';
 import { Route } from 'react-router-dom';
-import { createStore } from 'redux';
 
 let mockFailsForgeRandomGetBytesMethod = false;
 
@@ -24,7 +23,7 @@ jest.mock('node-forge', () => {
 
 const TEST_CONTEXT = `${__dirname}/test_data`;
 
-const TEST_REDUX_STATE = {
+const TEST_INITIAL_STATE = {
   stateKey1: 'State Value #1',
   stateKey2: 'State Value #2',
 };
@@ -178,7 +177,7 @@ test('Server-side rendering (SSR); injection of CSS chunks & Redux state',
       />
     ),
     beforeRender: async () => ({
-      store: createStore(() => _.clone(TEST_REDUX_STATE)),
+      initialState: _.cloneDeep(TEST_INITIAL_STATE),
     }),
   }));
 
