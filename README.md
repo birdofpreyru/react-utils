@@ -3,7 +3,7 @@
 ![Latest NPM Release](https://img.shields.io/npm/v/@dr.pogodin/react-utils.svg)
 ![NPM Downloads](https://img.shields.io/npm/dm/@dr.pogodin/react-utils.svg)
 
-# Dr. Pogodin's React Utils
+# React Utils
 
 A collection of generic ReactJS configurations, components, and utilities.
 
@@ -93,7 +93,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
   with isomorphic aspects of the code.
 - [`JU`](docs/jest-utils.md) &ndash; `jest` utilities.
 - [`PT`](docs/prop-types.md) &ndash; Alias of `prop-types`.
-- [React Themes](docs/react-themes) &ndash; Aliases for `dr.pogodin/react-themes`.
+- [React Themes](docs/react-themes.md) &ndash; Aliases for `dr.pogodin/react-themes`.
   UI styles for React components with theme composition.
 - [SCSS Mixins](docs/scss-mixins.md) &ndash; Collection of useful style
   mixins;
@@ -161,4 +161,4 @@ To release updated library version to NPM do the following:
 - Commit the tag to GitHub repository.
 
 ## License
-Dr. Pogodin React Utils are [MIT Licensed](LICENSE.md).
+React Utils are [MIT Licensed](LICENSE.md).
