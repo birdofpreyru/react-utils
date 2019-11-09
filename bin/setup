@@ -140,3 +140,4 @@ libs.forEach((library) => {
   updateProdDependencies(libData, hostData);
 });
 spawnSync('npm', ['install'], { stdio: 'inherit' });
+spawnSync('npm', ['dedupe'], { stdio: 'inherit' });
