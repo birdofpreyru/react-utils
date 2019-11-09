@@ -10,72 +10,82 @@
 /* global document */
 
 import _ from 'lodash';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDom from 'react-dom';
 import PT from 'prop-types';
 import themed from '@dr.pogodin/react-themes';
 
 import baseTheme from './base-theme.scss';
+import './styles.scss';
 
-/* NOTE: Modal component is implemented as class, as it demands advanced
- * interaction with DOM upon mount and unmount. */
-class BaseModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.portal = document.createElement('div');
-  }
+function BaseModal({
+  children,
+  onCancel,
+  theme,
+}) {
+  const [portal, setPortal] = useState();
 
-  componentDidMount() {
+  useEffect(() => {
+    const p = document.createElement('div');
     document.body.classList.add('scrolling-disabled-by-modal');
-    document.body.appendChild(this.portal);
-  }
+    document.body.appendChild(p);
+    setPortal(p);
+    return () => {
+      document.body.classList.remove('scrolling-disabled-by-modal');
+      document.body.removeChild(p);
+    };
+  }, []);
 
-  componentWillUnmount() {
-    document.body.classList.remove('scrolling-disabled-by-modal');
-    document.body.removeChild(this.portal);
-  }
-
-  render() {
-    const {
-      children,
-      onCancel,
-      theme,
-    } = this.props;
-    return ReactDom.createPortal(
-      (
-        <>
-          <div
-            className={theme.container}
-            onWheel={(event) => event.stopPropagation()}
-          >
-            {children}
-          </div>
-          <button
-            aria-label="Cancel"
-            onClick={() => onCancel()}
-            className={theme.overlay}
-            type="button"
-          />
-        </>
-      ),
-      this.portal,
-    );
-  }
+  return portal ? ReactDom.createPortal(
+    (
+      <>
+        <div
+          className={theme.container}
+          onWheel={(event) => event.stopPropagation()}
+        >
+          {children}
+        </div>
+        <button
+          aria-label="Cancel"
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') onCancel();
+          }}
+          onClick={() => onCancel()}
+          className={theme.overlay}
+          ref={(node) => {
+            if (node) {
+              node.focus();
+            }
+          }}
+          type="button"
+        />
+      </>
+    ),
+    portal,
+  ) : null;
 }
 
-BaseModal.defaultProps = {
-  onCancel: _.noop,
-  children: null,
-  theme: {},
-};
+const ThemedModal = themed(
+  'Modal',
+  [
+    'container',
+    'overlay',
+  ],
+  baseTheme,
+)(BaseModal);
 
 BaseModal.propTypes = {
   onCancel: PT.func,
   children: PT.node,
-  theme: PT.shape(),
+  theme: ThemedModal.themeType,
 };
+
+BaseModal.defaultProps = {
+  onCancel: _.noop,
+  children: null,
+};
+
+export default ThemedModal;
 
 /* Non-themed version of the Modal. */
 export { BaseModal };
-
-export default themed('Modal', baseTheme)(BaseModal);

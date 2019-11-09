@@ -1,7 +1,5 @@
 /* Helper for loading of tested module. */
 
-/* global window */
-
 const m = () => require('utils/isomorphy');
 
 afterEach(() => {
