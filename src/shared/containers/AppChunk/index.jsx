@@ -3,7 +3,7 @@
  * serving as the split points. Because it is quite complex, here are only
  * some technical comments in the code. For instructions on how to use it
  * refer to
- * https://github.com/dr-pogodin-platform/community-app/blob/develop/docs/code-splitting.md
+ * https://github.com/topcoder-platform/community-app/blob/develop/docs/code-splitting.md
  */
 
 /* global document, window */
@@ -17,7 +17,7 @@ import React from 'react';
 import ReactDomServer from 'react-dom/server';
 import shortid from 'shortid';
 import { Route, StaticRouter } from 'react-router-dom';
-import { buildTimestamp, isServerSide } from 'utils/isomorphy';
+import { getBuildInfo, isServerSide } from 'utils/isomorphy';
 
 import ContentWrapper from './ContentWrapper';
 
@@ -63,7 +63,7 @@ export default class SplitRoute extends React.Component {
 
     const PUBLIC_PATH = global.TRU_BUILD_INFO.publicPath;
 
-    const timestamp = moment(buildTimestamp()).valueOf();
+    const timestamp = moment(getBuildInfo().timestamp).valueOf();
 
     const { component } = this.state;
 

@@ -253,4 +253,6 @@ exports[`Setting of response HTTP status the server-side rendering 1`] = `
         </html>"
 `;
 
-exports[`Throws in case of forge.random.getBytes(..) failure 1`] = `[TypeError: next is not a function]`;
+exports[`Throws in case of forge.random.getBytes(..) failure 1`] = `[Error: Emulated Failure of forge.random.getBytes(..)]`;
+
+exports[`Throws in case of forge.random.getBytes(..) failure 2`] = `""`;

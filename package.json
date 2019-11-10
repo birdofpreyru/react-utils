@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.7.2",
-    "@dr.pogodin/react-global-state": "0.0.6",
+    "@dr.pogodin/react-global-state": "0.0.10",
     "@dr.pogodin/react-themes": "^1.0.5",
     "axios": "^0.19.0",
     "babel-plugin-react-css-modules": "^5.2.6",
@@ -94,10 +94,10 @@
     "workbox-webpack-plugin": "^4.3.1"
   },
   "engines": {
-    "node": "~12.12.0",
-    "npm": "~6.11.3"
+    "node": "~12.13.1",
+    "npm": "~6.12.1"
   },
-  "homepage": "https://github.com/birdofpreyru/react-utils#readme",
+  "homepage": "https://dr.pogodin.studio",
   "keywords": [
     "Development",
     "Dr.Pogodin",
@@ -119,7 +119,7 @@
   },
   "scripts": {
     "build": "bin/build -t development --lib && bin/build -t production --lib",
-    "jest": "NODE_CONFIG_ENV=test jest --config config/jest/default.js",
+    "jest": "NODE_CONFIG_ENV=test jest --no-cache --config config/jest/default.js",
     "lint": "npm run lint:js && npm run lint:scss",
     "lint:js": "eslint --ext .js,.jsx . && eslint bin/*",
     "lint:scss": "./node_modules/.bin/stylelint **/*.scss --syntax scss",

@@ -19,6 +19,8 @@ import { StaticRouter } from 'react-router-dom';
 
 const sanitizedConfig = _.omit(config, 'SECRET');
 
+const DEFAULT_MAX_SSR_ROUNDS = 10;
+
 export const SCRIPT_LOCATIONS = {
   BODY_OPEN: 'BODY_OPEN',
   DEFAULT: 'DEFAULT',
@@ -118,32 +120,39 @@ export default function factory(webpackConfig, options) {
         prepareCipher(buildInfo.key),
       ]);
 
-      /* Context for react-router and collection of data related to server-side
-      * rendering (this will be moved into separate place in future). */
-      const context = {
-        /* Array of chunk names, to use for stylesheet links injection. */
-        chunks: [],
-
-        /* Pre-rendered HTML markup for dynamic chunks. */
-        splits: {},
-      };
-
       let helmet;
 
       /* Optional server-side rendering. */
       let App = options.Application;
-      const ssrContext = { state: _.cloneDeep(initialState || {}) };
+      const ssrContext = {
+        req,
+        state: _.cloneDeep(initialState || {}),
+
+        /* Array of chunk names to use for stylesheet link injection. */
+        chunks: [],
+
+        /* Pre-rendered HTML markup for dymanic chunks. */
+        splits: {},
+      };
       if (App) {
         let markup;
-        for (let round = 0; round < 3; round += 1) {
+        /* TODO: The limit number of rounds should be exposed as a config
+         * option. */
+        for (
+          let round = 0;
+          round < (options.maxSsrRounds || DEFAULT_MAX_SSR_ROUNDS);
+          round += 1
+        ) {
           /* eslint-disable no-await-in-loop */
+          ssrContext.chunks = [];
+          ssrContext.splits = {};
           markup = ReactDOM.renderToString((
             <GlobalStateProvider
               initialState={ssrContext.state}
               ssrContext={ssrContext}
             >
               <StaticRouter
-                context={context}
+                context={ssrContext}
                 location={req.url}
               >
                 <App />
@@ -163,10 +172,11 @@ export default function factory(webpackConfig, options) {
       }
 
       /* Encrypts data to be injected into HTML.
-      * Keep in mind, that this encryption is no way secure: as the JS bundle
-      * contains decryption key and is able to decode it at the client side.
-      * Hovewer, for a number of reasons, encryption of injected data is still
-      * better than injection of a plain text. */
+       * Keep in mind, that this encryption is no way secure: as the JS bundle
+       * contains decryption key and is able to decode it at the client side.
+       * Hovewer, for a number of reasons, encryption of injected data is still
+       * better than injection of a plain text. */
+      delete ssrContext.state.dr_pogodin_react_utils___split_components;
       cipher.update(forge.util.createBuffer(JSON.stringify({
         CONFIG: configToInject || sanitizedConfig,
         ISTATE: ssrContext.state,
@@ -183,9 +193,9 @@ export default function factory(webpackConfig, options) {
 
       const timestamp = moment(buildInfo.timestamp).valueOf();
 
-      if (context.status) res.status(context.status);
+      if (ssrContext.status) res.status(ssrContext.status);
       const styles = [];
-      context.chunks.forEach((chunk) => {
+      ssrContext.chunks.forEach((chunk) => {
         let assets = assetsByChunkName[chunk];
         if (!assets) return;
         if (!_.isArray(assets)) assets = [assets];
@@ -244,7 +254,7 @@ export default function factory(webpackConfig, options) {
             ${bodyOpenExtraScripts || ''}
             <div id="react-view">${App || ''}</div>
             <script id="inj" type="application/javascript">
-              window.SPLITS = ${serializeJs(context.splits, { isJSON: true })}
+              window.SPLITS = ${serializeJs(ssrContext.splits, { isJSON: true })}
               window.INJ="${INJ}"
             </script>
             <script

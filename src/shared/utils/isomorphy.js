@@ -46,9 +46,17 @@ export function isProdBuild() {
 }
 
 /**
+ * Returns build info object.
+ * @returns {Object}
+ */
+export function getBuildInfo() {
+  return (isClientSide() ? window : global).TRU_BUILD_INFO;
+}
+
+/**
  * Returns build timestamp of the front-end JS bundle.
  * @return {String} ISO date/time string.
  */
 export function buildTimestamp() {
-  return (isClientSide() ? window : global).TRU_BUILD_INFO.timestamp;
+  return getBuildInfo().timestamp;
 }

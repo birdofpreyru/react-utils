@@ -75,23 +75,27 @@ async function coreTest(webpackConfig, options) {
 
   try {
     let render = '';
-    await renderer(_.clone(TEST_HTTP_REQUEST), {
-      locals: {
-        webpackStats: {
-          toJson: () => ({
-            assetsByChunkName: {
-              'test-chunk-a': 'test-chunk-a-1511941200000.css',
-              'test-chunk-b': [
-                'test-chunk-b-1511941200000.js',
-                'test-chunk-b-1511941200000.css',
-              ],
-            },
-          }),
+    await renderer(
+      _.clone(TEST_HTTP_REQUEST),
+      {
+        locals: {
+          webpackStats: {
+            toJson: () => ({
+              assetsByChunkName: {
+                'test-chunk-a': 'test-chunk-a-1511941200000.css',
+                'test-chunk-b': [
+                  'test-chunk-b-1511941200000.js',
+                  'test-chunk-b-1511941200000.css',
+                ],
+              },
+            }),
+          },
         },
+        send: (x) => { render += x; },
+        status: (x) => { render += `HTTP STATUS: ${x}\n`; },
       },
-      send: (x) => { render += x; },
-      status: (x) => { render += `HTTP STATUS: ${x}\n`; },
-    });
+      (error) => expect(error).toMatchSnapshot(),
+    );
     expect(render).toMatchSnapshot();
   } catch (e) {
     expect(e).toMatchSnapshot();

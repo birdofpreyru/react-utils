@@ -168,6 +168,7 @@ Object {
   },
   "isomorphy": Object {
     "buildTimestamp": [Function],
+    "getBuildInfo": [Function],
     "isClientSide": [Function],
     "isDevBuild": [Function],
     "isProdBuild": [Function],
@@ -567,6 +568,7 @@ Object {
     "act": [Function],
     "findInDomByClass": [Function],
     "findInDomManyByClass": [Function],
+    "getMockUuid": [Function],
     "mockTimer": [Function],
     "mount": [Function],
     "render": [Function],
@@ -822,6 +824,7 @@ Object {
   },
   "isomorphy": Object {
     "buildTimestamp": [Function],
+    "getBuildInfo": [Function],
     "isClientSide": [Function],
     "isDevBuild": [Function],
     "isProdBuild": [Function],

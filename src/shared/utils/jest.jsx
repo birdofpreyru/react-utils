@@ -28,6 +28,17 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 export { act } from 'react-dom/test-utils';
 
 /**
+ * Generates a mock UUID.
+ * @param {Number} seed
+ * @return {String}
+ */
+export function getMockUuid(seed = 0) {
+  const x = seed.toString(16).padStart(32, '0');
+  return `${x.slice(0, 8)}-${x.slice(8, 12)}-${x.slice(12, 16)}-${x.slice(16, 20)}-${x.slice(20)}`;
+}
+
+
+/**
  * Advances mock timers, and mock date by the specified time.
  * @param {Number} time Time step [ms].
  * @returns {Promise} Wait for this to "jump after" any async code which should

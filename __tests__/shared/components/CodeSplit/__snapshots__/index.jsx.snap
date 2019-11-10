@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Server-side rendring 1`] = `
+"<div></div>
+<div>
+  <div>PLACEHOLDER!</div>
+</div>
+<div>
+  <div>
+    <h1>Sample Component</h1><pre>{
+  &quot;dr_pogodin_react_utils___split_components&quot;: {
+    &quot;sample-component-1&quot;: {
+      &quot;data&quot;: null,
+      &quot;numRefs&quot;: 0,
+      &quot;operationId&quot;: &quot;00000000-0000-0000-0000-000000000001&quot;,
+      &quot;timestamp&quot;: 0
+    },
+    &quot;sample-component-2&quot;: {
+      &quot;data&quot;: null,
+      &quot;numRefs&quot;: 0,
+      &quot;operationId&quot;: &quot;00000000-0000-0000-0000-000000000002&quot;,
+      &quot;timestamp&quot;: 0
+    }
+  }
+}</pre>
+  </div>
+</div>"
+`;
+
+exports[`Server-side rendring 2`] = `
+"<div>
+  <div>
+    <h1>Sample Component</h1><pre>{
+  &quot;dr_pogodin_react_utils___split_components&quot;: {
+    &quot;sample-component-1&quot;: {
+      &quot;data&quot;: {},
+      &quot;numRefs&quot;: 0,
+      &quot;operationId&quot;: &quot;&quot;,
+      &quot;timestamp&quot;: 1574985600000
+    },
+    &quot;sample-component-2&quot;: {
+      &quot;data&quot;: {},
+      &quot;numRefs&quot;: 0,
+      &quot;operationId&quot;: &quot;&quot;,
+      &quot;timestamp&quot;: 1574985600000
+    }
+  }
+}</pre>
+  </div>
+</div>
+<div>
+  <div>
+    <h1>Sample Component</h1><pre>{
+  &quot;dr_pogodin_react_utils___split_components&quot;: {
+    &quot;sample-component-1&quot;: {
+      &quot;data&quot;: {},
+      &quot;numRefs&quot;: 0,
+      &quot;operationId&quot;: &quot;&quot;,
+      &quot;timestamp&quot;: 1574985600000
+    },
+    &quot;sample-component-2&quot;: {
+      &quot;data&quot;: {},
+      &quot;numRefs&quot;: 0,
+      &quot;operationId&quot;: &quot;&quot;,
+      &quot;timestamp&quot;: 1574985600000
+    }
+  }
+}</pre>
+  </div>
+</div>
+<div>
+  <div>
+    <h1>Sample Component</h1><pre>{
+  &quot;dr_pogodin_react_utils___split_components&quot;: {
+    &quot;sample-component-1&quot;: {
+      &quot;data&quot;: {},
+      &quot;numRefs&quot;: 0,
+      &quot;operationId&quot;: &quot;&quot;,
+      &quot;timestamp&quot;: 1574985600000
+    },
+    &quot;sample-component-2&quot;: {
+      &quot;data&quot;: {},
+      &quot;numRefs&quot;: 0,
+      &quot;operationId&quot;: &quot;&quot;,
+      &quot;timestamp&quot;: 1574985600000
+    }
+  }
+}</pre>
+  </div>
+</div>"
+`;
