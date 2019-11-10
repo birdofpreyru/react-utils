@@ -161,7 +161,10 @@ Object {
   "config": undefined,
   "hooks": Object {
     "useAsyncData": [Function],
+    "useContext": [Function],
+    "useEffect": [Function],
     "useGlobalState": [Function],
+    "useState": [Function],
   },
   "isomorphy": Object {
     "buildTimestamp": [Function],
@@ -812,7 +815,10 @@ Object {
   },
   "hooks": Object {
     "useAsyncData": [Function],
+    "useContext": [Function],
+    "useEffect": [Function],
     "useGlobalState": [Function],
+    "useState": [Function],
   },
   "isomorphy": Object {
     "buildTimestamp": [Function],
