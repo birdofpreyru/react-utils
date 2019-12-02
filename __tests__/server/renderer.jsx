@@ -6,20 +6,9 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Route } from 'react-router-dom';
 
-let mockFailsForgeRandomGetBytesMethod = false;
+global.mockFailsForgeRandomGetBytesMethod = false;
 
-jest.mock('node-forge', () => {
-  const mockForge = require.requireActual('node-forge');
-  mockForge.random.getBytes = (numBytes, cb) => {
-    if (mockFailsForgeRandomGetBytesMethod) {
-      cb(new Error('Emulated Failure of forge.random.getBytes(..)'));
-    }
-    let res = '';
-    for (let i = 0; i < numBytes; i += 1) res += i % 10;
-    cb(null, res);
-  };
-  return mockForge;
-});
+jest.mock('node-forge');
 
 const TEST_CONTEXT = `${__dirname}/test_data`;
 
@@ -50,7 +39,7 @@ beforeAll(() => {
 
 afterEach(() => {
   delete global.TRU_BUILD_INFO;
-  mockFailsForgeRandomGetBytesMethod = false;
+  global.mockFailsForgeRandomGetBytesMethod = false;
 });
 
 afterAll(() => {
@@ -203,6 +192,6 @@ test('Setting of response HTTP status the server-side rendering', () => {
 });
 
 test('Throws in case of forge.random.getBytes(..) failure', () => {
-  mockFailsForgeRandomGetBytesMethod = true;
+  global.mockFailsForgeRandomGetBytesMethod = true;
   return coreTest(TEST_WEBPACK_CONFIG, {});
 });

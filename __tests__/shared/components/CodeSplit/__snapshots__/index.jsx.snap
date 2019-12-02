@@ -1,13 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Server-side rendring 1`] = `
-"<div></div>
-<div>
-  <div>PLACEHOLDER!</div>
-</div>
-<div>
-  <div>
-    <h1>Sample Component</h1><pre>{
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+
+  <head>
+
+    <title data-react-helmet=\\"true\\"></title>
+
+    <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
+
+    <link href=\\"/test/public/pathmain-1511941200000.css\\" id=\\"tru-style\\" rel=\\"stylesheet\\" />
+
+    <link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\" />
+    <meta charset=\\"utf-8\\" />
+    <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
+  </head>
+
+  <body>
+
+    <div id=\\"react-view\\">
+      <div></div>
+      <div>
+        <div>PLACEHOLDER!</div>
+      </div>
+      <div>
+        <div>
+          <h1>Sample Component</h1><pre>{
   &quot;dr_pogodin_react_utils___split_components&quot;: {
     &quot;sample-component-1&quot;: {
       &quot;data&quot;: null,
@@ -23,14 +42,48 @@ exports[`Server-side rendring 1`] = `
     }
   }
 }</pre>
-  </div>
-</div>"
+        </div>
+      </div>
+    </div>
+    <script id=\\"inj\\" type=\\"application/javascript\\">
+      window.SPLITS = {
+        \\"sample-component-1\\": \\"\\",
+        \\"sample-component-2\\": \\"\\\\u003Cdiv\\\\u003EPLACEHOLDER!\\\\u003C\\\\u002Fdiv\\\\u003E\\",
+        \\"sample-component-3\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: null,\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;00000000-0000-0000-0000-000000000001&quot;,\\\\n      &quot;timestamp&quot;: 0\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: null,\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;00000000-0000-0000-0000-000000000002&quot;,\\\\n      &quot;timestamp&quot;: 0\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\"
+      }
+      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1TZonSyrmykHqLzmKxXS0DK2Cs9zyFh0xgn25yw2xNin\\"
+    </script>
+    <script src=\\"/test/public/pathpolyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
+
+    <script src=\\"/test/public/pathmain-1511941200000.js\\" type=\\"application/javascript\\"></script>
+  </body>
+
+</html>"
 `;
 
 exports[`Server-side rendring 2`] = `
-"<div>
-  <div>
-    <h1>Sample Component</h1><pre>{
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+
+  <head>
+
+    <title data-react-helmet=\\"true\\"></title>
+
+    <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
+
+    <link href=\\"/test/public/pathmain-1511941200000.css\\" id=\\"tru-style\\" rel=\\"stylesheet\\" />
+
+    <link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\" />
+    <meta charset=\\"utf-8\\" />
+    <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
+  </head>
+
+  <body>
+
+    <div id=\\"react-view\\">
+      <div>
+        <div>
+          <h1>Sample Component</h1><pre>{
   &quot;dr_pogodin_react_utils___split_components&quot;: {
     &quot;sample-component-1&quot;: {
       &quot;data&quot;: {},
@@ -46,11 +99,11 @@ exports[`Server-side rendring 2`] = `
     }
   }
 }</pre>
-  </div>
-</div>
-<div>
-  <div>
-    <h1>Sample Component</h1><pre>{
+        </div>
+      </div>
+      <div>
+        <div>
+          <h1>Sample Component</h1><pre>{
   &quot;dr_pogodin_react_utils___split_components&quot;: {
     &quot;sample-component-1&quot;: {
       &quot;data&quot;: {},
@@ -66,11 +119,11 @@ exports[`Server-side rendring 2`] = `
     }
   }
 }</pre>
-  </div>
-</div>
-<div>
-  <div>
-    <h1>Sample Component</h1><pre>{
+        </div>
+      </div>
+      <div>
+        <div>
+          <h1>Sample Component</h1><pre>{
   &quot;dr_pogodin_react_utils___split_components&quot;: {
     &quot;sample-component-1&quot;: {
       &quot;data&quot;: {},
@@ -86,6 +139,21 @@ exports[`Server-side rendring 2`] = `
     }
   }
 }</pre>
-  </div>
-</div>"
+        </div>
+      </div>
+    </div>
+    <script id=\\"inj\\" type=\\"application/javascript\\">
+      window.SPLITS = {
+        \\"sample-component-1\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\",
+        \\"sample-component-2\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\",
+        \\"sample-component-3\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\"
+      }
+      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1TZonSyrmykHqLzmKxXS0DK2Cs9zyFh0xgn25yw2xNin\\"
+    </script>
+    <script src=\\"/test/public/pathpolyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
+
+    <script src=\\"/test/public/pathmain-1511941200000.js\\" type=\\"application/javascript\\"></script>
+  </body>
+
+</html>"
 `;
