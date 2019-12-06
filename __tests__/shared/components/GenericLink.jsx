@@ -1,5 +1,3 @@
-/* global window */
-
 import GenericLink from 'components/GenericLink';
 import PT from 'prop-types';
 import React from 'react';

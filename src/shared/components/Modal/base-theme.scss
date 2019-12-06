@@ -1,11 +1,5 @@
 @import '~styles/mixins';
 
-:global {
-  body.scrolling-disabled-by-modal {
-    overflow: hidden;
-  }
-}
-
 *,
 .context,
 .ad.hoc {
@@ -29,7 +23,7 @@
     max-height: 95vh;
     max-width: $screen-md;
     overflow: hidden;
-    padding: 40;
+    padding: 0.6em 1.2em;
     width: 480px;
     position: fixed;
     top: 50%;

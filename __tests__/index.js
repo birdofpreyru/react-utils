@@ -1,5 +1,3 @@
-/* global window */
-
 jest.mock('utils/webpack/require');
 
 beforeEach(() => jest.resetModules());

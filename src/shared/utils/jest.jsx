@@ -6,16 +6,71 @@
  * execution, only for tests; thus we depend on Jest environment and dev
  * dependencies. */
 
-/* global expect */
+/* TODO: Revise.  */
 
-import PT from 'prop-types';
+/* global expect, jest, document */
+/* eslint-disable import/no-extraneous-dependencies */
+
 import React from 'react';
+
+import mockdate from 'mockdate';
+import PT from 'prop-types';
+import { render as newRender, unmountComponentAtNode } from 'react-dom';
 import TU from 'react-dom/test-utils';
 
 /* eslint-disable import/no-extraneous-dependencies */
 import Renderer from 'react-test-renderer';
 import ShallowRenderer from 'react-test-renderer/shallow';
 /* eslint-enable import/no-extraneous-dependencies */
+
+/* NEW TESTING METHODS */
+
+export { act } from 'react-dom/test-utils';
+
+/**
+ * Generates a mock UUID.
+ * @param {Number} seed
+ * @return {String}
+ */
+export function getMockUuid(seed = 0) {
+  const x = seed.toString(16).padStart(32, '0');
+  return `${x.slice(0, 8)}-${x.slice(8, 12)}-${x.slice(12, 16)}-${x.slice(16, 20)}-${x.slice(20)}`;
+}
+
+
+/**
+ * Advances mock timers, and mock date by the specified time.
+ * @param {Number} time Time step [ms].
+ * @returns {Promise} Wait for this to "jump after" any async code which should
+ *  be executed because of the mock time movement.
+ */
+export async function mockTimer(time) {
+  mockdate.set(time + Date.now());
+  jest.advanceTimersByTime(time);
+}
+
+/**
+ * Mounts `Scene` to the DOM, and returns the root scene element.
+ * @param {React.ReactNode} scene
+ * @return {HTMLElement}
+ */
+export function mount(scene) {
+  const res = document.createElement('div');
+  document.body.appendChild(res);
+  newRender(scene, res);
+  return res;
+}
+
+/**
+ * Unmounts `scene` from the DOM.
+ * @param {HTMLElement} scene
+ */
+export function unmount(scene) {
+  unmountComponentAtNode(scene);
+  scene.remove();
+}
+
+/* OLD STUFF BELOW THIS MARK */
 
 /**
  * Just an alias for TU.findRenderedDOMComponentWithClass(..).

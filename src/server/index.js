@@ -56,6 +56,8 @@ function normalizePort(value) {
  *    - extraScripts {Array} - Any additional scripts to be injected into
  *      HTML template;
  *    - initialState {Any} - Initial value of the global state.
+ * @param {Number} [options.maxSsrRounds=10] Maximum number of SSR rounds
+ *  (the default is set inside the renderer).
  * @param {Function} [options.onExpressJsSetup] Custom setup of ExpressJS server.
  * @param {String} [options.port=3000] The port to listen (number or name).
  *  When not specified the value will be taken from PORT environmental variable,
@@ -66,7 +68,7 @@ function normalizePort(value) {
  */
 async function launch(webpackConfig, options) {
   /* Options normalization. */
-  const ops = options ? _.clone(options) : {};
+  const ops = options ? _.cloneDeep(options) : {};
   ops.port = normalizePort(ops.port || process.env.PORT || 3000);
   _.defaults(ops, {
     httpsRedirect: true,

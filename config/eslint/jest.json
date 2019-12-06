@@ -1,6 +1,7 @@
 {
   "extends": "./default.json",
   "env": {
+    "browser": true,
     "jest": true
   },
   "plugins": [

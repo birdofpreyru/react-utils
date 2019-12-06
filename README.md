@@ -3,7 +3,7 @@
 ![Latest NPM Release](https://img.shields.io/npm/v/@dr.pogodin/react-utils.svg)
 ![NPM Downloads](https://img.shields.io/npm/dm/@dr.pogodin/react-utils.svg)
 
-# Dr. Pogodin's React Utils
+# React Utils
 
 A collection of generic ReactJS configurations, components, and utilities.
 
@@ -59,6 +59,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [`<Button>`](docs/button.md) &ndash; Handles buttons and button-like links
   (components that look like regular buttons, but behave as links) in the same
   uniform manner.
+- [`<CodeSplit>`](docs/code-split.md) &ndash; Code splitting component.
 - [`<GlobalStateProvider>`](docs/global-state-provider.md) &ndash; Alias
   for `<GlobalStateProvider>` from `@dr.pogodin/react-global-state`.
 - [`<Link>` and `<NavLink>`](docs/link-and-navlink.md) &ndash; Auxiliary
@@ -78,7 +79,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
   and Webpack build of the library and derived apps. Can be used to work around
   issues with `npm link` command for the library development within dependant
   projects.
-- [`react-utils-setup`](docs/bin-setup.md) &ndash; The script for library
+- [`react-utils-setup`](docs/react-utils-setup.md) &ndash; The script for library
   installation and upgrades.
 
 ### Utilities
@@ -93,7 +94,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
   with isomorphic aspects of the code.
 - [`JU`](docs/jest-utils.md) &ndash; `jest` utilities.
 - [`PT`](docs/prop-types.md) &ndash; Alias of `prop-types`.
-- [React Themes](docs/react-themes) &ndash; Aliases for `dr.pogodin/react-themes`.
+- [React Themes](docs/react-themes.md) &ndash; Aliases for `dr.pogodin/react-themes`.
   UI styles for React components with theme composition.
 - [SCSS Mixins](docs/scss-mixins.md) &ndash; Collection of useful style
   mixins;
@@ -161,4 +162,4 @@ To release updated library version to NPM do the following:
 - Commit the tag to GitHub repository.
 
 ## License
-Dr. Pogodin React Utils are [MIT Licensed](LICENSE.md).
+React Utils are [MIT Licensed](LICENSE.md).

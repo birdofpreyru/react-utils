@@ -4,9 +4,9 @@ import 'styles/global.scss';
 
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
 
-import AppChunk from 'containers/AppChunk';
 import Avatar from 'components/Avatar';
 import Button, { BaseButton } from 'components/Button';
+import CodeSplit from 'components/CodeSplit';
 import client from 'client';
 import Link from 'components/Link';
 import PageLayout from 'components/PageLayout';
@@ -25,12 +25,12 @@ const serverUrl = module.webpackPolyfill ? './server'
 const server = utils.isomorphy.isServerSide() ? requireWeak(serverUrl) : null;
 
 export {
-  AppChunk,
   Avatar,
   BaseButton,
   BaseModal,
   Button,
   client,
+  CodeSplit,
   GlobalStateProvider,
   Link,
   NavLink,

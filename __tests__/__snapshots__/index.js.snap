@@ -2,7 +2,6 @@
 
 exports[`Export at client side 1`] = `
 Object {
-  "AppChunk": [Function],
   "Avatar": [Function],
   "BaseButton": [Function],
   "BaseModal": [Function],
@@ -11,6 +10,7 @@ Object {
     "render": [Function],
     "themeType": [Function],
   },
+  "CodeSplit": [Function],
   "GlobalStateProvider": [Function],
   "JU": null,
   "Link": [Function],
@@ -161,10 +161,14 @@ Object {
   "config": undefined,
   "hooks": Object {
     "useAsyncData": [Function],
+    "useContext": [Function],
+    "useEffect": [Function],
     "useGlobalState": [Function],
+    "useState": [Function],
   },
   "isomorphy": Object {
     "buildTimestamp": [Function],
+    "getBuildInfo": [Function],
     "isClientSide": [Function],
     "isDevBuild": [Function],
     "isProdBuild": [Function],
@@ -550,7 +554,6 @@ Array [
 
 exports[`Export at server side 1`] = `
 Object {
-  "AppChunk": [Function],
   "Avatar": [Function],
   "BaseButton": [Function],
   "BaseModal": [Function],
@@ -559,10 +562,15 @@ Object {
     "render": [Function],
     "themeType": [Function],
   },
+  "CodeSplit": [Function],
   "GlobalStateProvider": [Function],
   "JU": Object {
+    "act": [Function],
     "findInDomByClass": [Function],
     "findInDomManyByClass": [Function],
+    "getMockUuid": [Function],
+    "mockTimer": [Function],
+    "mount": [Function],
     "render": [Function],
     "renderDom": [Function],
     "shallowRender": [Function],
@@ -654,6 +662,7 @@ Object {
       "wheel": [Function],
     },
     "snapshot": [Function],
+    "unmount": [Function],
   },
   "Link": [Function],
   "MetaTags": [Function],
@@ -808,10 +817,14 @@ Object {
   },
   "hooks": Object {
     "useAsyncData": [Function],
+    "useContext": [Function],
+    "useEffect": [Function],
     "useGlobalState": [Function],
+    "useState": [Function],
   },
   "isomorphy": Object {
     "buildTimestamp": [Function],
+    "getBuildInfo": [Function],
     "isClientSide": [Function],
     "isDevBuild": [Function],
     "isProdBuild": [Function],

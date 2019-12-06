@@ -1,27 +1,45 @@
 # Modal
+```jsx
+import { BaseModal, Modal } from '@dr.pogodin/react-utils';
+```
+The `<Modal>` component implements a simple themeable modal window, wrapped
+into the default theme. `<BaseModal>` exposes the base non-themed component.
 
-Implements a simple themeable modal window.
+### Example
 
-*TODO: This is a raw description of the component, should be improved*
+```jsx
+import React, { useState } from 'react';
+import { Button, Modal } from '@dr.pogodin/react-utils';
 
-**@dr.pogodin/react-utils** exports two versions of the modal component,
-`BaseModal` implements a non-themed version, and `Modal` is its version
-wrapped into a default style, using [React Themes](react-themes.md).
+export default function ModalDemo() {
+  const [visible, setVisible] = useState(false);
+  return (
+    <div>
+      <Button onClick={() => setVisible(true)}>Show Modal</Button>
+      {
+        visible ? (
+          <Modal onCancel={() => setVisible(false)}>
+            This is a simple modal. Click outside, or press Escape to close it.
+          </Modal>
+        ) : null
+      }
+    </div>
+  );
+}
 
-### Props
+```
 
-Both **BaseModal** and **Modal** components accept:
+### Reference
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| children | ReactJS Node | `null` | Modal content to render.|
-| onCancel | `Function` | `noop` | Callback to trigger when the modal is closed. |
+**Children** are rendered as the modal content.
 
-**BaseModal** accepts additionally _theme_ prop, which should be an object,
-and defaults to `{}`. Theme object may have the following fields:
+**Properties**
 
-| Field | Description |
-| --- | --- |
-| container | CSS class to apply to the **BaseModal** root container. |
-| overlay | CSS class to apply to the overlay opened behind the **BaseModal** |
-
+- `[onCancel]` (_Function_) &ndash; Optional. The callback to trigger when user
+  clicks outside the modal, or presses Escape. It is expected to hide the modal.
+- `[theme]` (_Object_) &ndash; Optional. _Ad hoc_ modal
+  [theme](https://github.com/birdofpreyru/react-utils/blob/master/docs/react-themes.md):
+  - `[container]` (_String_) &ndash; Optional. Modal container class.
+  - `[overlay]` (_String_)  &ndash; Optional. Modal overlay (background closing
+    the page underneath the modal) class.
+- It also accepts other properties inherited from the themed component wrapper.
