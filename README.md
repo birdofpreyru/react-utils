@@ -79,7 +79,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
   and Webpack build of the library and derived apps. Can be used to work around
   issues with `npm link` command for the library development within dependant
   projects.
-- [`react-utils-setup`](docs/bin-setup.md) &ndash; The script for library
+- [`react-utils-setup`](docs/react-utils-setup.md) &ndash; The script for library
   installation and upgrades.
 
 ### Utilities
