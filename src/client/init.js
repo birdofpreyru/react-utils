@@ -6,12 +6,20 @@
 
 import forge from 'node-forge';
 
-window.TRU_BUILD_INFO = BUILD_INFO;
+/* `BUILD_INFO` is always injected by Webpack build, but this check is needed
+ * to adopt the code for usage in tests. */
+if (typeof BUILD_INFO !== 'undefined') {
+  window.TRU_BUILD_INFO = BUILD_INFO;
+}
+
 window.TRU_FRONT_END = true;
 
-/* Removes data injection script out of the document. */
-const block = document.querySelector('script[id="inj"]');
-document.getElementsByTagName('body')[0].removeChild(block);
+/* Removes data injection script out of the document.
+ * The if block is here for test purposes. */
+if (!window.TRU_KEEP_INJ_SCRIPT) {
+  const block = document.querySelector('script[id="inj"]');
+  document.getElementsByTagName('body')[0].removeChild(block);
+}
 
 /* TODO: A proper logger should be moved to `@dr.pogodin/react-utils`. */
 /* eslint-disable no-console */

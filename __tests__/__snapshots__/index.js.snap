@@ -2,7 +2,6 @@
 
 exports[`Export at client side 1`] = `
 Object {
-  "AppChunk": [Function],
   "Avatar": [Function],
   "BaseButton": [Function],
   "BaseModal": [Function],
@@ -11,6 +10,7 @@ Object {
     "render": [Function],
     "themeType": [Function],
   },
+  "CodeSplit": [Function],
   "GlobalStateProvider": [Function],
   "JU": null,
   "Link": [Function],
@@ -168,6 +168,7 @@ Object {
   },
   "isomorphy": Object {
     "buildTimestamp": [Function],
+    "getBuildInfo": [Function],
     "isClientSide": [Function],
     "isDevBuild": [Function],
     "isProdBuild": [Function],
@@ -553,7 +554,6 @@ Array [
 
 exports[`Export at server side 1`] = `
 Object {
-  "AppChunk": [Function],
   "Avatar": [Function],
   "BaseButton": [Function],
   "BaseModal": [Function],
@@ -562,11 +562,13 @@ Object {
     "render": [Function],
     "themeType": [Function],
   },
+  "CodeSplit": [Function],
   "GlobalStateProvider": [Function],
   "JU": Object {
     "act": [Function],
     "findInDomByClass": [Function],
     "findInDomManyByClass": [Function],
+    "getMockUuid": [Function],
     "mockTimer": [Function],
     "mount": [Function],
     "render": [Function],
@@ -822,6 +824,7 @@ Object {
   },
   "isomorphy": Object {
     "buildTimestamp": [Function],
+    "getBuildInfo": [Function],
     "isClientSide": [Function],
     "isDevBuild": [Function],
     "isProdBuild": [Function],
