@@ -50,6 +50,7 @@
     "@babel/plugin-transform-runtime": "^7.7.5",
     "@babel/preset-env": "^7.7.5",
     "@babel/preset-react": "^7.7.4",
+    "@babel/types": "^7.7.4",
     "@dr.pogodin/babel-preset-svgr": "^1.0.1",
     "autoprefixer": "^9.7.3",
     "babel-eslint": "^10.0.3",
