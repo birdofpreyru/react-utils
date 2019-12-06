@@ -1,6 +1,7 @@
 /**
  * Server-side implementation.
  */
+/* eslint-disable react/jsx-props-no-spreading */
 
 import React from 'react';
 import ReactDom from 'react-dom/server';
@@ -18,6 +19,7 @@ export default function ServerSide({
   getComponentAsync,
   getComponentServer,
   placeholder,
+  ...rest
 }) {
   /* 1. The component, or its placeholder is rendered into HTML string.
    *    The component is wrapped into <GlobalStateProvider>, and <StaticRouter>
@@ -41,7 +43,7 @@ export default function ServerSide({
         context={globalState.ssrContext}
         location={globalState.ssrContext.req.url}
       >
-        <Scene />
+        <Scene {...rest} />
       </StaticRouter>
     </GlobalStateProvider>
   ));

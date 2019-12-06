@@ -2,6 +2,7 @@
  * Client-side implementation of a split code chunk.
  */
 /* global document, window */
+/* eslint-disable react/jsx-props-no-spreading */
 
 import React, { useEffect } from 'react';
 
@@ -20,14 +21,27 @@ export default function ClientSide({
   chunkName,
   getComponentAsync,
   placeholder,
+  ...rest
 }) {
   const buildInfo = getBuildInfo();
   const { publicPath } = buildInfo;
   const { buildTimestamp } = moment(buildInfo.timestamp).valueOf();
 
   let res;
-  /* Client side rendering using SSR pre-rendered partial markup. */
-  if (window.SPLITS[chunkName]) {
+
+  const { data } = useAsyncData(
+    `dr_pogodin_react_utils___split_components.${chunkName}`,
+    getComponentAsync,
+  );
+  if (data) {
+    const Scene = data.default || data;
+    res = (
+      <div>
+        <Scene {...rest} />
+      </div>
+    );
+  } else if (window.SPLITS[chunkName]) {
+    /* Client side rendering using SSR pre-rendered partial markup. */
     /* If the page has been pre-rendered at the server-side, we render
       * exactly the same until the splitted code is loaded. */
     /* eslint-disable react/no-danger */
@@ -39,12 +53,6 @@ export default function ClientSide({
       />
     );
     /* eslint-disable react/no-danger */
-
-    /* We remove the pre-rendered HTML string from window.SPLITS,
-      * because if the vistor navigates around the app and comes back
-      * to this route, we want to re-render the page from scratch in
-      * that case (because the state of app has changed). */
-    delete window.SPLITS[chunkName];
   } else if (placeholder) {
     /* If the page has not been pre-rendered, the best we can do prior
      * the loading of split code, is to render the placeholder, if
@@ -57,7 +65,7 @@ export default function ClientSide({
     const Scene = placeholder;
     res = (
       <div>
-        <Scene />
+        <Scene {...rest} />
       </div>
     );
   }
@@ -112,19 +120,6 @@ export default function ClientSide({
       this.setState({ component: null });
     };
   }, []);
-
-  const { data } = useAsyncData(
-    `dr_pogodin_react_utils___split_components.${chunkName}`,
-    getComponentAsync,
-  );
-  if (data) {
-    const Scene = data;
-    res = (
-      <div>
-        <Scene />
-      </div>
-    );
-  }
 
   return res;
 }
