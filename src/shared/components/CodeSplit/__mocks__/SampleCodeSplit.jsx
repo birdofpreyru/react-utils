@@ -7,11 +7,13 @@ import path from 'path';
 
 import CodeSplit from 'components/CodeSplit';
 
-import { webpack } from 'utils';
+import { hooks, webpack } from 'utils';
 
 export default function SampleCodeSplit() {
+  const [testKey] = hooks.useGlobalState('test.key', 'testValue');
   return (
     <>
+      <h1>{testKey}</h1>
       <CodeSplit
         chunkName="sample-component-1"
         getComponentAsync={

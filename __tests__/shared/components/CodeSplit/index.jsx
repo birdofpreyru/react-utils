@@ -6,7 +6,8 @@ import _ from 'lodash';
 import mockdate from 'mockdate';
 import pretty from 'pretty';
 
-import { isServerSide } from 'utils/isomorphy';
+import { isClientSide, isServerSide } from 'utils/isomorphy';
+import { act } from 'utils/jest';
 
 let factory;
 let Helmet;
@@ -73,7 +74,10 @@ afterAll(() => {
   Helmet.canUseDOM = true;
 });
 
-beforeEach(async () => {
+/**
+ * Resets React environment.
+ */
+function resetModules() {
   jest.resetModules();
   factory = require('server/renderer').default;
   ({ Helmet } = require('react-helmet'));
@@ -81,14 +85,55 @@ beforeEach(async () => {
   SampleCodeSplit = require(
     'components/CodeSplit/__mocks__/SampleCodeSplit',
   ).default;
+}
+
+beforeEach(async () => {
+  resetModules();
 });
 
 test('Server-side rendring', async () => {
   expect(isServerSide()).toBe(true);
   let markup = await renderServerSide(SampleCodeSplit, 1);
   expect(pretty(markup)).toMatchSnapshot();
-  markup = renderServerSide(SampleCodeSplit, 2);
-  await jest.runAllTimers();
+  markup = renderServerSide(SampleCodeSplit, 3);
+  jest.runAllTimers();
   markup = await markup;
   expect(pretty(markup)).toMatchSnapshot();
+});
+
+test('Client-side rendering', async () => {
+  expect(isServerSide()).toBe(true);
+  let serverMarkup = renderServerSide(SampleCodeSplit, 3);
+  await jest.runAllTimers();
+  serverMarkup = await serverMarkup;
+  document.write(serverMarkup);
+  document.close();
+  const ssrHead = pretty(document.head.innerHTML);
+  const ssrBody = pretty(document.body.innerHTML);
+  expect(ssrHead).toMatchSnapshot();
+  expect(ssrBody).toMatchSnapshot();
+  window.TRU_KEEP_INJ_SCRIPT = true;
+  require('client/init');
+  resetModules();
+  expect(isClientSide()).toBe(true);
+  let Launch = require('client').default;
+  await act(() => Launch({ getApplication: () => SampleCodeSplit }));
+  let head = pretty(document.head.innerHTML);
+  let body = pretty(document.body.innerHTML);
+  expect(head).toEqual(ssrHead);
+  expect(body).toEqual(ssrBody);
+
+  /* This tests that in the real render the data injection script
+   * is auto-removed from the document during the injection. */
+  resetModules();
+  document.write(serverMarkup);
+  document.close();
+  delete window.TRU_KEEP_INJ_SCRIPT;
+  require('client/init');
+  Launch = require('client').default;
+  await act(() => Launch({ getApplication: () => SampleCodeSplit }));
+  head = pretty(document.head.innerHTML);
+  body = pretty(document.body.innerHTML);
+  expect(head).toMatchSnapshot();
+  expect(body).toMatchSnapshot();
 });
