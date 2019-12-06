@@ -59,6 +59,7 @@ $ ./node_modules/.bin/dr-pogodin-lib-setup
 - [`<Button>`](docs/button.md) &ndash; Handles buttons and button-like links
   (components that look like regular buttons, but behave as links) in the same
   uniform manner.
+- [`<CodeSplit>`](docs/code-split.md) &ndash; Code splitting component.
 - [`<GlobalStateProvider>`](docs/global-state-provider.md) &ndash; Alias
   for `<GlobalStateProvider>` from `@dr.pogodin/react-global-state`.
 - [`<Link>` and `<NavLink>`](docs/link-and-navlink.md) &ndash; Auxiliary

@@ -2,7 +2,6 @@
 
 exports[`Export at client side 1`] = `
 Object {
-  "AppChunk": [Function],
   "Avatar": [Function],
   "BaseButton": [Function],
   "BaseModal": [Function],
@@ -11,6 +10,7 @@ Object {
     "render": [Function],
     "themeType": [Function],
   },
+  "CodeSplit": [Function],
   "GlobalStateProvider": [Function],
   "JU": null,
   "Link": [Function],
@@ -554,7 +554,6 @@ Array [
 
 exports[`Export at server side 1`] = `
 Object {
-  "AppChunk": [Function],
   "Avatar": [Function],
   "BaseButton": [Function],
   "BaseModal": [Function],
@@ -563,6 +562,7 @@ Object {
     "render": [Function],
     "themeType": [Function],
   },
+  "CodeSplit": [Function],
   "GlobalStateProvider": [Function],
   "JU": Object {
     "act": [Function],
