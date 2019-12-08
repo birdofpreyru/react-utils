@@ -19,14 +19,13 @@
   }
 
   &.mainPanel {
-    max-width: $screen-md;
     overflow: hidden;
     padding: 1.2em;
-    width: 100%;
+    width: $screen-md;
   }
 
   &.sidePanel {
-    flex: 1;
     overflow: hidden;
+    width: calc((100% - #{$screen-md}) / 2);
   }
 }
