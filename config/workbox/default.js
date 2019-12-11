@@ -4,8 +4,8 @@
 
 /* global self, workbox */
 
-workbox.skipWaiting();
-workbox.clientsClaim();
+workbox.core.skipWaiting();
+workbox.core.clientsClaim();
 
 /* eslint-disable no-restricted-globals, no-underscore-dangle */
 workbox.precaching.precacheAndRoute(self.__precacheManifest);
