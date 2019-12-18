@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.7.6",
-    "@dr.pogodin/react-global-state": "0.0.10",
+    "@dr.pogodin/react-global-state": "0.0.11",
     "@dr.pogodin/react-themes": "^1.1.0",
     "axios": "^0.19.0",
     "babel-plugin-react-css-modules": "^5.2.6",
@@ -38,7 +38,7 @@
     "shortid": "^2.2.15",
     "source-map-support": "^0.5.16",
     "url-parse": "^1.4.7",
-    "webpack": "^4.41.2",
+    "webpack": "^4.41.3",
     "winston": "^3.2.1"
   },
   "description": "Collection of generic ReactJS components and utils",
@@ -58,10 +58,10 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-css-modules-transform": "^1.6.2",
     "babel-plugin-dynamic-import-node": "^2.3.0",
-    "babel-plugin-module-resolver": "^3.2.0",
+    "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-assets": "^1.0.2",
-    "core-js": "^3.4.8",
-    "css-loader": "^3.3.0",
+    "core-js": "^3.5.0",
+    "css-loader": "^3.4.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-import-resolver-babel-module": "^5.1.0",
@@ -73,7 +73,7 @@
     "file-loader": "^5.0.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
-    "mini-css-extract-plugin": "^0.8.0",
+    "mini-css-extract-plugin": "^0.8.2",
     "mockdate": "^2.0.5",
     "node-sass": "^4.13.0",
     "nodelist-foreach-polyfill": "^1.2.0",
@@ -95,8 +95,8 @@
     "workbox-webpack-plugin": "^4.3.1"
   },
   "engines": {
-    "node": "~12.13.1",
-    "npm": "~6.12.1"
+    "node": "~12.14.0",
+    "npm": "~6.13.4"
   },
   "homepage": "https://dr.pogodin.studio",
   "keywords": [
@@ -126,5 +126,5 @@
     "lint:scss": "./node_modules/.bin/stylelint **/*.scss --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "0.15.0"
+  "version": "0.15.1"
 }
