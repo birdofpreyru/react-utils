@@ -115,9 +115,6 @@ export default function ClientSide({
       /* TODO: This unusedCssStamp thing should be revised. Probably, not needed
        * at all. */
       if (link2) link2.setAttribute('data-chunk-unused', unusedCssStamp += 1);
-
-      /* Reset to the initial state. */
-      this.setState({ component: null });
     };
   }, []);
 
