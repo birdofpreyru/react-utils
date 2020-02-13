@@ -54,6 +54,9 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
  * @param {String} [ops.outputPath] Optional. Output path for the build.
  *  Defaults to `build` folder inside the `context` path.
  *
+ * @param {boolean} [ops.dontTimestampOutputs] Optional. If set `true` ouput
+ *  CSS and JS files will not have build timestamp appended to their names.
+ *
  * @param {String} ops.publicPath Base URL for the output of the build assets.
  */
 module.exports = function configFactory(ops) {
@@ -64,6 +67,11 @@ module.exports = function configFactory(ops) {
   });
 
   const now = moment();
+
+  let outputFilenameSuffix = '';
+  if (!o.dontTimestampOutputs) {
+    outputFilenameSuffix = `-${now.valueOf()}`;
+  }
 
   let buildInfo;
   const buildInfoUrl = path.resolve(o.context, '.build-info');
@@ -105,8 +113,8 @@ module.exports = function configFactory(ops) {
 
   const plugins = [
     new MiniCssExtractPlugin({
-      chunkFilename: `[name]-${now.valueOf()}.css`,
-      filename: `[name]-${now.valueOf()}.css`,
+      chunkFilename: `[name]${outputFilenameSuffix}.css`,
+      filename: `[name]${outputFilenameSuffix}.css`,
     }),
     new webpack.DefinePlugin({
       BUILD_INFO: JSON.stringify(buildInfo),
@@ -120,7 +128,6 @@ module.exports = function configFactory(ops) {
   if (o.workbox) {
     if (!_.isObject(o.workbox)) o.workbox = {};
     plugins.push(new WorkboxPlugin.InjectManifest({
-      importWorkboxFrom: 'local',
       swSrc: path.resolve(__dirname, '../workbox/default.js'),
       ...o.workbox,
       swDest: '__service-worker.js',
@@ -136,8 +143,8 @@ module.exports = function configFactory(ops) {
     },
     mode: o.mode,
     output: {
-      chunkFilename: `[name]-${now.valueOf()}.js`,
-      filename: `[name]-${now.valueOf()}.js`,
+      chunkFilename: `[name]${outputFilenameSuffix}.js`,
+      filename: `[name]${outputFilenameSuffix}.js`,
       path: path.resolve(__dirname, o.context, o.outputPath),
       publicPath: `${o.publicPath}/`,
     },

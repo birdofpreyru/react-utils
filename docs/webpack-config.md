@@ -43,6 +43,9 @@ mutation of the config object.
       the CSS classnames generation by the Webpack's `css-loader`; it is passed
       into the `localIdentName` param of the loader. It should match the
       corresponding setting in the Babel config. Defaults to `[hash:base64:6]`.
+    - **`dontTimestampOutputs`** &ndash; *boolean* &ndash; Optional. If set
+      `true` ouput CSS and JS files will not have build timestamp appended
+      to their names.
     - **`entry`** &mdash; *Object*|*String*|*String[]* &mdash; Entry points.
       If an object is passed in, the `polyfills` entry point (chunk) is extended
       or appended to include some polyfills we consider obligatory
