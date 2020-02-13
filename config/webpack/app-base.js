@@ -120,7 +120,6 @@ module.exports = function configFactory(ops) {
   if (o.workbox) {
     if (!_.isObject(o.workbox)) o.workbox = {};
     plugins.push(new WorkboxPlugin.InjectManifest({
-      importWorkboxFrom: 'local',
       swSrc: path.resolve(__dirname, '../workbox/default.js'),
       ...o.workbox,
       swDest: '__service-worker.js',
