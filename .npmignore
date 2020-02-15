@@ -1,7 +1,0 @@
-/.circleci/
-/__coverage__/
-/__mocks__/
-/__tests__/
-/docs/
-/dr.pogodin-react-utils-*
-/src/
