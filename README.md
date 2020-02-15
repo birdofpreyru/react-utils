@@ -13,7 +13,7 @@ Forked from
 ## Content
 - [Installation](#installation)
 - [Reference](#reference)
-  - [Configurations](#configurations)
+  - [Standard Configurations](#standard-configurations)
   - [Components](#components)
   - [NodeJS Scripts](#nodejs-scripts)
   - [Utilities](#utilities)
