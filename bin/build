@@ -71,7 +71,9 @@ const cwd = process.cwd();
 const inDir = path.resolve(cwd, commander.inDir);
 
 let outDir = path.resolve(cwd, commander.outDir);
-if (commander.lib) outDir += `/${commander.buildType}`;
+if (commander.lib) {
+  outDir += `/${commander.buildType}`;
+}
 
 /* Prepares output directory: cleans existing files, creates the folders. */
 rimraf.sync(outDir);
@@ -158,8 +160,6 @@ if (commander.watch) BABEL_CMD_JS += ' --watch';
 */
 
 const BABEL_CMD_SVG = `${BABEL_CMD_JS} --extensions ".svg" --keep-file-extension`;
-
-BABEL_CMD_JS += ' --copy-files';
 
 async function babelBuild() {
   await exec(BABEL_CMD_JS, BABEL_EXEC_OPTIONS);

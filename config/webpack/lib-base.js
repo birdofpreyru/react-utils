@@ -91,10 +91,10 @@ module.exports = function configFactory(ops) {
         ],
         loader: 'file-loader',
         options: {
-          emitFile: false,
+          emitFile: true,
           name: '[path][name].[ext]',
-          outputPath: '/',
-          publicPath: `~${ops.library}`,
+          outputPath: '../shared',
+          publicPath: `~${ops.library}/build/shared`,
         },
       }, {
         /* Loads JS and JSX moudles, and inlines SVG assets. */
