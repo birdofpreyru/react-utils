@@ -128,5 +128,11 @@
     "lint:scss": "stylelint **/*.scss --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "0.17.0"
+  "version": "0.17.1",
+  "files": [
+    "/build",
+    "/config",
+    "/src/styles/_mixins",
+    "/src/styles/mixins*"
+  ]
 }

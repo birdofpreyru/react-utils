@@ -106,6 +106,7 @@ module.exports = function configFactory(ops) {
         loader: 'babel-loader',
         options: {
           babelrc: false,
+          configFile: false,
           envName: ops.babelEnv,
           presets: ['@dr.pogodin/react-utils/config/babel/webpack'],
         },
