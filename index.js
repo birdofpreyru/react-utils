@@ -5,16 +5,17 @@
  * the library.
  */
 /* eslint-disable global-require, import/no-dynamic-require,
-  import/no-unresolved */
+  import/no-unresolved, no-eval */
 /* global window */
 
-const IS_PROD = process.env.NODE_ENV === 'production';
 const IS_NODE = typeof window === 'undefined' || !window.TRU_FRONT_END;
 
-if (IS_PROD) {
-  module.exports = IS_NODE ? require('./build/production')
+/* Note: The check must be placed directly inside if(..) so that webpack
+ * is able to drop out unnecessary branch during the optimization. */
+if (process.env.NODE_ENV === 'production') {
+  module.exports = IS_NODE ? eval('require')('./build/production')
     : require('./build/production/web.bundle.js');
 } else {
-  module.exports = IS_NODE ? require('./build/development')
+  module.exports = IS_NODE ? eval('require')('./build/development')
     : require('./build/development/web.bundle.js');
 }

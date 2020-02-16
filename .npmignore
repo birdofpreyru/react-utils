@@ -1,0 +1,18 @@
+# Ignore hidden files
+.*
+
+# Ignore test-related stuff
+__coverage__/
+**/__mocks__/
+__tests__/
+
+# Ignore locally created library packs
+dr.pogodin-react-utils-*
+
+# Ignores documentation
+docs/
+
+# Ignores sources, beside SCSS mixins
+src/**
+!src/styles/_mixins/**
+!src/styles/mixins.scss
