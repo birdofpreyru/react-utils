@@ -26,7 +26,7 @@ Forked from
 Install the package as
 ```bash
 $ npm install --save @dr.pogodin/react-utils
-$ ./node_modules/.bin/dr-pogodin-lib-setup
+$ ./node_modules/.bin/react-utils-setup
 ```
 Then import the global stylesheet into the root ReactJS component of your app:
 ```jsx
@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === 'production') {
 
 To upgrade this library to the latest version just execute again
 ```bash
-$ ./node_modules/.bin/dr-pogodin-lib-setup
+$ ./node_modules/.bin/react-utils-setup
 ```
 
 ## Reference
