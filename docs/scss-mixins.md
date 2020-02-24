@@ -1,6 +1,6 @@
 ```scss
 // Inside your SCSS code.
-@import "@dr.pogodin/react-utils/src/styles/mixins";
+@import "@dr.pogodin/react-utils/mixins";
 ```
 
 **Why?** &ndash; Some pieces of SCSS code are often reused in different

@@ -26,22 +26,22 @@ Forked from
 Install the package as
 ```bash
 $ npm install --save @dr.pogodin/react-utils
-$ ./node_modules/.bin/dr-pogodin-lib-setup
+$ ./node_modules/.bin/react-utils-setup
 ```
 Then import the global stylesheet into the root ReactJS component of your app:
 ```jsx
 /* eslint-disable global-require */
 if (process.env.NODE_ENV === 'production') {
-  require('@dr.pogodin/react-utils/build/production/style.css');
+  require('@dr.pogodin/react-utils/prod-styles');
 } else {
-  require('@dr.pogodin/react-utils/build/development/style.css');
+  require('@dr.pogodin/react-utils/dev-styles');
 }
 /* eslint-enable global-require */
 ```
 
 To upgrade this library to the latest version just execute again
 ```bash
-$ ./node_modules/.bin/dr-pogodin-lib-setup
+$ ./node_modules/.bin/react-utils-setup
 ```
 
 ## Reference
