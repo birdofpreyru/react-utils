@@ -1,5 +1,3 @@
-jest.mock('utils/webpack/require');
-
 beforeEach(() => jest.resetModules());
 
 afterEach(() => delete window.TRU_FRONT_END);

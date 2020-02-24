@@ -15,8 +15,5 @@ module.exports = function buildConfig(env) {
   );
   babelLoader.options.presets[0] = `${__dirname}/config/babel/webpack`;
 
-  if (!config.module.noParse) config.module.noParse = [];
-  config.module.noParse.push(/src\/shared\/utils\/webpack\/require/);
-
   return config;
 };

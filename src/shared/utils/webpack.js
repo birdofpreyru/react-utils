@@ -17,9 +17,9 @@
  * @return Required module.
  */
 export function requireWeak(modulePath) {
-  /* eslint-disable global-require, import/no-dynamic-require */
-  const mod = require('./require')(modulePath);
-  /* eslint-enable global-require, import/no-dynamic-require */
+  /* eslint-disable no-eval */
+  const mod = eval('require')(modulePath);
+  /* eslint-enable no-eval */
   return mod.default || mod;
 }
 
