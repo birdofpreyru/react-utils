@@ -10,6 +10,7 @@ import { useAsyncData } from '@dr.pogodin/react-global-state';
 import moment from 'moment';
 
 import { getBuildInfo } from 'utils/isomorphy';
+import time from 'utils/time';
 
 /* Specifies the maximal number of unused CSS stylesheets to be kept in memory.
  */
@@ -32,6 +33,9 @@ export default function ClientSide({
   const { data } = useAsyncData(
     `dr_pogodin_react_utils___split_components.${chunkName}`,
     getComponentAsync,
+    {
+      maxage: time.YEAR_MS,
+    },
   );
   if (data) {
     const Scene = data.default || data;

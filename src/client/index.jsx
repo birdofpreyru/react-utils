@@ -4,20 +4,42 @@
 
 /* global document, window */
 
-import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
+import {
+  GlobalStateProvider,
+  useGlobalState,
+} from '@dr.pogodin/react-global-state';
 
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDom from 'react-dom';
 import shortId from 'shortid';
 import { BrowserRouter } from 'react-router-dom';
+
+/**
+ * This dummy component clears the code chunk cache in the global state each
+ * time the epoch prop changes.
+ */
+function HmrHelper({ epoch }) {
+  const [currentEpoch, setCurrentEpoch] = useState(epoch);
+  const [, setCache] = useGlobalState(
+    'dr_pogodin_react_utils___split_components',
+    {},
+  );
+  if (epoch !== currentEpoch) {
+    setCurrentEpoch(epoch);
+    setCache({});
+  }
+  return null;
+}
 
 /**
  * Renders given application into DOM, providing it with the initial global
  * state.
  * @param {Function} Application Root ReactJS component of the app.
  * @param {Object} initialState Optional. Initial value of the global state.
+ * @param {Number} hmrEpoch Optional. HMR epoch. It is needed to handle HMR of
+ *  split code chunks.
  */
-function render(Application, initialState) {
+function render(Application, { initialState, hmrEpoch } = {}) {
   let app = (
     <BrowserRouter>
       <Application />
@@ -25,6 +47,7 @@ function render(Application, initialState) {
   );
   app = (
     <GlobalStateProvider initialState={initialState}>
+      { hmrEpoch ? <HmrHelper epoch={hmrEpoch} /> : null }
       {app}
     </GlobalStateProvider>
   );
@@ -44,11 +67,23 @@ export default async function Launch({
   getApplication,
   moduleHot,
 }) {
-  render(getApplication(), window.ISTATE);
+  let hmrEpoch = moduleHot && applicationModulePath ? 1 : 0;
+  render(
+    getApplication(),
+    {
+      initialState: window.ISTATE,
+      hmrEpoch,
+    },
+  );
 
-  if (moduleHot && applicationModulePath) {
-    moduleHot.accept(applicationModulePath,
-      () => render(getApplication(), window.ISTATE));
+  if (hmrEpoch) {
+    moduleHot.accept(
+      applicationModulePath,
+      () => {
+        hmrEpoch += 1;
+        render(getApplication(), { hmrEpoch });
+      },
+    );
 
     /* HMR of CSS code each time webpack hot middleware updates the code. */
     moduleHot.addStatusHandler((status) => {
