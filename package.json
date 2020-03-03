@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.8.4",
-    "@dr.pogodin/react-global-state": "^0.1.1",
+    "@dr.pogodin/react-global-state": "^0.1.2",
     "@dr.pogodin/react-themes": "^1.1.0",
     "axios": "^0.19.2",
     "babel-plugin-react-css-modules": "^5.2.6",
@@ -128,5 +128,5 @@
     "lint:scss": "stylelint **/*.scss --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "0.18.1"
+  "version": "0.18.2"
 }
