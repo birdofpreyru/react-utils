@@ -8,26 +8,25 @@
 
 /* global window */
 
-import _ from 'lodash';
 import PT from 'prop-types';
 import React from 'react';
 
 import './style.scss';
 
-export default function GenericLink(props) {
-  const {
-    children,
-    className,
-    disabled,
-    enforceA,
-    onClick,
-    onMouseDown,
-    openNewTab,
-    replace,
-    routerLinkType,
-    to,
-  } = props;
-
+export default function GenericLink({
+  children,
+  className,
+  disabled,
+  enforceA,
+  keepScrollPosition,
+  onClick,
+  onMouseDown,
+  openNewTab,
+  replace,
+  routerLinkType,
+  to,
+  ...rest
+}) {
   /* Renders Link as <a> element if:
    * - It is opted explicitely by `enforceA` prop;
    * - It should be opened in a new tab;
@@ -50,24 +49,21 @@ export default function GenericLink(props) {
     );
   }
 
-  const linkProps = _.omit(props, [
-    'children',
-    'enforceA',
-    'openNewTab',
-    'routerLinkType',
-  ]);
-
   /* Otherwise we render the link as React Router's Link or NavLink element. */
   return React.createElement(routerLinkType, {
-    ...linkProps,
+    className,
+    disabled,
+    onMouseDown,
     replace,
+    to,
     onClick: (e) => {
-      /* If a custom onClick(..) handler was provided we execute it. */
-      if (onClick) onClick(e);
-
       /* The link to the current page will scroll to the top of the page. */
-      window.scroll(0, 0);
+      if (!keepScrollPosition) window.scroll(0, 0);
+
+      /* If a custom onClick(..) handler was provided we execute it. */
+      return onClick && onClick(e);
     },
+    ...rest,
   }, children);
 }
 
@@ -76,6 +72,7 @@ GenericLink.defaultProps = {
   className: null,
   disabled: false,
   enforceA: false,
+  keepScrollPosition: false,
   onClick: null,
   onMouseDown: null,
   openNewTab: false,
@@ -88,6 +85,7 @@ GenericLink.propTypes = {
   className: PT.string,
   disabled: PT.bool,
   enforceA: PT.bool,
+  keepScrollPosition: PT.bool,
   onClick: PT.func,
   onMouseDown: PT.func,
   openNewTab: PT.bool,
