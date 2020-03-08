@@ -38,6 +38,9 @@ rendered link;
 - **`disabled`** &mdash; *Boolean* &mdash; Optional. Disables the link;
 - **`enforceA`** &mdash; *Boolean* &mdash; Optional. If *true* enforces
 rendering of the link as a simple `<a>` element;
+- `keepScrollPosition` (_boolean_) &ndash; Optional. If set _true_ a link
+  rendered as React Router's component won't reset the viewport scrolling
+  position to the origin.
 - **`onClick`** &mdash; *Function* &mdash; Optional. An event handler to trigger
 on click;
 - **`onMouseDown`** &mdash; *Function* &mdash; Optional. An event handler to

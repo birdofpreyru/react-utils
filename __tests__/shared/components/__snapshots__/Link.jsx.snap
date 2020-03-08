@@ -5,6 +5,7 @@ exports[`Matches snapshots 1`] = `
   className={null}
   disabled={false}
   enforceA={false}
+  keepScrollPosition={false}
   onClick={null}
   onMouseDown={null}
   openNewTab={false}
