@@ -1,11 +1,21 @@
 # Webpack
-Various utils related to the Webpack bundling process.
 
-**Why?** &mdash; Webpack is the backbone of our development; it is great, but
-there are some tricky situations, that can be leveraged by functions provided
-here.
+Webpack-related utilities.
+
+```js
+import { webpack } from '@dr.pogodin/react-utils';
+```
+
+`webpack` object exposes the following methods as its fields:
+
+- [`requireWeak(module: string)` &rArr; `object`](#require-weak)
+- [`resolveWeak(modulePath: string)` &rArr; `string`](#resolve-weak)
 
 ### Reference
-- **`requireWeak(module)`** &mdash; Requires specified `module` in the weak way:
-the module is not bundled by Webpack, and it is required from the runtime
-environment at the moment when this function is executed.
+
+- <a name="require-weak"></a>`requireWeak(module: string)` &rArr; `object` \
+  Requires specified module weakly: the module is not bundled by Webpack,
+  and it is required dynamically when this function is executed.
+
+- <a name="resolve-weak"></a>`resolveWeak(modulePath: string)` &rArr; `string` \
+  Resolves given module path.
