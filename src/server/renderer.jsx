@@ -83,9 +83,11 @@ function prepareCipher(key) {
 
 /**
  * Creates the middleware.
- * @param {Object} webpackConfig
- * @param {Object} options Additional options:
- * @return {Function} Created middleware.
+ * @param {object} webpackConfig
+ * @param {object} options Additional options:
+ * @param {boolean} [options.favicon] Optional. `true` will include favicon
+ *  link into the rendered HTML templates.
+ * @return {function} Created middleware.
  */
 export default function factory(webpackConfig, options) {
   const buildInfo = getBuildInfo(webpackConfig.context);
@@ -228,6 +230,10 @@ export default function factory(webpackConfig, options) {
           .join('');
       }
 
+      const faviconLink = ops.favicon ? (
+        '<link rel="shortcut icon" href="/favicon.ico" />'
+      ) : '';
+
       res.send((
         `<!DOCTYPE html>
         <html lang="en">
@@ -243,7 +249,7 @@ export default function factory(webpackConfig, options) {
               rel="stylesheet"
             />
             ${styles.join('')}
-            <link rel="shortcut icon" href="/favicon.ico" />
+            ${faviconLink}
             <meta charset="utf-8" />
             <meta
               content="width=device-width,initial-scale=1.0"
