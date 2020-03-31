@@ -86,7 +86,7 @@ $ ./node_modules/.bin/react-utils-setup
 - [`_`](docs/lodash.md) &ndash; Alias of `lodash` (JS utilities).
 - [`api`](docs/api.md) &ndash; Alias of `axios` (API / HTTP client).
 - [`client`](docs/client.md) &ndash; Client-side initialization code.
-- [`config`](docs/config.md) &ndash; Isomorphic app config.
+- [`config`](docs/config-utils.md) &ndash; Isomorphic app config.
 - [Global Styles](docs/global-styles.md) &ndash; Global SCSS styles necessary for
   a generic application.
 - [`hooks`](docs/hooks.md) &ndash; Different React hooks.
