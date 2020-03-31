@@ -94,6 +94,11 @@ async function coreTest(webpackConfig, options) {
 test('Base rendering of HTML template',
   () => coreTest(TEST_WEBPACK_CONFIG, {}));
 
+test(
+  '"favicon" option',
+  () => coreTest(TEST_WEBPACK_CONFIG, { favicon: '/path/to/favicon.ico' }),
+);
+
 test('Config overriding for injection',
   () => coreTest(TEST_WEBPACK_CONFIG, {
     beforeRender: async (res, sanitizedConfig) => {

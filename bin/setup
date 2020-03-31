@@ -8,6 +8,7 @@ const { spawnSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+const _ = require('lodash');
 const commander = require('commander');
 
 const COMMAND_DESCRIPTION = `\
@@ -63,16 +64,36 @@ function generateTargetPackage(entry) {
 }
 
 /**
- * Adopts dev dependencies of the `donor` package into the `host` one.
- * @param {Object} donorData Data from donor's `package.json`.
- * @param {Object} hostData Data from host's `package.json`.
+ * Adopts all dev dependencies of the "donor" package as dev dependencies of
+ * the "host" package. An exception is done for any donor's dev dependencies
+ * which are known host's dependencies. This is to avoid changing their status
+ * in host from prod to dev. They will be upgraded to appropriate version
+ * by the updateProdDependencies() method below.
+ * @param {Object} donorData Donor's package JSON data.
+ * @param {Object} hostData Host's package JSON data.
  */
-function adoptDevDependencies(donorData) {
-  let deps = Object.entries(donorData.devDependencies || {});
-  deps = deps.map(generateTargetPackage);
-  spawnSync('npm', ['install', '--save-dev'].concat(deps), {
-    stdio: 'inherit',
-  });
+function adoptDevDependencies(donorData, hostData) {
+  /* Inits deps as a map of all donor's dev dependencies. */
+  let deps = _.clone(donorData.devDependencies) || {};
+
+  /* Removes from the map any prod dependencies of host. */
+  Object.entries(hostData.dependencies || {})
+    .forEach(([libName]) => {
+      delete deps[libName];
+    });
+
+  /* Removes from the map any dev dependencies of host matching by version. */
+  Object.entries(hostData.devDependencies || {})
+    .forEach(([libName, libVersion]) => {
+      if (libVersion === deps[libName]) delete deps[libName];
+    });
+
+  deps = Object.entries(deps).map(generateTargetPackage);
+  if (deps.length) {
+    spawnSync('npm', ['install', '--save-dev'].concat(deps), {
+      stdio: 'inherit',
+    });
+  }
 }
 
 /**
@@ -112,7 +133,7 @@ function getPackageJson(packageName = '@dr.pogodin/react-utils') {
  */
 function install(library) {
   let name = library;
-  if (name.indexOf('@') <= 0) name += '@latest';
+  if (!name.includes('@')) name += '@latest';
   spawnSync('npm', ['install', '--save', name], { stdio: 'inherit' });
 }
 
@@ -123,11 +144,24 @@ function install(library) {
  * @param {Object} hostData Data from host's `package.json`.
  */
 function updateProdDependencies(donorData, hostData) {
-  let deps = Object.entries(donorData.dependencies || {});
+  let deps = [
+    ...Object.entries(donorData.dependencies || {}),
+    ...Object.entries(donorData.devDependencies || {}),
+  ];
   const hostDeps = hostData.dependencies || {};
-  deps = deps.filter((x) => hostDeps[x[0]]);
-  deps = deps.map(generateTargetPackage);
-  spawnSync('npm', ['install', '--save'].concat(deps), { stdio: 'inherit' });
+  deps = deps.filter(([libName, libVersion]) => {
+    const hostLibVersion = hostDeps[libName];
+    return hostLibVersion && hostLibVersion !== libVersion;
+  });
+  if (deps.length) {
+    deps = deps.map(generateTargetPackage);
+    console.log(deps);
+    spawnSync(
+      'npm',
+      ['install', '--save'].concat(deps),
+      { stdio: 'inherit' },
+    );
+  }
 }
 
 /* Entry point. */
@@ -141,3 +175,4 @@ libs.forEach((library) => {
 });
 spawnSync('npm', ['install'], { stdio: 'inherit' });
 spawnSync('npm', ['dedupe'], { stdio: 'inherit' });
+spawnSync('npm', ['audit', 'fix'], { stdio: 'inherit' });

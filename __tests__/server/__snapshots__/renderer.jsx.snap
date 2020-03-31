@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Base rendering of HTML template 1`] = `
+exports[`"favicon" option 1`] = `
 "<!DOCTYPE html>
         <html lang=\\"en\\">
           <head>
@@ -16,6 +16,48 @@ exports[`Base rendering of HTML template 1`] = `
             />
             
             <link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\" />
+            <meta charset=\\"utf-8\\" />
+            <meta
+              content=\\"width=device-width,initial-scale=1.0\\"
+              name=\\"viewport\\"
+            />
+          </head>
+          <body>
+            
+            <div id=\\"react-view\\"></div>
+            <script id=\\"inj\\" type=\\"application/javascript\\">
+              window.SPLITS = {}
+              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1TZonSyrmykHqLzmKxXS0DK2Cs9zyFh0xgn25yw2xNin\\"
+            </script>
+            <script
+              src=\\"/test/public/path/polyfills-1511941200000.js\\"
+              type=\\"application/javascript\\"
+            ></script>
+            
+            <script
+              src=\\"/test/public/path/main-1511941200000.js\\"
+              type=\\"application/javascript\\"
+            ></script>
+          </body>
+        </html>"
+`;
+
+exports[`Base rendering of HTML template 1`] = `
+"<!DOCTYPE html>
+        <html lang=\\"en\\">
+          <head>
+            
+            
+            
+            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
+            
+            <link
+              href=\\"/test/public/path/main-1511941200000.css\\"
+              id=\\"tru-style\\"
+              rel=\\"stylesheet\\"
+            />
+            
+            
             <meta charset=\\"utf-8\\" />
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"
@@ -57,7 +99,7 @@ exports[`Config overriding for injection 1`] = `
               rel=\\"stylesheet\\"
             />
             
-            <link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\" />
+            
             <meta charset=\\"utf-8\\" />
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"
@@ -99,7 +141,7 @@ exports[`Hemlet integration works 1`] = `
               rel=\\"stylesheet\\"
             />
             
-            <link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\" />
+            
             <meta charset=\\"utf-8\\" />
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"
@@ -141,7 +183,7 @@ exports[`Injection of additional JS scripts 1`] = `
               rel=\\"stylesheet\\"
             />
             
-            <link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\" />
+            
             <meta charset=\\"utf-8\\" />
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"
@@ -183,7 +225,7 @@ exports[`Server-side rendering (SSR); injection of CSS chunks & Redux state 1`] 
               rel=\\"stylesheet\\"
             />
             <link data-chunk=\\"test-chunk-a\\" id=\\"tru-style\\" href=\\"/test/public/path/test-chunk-a-1511941200000.css\\" rel=\\"stylesheet\\" /><link data-chunk=\\"test-chunk-b\\" id=\\"tru-style\\" href=\\"/test/public/path/test-chunk-b-1511941200000.css\\" rel=\\"stylesheet\\" />
-            <link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\" />
+            
             <meta charset=\\"utf-8\\" />
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"
@@ -226,7 +268,7 @@ exports[`Setting of response HTTP status the server-side rendering 1`] = `
               rel=\\"stylesheet\\"
             />
             
-            <link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\" />
+            
             <meta charset=\\"utf-8\\" />
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"

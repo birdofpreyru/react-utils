@@ -7,7 +7,7 @@ exports[`Client-side rendering 1`] = `
 
 <link href=\\"/test/public/pathmain-1511941200000.css\\" id=\\"tru-style\\" rel=\\"stylesheet\\">
 
-<link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\">
+
 <meta charset=\\"utf-8\\">
 <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">"
 `;
@@ -105,7 +105,7 @@ exports[`Client-side rendering 3`] = `
 
 <link href=\\"/test/public/pathmain-1511941200000.css\\" id=\\"tru-style\\" rel=\\"stylesheet\\">
 
-<link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\">
+
 <meta charset=\\"utf-8\\">
 <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">"
 `;
@@ -201,7 +201,7 @@ exports[`Server-side rendring 1`] = `
 
     <link href=\\"/test/public/pathmain-1511941200000.css\\" id=\\"tru-style\\" rel=\\"stylesheet\\" />
 
-    <link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\" />
+
     <meta charset=\\"utf-8\\" />
     <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
   </head>
@@ -266,7 +266,7 @@ exports[`Server-side rendring 2`] = `
 
     <link href=\\"/test/public/pathmain-1511941200000.css\\" id=\\"tru-style\\" rel=\\"stylesheet\\" />
 
-    <link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\" />
+
     <meta charset=\\"utf-8\\" />
     <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
   </head>

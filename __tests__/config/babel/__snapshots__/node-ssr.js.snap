@@ -1,0 +1,351 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
+Object {
+  "plugins": Array [
+    Array [
+      "module-resolver",
+      Object {
+        "extensions": Array [
+          ".js",
+          ".jsx",
+        ],
+        "root": Array [
+          "./src/shared",
+          "./src",
+        ],
+        "transformFunctions": Array [
+          "resolveWeak",
+          "webpack.resolveWeak",
+        ],
+      },
+    ],
+    "@babel/syntax-dynamic-import",
+    "@babel/transform-runtime",
+    Array [
+      "react-css-modules",
+      Object {
+        "filetypes": Object {
+          ".scss": Object {
+            "syntax": "postcss-scss",
+          },
+        },
+        "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
+      },
+    ],
+    "dynamic-import-node",
+    Array [
+      "transform-assets",
+      Object {
+        "extensions": Array [
+          "gif",
+          "jpeg",
+          "jpg",
+          "png",
+        ],
+        "name": "/test/path/images/[hash].[ext]",
+      },
+    ],
+    Array [
+      "css-modules-transform",
+      Object {
+        "extensions": Array [
+          ".css",
+          ".scss",
+        ],
+        "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
+      },
+    ],
+  ],
+  "presets": Array [
+    "@babel/env",
+    "@babel/react",
+    "@dr.pogodin/babel-preset-svgr",
+  ],
+}
+`;
+
+exports[`"development" environment "noStyling" variation 1`] = `
+Object {
+  "plugins": Array [
+    Array [
+      "module-resolver",
+      Object {
+        "extensions": Array [
+          ".js",
+          ".jsx",
+        ],
+        "root": Array [
+          "./src/shared",
+          "./src",
+        ],
+        "transformFunctions": Array [
+          "resolveWeak",
+          "webpack.resolveWeak",
+        ],
+      },
+    ],
+    "@babel/syntax-dynamic-import",
+    "@babel/transform-runtime",
+    "dynamic-import-node",
+    Array [
+      "transform-assets",
+      Object {
+        "extensions": Array [
+          "gif",
+          "jpeg",
+          "jpg",
+          "png",
+        ],
+        "name": "/images/[hash].[ext]",
+      },
+    ],
+  ],
+  "presets": Array [
+    "@babel/env",
+    "@babel/react",
+    "@dr.pogodin/babel-preset-svgr",
+  ],
+}
+`;
+
+exports[`"development" environment Default config 1`] = `
+Object {
+  "plugins": Array [
+    Array [
+      "module-resolver",
+      Object {
+        "extensions": Array [
+          ".js",
+          ".jsx",
+        ],
+        "root": Array [
+          "./src/shared",
+          "./src",
+        ],
+        "transformFunctions": Array [
+          "resolveWeak",
+          "webpack.resolveWeak",
+        ],
+      },
+    ],
+    "@babel/syntax-dynamic-import",
+    "@babel/transform-runtime",
+    Array [
+      "react-css-modules",
+      Object {
+        "filetypes": Object {
+          ".scss": Object {
+            "syntax": "postcss-scss",
+          },
+        },
+        "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
+      },
+    ],
+    "dynamic-import-node",
+    Array [
+      "transform-assets",
+      Object {
+        "extensions": Array [
+          "gif",
+          "jpeg",
+          "jpg",
+          "png",
+        ],
+        "name": "/images/[hash].[ext]",
+      },
+    ],
+    Array [
+      "css-modules-transform",
+      Object {
+        "extensions": Array [
+          ".css",
+          ".scss",
+        ],
+        "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
+      },
+    ],
+  ],
+  "presets": Array [
+    "@babel/env",
+    "@babel/react",
+    "@dr.pogodin/babel-preset-svgr",
+  ],
+}
+`;
+
+exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
+Object {
+  "plugins": Array [
+    Array [
+      "module-resolver",
+      Object {
+        "extensions": Array [
+          ".js",
+          ".jsx",
+        ],
+        "root": Array [
+          "./src/shared",
+          "./src",
+        ],
+        "transformFunctions": Array [
+          "resolveWeak",
+          "webpack.resolveWeak",
+        ],
+      },
+    ],
+    "@babel/syntax-dynamic-import",
+    "@babel/transform-runtime",
+    Array [
+      "react-css-modules",
+      Object {
+        "filetypes": Object {
+          ".scss": Object {
+            "syntax": "postcss-scss",
+          },
+        },
+        "generateScopedName": "[hash:base64:6]",
+      },
+    ],
+    "dynamic-import-node",
+    Array [
+      "transform-assets",
+      Object {
+        "extensions": Array [
+          "gif",
+          "jpeg",
+          "jpg",
+          "png",
+        ],
+        "name": "/test/path/images/[hash].[ext]",
+      },
+    ],
+    Array [
+      "css-modules-transform",
+      Object {
+        "extensions": Array [
+          ".css",
+          ".scss",
+        ],
+        "generateScopedName": "[hash:base64:6]",
+      },
+    ],
+  ],
+  "presets": Array [
+    "@babel/env",
+    "@babel/react",
+    "@dr.pogodin/babel-preset-svgr",
+  ],
+}
+`;
+
+exports[`"production" environment "noStyling" variation 1`] = `
+Object {
+  "plugins": Array [
+    Array [
+      "module-resolver",
+      Object {
+        "extensions": Array [
+          ".js",
+          ".jsx",
+        ],
+        "root": Array [
+          "./src/shared",
+          "./src",
+        ],
+        "transformFunctions": Array [
+          "resolveWeak",
+          "webpack.resolveWeak",
+        ],
+      },
+    ],
+    "@babel/syntax-dynamic-import",
+    "@babel/transform-runtime",
+    "dynamic-import-node",
+    Array [
+      "transform-assets",
+      Object {
+        "extensions": Array [
+          "gif",
+          "jpeg",
+          "jpg",
+          "png",
+        ],
+        "name": "/images/[hash].[ext]",
+      },
+    ],
+  ],
+  "presets": Array [
+    "@babel/env",
+    "@babel/react",
+    "@dr.pogodin/babel-preset-svgr",
+  ],
+}
+`;
+
+exports[`"production" environment Default config 1`] = `
+Object {
+  "plugins": Array [
+    Array [
+      "module-resolver",
+      Object {
+        "extensions": Array [
+          ".js",
+          ".jsx",
+        ],
+        "root": Array [
+          "./src/shared",
+          "./src",
+        ],
+        "transformFunctions": Array [
+          "resolveWeak",
+          "webpack.resolveWeak",
+        ],
+      },
+    ],
+    "@babel/syntax-dynamic-import",
+    "@babel/transform-runtime",
+    Array [
+      "react-css-modules",
+      Object {
+        "filetypes": Object {
+          ".scss": Object {
+            "syntax": "postcss-scss",
+          },
+        },
+        "generateScopedName": "[hash:base64:6]",
+      },
+    ],
+    "dynamic-import-node",
+    Array [
+      "transform-assets",
+      Object {
+        "extensions": Array [
+          "gif",
+          "jpeg",
+          "jpg",
+          "png",
+        ],
+        "name": "/images/[hash].[ext]",
+      },
+    ],
+    Array [
+      "css-modules-transform",
+      Object {
+        "extensions": Array [
+          ".css",
+          ".scss",
+        ],
+        "generateScopedName": "[hash:base64:6]",
+      },
+    ],
+  ],
+  "presets": Array [
+    "@babel/env",
+    "@babel/react",
+    "@dr.pogodin/babel-preset-svgr",
+  ],
+}
+`;
+
+exports[`Module exports 1`] = `[Function]`;

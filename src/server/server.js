@@ -15,7 +15,13 @@ import requestIp from 'request-ip';
 import rendererFactory from './renderer';
 
 export default async function factory(webpackConfig, options) {
-  const renderer = rendererFactory(webpackConfig, options);
+  const rendererOps = _.pick(options, [
+    'Application',
+    'beforeRender',
+    'favicon',
+    'maxSsrRounds',
+  ]);
+  const renderer = rendererFactory(webpackConfig, rendererOps);
   const { publicPath } = webpackConfig.output;
 
   const server = express();
