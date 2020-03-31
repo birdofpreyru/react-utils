@@ -1,17 +1,11 @@
 # Babel Configurations
-Standard configurations for [Babel](https://babeljs.io/).
+Standard [Babel](https://babeljs.io/) configs.
 
-**Why?** &mdash; We use Babel to support latest JavaScript specifications in our
-projects, and to allow for some fancy features in our code. The standard Babel
-configurations ensure that the same code patterns are supported in all of our apps.
+- [**config/babel/node-ssr**](#node-ssr) &mdash; Babel config for NodeJS
+  compilation of JS and JSX modules (server-side ReactJS rendering);
 
-Several Babel configurations are provided by this package:
-
-- [**config/babel/node-ssr**](#node-ssr) &mdash; Babel configuration for NodeJS
-compilation of JS and JSX modules (server-side ReactJS rendering);
-
-- [**config/babel/webpack**](#webpack) &mdash; Babel configuration for Webpack
-compilation of JS and JSX modules.
+- [**config/babel/webpack**](#webpack) &mdash; Babel config for Webpack
+  compilation of JS and JSX modules.
 
 Use them as presets in your `.babelrc`, e.g.
 ```json
@@ -47,7 +41,15 @@ option.
 configuration for NodeJS compilation of JS and JSX modules (server-side ReactJS
 rendering);
 
-  - Presets: [env](https://www.npmjs.com/package/babel-preset-env),
+  **Supported Options:**
+  - `baseAssetsOutputPath` {_string_} &ndash; Optional. The base path for assets
+    output. Defaults empty string.
+  - `noStyling` {_boolean_} &ndash; Optional. If `true` the preset will exclude
+    any presets and plugins related to (S)CSS processing.
+
+  **Details:**
+
+  - Imports presets: [env](https://www.npmjs.com/package/babel-preset-env),
   [react](https://www.npmjs.com/package/babel-preset-react),
   [stage-2](https://www.npmjs.com/package/babel-preset-stage-2);
 
@@ -89,13 +91,19 @@ rendering);
 - <a name="webpack">**`config/babel/webpack`**</a> &mdash; Babel configuration
 for Webpack compilation of JS and JSX modules.
 
-  - Presets: [env](https://www.npmjs.com/package/babel-preset-env),
-  [react](https://www.npmjs.com/package/babel-preset-react),
-  [stage-2](https://www.npmjs.com/package/babel-preset-stage-2);
+  **Supported Options:**
+  - `noStyling` {_boolean_} &ndash; Optional. If `true` the preset will exclude any presets
+    and plugins related to (S)CSS processing.
+
+  **Details:**
+
+  - Imports presets: [env](https://www.npmjs.com/package/babel-preset-env),
+    [react](https://www.npmjs.com/package/babel-preset-react),
+    [stage-2](https://www.npmjs.com/package/babel-preset-stage-2);
 
   - Uses [`@dr.pogodin/babel-preset-svgr`](https://www.npmjs.com/package/@dr.pogodin/babel-preset-svgr)
-  to embed imported SVG files into the complied JS modules with the help of
-  [SVGR library](https://github.com/smooth-code/svgr);
+    to embed imported SVG files into the complied JS modules with the help of
+    [SVGR library](https://github.com/smooth-code/svgr);
 
   - Uses [`babel-plugin-module-resolver`](https://www.npmjs.com/package/babel-plugin-module-resolver)
   to setup the following paths as the roots for resolution of relative imports:

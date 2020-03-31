@@ -3,50 +3,70 @@
 const _ = require('lodash');
 const getWebpackBabelConfig = require('./webpack');
 
-function getConfig(babel, ops = {}) {
-  const config = getWebpackBabelConfig(babel);
+/**
+ * Creates a new base config.
+ * @param {object} babel Babel compiler.
+ * @param {object} [options] Optional. Options.
+ * @return {object} Config.
+ */
+function newBase(babel, options = {}) {
+  const baseOps = _.pick(options, ['noStyling']);
+  const config = getWebpackBabelConfig(babel, baseOps);
 
-  const cssModulesTransformPluginOps = {
-    extensions: ['.css', '.scss'],
-  };
-
-  const transformAssetsPluginOptions = {
-    extensions: ['gif', 'jpeg', 'jpg', 'png'],
-  };
-
-  config.plugins = config.plugins.concat([
+  const baseAssetsOutputPath = options.baseAssetsOutputPath || '';
+  config.plugins.push(
     'dynamic-import-node',
-    ['transform-assets', transformAssetsPluginOptions],
-    ['css-modules-transform', cssModulesTransformPluginOps],
-  ]);
+    ['transform-assets', {
+      extensions: ['gif', 'jpeg', 'jpg', 'png'],
+      name: `${baseAssetsOutputPath}/images/[hash].[ext]`,
+    }],
+  );
 
   const moduleResolverPluginOps = config.plugins.find(
     (x) => x[0] === 'module-resolver',
   )[1];
-
   moduleResolverPluginOps.transformFunctions = [
     'resolveWeak',
     'webpack.resolveWeak',
   ];
 
-  switch (babel.env()) {
-    case 'development':
-      _.pull(config.plugins, 'react-hot-loader/babel');
-      cssModulesTransformPluginOps.generateScopedName = '[path][name]___[local]___[hash:base64:6]';
+  if (babel.env() === getWebpackBabelConfig.ENVIRONMENTS.DEV) {
+    _.pull(config.plugins, 'react-hot-loader/babel');
+  }
+
+  return config;
+}
+
+/**
+ * Mutates `config` to support styling ((S)CSS) processing.
+ * @param {object} config
+ * @param {string} env "development" or "production".
+ * @return {object} Returns mutated config for chaining.
+ */
+function addStyling(config, env) {
+  const cssModulesTransformOps = {
+    extensions: ['.css', '.scss'],
+  };
+  switch (env) {
+    case getWebpackBabelConfig.ENVIRONMENTS.DEV:
+      cssModulesTransformOps.generateScopedName = '[path][name]___[local]___[hash:base64:6]';
       break;
-    case 'production':
-      cssModulesTransformPluginOps.generateScopedName = '[hash:base64:6]';
+    case getWebpackBabelConfig.ENVIRONMENTS.PROD:
+      cssModulesTransformOps.generateScopedName = '[hash:base64:6]';
       break;
-    case 'test':
-      cssModulesTransformPluginOps.generateScopedName = '[path][name]___[local]___[hash:base64:6]';
+    case getWebpackBabelConfig.ENVIRONMENTS.TEST:
+      cssModulesTransformOps.generateScopedName = '[path][name]___[local]___[hash:base64:6]';
       break;
     default:
   }
+  config.plugins.push(['css-modules-transform', cssModulesTransformOps]);
+  return config;
+}
 
-  const baseAssetsOutputPath = ops.baseAssetsOutputPath || '';
-  transformAssetsPluginOptions.name = `${
-    baseAssetsOutputPath}/images/[hash].[ext]`;
-
+function getConfig(babel, ops = {}) {
+  const env = babel.env();
+  const config = newBase(babel, ops);
+  if (!ops.noStyling) addStyling(config, env);
   return config;
 }
 
