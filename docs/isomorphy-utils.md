@@ -1,18 +1,30 @@
 # Isomorphy
-Collection of helpers to deal with isomorphic aspects of the code.
 
-**Why?** &mdash; Most of our ReactJS code should be isomorphic, i.e. it should
-be functional both when executed at the client-side (in browser), and when
-executed at the server-side (in NodeJS), without extra care of the caller.
-In some cases, it demands to explicitely check, where the code is executed, and
-proceed depending on that. This module provides functions that allow to do such
-checks, and to get some additional information about the currently running code.
+```js
+import { isomorphy } from '@dr.pogodin/react-utils';
+```
 
-**Important Notes:**
-- All functionality of this module relies on `@dr.pogodin/react-utils`
-  configuration / client initialization / server code beign used in your
-  project;
-- `isDevBuild()` and `isProdBuild()` functions return dev/prod mode of the
+A good ReactJS code is isomorphic, it works correctly both client- (browser),
+and server-side (NodeJS). Sometimes it requires explcit environment checks to
+provide different functionality implementation for client and server.
+This module provides necessary functions.
+
+- [`isomorphy` reference](#reference)
+  - [`.assertClientSide()`](#assertClientSide)
+  - [`.assertServerSide()`](#assertServerSide)
+  - [`.buildTimestamp(): string`](#buildTimestamp)
+  - [`.isClientSide(): boolean`](#isClientSide)
+  - [`.isDevBuild(): boolean`](#isDevBuild)
+  - [`.isProdBuild(): boolean`](#isProdBuild)
+  - [`.isServerSide(): boolean`](#isServerSide)
+
+**Important**
+
+- All functionality in this module relies on React Utils configuration, client
+  initialization, and server code being used in your project.
+
+- [`isDevBuild()`](#isDevBuild) and [`isProdBuild()`](#isProdBuild) functions
+  return dev/prod mode of the
   currently executed code. While the server launched in dev mode always serve
   dev version of the frontend code, the server launched in prod mode can serve
   either prod, or dev versions of the code, depending on which of them was build
@@ -22,27 +34,33 @@ checks, and to get some additional information about the currently running code.
   defines the runtime environment, which can be configured via
   [`config`](./config-utils.md).
 
-[Example](#example)
-
 ### Reference
 
-- **`buildTimestamp()`** &mdash; Returns build timestamp of the frontend JS
+- <a name="assertClientSide"></a>
+  `.assertClientSide()` &ndash; Throws error if called outside the client-side
+  environment.
+
+- <a name="assertServerSide"></a>
+  `.assertServerSide()` &ndash; Throws error if called outside the server-side
+  environment.
+
+- <a name="buildTimestamp"></a>
+  `.buildTimestamp(): string` &ndash; Returns build timestamp of the frontend JS
   bundle, in form of ISO date/time string. At the server-side it will be the
   timestamp of bundle being served by the server.
-- **`isClientSide()`** &mdash; Returns `true` if executed at client-side
-  (in browser); `false` otherwise.
-- **`isDevBuild()`** &mdash; Returns `true` if development version of the code
-  is running; `false` otherwise.
-- **`isProdBuild()`** &mdash; Returns `true` if the production version of the
-  code is running; `false` otherwise.
-- **`isServerSide()`** &mdash; Returns `true` if executed at the server-side
-  (in NodeJS); `false` otherwise.
 
-### Example
-```js
-import { isomorphy } from '@dr.pogodin/react-utils';
+- <a name="isClientSide"></a>
+  `.isClientSide(): boolean` &ndash; Returns `true` if executed at the client
+  side (in browser), `false` otherwise.
 
-if (isomorphy.isClientSide()) {
-  // Do some useful staff here, if executed at the client-side.
-}
-```
+- <a name="isDevBuild"><a/>
+  `.isDevBuild(): boolean` &ndash; Returns `true` if development version of
+    the code is running, `false` otherwise.
+
+- <a name="isProdBuild"></a>
+  `.isProdBuild(): boolean` &ndash; Returns `true` if the production version
+    of code is running, `false` otherwise.
+
+- <a name="isServerSide"></a>
+  `.isServerSide(): boolean` &ndash; Returns `true` if executed at
+  the server side (NodeJS), `false` otherwise.
