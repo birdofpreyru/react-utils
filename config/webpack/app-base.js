@@ -172,6 +172,7 @@ module.exports = function configFactory(ops) {
         options: {
           outputPath: 'fonts/',
           publicPath: `${o.publicPath}/fonts`,
+          name: '[md5:hash].[ext]',
         },
       }, {
         /* Loads JS and JSX moudles, and inlines SVG assets. */
@@ -191,6 +192,7 @@ module.exports = function configFactory(ops) {
         options: {
           outputPath: 'images/',
           publicPath: `${o.publicPath}/images`,
+          name: '[md5:hash].[ext]',
         },
       }, {
         /* Loads SCSS stylesheets. */
