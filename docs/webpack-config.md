@@ -231,7 +231,6 @@ mutation of the config object.
     - `react-helmet`
     - `react-hot-loader`
     - `react-router-dom`
-    - `react-tooltip`
     - `shortid`
     - `url-parse`
 

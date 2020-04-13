@@ -97,7 +97,11 @@ Object {
   "ScalableRect": [Function],
   "ThemeProvider": [Function],
   "Throbber": [Function],
-  "Tooltip": [Function],
+  "WithTooltip": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+    "themeType": [Function],
+  },
   "_": [Function],
   "api": Object {
     "Axios": [Function],
@@ -757,7 +761,11 @@ Object {
   "ScalableRect": [Function],
   "ThemeProvider": [Function],
   "Throbber": [Function],
-  "Tooltip": [Function],
+  "WithTooltip": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+    "themeType": [Function],
+  },
   "_": [Function],
   "api": Object {
     "Axios": [Function],
