@@ -5,10 +5,9 @@
 
 # React Utils
 
-A collection of generic ReactJS configurations, components, and utilities.
-
-Forked from
-[Topcoder React Utils](https://github.com/topcoder-platform/topcoder-react-utils).
+ReactJS development kit.
+The [ReactJS Starter Pack](https://github.com/birdofpreyru/react-starter)
+implements required setup, and provides usage examples.
 
 ## Content
 - [Installation](#installation)
