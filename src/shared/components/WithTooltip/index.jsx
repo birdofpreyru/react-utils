@@ -26,7 +26,6 @@ Tooltip.propTypes = {
   children: PT.node,
   theme: PT.shape({
     arrow: PT.string.isRequired,
-    arrowBottom: PT.string.isRequired,
   }).isRequired,
 };
 
@@ -52,7 +51,7 @@ function Wrapper({
   const createTooltip = () => {
     if (!refs.portal) {
       const p = document.createElement('div');
-      p.classList.add(theme.tooltip);
+      p.setAttribute('class', theme.tooltip);
       document.body.appendChild(p);
       refs.portal = p;
       setPortal(p);
@@ -81,7 +80,10 @@ function Wrapper({
         destroyTooltip();
       } else {
         /* TODO: Some refactoring may be good here. */
-        if (!refs.arrow) refs.arrow = portal.querySelector(`.${theme.arrow}`);
+        if (!refs.arrow) {
+          const classNames = theme.arrow.split(' ').filter((item) => !!item);
+          refs.arrow = portal.querySelector(`.${classNames.join('.')}`);
+        }
         const arrowRect = refs.arrow.getBoundingClientRect();
         const portalRect = portal.getBoundingClientRect();
         let x = refs.cursorPageX - portalRect.width / 2;
@@ -170,7 +172,12 @@ function Wrapper({
 
 const ThemedWrapper = themed(
   'WithTooltip',
-  ['tooltip', 'wrapper'],
+  [
+    'appearance',
+    'arrow',
+    'tooltip',
+    'wrapper',
+  ],
   defaultTheme,
 )(Wrapper);
 
