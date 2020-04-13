@@ -72,7 +72,7 @@ $ ./node_modules/.bin/react-utils-setup
   the specified aspect ratio regardless the width you set.
 - [`<Throbber>`](docs/throbber.md) &ndash; Simple activity indicator
   (three bouncing circles).
-- [`<Tooltip>`](docs/tooltip.md) &ndash; Tooltip component.
+- [`<WithTooltip>`](docs/WithTooltip.md) &ndash; Tooltip component.
 
 ### NodeJS Scripts
 - [`react-utils-build`](docs/react-utils-build.md) &ndash; The script for Babel,

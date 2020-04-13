@@ -15,7 +15,7 @@ import Modal, { BaseModal } from 'components/Modal';
 import NavLink from 'components/NavLink';
 import ScalableRect from 'components/ScalableRect';
 import Throbber from 'components/Throbber';
-import Tooltip from 'components/Tooltip';
+import WithTooltip from 'components/WithTooltip';
 import * as utils from 'utils';
 
 import { requireWeak } from 'utils/webpack';
@@ -38,9 +38,9 @@ export {
   Modal,
   PageLayout,
   ScalableRect,
-  Tooltip,
   Throbber,
   server,
+  WithTooltip,
 };
 
 export * from 'utils';
