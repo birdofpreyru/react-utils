@@ -133,7 +133,7 @@ function getPackageJson(packageName = '@dr.pogodin/react-utils') {
  */
 function install(library) {
   let name = library;
-  if (!name.includes('@')) name += '@latest';
+  if (!name.includes('@', 1)) name += '@latest';
   spawnSync('npm', ['install', '--save', name], { stdio: 'inherit' });
 }
 
