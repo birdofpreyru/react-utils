@@ -49,7 +49,6 @@ module.exports = function configFactory(ops) {
       'react-helmet',
       /react-hot-loader/,
       'react-router-dom',
-      'react-tooltip',
       'shortid',
       '@dr.pogodin/react-utils',
       'url-parse',
