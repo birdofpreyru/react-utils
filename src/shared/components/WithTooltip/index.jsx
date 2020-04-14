@@ -1,169 +1,64 @@
 /**
  * A wrapper component implementing tooltip.
  */
-/* global document, window */
+/* global window */
 
 import React from 'react';
-import ReactDom from 'react-dom';
 
 import { hooks, PT, themed } from 'utils';
 
+import Tooltip from './Tooltip';
+
 import defaultTheme from './default-theme.scss';
-
-function Tooltip({
-  children,
-  theme,
-}) {
-  return (
-    <>
-      {children}
-      <div className={theme.arrow} />
-    </>
-  );
-}
-
-Tooltip.propTypes = {
-  children: PT.node,
-  theme: PT.shape({
-    arrow: PT.string.isRequired,
-  }).isRequired,
-};
-
-Tooltip.defaultProps = {
-  children: null,
-};
 
 function Wrapper({
   children,
   tip,
   theme,
 }) {
-  const { current: refs } = hooks.useRef({
-    arrow: null,
-    cursorX: 0,
-    cursorY: 0,
-    portal: null,
-    wrapper: null,
-  });
+  const tooltipRef = hooks.useRef();
+  const wrapperRef = hooks.useRef();
+  const [showTooltip, setShowTooltip] = hooks.useState(false);
 
-  const [portal, setPortal] = hooks.useState(null);
-
-  const createTooltip = () => {
-    if (!refs.portal) {
-      const p = document.createElement('div');
-      p.setAttribute('class', theme.tooltip);
-      document.body.appendChild(p);
-      refs.portal = p;
-      setPortal(p);
-    }
-  };
-
-  const destroyTooltip = () => {
-    if (refs.portal) {
-      document.body.removeChild(refs.portal);
-      refs.portal = null;
-      refs.arrow = null;
-      setPortal(null);
-    }
-  };
-
-  const updatePortalPosition = () => {
-    if (!portal) createTooltip();
+  const updatePortalPosition = (cursorX, cursorY) => {
+    if (!showTooltip) setShowTooltip(true);
     else {
-      const wrapperRect = refs.wrapper.getBoundingClientRect();
+      const wrapperRect = wrapperRef.current.getBoundingClientRect();
       if (
-        refs.cursorClientX < wrapperRect.left
-        || refs.cursorClientX > wrapperRect.right
-        || refs.cursorClientY < wrapperRect.top
-        || refs.cursorClientY > wrapperRect.bottom
+        cursorX < wrapperRect.left
+        || cursorX > wrapperRect.right
+        || cursorY < wrapperRect.top
+        || cursorY > wrapperRect.bottom
       ) {
-        destroyTooltip();
-      } else {
-        /* TODO: Some refactoring may be good here. */
-        if (!refs.arrow) {
-          const classNames = theme.arrow.split(' ').filter((item) => !!item);
-          refs.arrow = portal.querySelector(`.${classNames.join('.')}`);
-        }
-        const arrowRect = refs.arrow.getBoundingClientRect();
-        const portalRect = portal.getBoundingClientRect();
-        let x = refs.cursorPageX - portalRect.width / 2;
-        let y = refs.cursorPageY - portalRect.height - arrowRect.height / 1.5;
-
-        let arrowStyle;
-        let arrowX = portalRect.width / 2 - arrowRect.width / 2;
-
-        if (x < window.pageXOffset) {
-          x = window.pageXOffset + 6;
-          arrowX = refs.cursorClientX - portalRect.left - arrowRect.width / 2;
-        } else if (
-          x + portalRect.width > window.pageXOffset + document.body.clientWidth
-        ) {
-          x = window.pageXOffset + document.body.clientWidth - portalRect.width - 6;
-          arrowX = refs.cursorClientX - portalRect.left - arrowRect.width / 2;
-        }
-        if (arrowX > portalRect.width - arrowRect.width - 3) {
-          arrowX = portalRect.width - arrowRect.width - 3;
-        } else if (arrowX < 3) {
-          arrowX = 3;
-        }
-
-        if (y < window.pageYOffset) {
-          y += 2 * portalRect.height + arrowRect.height;
-          arrowStyle = [
-            'border-top-color:transparent',
-            'border-left-color:transparent',
-            'border-right-color:transparent',
-            `left:${arrowX}px`,
-            `top:${-arrowRect.height}px`,
-          ].join(';');
-        } else {
-          arrowStyle = [
-            'border-bottom-color:transparent',
-            'border-left-color:transparent',
-            'border-right-color:transparent',
-            `left:${arrowX}px`,
-          ].join(';');
-        }
-
-        refs.arrow.setAttribute('style', arrowStyle);
-        portal.setAttribute('style', `left:${x}px;top:${y}px`);
+        setShowTooltip(false);
+      } else if (tooltipRef.current) {
+        tooltipRef.current.pointTo(
+          cursorX + window.pageXOffset,
+          cursorY + window.pageYOffset,
+        );
       }
     }
   };
 
   hooks.useEffect(() => {
-    const listener = () => {
-      if (refs.portal) destroyTooltip();
-    };
+    const listener = () => showTooltip && setShowTooltip(false);
     window.addEventListener('scroll', listener);
     return () => {
       window.removeEventListener('scroll', listener);
     };
   }, []);
 
-  hooks.useEffect(() => {
-    if (portal) updatePortalPosition();
-  }, [portal]);
-
   return (
     <div
       className={theme.wrapper}
-      onMouseLeave={destroyTooltip}
-      onMouseMove={(e) => {
-        refs.cursorClientX = e.clientX;
-        refs.cursorClientY = e.clientY;
-        refs.cursorPageX = e.pageX;
-        refs.cursorPageY = e.pageY;
-        updatePortalPosition();
-      }}
-      ref={(node) => {
-        refs.wrapper = node;
-      }}
+      onMouseLeave={() => setShowTooltip(false)}
+      onMouseMove={(e) => updatePortalPosition(e.clientX, e.clientY)}
+      ref={wrapperRef}
     >
       {
-        portal ? ReactDom.createPortal((
-          <Tooltip theme={theme}>{tip}</Tooltip>
-        ), portal) : null
+        showTooltip ? (
+          <Tooltip ref={tooltipRef} theme={theme}>{tip}</Tooltip>
+        ) : null
       }
       {children}
     </div>
@@ -175,7 +70,8 @@ const ThemedWrapper = themed(
   [
     'appearance',
     'arrow',
-    'tooltip',
+    'container',
+    'content',
     'wrapper',
   ],
   defaultTheme,
