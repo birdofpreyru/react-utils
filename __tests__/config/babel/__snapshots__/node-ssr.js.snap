@@ -47,7 +47,7 @@ Object {
       },
     ],
     Array [
-      "css-modules-transform",
+      "@dr.pogodin/css-modules-transform",
       Object {
         "extensions": Array [
           ".css",
@@ -156,7 +156,7 @@ Object {
       },
     ],
     Array [
-      "css-modules-transform",
+      "@dr.pogodin/css-modules-transform",
       Object {
         "extensions": Array [
           ".css",
@@ -221,7 +221,7 @@ Object {
       },
     ],
     Array [
-      "css-modules-transform",
+      "@dr.pogodin/css-modules-transform",
       Object {
         "extensions": Array [
           ".css",
@@ -330,7 +330,7 @@ Object {
       },
     ],
     Array [
-      "css-modules-transform",
+      "@dr.pogodin/css-modules-transform",
       Object {
         "extensions": Array [
           ".css",
