@@ -41,12 +41,13 @@ function Wrapper({
   };
 
   hooks.useEffect(() => {
-    const listener = () => showTooltip && setShowTooltip(false);
-    window.addEventListener('scroll', listener);
-    return () => {
-      window.removeEventListener('scroll', listener);
-    };
-  }, []);
+    if (showTooltip) {
+      const listener = () => setShowTooltip(false);
+      window.addEventListener('scroll', listener);
+      return () => window.removeEventListener('scroll', listener);
+    }
+    return undefined;
+  }, [showTooltip]);
 
   return (
     <div

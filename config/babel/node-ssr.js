@@ -59,7 +59,10 @@ function addStyling(config, env) {
       break;
     default:
   }
-  config.plugins.push(['css-modules-transform', cssModulesTransformOps]);
+  config.plugins.push([
+    '@dr.pogodin/css-modules-transform',
+    cssModulesTransformOps,
+  ]);
   return config;
 }
 
