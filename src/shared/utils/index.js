@@ -8,7 +8,7 @@ import themed, {
   ThemeProvider,
 } from '@dr.pogodin/react-themes';
 
-import * as api from 'axios';
+import api from 'axios';
 import * as PT from 'prop-types';
 
 import config from './config';
