@@ -11,7 +11,10 @@ const getWebpackBabelConfig = require('./webpack');
  */
 function newBase(babel, options = {}) {
   const baseOps = _.pick(options, ['noStyling']);
-  const config = getWebpackBabelConfig(babel, baseOps);
+  const config = getWebpackBabelConfig(
+    babel,
+    { ...baseOps, targets: { node: '12' } },
+  );
 
   const baseAssetsOutputPath = options.baseAssetsOutputPath || '';
   config.plugins.push(

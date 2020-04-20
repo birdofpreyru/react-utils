@@ -21,7 +21,12 @@ Object {
     "react-hot-loader/babel",
   ],
   "presets": Array [
-    "@babel/env",
+    Array [
+      "@babel/env",
+      Object {
+        "targets": "> 0.25%",
+      },
+    ],
     "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
@@ -60,7 +65,12 @@ Object {
     "react-hot-loader/babel",
   ],
   "presets": Array [
-    "@babel/env",
+    Array [
+      "@babel/env",
+      Object {
+        "targets": "> 0.25%",
+      },
+    ],
     "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
@@ -87,7 +97,12 @@ Object {
     "@babel/transform-runtime",
   ],
   "presets": Array [
-    "@babel/env",
+    Array [
+      "@babel/env",
+      Object {
+        "targets": "> 0.25%",
+      },
+    ],
     "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
@@ -125,7 +140,12 @@ Object {
     ],
   ],
   "presets": Array [
-    "@babel/env",
+    Array [
+      "@babel/env",
+      Object {
+        "targets": "> 0.25%",
+      },
+    ],
     "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],

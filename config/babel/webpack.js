@@ -1,5 +1,7 @@
 /* Babel preset for the Webpack build. */
 
+const _ = require('lodash');
+
 /**
  * Supported Babel environments.
  */
@@ -11,12 +13,15 @@ const ENVIRONMENTS = {
 
 /**
  * Creates a new base config.
+ * @param {object} [options] Optional Base config options.
+ * @param {string|string[]|object} [options.targets] Optional. Babel/env preset
+ *  targets.
  * @return {object} Configuration.
  */
-function newBaseConfig() {
+function newBaseConfig(options = {}) {
   return {
     presets: [
-      '@babel/env',
+      ['@babel/env', { targets: options.targets || '> 0.25%' }],
       '@babel/react',
       '@dr.pogodin/babel-preset-svgr',
     ],
@@ -66,10 +71,15 @@ function addStyling(config, env) {
  * @param {object} [ops] Optional. Preset options.
  * @param {boolean} [ops.noStyling] Optional. If set, the preset won't include
  *  any components for (S)CSS processing.
+ * @param {string|string[]|object} [ops.targets] Optional. Targets setting for
+ *  the "babel/env" preset.
  */
 function getPreset(babel, ops = {}) {
   const env = babel.env();
-  const res = newBaseConfig();
+
+  const baseOps = _.pick(ops, ['targets']);
+  const res = newBaseConfig(baseOps);
+
   if (!ops.noStyling) addStyling(res, env);
   if (env === ENVIRONMENTS.DEV) res.plugins.push('react-hot-loader/babel');
   return res;
