@@ -58,7 +58,14 @@ Object {
     ],
   ],
   "presets": Array [
-    "@babel/env",
+    Array [
+      "@babel/env",
+      Object {
+        "targets": Object {
+          "node": "12",
+        },
+      },
+    ],
     "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
@@ -102,7 +109,14 @@ Object {
     ],
   ],
   "presets": Array [
-    "@babel/env",
+    Array [
+      "@babel/env",
+      Object {
+        "targets": Object {
+          "node": "12",
+        },
+      },
+    ],
     "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
@@ -167,7 +181,14 @@ Object {
     ],
   ],
   "presets": Array [
-    "@babel/env",
+    Array [
+      "@babel/env",
+      Object {
+        "targets": Object {
+          "node": "12",
+        },
+      },
+    ],
     "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
@@ -232,7 +253,14 @@ Object {
     ],
   ],
   "presets": Array [
-    "@babel/env",
+    Array [
+      "@babel/env",
+      Object {
+        "targets": Object {
+          "node": "12",
+        },
+      },
+    ],
     "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
@@ -276,7 +304,14 @@ Object {
     ],
   ],
   "presets": Array [
-    "@babel/env",
+    Array [
+      "@babel/env",
+      Object {
+        "targets": Object {
+          "node": "12",
+        },
+      },
+    ],
     "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
@@ -341,7 +376,14 @@ Object {
     ],
   ],
   "presets": Array [
-    "@babel/env",
+    Array [
+      "@babel/env",
+      Object {
+        "targets": Object {
+          "node": "12",
+        },
+      },
+    ],
     "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
