@@ -21,7 +21,7 @@ const ENVIRONMENTS = {
 function newBaseConfig(options = {}) {
   return {
     presets: [
-      ['@babel/env', { targets: options.targets || '> 0.25%' }],
+      ['@babel/env', { targets: options.targets || 'defaults' }],
       '@babel/react',
       '@dr.pogodin/babel-preset-svgr',
     ],
