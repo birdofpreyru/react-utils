@@ -1,4 +1,4 @@
-const { isomorphy } = require('./index');
+const isomorphy = require('./index').isomorphy;
 
 if (isomorphy.isClientSide()) {
   /* eslint-disable global-require */
