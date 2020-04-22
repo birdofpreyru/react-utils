@@ -122,7 +122,7 @@
     "url": "git+https://github.com/birdofpreyru/react-utils.git"
   },
   "scripts": {
-    "build": "rimraf build && bin/build -t development --lib && bin/build -t production --lib",
+    "build": "rimraf build && node bin/build -t development --lib && node bin/build -t production --lib",
     "jest": "NODE_CONFIG_ENV=test jest --no-cache --config config/jest/default.js",
     "lint": "npm run lint:js && npm run lint:scss",
     "lint:js": "eslint --ext .js,.jsx . && eslint bin/*",
