@@ -106,8 +106,6 @@ module.exports = function configFactory(ops) {
   }
 
   entry.polyfills = _.union(entry.polyfills, [
-    'core-js/stable',
-    'regenerator-runtime/runtime',
     'nodelist-foreach-polyfill',
   ]);
 

@@ -61,9 +61,7 @@ Object {
     Array [
       "@babel/env",
       Object {
-        "targets": Object {
-          "node": "12",
-        },
+        "targets": "current node",
       },
     ],
     "@babel/react",
@@ -112,9 +110,7 @@ Object {
     Array [
       "@babel/env",
       Object {
-        "targets": Object {
-          "node": "12",
-        },
+        "targets": "current node",
       },
     ],
     "@babel/react",
@@ -184,9 +180,7 @@ Object {
     Array [
       "@babel/env",
       Object {
-        "targets": Object {
-          "node": "12",
-        },
+        "targets": "current node",
       },
     ],
     "@babel/react",
@@ -256,9 +250,7 @@ Object {
     Array [
       "@babel/env",
       Object {
-        "targets": Object {
-          "node": "12",
-        },
+        "targets": "current node",
       },
     ],
     "@babel/react",
@@ -307,9 +299,7 @@ Object {
     Array [
       "@babel/env",
       Object {
-        "targets": Object {
-          "node": "12",
-        },
+        "targets": "current node",
       },
     ],
     "@babel/react",
@@ -379,9 +369,7 @@ Object {
     Array [
       "@babel/env",
       Object {
-        "targets": Object {
-          "node": "12",
-        },
+        "targets": "current node",
       },
     ],
     "@babel/react",

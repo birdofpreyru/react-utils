@@ -1,6 +1,6 @@
-const { isomorphy } = require('./index');
+const lib = require('./index');
 
-if (isomorphy.isClientSide()) {
+if (lib.isomorphy.isClientSide()) {
   /* eslint-disable global-require */
   require('./build/development/style.css');
   /* eslint-enable global-require */
