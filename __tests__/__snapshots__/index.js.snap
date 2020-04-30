@@ -2,7 +2,6 @@
 
 exports[`Export at client side 1`] = `
 Object {
-  "Avatar": [Function],
   "BaseButton": [Function],
   "BaseModal": [Function],
   "Button": Object {

@@ -4,7 +4,6 @@ import 'styles/global.scss';
 
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
 
-import Avatar from 'components/Avatar';
 import Button, { BaseButton } from 'components/Button';
 import Checkbox from 'components/Checkbox';
 import CodeSplit from 'components/CodeSplit';
@@ -28,7 +27,6 @@ const serverUrl = module.webpackPolyfill ? './server'
 const server = utils.isomorphy.isServerSide() ? requireWeak(serverUrl) : null;
 
 export {
-  Avatar,
   BaseButton,
   BaseModal,
   Button,

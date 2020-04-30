@@ -54,7 +54,6 @@ $ ./node_modules/.bin/react-utils-setup
 - [Webpack](docs/webpack-config.md)
 
 ### Components
-- [`<Avatar>`](docs/avatar.md) &ndash; The standard component for user avatars.
 - [`<Button>`](docs/button.md) &ndash; Handles buttons and button-like links
   (components that look like regular buttons, but behave as links) in the same
   uniform manner.
