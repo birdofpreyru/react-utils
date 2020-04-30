@@ -6,8 +6,7 @@ import _ from 'lodash';
 import mockdate from 'mockdate';
 import pretty from 'pretty';
 
-import { isClientSide, isServerSide } from 'utils/isomorphy';
-import { act } from 'utils/jest';
+import { act, mockClientSide, unmockClientSide } from 'utils/jest';
 
 let factory;
 let Helmet;
@@ -37,7 +36,8 @@ const TEST_WEBPACK_CONFIG = {
  * @param {Number} [maxSsrRounds]
  */
 async function renderServerSide(Scene, maxSsrRounds) {
-  expect(isServerSide()).toBe(true);
+  const { IS_SERVER_SIDE } = require('utils/isomorphy');
+  expect(IS_SERVER_SIDE).toBe(true);
   const renderer = factory(
     _.cloneDeep(TEST_WEBPACK_CONFIG),
     {
@@ -77,7 +77,9 @@ afterAll(() => {
 /**
  * Resets React environment.
  */
-function resetModules() {
+function resetModules(clientSide) {
+  if (clientSide) mockClientSide();
+  else unmockClientSide();
   jest.resetModules();
   factory = require('server/renderer').default;
   ({ Helmet } = require('react-helmet'));
@@ -92,7 +94,8 @@ beforeEach(async () => {
 });
 
 test('Server-side rendring', async () => {
-  expect(isServerSide()).toBe(true);
+  const { IS_SERVER_SIDE } = require('utils/isomorphy');
+  expect(IS_SERVER_SIDE).toBe(true);
   let markup = await renderServerSide(SampleCodeSplit, 1);
   expect(pretty(markup)).toMatchSnapshot();
   markup = renderServerSide(SampleCodeSplit, 3);
@@ -102,7 +105,8 @@ test('Server-side rendring', async () => {
 });
 
 test('Client-side rendering', async () => {
-  expect(isServerSide()).toBe(true);
+  const { IS_SERVER_SIDE } = require('utils/isomorphy');
+  expect(IS_SERVER_SIDE).toBe(true);
   let serverMarkup = renderServerSide(SampleCodeSplit, 3);
   await jest.runAllTimers();
   serverMarkup = await serverMarkup;
@@ -114,8 +118,9 @@ test('Client-side rendering', async () => {
   expect(ssrBody).toMatchSnapshot();
   window.TRU_KEEP_INJ_SCRIPT = true;
   require('client/init');
-  resetModules();
-  expect(isClientSide()).toBe(true);
+  resetModules(true);
+  const { IS_CLIENT_SIDE } = require('utils/isomorphy');
+  expect(IS_CLIENT_SIDE).toBe(true);
   let Launch = require('client').default;
   await act(() => Launch({ getApplication: () => SampleCodeSplit }));
   let head = pretty(document.head.innerHTML);
@@ -125,7 +130,7 @@ test('Client-side rendering', async () => {
 
   /* This tests that in the real render the data injection script
    * is auto-removed from the document during the injection. */
-  resetModules();
+  resetModules(true);
   document.write(serverMarkup);
   document.close();
   delete window.TRU_KEEP_INJ_SCRIPT;
