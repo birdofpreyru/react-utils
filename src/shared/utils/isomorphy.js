@@ -4,12 +4,17 @@
 
 /* global window */
 
+export const IS_CLIENT_SIDE = typeof process === 'undefined'
+  || !process.versions || !process.versions.node;
+
+export const IS_SERVER_SIDE = !IS_CLIENT_SIDE;
+
 /**
  * Returns `true` when executed at the front end side; `false` otherwise.
  * @return {boolean}
  */
 export function isClientSide() {
-  return typeof window !== 'undefined' && Boolean(window.TRU_FRONT_END);
+  return IS_CLIENT_SIDE;
 }
 
 /**
@@ -17,7 +22,7 @@ export function isClientSide() {
  * @return {boolean}
  */
 export function isServerSide() {
-  return typeof window === 'undefined' || !window.TRU_FRONT_END;
+  return IS_SERVER_SIDE;
 }
 
 /**

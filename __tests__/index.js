@@ -1,13 +1,15 @@
 import mockdate from 'mockdate';
+import { mockClientSide, unmockClientSide } from 'utils/jest';
 
 mockdate.set('2020-04-19Z');
 
-beforeEach(() => jest.resetModules());
+beforeEach(() => {
+  unmockClientSide();
+  jest.resetModules();
+});
 
-afterEach(() => delete window.TRU_FRONT_END);
-
-test.only('Export at client side', () => {
-  window.TRU_FRONT_END = true;
+test('Export at client side', () => {
+  mockClientSide();
   const lib = require('../src');
   expect(lib).toMatchSnapshot();
   expect({ ...lib._ }).toMatchSnapshot();

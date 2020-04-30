@@ -1,10 +1,10 @@
 /* eslint-env browser */
 
 import _ from 'lodash';
-import config from 'config';
-import { isClientSide, isServerSide } from 'utils/isomorphy';
+import { mockClientSide, unmockClientSide } from 'utils/jest';
 
 test('Base test', () => {
+  const config = require('config');
   expect(config).toMatchSnapshot();
 });
 
@@ -18,21 +18,24 @@ describe('Isomorphy behavior tests', () => {
   };
 
   beforeEach(() => {
+    unmockClientSide();
     jest.resetModules();
     jest.setMock('config', _.clone(SERVER_SIDE_CONFIG));
     window.CONFIG = _.clone(CLIENT_SIDE_CONFIG);
   });
 
-  afterEach(() => delete window.TRU_FRONT_END);
+  afterEach(() => unmockClientSide());
 
   test('Serves injected config at the client side', () => {
-    window.TRU_FRONT_END = true;
-    expect(isClientSide()).toBe(true);
+    mockClientSide();
+    const { IS_CLIENT_SIDE } = require('utils/isomorphy');
+    expect(IS_CLIENT_SIDE).toBe(true);
     expect(require('utils/config').default).toEqual(CLIENT_SIDE_CONFIG);
   });
 
   test('Serves node-config at the server side', () => {
-    expect(isServerSide()).toBe(true);
+    const { IS_SERVER_SIDE } = require('utils/isomorphy');
+    expect(IS_SERVER_SIDE).toBe(true);
     expect(require('utils/config').default).toEqual(SERVER_SIDE_CONFIG);
   });
 });

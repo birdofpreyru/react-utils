@@ -10,13 +10,15 @@ provide different functionality implementation for client and server.
 This module provides necessary functions.
 
 - [`isomorphy` reference](#reference)
+  - [`.IS_CLIENT_SIDE: boolean`](#is_client_side)
+  - [`.IS_SERVER_SIDE: boolean`](#is_server_side)
   - [`.assertClientSide()`](#assertClientSide)
   - [`.assertServerSide()`](#assertServerSide)
   - [`.buildTimestamp(): string`](#buildTimestamp)
-  - [`.isClientSide(): boolean`](#isClientSide)
   - [`.isDevBuild(): boolean`](#isDevBuild)
   - [`.isProdBuild(): boolean`](#isProdBuild)
-  - [`.isServerSide(): boolean`](#isServerSide)
+  - **Deprecated** [`.isClientSide(): boolean`](#isClientSide)
+  - **Deprecated** [`.isServerSide(): boolean`](#isServerSide)
 
 **Important**
 
@@ -36,6 +38,12 @@ This module provides necessary functions.
 
 ### Reference
 
+- <a name="is_client_side"></a>
+  `.IS_CLIENT_SIDE: boolean` &ndash; Equals `true` outside NodeJS environment.
+
+- <a name="is_server_side"></a>
+  `.IS_SERVER_SIDE: boolean` &ndash; Equals `true` inside NodeJS environment.
+
 - <a name="assertClientSide"></a>
   `.assertClientSide()` &ndash; Throws error if called outside the client-side
   environment.
@@ -49,10 +57,6 @@ This module provides necessary functions.
   bundle, in form of ISO date/time string. At the server-side it will be the
   timestamp of bundle being served by the server.
 
-- <a name="isClientSide"></a>
-  `.isClientSide(): boolean` &ndash; Returns `true` if executed at the client
-  side (in browser), `false` otherwise.
-
 - <a name="isDevBuild"><a/>
   `.isDevBuild(): boolean` &ndash; Returns `true` if development version of
     the code is running, `false` otherwise.
@@ -61,6 +65,10 @@ This module provides necessary functions.
   `.isProdBuild(): boolean` &ndash; Returns `true` if the production version
     of code is running, `false` otherwise.
 
+- <a name="isClientSide"></a>
+  **Deprecated** `.isClientSide(): boolean` &ndash; Returns
+  [`.IS_CLIENT_SIDE: boolean`](#is_client_side) value.
+
 - <a name="isServerSide"></a>
-  `.isServerSide(): boolean` &ndash; Returns `true` if executed at
-  the server side (NodeJS), `false` otherwise.
+  **Deprecated** `.isServerSide(): boolean` &ndash; Returns
+  [`.IS_SERVER_SIDE: boolean`](#is_server_side) value.

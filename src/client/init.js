@@ -12,8 +12,6 @@ if (typeof BUILD_INFO !== 'undefined') {
   window.TRU_BUILD_INFO = BUILD_INFO;
 }
 
-window.TRU_FRONT_END = true;
-
 /* Removes data injection script out of the document.
  * The if block is here for test purposes. */
 if (!window.TRU_KEEP_INJ_SCRIPT) {

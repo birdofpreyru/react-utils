@@ -27,6 +27,19 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 
 export { act } from 'react-dom/test-utils';
 
+const originalProcessVersions = process.versions;
+
+export function mockClientSide() {
+  Object.defineProperty(process, 'versions', { value: null });
+}
+
+export function unmockClientSide() {
+  Object.defineProperty(process, 'versions', {
+    value: originalProcessVersions,
+    writable: false,
+  });
+}
+
 /**
  * Generates a mock UUID.
  * @param {Number} seed
@@ -36,7 +49,6 @@ export function getMockUuid(seed = 0) {
   const x = seed.toString(16).padStart(32, '0');
   return `${x.slice(0, 8)}-${x.slice(8, 12)}-${x.slice(12, 16)}-${x.slice(16, 20)}-${x.slice(20)}`;
 }
-
 
 /**
  * Advances mock timers, and mock date by the specified time.

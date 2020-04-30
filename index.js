@@ -6,9 +6,9 @@
  */
 /* eslint-disable global-require, import/no-dynamic-require,
   import/no-unresolved, no-eval */
-/* global window */
 
-const IS_NODE = typeof window === 'undefined' || !window.TRU_FRONT_END;
+const IS_NODE = typeof process !== 'undefined'
+  && process.versions && process.versions.node;
 
 /* Note: The check must be placed directly inside if(..) so that webpack
  * is able to drop out unnecessary branch during the optimization. */

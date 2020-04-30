@@ -1,0 +1,22 @@
+*,
+.context,
+.ad.hoc {
+  &.container {
+    align-items: center;
+    display: inline-flex;
+    margin: 0.3em 0.3em 0.3em 1.5em;
+  }
+
+  &.input {
+    border: 1px solid gray;
+    border-radius: 0.3em;
+    cursor: text;
+    font-size: 1em;
+    min-height: 2em;
+    padding: 0.3em;
+  }
+
+  &.label {
+    margin-right: 0.6em;
+  }
+}

@@ -16,6 +16,10 @@ This module provides the following functions:
   [`findRenderedDOMComponentWithClass(..)`](https://reactjs.org/docs/test-utils.html#findrendereddomcomponentwithclass)
   from `react-dom/test-utils`;
 
+- `.mockClientSide()` &ndash; Mocks the client side for `isomorphy` checks.
+
+- `.unmockClientSide()` &ndash; Unmocks the client side for `isomorphy` checks.
+
 - **`render(component)`** &mdash; Renders provided ReactJS component into
   JSON representation of the component tree, using
   [`react-test-renderer`](https://www.npmjs.com/package/react-test-renderer),
