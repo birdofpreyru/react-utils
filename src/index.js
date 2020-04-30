@@ -6,8 +6,11 @@ import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
 
 import Avatar from 'components/Avatar';
 import Button, { BaseButton } from 'components/Button';
+import Checkbox from 'components/Checkbox';
 import CodeSplit from 'components/CodeSplit';
 import client from 'client';
+import Dropdown from 'components/Dropdown';
+import Input from 'components/Input';
 import Link from 'components/Link';
 import PageLayout from 'components/PageLayout';
 import MetaTags from 'components/MetaTags';
@@ -29,9 +32,12 @@ export {
   BaseButton,
   BaseModal,
   Button,
+  Checkbox,
   client,
   CodeSplit,
+  Dropdown,
   GlobalStateProvider,
+  Input,
   Link,
   NavLink,
   MetaTags,

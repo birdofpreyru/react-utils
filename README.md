@@ -58,9 +58,12 @@ $ ./node_modules/.bin/react-utils-setup
 - [`<Button>`](docs/button.md) &ndash; Handles buttons and button-like links
   (components that look like regular buttons, but behave as links) in the same
   uniform manner.
+- [`<Checkbox>`](docs/checkbox.md) &ndash; Themed checkbox component.
 - [`<CodeSplit>`](docs/code-split.md) &ndash; Code splitting component.
+- [`<Dropdown>`](docs/dropdown.md) &ndash; Themed dropdown component.
 - [`<GlobalStateProvider>`](docs/global-state-provider.md) &ndash; Alias
   for `<GlobalStateProvider>` from `@dr.pogodin/react-global-state`.
+- [`<Input>`](docs/input.md) &ndash; Themed text input component.
 - [`<Link>` and `<NavLink>`](docs/link-and-navlink.md) &ndash; Auxiliary
   wrappers around the React Router's components of the same names. Allow
   to handle external and internal links in the same uniform manner.

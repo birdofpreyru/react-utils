@@ -1,0 +1,44 @@
+@import "~styles/mixins";
+
+*,
+.context,
+.ad.hoc {
+  &.container {
+    align-items: center;
+    display: inline-flex;
+    margin: 0.3em 0.3em 0.3em 1.5em;
+    position: relative;
+
+    &::after {
+      background-image: linear-gradient(to top, lightgray, white 50%, white);
+      border: 1px solid gray;
+      border-radius: 0 0.3em 0.3em 0;
+      content: '▼';
+      cursor: pointer;
+      line-height: 1.9em;
+      padding: 0 0.6em;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  &.label {
+    margin-right: 0.6em;
+  }
+
+  &.option {
+    /* Empty style */
+  }
+
+  &.select {
+    appearance: none;
+    background: white;
+    border: 1px solid gray;
+    border-radius: 0.3em;
+    cursor: pointer;
+    font-size: 1em;
+    min-height: 2em;
+    padding: 0.3em 3.3em 0.3em 1.2em;
+  }
+}
