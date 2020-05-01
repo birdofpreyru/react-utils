@@ -16,20 +16,22 @@ export default function ButtonDemo() {
   );
 }
 ```
-`<Button />` handles buttons, and button-like links (elements which look like
+`<Button>` handles buttons, and button-like links (elements which look like
 buttons, but behave as links) in the same uniform manner.
 It is [themed](react-themes.md) component, which look can be altered via
 _ad hoc_ and context styles.
 
-Under the hood, a `<Button />` instance is rendered as:
-1.  `<div />` when the button is disabled. It helps to ensure exactly
+Under the hood, a `<Button>` instance is rendered as:
+1.  `<div>` when the button is disabled. It helps to ensure exactly
     the same style of disabled buttons and button-like links;
-2.  [`<Link />`](link-and-navlink.md) when `to` property is set.
+2.  [`<Link>`](link-and-navlink.md) when `to` property is set.
     This takes care about internal and external links.
-3.  `<button />` element, otherwise. `<Link />` component could play the button
-    role instead, but rendering true buttons is more efficient in this case.
+3.  `<div>` element, otherwise. `<Link>` component could also play the button
+    role, but is more efficient to use `<div>` in this case.
 
-- `<Button />` &ndash; Themed button. The context style is picked up from
+### Reference
+
+- `<Button>` &ndash; Themed button. The context style is picked up from
   the `Button` context theme.
 
   **Children**
@@ -44,10 +46,10 @@ Under the hood, a `<Button />` instance is rendered as:
   - `[disabled]` (_Boolean_) &ndash; Optional. Set `true` to disable the button.
 
   - `[enforceA]` (_Boolean_) &ndash; Optional. When the button is rendered
-    as `<Link />`, this prop enforces it to be rendered as a simple `<a />`
+    as `<Link>`, this prop enforces it to be rendered as a simple `<a>`
     element (external link), rather than React router's internal link.
-    See [`<Link />` documentation](link-and-navlink.md) to learn when
-    links are rendered as `<a />` by default.
+    See [`<Link>` documentation](link-and-navlink.md) to learn when
+    links are rendered as `<a>` by default.
 
   - `[onClick]` (_Function_) &ndash; Optional. Click event handler.
 
@@ -57,16 +59,9 @@ Under the hood, a `<Button />` instance is rendered as:
     the new tab.
 
   - `[replace]` (_Boolean_) &ndash; Optional. When the button is rendered as
-    `<Link />`, and the target URL is internal, this property tells that
+    `<Link>`, and the target URL is internal, this property tells that
     the new route should replace the last record in the browser's history,
     rather than to be pushed as a new entry into the history stack.
-
-  - `[size]` (_String_) &ndash; Optional. Button size. If specified, and
-    `theme[size]` is defined, `theme[size]` class is added to the root element
-    of the button. It is supposed to control button size, and although any
-    values can be used, it is recommended to stick with `xs`, `sm`, `md`, `lg`,
-    and `xl` size labels, with `md` size being the default, when no `size`
-    property is set.
 
   - `[theme]` (_Object_) &ndash; Optional mapping of CSS classes to add
     to different button pieces.
@@ -74,25 +69,17 @@ Under the hood, a `<Button />` instance is rendered as:
     - `[theme.button]` &ndash; To the root button element in all cases.
     - `[theme.disabled]` &ndash; To the root button element, in disabled state.
     - `[theme.link]` &ndash; To the root button element, if button is rendered
-      as `<Link />`.
-    - `[theme.regular]` &ndash; To the root button element, if button is
-      rendered as `<button />`.
-    - Additional classes to handle different button sizes.
-      The Recommended names are `theme.xs`, `theme.sm`, `theme.md`, `theme.lg`,
-      `theme.xl`.
+      as `<Link>`.
   
   - `[to]` (_Object_ or _String_) &ndash; Optional. If specified, the button
-    will be rendered as `<Link />` (if not disabled), and it will point to
+    will be rendered as `<Link>` (if not disabled), and it will point to
     the specified location or URL.
-
-  - `[type]` (_String_) &ndash; Optional. Button type. It will have effect
-    only when button is rendered as `<button />`.
 
   - [Other themed component properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties).
 
-- `<BaseButton />` &ndash; Non-themed button component. The `<Button />` itself
-  is a themed `<BaseButton />`. You can use it to create special buttons with
-  different default themes, e.g.
+- **Deprecated** `<BaseButton>` &ndash; Non-themed button component.
+  The `<Button>` itself is a themed `<BaseButton>`. You can use it to create
+  special buttons with different default themes, e.g.
 
   ```jsx
   import { BaseButton, themed } from '@dr.pogodin/react-utils';
@@ -100,5 +87,5 @@ Under the hood, a `<Button />` instance is rendered as:
 
   export DangerButton = themed('DangerButton', dangerButtonTheme)(BaseButton);
   ```
-  Apart of visual differences, resuling `<DangerButton />` will work exactly as
-  `<Button />`.
+  Apart of visual differences, resuling `<DangerButton>` will work exactly as
+  `<Button>`.

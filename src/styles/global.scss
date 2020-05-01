@@ -2,9 +2,8 @@
 
 @import "_global/reset";
 
-html,
 body {
-  text-rendering: geometricPrecision;
+  text-rendering: auto;
 }
 
 * {

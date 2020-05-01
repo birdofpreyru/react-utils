@@ -8,8 +8,6 @@ const testTheme = {
   button: 'BUTTON_CLASS',
   disabled: 'DISABLED_CLASS',
   link: 'LINK_CLASS',
-  regular: 'REGULAR_CLASS',
-  xl: 'XL_CLASS',
 };
 
 describe('Matches snapshots', () => {
@@ -39,7 +37,6 @@ describe('Matches snapshots', () => {
         disabled
         onClick={_.noop}
         theme={testTheme}
-        size="xl"
       >
         BUTTON
       </Button>
@@ -49,7 +46,6 @@ describe('Matches snapshots', () => {
         disabled
         onClick={_.noop}
         theme={_.omit(testTheme, 'disabled')}
-        size="xl"
       >
         BUTTON
       </Button>

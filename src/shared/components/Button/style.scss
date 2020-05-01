@@ -12,44 +12,25 @@
     align-items: center;
     background-image: linear-gradient(to top, lightgray, white 50%, white);
     border: solid 1px gray;
-    border-radius: 3px;
+    border-radius: 0.3em;
     color: inherit;
-    display: inline-flex;
+    cursor: pointer;
+    display: inline-block;
     font: inherit;
-    justify-content: center;
-    min-height: 36px;
-    margin: 6px;
-    padding: 6px 24px;
+    margin: 0.1em;
+    padding: 0.3em 1.2em;
     text-align: center;
     text-decoration: none;
-    vertical-align: middle;
-  }
 
-  /* Additional styling of disabled buttons. */
-  &.disabled {
-    cursor: not-allowed;
-    opacity: 0.33;
-  }
-
-  /* .link and .regular classes are applied only to active button-like links,
-   * and real buttons (rendered as <button> elements). */
-  &.link,
-  &.regular {
-    /* To prevent different styling of the button-like link once it has been
-    * visited. */
-    &:visited {
-      color: inherit;
+    &:hover {
+      border-color: gray;
+      cursor: pointer;
     }
 
     &:focus {
       box-shadow: 0 0 3px 1px lightblue;
       border-color: blue;
       outline: none;
-    }
-
-    &:hover {
-      border-color: gray;
-      cursor: pointer;
     }
 
     &.active,
@@ -60,28 +41,19 @@
     }
   }
 
-  /* Alternative button sizes. */
-  &.xs {
-    border-radius: 1px;
-    min-height: 24px;
-    padding: 1px 12px;
+  /* Additional styling of disabled buttons. */
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.33;
   }
 
-  &.sm {
-    border-radius: 1px;
-    min-height: 30px;
-    padding: 3px 18px;
-  }
-
-  &.lg {
-    border-radius: 3px;
-    min-height: 42px;
-    padding: 9px 30px;
-  }
-
-  &.xl {
-    border-radius: 6px;
-    min-height: 48px;
-    padding: 12px 36px;
+  /* .link and .regular classes are applied only to active button-like links,
+   * and real buttons (rendered as <button> elements). */
+  &.link {
+    /* To prevent different styling of the button-like link once it has been
+    * visited. */
+    &:visited {
+      color: inherit;
+    }
   }
 }
