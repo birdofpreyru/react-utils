@@ -16,7 +16,6 @@ exports[`Matches snapshots when active 1`] = `
       "context": "src-shared-components-Button-style___context___27VAmK",
       "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
       "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-      "link": "src-shared-components-Button-style___link___1z748N   LINK_CLASS",
     }
   }
 >
@@ -40,7 +39,6 @@ exports[`Matches snapshots when active 2`] = `
       "context": "src-shared-components-Button-style___context___27VAmK",
       "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
       "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-      "link": "src-shared-components-Button-style___link___1z748N   LINK_CLASS",
     }
   }
 >
@@ -64,7 +62,6 @@ exports[`Matches snapshots when disabled 1`] = `
       "context": "src-shared-components-Button-style___context___27VAmK",
       "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
       "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-      "link": "src-shared-components-Button-style___link___1z748N   LINK_CLASS",
     }
   }
 >
@@ -88,7 +85,6 @@ exports[`Matches snapshots when disabled 2`] = `
       "context": "src-shared-components-Button-style___context___27VAmK",
       "disabled": "src-shared-components-Button-style___disabled___3uMacK",
       "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-      "link": "src-shared-components-Button-style___link___1z748N   LINK_CLASS",
     }
   }
 >
@@ -111,7 +107,6 @@ exports[`Matches snapshots when rendered as link 1`] = `
       "context": "src-shared-components-Button-style___context___27VAmK",
       "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
       "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-      "link": "src-shared-components-Button-style___link___1z748N   LINK_CLASS",
     }
   }
   to="/SOME/TEST/URL"
@@ -135,7 +130,6 @@ exports[`Matches snapshots when rendered as link 2`] = `
       "context": "src-shared-components-Button-style___context___27VAmK",
       "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
       "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-      "link": "src-shared-components-Button-style___link___1z748N",
     }
   }
   to="/SOME/TEST/URL"

@@ -7,7 +7,6 @@ const testTheme = {
   active: 'ACTIVE_CLASS',
   button: 'BUTTON_CLASS',
   disabled: 'DISABLED_CLASS',
-  link: 'LINK_CLASS',
 };
 
 describe('Matches snapshots', () => {

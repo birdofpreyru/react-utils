@@ -68,8 +68,6 @@ Under the hood, a `<Button>` instance is rendered as:
 
     - `[theme.button]` &ndash; To the root button element in all cases.
     - `[theme.disabled]` &ndash; To the root button element, in disabled state.
-    - `[theme.link]` &ndash; To the root button element, if button is rendered
-      as `<Link>`.
   
   - `[to]` (_Object_ or _String_) &ndash; Optional. If specified, the button
     will be rendered as `<Link>` (if not disabled), and it will point to

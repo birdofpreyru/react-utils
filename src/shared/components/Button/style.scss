@@ -1,13 +1,10 @@
 /**
  * The default button theme.
- *
- * The comments in this file explain how to write a custom button theme.
  */
 
 *,
 .context,
 .ad.hoc {
-  /* Generic button of medium size. */
   &.button {
     align-items: center;
     background-image: linear-gradient(to top, lightgray, white 50%, white);
@@ -21,6 +18,10 @@
     padding: 0.3em 1.2em;
     text-align: center;
     text-decoration: none;
+
+    &:visited {
+      color: inherit;
+    }
 
     &:hover {
       border-color: gray;
@@ -45,15 +46,5 @@
   &.disabled {
     cursor: not-allowed;
     opacity: 0.33;
-  }
-
-  /* .link and .regular classes are applied only to active button-like links,
-   * and real buttons (rendered as <button> elements). */
-  &.link {
-    /* To prevent different styling of the button-like link once it has been
-    * visited. */
-    &:visited {
-      color: inherit;
-    }
   }
 }

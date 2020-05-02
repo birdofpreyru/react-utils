@@ -34,18 +34,8 @@ function BaseButton({
     );
   }
   if (to) {
-    if (theme.link) className += ` ${theme.link}`;
     return (
-      /* NOTE: This ESLint rule enforces us to use <a> and <button> properly
-       * in the situations where they are supposed to be used; it is correct
-       * from the document structure point of view, but it is not convenient
-       * from the developer point of view! The reason is that during active
-       * development / prototyping it is often necessary to replace a button
-       * by a link, and vice-versa, thus having a component that hides the
-       * visual and logic differences between button and links saves tons of
-       * developer time. Thus, we sacrifice this rule here in exchange for
-       * convenience and efficiency of development. */
-      <Link // eslint-disable-line jsx-a11y/anchor-is-valid
+      <Link
         className={className}
         enforceA={enforceA}
         onClick={onClick}
@@ -76,7 +66,6 @@ const ThemedButton = themed('Button', [
   'active',
   'button',
   'disabled',
-  'link',
 ], defaultTheme)(BaseButton);
 
 BaseButton.defaultProps = {
