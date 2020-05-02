@@ -11,6 +11,7 @@ const forge = require('node-forge');
 const fs = require('fs');
 const moment = require('moment');
 const path = require('path');
+const SM = require('sitemap');
 const { StatsWriterPlugin } = require('webpack-stats-plugin');
 const webpack = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
@@ -58,6 +59,10 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
  *  CSS and JS files will not have build timestamp appended to their names.
  *
  * @param {String} ops.publicPath Base URL for the output of the build assets.
+ *
+ * @param {String} [ops.sitemap] Optional. A path to JS module or JSON file,
+ *  which retuns a sitemap config or factory. If set, the sitemap will be build
+ *  and served.
  */
 module.exports = function configFactory(ops) {
   const o = _.defaults(_.clone(ops), {
@@ -65,6 +70,27 @@ module.exports = function configFactory(ops) {
     outputPath: 'build/web-public',
     publicPath: '',
   });
+
+  /* TODO: This works in practice, but being async and not awaited it is a bad
+   * pattern. */
+  if (o.sitemap) {
+    const sitemapUrl = path.resolve(o.context, o.sitemap);
+    /* eslint-disable global-require, import/no-dynamic-require */
+    let source = require(sitemapUrl);
+    if (_.isFunction(source)) source = source();
+    /* eslint-enable global-require, import/no-dynamic-require */
+    const sm = new SM.SitemapStream();
+    source.forEach((item) => sm.write(item));
+    sm.end();
+    SM.streamToPromise(sm).then((sitemap) => {
+      const outUrl = path.resolve(o.context, o.outputPath);
+      if (!fs.existsSync(outUrl)) fs.mkdirSync(outUrl);
+      fs.writeFileSync(
+        path.resolve(o.context, o.outputPath, 'sitemap.xml'),
+        sitemap,
+      );
+    });
+  }
 
   const now = moment();
 
