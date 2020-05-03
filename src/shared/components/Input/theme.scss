@@ -4,19 +4,24 @@
   &.container {
     align-items: center;
     display: inline-flex;
-    margin: 0.3em 0.3em 0.3em 1.5em;
+    margin: 0.1em;
   }
 
   &.input {
     border: 1px solid gray;
     border-radius: 0.3em;
     cursor: text;
-    font-size: 1em;
-    min-height: 2em;
-    padding: 0.3em;
+    font: inherit;
+    outline: none;
+    padding: 0.3em 0.3em calc(0.3em + 1px);
+
+    &:focus {
+      border-color: blue;
+      box-shadow: 0 0 3px 1px lightblue;
+    }
   }
 
   &.label {
-    margin-right: 0.6em;
+    margin: 0 0.6em 0 1.5em;
   }
 }
