@@ -1,5 +1,6 @@
 import React from 'react';
-import { PT, themed } from 'utils';
+
+import { _, PT, themed } from 'utils';
 
 import defaultTheme from './theme.scss';
 
@@ -13,8 +14,9 @@ function Dropdown({
 }) {
   const optionArray = [];
   for (let i = 0; i < options.length; ++i) {
-    const op = options[i];
+    let op = options[i];
     if (!filter || filter(op)) {
+      if (_.isString(op)) op = { value: op };
       optionArray.push((
         <option className={theme.option} key={op.value} value={op.value}>
           {op.name === undefined ? op.value : op.name }
@@ -32,11 +34,13 @@ function Dropdown({
       >
         {optionArray}
       </select>
+      <div className={theme.arrow}>▼</div>
     </div>
   );
 }
 
 const ThemedDropdown = themed('Dropdown', [
+  'arrow',
   'container',
   'label',
   'option',
@@ -47,10 +51,15 @@ Dropdown.propTypes = {
   filter: PT.func,
   label: PT.string,
   onChange: PT.func,
-  options: PT.arrayOf(PT.shape({
-    name: PT.node,
-    value: PT.string.isRequired,
-  }).isRequired),
+  options: PT.arrayOf(
+    PT.oneOfType([
+      PT.shape({
+        name: PT.node,
+        value: PT.string.isRequired,
+      }),
+      PT.string,
+    ]).isRequired,
+  ),
   theme: ThemedDropdown.themeType.isRequired,
   value: PT.string,
 };

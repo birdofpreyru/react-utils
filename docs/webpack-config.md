@@ -64,6 +64,12 @@ mutation of the config object.
       the build. Defaults to `build` folder inside the `context` path.
     - **`publicPath`** &mdash; *String* &mdash; Base URL for the output of
       the build assets;
+    - `sitemap?: string` &ndash; Optional. The path to JS or JSON config for
+      sitemap. It can be relative to the context, and can be a factory, which
+      returns the config. The config should be compatible with
+      [`sitemap`](https://www.npmjs.com/package/sitemap) library, and if
+      provided the Webpack config factory will use it to gererate `sitemap.xml`
+      file in the output folder, and then serve it from the app root.
     - **`workbox`** &ndash; *Boolean*|*Object* &ndash; Optional. If evaluates to
       a truly value, [Workbox's InjectManifest plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin#injectmanifest_plugin)
       is added to the array of Webpack plugins, to generate service worker for

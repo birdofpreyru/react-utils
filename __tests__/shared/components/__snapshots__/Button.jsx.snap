@@ -1,199 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Matches snapshots when active 1`] = `
-<BaseButton
-  active={true}
-  disabled={false}
-  enforceA={false}
+<div
+  className="src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS"
   onClick={[Function]}
-  onMouseDown={null}
-  openNewTab={false}
-  replace={false}
-  size={null}
-  theme={
-    Object {
-      "active": "src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS",
-      "ad": "src-shared-components-Button-style___ad___kh1k6A",
-      "button": "src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS",
-      "context": "src-shared-components-Button-style___context___27VAmK",
-      "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
-      "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-      "lg": "src-shared-components-Button-style___lg___30N2R_",
-      "link": "src-shared-components-Button-style___link___1z748N   LINK_CLASS",
-      "regular": "src-shared-components-Button-style___regular___3HACs4   REGULAR_CLASS",
-      "sm": "src-shared-components-Button-style___sm___qxF3eU",
-      "xl": "src-shared-components-Button-style___xl___3mniSK   XL_CLASS",
-      "xs": "src-shared-components-Button-style___xs___b4V2WW",
-    }
-  }
-  to={null}
-  type="button"
+  onKeyPress={[Function]}
+  role="button"
+  tabIndex={0}
 >
   BUTTON
-</BaseButton>
-`;
-
-exports[`Matches snapshots when active 2`] = `
-<BaseButton
-  active={true}
-  disabled={false}
-  enforceA={false}
-  onClick={[Function]}
-  onMouseDown={null}
-  openNewTab={false}
-  replace={false}
-  size={null}
-  theme={
-    Object {
-      "active": "src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS",
-      "ad": "src-shared-components-Button-style___ad___kh1k6A",
-      "button": "src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS",
-      "context": "src-shared-components-Button-style___context___27VAmK",
-      "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
-      "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-      "lg": "src-shared-components-Button-style___lg___30N2R_",
-      "link": "src-shared-components-Button-style___link___1z748N   LINK_CLASS",
-      "regular": "src-shared-components-Button-style___regular___3HACs4",
-      "sm": "src-shared-components-Button-style___sm___qxF3eU",
-      "xl": "src-shared-components-Button-style___xl___3mniSK   XL_CLASS",
-      "xs": "src-shared-components-Button-style___xs___b4V2WW",
-    }
-  }
-  to={null}
-  type="button"
->
-  BUTTON
-</BaseButton>
+</div>
 `;
 
 exports[`Matches snapshots when disabled 1`] = `
-<BaseButton
-  active={false}
-  disabled={true}
-  enforceA={false}
-  onClick={[Function]}
-  onMouseDown={null}
-  openNewTab={false}
-  replace={false}
-  size="xl"
-  theme={
-    Object {
-      "active": "src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS",
-      "ad": "src-shared-components-Button-style___ad___kh1k6A",
-      "button": "src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS",
-      "context": "src-shared-components-Button-style___context___27VAmK",
-      "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
-      "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-      "lg": "src-shared-components-Button-style___lg___30N2R_",
-      "link": "src-shared-components-Button-style___link___1z748N   LINK_CLASS",
-      "regular": "src-shared-components-Button-style___regular___3HACs4   REGULAR_CLASS",
-      "sm": "src-shared-components-Button-style___sm___qxF3eU",
-      "xl": "src-shared-components-Button-style___xl___3mniSK   XL_CLASS",
-      "xs": "src-shared-components-Button-style___xs___b4V2WW",
-    }
-  }
-  to={null}
-  type="button"
+<div
+  className="src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS"
 >
   BUTTON
-</BaseButton>
+</div>
 `;
 
 exports[`Matches snapshots when disabled 2`] = `
-<BaseButton
-  active={false}
-  disabled={true}
-  enforceA={false}
-  onClick={[Function]}
-  onMouseDown={null}
-  openNewTab={false}
-  replace={false}
-  size="xl"
-  theme={
-    Object {
-      "active": "src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS",
-      "ad": "src-shared-components-Button-style___ad___kh1k6A",
-      "button": "src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS",
-      "context": "src-shared-components-Button-style___context___27VAmK",
-      "disabled": "src-shared-components-Button-style___disabled___3uMacK",
-      "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-      "lg": "src-shared-components-Button-style___lg___30N2R_",
-      "link": "src-shared-components-Button-style___link___1z748N   LINK_CLASS",
-      "regular": "src-shared-components-Button-style___regular___3HACs4   REGULAR_CLASS",
-      "sm": "src-shared-components-Button-style___sm___qxF3eU",
-      "xl": "src-shared-components-Button-style___xl___3mniSK   XL_CLASS",
-      "xs": "src-shared-components-Button-style___xs___b4V2WW",
-    }
-  }
-  to={null}
-  type="button"
+<div
+  className="src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS src-shared-components-Button-style___disabled___3uMacK"
 >
   BUTTON
-</BaseButton>
+</div>
 `;
 
 exports[`Matches snapshots when rendered as link 1`] = `
-<BaseButton
-  active={true}
+<a
+  className="src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS"
   disabled={false}
-  enforceA={false}
-  onClick={null}
+  href="/SOME/TEST/URL"
+  onClick={[Function]}
   onMouseDown={null}
-  openNewTab={false}
-  replace={false}
-  size={null}
-  theme={
-    Object {
-      "active": "src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS",
-      "ad": "src-shared-components-Button-style___ad___kh1k6A",
-      "button": "src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS",
-      "context": "src-shared-components-Button-style___context___27VAmK",
-      "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
-      "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-      "lg": "src-shared-components-Button-style___lg___30N2R_",
-      "link": "src-shared-components-Button-style___link___1z748N   LINK_CLASS",
-      "regular": "src-shared-components-Button-style___regular___3HACs4   REGULAR_CLASS",
-      "sm": "src-shared-components-Button-style___sm___qxF3eU",
-      "xl": "src-shared-components-Button-style___xl___3mniSK   XL_CLASS",
-      "xs": "src-shared-components-Button-style___xs___b4V2WW",
-    }
-  }
-  to="/SOME/TEST/URL"
-  type="button"
 >
   BUTTON
-</BaseButton>
-`;
-
-exports[`Matches snapshots when rendered as link 2`] = `
-<BaseButton
-  active={true}
-  disabled={false}
-  enforceA={false}
-  onClick={null}
-  onMouseDown={null}
-  openNewTab={false}
-  replace={false}
-  size={null}
-  theme={
-    Object {
-      "active": "src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS",
-      "ad": "src-shared-components-Button-style___ad___kh1k6A",
-      "button": "src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS",
-      "context": "src-shared-components-Button-style___context___27VAmK",
-      "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
-      "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-      "lg": "src-shared-components-Button-style___lg___30N2R_",
-      "link": "src-shared-components-Button-style___link___1z748N",
-      "regular": "src-shared-components-Button-style___regular___3HACs4   REGULAR_CLASS",
-      "sm": "src-shared-components-Button-style___sm___qxF3eU",
-      "xl": "src-shared-components-Button-style___xl___3mniSK   XL_CLASS",
-      "xs": "src-shared-components-Button-style___xs___b4V2WW",
-    }
-  }
-  to="/SOME/TEST/URL"
-  type="button"
->
-  BUTTON
-</BaseButton>
+</a>
 `;

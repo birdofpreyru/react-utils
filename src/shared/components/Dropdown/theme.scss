@@ -3,28 +3,35 @@
 *,
 .context,
 .ad.hoc {
+  &.arrow {
+    background-image: linear-gradient(to top, lightgray, white 50%, white);
+    border: 1px solid gray;
+    border-radius: 0 0.3em 0.3em 0;
+    padding: 0.3em 0.6em;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+  }
+
   &.container {
     align-items: center;
     display: inline-flex;
-    margin: 0.3em 0.3em 0.3em 1.5em;
+    margin: 0.1em;
     position: relative;
+  }
 
-    &::after {
-      background-image: linear-gradient(to top, lightgray, white 50%, white);
-      border: 1px solid gray;
-      border-radius: 0 0.3em 0.3em 0;
-      content: '▼';
-      cursor: pointer;
-      line-height: 1.9em;
-      padding: 0 0.6em;
-      pointer-events: none;
-      position: absolute;
-      right: 0;
-    }
+  :active + &.arrow {
+    background-image: linear-gradient(to bottom, lightgray, white 50%, white);
+    border-bottom-right-radius: 0;
+  }
+
+  :focus + &.arrow {
+    border-color: blue;
+    border-left-color: gray;
   }
 
   &.label {
-    margin-right: 0.6em;
+    margin: 0 0.6em 0 1.5em;
   }
 
   &.option {
@@ -36,9 +43,22 @@
     background: white;
     border: 1px solid gray;
     border-radius: 0.3em;
+    color: inherit;
     cursor: pointer;
-    font-size: 1em;
-    min-height: 2em;
-    padding: 0.3em 3.3em 0.3em 1.2em;
+    display: inline-block;
+    font: inherit;
+    outline: none;
+    padding: 0.3em 3.3em calc(0.3em + 1px) 1.2em;
+
+    &:active {
+      background: white;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:focus {
+      border-color: blue;
+      box-shadow: 0 0 3px 1px lightblue;
+    }
   }
 }
