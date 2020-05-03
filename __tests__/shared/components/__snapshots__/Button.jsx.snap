@@ -1,139 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Matches snapshots when active 1`] = `
-<BaseButton
-  active={true}
-  disabled={false}
-  enforceA={false}
+<div
+  className="src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS"
   onClick={[Function]}
-  openNewTab={false}
-  replace={false}
-  theme={
-    Object {
-      "active": "src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS",
-      "ad": "src-shared-components-Button-style___ad___kh1k6A",
-      "button": "src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS",
-      "context": "src-shared-components-Button-style___context___27VAmK",
-      "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
-      "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-    }
-  }
+  onKeyPress={[Function]}
+  role="button"
+  tabIndex={0}
 >
   BUTTON
-</BaseButton>
-`;
-
-exports[`Matches snapshots when active 2`] = `
-<BaseButton
-  active={true}
-  disabled={false}
-  enforceA={false}
-  onClick={[Function]}
-  openNewTab={false}
-  replace={false}
-  theme={
-    Object {
-      "active": "src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS",
-      "ad": "src-shared-components-Button-style___ad___kh1k6A",
-      "button": "src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS",
-      "context": "src-shared-components-Button-style___context___27VAmK",
-      "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
-      "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-    }
-  }
->
-  BUTTON
-</BaseButton>
+</div>
 `;
 
 exports[`Matches snapshots when disabled 1`] = `
-<BaseButton
-  active={false}
-  disabled={true}
-  enforceA={false}
-  onClick={[Function]}
-  openNewTab={false}
-  replace={false}
-  theme={
-    Object {
-      "active": "src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS",
-      "ad": "src-shared-components-Button-style___ad___kh1k6A",
-      "button": "src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS",
-      "context": "src-shared-components-Button-style___context___27VAmK",
-      "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
-      "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-    }
-  }
+<div
+  className="src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS"
 >
   BUTTON
-</BaseButton>
+</div>
 `;
 
 exports[`Matches snapshots when disabled 2`] = `
-<BaseButton
-  active={false}
-  disabled={true}
-  enforceA={false}
-  onClick={[Function]}
-  openNewTab={false}
-  replace={false}
-  theme={
-    Object {
-      "active": "src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS",
-      "ad": "src-shared-components-Button-style___ad___kh1k6A",
-      "button": "src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS",
-      "context": "src-shared-components-Button-style___context___27VAmK",
-      "disabled": "src-shared-components-Button-style___disabled___3uMacK",
-      "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-    }
-  }
+<div
+  className="src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS src-shared-components-Button-style___disabled___3uMacK"
 >
   BUTTON
-</BaseButton>
+</div>
 `;
 
 exports[`Matches snapshots when rendered as link 1`] = `
-<BaseButton
-  active={true}
+<a
+  className="src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS"
   disabled={false}
-  enforceA={false}
-  openNewTab={false}
-  replace={false}
-  theme={
-    Object {
-      "active": "src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS",
-      "ad": "src-shared-components-Button-style___ad___kh1k6A",
-      "button": "src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS",
-      "context": "src-shared-components-Button-style___context___27VAmK",
-      "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
-      "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-    }
-  }
-  to="/SOME/TEST/URL"
+  href="/SOME/TEST/URL"
+  onClick={[Function]}
+  onMouseDown={null}
 >
   BUTTON
-</BaseButton>
-`;
-
-exports[`Matches snapshots when rendered as link 2`] = `
-<BaseButton
-  active={true}
-  disabled={false}
-  enforceA={false}
-  openNewTab={false}
-  replace={false}
-  theme={
-    Object {
-      "active": "src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS",
-      "ad": "src-shared-components-Button-style___ad___kh1k6A",
-      "button": "src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS",
-      "context": "src-shared-components-Button-style___context___27VAmK",
-      "disabled": "src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS",
-      "hoc": "src-shared-components-Button-style___hoc___xeK7Rp",
-    }
-  }
-  to="/SOME/TEST/URL"
->
-  BUTTON
-</BaseButton>
+</a>
 `;

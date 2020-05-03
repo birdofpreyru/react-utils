@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import Button from 'components/Button';
 import React from 'react';
-import { shallowSnapshot } from 'utils/jest';
+import { snapshot } from 'utils/jest';
+import { StaticRouter } from 'react-router-dom';
 
 const testTheme = {
   active: 'ACTIVE_CLASS',
@@ -11,7 +12,7 @@ const testTheme = {
 
 describe('Matches snapshots', () => {
   test('when active', () => {
-    shallowSnapshot((
+    snapshot((
       <Button
         active
         onClick={_.noop}
@@ -20,18 +21,9 @@ describe('Matches snapshots', () => {
         BUTTON
       </Button>
     ));
-    shallowSnapshot((
-      <Button
-        active
-        onClick={_.noop}
-        theme={_.omit(testTheme, 'regular')}
-      >
-        BUTTON
-      </Button>
-    ));
   });
   test('when disabled', () => {
-    shallowSnapshot((
+    snapshot((
       <Button
         disabled
         onClick={_.noop}
@@ -40,7 +32,7 @@ describe('Matches snapshots', () => {
         BUTTON
       </Button>
     ));
-    shallowSnapshot((
+    snapshot((
       <Button
         disabled
         onClick={_.noop}
@@ -51,23 +43,16 @@ describe('Matches snapshots', () => {
     ));
   });
   test('when rendered as link', () => {
-    shallowSnapshot((
-      <Button
-        active
-        theme={testTheme}
-        to="/SOME/TEST/URL"
-      >
-        BUTTON
-      </Button>
-    ));
-    shallowSnapshot((
-      <Button
-        active
-        theme={_.omit(testTheme, 'link')}
-        to="/SOME/TEST/URL"
-      >
-        BUTTON
-      </Button>
+    snapshot((
+      <StaticRouter>
+        <Button
+          active
+          theme={testTheme}
+          to="/SOME/TEST/URL"
+        >
+          BUTTON
+        </Button>
+      </StaticRouter>
     ));
   });
 });
