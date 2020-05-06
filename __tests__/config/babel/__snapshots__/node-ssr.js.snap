@@ -21,7 +21,12 @@ Object {
       },
     ],
     "@babel/syntax-dynamic-import",
-    "@babel/transform-runtime",
+    Array [
+      "@babel/transform-runtime",
+      Object {
+        "corejs": false,
+      },
+    ],
     Array [
       "react-css-modules",
       Object {
@@ -91,7 +96,12 @@ Object {
       },
     ],
     "@babel/syntax-dynamic-import",
-    "@babel/transform-runtime",
+    Array [
+      "@babel/transform-runtime",
+      Object {
+        "corejs": false,
+      },
+    ],
     "dynamic-import-node",
     Array [
       "transform-assets",
@@ -140,7 +150,12 @@ Object {
       },
     ],
     "@babel/syntax-dynamic-import",
-    "@babel/transform-runtime",
+    Array [
+      "@babel/transform-runtime",
+      Object {
+        "corejs": false,
+      },
+    ],
     Array [
       "react-css-modules",
       Object {
@@ -210,7 +225,12 @@ Object {
       },
     ],
     "@babel/syntax-dynamic-import",
-    "@babel/transform-runtime",
+    Array [
+      "@babel/transform-runtime",
+      Object {
+        "corejs": false,
+      },
+    ],
     Array [
       "react-css-modules",
       Object {
@@ -280,7 +300,12 @@ Object {
       },
     ],
     "@babel/syntax-dynamic-import",
-    "@babel/transform-runtime",
+    Array [
+      "@babel/transform-runtime",
+      Object {
+        "corejs": false,
+      },
+    ],
     "dynamic-import-node",
     Array [
       "transform-assets",
@@ -329,7 +354,12 @@ Object {
       },
     ],
     "@babel/syntax-dynamic-import",
-    "@babel/transform-runtime",
+    Array [
+      "@babel/transform-runtime",
+      Object {
+        "corejs": false,
+      },
+    ],
     Array [
       "react-css-modules",
       Object {

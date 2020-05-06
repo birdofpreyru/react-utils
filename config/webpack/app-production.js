@@ -35,10 +35,8 @@ module.exports = function configFactory(ops) {
   }), {
     plugins: [
       new webpack.DefinePlugin({
-        'process.env': {
-          BABEL_ENV: JSON.stringify('production'),
-          NODE_ENV: JSON.stringify('production'),
-        },
+        'process.env.BABEL_ENV': JSON.stringify('production'),
+        'process.env.NODE_ENV': JSON.stringify('production'),
       }),
       new OptimizeCssAssetsPlugin({
         cssProcessorOptions: {
