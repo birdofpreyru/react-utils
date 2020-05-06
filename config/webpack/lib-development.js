@@ -3,6 +3,9 @@
  */
 
 const path = require('path');
+const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
+
 const baseFactory = require('./lib-base');
 
 /**
@@ -21,11 +24,24 @@ const baseFactory = require('./lib-base');
  * @return {Object} Webpack configuration.
  */
 module.exports = function configFactory(ops) {
-  return baseFactory({
-    ...ops,
-    babelEnv: 'development',
-    cssLocalIdent: '[path][name]___[local]___[hash:base64:6]',
-    mode: 'development',
-    outputPath: path.resolve(__dirname, ops.context, 'build/development'),
-  });
+  return webpackMerge.smart(
+    baseFactory({
+      ...ops,
+      babelEnv: 'development',
+      cssLocalIdent: '[path][name]___[local]___[hash:base64:6]',
+      mode: 'development',
+      outputPath: path.resolve(__dirname, ops.context, 'build/development'),
+    }),
+    {
+      plugins: [
+        new webpack.DefinePlugin({
+          'process.env': {
+            BABEL_ENV: JSON.stringify('development'),
+            NODE_ENV: JSON.stringify('development'),
+            REACT_GLOBAL_STATE_DEBUG: JSON.stringify(true),
+          },
+        }),
+      ],
+    },
+  );
 };

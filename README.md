@@ -1,5 +1,5 @@
 ![Master Build Status](https://img.shields.io/circleci/project/github/birdofpreyru/react-utils/master.svg?label=master)
-![Dev Build Status](https://img.shields.io/circleci/project/github/birdofpreyru/react-utils/dev.svg?label=dev)
+![Dev Build Status](https://img.shields.io/circleci/project/github/birdofpreyru/react-utils/devel.svg?label=devel)
 ![Latest NPM Release](https://img.shields.io/npm/v/@dr.pogodin/react-utils.svg)
 ![NPM Downloads](https://img.shields.io/npm/dm/@dr.pogodin/react-utils.svg)
 
@@ -130,7 +130,7 @@ Whenever you are to do any changes in the library, keep in mind the following:
   in the project relying on the library, you should release it as a minor
   library update (more severe comparing to patch update). Consider to use
   a new branch, called after the minor version, and to not merge your changes
-  into the main **dev** / **master** branches until everybody is prepared
+  into the main **devel** / **master** branches until everybody is prepared
   for that.
 
 ### Local Testing of Library Updates within a Host Project
