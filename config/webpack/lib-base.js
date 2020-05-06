@@ -7,7 +7,6 @@
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
-const webpack = require('webpack');
 
 /**
  * Creates a new Webpack config object.
@@ -67,12 +66,6 @@ module.exports = function configFactory(ops) {
       libraryTarget: 'umd',
     },
     plugins: [
-      new webpack.DefinePlugin({
-        'process.env': {
-          BABEL_ENV: JSON.stringify(ops.babelEnv),
-          NODE_ENV: JSON.stringify(ops.babelEnv),
-        },
-      }),
       new MiniCssExtractPlugin({
         filename: 'style.css',
       }),

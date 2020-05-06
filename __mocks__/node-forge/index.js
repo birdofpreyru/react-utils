@@ -1,4 +1,6 @@
-const mock = require.requireActual('node-forge');
+/* global jest */
+
+const mock = jest.requireActual('node-forge');
 
 mock.random.getBytes = (numBytes, cb) => {
   if (global.mockFailsForgeRandomGetBytesMethod) {

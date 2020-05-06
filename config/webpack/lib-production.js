@@ -4,7 +4,9 @@
 
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
+
 const baseFactory = require('./lib-base');
 
 /**
@@ -32,6 +34,12 @@ module.exports = function configFactory(ops) {
   });
   return webpackMerge(baseConfig, {
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {
+          BABEL_ENV: JSON.stringify('production'),
+          NODE_ENV: JSON.stringify('production'),
+        },
+      }),
       new OptimizeCssAssetsPlugin({
         cssProcessorOptions: {
           /* Due to the way our styles are organized, these dangerous
