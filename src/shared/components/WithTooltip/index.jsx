@@ -41,13 +41,13 @@ function Wrapper({
   };
 
   hooks.useEffect(() => {
-    if (showTooltip) {
+    if (showTooltip && tip !== null) {
       const listener = () => setShowTooltip(false);
       window.addEventListener('scroll', listener);
       return () => window.removeEventListener('scroll', listener);
     }
     return undefined;
-  }, [showTooltip]);
+  }, [showTooltip, tip]);
 
   return (
     <div
@@ -57,7 +57,7 @@ function Wrapper({
       ref={wrapperRef}
     >
       {
-        showTooltip ? (
+        showTooltip && tip !== null ? (
           <Tooltip ref={tooltipRef} theme={theme}>{tip}</Tooltip>
         ) : null
       }
