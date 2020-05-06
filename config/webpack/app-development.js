@@ -36,12 +36,10 @@ module.exports = function configFactory(ops) {
   }), {
     plugins: [
       new webpack.DefinePlugin({
-        'process.env': {
-          BABEL_ENV: JSON.stringify('development'),
-          DEV_TOOLS: JSON.stringify(true),
-          NODE_ENV: JSON.stringify('development'),
-          REACT_GLOBAL_STATE_DEBUG: JSON.stringify(true),
-        },
+        'process.env.BABEL_ENV': JSON.stringify('development'),
+        'process.env.DEV_TOOLS': JSON.stringify(true),
+        'process.env.NODE_ENV': JSON.stringify('development'),
+        'process.env.REACT_GLOBAL_STATE_DEBUG': JSON.stringify(true),
       }),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoEmitOnErrorsPlugin(),

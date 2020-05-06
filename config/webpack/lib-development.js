@@ -35,11 +35,9 @@ module.exports = function configFactory(ops) {
     {
       plugins: [
         new webpack.DefinePlugin({
-          'process.env': {
-            BABEL_ENV: JSON.stringify('development'),
-            NODE_ENV: JSON.stringify('development'),
-            REACT_GLOBAL_STATE_DEBUG: JSON.stringify(true),
-          },
+          'process.env.BABEL_ENV': JSON.stringify('development'),
+          'process.env.NODE_ENV': JSON.stringify('development'),
+          'process.env.REACT_GLOBAL_STATE_DEBUG': JSON.stringify(true),
         }),
       ],
     },
