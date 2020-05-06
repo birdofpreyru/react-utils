@@ -12,7 +12,8 @@
 /* Break points. */
 
 $screen-xs: 320px !default;
-$screen-sm: 768px !default;
+$screen-sm: 495px !default;
+$screen-mm: 768px !default;
 $screen-md: 1024px !default;
 $screen-lg: 1280px !default;
 
@@ -30,6 +31,12 @@ $screen-lg: 1280px !default;
   }
 }
 
+@mixin xs-to-mm {
+  @media (max-width: #{$screen-mm}) {
+    @content;
+  }
+}
+
 @mixin xs-to-md {
   @media (max-width: #{$screen-md}) {
     @content;
@@ -42,10 +49,16 @@ $screen-lg: 1280px !default;
   }
 }
 
-/* XS */
+/* SM */
 
 @mixin sm {
   @media (min-width: #{$screen-xs + 1px}) and (max-width: #{$screen-sm}) {
+    @content;
+  }
+}
+
+@mixin sm-to-mm {
+  @media (min-width: #{$screen-xs + 1px}) and (max-width: #{$screen-mm}) {
     @content;
   }
 }
@@ -68,22 +81,48 @@ $screen-lg: 1280px !default;
   }
 }
 
-/* MD */
+/* MM */
 
-@mixin md {
+@mixin mm {
+  @media (min-width: #{$screen-sm + 1px}) and (max-width: #{$screen-mm}) {
+    @content;
+  }
+}
+
+@mixin mm-to-md {
   @media (min-width: #{$screen-sm + 1px}) and (max-width: #{$screen-md}) {
     @content;
   }
 }
 
-@mixin md-to-lg {
+@mixin mm-to-lg {
   @media (min-width: #{$screen-sm + 1px}) and (max-width: #{$screen-lg}) {
     @content;
   }
 }
 
-@mixin md-to-xl {
+@mixin mm-to-xl {
   @media (min-width: #{$screen-sm + 1px}) {
+    @content;
+  }
+}
+
+/* MD */
+
+@mixin md {
+  @media (min-width: #{$screen-mm + 1px}) and (max-width: #{$screen-md}) {
+    @content;
+  }
+}
+
+@mixin md-to-lg {
+  @media (min-width: #{$screen-mm + 1px}) and (max-width: #{$screen-lg}) {
+    @content;
+  }
+}
+
+@mixin md-to-xl {
+  @media (min-width: #{$screen-mm + 1px}) {
     @content;
   }
 }
