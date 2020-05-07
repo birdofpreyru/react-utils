@@ -19,7 +19,6 @@ const ENVIRONMENTS = {
  * @return {object} Configuration.
  */
 function newBaseConfig(options = {}) {
-  const { corejs } = options;
   return {
     presets: [
       ['@babel/env', { targets: options.targets || 'defaults' }],
@@ -35,9 +34,7 @@ function newBaseConfig(options = {}) {
         ],
       }],
       '@babel/syntax-dynamic-import',
-      ['@babel/transform-runtime', {
-        corejs: corejs === undefined ? 3 : corejs,
-      }],
+      '@babel/transform-runtime',
     ],
   };
 }
@@ -74,15 +71,13 @@ function addStyling(config, env) {
  * @param {object} [ops] Optional. Preset options.
  * @param {boolean} [ops.noStyling] Optional. If set, the preset won't include
  *  any components for (S)CSS processing.
- * @param {boolean|number} [ops.corejs=3] Optional. Specifies whether CoreJS
- *  polyfills should be used. Defaults to 3 (corejs version to use).
  * @param {string|string[]|object} [ops.targets] Optional. Targets setting for
  *  the "babel/env" preset.
  */
 function getPreset(babel, ops = {}) {
   const env = babel.env();
 
-  const baseOps = _.pick(ops, ['corejs', 'targets']);
+  const baseOps = _.pick(ops, ['targets']);
   const res = newBaseConfig(baseOps);
 
   if (!ops.noStyling) addStyling(res, env);

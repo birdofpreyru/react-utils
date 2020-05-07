@@ -13,7 +13,7 @@ function newBase(babel, options = {}) {
   const baseOps = _.pick(options, ['noStyling']);
   const config = getWebpackBabelConfig(
     babel,
-    { ...baseOps, corejs: false, targets: 'current node' },
+    { ...baseOps, targets: 'current node' },
   );
 
   const baseAssetsOutputPath = options.baseAssetsOutputPath || '';

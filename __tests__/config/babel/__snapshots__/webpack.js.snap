@@ -17,12 +17,7 @@ Object {
       },
     ],
     "@babel/syntax-dynamic-import",
-    Array [
-      "@babel/transform-runtime",
-      Object {
-        "corejs": 3,
-      },
-    ],
+    "@babel/transform-runtime",
     "react-hot-loader/babel",
   ],
   "presets": Array [
@@ -55,12 +50,7 @@ Object {
       },
     ],
     "@babel/syntax-dynamic-import",
-    Array [
-      "@babel/transform-runtime",
-      Object {
-        "corejs": 3,
-      },
-    ],
+    "@babel/transform-runtime",
     Array [
       "react-css-modules",
       Object {
@@ -104,12 +94,7 @@ Object {
       },
     ],
     "@babel/syntax-dynamic-import",
-    Array [
-      "@babel/transform-runtime",
-      Object {
-        "corejs": 3,
-      },
-    ],
+    "@babel/transform-runtime",
   ],
   "presets": Array [
     Array [
@@ -141,12 +126,7 @@ Object {
       },
     ],
     "@babel/syntax-dynamic-import",
-    Array [
-      "@babel/transform-runtime",
-      Object {
-        "corejs": 3,
-      },
-    ],
+    "@babel/transform-runtime",
     Array [
       "react-css-modules",
       Object {

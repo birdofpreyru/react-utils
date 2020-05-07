@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.9.6",
-    "@dr.pogodin/react-global-state": "^0.2.2",
-    "@dr.pogodin/react-themes": "^1.2.2",
+    "@dr.pogodin/react-global-state": "^0.2.3",
+    "@dr.pogodin/react-themes": "^1.2.3",
     "autoprefix": "^1.0.1",
     "axios": "^0.19.2",
     "babel-plugin-react-css-modules": "^5.2.6",
@@ -59,7 +59,8 @@
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-assets": "^1.0.2",
-    "css-loader": "^3.5.3",
+    "core-js": "^3.6.5",
+    "css-loader": "^3.5.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-import-resolver-babel-module": "^5.1.2",
@@ -82,6 +83,7 @@
     "pretty": "^2.0.0",
     "react-hot-loader": "^4.12.21",
     "react-test-renderer": "^16.13.1",
+    "regenerator-runtime": "^0.13.5",
     "resolve-url-loader": "^3.1.1",
     "sass-loader": "^8.0.2",
     "sitemap": "^6.1.2",
@@ -128,5 +130,5 @@
     "lint:scss": "stylelint **/*.scss --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "0.23.1"
+  "version": "0.23.2"
 }
