@@ -10,7 +10,7 @@
 /* global document */
 
 import _ from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactDom from 'react-dom';
 import PT from 'prop-types';
 import themed from '@dr.pogodin/react-themes';
@@ -23,9 +23,10 @@ function BaseModal({
   onCancel,
   theme,
 }) {
-  const [portal, setPortal] = useState();
+  const overlayRef = React.useRef();
+  const [portal, setPortal] = React.useState();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const p = document.createElement('div');
     document.body.classList.add('scrolling-disabled-by-modal');
     document.body.appendChild(p);
@@ -40,24 +41,28 @@ function BaseModal({
     (
       <>
         <div
+          aria-modal="true"
           className={theme.container}
           onWheel={(event) => event.stopPropagation()}
+          role="dialog"
         >
           {children}
         </div>
-        <button
+        <div
           aria-label="Cancel"
+          className={theme.overlay}
+          onClick={() => onCancel()}
           onKeyDown={(e) => {
             if (e.key === 'Escape') onCancel();
           }}
-          onClick={() => onCancel()}
-          className={theme.overlay}
           ref={(node) => {
-            if (node) {
+            if (node && node !== overlayRef.current) {
+              overlayRef.current = node;
               node.focus();
             }
           }}
-          type="button"
+          role="button"
+          tabIndex="-1"
         />
       </>
     ),
