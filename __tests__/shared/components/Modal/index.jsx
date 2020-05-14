@@ -54,9 +54,8 @@ test('onCancel', () => {
   act(() => {
     jest.runAllTimers();
   });
-  const overlay = document.getElementsByTagName('button');
-  expect(overlay.length).toBe(1);
-  simulate.click(overlay[0]);
+  const overlay = document.querySelector('div[aria-label=Cancel]');
+  simulate.click(overlay);
   expect(onCancel).toHaveBeenCalled();
 });
 
