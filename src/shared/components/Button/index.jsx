@@ -96,4 +96,10 @@ BaseButton.propTypes = {
 export default ThemedButton;
 
 /* TODO: Deprecated 2020.05.02. Remove after some time. */
-export { BaseButton };
+function DeprecatedBaseButton(...args) {
+  console.warn('[react-utils]: <BaseButton /> export is deprecated');
+  /* eslint-disable react/jsx-props-no-spreading */
+  return <BaseButton {...args} />;
+  /* eslint-disable react/jsx-props-no-spreading */
+}
+export { DeprecatedBaseButton as BaseButton };
