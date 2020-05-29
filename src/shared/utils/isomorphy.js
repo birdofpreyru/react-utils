@@ -4,7 +4,7 @@
 
 /* global window */
 
-export const IS_CLIENT_SIDE = typeof process === 'undefined'
+export const IS_CLIENT_SIDE = typeof process !== 'object'
   || !process.versions || !process.versions.node;
 
 export const IS_SERVER_SIDE = !IS_CLIENT_SIDE;
@@ -73,7 +73,7 @@ export function isProdBuild() {
  * @returns {object}
  */
 export function getBuildInfo() {
-  return (isClientSide() ? window : global).TRU_BUILD_INFO;
+  return (IS_CLIENT_SIDE ? window : global).TRU_BUILD_INFO;
 }
 
 /**
