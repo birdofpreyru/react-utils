@@ -24,7 +24,7 @@ themed.PRIORITY = PRIORITY;
 const juUrl = module.webpackPolyfill ? './shared/utils/jest'
   : path.resolve(__dirname, './jest');
 
-const JU = isomorphy.isServerSide()
+const JU = isomorphy.IS_SERVER_SIDE
   && (process.env.NODE_CONFIG_ENV || process.env.NODE_ENV) !== 'production'
   ? webpack.requireWeak(juUrl) : null;
 

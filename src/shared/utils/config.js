@@ -7,9 +7,9 @@
 
 /* global window */
 
-import { isClientSide } from './isomorphy';
+import { IS_CLIENT_SIDE } from './isomorphy';
 import { requireWeak } from './webpack';
 
 /* eslint-disable global-require */
-export default isClientSide() ? window.CONFIG : requireWeak('config');
+export default IS_CLIENT_SIDE ? window.CONFIG : requireWeak('config');
 /* eslint-enable global-require */

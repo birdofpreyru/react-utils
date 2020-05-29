@@ -24,7 +24,7 @@ import { requireWeak } from 'utils/webpack';
 
 const serverUrl = module.webpackPolyfill ? './server'
   : path.resolve(__dirname, './server');
-const server = utils.isomorphy.isServerSide() ? requireWeak(serverUrl) : null;
+const server = utils.isomorphy.IS_SERVER_SIDE ? requireWeak(serverUrl) : null;
 
 export {
   BaseButton,

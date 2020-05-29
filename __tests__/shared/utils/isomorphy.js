@@ -18,15 +18,11 @@ test('Client-side detection', () => {
   mockClientSide();
   expect(m().IS_CLIENT_SIDE).toBe(true);
   expect(m().IS_SERVER_SIDE).toBe(false);
-  expect(m().isClientSide()).toBe(true);
-  expect(m().isServerSide()).toBe(false);
 });
 
 test('Server-side detection', () => {
   expect(m().IS_CLIENT_SIDE).toBe(false);
   expect(m().IS_SERVER_SIDE).toBe(true);
-  expect(m().isClientSide()).toBe(false);
-  expect(m().isServerSide()).toBe(true);
 });
 
 test('Dev mode detection - client side', () => {
