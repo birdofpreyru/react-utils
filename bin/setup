@@ -155,7 +155,6 @@ function updateProdDependencies(donorData, hostData) {
   });
   if (deps.length) {
     deps = deps.map(generateTargetPackage);
-    console.log(deps);
     spawnSync(
       'npm',
       ['install', '--save'].concat(deps),
