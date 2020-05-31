@@ -74,6 +74,8 @@ $ ./node_modules/.bin/react-utils-setup
 - [`<Throbber>`](docs/throbber.md) &ndash; Simple activity indicator
   (three bouncing circles).
 - [`<WithTooltip>`](docs/WithTooltip.md) &ndash; Tooltip component.
+- [`<YouTubeVideo>`](docs/YouTubeVideo.md) &ndash; Embed YouTube video
+  component.
 
 ### NodeJS Scripts
 - [`react-utils-build`](docs/react-utils-build.md) &ndash; The script for Babel,

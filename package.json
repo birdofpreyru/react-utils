@@ -26,6 +26,7 @@
     "morgan": "^1.10.0",
     "node-forge": "^0.9.1",
     "prop-types": "^15.7.2",
+    "qs": "^6.9.4",
     "raf": "^3.4.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -130,5 +131,5 @@
     "lint:scss": "stylelint **/*.scss --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "0.23.7"
+  "version": "0.23.8"
 }

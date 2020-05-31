@@ -116,6 +116,11 @@ Object {
     "render": [Function],
     "themeType": [Function],
   },
+  "YouTubeVideo": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+    "themeType": [Function],
+  },
   "_": [Function],
   "api": [Function],
   "client": [Function],
@@ -806,6 +811,11 @@ Object {
   "ThemeProvider": [Function],
   "Throbber": [Function],
   "WithTooltip": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+    "themeType": [Function],
+  },
+  "YouTubeVideo": Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
