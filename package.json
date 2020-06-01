@@ -7,7 +7,7 @@
     "url": "https://github.com/birdofpreyru/react-utils/issues"
   },
   "dependencies": {
-    "@babel/runtime": "^7.10.1",
+    "@babel/runtime": "^7.10.2",
     "@dr.pogodin/react-global-state": "^0.2.4",
     "@dr.pogodin/react-themes": "^1.2.3",
     "autoprefix": "^1.0.1",
@@ -44,13 +44,13 @@
   "description": "Collection of generic ReactJS components and utils",
   "devDependencies": {
     "@babel/cli": "^7.10.1",
-    "@babel/core": "^7.10.1",
+    "@babel/core": "^7.10.2",
     "@babel/node": "^7.10.1",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.10.1",
-    "@babel/preset-env": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
-    "@babel/types": "^7.10.1",
+    "@babel/types": "^7.10.2",
     "@dr.pogodin/babel-plugin-css-modules-transform": "^1.7.1",
     "@dr.pogodin/babel-preset-svgr": "^1.0.10",
     "autoprefixer": "^9.8.0",
