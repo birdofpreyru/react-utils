@@ -1,0 +1,11 @@
+*,
+.context,
+.ad.hoc {
+  .container {
+    position: absolute;
+    text-align: center;
+    top: 40%;
+    transform: translateY(50%);
+    width: 100%;
+  }
+}

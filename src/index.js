@@ -18,6 +18,7 @@ import NavLink from 'components/NavLink';
 import ScalableRect from 'components/ScalableRect';
 import Throbber from 'components/Throbber';
 import WithTooltip from 'components/WithTooltip';
+import YouTubeVideo from 'components/YouTubeVideo';
 import * as utils from 'utils';
 
 import { requireWeak } from 'utils/webpack';
@@ -45,6 +46,7 @@ export {
   Throbber,
   server,
   WithTooltip,
+  YouTubeVideo,
 };
 
 export * from 'utils';
