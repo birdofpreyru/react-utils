@@ -82,7 +82,6 @@ if (commander.lib) {
 rimraf.sync(outDir);
 fs.mkdirSync(outDir, { recursive: true });
 
-
 /* ************************************************************************** */
 /* Webpack compilation of isomorphic library bundle.                          */
 
@@ -134,7 +133,6 @@ function handleWebpackCompilationResults(error, stats) {
 
 if (commander.watch) webpackCompiler.watch({}, handleWebpackCompilationResults);
 else webpackCompiler.run(handleWebpackCompilationResults);
-
 
 /* ************************************************************************** */
 /* Babel compilation of JS, JSX, and SVG files.                               */
