@@ -1,4 +1,3 @@
-
 /**
  * Creates a dynamically scalable rectangular container with the specified fixed
  * ratio of its sides.
