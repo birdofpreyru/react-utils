@@ -4,7 +4,7 @@
 
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const baseFactory = require('./app-base');
 
 /**
@@ -28,7 +28,7 @@ const baseFactory = require('./app-base');
  * @param {String} ops.publicPath Base URL for the output of the build assets.
  */
 module.exports = function configFactory(ops) {
-  const res = webpackMerge.smart(baseFactory({
+  const res = merge(baseFactory({
     ...ops,
     babelEnv: 'production',
     mode: 'production',

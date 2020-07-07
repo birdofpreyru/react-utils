@@ -4,7 +4,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 
 const baseFactory = require('./lib-base');
 
@@ -24,7 +24,7 @@ const baseFactory = require('./lib-base');
  * @return {Object} Webpack configuration.
  */
 module.exports = function configFactory(ops) {
-  return webpackMerge.smart(
+  return merge(
     baseFactory({
       ...ops,
       babelEnv: 'development',

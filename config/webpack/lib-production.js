@@ -5,7 +5,7 @@
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 
 const baseFactory = require('./lib-base');
 
@@ -32,7 +32,7 @@ module.exports = function configFactory(ops) {
     mode: 'production',
     outputPath: path.resolve(__dirname, ops.context, 'build/production'),
   });
-  return webpackMerge(baseConfig, {
+  return merge(baseConfig, {
     plugins: [
       new webpack.DefinePlugin({
         'process.env.BABEL_ENV': JSON.stringify('production'),

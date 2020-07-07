@@ -4,7 +4,7 @@
 
 const _ = require('lodash');
 const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const baseFactory = require('./app-base');
 
 /**
@@ -28,7 +28,7 @@ const baseFactory = require('./app-base');
  * @param {String} ops.publicPath Base URL for the output of the build assets.
  */
 module.exports = function configFactory(ops) {
-  const res = webpackMerge.smart(baseFactory({
+  const res = merge(baseFactory({
     ...ops,
     babelEnv: 'development',
     cssLocalIdent: '[path][name]___[local]___[hash:base64:6]',
