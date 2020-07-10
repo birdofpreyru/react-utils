@@ -106,6 +106,8 @@ export default async function factory(webpackConfig, options) {
 
   /* Error handler. */
   server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+    options.logger.error(err.stack);
+
     let errorResponse = null;
     const status = err.isJoi ? 400 : err.httpStatus || err.status || 500;
 

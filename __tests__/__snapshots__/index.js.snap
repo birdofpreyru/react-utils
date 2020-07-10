@@ -167,7 +167,7 @@ Object {
 
 exports[`Export at client side 2`] = `
 Object {
-  "VERSION": "4.17.15",
+  "VERSION": "4.17.19",
   "_": [Function],
   "add": [Function],
   "after": [Function],
@@ -871,7 +871,7 @@ Object {
 
 exports[`Export at server side 2`] = `
 Object {
-  "VERSION": "4.17.15",
+  "VERSION": "4.17.19",
   "_": [Function],
   "add": [Function],
   "after": [Function],
