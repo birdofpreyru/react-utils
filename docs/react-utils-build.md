@@ -40,14 +40,14 @@ Usage: build [options]
 Library build script
 
 Options:
-  --lib                    library build (default: false)
-  -i, --in-dir <path>      input folder for the build (default: "src")
-  -o, --out-dir <path>     output folder for the build (default: "build")
-  -t, --build-type <type>  build type: development, production
-  -w, --watch              build, watch, and rebuild on source changes
-  --webpack-config <path>  path to the webpack config (default: "webpack.config.js")
-  -h, --help               output usage information
-
+  --lib                     library build (default: false)
+  -i, --in-dir <path>       input folder for the build (default: "src")
+  -o, --out-dir <path>      output folder for the build (default: "build")
+  -t, --build-type <type>   build type: development, production
+  -w, --watch               build, watch, and rebuild on source changes
+  --webpack-config <path>   path to the webpack config (default: "webpack.config.js")
+  -c, --copy-files <regex>  copy files matching the pattern into the build folder
+  -h, --help                display help for command
 ```
 
 To just build the package in development and production (with optimizations)
