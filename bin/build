@@ -60,6 +60,9 @@ commander
     '--webpack-config <path>',
     'path to the webpack config',
     'webpack.config.js',
+  )
+  .option(
+    '-c, --copy-files <regex>', 'copy files matching the pattern into the build folder',
   );
 
 commander.parse(process.argv);
@@ -168,3 +171,25 @@ async function babelBuild() {
 }
 
 babelBuild();
+
+// If opted, copy files matching the pattern into the build folder.
+
+function copyFromFolder(from, to, regex) {
+  fs.readdirSync(from, { withFileTypes: true }).forEach((item) => {
+    let toCreated = false;
+    if (item.isDirectory()) {
+      copyFromFolder(`${from}/${item.name}`, `${to}/${item.name}`, regex);
+    } else if (item.isFile() && item.name.match(regex)) {
+      if (!toCreated) {
+        toCreated = true;
+        fs.mkdirSync(to, { recursive: true });
+      }
+      fs.copyFileSync(`${from}/${item.name}`, `${to}/${item.name}`);
+    }
+  });
+}
+
+if (commander.copyFiles) {
+  const regex = new RegExp(commander.copyFiles);
+  copyFromFolder(inDir, outDir, regex);
+}
