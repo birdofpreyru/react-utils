@@ -113,6 +113,12 @@ Object {
   "Throbber": [Function],
   "WithTooltip": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "PLACEMENTS": Object {
+      "ABOVE_CURSOR": "ABOVE_CURSOR",
+      "ABOVE_ELEMENT": "ABOVE_ELEMENT",
+      "BELOW_CURSOR": "BELOW_CURSOR",
+      "BELOW_ELEMENT": "BELOW_ELEMENT",
+    },
     "render": [Function],
     "themeType": [Function],
   },
@@ -812,6 +818,12 @@ Object {
   "Throbber": [Function],
   "WithTooltip": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "PLACEMENTS": Object {
+      "ABOVE_CURSOR": "ABOVE_CURSOR",
+      "ABOVE_ELEMENT": "ABOVE_ELEMENT",
+      "BELOW_CURSOR": "BELOW_CURSOR",
+      "BELOW_ELEMENT": "BELOW_ELEMENT",
+    },
     "render": [Function],
     "themeType": [Function],
   },

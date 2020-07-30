@@ -7,12 +7,13 @@ import React from 'react';
 
 import { hooks, PT, themed } from 'utils';
 
-import Tooltip from './Tooltip';
+import Tooltip, { PLACEMENTS } from './Tooltip';
 
 import defaultTheme from './default-theme.scss';
 
 function Wrapper({
   children,
+  placement,
   tip,
   theme,
 }) {
@@ -35,6 +36,8 @@ function Wrapper({
         tooltipRef.current.pointTo(
           cursorX + window.pageXOffset,
           cursorY + window.pageYOffset,
+          placement,
+          wrapperRef.current,
         );
       }
     }
@@ -78,14 +81,18 @@ const ThemedWrapper = themed(
   defaultTheme,
 )(Wrapper);
 
+ThemedWrapper.PLACEMENTS = PLACEMENTS;
+
 Wrapper.propTypes = {
   children: PT.node,
+  placement: PT.oneOf(Object.values(PLACEMENTS)),
   theme: ThemedWrapper.themeType.isRequired,
   tip: PT.node,
 };
 
 Wrapper.defaultProps = {
   children: null,
+  placement: PLACEMENTS.ABOVE_CURSOR,
   tip: null,
 };
 
