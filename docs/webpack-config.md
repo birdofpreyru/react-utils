@@ -43,6 +43,8 @@ mutation of the config object.
       the CSS classnames generation by the Webpack's `css-loader`; it is passed
       into the `localIdentName` param of the loader. It should match the
       corresponding setting in the Babel config. Defaults to `[hash:base64:6]`.
+    - `.dontEmitBuildInfo?: boolean` &ndash; Optional. If set the
+      `.build-info` file won't be created at the disk during the compilation.
     - **`dontTimestampOutputs`** &ndash; *boolean* &ndash; Optional. If set
       `true` ouput CSS and JS files will not have build timestamp appended
       to their names.
@@ -141,7 +143,7 @@ mutation of the config object.
   This configration is based on the [`config/webpack/app-base`](#app-base) and
   it differs from that in the following:
   - *development* Babel environment is enforced, and sets
-    `[path][name]___[local]___[hash:base64:6]` as the value of
+    `[path][name]___[local]___[hash:base64:6]` as the default value of
     `cssLocalIdent` argument for the base config.
   - Adds as polyfills the code necessary to support the Hot Module
     Reloading:

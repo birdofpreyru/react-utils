@@ -60,6 +60,9 @@ function addStyling(config, env) {
     case ENVIRONMENTS.PROD:
       cssModulesOps.generateScopedName = '[hash:base64:6]';
       break;
+    case ENVIRONMENTS.TEST:
+      cssModulesOps.generateScopedName = '[path]___[name]__[local]___[hash:base64:5]';
+      break;
     default:
   }
   return config;
