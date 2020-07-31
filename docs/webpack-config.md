@@ -42,7 +42,7 @@ mutation of the config object.
     - **`cssLocalIdent`** &mdash; *String* &mdash; Optional. The template for
       the CSS classnames generation by the Webpack's `css-loader`; it is passed
       into the `localIdentName` param of the loader. It should match the
-      corresponding setting in the Babel config. Defaults to `[hash:base64:6]`.
+      corresponding setting in the Babel config. Defaults to `[md5:hash:base64:6]`.
     - **`dontTimestampOutputs`** &ndash; *boolean* &ndash; Optional. If set
       `true` ouput CSS and JS files will not have build timestamp appended
       to their names.
@@ -141,7 +141,7 @@ mutation of the config object.
   This configration is based on the [`config/webpack/app-base`](#app-base) and
   it differs from that in the following:
   - *development* Babel environment is enforced, and sets
-    `[path][name]___[local]___[hash:base64:6]` as the value of
+    `[path][name]___[local]___[md5:hash:base64:6]` as the value of
     `cssLocalIdent` argument for the base config.
   - Adds as polyfills the code necessary to support the Hot Module
     Reloading:
@@ -185,7 +185,7 @@ mutation of the config object.
     - **`cssLocalIdent`** &mdash; *String* &mdash; Optional. The template for
       the CSS classnames generation by the Webpack's css-loader; it is passed
       into the localIdentName param of the loader. It should match the
-      corresponding setting in the Babel config. Defaults to [hash:base64:6].
+      corresponding setting in the Babel config. Defaults to [md5:hash:base64:6].
 
     - **`entry`** &mdash; *Object|String|String[]* &mdash; Entry points. If an
       object is passed in, the polyfills entry point (chunk) is extended or
@@ -243,13 +243,13 @@ mutation of the config object.
 - <a name="lib-development">**`config/webpack/lib-development`**</a>
 
   Extends and tunes [`config/webpack/lib-base`](#lib-base) to use *development*
-  Babel environment, and sets `[path][name]___[local]___[hash:base64:6]` as
+  Babel environment, and sets `[path][name]___[local]___[md5:hash:base64:6]` as
   the template for generated CSS classnames.
 
 - <a name="lib-production">**`config/webpack/lib-production`**</a>
 
   Extends and tunes [`config/webpack/lib-base`](#lib-base) to use *production*
-  Babel environment, and sets `[hash:base64:6]` as the template for generated
+  Babel environment, and sets `[md5:hash:base64:6]` as the template for generated
   CSS classnames.
 
 ### Example

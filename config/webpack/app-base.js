@@ -34,7 +34,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
  * @param {String} ops.cssLocalIdent Optional. The template for CSS classnames
  *  generation by css-loader (it will be passed into the "localIdentName" param
  *  of the loader). It should match the corresponding setting in the Babel
- *  config. Defaults to: [hash:base64:6].
+ *  config. Defaults to: [md5:hash:base64:6].
  *
  * @param {Object|String|String[]} ops.entry Entry points. If an object is
  *  passed in, the "polyfills" entry point is extended or appended to
@@ -66,7 +66,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
  */
 module.exports = function configFactory(ops) {
   const o = _.defaults(_.clone(ops), {
-    cssLocalIdent: '[hash:base64:6]',
+    cssLocalIdent: '[md5:hash:base64:6]',
     outputPath: 'build/web-public',
     publicPath: '',
   });
