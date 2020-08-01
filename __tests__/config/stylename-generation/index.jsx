@@ -3,7 +3,6 @@ import path from 'path';
 import React from 'react';
 import { snapshot } from 'utils/jest';
 import webpack from 'webpack';
-import time from 'utils/time';
 
 import webpackConfigFactory from '../../../config/webpack/app-development';
 
@@ -33,18 +32,21 @@ it('Webpack stylename generation', (done) => {
   compiler.hooks.shouldEmit.tap('Test', () => false);
 
   compiler.run((err, stats) => {
-    expect(err).toBe(null);
-    expect(stats.hasErrors()).toBe(false);
-    /* eslint-disable no-underscore-dangle */
-    const compiledCss = stats.compilation.assets['main.css']
-      ._source.children[0]._value;
-    expect(compiledCss).toMatchSnapshot();
-    expect(
-      compiledCss.startsWith(
-        '.__tests__-config-stylename-generation-__assets__-TestComponent-___style__testClassName___2QV-B',
-      ),
-    ).toBe(true);
-    /* eslint-enable no-underscore-dangle */
-    done();
+    try {
+      expect(err).toBe(null);
+      expect(stats.hasErrors()).toBe(false);
+      /* eslint-disable no-underscore-dangle */
+      const compiledCss = stats.compilation.assets['main.css']
+        ._source.children[0]._value;
+      expect(compiledCss).toMatchSnapshot();
+      expect(
+        compiledCss.startsWith(
+          '.__tests__-config-stylename-generation-__assets__-TestComponent-___style__testClassName___2QV-B',
+        ),
+      ).toBe(true);
+      /* eslint-enable no-underscore-dangle */
+    } finally {
+      done();
+    }
   });
-}, 30 * time.SEC_MS);
+});
