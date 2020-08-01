@@ -28,7 +28,7 @@ module.exports = function configFactory(ops) {
   const baseConfig = baseFactory({
     ...ops,
     babelEnv: 'production',
-    cssLocalIdent: '[md5:hash:base64:6]',
+    cssLocalIdent: '[hash:base64:6]',
     mode: 'production',
     outputPath: path.resolve(__dirname, ops.context, 'build/production'),
   });

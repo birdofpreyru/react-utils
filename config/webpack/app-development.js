@@ -31,7 +31,7 @@ module.exports = function configFactory(ops) {
   const res = merge(baseFactory({
     ...ops,
     babelEnv: 'development',
-    cssLocalIdent: '[path][name]___[local]___[md5:hash:base64:6]',
+    cssLocalIdent: '[path][name]___[local]___[hash:base64:6]',
     mode: 'development',
   }), {
     plugins: [
