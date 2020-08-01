@@ -36,6 +36,9 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
  *  of the loader). It should match the corresponding setting in the Babel
  *  config. Defaults to: [hash:base64:6].
  *
+ * @param {boolean} [ops.dontEmitBuildInfo] Set to prevent creation of
+ *  .build-info file.
+ *
  * @param {Object|String|String[]} ops.entry Entry points. If an object is
  *  passed in, the "polyfills" entry point is extended or appended to
  *  include some polyfills we consider obligatory. If a string or an array is
@@ -102,25 +105,27 @@ module.exports = function configFactory(ops) {
   let buildInfo;
   const buildInfoUrl = path.resolve(o.context, '.build-info');
   /* If build-info file is found, we reuse those data. */
-  if (fs.existsSync(buildInfoUrl) && o.keepBuildInfo) {
-    buildInfo = JSON.parse(fs.readFileSync(buildInfoUrl));
-  } else {
-    /* Stores misc build info into the local ".build-info" file in the context
-     * directory. */
-    buildInfo = {
-      /* A random 32-bit key, that can be used for encryption. */
-      key: forge.random.getBytesSync(32),
+  if (!o.dontEmitBuildInfo) {
+    if (fs.existsSync(buildInfoUrl) && o.keepBuildInfo) {
+      buildInfo = JSON.parse(fs.readFileSync(buildInfoUrl));
+    } else {
+      /* Stores misc build info into the local ".build-info" file in the context
+      * directory. */
+      buildInfo = {
+        /* A random 32-bit key, that can be used for encryption. */
+        key: forge.random.getBytesSync(32),
 
-      /* Public path used during build. */
-      publicPath: o.publicPath,
+        /* Public path used during build. */
+        publicPath: o.publicPath,
 
-      /* Build timestamp. */
-      timestamp: now.utc().toISOString(),
+        /* Build timestamp. */
+        timestamp: now.utc().toISOString(),
 
-      /* `true` if client-side code should setup a service worker. */
-      useServiceWorker: Boolean(o.workbox),
-    };
-    fs.writeFileSync(buildInfoUrl, JSON.stringify(buildInfo));
+        /* `true` if client-side code should setup a service worker. */
+        useServiceWorker: Boolean(o.workbox),
+      };
+      fs.writeFileSync(buildInfoUrl, JSON.stringify(buildInfo));
+    }
   }
 
   /* Entry points normalization. */

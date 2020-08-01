@@ -28,10 +28,12 @@ const baseFactory = require('./app-base');
  * @param {String} ops.publicPath Base URL for the output of the build assets.
  */
 module.exports = function configFactory(ops) {
-  const res = merge(baseFactory({
-    ...ops,
-    babelEnv: 'development',
+  const o = _.defaults(_.clone(ops), {
     cssLocalIdent: '[path][name]___[local]___[hash:base64:6]',
+  });
+  const res = merge(baseFactory({
+    ...o,
+    babelEnv: 'development',
     mode: 'development',
   }), {
     plugins: [
