@@ -12,6 +12,8 @@
     top: 0;
     width: 100%;
     z-index: 998;
+
+    &:focus { outline: none; }
   }
 
   &.container {

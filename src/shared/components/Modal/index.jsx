@@ -10,7 +10,7 @@
 /* global document */
 
 import _ from 'lodash';
-import React from 'react';
+import React, { useMemo } from 'react';
 import ReactDom from 'react-dom';
 import PT from 'prop-types';
 import themed from '@dr.pogodin/react-themes';
@@ -23,6 +23,7 @@ function BaseModal({
   onCancel,
   theme,
 }) {
+  const containerRef = React.useRef();
   const overlayRef = React.useRef();
   const [portal, setPortal] = React.useState();
 
@@ -37,17 +38,26 @@ function BaseModal({
     };
   }, []);
 
+  const focusLast = useMemo(() => (
+    <div
+      onFocus={() => {
+        const elems = containerRef.current.querySelectorAll('*');
+        for (let i = elems.length - 1; i >= 0; --i) {
+          elems[i].focus();
+          if (document.activeElement === elems[i]) return;
+        }
+        overlayRef.current.focus();
+      }}
+      /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+      tabIndex="0"
+      /* eslint-enable jsx-a11y/no-noninteractive-tabindex */
+    />
+  ), []);
+
   return portal ? ReactDom.createPortal(
     (
       <>
-        <div
-          aria-modal="true"
-          className={theme.container}
-          onWheel={(event) => event.stopPropagation()}
-          role="dialog"
-        >
-          {children}
-        </div>
+        {focusLast}
         <div
           aria-label="Cancel"
           className={theme.overlay}
@@ -62,8 +72,26 @@ function BaseModal({
             }
           }}
           role="button"
-          tabIndex="-1"
+          tabIndex="0"
         />
+        <div
+          aria-modal="true"
+          className={theme.container}
+          onWheel={(event) => event.stopPropagation()}
+          ref={containerRef}
+          role="dialog"
+        >
+          {children}
+        </div>
+        <div
+          onFocus={() => {
+            overlayRef.current.focus();
+          }}
+          /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+          tabIndex="0"
+          /* eslint-enable jsx-a11y/no-noninteractive-tabindex */
+        />
+        {focusLast}
       </>
     ),
     portal,
