@@ -19,6 +19,7 @@ module.exports = {
   rootDir: '../..',
   testMatch: ['**/__tests__/**/*.js?(x)'],
   testPathIgnorePatterns: [
+    '/__assets__/',
     '/node_modules/',
   ],
   testURL: 'http://localhost',
