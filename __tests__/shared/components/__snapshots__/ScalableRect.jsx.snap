@@ -2,7 +2,7 @@
 
 exports[`Snapshots match 1`] = `
 <div
-  className="src-shared-components-ScalableRect-___style__container___3YhfN"
+  className="src-shared-components-ScalableRect-style___container___3YhfNf"
   style={
     Object {
       "paddingBottom": "100%",
@@ -10,7 +10,7 @@ exports[`Snapshots match 1`] = `
   }
 >
   <div
-    className="src-shared-components-ScalableRect-___style__wrapper___3qZoW"
+    className="src-shared-components-ScalableRect-style___wrapper___3qZoWe"
   >
     CONTENT
   </div>
@@ -22,7 +22,7 @@ exports[`Snapshots match 2`] = `
   className="CLASS_NAME"
 >
   <div
-    className="src-shared-components-ScalableRect-___style__container___3YhfN"
+    className="src-shared-components-ScalableRect-style___container___3YhfNf"
     style={
       Object {
         "paddingBottom": "100%",
@@ -30,7 +30,7 @@ exports[`Snapshots match 2`] = `
     }
   >
     <div
-      className="src-shared-components-ScalableRect-___style__wrapper___3qZoW"
+      className="src-shared-components-ScalableRect-style___wrapper___3qZoWe"
     >
       CONTENT
     </div>

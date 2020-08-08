@@ -55,13 +55,11 @@ function addStyling(config, env) {
   config.plugins.push(['react-css-modules', cssModulesOps]);
   switch (env) {
     case ENVIRONMENTS.DEV:
+    case ENVIRONMENTS.TEST:
       cssModulesOps.generateScopedName = '[path][name]___[local]___[hash:base64:6]';
       break;
     case ENVIRONMENTS.PROD:
       cssModulesOps.generateScopedName = '[hash:base64:6]';
-      break;
-    case ENVIRONMENTS.TEST:
-      cssModulesOps.generateScopedName = '[path]___[name]__[local]___[hash:base64:5]';
       break;
     default:
   }
