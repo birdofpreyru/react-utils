@@ -2,12 +2,14 @@
 
 exports[`Babel stylename generation 1`] = `
 <div
-  className="__tests__-config-stylename-generation-__assets__-TestComponent-___style__testClassName___2QV-B"
-/>
+  className="__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___1v_vvw"
+>
+  {"testClassName":"__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___1v_vvw"}
+</div>
 `;
 
 exports[`Webpack stylename generation 1`] = `
-".__tests__-config-stylename-generation-__assets__-TestComponent-___style__testClassName___2QV-B {
+".__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___1v_vvw {
   background: red;
   width: 10px;
   height: 10px;

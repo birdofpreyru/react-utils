@@ -2,7 +2,7 @@
 
 exports[`Matches snapshots when active 1`] = `
 <div
-  className="src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS"
+  className="src-shared-components-Button-style___button___oguJnh   BUTTON_CLASS src-shared-components-Button-style___active___2IWcBB   ACTIVE_CLASS"
   onClick={[Function]}
   onKeyPress={[Function]}
   role="button"
@@ -14,7 +14,7 @@ exports[`Matches snapshots when active 1`] = `
 
 exports[`Matches snapshots when disabled 1`] = `
 <div
-  className="src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS src-shared-components-Button-style___disabled___3uMacK   DISABLED_CLASS"
+  className="src-shared-components-Button-style___button___oguJnh   BUTTON_CLASS src-shared-components-Button-style___disabled___Wt6a-V   DISABLED_CLASS"
 >
   BUTTON
 </div>
@@ -22,7 +22,7 @@ exports[`Matches snapshots when disabled 1`] = `
 
 exports[`Matches snapshots when disabled 2`] = `
 <div
-  className="src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS src-shared-components-Button-style___disabled___3uMacK"
+  className="src-shared-components-Button-style___button___oguJnh   BUTTON_CLASS src-shared-components-Button-style___disabled___Wt6a-V"
 >
   BUTTON
 </div>
@@ -30,7 +30,7 @@ exports[`Matches snapshots when disabled 2`] = `
 
 exports[`Matches snapshots when rendered as link 1`] = `
 <a
-  className="src-shared-components-Button-style___button___ngAZY2   BUTTON_CLASS src-shared-components-Button-style___active___3Gx8NP   ACTIVE_CLASS"
+  className="src-shared-components-Button-style___button___oguJnh   BUTTON_CLASS src-shared-components-Button-style___active___2IWcBB   ACTIVE_CLASS"
   disabled={false}
   href="/SOME/TEST/URL"
   onClick={[Function]}

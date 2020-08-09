@@ -52,7 +52,7 @@ Object {
     "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
     Array [
-      "react-css-modules",
+      "@dr.pogodin/react-css-modules",
       Object {
         "filetypes": Object {
           ".scss": Object {
@@ -128,7 +128,7 @@ Object {
     "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
     Array [
-      "react-css-modules",
+      "@dr.pogodin/react-css-modules",
       Object {
         "filetypes": Object {
           ".scss": Object {

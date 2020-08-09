@@ -52,13 +52,11 @@ function addStyling(config, env) {
   };
   switch (env) {
     case getWebpackBabelConfig.ENVIRONMENTS.DEV:
+    case getWebpackBabelConfig.ENVIRONMENTS.TEST:
       cssModulesTransformOps.generateScopedName = '[path][name]___[local]___[hash:base64:6]';
       break;
     case getWebpackBabelConfig.ENVIRONMENTS.PROD:
       cssModulesTransformOps.generateScopedName = '[hash:base64:6]';
-      break;
-    case getWebpackBabelConfig.ENVIRONMENTS.TEST:
-      cssModulesTransformOps.generateScopedName = '[path][name]___[local]___[hash:base64:6]';
       break;
     default:
   }

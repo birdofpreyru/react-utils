@@ -14,7 +14,7 @@ it('Babel stylename generation', () => {
 
 it('Webpack stylename generation', (done) => {
   const webpackConfig = webpackConfigFactory({
-    cssLocalIdent: '[path]___[name]__[local]___[hash:base64:5]',
+    cssLocalIdent: '[path][name]___[local]___[hash:base64:6]',
     context: path.resolve(__dirname, '../../..'),
     dontEmitBuildInfo: true,
     dontTimestampOutputs: true,
@@ -41,7 +41,7 @@ it('Webpack stylename generation', (done) => {
       expect(compiledCss).toMatchSnapshot();
       expect(
         compiledCss.startsWith(
-          '.__tests__-config-stylename-generation-__assets__-TestComponent-___style__testClassName___2QV-B',
+          '.__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___1v_vvw',
         ),
       ).toBe(true);
       /* eslint-enable no-underscore-dangle */
@@ -49,4 +49,4 @@ it('Webpack stylename generation', (done) => {
       done();
     }
   });
-});
+}, 30000);
