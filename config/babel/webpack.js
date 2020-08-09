@@ -52,7 +52,7 @@ function addStyling(config, env) {
       '.scss': { syntax: 'postcss-scss' },
     },
   };
-  config.plugins.push(['react-css-modules', cssModulesOps]);
+  config.plugins.push(['@dr.pogodin/react-css-modules', cssModulesOps]);
   switch (env) {
     case ENVIRONMENTS.DEV:
     case ENVIRONMENTS.TEST:

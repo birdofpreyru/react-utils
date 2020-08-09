@@ -41,7 +41,7 @@ it('Webpack stylename generation', (done) => {
       expect(compiledCss).toMatchSnapshot();
       expect(
         compiledCss.startsWith(
-          '.__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___2QV-Bi',
+          '.__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___1v_vvw',
         ),
       ).toBe(true);
       /* eslint-enable no-underscore-dangle */
