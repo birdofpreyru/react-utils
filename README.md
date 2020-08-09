@@ -96,6 +96,8 @@ $ ./node_modules/.bin/react-utils-setup
 - [`isomorphy`](docs/isomorphy-utils.md) &ndash; Collection of helpers to deal
   with isomorphic aspects of the code.
 - [`JU`](docs/jest-utils.md) &ndash; `jest` utilities.
+- [`newBarrier()`](docs/new-barrier.md) &ndash; a function which creates
+  a Promise with its resolve method attached as `.resolve` field.
 - [`PT`](docs/prop-types.md) &ndash; Alias of `prop-types`.
 - [React Themes](docs/react-themes.md) &ndash; Aliases for `dr.pogodin/react-themes`.
   UI styles for React components with theme composition.

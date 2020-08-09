@@ -28,6 +28,18 @@ const JU = isomorphy.IS_SERVER_SIDE
   && (process.env.NODE_CONFIG_ENV || process.env.NODE_ENV) !== 'production'
   ? webpack.requireWeak(juUrl) : null;
 
+/**
+ * Creates a new async barrier: a Promise instance with its resolve method
+ * attached as .resolve field.
+ * @return {Promise<>}
+ */
+function newBarrier() {
+  let resolve;
+  const promise = new Promise((res) => { resolve = res; });
+  promise.resolve = resolve;
+  return promise;
+}
+
 export {
   _,
   api,
@@ -35,6 +47,7 @@ export {
   hooks,
   isomorphy,
   JU,
+  newBarrier,
   PT,
   themed,
   ThemeProvider,
