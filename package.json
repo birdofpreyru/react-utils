@@ -39,6 +39,7 @@
     "shortid": "^2.2.15",
     "source-map-support": "^0.5.19",
     "url-parse": "^1.4.7",
+    "uuid": "^8.3.0",
     "winston": "^3.3.3"
   },
   "description": "Collection of generic ReactJS components and utils",
@@ -131,5 +132,5 @@
     "lint:scss": "stylelint **/*.scss --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "0.25.0"
+  "version": "0.25.1"
 }

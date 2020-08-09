@@ -85,7 +85,7 @@ exports[`Client-side rendering 2`] = `
     </div>
   </div>
 </div>
-<script id=\\"inj\\" type=\\"application/javascript\\">
+<script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
   window.SPLITS = {
     \\"sample-component-1\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\",
     \\"sample-component-2\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\",
@@ -238,7 +238,7 @@ exports[`Server-side rendring 1`] = `
         </div>
       </div>
     </div>
-    <script id=\\"inj\\" type=\\"application/javascript\\">
+    <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
       window.SPLITS = {
         \\"sample-component-1\\": \\"\\",
         \\"sample-component-2\\": \\"\\\\u003Cdiv\\\\u003EPLACEHOLDER!\\\\u003C\\\\u002Fdiv\\\\u003E\\",
@@ -345,7 +345,7 @@ exports[`Server-side rendring 2`] = `
         </div>
       </div>
     </div>
-    <script id=\\"inj\\" type=\\"application/javascript\\">
+    <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
       window.SPLITS = {
         \\"sample-component-1\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\",
         \\"sample-component-2\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\",

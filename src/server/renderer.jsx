@@ -259,7 +259,11 @@ export default function factory(webpackConfig, options) {
           <body>
             ${bodyOpenExtraScripts || ''}
             <div id="react-view">${App || ''}</div>
-            <script id="inj" type="application/javascript">
+            <script
+              id="inj"
+              type="application/javascript"
+              nonce="${req.cspNonce}"
+            >
               window.SPLITS = ${serializeJs(ssrContext.splits, { isJSON: true })}
               window.INJ="${INJ}"
             </script>

@@ -11,6 +11,7 @@ import favicon from 'serve-favicon';
 import helmet from 'helmet';
 import loggerMiddleware from 'morgan';
 import requestIp from 'request-ip';
+import { v4 as uuid } from 'uuid';
 
 import rendererFactory from './renderer';
 
@@ -40,7 +41,30 @@ export default async function factory(webpackConfig, options) {
   }
 
   server.use(compression());
-  server.use(helmet());
+  server.use(helmet({ contentSecurityPolicy: false }));
+
+  server.use((req, res, next) => {
+    req.cspNonce = uuid();
+    const csp = helmet.contentSecurityPolicy({
+      // These are default options of CSP middleware (as of helmet library
+      // v4.0.0), with the only change being the unique script-src nounce
+      // added for each request.
+      directives: {
+        'default-src': ["'self'"],
+        'base-uri': ["'self'"],
+        'block-all-mixed-content': [],
+        'font-src': ["'self'", 'https:', 'data:'],
+        'frame-ancestors': ["'self'"],
+        'img-src': ["'self'", 'data:'],
+        'object-src': ["'none'"],
+        'script-src': ["'self'", "'unsafe-eval'", `'nonce-${req.cspNonce}'`],
+        'script-src-attr': ["'none'"],
+        'style-src': ["'self'", 'https:', "'unsafe-inline'"],
+        'upgrade-insecure-requests': [],
+      },
+    });
+    csp(req, res, next);
+  });
 
   if (options.favicon) {
     server.use(favicon(options.favicon));
