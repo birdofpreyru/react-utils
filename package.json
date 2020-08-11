@@ -56,7 +56,7 @@
     "@dr.pogodin/babel-preset-svgr": "^1.0.10",
     "autoprefixer": "^9.8.6",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.2.2",
+    "babel-jest": "^26.3.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-module-resolver": "^4.0.0",
@@ -74,8 +74,8 @@
     "event-source-polyfill": "^1.0.16",
     "file-loader": "^6.0.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^26.2.2",
-    "mini-css-extract-plugin": "^0.9.0",
+    "jest": "^26.3.0",
+    "mini-css-extract-plugin": "^0.10.0",
     "mockdate": "^3.0.2",
     "nodelist-foreach-polyfill": "^1.2.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
@@ -132,5 +132,5 @@
     "lint:scss": "stylelint **/*.scss --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "0.25.1"
+  "version": "0.25.2"
 }
