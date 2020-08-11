@@ -25,7 +25,11 @@ exports[`"favicon" option 1`] = `
           <body>
             
             <div id=\\"react-view\\"></div>
-            <script id=\\"inj\\" type=\\"application/javascript\\">
+            <script
+              id=\\"inj\\"
+              type=\\"application/javascript\\"
+              nonce=\\"abcdef-dummy-nonce\\"
+            >
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1TZonSyrmykHqLzmKxXS0DK2Cs9zyFh0xgn25yw2xNin\\"
             </script>
@@ -67,7 +71,11 @@ exports[`Base rendering of HTML template 1`] = `
           <body>
             
             <div id=\\"react-view\\"></div>
-            <script id=\\"inj\\" type=\\"application/javascript\\">
+            <script
+              id=\\"inj\\"
+              type=\\"application/javascript\\"
+              nonce=\\"abcdef-dummy-nonce\\"
+            >
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1TZonSyrmykHqLzmKxXS0DK2Cs9zyFh0xgn25yw2xNin\\"
             </script>
@@ -109,7 +117,11 @@ exports[`Config overriding for injection 1`] = `
           <body>
             
             <div id=\\"react-view\\"></div>
-            <script id=\\"inj\\" type=\\"application/javascript\\">
+            <script
+              id=\\"inj\\"
+              type=\\"application/javascript\\"
+              nonce=\\"abcdef-dummy-nonce\\"
+            >
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1V2aMuxzUDYDD7cyzqAGNMV/1JiJaq6hJDBBPyP0kOQPqRTHIpwZ3UR8U81Nr3rcN8PKpItGkkn7wPCt6QXzc3s=\\"
             </script>
@@ -151,7 +163,11 @@ exports[`Hemlet integration works 1`] = `
           <body>
             
             <div id=\\"react-view\\"><div><p>Hello World!</p><p>Goodbye World!</p></div></div>
-            <script id=\\"inj\\" type=\\"application/javascript\\">
+            <script
+              id=\\"inj\\"
+              type=\\"application/javascript\\"
+              nonce=\\"abcdef-dummy-nonce\\"
+            >
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1TZonSyrmykHqLzmKxXS0DK2Cs9zyFh0xgn25yw2xNin\\"
             </script>
@@ -193,7 +209,11 @@ exports[`Injection of additional JS scripts 1`] = `
           <body>
             <script>1-st script after opening <body></script><script>2-nd script after opening <body></script>
             <div id=\\"react-view\\"></div>
-            <script id=\\"inj\\" type=\\"application/javascript\\">
+            <script
+              id=\\"inj\\"
+              type=\\"application/javascript\\"
+              nonce=\\"abcdef-dummy-nonce\\"
+            >
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1TZonSyrmykHqLzmKxXS0DK2Cs9zyFh0xgn25yw2xNin\\"
             </script>
@@ -235,7 +255,11 @@ exports[`Server-side rendering (SSR); injection of CSS chunks & Redux state 1`] 
           <body>
             
             <div id=\\"react-view\\"><div>Hello Wold!</div></div>
-            <script id=\\"inj\\" type=\\"application/javascript\\">
+            <script
+              id=\\"inj\\"
+              type=\\"application/javascript\\"
+              nonce=\\"abcdef-dummy-nonce\\"
+            >
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1TZonSyrmykHqLzmKxXS0DLPyBqGDNu0Yb+sEvg3s2Nv7ZYfzgAL5LpxryHNGWLiWYlCFgBW1NkdubXDUzuNfddcSwOHmA68IbAvuQnY81RZWKcs/M+w/CFPnw0PiVYASg==\\"
             </script>
@@ -278,7 +302,11 @@ exports[`Setting of response HTTP status the server-side rendering 1`] = `
           <body>
             
             <div id=\\"react-view\\"><div>404 Error Test</div></div>
-            <script id=\\"inj\\" type=\\"application/javascript\\">
+            <script
+              id=\\"inj\\"
+              type=\\"application/javascript\\"
+              nonce=\\"abcdef-dummy-nonce\\"
+            >
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1TZonSyrmykHqLzmKxXS0DK2Cs9zyFh0xgn25yw2xNin\\"
             </script>
