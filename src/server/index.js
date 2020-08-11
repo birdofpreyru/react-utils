@@ -35,6 +35,9 @@ function normalizePort(value) {
  * @param {Object} [options] Additional options.
  * @param {Function} [options.Application=null] Optional. The root ReactJS
  *  component of the app to use for server-side rendering.
+ * @param {string[]} [options.cspFrameSrc=["'self'", 'https://*.youtube.com']]
+ *  Optional. Overrides the value of Content Security Policy's (CSP's)
+ *  "frame-src" directive. Defaults to ["'self'", 'https://*.youtube.com'].
  * @param {Boolean} [options.devMode=false] Whether the server should be
  *  started in the dev mode.
  * @param {String} [options.favicon=""] Path of the favicon to be used by

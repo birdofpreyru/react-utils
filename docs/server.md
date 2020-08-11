@@ -41,6 +41,12 @@ development tools, including Hot Module Reloading (HMR).
     for server-side rendering, and also to inject additional configuration and
     scripts into the generated HTML code.
 
+  - `options.cspFrameSrc: string[] = ["'self'", 'https://*.youtube.com']` &ndash;
+    Optional. Overrides the value of [CSP's `frame-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-src)
+    directive. The default value whitelists YouTube host to ensure that
+    [`<YouTubeVideo>`](./YouTubeVideo.md) component works with default
+    settings.
+
   - `[options.devMode]` (_Boolean_) &ndash; Optional. Pass in `true` to start
     the server in development mode.
 

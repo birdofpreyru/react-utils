@@ -55,6 +55,7 @@ export default async function factory(webpackConfig, options) {
         'block-all-mixed-content': [],
         'font-src': ["'self'", 'https:', 'data:'],
         'frame-ancestors': ["'self'"],
+        'frame-src': options.cspFrameSrc || ["'self'", 'https://*.youtube.com'],
         'img-src': ["'self'", 'data:'],
         'object-src': ["'none'"],
         'script-src': ["'self'", "'unsafe-eval'", `'nonce-${req.cspNonce}'`],
