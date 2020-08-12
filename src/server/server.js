@@ -13,6 +13,8 @@ import loggerMiddleware from 'morgan';
 import requestIp from 'request-ip';
 import { v4 as uuid } from 'uuid';
 
+import { isDevBuild } from 'utils/isomorphy';
+
 import rendererFactory from './renderer';
 
 export default async function factory(webpackConfig, options) {
@@ -61,9 +63,9 @@ export default async function factory(webpackConfig, options) {
         scriptSrc: ["'self'", "'unsafe-eval'", `'nonce-${req.cspNonce}'`],
         scriptSrcAttr: ["'none'"],
         styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
-        upgradeInsecureRequests: [],
       },
     };
+    if (!isDevBuild()) cspSettings.directives.upgradeInsecureRequests = [];
     if (options.cspSettingsHook) {
       cspSettings = options.cspSettingsHook(cspSettings, req);
     }

@@ -52,7 +52,8 @@ development tools, including Hot Module Reloading (HMR).
     and the incoming request object. The hook response will be passed
     as options to the helmet `contentSecurityPolicy` middleware.
 
-    Currently, the default settings is the following object:
+    Currently, the default settings is the following object in production
+    environment:
     ```js
     {
       directives: {
@@ -67,7 +68,7 @@ development tools, including Hot Module Reloading (HMR).
         scriptSrc: ["'self'", "'unsafe-eval'", `'nonce-UNIQUE_NONCE_VALUE'`],
         scriptSrcAttr: ["'none'"],
         styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
-        upgradeInsecureRequests: []
+        upgradeInsecureRequests: [] // Removed in dev mode.
       }
     }
     ```
@@ -78,6 +79,8 @@ development tools, including Hot Module Reloading (HMR).
       whitelist auxiliary scripts injected by react-utils. The actual nonce
       value can be fetched by host code via `.cspNonce` field of `req` argument
       of `.beforeRender` hook.
+    - `upgradeInsecureRequests` directive is removed in development mode,
+      to simplify local testing with http requests.
 
   - `[options.devMode]` (_Boolean_) &ndash; Optional. Pass in `true` to start
     the server in development mode.
