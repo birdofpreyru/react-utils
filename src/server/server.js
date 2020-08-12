@@ -45,26 +45,29 @@ export default async function factory(webpackConfig, options) {
 
   server.use((req, res, next) => {
     req.cspNonce = uuid();
-    const csp = helmet.contentSecurityPolicy({
-      // These are default options of CSP middleware (as of helmet library
-      // v4.0.0), with the only change being the unique script-src nounce
-      // added for each request.
+    // These are default options of CSP middleware (as of helmet library
+    // v4.0.0), with the only change being the unique script-src nounce
+    // added for each request.
+    let cspSettings = {
       directives: {
-        'default-src': ["'self'"],
-        'base-uri': ["'self'"],
-        'block-all-mixed-content': [],
-        'font-src': ["'self'", 'https:', 'data:'],
-        'frame-ancestors': ["'self'"],
-        'frame-src': options.cspFrameSrc,
-        'img-src': options.cspImgSrc,
-        'object-src': ["'none'"],
-        'script-src': ["'self'", "'unsafe-eval'", `'nonce-${req.cspNonce}'`],
-        'script-src-attr': ["'none'"],
-        'style-src': ["'self'", 'https:', "'unsafe-inline'"],
-        'upgrade-insecure-requests': [],
+        defaultSrc: ["'self'"],
+        baseUri: ["'self'"],
+        blockAllMixedContent: [],
+        fontSrc: ["'self'", 'https:', 'data:'],
+        frameAncestors: ["'self'"],
+        frameSrc: ["'self'", 'https://*.youtube.com'],
+        imgSrc: ["'self'", 'data:'],
+        objectSrc: ["'none'"],
+        scriptSrc: ["'self'", "'unsafe-eval'", `'nonce-${req.cspNonce}'`],
+        scriptSrcAttr: ["'none'"],
+        styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
+        upgradeInsecureRequests: [],
       },
-    });
-    csp(req, res, next);
+    };
+    if (options.cspSettingsHook) {
+      cspSettings = options.cspSettingsHook(cspSettings);
+    }
+    helmet.contentSecurityPolicy(cspSettings)(req, res, next);
   });
 
   if (options.favicon) {

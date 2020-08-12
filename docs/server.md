@@ -41,15 +41,37 @@ development tools, including Hot Module Reloading (HMR).
     for server-side rendering, and also to inject additional configuration and
     scripts into the generated HTML code.
 
-  - `options.cspFrameSrc: string[] = ["'self'", 'https://*.youtube.com']` &ndash;
-    Optional. The value of [CSP `frame-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-src)
-    directive. Defaults to `["'self'", 'https://*.youtube.com']`. YouTube host
-    is whitelisted to ensure that [`<YouTubeVideo>`](./YouTubeVideo.md)
-    component works with default settings.
-
-  - `options.cspImgSrc: string[] = ["'self'", 'data:']` &ndash; Optional.
-    The value of [CSP `img-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/img-src) directive. Defaults to
-    `["'self'", 'data:']`.
+  - `[options.cspSettingsHook: function]` &ndash; Optional. If provided it will
+    be called on each request with the argument set to default
+    [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) settings for
+    [helmet](https://github.com/helmetjs/helmet)'s
+    `contentSecurityPolicy` middleware. The response from the hook will be
+    passed to the middleware as the actual settings to use. The default value is
+    ```js
+    {
+      directives: {
+        defaultSrc: ["'self'"],
+        baseUri: ["'self'"],
+        blockAllMixedContent: [],
+        fontSrc: ["'self'", 'https:', 'data:'],
+        frameAncestors: ["'self'"],
+        frameSrc: ["'self'", 'https://*.youtube.com'],
+        imgSrc: ["'self'", 'data:'],
+        objectSrc: ["'none'"],
+        scriptSrc: ["'self'", "'unsafe-eval'", `'nonce-UNIQUE_NONCE_VALUE'`],
+        scriptSrcAttr: ["'none'"],
+        styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
+        upgradeInsecureRequests: []
+      }
+    }
+    ```
+    It is the default value used by Helmet with a few updates:
+    - YouTube host is whitelisted in the `frameSrc` directive to ensure
+      the [`<YouTubeVideo>`](./YouTubeVideo.md) component works.
+    - An unique per-request nonce is added to `scriptSrc` directive to
+      whitelist auxiliary scripts injected by react-utils. The actual nonce
+      value can be fetched by host code via `.cspNonce` field of `req` argument
+      of `.beforeRender` hook.
 
   - `[options.devMode]` (_Boolean_) &ndash; Optional. Pass in `true` to start
     the server in development mode.
