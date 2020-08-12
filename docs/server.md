@@ -42,10 +42,14 @@ development tools, including Hot Module Reloading (HMR).
     scripts into the generated HTML code.
 
   - `options.cspFrameSrc: string[] = ["'self'", 'https://*.youtube.com']` &ndash;
-    Optional. Overrides the value of [CSP's `frame-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-src)
-    directive. The default value whitelists YouTube host to ensure that
-    [`<YouTubeVideo>`](./YouTubeVideo.md) component works with default
-    settings.
+    Optional. The value of [CSP `frame-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-src)
+    directive. Defaults to `["'self'", 'https://*.youtube.com']`. YouTube host
+    is whitelisted to ensure that [`<YouTubeVideo>`](./YouTubeVideo.md)
+    component works with default settings.
+
+  - `options.cspImgSrc: string[] = ["'self'", 'data:']` &ndash; Optional.
+    The value of [CSP `img-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/img-src) directive. Defaults to
+    `["'self'", 'data:']`.
 
   - `[options.devMode]` (_Boolean_) &ndash; Optional. Pass in `true` to start
     the server in development mode.
@@ -99,7 +103,11 @@ development tools, including Hot Module Reloading (HMR).
 
   **Arguments**
 
-  - `req` (_Object_) &ndash; Incoming ExpressJS HTTP request.
+  - `req` (_Object_) &ndash; Incoming ExpressJS HTTP request, with some extra
+    fields attached:
+
+    - `.cspNonce: string` &ndash; CSP nonce for `<script>` tags, which should be
+      added to the tags injected into the page to allow them to work.
 
   - `config` (_Object_) &ndash; Application config that server wants to
     inject into generated HTML template.

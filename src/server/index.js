@@ -38,6 +38,8 @@ function normalizePort(value) {
  * @param {string[]} [options.cspFrameSrc=["'self'", 'https://*.youtube.com']]
  *  Optional. Overrides the value of Content Security Policy's (CSP's)
  *  "frame-src" directive. Defaults to ["'self'", 'https://*.youtube.com'].
+ * @param {string[]} [options.cspImgSrc=["'self'", 'data:']] Optional. Overrides
+ *  the value of CSP "img-src" directive. Defaults to ["'self'", 'data:'].
  * @param {Boolean} [options.devMode=false] Whether the server should be
  *  started in the dev mode.
  * @param {String} [options.favicon=""] Path of the favicon to be used by
@@ -75,6 +77,8 @@ async function launch(webpackConfig, options) {
   ops.port = normalizePort(ops.port || process.env.PORT || 3000);
   _.defaults(ops, {
     httpsRedirect: true,
+    cspFrameSrc: ["'self'", 'https://*.youtube.com'],
+    cspImgSrc: ["'self'", 'data:'],
   });
 
   if (_.isUndefined(ops.logger)) {

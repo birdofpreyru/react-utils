@@ -173,5 +173,5 @@ libs.forEach((library) => {
   updateProdDependencies(libData, hostData);
 });
 spawnSync('npm', ['install'], { stdio: 'inherit' });
-spawnSync('npm', ['dedupe'], { stdio: 'inherit' });
 spawnSync('npm', ['audit', 'fix'], { stdio: 'inherit' });
+spawnSync('npm', ['dedupe'], { stdio: 'inherit' });
