@@ -65,7 +65,7 @@ export default async function factory(webpackConfig, options) {
       },
     };
     if (options.cspSettingsHook) {
-      cspSettings = options.cspSettingsHook(cspSettings);
+      cspSettings = options.cspSettingsHook(cspSettings, req);
     }
     helmet.contentSecurityPolicy(cspSettings)(req, res, next);
   });

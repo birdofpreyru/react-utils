@@ -41,12 +41,18 @@ development tools, including Hot Module Reloading (HMR).
     for server-side rendering, and also to inject additional configuration and
     scripts into the generated HTML code.
 
-  - `[options.cspSettingsHook: function]` &ndash; Optional. If provided it will
-    be called on each request with the argument set to default
-    [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) settings for
-    [helmet](https://github.com/helmetjs/helmet)'s
-    `contentSecurityPolicy` middleware. The response from the hook will be
-    passed to the middleware as the actual settings to use. The default value is
+  - `[options.cspSettingsHook: function]` &ndash; Optional. A hook allowing
+    to customize [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+    settings for [helmet](https://github.com/helmetjs/helmet)'s
+    `contentSecurityPolicy` middleware on per-request basis.
+
+    If provided it should be a with signature: \
+    `(defaultSettings: object, req: object)` &rArr; `object` \
+    which gets the default settings (also used without the hook),
+    and the incoming request object. The hook response will be passed
+    as options to the helmet `contentSecurityPolicy` middleware.
+
+    Currently, the default settings is the following object:
     ```js
     {
       directives: {
@@ -65,7 +71,7 @@ development tools, including Hot Module Reloading (HMR).
       }
     }
     ```
-    It is the default value used by Helmet with a few updates:
+    It matches the default value used by Helmet with a few updates:
     - YouTube host is whitelisted in the `frameSrc` directive to ensure
       the [`<YouTubeVideo>`](./YouTubeVideo.md) component works.
     - An unique per-request nonce is added to `scriptSrc` directive to
