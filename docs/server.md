@@ -41,6 +41,47 @@ development tools, including Hot Module Reloading (HMR).
     for server-side rendering, and also to inject additional configuration and
     scripts into the generated HTML code.
 
+  - `[options.cspSettingsHook: function]` &ndash; Optional. A hook allowing
+    to customize [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+    settings for [helmet](https://github.com/helmetjs/helmet)'s
+    `contentSecurityPolicy` middleware on per-request basis.
+
+    If provided it should be a with signature: \
+    `(defaultSettings: object, req: object)` &rArr; `object` \
+    which gets the default settings (also used without the hook),
+    and the incoming request object. The hook response will be passed
+    as options to the helmet `contentSecurityPolicy` middleware.
+
+    Currently, the default settings is the following object in production
+    environment:
+    ```js
+    {
+      directives: {
+        defaultSrc: ["'self'"],
+        baseUri: ["'self'"],
+        blockAllMixedContent: [],
+        fontSrc: ["'self'", 'https:', 'data:'],
+        frameAncestors: ["'self'"],
+        frameSrc: ["'self'", 'https://*.youtube.com'],
+        imgSrc: ["'self'", 'data:'],
+        objectSrc: ["'none'"],
+        scriptSrc: ["'self'", "'unsafe-eval'", `'nonce-UNIQUE_NONCE_VALUE'`],
+        scriptSrcAttr: ["'none'"],
+        styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
+        upgradeInsecureRequests: [] // Removed in dev mode.
+      }
+    }
+    ```
+    It matches the default value used by Helmet with a few updates:
+    - YouTube host is whitelisted in the `frameSrc` directive to ensure
+      the [`<YouTubeVideo>`](./YouTubeVideo.md) component works.
+    - An unique per-request nonce is added to `scriptSrc` directive to
+      whitelist auxiliary scripts injected by react-utils. The actual nonce
+      value can be fetched by host code via `.cspNonce` field of `req` argument
+      of `.beforeRender` hook.
+    - `upgradeInsecureRequests` directive is removed in development mode,
+      to simplify local testing with http requests.
+
   - `[options.devMode]` (_Boolean_) &ndash; Optional. Pass in `true` to start
     the server in development mode.
 
@@ -93,7 +134,11 @@ development tools, including Hot Module Reloading (HMR).
 
   **Arguments**
 
-  - `req` (_Object_) &ndash; Incoming ExpressJS HTTP request.
+  - `req` (_Object_) &ndash; Incoming ExpressJS HTTP request, with some extra
+    fields attached:
+
+    - `.cspNonce: string` &ndash; CSP nonce for `<script>` tags, which should be
+      added to the tags injected into the page to allow them to work.
 
   - `config` (_Object_) &ndash; Application config that server wants to
     inject into generated HTML template.
