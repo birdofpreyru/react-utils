@@ -54,6 +54,12 @@ Object {
           ".scss",
         ],
         "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
+        "processorOpts": Object {
+          "parser": Object {
+            "parse": [Function],
+            "stringify": [Function],
+          },
+        },
       },
     ],
   ],
@@ -173,6 +179,12 @@ Object {
           ".scss",
         ],
         "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
+        "processorOpts": Object {
+          "parser": Object {
+            "parse": [Function],
+            "stringify": [Function],
+          },
+        },
       },
     ],
   ],
@@ -243,6 +255,12 @@ Object {
           ".scss",
         ],
         "generateScopedName": "[hash:base64:6]",
+        "processorOpts": Object {
+          "parser": Object {
+            "parse": [Function],
+            "stringify": [Function],
+          },
+        },
       },
     ],
   ],
@@ -362,6 +380,12 @@ Object {
           ".scss",
         ],
         "generateScopedName": "[hash:base64:6]",
+        "processorOpts": Object {
+          "parser": Object {
+            "parse": [Function],
+            "stringify": [Function],
+          },
+        },
       },
     ],
   ],

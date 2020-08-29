@@ -9,7 +9,10 @@ exports[`Babel stylename generation 1`] = `
 `;
 
 exports[`Webpack stylename generation 1`] = `
-".__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___1v_vvw {
+"/*
+  Sample multi-line comment
+*/
+.__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___1v_vvw {
   background: red;
   width: 10px;
   height: 10px;
