@@ -7,10 +7,10 @@ import path from 'path';
 
 import CodeSplit from 'components/CodeSplit';
 
-import { hooks, webpack } from 'utils';
+import { useGlobalState, webpack } from 'utils';
 
 export default function SampleCodeSplit() {
-  const [testKey] = hooks.useGlobalState('test.key', 'testValue');
+  const [testKey] = useGlobalState('test.key', 'testValue');
   return (
     <>
       <h1>{testKey}</h1>

@@ -110,6 +110,10 @@ $ ./node_modules/.bin/react-utils-setup
 - [`time`](docs/time.md) &ndash; Alias of `moment` + related utils. Everything
   needed to deal with date & times.
 - [`url`](docs/url.md) &ndash; URL utils.
+- [`useAsyncData`](https://www.npmjs.com/package/@dr.pogodin/react-global-state#useAsyncData)
+  &ndash; Alias of the same named hook in `@dr.pogodin/react-global-state`.
+- [`useGlobalState`](https://www.npmjs.com/package/@dr.pogodin/react-global-state#useGlobalState)
+  &ndash; Alias of the same named hook in `@dr.pogodin/react-global-state`.
 - [`webpack`](docs/webpack-utils.md) &ndash; Various utils related to the
   Webpack bundling process.
 

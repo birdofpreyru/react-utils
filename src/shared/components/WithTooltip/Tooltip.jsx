@@ -246,7 +246,7 @@ const Tooltip = forwardRef(({ children, theme }, ref) => {
       document.body.removeChild(x.container);
       setComponents(null);
     };
-  }, []);
+  }, [theme]);
 
   return components ? createPortal(children, components.content) : null;
 });
