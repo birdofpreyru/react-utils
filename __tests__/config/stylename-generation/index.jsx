@@ -40,7 +40,7 @@ it('Webpack stylename generation', (done) => {
         ._source.children[0]._value;
       expect(compiledCss).toMatchSnapshot();
       expect(
-        compiledCss.startsWith(
+        compiledCss.includes(
           '.__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___1v_vvw',
         ),
       ).toBe(true);

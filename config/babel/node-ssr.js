@@ -1,6 +1,8 @@
 /* Babel preset for NodeJS build with support of server-side JSX rendering. */
+/* eslint-disable import/no-extraneous-dependencies */
 
 const _ = require('lodash');
+const postcssScss = require('postcss-scss');
 const getWebpackBabelConfig = require('./webpack');
 
 /**
@@ -49,6 +51,7 @@ function newBase(babel, options = {}) {
 function addStyling(config, env) {
   const cssModulesTransformOps = {
     extensions: ['.css', '.scss'],
+    processorOpts: { parser: postcssScss },
   };
   switch (env) {
     case getWebpackBabelConfig.ENVIRONMENTS.DEV:
