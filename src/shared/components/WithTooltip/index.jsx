@@ -3,9 +3,9 @@
  */
 /* global window */
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-import { hooks, PT, themed } from 'utils';
+import { PT, themed } from 'utils';
 
 import Tooltip, { PLACEMENTS } from './Tooltip';
 
@@ -17,9 +17,9 @@ function Wrapper({
   tip,
   theme,
 }) {
-  const tooltipRef = hooks.useRef();
-  const wrapperRef = hooks.useRef();
-  const [showTooltip, setShowTooltip] = hooks.useState(false);
+  const tooltipRef = useRef();
+  const wrapperRef = useRef();
+  const [showTooltip, setShowTooltip] = useState(false);
 
   const updatePortalPosition = (cursorX, cursorY) => {
     if (!showTooltip) setShowTooltip(true);
@@ -43,7 +43,7 @@ function Wrapper({
     }
   };
 
-  hooks.useEffect(() => {
+  useEffect(() => {
     if (showTooltip && tip !== null) {
       const listener = () => setShowTooltip(false);
       window.addEventListener('scroll', listener);

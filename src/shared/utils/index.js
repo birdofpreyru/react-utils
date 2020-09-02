@@ -2,6 +2,8 @@ import path from 'path';
 
 import _ from 'lodash';
 
+import { useGlobalState, useAsyncData } from '@dr.pogodin/react-global-state';
+
 import themed, {
   COMPOSE,
   PRIORITY,
@@ -13,7 +15,6 @@ import * as PT from 'prop-types';
 
 import config from './config';
 import * as isomorphy from './isomorphy';
-import hooks from './hooks';
 import time from './time';
 import * as url from './url';
 import * as webpack from './webpack';
@@ -44,7 +45,6 @@ export {
   _,
   api,
   config,
-  hooks,
   isomorphy,
   JU,
   newBarrier,
@@ -53,5 +53,7 @@ export {
   ThemeProvider,
   time,
   url,
+  useAsyncData,
+  useGlobalState,
   webpack,
 };
