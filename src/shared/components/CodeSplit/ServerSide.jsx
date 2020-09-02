@@ -30,12 +30,17 @@ export default function ServerSide({
   let Scene;
   if (getComponentServer) Scene = getComponentServer();
   else {
+    // In this case we are sure the condition won't change during the rendering
+    // loop, thus we can ignore the rule.
+    /* eslint-disable react-hooks/rules-of-hooks */
     const { data } = useAsyncData(
       `dr_pogodin_react_utils___split_components.${chunkName}`,
       getComponentAsync,
     );
     Scene = data ? (data.default || data) : (placeholder || (() => null));
+    /* eslint-enable react-hooks/rules-of-hooks */
   }
+
   const globalState = getGlobalState();
   const html = ReactDom.renderToString((
     <GlobalStateProvider stateProxy={globalState}>

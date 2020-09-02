@@ -24,6 +24,7 @@ export default function ClientSide({
   placeholder,
   ...rest
 }) {
+  const { current: heap } = React.useRef({ mounted: false });
   const buildInfo = getBuildInfo();
   const { publicPath } = buildInfo;
   const { buildTimestamp } = moment(buildInfo.timestamp).valueOf();
@@ -77,6 +78,13 @@ export default function ClientSide({
   /* TODO: Revise this, especially, what happens when parameters, like the
    * component is changed? */
   useEffect(() => {
+    // This is a safeguard against updates of <CodeSplit> parameters after
+    // the initial rendering. As noted above, it is not supported currently,
+    // and probably there is no need to support it. This check will help to
+    // figure it out for sure.
+    if (heap.mounted) throw Error('Illegal attempt to remount a CodeSplit');
+    else heap.mounted = true;
+
     /* The links to stylesheets are injected into document header using
     * browser's API, rather than ReactJS rendering mechanism, because
     * it gives a better control over reloading of the stylesheets and
@@ -120,7 +128,7 @@ export default function ClientSide({
        * at all. */
       if (link2) link2.setAttribute('data-chunk-unused', unusedCssStamp += 1);
     };
-  }, []);
+  }, [buildTimestamp, chunkName, heap, publicPath]);
 
   return res;
 }
