@@ -57,11 +57,11 @@ export default function GenericLink({
     replace,
     to,
     onClick: (e) => {
-      /* The link to the current page will scroll to the top of the page. */
-      if (!keepScrollPosition) window.scroll(0, 0);
+      // Executes the user-provided event handler, if any.
+      if (onClick) onClick(e);
 
-      /* If a custom onClick(..) handler was provided we execute it. */
-      return onClick && onClick(e);
+      // By default, clicking the link scrolls the page to beginning.
+      if (!keepScrollPosition) window.scroll(0, 0);
     },
     ...rest,
   }, children);
