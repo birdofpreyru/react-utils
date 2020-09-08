@@ -118,9 +118,11 @@ module.exports = function configFactory(ops) {
           }, {
             loader: 'postcss-loader',
             options: {
-              plugins: [
-                autoprefixer,
-              ],
+              postcssOptions: {
+                plugins: [
+                  autoprefixer,
+                ],
+              },
             },
           }, 'resolve-url-loader', {
             loader: 'sass-loader',
