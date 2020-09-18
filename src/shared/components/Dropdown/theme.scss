@@ -34,9 +34,8 @@
     margin: 0 0.6em 0 1.5em;
   }
 
-  &.option {
-    /* Empty style */
-  }
+  &.option { /* Empty style */ }
+  &.hiddenOption { display: none; }
 
   &.select {
     appearance: none;
