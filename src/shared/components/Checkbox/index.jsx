@@ -23,7 +23,7 @@ function Checkbox({
   );
 }
 
-const ThemedCheckbox = themed('CheckBox', [
+const ThemedCheckbox = themed('Checkbox', [
   'checkbox',
   'container',
   'label',
