@@ -12,7 +12,7 @@ function Dropdown({
   theme,
   value,
 }) {
-  const optionArray = [];
+  const optionArray = [<option className={theme.hiddenOption}>&zwnj;</option>];
   for (let i = 0; i < options.length; ++i) {
     let op = options[i];
     if (!filter || filter(op)) {
