@@ -67,11 +67,11 @@
     "eslint-config-airbnb": "^18.2.0",
     "eslint-import-resolver-babel-module": "^5.1.2",
     "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jest": "^24.0.1",
+    "eslint-plugin-jest": "^24.0.2",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.2",
-    "event-source-polyfill": "^1.0.19",
+    "event-source-polyfill": "^1.0.20",
     "file-loader": "^6.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.4.2",
@@ -79,7 +79,7 @@
     "mockdate": "^3.0.2",
     "nodelist-foreach-polyfill": "^1.2.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
-    "postcss": "^8.0.5",
+    "postcss": "^8.0.6",
     "postcss-loader": "^4.0.2",
     "postcss-scss": "^3.0.0",
     "pretty": "^2.0.0",
@@ -89,7 +89,7 @@
     "resolve-url-loader": "^3.1.1",
     "sass": "^1.26.11",
     "sass-loader": "^10.0.2",
-    "sitemap": "^6.3.0",
+    "sitemap": "^6.3.2",
     "stylelint": "^13.7.1",
     "stylelint-config-standard": "^20.0.0",
     "webpack": "^4.44.2",
@@ -133,5 +133,5 @@
     "lint:scss": "stylelint **/*.scss --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "0.27.0"
+  "version": "0.27.1"
 }
