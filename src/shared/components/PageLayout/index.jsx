@@ -29,20 +29,19 @@ function PageLayout({
   );
 }
 
+const ThemedPageLayout = themed('PageLayout', [
+  'container',
+  'leftSidePanel',
+  'mainPanel',
+  'rightSidePanel',
+  'sidePanel',
+], baseTheme)(PageLayout);
+
 PageLayout.propTypes = {
   children: PT.node,
   leftSidePanelContent: PT.node,
   rightSidePanelContent: PT.node,
-  theme: PT.exact({
-    ad: PT.string,
-    hoc: PT.string,
-    context: PT.string,
-    container: PT.string,
-    leftSidePanel: PT.string,
-    mainPanel: PT.string,
-    rightSidePanel: PT.string,
-    sidePanel: PT.string,
-  }).isRequired,
+  theme: ThemedPageLayout.themeType.isRequired,
 };
 
 PageLayout.defaultProps = {
@@ -51,4 +50,4 @@ PageLayout.defaultProps = {
   rightSidePanelContent: null,
 };
 
-export default themed('PageLayout', baseTheme)(PageLayout);
+export default ThemedPageLayout;
