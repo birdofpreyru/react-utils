@@ -53,8 +53,8 @@
     "@babel/preset-react": "^7.10.4",
     "@babel/types": "^7.11.5",
     "@dr.pogodin/babel-plugin-css-modules-transform": "^1.8.1",
-    "@dr.pogodin/babel-preset-svgr": "^1.1.1",
-    "autoprefixer": "^10.0.0",
+    "@dr.pogodin/babel-preset-svgr": "^1.2.0",
+    "autoprefixer": "^10.0.1",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.3.0",
     "babel-loader": "^8.1.0",
@@ -63,13 +63,13 @@
     "babel-plugin-transform-assets": "^1.0.2",
     "core-js": "^3.6.5",
     "css-loader": "^4.3.0",
-    "eslint": "^7.9.0",
+    "eslint": "^7.10.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-import-resolver-babel-module": "^5.1.2",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.0.2",
     "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.21.1",
+    "eslint-plugin-react": "^7.21.2",
     "eslint-plugin-react-hooks": "^4.1.2",
     "event-source-polyfill": "^1.0.20",
     "file-loader": "^6.1.0",
@@ -90,7 +90,7 @@
     "sass": "^1.26.11",
     "sass-loader": "^10.0.2",
     "sitemap": "^6.3.2",
-    "stylelint": "^13.7.1",
+    "stylelint": "^13.7.2",
     "stylelint-config-standard": "^20.0.0",
     "webpack": "^4.44.2",
     "webpack-dev-middleware": "^3.7.2",
@@ -133,5 +133,5 @@
     "lint:scss": "stylelint **/*.scss --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "0.27.1"
+  "version": "0.27.2"
 }
