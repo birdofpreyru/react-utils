@@ -66,6 +66,9 @@ $ ./node_modules/.bin/react-utils-setup
 - [`<Link>` and `<NavLink>`](docs/link-and-navlink.md) &ndash; Auxiliary
   wrappers around the React Router's components of the same names. Allow
   to handle external and internal links in the same uniform manner.
+- [`<MetaTags>`](docs/MetaTags.md) &ndash; Helps to inject meta tags (page
+  title, a brief content description, and social media thumbnails) into
+  generated pages.
 - [`<Modal>`](docs/modal.md) &ndash; Themeable modal component.
 - [`<PageLayout>`](docs/page-layout.md) &ndash; Simple and configurable
   page layout.
