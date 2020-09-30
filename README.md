@@ -109,8 +109,8 @@ $ ./node_modules/.bin/react-utils-setup
   with standard configuration, that serves a ReactJS application with or without
   server-side rendering, supports development tools (Hop Module Reloading), and
   can be further configured for the needs of specific projects.
-- [`time`](docs/time.md) &ndash; Alias of `moment` + related utils. Everything
-  needed to deal with date & times.
+- [`time`](docs/time.md) &ndash; An alias of `dayjs` + related utils.
+  Everything needed to deal with date & times.
 - [`url`](docs/url.md) &ndash; URL utils.
 - [`useAsyncData`](https://www.npmjs.com/package/@dr.pogodin/react-global-state#useAsyncData)
   &ndash; An alias for the `useAsyncData(..)` hook from `@dr.pogodin/react-global-state`.

@@ -9,7 +9,6 @@ const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const forge = require('node-forge');
 const fs = require('fs');
-const moment = require('moment');
 const path = require('path');
 const SM = require('sitemap');
 const { StatsWriterPlugin } = require('webpack-stats-plugin');
@@ -95,7 +94,7 @@ module.exports = function configFactory(ops) {
     });
   }
 
-  const now = moment();
+  const now = new Date();
 
   let outputFilenameSuffix = '';
   if (!o.dontTimestampOutputs) {
@@ -119,7 +118,7 @@ module.exports = function configFactory(ops) {
         publicPath: o.publicPath,
 
         /* Build timestamp. */
-        timestamp: now.utc().toISOString(),
+        timestamp: now.toUTCString(),
 
         /* `true` if client-side code should setup a service worker. */
         useServiceWorker: Boolean(o.workbox),

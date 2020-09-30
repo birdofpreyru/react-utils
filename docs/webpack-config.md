@@ -231,8 +231,8 @@ mutation of the config object.
     - `@dr.pogodin/react-themes`
     - `@dr.pogodin/react-utils`
     - `axios`
+    - `dayjs`
     - `lodash`
-    - `moment`
     - `prop-types`
     - `react`
     - `react-dom`

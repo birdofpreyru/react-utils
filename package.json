@@ -19,10 +19,10 @@
     "config": "^3.3.2",
     "cookie-parser": "^1.4.5",
     "cross-env": "^7.0.2",
+    "dayjs": "^1.9.1",
     "express": "^4.17.1",
     "helmet": "^4.1.1",
     "lodash": "^4.17.20",
-    "moment": "^2.29.0",
     "morgan": "^1.10.0",
     "node-forge": "^0.10.0",
     "prop-types": "^15.7.2",
@@ -133,5 +133,5 @@
     "lint:scss": "stylelint **/*.scss --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "0.27.2"
+  "version": "0.28.0"
 }

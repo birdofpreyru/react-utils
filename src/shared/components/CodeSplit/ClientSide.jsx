@@ -7,7 +7,7 @@
 import React, { useEffect } from 'react';
 
 import { useAsyncData } from '@dr.pogodin/react-global-state';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { getBuildInfo } from 'utils/isomorphy';
 import time from 'utils/time';
@@ -27,7 +27,7 @@ export default function ClientSide({
   const { current: heap } = React.useRef({ mounted: false });
   const buildInfo = getBuildInfo();
   const { publicPath } = buildInfo;
-  const { buildTimestamp } = moment(buildInfo.timestamp).valueOf();
+  const { buildTimestamp } = dayjs(buildInfo.timestamp).valueOf();
 
   let res;
 

@@ -8,7 +8,7 @@ import _ from 'lodash';
 import config from 'config';
 import forge from 'node-forge';
 import fs from 'fs';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import path from 'path';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
@@ -193,7 +193,7 @@ export default function factory(webpackConfig, options) {
       } else if (WEBPACK_STATS) ({ assetsByChunkName } = WEBPACK_STATS);
       else assetsByChunkName = {};
 
-      const timestamp = moment(buildInfo.timestamp).valueOf();
+      const timestamp = dayjs(buildInfo.timestamp).valueOf();
 
       if (ssrContext.status) res.status(ssrContext.status);
       const styles = [];
