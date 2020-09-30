@@ -60,7 +60,7 @@ $ ./node_modules/.bin/react-utils-setup
 - [`<Checkbox>`](docs/checkbox.md) &ndash; Themed checkbox component.
 - [`<CodeSplit>`](docs/code-split.md) &ndash; Code splitting component.
 - [`<Dropdown>`](docs/dropdown.md) &ndash; Themed dropdown component.
-- [`<GlobalStateProvider>`](docs/global-state-provider.md) &ndash; Alias
+- [`<GlobalStateProvider>`](https://www.npmjs.com/package/@dr.pogodin/react-global-state#GlobalStateProvider) &ndash; An alias
   for `<GlobalStateProvider>` from `@dr.pogodin/react-global-state`.
 - [`<Input>`](docs/input.md) &ndash; Themed text input component.
 - [`<Link>` and `<NavLink>`](docs/link-and-navlink.md) &ndash; Auxiliary
@@ -92,7 +92,6 @@ $ ./node_modules/.bin/react-utils-setup
 - [`config`](docs/config-utils.md) &ndash; Isomorphic app config.
 - [Global Styles](docs/global-styles.md) &ndash; Global SCSS styles necessary for
   a generic application.
-- [`hooks`](docs/hooks.md) &ndash; Different React hooks.
 - [`isomorphy`](docs/isomorphy-utils.md) &ndash; Collection of helpers to deal
   with isomorphic aspects of the code.
 - [`JU`](docs/jest-utils.md) &ndash; `jest` utilities.
@@ -111,9 +110,9 @@ $ ./node_modules/.bin/react-utils-setup
   needed to deal with date & times.
 - [`url`](docs/url.md) &ndash; URL utils.
 - [`useAsyncData`](https://www.npmjs.com/package/@dr.pogodin/react-global-state#useAsyncData)
-  &ndash; Alias of the same named hook in `@dr.pogodin/react-global-state`.
+  &ndash; An alias for the `useAsyncData(..)` hook from `@dr.pogodin/react-global-state`.
 - [`useGlobalState`](https://www.npmjs.com/package/@dr.pogodin/react-global-state#useGlobalState)
-  &ndash; Alias of the same named hook in `@dr.pogodin/react-global-state`.
+  &ndash; An alias for the `useGlobalState(..)` hook from `@dr.pogodin/react-global-state`.
 - [`webpack`](docs/webpack-utils.md) &ndash; Various utils related to the
   Webpack bundling process.
 
