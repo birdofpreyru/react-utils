@@ -14,6 +14,12 @@ dayjs.DAY_MS = 24 * dayjs.HOUR_MS;
 dayjs.YEAR_MS = 365 * dayjs.DAY_MS;
 
 /**
+ * Returns Unix timestamp [ms].
+ * @return {number}
+ */
+dayjs.now = Date.now;
+
+/**
  * Waits for the specified time.
  * @param {Number} timeout Interval duration [ms].
  * @return {Promise} Resolves after the specified timeout.

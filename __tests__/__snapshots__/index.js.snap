@@ -556,6 +556,7 @@ Array [
   "HOUR_MS",
   "DAY_MS",
   "YEAR_MS",
+  "now",
   "timer",
 ]
 `;
@@ -1222,6 +1223,7 @@ Array [
   "HOUR_MS",
   "DAY_MS",
   "YEAR_MS",
+  "now",
   "timer",
 ]
 `;

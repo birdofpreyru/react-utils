@@ -67,7 +67,7 @@
     "eslint-config-airbnb": "^18.2.0",
     "eslint-import-resolver-babel-module": "^5.1.2",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^24.0.2",
+    "eslint-plugin-jest": "^24.1.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.21.3",
     "eslint-plugin-react-hooks": "^4.1.2",
@@ -133,5 +133,5 @@
     "lint:scss": "stylelint **/*.scss --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "0.28.1"
+  "version": "0.28.2"
 }
