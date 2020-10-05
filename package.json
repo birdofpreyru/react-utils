@@ -9,7 +9,7 @@
   "dependencies": {
     "@babel/runtime": "^7.11.2",
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.0.6",
-    "@dr.pogodin/react-global-state": "^0.3.0",
+    "@dr.pogodin/react-global-state": "^0.3.1",
     "@dr.pogodin/react-themes": "^1.2.4",
     "autoprefix": "^1.0.1",
     "axios": "^0.20.0",
@@ -39,7 +39,7 @@
     "shortid": "^2.2.15",
     "source-map-support": "^0.5.19",
     "url-parse": "^1.4.7",
-    "uuid": "^8.3.0",
+    "uuid": "^8.3.1",
     "winston": "^3.3.3"
   },
   "description": "Collection of generic ReactJS components and utils",
@@ -56,7 +56,7 @@
     "@dr.pogodin/babel-preset-svgr": "^1.2.0",
     "autoprefixer": "^10.0.1",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.3.0",
+    "babel-jest": "^26.5.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-module-resolver": "^4.0.0",
@@ -69,18 +69,18 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.0.2",
     "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.21.2",
+    "eslint-plugin-react": "^7.21.3",
     "eslint-plugin-react-hooks": "^4.1.2",
     "event-source-polyfill": "^1.0.20",
     "file-loader": "^6.1.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^26.4.2",
-    "mini-css-extract-plugin": "^0.11.2",
+    "jest": "^26.5.0",
+    "mini-css-extract-plugin": "^0.11.3",
     "mockdate": "^3.0.2",
     "nodelist-foreach-polyfill": "^1.2.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss": "^8.1.1",
-    "postcss-loader": "^4.0.2",
+    "postcss-loader": "^4.0.3",
     "postcss-scss": "^3.0.2",
     "pretty": "^2.0.0",
     "react-hot-loader": "^4.13.0",
@@ -133,5 +133,5 @@
     "lint:scss": "stylelint **/*.scss --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "0.28.0"
+  "version": "0.28.1"
 }
