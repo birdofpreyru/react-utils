@@ -6,6 +6,7 @@
 
 const _ = require('lodash');
 const autoprefixer = require('autoprefixer');
+const dayjs = require('dayjs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const forge = require('node-forge');
 const fs = require('fs');
@@ -94,7 +95,7 @@ module.exports = function configFactory(ops) {
     });
   }
 
-  const now = new Date();
+  const now = dayjs();
 
   let outputFilenameSuffix = '';
   if (!o.dontTimestampOutputs) {
@@ -118,7 +119,7 @@ module.exports = function configFactory(ops) {
         publicPath: o.publicPath,
 
         /* Build timestamp. */
-        timestamp: now.toUTCString(),
+        timestamp: now.toISOString(),
 
         /* `true` if client-side code should setup a service worker. */
         useServiceWorker: Boolean(o.workbox),
