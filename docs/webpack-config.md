@@ -157,7 +157,6 @@ mutation of the config object.
     - **`NODE_ENV`** &mdash; It is set to *development*.
   - Adds the following plugins:
     - [HotModuleReplacementPlugin](https://webpack.js.org/plugins/hot-module-replacement-plugin/);
-    - [NoEmitOnErrorsPlugin](https://webpack.js.org/plugins/no-emit-on-errors-plugin/);
     - [NamedModulesPlugin](https://webpack.js.org/plugins/named-modules-plugin/).
 
 - <a name="app-production">**`config/webpack/app-production`**</a>
