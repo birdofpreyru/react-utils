@@ -74,16 +74,3 @@ Under the hood, a `<Button>` instance is rendered as:
     the specified location or URL.
 
   - [Other themed component properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties).
-
-- **Deprecated** `<BaseButton>` &ndash; Non-themed button component.
-  The `<Button>` itself is a themed `<BaseButton>`. You can use it to create
-  special buttons with different default themes, e.g.
-
-  ```jsx
-  import { BaseButton, themed } from '@dr.pogodin/react-utils';
-  import dangerButtonTheme from 'path/to/danger-button-theme.scss';
-
-  export DangerButton = themed('DangerButton', dangerButtonTheme)(BaseButton);
-  ```
-  Apart of visual differences, resuling `<DangerButton>` will work exactly as
-  `<Button>`.

@@ -9,40 +9,6 @@ export const IS_CLIENT_SIDE = typeof process !== 'object'
 
 export const IS_SERVER_SIDE = !IS_CLIENT_SIDE;
 
-/* TODO: Deprecated. */
-/**
- * Returns `true` when executed at the front end side; `false` otherwise.
- * @return {boolean}
- */
-export function isClientSide() {
-  console.warn('[react-utils]: isomorphy.isClientSide() is deprecated.');
-  return IS_CLIENT_SIDE;
-}
-
-/* TODO: Deprecated. */
-/**
- * Returns `true` if executed at the server side; `false` otherwise.
- * @return {boolean}
- */
-export function isServerSide() {
-  console.warn('[react-utils]: isomorphy.isServerSide() is deprecated.');
-  return IS_SERVER_SIDE;
-}
-
-/**
- * Throws if called outside the client-side environment.
- */
-export function assertClientSide() {
-  if (!isClientSide()) throw Error('Illegal outside the client side.');
-}
-
-/**
- * Throws if called outside the server-side environment.
- */
-export function assertServerSide() {
-  if (!isServerSide()) throw Error('Illegal outside the server side.');
-}
-
 /**
  * @return {string} Code mode: "development" or "production".
  */

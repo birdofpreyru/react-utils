@@ -2,7 +2,6 @@
 
 exports[`Export at client side 1`] = `
 Object {
-  "BaseButton": [Function],
   "BaseModal": [Function],
   "Button": Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -134,14 +133,10 @@ Object {
   "isomorphy": Object {
     "IS_CLIENT_SIDE": true,
     "IS_SERVER_SIDE": false,
-    "assertClientSide": [Function],
-    "assertServerSide": [Function],
     "buildTimestamp": [Function],
     "getBuildInfo": [Function],
-    "isClientSide": [Function],
     "isDevBuild": [Function],
     "isProdBuild": [Function],
-    "isServerSide": [Function],
   },
   "newBarrier": [Function],
   "server": null,
@@ -563,7 +558,6 @@ Array [
 
 exports[`Export at server side 1`] = `
 Object {
-  "BaseButton": [Function],
   "BaseModal": [Function],
   "Button": Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -801,14 +795,10 @@ Object {
   "isomorphy": Object {
     "IS_CLIENT_SIDE": false,
     "IS_SERVER_SIDE": true,
-    "assertClientSide": [Function],
-    "assertServerSide": [Function],
     "buildTimestamp": [Function],
     "getBuildInfo": [Function],
-    "isClientSide": [Function],
     "isDevBuild": [Function],
     "isProdBuild": [Function],
-    "isServerSide": [Function],
   },
   "newBarrier": [Function],
   "server": [Function],
