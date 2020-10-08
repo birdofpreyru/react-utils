@@ -37,6 +37,8 @@ mutation of the config object.
   - Config factory handles the following fields in the options object:
     - **`babelEnv`** &mdash; *String* &mdash; Babel environment to use for
       the Babel compilation step;
+    - `babelLoaderOptions?: object` &ndash; Optional. Overrides for default
+      Babel options of JSX and SVG files loader.
     - **`context`** &mdash; *String* &mdash; Base URL for the resolution of
       relative config paths;
     - **`cssLocalIdent`** &mdash; *String* &mdash; Optional. The template for
@@ -180,6 +182,9 @@ mutation of the config object.
 
     - **`babelEnv`** &mdash; *String* &mdash; Babel environment to use for the
       Babel compilation step;
+
+    - `babelLoaderOptions?: object` &ndash; Optional. Overrides for default
+      Babel options of JSX and SVG files loader.
 
     - **`context`** &mdash; *String* &mdash; Base URL for the resolution of
       relative config paths;

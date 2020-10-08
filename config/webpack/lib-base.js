@@ -16,6 +16,9 @@ const path = require('path');
  *
  * @param {String} ops.babelEnv BABEL_ENV to be used by Babel during the build.
  *
+ * @param {object} [ops.babelLoaderOptions] Optional. Overrides for babel-loader
+ *  of JSX and SVG files.
+ *
  * @param {String} ops.context Base URL for resolution of relative config paths.
  *
  * @param {String} ops.cssLocalIdent Template for CSS classname
@@ -56,6 +59,7 @@ module.exports = function configFactory(ops) {
     output: {
       filename: 'web.bundle.js',
 
+      // TODO: Check, whether this fix can be dropped.
       // Workaround to fix umd build, restore webpack v3 behaviour
       // https://github.com/webpack/webpack/issues/6677
       // https://github.com/webpack/webpack/issues/6642
@@ -101,6 +105,7 @@ module.exports = function configFactory(ops) {
           configFile: false,
           envName: ops.babelEnv,
           presets: ['@dr.pogodin/react-utils/config/babel/webpack'],
+          ...ops.babelLoaderOptions || {},
         },
       }, {
         /* Loads SCSS stylesheets. */

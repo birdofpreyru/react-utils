@@ -28,6 +28,9 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
  *
  * @param {String} ops.babelEnv BABEL_ENV to use for Babel during the build.
  *
+ * @param {object} [ops.babelLoaderOptions] Optional. Overrides for babel-loader
+ *  of JSX and SVG files.
+ *
  * @param {String} ops.context Base URL for resolution of relative
  *  config paths.
  *
@@ -69,6 +72,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
  */
 module.exports = function configFactory(ops) {
   const o = _.defaults(_.clone(ops), {
+    babelLoaderOptions: {},
     cssLocalIdent: '[hash:base64:6]',
     outputPath: 'build/web-public',
     publicPath: '',
@@ -215,6 +219,7 @@ module.exports = function configFactory(ops) {
           configFile: false,
           envName: o.babelEnv,
           presets: ['@dr.pogodin/react-utils/config/babel/webpack'],
+          ...o.babelLoaderOptions,
         },
       }, {
         /* Loads image assets. */
