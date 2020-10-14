@@ -6,10 +6,10 @@
 
 const _ = require('lodash');
 const autoprefixer = require('autoprefixer');
+const dayjs = require('dayjs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const forge = require('node-forge');
 const fs = require('fs');
-const moment = require('moment');
 const path = require('path');
 const SM = require('sitemap');
 const { StatsWriterPlugin } = require('webpack-stats-plugin');
@@ -27,6 +27,9 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
  *  The following options are accepted:
  *
  * @param {String} ops.babelEnv BABEL_ENV to use for Babel during the build.
+ *
+ * @param {object} [ops.babelLoaderOptions] Optional. Overrides for babel-loader
+ *  of JSX and SVG files.
  *
  * @param {String} ops.context Base URL for resolution of relative
  *  config paths.
@@ -69,6 +72,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
  */
 module.exports = function configFactory(ops) {
   const o = _.defaults(_.clone(ops), {
+    babelLoaderOptions: {},
     cssLocalIdent: '[hash:base64:6]',
     outputPath: 'build/web-public',
     publicPath: '',
@@ -95,7 +99,7 @@ module.exports = function configFactory(ops) {
     });
   }
 
-  const now = moment();
+  const now = dayjs();
 
   let outputFilenameSuffix = '';
   if (!o.dontTimestampOutputs) {
@@ -119,7 +123,7 @@ module.exports = function configFactory(ops) {
         publicPath: o.publicPath,
 
         /* Build timestamp. */
-        timestamp: now.utc().toISOString(),
+        timestamp: now.toISOString(),
 
         /* `true` if client-side code should setup a service worker. */
         useServiceWorker: Boolean(o.workbox),
@@ -215,6 +219,7 @@ module.exports = function configFactory(ops) {
           configFile: false,
           envName: o.babelEnv,
           presets: ['@dr.pogodin/react-utils/config/babel/webpack'],
+          ...o.babelLoaderOptions,
         },
       }, {
         /* Loads image assets. */

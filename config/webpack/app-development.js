@@ -44,7 +44,6 @@ module.exports = function configFactory(ops) {
         'process.env.REACT_GLOBAL_STATE_DEBUG': JSON.stringify(true),
       }),
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoEmitOnErrorsPlugin(),
     ],
   });
   if (!_.isArray(res.entry.main)) {

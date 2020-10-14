@@ -12,13 +12,9 @@ This module provides necessary functions.
 - [`isomorphy` reference](#reference)
   - [`.IS_CLIENT_SIDE: boolean`](#is_client_side)
   - [`.IS_SERVER_SIDE: boolean`](#is_server_side)
-  - [`.assertClientSide()`](#assertClientSide)
-  - [`.assertServerSide()`](#assertServerSide)
   - [`.buildTimestamp(): string`](#buildTimestamp)
   - [`.isDevBuild(): boolean`](#isDevBuild)
   - [`.isProdBuild(): boolean`](#isProdBuild)
-  - **Deprecated** [`.isClientSide(): boolean`](#isClientSide)
-  - **Deprecated** [`.isServerSide(): boolean`](#isServerSide)
 
 **Important**
 
@@ -44,14 +40,6 @@ This module provides necessary functions.
 - <a name="is_server_side"></a>
   `.IS_SERVER_SIDE: boolean` &ndash; Equals `true` inside NodeJS environment.
 
-- <a name="assertClientSide"></a>
-  `.assertClientSide()` &ndash; Throws error if called outside the client-side
-  environment.
-
-- <a name="assertServerSide"></a>
-  `.assertServerSide()` &ndash; Throws error if called outside the server-side
-  environment.
-
 - <a name="buildTimestamp"></a>
   `.buildTimestamp(): string` &ndash; Returns build timestamp of the frontend JS
   bundle, in form of ISO date/time string. At the server-side it will be the
@@ -64,11 +52,3 @@ This module provides necessary functions.
 - <a name="isProdBuild"></a>
   `.isProdBuild(): boolean` &ndash; Returns `true` if the production version
     of code is running, `false` otherwise.
-
-- <a name="isClientSide"></a>
-  **Deprecated** `.isClientSide(): boolean` &ndash; Returns
-  [`.IS_CLIENT_SIDE: boolean`](#is_client_side) value.
-
-- <a name="isServerSide"></a>
-  **Deprecated** `.isServerSide(): boolean` &ndash; Returns
-  [`.IS_SERVER_SIDE: boolean`](#is_server_side) value.

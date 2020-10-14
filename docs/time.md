@@ -3,8 +3,9 @@
 ```js
 import { time } from '@dr.pogodin/react-utils';
 ```
-Date & time utils. `time` is an alias for the [moment](https://momentjs.com/docs/) library, i.e. you can use `time()` the same way you would use `moment()`. Also
-`time` has the following extra stuff attached.
+Date & time utils. `time` is an alias for [dayjs](https://day.js.org/en/)
+library, _i.e._ you can use `time()` the same way you would use `dayjs()`.
+Also `time` has the following extra stuff attached.
 
 ### Constants
 

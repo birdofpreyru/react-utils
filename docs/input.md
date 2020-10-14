@@ -12,11 +12,13 @@ Implements a [themed](docs/react-themes.md) input component.
 
   **Props:**
   - `label?: string` &ndash; Optional. Checkbox label. Defaults `undefined`.
-  - `onChange?: function` &ndash; Optional. State change event handler.
-  - `placeholder?: string` &ndash; Optional. Input placeholder.
   - `theme?: object` &ndash; Optional. _Ad-hoc_ theme. Valid theme keys:
     - `container`
     - `input`
     - `label`
-  - `type?: string` &ndash; Optional. Input type.
-  - `value?: string` &ndash; Optional. Input value.
+  - Any other props are forwarded directly to the underlying standard
+    `<input>` element. Most probably you want to set:
+    - `onChange: function`
+    - `placeholder: string`
+    - `type: string`
+    - `value: string`
