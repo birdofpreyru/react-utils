@@ -3,7 +3,6 @@
  */
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React from 'react';
 import ReactDom from 'react-dom/server';
 import PT from 'prop-types';
 

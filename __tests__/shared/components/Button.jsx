@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import Button from 'components/Button';
-import React from 'react';
 import { snapshot } from 'utils/jest';
 import { StaticRouter } from 'react-router-dom';
 

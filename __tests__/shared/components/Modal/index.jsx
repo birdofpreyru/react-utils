@@ -1,5 +1,3 @@
-import React from 'react';
-
 import pretty from 'pretty';
 
 import Modal from 'components/Modal';

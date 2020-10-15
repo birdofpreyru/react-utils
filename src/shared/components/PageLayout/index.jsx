@@ -2,8 +2,6 @@
  * Standard Page layout.
  */
 
-import React from 'react';
-
 import { PT, themed } from 'utils';
 
 import baseTheme from './base-theme.scss';

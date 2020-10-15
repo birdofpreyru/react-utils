@@ -11,7 +11,7 @@
 /* global expect, jest, document */
 /* eslint-disable import/no-extraneous-dependencies */
 
-import React from 'react';
+import { Component } from 'react';
 
 import mockdate from 'mockdate';
 import PT from 'prop-types';
@@ -117,7 +117,7 @@ export function render(component) {
  * the "renderIntoDocument(..)" function from "react-dom/test-utils" works
  * only with state components, so we have to wrap our ReactJS components into
  * such Wrapper. */
-class Wrapper extends React.Component {
+class Wrapper extends Component {
   componentDidMount() {}
 
   render() {

@@ -6,7 +6,6 @@
  * - User explicitely opts to use <a>.
  */
 
-import React from 'react';
 import { Link as RrLink } from 'react-router-dom';
 
 import GenericLink from './GenericLink';

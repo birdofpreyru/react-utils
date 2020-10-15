@@ -27,7 +27,12 @@ Object {
         "targets": "defaults",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -71,7 +76,12 @@ Object {
         "targets": "defaults",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -103,7 +113,12 @@ Object {
         "targets": "defaults",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -146,7 +161,12 @@ Object {
         "targets": "defaults",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }

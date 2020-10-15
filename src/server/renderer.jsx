@@ -10,7 +10,6 @@ import forge from 'node-forge';
 import fs from 'fs';
 import dayjs from 'dayjs';
 import path from 'path';
-import React from 'react';
 import ReactDOM from 'react-dom/server';
 import serializeJs from 'serialize-javascript';
 

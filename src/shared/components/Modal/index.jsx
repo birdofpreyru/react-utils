@@ -10,7 +10,12 @@
 /* global document */
 
 import _ from 'lodash';
-import React, { useMemo } from 'react';
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import ReactDom from 'react-dom';
 import PT from 'prop-types';
 import themed from '@dr.pogodin/react-themes';
@@ -23,11 +28,11 @@ function BaseModal({
   onCancel,
   theme,
 }) {
-  const containerRef = React.useRef();
-  const overlayRef = React.useRef();
-  const [portal, setPortal] = React.useState();
+  const containerRef = useRef();
+  const overlayRef = useRef();
+  const [portal, setPortal] = useState();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const p = document.createElement('div');
     document.body.classList.add('scrolling-disabled-by-modal');
     document.body.appendChild(p);

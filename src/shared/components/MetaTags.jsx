@@ -9,7 +9,6 @@
 
 import { useGlobalState } from '@dr.pogodin/react-global-state';
 import PT from 'prop-types';
-import React from 'react';
 import { Helmet } from 'react-helmet';
 
 export default function MetaTags({

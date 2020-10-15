@@ -1,6 +1,5 @@
 import path from 'path';
 
-import React from 'react';
 import { snapshot } from 'utils/jest';
 import webpack from 'webpack';
 

@@ -70,7 +70,12 @@ Object {
         "targets": "current node",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -119,7 +124,12 @@ Object {
         "targets": "current node",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -195,7 +205,12 @@ Object {
         "targets": "current node",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -271,7 +286,12 @@ Object {
         "targets": "current node",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -320,7 +340,12 @@ Object {
         "targets": "current node",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -396,7 +421,12 @@ Object {
         "targets": "current node",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }

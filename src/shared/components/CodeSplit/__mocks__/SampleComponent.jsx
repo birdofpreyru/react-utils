@@ -5,7 +5,6 @@
  * that code splitting has not broke related functionality.
  */
 
-import React from 'react';
 import { Route } from 'react-router-dom';
 
 import { useGlobalState } from '@dr.pogodin/react-global-state';

@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import factory, { SCRIPT_LOCATIONS } from 'server/renderer';
 import fs from 'fs';
-import React from 'react';
 
 import { Helmet } from 'react-helmet';
 import { Route } from 'react-router-dom';

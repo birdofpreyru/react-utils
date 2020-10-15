@@ -22,7 +22,12 @@ function newBaseConfig(options = {}) {
   return {
     presets: [
       ['@babel/env', { targets: options.targets || 'defaults' }],
-      '@babel/react',
+
+      // TODO: Starting from Babel 8, "automatic" will be the default runtime,
+      // thus once upgraded to Babel 8, runtime should be removed from
+      // @babel/react options below.
+      ['@babel/react', { runtime: 'automatic' }],
+
       '@dr.pogodin/babel-preset-svgr',
     ],
     plugins: [

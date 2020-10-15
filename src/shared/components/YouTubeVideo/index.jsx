@@ -11,7 +11,6 @@
 
 import PT from 'prop-types';
 import qs from 'qs';
-import React from 'react';
 import ScalableRect from 'components/ScalableRect';
 import themed from '@dr.pogodin/react-themes';
 import Throbber from 'components/Throbber';

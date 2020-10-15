@@ -1,4 +1,3 @@
-import React from 'react';
 import { PT, themed } from 'utils';
 
 import defaultTheme from './theme.scss';

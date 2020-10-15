@@ -4,7 +4,7 @@
 /* global document, window */
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 
 import { useAsyncData } from '@dr.pogodin/react-global-state';
 import dayjs from 'dayjs';
@@ -24,7 +24,7 @@ export default function ClientSide({
   placeholder,
   ...rest
 }) {
-  const { current: heap } = React.useRef({ mounted: false });
+  const { current: heap } = useRef({ mounted: false });
   const buildInfo = getBuildInfo();
   const { publicPath } = buildInfo;
   const { buildTimestamp } = dayjs(buildInfo.timestamp).valueOf();
