@@ -98,14 +98,22 @@ if (!commander.lib) webpackOutDir += '/web-public';
 
 _.merge(webpackConfig, {
   output: { path: webpackOutDir },
+
+  /* TODO: These options are no longer there in Webpack@5
+     Not yet sure, whether we can remove them, or need to
+     replace with something?
   stats: {
     maxModules: Infinity,
     optimizationBailout: true,
   },
+  */
 });
 
 const webpackCompiler = webpack(webpackConfig);
-webpackCompiler.apply(new webpack.ProgressPlugin());
+
+// TODO: Do we need to connect it some other way to
+// output progress with Webpack@5?
+// webpackCompiler.apply(new webpack.ProgressPlugin());
 
 let firstWebpackStats = true;
 

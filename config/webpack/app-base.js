@@ -12,7 +12,7 @@ const forge = require('node-forge');
 const fs = require('fs');
 const path = require('path');
 const SM = require('sitemap');
-const { StatsWriterPlugin } = require('webpack-stats-plugin');
+// const { StatsWriterPlugin } = require('webpack-stats-plugin');
 const webpack = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
@@ -156,6 +156,10 @@ module.exports = function configFactory(ops) {
     }),
     /* TODO: This currently breaks tests, due to
         Multiple assets emit different content to the same filename.
+
+    Presumably, instead of this plugin we should use .getStats() method
+    of Webpack compiler.
+
     new StatsWriterPlugin({
       filename: '__stats__.json',
     }),
