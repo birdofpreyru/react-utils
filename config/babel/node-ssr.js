@@ -23,7 +23,7 @@ function newBase(babel, options = {}) {
     'dynamic-import-node',
     ['transform-assets', {
       extensions: ['gif', 'jpeg', 'jpg', 'png'],
-      name: `${baseAssetsOutputPath}/images/[hash].[ext]`,
+      name: `${baseAssetsOutputPath}/images/[contenthash].[ext]`,
     }],
   );
 

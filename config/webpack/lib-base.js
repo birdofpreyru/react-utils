@@ -154,6 +154,13 @@ module.exports = function configFactory(ops) {
         fonts: path.resolve(ops.context, 'src/assets/fonts'),
         styles: path.resolve(ops.context, 'src/styles'),
       },
+      fallback: {
+        // TODO: Added for older normalize-url versions to work with Webpack@5.
+        // normalize-url is our indirect dependency, used by a couple of Webpack
+        // community loaders / plugins, thus presumably we can drop this setting
+        // later, along with "url" library dependency.
+        url: require.resolve('url'),
+      },
       extensions: ['.js', '.json', '.jsx', '.scss'],
       symlinks: false,
     },

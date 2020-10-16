@@ -43,7 +43,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/test/path/images/[hash].[ext]",
+        "name": "/test/path/images/[contenthash].[ext]",
       },
     ],
     Array [
@@ -113,7 +113,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/images/[hash].[ext]",
+        "name": "/images/[contenthash].[ext]",
       },
     ],
   ],
@@ -178,7 +178,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/images/[hash].[ext]",
+        "name": "/images/[contenthash].[ext]",
       },
     ],
     Array [
@@ -259,7 +259,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/test/path/images/[hash].[ext]",
+        "name": "/test/path/images/[contenthash].[ext]",
       },
     ],
     Array [
@@ -329,7 +329,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/images/[hash].[ext]",
+        "name": "/images/[contenthash].[ext]",
       },
     ],
   ],
@@ -394,7 +394,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/images/[hash].[ext]",
+        "name": "/images/[contenthash].[ext]",
       },
     ],
     Array [

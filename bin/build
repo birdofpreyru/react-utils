@@ -135,7 +135,10 @@ function handleWebpackCompilationResults(error, stats) {
 }
 
 if (commander.watch) webpackCompiler.watch({}, handleWebpackCompilationResults);
-else webpackCompiler.run(handleWebpackCompilationResults);
+else {
+  webpackCompiler.run(handleWebpackCompilationResults);
+  webpackCompiler.close(() => null);
+}
 
 /* ************************************************************************** */
 /* Babel compilation of JS, JSX, and SVG files.                               */

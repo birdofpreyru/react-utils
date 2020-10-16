@@ -154,9 +154,12 @@ module.exports = function configFactory(ops) {
     new webpack.DefinePlugin({
       BUILD_INFO: JSON.stringify(buildInfo),
     }),
+    /* TODO: This currently breaks tests, due to
+        Multiple assets emit different content to the same filename.
     new StatsWriterPlugin({
       filename: '__stats__.json',
     }),
+    */
   ];
 
   /* Adds InjectManifest plugin from WorkBox, if opted to. */
@@ -174,7 +177,6 @@ module.exports = function configFactory(ops) {
     entry,
     node: {
       __dirname: true,
-      fs: 'empty',
     },
     mode: o.mode,
     output: {
@@ -192,6 +194,13 @@ module.exports = function configFactory(ops) {
         fonts: path.resolve(o.context, 'src/assets/fonts'),
         styles: path.resolve(o.context, 'src/styles'),
       },
+      fallback: {
+        // TODO: Added for older normalize-url versions to work with Webpack@5.
+        // normalize-url is our indirect dependency, used by a couple of Webpack
+        // community loaders / plugins, thus presumably we can drop this setting
+        // later, along with "url" library dependency.
+        url: require.resolve('url'),
+      },
       extensions: ['.js', '.json', '.jsx', '.scss'],
       symlinks: false,
     },
@@ -207,7 +216,7 @@ module.exports = function configFactory(ops) {
         options: {
           outputPath: 'fonts/',
           publicPath: `${o.publicPath}/fonts`,
-          name: '[md5:hash].[ext]',
+          name: '[contenthash].[ext]',
         },
       }, {
         /* Loads JS and JSX moudles, and inlines SVG assets. */
@@ -228,7 +237,7 @@ module.exports = function configFactory(ops) {
         options: {
           outputPath: 'images/',
           publicPath: `${o.publicPath}/images`,
-          name: '[md5:hash].[ext]',
+          name: '[contenthash].[ext]',
         },
       }, {
         /* Loads SCSS stylesheets. */
@@ -266,6 +275,7 @@ module.exports = function configFactory(ops) {
       }],
     },
     optimization: {
+      // !!! TODO: It is recommended to remove it and rely on default!
       /* TODO: Dynamic chunk splitting does not play along with server-side
        * rendering of split chunks. Probably there is a way to achieve that,
        * but it is not a priority now. */

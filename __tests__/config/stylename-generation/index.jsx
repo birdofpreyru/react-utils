@@ -36,16 +36,18 @@ it('Webpack stylename generation', (done) => {
       expect(stats.hasErrors()).toBe(false);
       /* eslint-disable no-underscore-dangle */
       const compiledCss = stats.compilation.assets['main.css']
-        ._source.children[0]._value;
+        ._source._children[0]._value;
       expect(compiledCss).toMatchSnapshot();
       expect(
         compiledCss.includes(
           '.__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___1v_vvw',
         ),
       ).toBe(true);
-      /* eslint-enable no-underscore-dangle */
-    } finally {
       done();
+      /* eslint-enable no-underscore-dangle */
+    } catch (error) {
+      done(error);
     }
   });
+  compiler.close(() => null);
 }, 30000);
