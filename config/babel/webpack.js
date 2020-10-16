@@ -38,7 +38,6 @@ function newBaseConfig(options = {}) {
           './src',
         ],
       }],
-      '@babel/syntax-dynamic-import',
       '@babel/transform-runtime',
     ],
   };

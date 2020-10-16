@@ -16,7 +16,6 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
     "react-hot-loader/babel",
   ],
@@ -54,7 +53,6 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
     Array [
       "@dr.pogodin/react-css-modules",
@@ -103,7 +101,6 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
   ],
   "presets": Array [
@@ -140,7 +137,6 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
     Array [
       "@dr.pogodin/react-css-modules",

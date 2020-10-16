@@ -20,7 +20,6 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
     Array [
       "@dr.pogodin/react-css-modules",
@@ -33,7 +32,7 @@ Object {
         "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
       },
     ],
-    "dynamic-import-node",
+    "@babel/syntax-dynamic-import",
     Array [
       "transform-assets",
       Object {
@@ -101,9 +100,8 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
-    "dynamic-import-node",
+    "@babel/syntax-dynamic-import",
     Array [
       "transform-assets",
       Object {
@@ -155,7 +153,6 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
     Array [
       "@dr.pogodin/react-css-modules",
@@ -168,7 +165,7 @@ Object {
         "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
       },
     ],
-    "dynamic-import-node",
+    "@babel/syntax-dynamic-import",
     Array [
       "transform-assets",
       Object {
@@ -236,7 +233,6 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
     Array [
       "@dr.pogodin/react-css-modules",
@@ -249,7 +245,7 @@ Object {
         "generateScopedName": "[hash:base64:6]",
       },
     ],
-    "dynamic-import-node",
+    "@babel/syntax-dynamic-import",
     Array [
       "transform-assets",
       Object {
@@ -317,9 +313,8 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
-    "dynamic-import-node",
+    "@babel/syntax-dynamic-import",
     Array [
       "transform-assets",
       Object {
@@ -371,7 +366,6 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
     Array [
       "@dr.pogodin/react-css-modules",
@@ -384,7 +378,7 @@ Object {
         "generateScopedName": "[hash:base64:6]",
       },
     ],
-    "dynamic-import-node",
+    "@babel/syntax-dynamic-import",
     Array [
       "transform-assets",
       Object {

@@ -20,7 +20,7 @@ function newBase(babel, options = {}) {
 
   const baseAssetsOutputPath = options.baseAssetsOutputPath || '';
   config.plugins.push(
-    'dynamic-import-node',
+    '@babel/syntax-dynamic-import',
     ['transform-assets', {
       extensions: ['gif', 'jpeg', 'jpg', 'png'],
       name: `${baseAssetsOutputPath}/images/[contenthash].[ext]`,
