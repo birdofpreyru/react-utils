@@ -7,6 +7,7 @@
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+const { ProgressPlugin } = require('webpack');
 
 /**
  * Creates a new Webpack config object.
@@ -73,6 +74,7 @@ module.exports = function configFactory(ops) {
       new MiniCssExtractPlugin({
         filename: 'style.css',
       }),
+      new ProgressPlugin(),
     ],
     module: {
       rules: [{

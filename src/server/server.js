@@ -108,7 +108,6 @@ export default async function factory(webpackConfig, options) {
     const webpackDevMiddleware = require('webpack-dev-middleware');
     const webpackHotMiddleware = require('webpack-hot-middleware');
     const compiler = webpack(webpackConfig);
-    compiler.apply(new webpack.ProgressPlugin());
     server.use(webpackDevMiddleware(compiler, {
       name: 'main.js',
       publicPath,

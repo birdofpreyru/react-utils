@@ -1,7 +1,7 @@
 import path from 'path';
 
 import { snapshot } from 'utils/jest';
-import webpack from 'webpack';
+import webpack, { ProgressPlugin } from 'webpack';
 
 import webpackConfigFactory from '../../../config/webpack/app-development';
 
@@ -18,6 +18,10 @@ it('Webpack stylename generation', (done) => {
     dontEmitBuildInfo: true,
     dontTimestampOutputs: true,
   });
+  webpackConfig.plugins = webpackConfig.plugins.filter(
+    (plugin) => !(plugin instanceof ProgressPlugin),
+  );
+
   webpackConfig.entry = './__tests__/config/stylename-generation/__assets__/TestComponent/index.jsx';
   const babelLoader = webpackConfig.module.rules.find(
     (x) => x.loader === 'babel-loader',

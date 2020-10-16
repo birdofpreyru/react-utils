@@ -13,7 +13,7 @@ const fs = require('fs');
 const path = require('path');
 const SM = require('sitemap');
 // const { StatsWriterPlugin } = require('webpack-stats-plugin');
-const webpack = require('webpack');
+const { DefinePlugin, ProgressPlugin } = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
 /**
@@ -151,9 +151,10 @@ module.exports = function configFactory(ops) {
       chunkFilename: `[name]${outputFilenameSuffix}.css`,
       filename: `[name]${outputFilenameSuffix}.css`,
     }),
-    new webpack.DefinePlugin({
+    new DefinePlugin({
       BUILD_INFO: JSON.stringify(buildInfo),
     }),
+    new ProgressPlugin(),
     /* TODO: This currently breaks tests, due to
         Multiple assets emit different content to the same filename.
 
