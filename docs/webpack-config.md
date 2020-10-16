@@ -168,7 +168,7 @@ mutation of the config object.
     - **`BABEL_ENV`** &mdash; It is set to *production*;
     - **`NODE_ENV`** &mdash; It is set to *production*.
   - Adds the following plugins:
-    - [OptimizeCssAssetsPlugin](https://www.npmjs.com/package/optimize-css-assets-webpack-plugin);
+    - [CSS Minimizer Webpack Plugin](https://www.npmjs.com/package/css-minimizer-webpack-plugin);
     - [UglifyJsPlugin](https://webpack.js.org/plugins/uglifyjs-webpack-plugin/).
 
 - <a name="lib-base">**`config/webpack/lib-base`**</a>

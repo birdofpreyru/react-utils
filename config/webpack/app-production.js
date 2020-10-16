@@ -2,7 +2,7 @@
  * Production Webpack configuration for ReactJS applications.
  */
 
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const baseFactory = require('./app-base');
@@ -33,19 +33,26 @@ module.exports = function configFactory(ops) {
     babelEnv: 'production',
     mode: 'production',
   }), {
+    optimization: {
+      minimizer: [
+        '...',
+        new CssMinimizerPlugin({
+          minimizerOptions: {
+            preset: ['default', {
+              /* Due to the way our styles are organized, these dangerous
+              * optimizations can break our styles, thus they are disabled. */
+              discardUnused: false,
+              reduceIdents: false,
+              zindex: false,
+            }],
+          },
+        }),
+      ],
+    },
     plugins: [
       new webpack.DefinePlugin({
         'process.env.BABEL_ENV': JSON.stringify('production'),
         'process.env.NODE_ENV': JSON.stringify('production'),
-      }),
-      new OptimizeCssAssetsPlugin({
-        cssProcessorOptions: {
-          /* Due to the way our styles are organized, these dangerous
-           * optimizations can break our styles, thus they are disabled. */
-          discardUnused: false,
-          reduceIdents: false,
-          zindex: false,
-        },
       }),
     ],
   });
