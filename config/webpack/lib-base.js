@@ -41,19 +41,20 @@ module.exports = function configFactory(ops) {
     entry: ops.entry,
     externals: [
       /@babel\/runtime/,
-      '@dr.pogodin/react-global-state',
+      // '@dr.pogodin/react-global-state',
       '@dr.pogodin/react-themes',
+      '@dr.pogodin/react-utils',
       'axios',
       'dayjs',
       'lodash',
       'prop-types',
+      'qs',
       'react',
       /react-dom/,
       'react-helmet',
       /react-hot-loader/,
       'react-router-dom',
       'shortid',
-      '@dr.pogodin/react-utils',
       'url-parse',
     ],
     mode: ops.mode,
@@ -66,6 +67,7 @@ module.exports = function configFactory(ops) {
       // https://github.com/webpack/webpack/issues/6642
       globalObject: "typeof self !== 'undefined' ? self : this",
 
+      // TODO: Update for new syntax (see Webpack@5 config docs)
       library: ops.library,
       path: ops.outputPath,
       libraryTarget: 'umd',

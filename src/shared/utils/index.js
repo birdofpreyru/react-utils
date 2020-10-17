@@ -1,7 +1,5 @@
 import _ from 'lodash';
 
-import { useGlobalState, useAsyncData } from '@dr.pogodin/react-global-state';
-
 import themed, {
   COMPOSE,
   PRIORITY,
@@ -16,6 +14,8 @@ import * as isomorphy from './isomorphy';
 import time from './time';
 import * as url from './url';
 import * as webpack from './webpack';
+
+export { useGlobalState, useAsyncData } from '@dr.pogodin/react-global-state';
 
 themed.COMPOSE = COMPOSE;
 themed.PRIORITY = PRIORITY;
@@ -54,7 +54,5 @@ export {
   ThemeProvider,
   time,
   url,
-  useAsyncData,
-  useGlobalState,
   webpack,
 };
