@@ -6,7 +6,6 @@
 
 const _ = require('lodash');
 const autoprefixer = require('autoprefixer');
-const dayjs = require('dayjs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const forge = require('node-forge');
 const fs = require('fs');
@@ -61,9 +60,6 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
  * @param {String} [ops.outputPath] Optional. Output path for the build.
  *  Defaults to `build` folder inside the `context` path.
  *
- * @param {boolean} [ops.dontTimestampOutputs] Optional. If set `true` ouput
- *  CSS and JS files will not have build timestamp appended to their names.
- *
  * @param {String} ops.publicPath Base URL for the output of the build assets.
  *
  * @param {String} [ops.sitemap] Optional. A path to JS module or JSON file,
@@ -99,13 +95,8 @@ module.exports = function configFactory(ops) {
     });
   }
 
-  const now = dayjs();
-
-  let outputFilenameSuffix = '';
-  if (!o.dontTimestampOutputs) {
-    outputFilenameSuffix = `-${now.valueOf()}`;
-  }
-
+  // TODO: Once all assets are named by hashes, we probably don't need build
+  // info anymore beside the key, which can be merged into stats object?
   let buildInfo;
   const buildInfoUrl = path.resolve(o.context, '.build-info');
   /* If build-info file is found, we reuse those data. */
@@ -121,9 +112,6 @@ module.exports = function configFactory(ops) {
 
         /* Public path used during build. */
         publicPath: o.publicPath,
-
-        /* Build timestamp. */
-        timestamp: now.toISOString(),
 
         /* `true` if client-side code should setup a service worker. */
         useServiceWorker: Boolean(o.workbox),
@@ -148,23 +136,13 @@ module.exports = function configFactory(ops) {
 
   const plugins = [
     new MiniCssExtractPlugin({
-      chunkFilename: `[name]${outputFilenameSuffix}.css`,
-      filename: `[name]${outputFilenameSuffix}.css`,
+      chunkFilename: '[contenthash].css',
+      filename: '[contenthash].css',
     }),
     new DefinePlugin({
       BUILD_INFO: JSON.stringify(buildInfo),
     }),
     new ProgressPlugin(),
-    /* TODO: This currently breaks tests, due to
-        Multiple assets emit different content to the same filename.
-
-    Presumably, instead of this plugin we should use .getStats() method
-    of Webpack compiler.
-
-    new StatsWriterPlugin({
-      filename: '__stats__.json',
-    }),
-    */
   ];
 
   /* Adds InjectManifest plugin from WorkBox, if opted to. */
@@ -185,8 +163,8 @@ module.exports = function configFactory(ops) {
     },
     mode: o.mode,
     output: {
-      chunkFilename: `[name]${outputFilenameSuffix}.js`,
-      filename: `[name]${outputFilenameSuffix}.js`,
+      chunkFilename: '[contenthash].js',
+      filename: '[contenthash].js',
       path: path.resolve(__dirname, o.context, o.outputPath),
       publicPath: `${o.publicPath}/`,
     },
@@ -278,13 +256,6 @@ module.exports = function configFactory(ops) {
           'css-loader',
         ],
       }],
-    },
-    optimization: {
-      // !!! TODO: It is recommended to remove it and rely on default!
-      /* TODO: Dynamic chunk splitting does not play along with server-side
-       * rendering of split chunks. Probably there is a way to achieve that,
-       * but it is not a priority now. */
-      splitChunks: false,
     },
   };
 };

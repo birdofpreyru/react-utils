@@ -97,9 +97,12 @@ export default function ClientSide({
       /* Marking the chunk being used again. */
       link.removeAttribute('data-chunk-unused');
     } else {
+      const assets = window.ASSETS_BY_CHUNK_NAME[chunkName];
+      const cssAsset = assets.find((item) => item.endsWith('.css'));
+
       link = document.createElement('link');
       link.setAttribute('data-chunk', chunkName);
-      link.setAttribute('href', `${publicPath}/${chunkName}-${buildTimestamp}.css`);
+      link.setAttribute('href', cssAsset);
       link.setAttribute('id', 'tru-style');
       link.setAttribute('rel', 'stylesheet');
       const head = document.getElementsByTagName('head')[0];

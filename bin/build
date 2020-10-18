@@ -140,6 +140,15 @@ function handleWebpackCompilationResults(error, stats) {
     logOps.all = true;
   }
   console.log(stats.toString(logOps));
+
+  fs.writeFileSync(
+    `${webpackOutDir}/__stats__.json`,
+    JSON.stringify(
+      _.pick(stats.toJson('minimal'), ['assetsByChunkName']),
+      null,
+      2,
+    ),
+  );
 }
 
 if (commander.watch) webpackCompiler.watch({}, handleWebpackCompilationResults);

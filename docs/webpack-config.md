@@ -47,9 +47,6 @@ mutation of the config object.
       corresponding setting in the Babel config. Defaults to `[hash:base64:6]`.
     - `.dontEmitBuildInfo?: boolean` &ndash; Optional. If set the
       `.build-info` file won't be created at the disk during the compilation.
-    - **`dontTimestampOutputs`** &ndash; *boolean* &ndash; Optional. If set
-      `true` ouput CSS and JS files will not have build timestamp appended
-      to their names.
     - **`entry`** &mdash; *Object*|*String*|*String[]* &mdash; Entry points.
       If an object is passed in, the `polyfills` entry point (chunk) is extended
       or appended to include some polyfills we consider obligatory

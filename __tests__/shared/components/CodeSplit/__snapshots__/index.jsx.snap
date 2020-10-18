@@ -5,8 +5,7 @@ exports[`Client-side rendering 1`] = `
 
 <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
 
-<link href=\\"/test/public/pathmain-1511941200000.css\\" id=\\"tru-style\\" rel=\\"stylesheet\\">
-
+<link data-chunk=\\"main\\" id=\\"tru-style\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
 
 <meta charset=\\"utf-8\\">
 <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">"
@@ -91,11 +90,10 @@ exports[`Client-side rendering 2`] = `
     \\"sample-component-2\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\",
     \\"sample-component-3\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\"
   }
-  window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1TZonSyrmykHqLzmKxXS0DJiZlRlzddfFhgB0Aa5NZhOKlnqDa1H6t87oTNo1QThP/4yKUyGu4eds57BRFU5bwQ=\\"
+  window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5x/O9WytXifp+Rrn07OeSezKzgU1DBmTNhGLGN6Ne6p4skptTPyzMu96urfoEiiwAm\\"
 </script>
-<script src=\\"/test/public/pathpolyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
-
-<script src=\\"/test/public/pathmain-1511941200000.js\\" type=\\"application/javascript\\"></script>"
+<script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
+<script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>"
 `;
 
 exports[`Client-side rendering 3`] = `
@@ -103,8 +101,7 @@ exports[`Client-side rendering 3`] = `
 
 <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
 
-<link href=\\"/test/public/pathmain-1511941200000.css\\" id=\\"tru-style\\" rel=\\"stylesheet\\">
-
+<link data-chunk=\\"main\\" id=\\"tru-style\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
 
 <meta charset=\\"utf-8\\">
 <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">"
@@ -184,9 +181,8 @@ exports[`Client-side rendering 4`] = `
   </div>
 </div>
 
-<script src=\\"/test/public/pathpolyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
-
-<script src=\\"/test/public/pathmain-1511941200000.js\\" type=\\"application/javascript\\"></script>"
+<script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
+<script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>"
 `;
 
 exports[`Server-side rendring 1`] = `
@@ -199,8 +195,7 @@ exports[`Server-side rendring 1`] = `
 
     <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
 
-    <link href=\\"/test/public/pathmain-1511941200000.css\\" id=\\"tru-style\\" rel=\\"stylesheet\\" />
-
+    <link data-chunk=\\"main\\" id=\\"tru-style\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
 
     <meta charset=\\"utf-8\\" />
     <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
@@ -244,11 +239,11 @@ exports[`Server-side rendring 1`] = `
         \\"sample-component-2\\": \\"\\\\u003Cdiv\\\\u003EPLACEHOLDER!\\\\u003C\\\\u002Fdiv\\\\u003E\\",
         \\"sample-component-3\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: null,\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;00000000-0000-0000-0000-000000000001&quot;,\\\\n      &quot;timestamp&quot;: 0\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: null,\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;00000000-0000-0000-0000-000000000002&quot;,\\\\n      &quot;timestamp&quot;: 0\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\"
       }
-      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1TZonSyrmykHqLzmKxXS0DJiZlRlzddfFhgB0Aa5NZhOKlnqDa1H6t87oTNo1QThP/4yKUyGu4eds57BRFU5bwQ=\\"
+      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5x/O9WytXifp+Rrn07OeSezKzgU1DBmTNhGLGN6Ne6p4skptTPyzMu96urfoEiiwAm\\"
     </script>
-    <script src=\\"/test/public/pathpolyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
+    <script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
+    <script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
 
-    <script src=\\"/test/public/pathmain-1511941200000.js\\" type=\\"application/javascript\\"></script>
   </body>
 
 </html>"
@@ -264,8 +259,7 @@ exports[`Server-side rendring 2`] = `
 
     <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
 
-    <link href=\\"/test/public/pathmain-1511941200000.css\\" id=\\"tru-style\\" rel=\\"stylesheet\\" />
-
+    <link data-chunk=\\"main\\" id=\\"tru-style\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
 
     <meta charset=\\"utf-8\\" />
     <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
@@ -351,11 +345,11 @@ exports[`Server-side rendring 2`] = `
         \\"sample-component-2\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\",
         \\"sample-component-3\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\"
       }
-      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGF1OkTQprU3+cINSXQietFqgqagolJ5j9NlQutv03F1TZonSyrmykHqLzmKxXS0DJiZlRlzddfFhgB0Aa5NZhOKlnqDa1H6t87oTNo1QThP/4yKUyGu4eds57BRFU5bwQ=\\"
+      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5x/O9WytXifp+Rrn07OeSezKzgU1DBmTNhGLGN6Ne6p4skptTPyzMu96urfoEiiwAm\\"
     </script>
-    <script src=\\"/test/public/pathpolyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
+    <script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
+    <script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
 
-    <script src=\\"/test/public/pathmain-1511941200000.js\\" type=\\"application/javascript\\"></script>
   </body>
 
 </html>"

@@ -16,7 +16,6 @@ it('Webpack stylename generation', (done) => {
     cssLocalIdent: '[path][name]___[local]___[hash:base64:6]',
     context: path.resolve(__dirname, '../../..'),
     dontEmitBuildInfo: true,
-    dontTimestampOutputs: true,
   });
   webpackConfig.plugins = webpackConfig.plugins.filter(
     (plugin) => !(plugin instanceof ProgressPlugin),
@@ -39,7 +38,9 @@ it('Webpack stylename generation', (done) => {
       expect(err).toBe(null);
       expect(stats.hasErrors()).toBe(false);
       /* eslint-disable no-underscore-dangle */
-      const compiledCss = stats.compilation.assets['main.css']
+      const cssChunkName = Object.keys(stats.compilation.assets)
+        .find((key) => key.endsWith('.css'));
+      const compiledCss = stats.compilation.assets[cssChunkName]
         ._source._children[0]._value;
       expect(compiledCss).toMatchSnapshot();
       expect(
