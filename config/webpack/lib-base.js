@@ -41,7 +41,7 @@ module.exports = function configFactory(ops) {
     entry: ops.entry,
     externals: [
       /@babel\/runtime/,
-      // '@dr.pogodin/react-global-state',
+      '@dr.pogodin/react-global-state',
       '@dr.pogodin/react-themes',
       '@dr.pogodin/react-utils',
       'axios',
@@ -67,7 +67,6 @@ module.exports = function configFactory(ops) {
       // https://github.com/webpack/webpack/issues/6642
       globalObject: "typeof self !== 'undefined' ? self : this",
 
-      // TODO: Update for new syntax (see Webpack@5 config docs)
       library: ops.library,
       path: ops.outputPath,
       libraryTarget: 'umd',
@@ -157,13 +156,6 @@ module.exports = function configFactory(ops) {
         components: path.resolve(ops.context, 'src/shared/components'),
         fonts: path.resolve(ops.context, 'src/assets/fonts'),
         styles: path.resolve(ops.context, 'src/styles'),
-      },
-      fallback: {
-        // TODO: Added for older normalize-url versions to work with Webpack@5.
-        // normalize-url is our indirect dependency, used by a couple of Webpack
-        // community loaders / plugins, thus presumably we can drop this setting
-        // later, along with "url" library dependency.
-        url: require.resolve('url'),
       },
       extensions: ['.js', '.json', '.jsx', '.scss'],
       symlinks: false,

@@ -33,6 +33,13 @@ module.exports = function configFactory(ops) {
       outputPath: path.resolve(__dirname, ops.context, 'build/development'),
     }),
     {
+      // TODO: Default value used before for dev library code was 'eval',
+      // but it does not work with Webpack@5 due to the bug:
+      // https://github.com/webpack/webpack/issues/11725
+      // Once the bug is fixed, it should be evaluated, whether we need
+      // go back to eval, or just keep devtool off.
+      devtool: false,
+
       plugins: [
         new webpack.DefinePlugin({
           'process.env.BABEL_ENV': JSON.stringify('development'),
