@@ -13,7 +13,6 @@ exports[`Matches snapshots 1`] = `
   routerLinkType={
     Object {
       "$$typeof": Symbol(react.forward_ref),
-      "displayName": "NavLink",
       "propTypes": Object {
         "activeClassName": [Function],
         "activeStyle": [Function],
@@ -51,7 +50,6 @@ exports[`Matches snapshots 2`] = `
   routerLinkType={
     Object {
       "$$typeof": Symbol(react.forward_ref),
-      "displayName": "NavLink",
       "propTypes": Object {
         "activeClassName": [Function],
         "activeStyle": [Function],
