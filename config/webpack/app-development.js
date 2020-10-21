@@ -29,13 +29,14 @@ const baseFactory = require('./app-base');
  */
 module.exports = function configFactory(ops) {
   const o = _.defaults(_.clone(ops), {
-    cssLocalIdent: '[path][name]___[local]___[hash:base64:6]',
+    cssLocalIdent: '[package]___[path][name]___[local]___[hash:base64:6]',
   });
   const res = merge(baseFactory({
     ...o,
     babelEnv: 'development',
     mode: 'development',
   }), {
+    devtool: false,
     plugins: [
       new webpack.DefinePlugin({
         'process.env.BABEL_ENV': JSON.stringify('development'),

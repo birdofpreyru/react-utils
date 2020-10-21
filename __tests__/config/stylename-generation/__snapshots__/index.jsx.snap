@@ -2,17 +2,53 @@
 
 exports[`Babel stylename generation 1`] = `
 <div
-  className="__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___1v_vvw"
+  className="@dr.pogodin/react-utils_____tests__/config/stylename-generation/__assets__/TestComponent/style___testClassName___pNB8TN"
 >
-  {"testClassName":"__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___1v_vvw"}
+  {"testClassName":"@dr.pogodin/react-utils_____tests__/config/stylename-generation/__assets__/TestComponent/style___testClassName___pNB8TN"}
 </div>
+`;
+
+exports[`Prevents class name clashes across modules 1`] = `
+"/*
+  Sample multi-line comment
+*/
+.mock-package-a___TestComponent-style___testClassName___2DANxU {
+  background: red;
+  width: 10px;
+  height: 10px;
+}
+
+/*
+  Sample multi-line comment
+*/
+.\\\\@mock-scope-mock-package_b___TestComponent-style___testClassName___1gb0n8 {
+  background: red;
+  width: 10px;
+  height: 10px;
+}
+"
+`;
+
+exports[`Prevents class name clashes in server-side code 1`] = `
+Array [
+  <div
+    className="mock-package-a___TestComponent/style___testClassName___2DANxU"
+  >
+    {"testClassName":"mock-package-a___TestComponent/style___testClassName___2DANxU"}
+  </div>,
+  <div
+    className="@mock.scope/mock-package_b___TestComponent/style___testClassName___1gb0n8"
+  >
+    {"testClassName":"@mock.scope/mock-package_b___TestComponent/style___testClassName___1gb0n8"}
+  </div>,
+]
 `;
 
 exports[`Webpack stylename generation 1`] = `
 "/*
   Sample multi-line comment
 */
-.__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___1v_vvw {
+.__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___pNB8TN {
   background: red;
   width: 10px;
   height: 10px;

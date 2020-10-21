@@ -2,6 +2,11 @@
 
 const _ = require('lodash');
 
+const {
+  generateScopedNameDev,
+  generateScopedNameProd,
+} = require('../shared/utils');
+
 /**
  * Supported Babel environments.
  */
@@ -60,10 +65,10 @@ function addStyling(config, env) {
   switch (env) {
     case ENVIRONMENTS.DEV:
     case ENVIRONMENTS.TEST:
-      cssModulesOps.generateScopedName = '[path][name]___[local]___[hash:base64:6]';
+      cssModulesOps.generateScopedName = generateScopedNameDev;
       break;
     case ENVIRONMENTS.PROD:
-      cssModulesOps.generateScopedName = '[hash:base64:6]';
+      cssModulesOps.generateScopedName = generateScopedNameProd;
       break;
     default:
   }

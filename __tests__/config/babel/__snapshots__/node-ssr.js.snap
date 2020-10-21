@@ -29,7 +29,7 @@ Object {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
+        "generateScopedName": [Function],
       },
     ],
     "@babel/syntax-dynamic-import",
@@ -52,7 +52,7 @@ Object {
           ".css",
           ".scss",
         ],
-        "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
+        "generateScopedName": [Function],
         "processorOpts": Object {
           "parser": Object {
             "parse": [Function],
@@ -162,7 +162,7 @@ Object {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
+        "generateScopedName": [Function],
       },
     ],
     "@babel/syntax-dynamic-import",
@@ -185,7 +185,7 @@ Object {
           ".css",
           ".scss",
         ],
-        "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
+        "generateScopedName": [Function],
         "processorOpts": Object {
           "parser": Object {
             "parse": [Function],
@@ -242,7 +242,7 @@ Object {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": "[hash:base64:6]",
+        "generateScopedName": [Function],
       },
     ],
     "@babel/syntax-dynamic-import",
@@ -265,7 +265,7 @@ Object {
           ".css",
           ".scss",
         ],
-        "generateScopedName": "[hash:base64:6]",
+        "generateScopedName": [Function],
         "processorOpts": Object {
           "parser": Object {
             "parse": [Function],
@@ -375,7 +375,7 @@ Object {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": "[hash:base64:6]",
+        "generateScopedName": [Function],
       },
     ],
     "@babel/syntax-dynamic-import",
@@ -398,7 +398,7 @@ Object {
           ".css",
           ".scss",
         ],
-        "generateScopedName": "[hash:base64:6]",
+        "generateScopedName": [Function],
         "processorOpts": Object {
           "parser": Object {
             "parse": [Function],

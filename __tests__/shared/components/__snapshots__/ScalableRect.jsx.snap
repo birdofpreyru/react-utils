@@ -2,7 +2,7 @@
 
 exports[`Snapshots match 1`] = `
 <div
-  className="src-shared-components-ScalableRect-style___container___yobLqv"
+  className="@dr.pogodin/react-utils___src/shared/components/ScalableRect/style___container___32tbH2"
   style={
     Object {
       "paddingBottom": "100%",
@@ -10,7 +10,7 @@ exports[`Snapshots match 1`] = `
   }
 >
   <div
-    className="src-shared-components-ScalableRect-style___wrapper___1sONf7"
+    className="@dr.pogodin/react-utils___src/shared/components/ScalableRect/style___wrapper___23rk-B"
   >
     CONTENT
   </div>
@@ -22,7 +22,7 @@ exports[`Snapshots match 2`] = `
   className="CLASS_NAME"
 >
   <div
-    className="src-shared-components-ScalableRect-style___container___yobLqv"
+    className="@dr.pogodin/react-utils___src/shared/components/ScalableRect/style___container___32tbH2"
     style={
       Object {
         "paddingBottom": "100%",
@@ -30,7 +30,7 @@ exports[`Snapshots match 2`] = `
     }
   >
     <div
-      className="src-shared-components-ScalableRect-style___wrapper___1sONf7"
+      className="@dr.pogodin/react-utils___src/shared/components/ScalableRect/style___wrapper___23rk-B"
     >
       CONTENT
     </div>

@@ -11,9 +11,10 @@ const forge = require('node-forge');
 const fs = require('fs');
 const path = require('path');
 const SM = require('sitemap');
-// const { StatsWriterPlugin } = require('webpack-stats-plugin');
 const { DefinePlugin, ProgressPlugin } = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+
+const { getLocalIdent } = require('../shared/utils');
 
 /**
  * Creates a new Webpack config object, and performs some auxiliary operations
@@ -230,6 +231,7 @@ module.exports = function configFactory(ops) {
             loader: 'css-loader',
             options: {
               modules: {
+                getLocalIdent,
                 localIdentName: o.cssLocalIdent,
               },
             },

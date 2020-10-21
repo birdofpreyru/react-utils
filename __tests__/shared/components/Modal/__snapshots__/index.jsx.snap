@@ -16,8 +16,8 @@ exports[`Snapshot match 2`] = `
 </div>
 <div>
   <div tabindex=\\"0\\"></div>
-  <div aria-label=\\"Cancel\\" class=\\"src-shared-components-Modal-base-theme___overlay___1I8O7p\\" role=\\"button\\" tabindex=\\"0\\"></div>
-  <div aria-modal=\\"true\\" class=\\"src-shared-components-Modal-base-theme___container___1ymeOm ad hoc container\\" role=\\"dialog\\">Modal Content</div>
+  <div aria-label=\\"Cancel\\" class=\\"@dr.pogodin/react-utils___src/shared/components/Modal/base-theme___overlay___1z_lT2\\" role=\\"button\\" tabindex=\\"0\\"></div>
+  <div aria-modal=\\"true\\" class=\\"@dr.pogodin/react-utils___src/shared/components/Modal/base-theme___container___uS4uDL ad hoc container\\" role=\\"dialog\\">Modal Content</div>
   <div tabindex=\\"0\\"></div>
   <div tabindex=\\"0\\"></div>
 </div>"
