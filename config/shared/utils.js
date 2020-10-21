@@ -55,6 +55,7 @@ function getLocalIdent(
     content: `${packageInfo.name + request}\x00${localName}`,
     context: packageInfo.root,
   }).replace(/\[package\]/gi, packageInfo.name)
+    .replace(/[<>:"/\\|?*@.]/gi, '-')
     .replace(/\[local\]/gi, localName);
   return res;
 }
