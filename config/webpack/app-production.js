@@ -3,6 +3,7 @@
  */
 
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const baseFactory = require('./app-base');
@@ -53,6 +54,10 @@ module.exports = function configFactory(ops) {
       new webpack.DefinePlugin({
         'process.env.BABEL_ENV': JSON.stringify('production'),
         'process.env.NODE_ENV': JSON.stringify('production'),
+      }),
+      new MiniCssExtractPlugin({
+        chunkFilename: '[contenthash].css',
+        filename: '[contenthash].css',
       }),
     ],
   });

@@ -136,10 +136,6 @@ module.exports = function configFactory(ops) {
   ]);
 
   const plugins = [
-    new MiniCssExtractPlugin({
-      chunkFilename: '[contenthash].css',
-      filename: '[contenthash].css',
-    }),
     new DefinePlugin({
       BUILD_INFO: JSON.stringify(buildInfo),
     }),
