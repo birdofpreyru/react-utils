@@ -5,6 +5,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const cssesc = require('cssesc');
 
 const { interpolateName } = require('loader-utils');
 
@@ -15,6 +16,23 @@ const { interpolateName } = require('loader-utils');
  */
 function normalizePath(file) {
   return path.sep === '\\' ? file.replace(/\\/g, '/') : file;
+}
+
+// eslint-disable-next-line no-control-regex
+const filenameReservedRegex = /[<>:"/\\@|?*]/g;
+// eslint-disable-next-line no-control-regex
+const reControlChars = /[\u0000-\u001f\u0080-\u009f]/g;
+
+function escapeLocalident(localident) {
+  return cssesc(
+    localident
+      // For `[hash]` placeholder
+      .replace(/^((-?[0-9])|--)/, '_$1')
+      .replace(filenameReservedRegex, '-')
+      .replace(reControlChars, '-')
+      .replace(/\./g, '-'),
+    { isIdentifier: true },
+  );
 }
 
 /**
@@ -48,16 +66,15 @@ function getLocalIdent(
 ) {
   const packageInfo = getPackageInfo(path.dirname(resourcePath));
   const request = normalizePath(path.relative(packageInfo.root, resourcePath));
-  const res = interpolateName({
+  const localIdent = interpolateName({
     resourcePath,
   }, localIdentName, {
     ...options,
     content: `${packageInfo.name + request}\x00${localName}`,
     context: packageInfo.root,
   }).replace(/\[package\]/gi, packageInfo.name)
-    .replace(/[<>:"/\\|?*@.]/gi, '-')
     .replace(/\[local\]/gi, localName);
-  return res;
+  return escapeLocalident(localIdent);
 }
 
 function generateScopedNameDev(localName, assetPath) {

@@ -1,13 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Babel stylename generation 1`] = `
-<div
-  className="-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___pNB8TN"
->
-  {"testClassName":"-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___pNB8TN"}
-</div>
-`;
-
 exports[`Prevents class name clashes across modules 1`] = `
 "/*
   Sample multi-line comment
@@ -16,6 +8,10 @@ exports[`Prevents class name clashes across modules 1`] = `
   background: red;
   width: 10px;
   height: 10px;
+}
+
+.-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___iZBsN- {
+  color: blue;
 }
 
 /*
@@ -41,16 +37,6 @@ Array [
   >
     {"testClassName":"-mock-scope-mock-package_b___TestComponent-style___testClassName___1gb0n8"}
   </div>,
+  "{\\"sampleClassName\\":\\"-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___iZBsN-\\"}",
 ]
-`;
-
-exports[`Webpack stylename generation 1`] = `
-"/*
-  Sample multi-line comment
-*/
-.__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___pNB8TN {
-  background: red;
-  width: 10px;
-  height: 10px;
-}"
 `;

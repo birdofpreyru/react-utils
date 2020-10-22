@@ -28,6 +28,7 @@ const VALID_BUILD_TYPES = Object.values(BUILD_TYPES);
  * Auxiliary wrapper around the command execution in a child process.
  *
  * TODO: Move to a server-side unitility module.
+ * TODO: The same code is duplicated in one of the tests.
  *
  * @param {String} command Command to execute;
  * @param {Object} [options] See https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback
@@ -98,15 +99,6 @@ if (!commander.lib) webpackOutDir += '/web-public';
 
 _.merge(webpackConfig, {
   output: { path: webpackOutDir },
-
-  /* TODO: These options are no longer there in Webpack@5
-     Not yet sure, whether we can remove them, or need to
-     replace with something?
-  stats: {
-    maxModules: Infinity,
-    optimizationBailout: true,
-  },
-  */
 });
 
 const webpackCompiler = webpack(webpackConfig);

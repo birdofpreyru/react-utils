@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Babel build Node: development 1`] = `
+"\\"use strict\\";
+
+var _interopRequireDefault = require(\\"@babel/runtime/helpers/interopRequireDefault\\");
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.default = TestApp;
+
+var _jsxRuntime = require(\\"react/jsx-runtime.js\\");
+
+var _TestComponent = _interopRequireDefault(require(\\"./MockPackageA/TestComponent\\"));
+
+var styles = {
+  \\"sampleClassName\\": \\"-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___iZBsN-\\"
+};
+
+const B = require(\\"./MockPackageB/TestComponent\\").default;
+
+function TestApp() {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_TestComponent.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(B, {}), JSON.stringify(styles)]
+  });
+}"
+`;
+
+exports[`Babel build Node: development 2`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.default = TestComponent;
+
+var _jsxRuntime = require(\\"react/jsx-runtime.js\\");
+
+var style = {
+  \\"testClassName\\": \\"mock-package-a___TestComponent-style___testClassName___2DANxU\\"
+};
+
+function TestComponent() {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(\\"div\\", {
+    className: \\"mock-package-a___TestComponent-style___testClassName___2DANxU\\",
+    children: JSON.stringify(style)
+  });
+}"
+`;
+
+exports[`Babel build Node: production 1`] = `
+"\\"use strict\\";
+
+var _interopRequireDefault = require(\\"@babel/runtime/helpers/interopRequireDefault\\");
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.default = TestApp;
+
+var _jsxRuntime = require(\\"react/jsx-runtime.js\\");
+
+var _TestComponent = _interopRequireDefault(require(\\"./MockPackageA/TestComponent\\"));
+
+var styles = {
+  \\"sampleClassName\\": \\"iZBsN-\\"
+};
+
+const B = require(\\"./MockPackageB/TestComponent\\").default;
+
+function TestApp() {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_TestComponent.default, {}), /*#__PURE__*/(0, _jsxRuntime.jsx)(B, {}), JSON.stringify(styles)]
+  });
+}"
+`;
+
+exports[`Babel build Node: production 2`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.default = TestComponent;
+
+var _jsxRuntime = require(\\"react/jsx-runtime.js\\");
+
+var style = {
+  \\"testClassName\\": \\"_2DANxU\\"
+};
+
+function TestComponent() {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(\\"div\\", {
+    className: \\"_2DANxU\\",
+    children: JSON.stringify(style)
+  });
+}"
+`;
+
+exports[`Webpack build App: development 1`] = `
+"/*
+  Sample multi-line comment
+*/
+.mock-package-a___TestComponent-style___testClassName___2DANxU {
+  background: red;
+  width: 10px;
+  height: 10px;
+}
+
+.-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___iZBsN- {
+  color: blue;
+}
+
+/*
+  Sample multi-line comment
+*/
+.-mock-scope-mock-package_b___TestComponent-style___testClassName___1gb0n8 {
+  background: red;
+  width: 10px;
+  height: 10px;
+}
+"
+`;
+
+exports[`Webpack build App: production 1`] = `"._2DANxU{background:red;width:10px;height:10px}.iZBsN-{color:#00f}._1gb0n8{background:red;width:10px;height:10px}"`;
+
+exports[`Webpack build Lib: development 1`] = `
+"/*
+  Sample multi-line comment
+*/
+.mock-package-a___TestComponent-style___testClassName___2DANxU {
+  background: red;
+  width: 10px;
+  height: 10px;
+}
+
+.-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___iZBsN- {
+  color: blue;
+}
+
+/*
+  Sample multi-line comment
+*/
+.-mock-scope-mock-package_b___TestComponent-style___testClassName___1gb0n8 {
+  background: red;
+  width: 10px;
+  height: 10px;
+}
+"
+`;
+
+exports[`Webpack build Lib: production 1`] = `"._2DANxU{background:red;width:10px;height:10px}.iZBsN-{color:#00f}._1gb0n8{background:red;width:10px;height:10px}"`;
