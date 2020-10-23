@@ -19,7 +19,7 @@ function normalizePath(file) {
 }
 
 // eslint-disable-next-line no-control-regex
-const filenameReservedRegex = /[<>:"/\\@|?*]/g;
+const filenameReservedRegex = /[<>:"/\\|?*]/g;
 // eslint-disable-next-line no-control-regex
 const reControlChars = /[\u0000-\u001f\u0080-\u009f]/g;
 
@@ -30,7 +30,7 @@ function escapeLocalident(localident) {
       .replace(/^((-?[0-9])|--)/, '_$1')
       .replace(filenameReservedRegex, '-')
       .replace(reControlChars, '-')
-      .replace(/\./g, '-'),
+      .replace(/[.@]/g, '-'),
     { isIdentifier: true },
   );
 }
