@@ -221,7 +221,12 @@ export default function factory(webpackConfig, options) {
             chunkStyles.push((
               `<link data-chunk="${chunk}" id="tru-style" href="${publicPath}${asset}" rel="stylesheet" />`
             ));
-          } else if (asset.endsWith('.js')) {
+          } else if (
+            asset.endsWith('.js')
+              // In dev mode HMR adds JS updates into asset arrays,
+              // and they (updates) should be ignored.
+              && !asset.endsWith('.hot-update.js')
+          ) {
             chunkScripts.push((
               `<script data-chunk="${chunk}" src="${publicPath}${asset}" type="application/javascript"></script>`
             ));

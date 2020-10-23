@@ -38,6 +38,10 @@ module.exports = function configFactory(ops) {
     mode: 'development',
   }), {
     devtool: false,
+    output: {
+      chunkFilename: '[id].js',
+      filename: '[id].js',
+    },
     plugins: [
       new MiniCssExtractPlugin({
         chunkFilename: '[id].css',
