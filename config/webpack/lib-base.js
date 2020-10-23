@@ -7,6 +7,9 @@
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+const { ProgressPlugin } = require('webpack');
+
+const { getLocalIdent } = require('../shared/utils');
 
 /**
  * Creates a new Webpack config object.
@@ -42,17 +45,18 @@ module.exports = function configFactory(ops) {
       /@babel\/runtime/,
       '@dr.pogodin/react-global-state',
       '@dr.pogodin/react-themes',
+      '@dr.pogodin/react-utils',
       'axios',
       'dayjs',
       'lodash',
       'prop-types',
+      'qs',
       'react',
       /react-dom/,
       'react-helmet',
       /react-hot-loader/,
       'react-router-dom',
       'shortid',
-      '@dr.pogodin/react-utils',
       'url-parse',
     ],
     mode: ops.mode,
@@ -73,6 +77,7 @@ module.exports = function configFactory(ops) {
       new MiniCssExtractPlugin({
         filename: 'style.css',
       }),
+      new ProgressPlugin(),
     ],
     module: {
       rules: [{
@@ -117,6 +122,7 @@ module.exports = function configFactory(ops) {
             options: {
               importLoaders: 3,
               modules: {
+                getLocalIdent,
                 localIdentName: ops.cssLocalIdent,
               },
             },

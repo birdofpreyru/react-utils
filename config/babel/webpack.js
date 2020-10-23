@@ -2,6 +2,11 @@
 
 const _ = require('lodash');
 
+const {
+  generateScopedNameDev,
+  generateScopedNameProd,
+} = require('../shared/utils');
+
 /**
  * Supported Babel environments.
  */
@@ -22,7 +27,12 @@ function newBaseConfig(options = {}) {
   return {
     presets: [
       ['@babel/env', { targets: options.targets || 'defaults' }],
-      '@babel/react',
+
+      // TODO: Starting from Babel 8, "automatic" will be the default runtime,
+      // thus once upgraded to Babel 8, runtime should be removed from
+      // @babel/react options below.
+      ['@babel/react', { runtime: 'automatic' }],
+
       '@dr.pogodin/babel-preset-svgr',
     ],
     plugins: [
@@ -33,7 +43,6 @@ function newBaseConfig(options = {}) {
           './src',
         ],
       }],
-      '@babel/syntax-dynamic-import',
       '@babel/transform-runtime',
     ],
   };
@@ -56,10 +65,10 @@ function addStyling(config, env) {
   switch (env) {
     case ENVIRONMENTS.DEV:
     case ENVIRONMENTS.TEST:
-      cssModulesOps.generateScopedName = '[path][name]___[local]___[hash:base64:6]';
+      cssModulesOps.generateScopedName = generateScopedNameDev;
       break;
     case ENVIRONMENTS.PROD:
-      cssModulesOps.generateScopedName = '[hash:base64:6]';
+      cssModulesOps.generateScopedName = generateScopedNameProd;
       break;
     default:
   }

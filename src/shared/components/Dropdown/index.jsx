@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { _, PT, themed } from 'utils';
 
 import defaultTheme from './theme.scss';

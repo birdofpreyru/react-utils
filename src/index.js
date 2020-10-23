@@ -1,5 +1,3 @@
-import path from 'path';
-
 import 'styles/global.scss';
 
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
@@ -21,11 +19,11 @@ import WithTooltip from 'components/WithTooltip';
 import YouTubeVideo from 'components/YouTubeVideo';
 import * as utils from 'utils';
 
-import { requireWeak } from 'utils/webpack';
-
-const serverUrl = module.webpackPolyfill ? './server'
-  : path.resolve(__dirname, './server');
-const server = utils.isomorphy.IS_SERVER_SIDE ? requireWeak(serverUrl) : null;
+let server = null; // eslint-disable-line import/no-mutable-exports
+if (utils.isomorphy.IS_SERVER_SIDE) {
+  const path = utils.webpack.requireWeak('path');
+  server = utils.webpack.requireWeak(path.resolve(__dirname, './server'));
+}
 
 export {
   BaseModal,

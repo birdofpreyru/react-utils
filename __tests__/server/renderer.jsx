@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import factory, { SCRIPT_LOCATIONS } from 'server/renderer';
 import fs from 'fs';
-import React from 'react';
 
 import { Helmet } from 'react-helmet';
 import { Route } from 'react-router-dom';
@@ -71,8 +70,22 @@ async function coreTest(webpackConfig, options) {
         locals: {
           webpackStats: {
             toJson: () => ({
+              // Note: asset names here do not match the currently used naming
+              // template [contenthash].xxx, but older name template
+              // [chunkname]-[buildTimestamp].xxx The actual names are not
+              // important for the test, and using older names allows to
+              // check there is no actual change in the code logic.
               assetsByChunkName: {
-                'test-chunk-a': 'test-chunk-a-1511941200000.css',
+                main: [
+                  'main-1511941200000.css',
+                  'main-1511941200000.js',
+                ],
+                polyfills: [
+                  'polyfills-1511941200000.js',
+                ],
+                'test-chunk-a': [
+                  'test-chunk-a-1511941200000.css',
+                ],
                 'test-chunk-b': [
                   'test-chunk-b-1511941200000.js',
                   'test-chunk-b-1511941200000.css',

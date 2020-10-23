@@ -1,8 +1,4 @@
-import path from 'path';
-
 import _ from 'lodash';
-
-import { useGlobalState, useAsyncData } from '@dr.pogodin/react-global-state';
 
 import themed, {
   COMPOSE,
@@ -19,15 +15,20 @@ import time from './time';
 import * as url from './url';
 import * as webpack from './webpack';
 
+export { useGlobalState, useAsyncData } from '@dr.pogodin/react-global-state';
+
 themed.COMPOSE = COMPOSE;
 themed.PRIORITY = PRIORITY;
 
-const juUrl = module.webpackPolyfill ? './shared/utils/jest'
-  : path.resolve(__dirname, './jest');
-
-const JU = isomorphy.IS_SERVER_SIDE
+let JU = null; // eslint-disable-line import/no-mutable-exports
+if (isomorphy.IS_SERVER_SIDE
   && (process.env.NODE_CONFIG_ENV || process.env.NODE_ENV) !== 'production'
-  ? webpack.requireWeak(juUrl) : null;
+) {
+  /* eslint-disable global-require */
+  const path = webpack.requireWeak('path');
+  JU = webpack.requireWeak(path.resolve(__dirname, './jest'));
+  /* eslint-enable global-require */
+}
 
 /**
  * Creates a new async barrier: a Promise instance with its resolve method
@@ -53,7 +54,5 @@ export {
   ThemeProvider,
   time,
   url,
-  useAsyncData,
-  useGlobalState,
   webpack,
 };

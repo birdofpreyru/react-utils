@@ -3,6 +3,7 @@
  */
 
 const _ = require('lodash');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const baseFactory = require('./app-base');
@@ -29,14 +30,23 @@ const baseFactory = require('./app-base');
  */
 module.exports = function configFactory(ops) {
   const o = _.defaults(_.clone(ops), {
-    cssLocalIdent: '[path][name]___[local]___[hash:base64:6]',
+    cssLocalIdent: '[package]___[path][name]___[local]___[hash:base64:6]',
   });
   const res = merge(baseFactory({
     ...o,
     babelEnv: 'development',
     mode: 'development',
   }), {
+    devtool: false,
+    output: {
+      chunkFilename: '[id].js',
+      filename: '[id].js',
+    },
     plugins: [
+      new MiniCssExtractPlugin({
+        chunkFilename: '[id].css',
+        filename: '[id].css',
+      }),
       new webpack.DefinePlugin({
         'process.env.BABEL_ENV': JSON.stringify('development'),
         'process.env.DEV_TOOLS': JSON.stringify(true),

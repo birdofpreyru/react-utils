@@ -2,7 +2,6 @@
  * This is a sample component, doing a code split.
  */
 
-import React from 'react';
 import path from 'path';
 
 import CodeSplit from 'components/CodeSplit';

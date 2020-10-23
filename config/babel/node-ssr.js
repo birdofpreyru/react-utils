@@ -5,6 +5,11 @@ const _ = require('lodash');
 const postcssScss = require('postcss-scss');
 const getWebpackBabelConfig = require('./webpack');
 
+const {
+  generateScopedNameDev,
+  generateScopedNameProd,
+} = require('../shared/utils');
+
 /**
  * Creates a new base config.
  * @param {object} babel Babel compiler.
@@ -20,10 +25,10 @@ function newBase(babel, options = {}) {
 
   const baseAssetsOutputPath = options.baseAssetsOutputPath || '';
   config.plugins.push(
-    'dynamic-import-node',
+    '@babel/syntax-dynamic-import',
     ['transform-assets', {
       extensions: ['gif', 'jpeg', 'jpg', 'png'],
-      name: `${baseAssetsOutputPath}/images/[hash].[ext]`,
+      name: `${baseAssetsOutputPath}/images/[contenthash].[ext]`,
     }],
   );
 
@@ -56,10 +61,10 @@ function addStyling(config, env) {
   switch (env) {
     case getWebpackBabelConfig.ENVIRONMENTS.DEV:
     case getWebpackBabelConfig.ENVIRONMENTS.TEST:
-      cssModulesTransformOps.generateScopedName = '[path][name]___[local]___[hash:base64:6]';
+      cssModulesTransformOps.generateScopedName = generateScopedNameDev;
       break;
     case getWebpackBabelConfig.ENVIRONMENTS.PROD:
-      cssModulesTransformOps.generateScopedName = '[hash:base64:6]';
+      cssModulesTransformOps.generateScopedName = generateScopedNameProd;
       break;
     default:
   }

@@ -9,7 +9,7 @@ import {
   useGlobalState,
 } from '@dr.pogodin/react-global-state';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ReactDom from 'react-dom';
 import shortId from 'shortid';
 import { BrowserRouter } from 'react-router-dom';

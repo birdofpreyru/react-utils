@@ -1,25 +1,21 @@
 import path from 'path';
 
-import React from 'react';
 import { snapshot } from 'utils/jest';
-import webpack from 'webpack';
+import webpack, { ProgressPlugin } from 'webpack';
 
 import webpackConfigFactory from '../../../config/webpack/app-development';
 
-import TestComponent from './__assets__/TestComponent';
+import TestApp from './__assets__';
 
-it('Babel stylename generation', () => {
-  snapshot(<TestComponent />);
-});
-
-it('Webpack stylename generation', (done) => {
+it('Prevents class name clashes across modules', (done) => {
   const webpackConfig = webpackConfigFactory({
-    cssLocalIdent: '[path][name]___[local]___[hash:base64:6]',
     context: path.resolve(__dirname, '../../..'),
     dontEmitBuildInfo: true,
-    dontTimestampOutputs: true,
   });
-  webpackConfig.entry = './__tests__/config/stylename-generation/__assets__/TestComponent/index.jsx';
+  webpackConfig.plugins = webpackConfig.plugins.filter(
+    (plugin) => !(plugin instanceof ProgressPlugin),
+  );
+  webpackConfig.entry = './__tests__/config/stylename-generation/__assets__';
   const babelLoader = webpackConfig.module.rules.find(
     (x) => x.loader === 'babel-loader',
   );
@@ -35,18 +31,20 @@ it('Webpack stylename generation', (done) => {
     try {
       expect(err).toBe(null);
       expect(stats.hasErrors()).toBe(false);
+      const cssChunkName = Object.keys(stats.compilation.assets)
+        .find((key) => key.endsWith('.css'));
       /* eslint-disable no-underscore-dangle */
-      const compiledCss = stats.compilation.assets['main.css']
-        ._source.children[0]._value;
-      expect(compiledCss).toMatchSnapshot();
-      expect(
-        compiledCss.includes(
-          '.__tests__-config-stylename-generation-__assets__-TestComponent-style___testClassName___1v_vvw',
-        ),
-      ).toBe(true);
+      const compiledCss = stats.compilation.assets[cssChunkName]
+        ._source._children.map(({ _value }) => _value).join('\n');
       /* eslint-enable no-underscore-dangle */
-    } finally {
+      expect(compiledCss).toMatchSnapshot();
       done();
+    } catch (error) {
+      done(error);
     }
   });
 }, 30000);
+
+it('Prevents class name clashes in server-side code', () => {
+  snapshot(<TestApp />);
+});

@@ -28,6 +28,7 @@ const VALID_BUILD_TYPES = Object.values(BUILD_TYPES);
  * Auxiliary wrapper around the command execution in a child process.
  *
  * TODO: Move to a server-side unitility module.
+ * TODO: The same code is duplicated in one of the tests.
  *
  * @param {String} command Command to execute;
  * @param {Object} [options] See https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback
@@ -98,14 +99,13 @@ if (!commander.lib) webpackOutDir += '/web-public';
 
 _.merge(webpackConfig, {
   output: { path: webpackOutDir },
-  stats: {
-    maxModules: Infinity,
-    optimizationBailout: true,
-  },
 });
 
 const webpackCompiler = webpack(webpackConfig);
-webpackCompiler.apply(new webpack.ProgressPlugin());
+
+// TODO: Do we need to connect it some other way to
+// output progress with Webpack@5?
+// webpackCompiler.apply(new webpack.ProgressPlugin());
 
 let firstWebpackStats = true;
 
@@ -132,10 +132,22 @@ function handleWebpackCompilationResults(error, stats) {
     logOps.all = true;
   }
   console.log(stats.toString(logOps));
+
+  fs.writeFileSync(
+    `${webpackOutDir}/__stats__.json`,
+    JSON.stringify(
+      _.pick(stats.toJson('minimal'), ['assetsByChunkName']),
+      null,
+      2,
+    ),
+  );
 }
 
 if (commander.watch) webpackCompiler.watch({}, handleWebpackCompilationResults);
-else webpackCompiler.run(handleWebpackCompilationResults);
+else {
+  webpackCompiler.run(handleWebpackCompilationResults);
+  webpackCompiler.close(() => null);
+}
 
 /* ************************************************************************** */
 /* Babel compilation of JS, JSX, and SVG files.                               */

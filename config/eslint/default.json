@@ -8,7 +8,9 @@
       "aspects": ["invalidHref", "noHref", "preferButton"]
     }],
     "no-plusplus": 0,
-    "react/jsx-one-expression-per-line": 0
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-uses-react": 0,
+    "react/react-in-jsx-scope": 0
   },
   "settings": {
     "import/resolver": {

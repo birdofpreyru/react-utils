@@ -8,9 +8,7 @@ import _ from 'lodash';
 import config from 'config';
 import forge from 'node-forge';
 import fs from 'fs';
-import dayjs from 'dayjs';
 import path from 'path';
-import React from 'react';
 import ReactDOM from 'react-dom/server';
 import serializeJs from 'serialize-javascript';
 
@@ -130,7 +128,7 @@ export default function factory(webpackConfig, options) {
         req,
         state: _.cloneDeep(initialState || {}),
 
-        /* Array of chunk names to use for stylesheet link injection. */
+        // Array of chunk names encountered during the rendering.
         chunks: [],
 
         /* Pre-rendered HTML markup for dymanic chunks. */
@@ -173,19 +171,6 @@ export default function factory(webpackConfig, options) {
         helmet = Helmet.renderStatic();
       }
 
-      /* Encrypts data to be injected into HTML.
-       * Keep in mind, that this encryption is no way secure: as the JS bundle
-       * contains decryption key and is able to decode it at the client side.
-       * Hovewer, for a number of reasons, encryption of injected data is still
-       * better than injection of a plain text. */
-      delete ssrContext.state.dr_pogodin_react_utils___split_components;
-      cipher.update(forge.util.createBuffer(JSON.stringify({
-        CONFIG: configToInject || sanitizedConfig,
-        ISTATE: ssrContext.state,
-      }), 'utf8'));
-      cipher.finish();
-      const INJ = forge.util.encode64(`${iv}${cipher.output.data}`);
-
       let assetsByChunkName;
       const { webpackStats } = res.locals;
       if (webpackStats) {
@@ -193,19 +178,59 @@ export default function factory(webpackConfig, options) {
       } else if (WEBPACK_STATS) ({ assetsByChunkName } = WEBPACK_STATS);
       else assetsByChunkName = {};
 
-      const timestamp = dayjs(buildInfo.timestamp).valueOf();
+      /* Encrypts data to be injected into HTML.
+       * Keep in mind, that this encryption is no way secure: as the JS bundle
+       * contains decryption key and is able to decode it at the client side.
+       * Hovewer, for a number of reasons, encryption of injected data is still
+       * better than injection of a plain text. */
+      delete ssrContext.state.dr_pogodin_react_utils___split_components;
+      cipher.update(forge.util.createBuffer(JSON.stringify({
+        ASSETS_BY_CHUNK_NAME: assetsByChunkName,
+        CONFIG: configToInject || sanitizedConfig,
+        ISTATE: ssrContext.state,
+      }), 'utf8'));
+      cipher.finish();
+      const INJ = forge.util.encode64(`${iv}${cipher.output.data}`);
 
       if (ssrContext.status) res.status(ssrContext.status);
-      const styles = [];
-      ssrContext.chunks.forEach((chunk) => {
+
+      const chunkStyles = [];
+      const chunkScripts = [];
+
+      // TODO: "polyfills", and "main" chunks have to be added explicitly,
+      // because unlike all other chunks they are not managed by <CodeSplit>
+      // component, thus they are not added to the ssrContext.chunks
+      // automatically. Actually, names of these entry chunks should be
+      // read from Wepback config, as the end user may customize them,
+      // remove or add other entry points, but it requires additional
+      // efforts to figure out how to automatically order them right,
+      // thus for now this handles the default config.
+      [
+        'polyfills',
+        'main',
+        ...ssrContext.chunks,
+      ].forEach((chunk) => {
         let assets = assetsByChunkName[chunk];
         if (!assets) return;
         if (!_.isArray(assets)) assets = [assets];
-        assets = assets.filter((asset) => asset.endsWith('.css'));
+
         assets.forEach((asset) => {
-          styles.push((
-            `<link data-chunk="${chunk}" id="tru-style" href="${publicPath}${asset}" rel="stylesheet" />`
-          ));
+          if (asset.endsWith('.css')) {
+            // TODO: Do we really need "tru-style" ids, or we just can match
+            // by other attribute values?
+            chunkStyles.push((
+              `<link data-chunk="${chunk}" id="tru-style" href="${publicPath}${asset}" rel="stylesheet" />`
+            ));
+          } else if (
+            asset.endsWith('.js')
+              // In dev mode HMR adds JS updates into asset arrays,
+              // and they (updates) should be ignored.
+              && !asset.endsWith('.hot-update.js')
+          ) {
+            chunkScripts.push((
+              `<script data-chunk="${chunk}" src="${publicPath}${asset}" type="application/javascript"></script>`
+            ));
+          }
         });
       });
 
@@ -243,12 +268,7 @@ export default function factory(webpackConfig, options) {
             ${helmet ? helmet.meta.toString() : ''}
             <meta name="theme-color" content="#FFFFFF"/>
             ${manifestLink}
-            <link
-              href="${publicPath}main-${timestamp}.css"
-              id="tru-style"
-              rel="stylesheet"
-            />
-            ${styles.join('')}
+            ${chunkStyles.join('')}
             ${faviconLink}
             <meta charset="utf-8" />
             <meta
@@ -267,15 +287,8 @@ export default function factory(webpackConfig, options) {
               window.SPLITS = ${serializeJs(ssrContext.splits, { isJSON: true })}
               window.INJ="${INJ}"
             </script>
-            <script
-              src="${publicPath}polyfills-${timestamp}.js"
-              type="application/javascript"
-            ></script>
+            ${chunkScripts.join('')}
             ${defaultExtraScripts || ''}
-            <script
-              src="${publicPath}main-${timestamp}.js"
-              type="application/javascript"
-            ></script>
           </body>
         </html>`
       ));

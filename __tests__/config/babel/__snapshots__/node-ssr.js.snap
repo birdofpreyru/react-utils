@@ -20,7 +20,6 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
     Array [
       "@dr.pogodin/react-css-modules",
@@ -30,10 +29,10 @@ Object {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
+        "generateScopedName": [Function],
       },
     ],
-    "dynamic-import-node",
+    "@babel/syntax-dynamic-import",
     Array [
       "transform-assets",
       Object {
@@ -43,7 +42,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/test/path/images/[hash].[ext]",
+        "name": "/test/path/images/[contenthash].[ext]",
       },
     ],
     Array [
@@ -53,7 +52,7 @@ Object {
           ".css",
           ".scss",
         ],
-        "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
+        "generateScopedName": [Function],
         "processorOpts": Object {
           "parser": Object {
             "parse": [Function],
@@ -70,7 +69,12 @@ Object {
         "targets": "current node",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -96,9 +100,8 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
-    "dynamic-import-node",
+    "@babel/syntax-dynamic-import",
     Array [
       "transform-assets",
       Object {
@@ -108,7 +111,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/images/[hash].[ext]",
+        "name": "/images/[contenthash].[ext]",
       },
     ],
   ],
@@ -119,7 +122,12 @@ Object {
         "targets": "current node",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -145,7 +153,6 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
     Array [
       "@dr.pogodin/react-css-modules",
@@ -155,10 +162,10 @@ Object {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
+        "generateScopedName": [Function],
       },
     ],
-    "dynamic-import-node",
+    "@babel/syntax-dynamic-import",
     Array [
       "transform-assets",
       Object {
@@ -168,7 +175,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/images/[hash].[ext]",
+        "name": "/images/[contenthash].[ext]",
       },
     ],
     Array [
@@ -178,7 +185,7 @@ Object {
           ".css",
           ".scss",
         ],
-        "generateScopedName": "[path][name]___[local]___[hash:base64:6]",
+        "generateScopedName": [Function],
         "processorOpts": Object {
           "parser": Object {
             "parse": [Function],
@@ -195,7 +202,12 @@ Object {
         "targets": "current node",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -221,7 +233,6 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
     Array [
       "@dr.pogodin/react-css-modules",
@@ -231,10 +242,10 @@ Object {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": "[hash:base64:6]",
+        "generateScopedName": [Function],
       },
     ],
-    "dynamic-import-node",
+    "@babel/syntax-dynamic-import",
     Array [
       "transform-assets",
       Object {
@@ -244,7 +255,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/test/path/images/[hash].[ext]",
+        "name": "/test/path/images/[contenthash].[ext]",
       },
     ],
     Array [
@@ -254,7 +265,7 @@ Object {
           ".css",
           ".scss",
         ],
-        "generateScopedName": "[hash:base64:6]",
+        "generateScopedName": [Function],
         "processorOpts": Object {
           "parser": Object {
             "parse": [Function],
@@ -271,7 +282,12 @@ Object {
         "targets": "current node",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -297,9 +313,8 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
-    "dynamic-import-node",
+    "@babel/syntax-dynamic-import",
     Array [
       "transform-assets",
       Object {
@@ -309,7 +324,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/images/[hash].[ext]",
+        "name": "/images/[contenthash].[ext]",
       },
     ],
   ],
@@ -320,7 +335,12 @@ Object {
         "targets": "current node",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -346,7 +366,6 @@ Object {
         ],
       },
     ],
-    "@babel/syntax-dynamic-import",
     "@babel/transform-runtime",
     Array [
       "@dr.pogodin/react-css-modules",
@@ -356,10 +375,10 @@ Object {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": "[hash:base64:6]",
+        "generateScopedName": [Function],
       },
     ],
-    "dynamic-import-node",
+    "@babel/syntax-dynamic-import",
     Array [
       "transform-assets",
       Object {
@@ -369,7 +388,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/images/[hash].[ext]",
+        "name": "/images/[contenthash].[ext]",
       },
     ],
     Array [
@@ -379,7 +398,7 @@ Object {
           ".css",
           ".scss",
         ],
-        "generateScopedName": "[hash:base64:6]",
+        "generateScopedName": [Function],
         "processorOpts": Object {
           "parser": Object {
             "parse": [Function],
@@ -396,7 +415,12 @@ Object {
         "targets": "current node",
       },
     ],
-    "@babel/react",
+    Array [
+      "@babel/react",
+      Object {
+        "runtime": "automatic",
+      },
+    ],
     "@dr.pogodin/babel-preset-svgr",
   ],
 }

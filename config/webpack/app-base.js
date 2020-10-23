@@ -6,15 +6,15 @@
 
 const _ = require('lodash');
 const autoprefixer = require('autoprefixer');
-const dayjs = require('dayjs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const forge = require('node-forge');
 const fs = require('fs');
 const path = require('path');
 const SM = require('sitemap');
-const { StatsWriterPlugin } = require('webpack-stats-plugin');
-const webpack = require('webpack');
+const { DefinePlugin, ProgressPlugin } = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+
+const { getLocalIdent } = require('../shared/utils');
 
 /**
  * Creates a new Webpack config object, and performs some auxiliary operations
@@ -61,9 +61,6 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
  * @param {String} [ops.outputPath] Optional. Output path for the build.
  *  Defaults to `build` folder inside the `context` path.
  *
- * @param {boolean} [ops.dontTimestampOutputs] Optional. If set `true` ouput
- *  CSS and JS files will not have build timestamp appended to their names.
- *
  * @param {String} ops.publicPath Base URL for the output of the build assets.
  *
  * @param {String} [ops.sitemap] Optional. A path to JS module or JSON file,
@@ -99,13 +96,8 @@ module.exports = function configFactory(ops) {
     });
   }
 
-  const now = dayjs();
-
-  let outputFilenameSuffix = '';
-  if (!o.dontTimestampOutputs) {
-    outputFilenameSuffix = `-${now.valueOf()}`;
-  }
-
+  // TODO: Once all assets are named by hashes, we probably don't need build
+  // info anymore beside the key, which can be merged into stats object?
   let buildInfo;
   const buildInfoUrl = path.resolve(o.context, '.build-info');
   /* If build-info file is found, we reuse those data. */
@@ -121,9 +113,6 @@ module.exports = function configFactory(ops) {
 
         /* Public path used during build. */
         publicPath: o.publicPath,
-
-        /* Build timestamp. */
-        timestamp: now.toISOString(),
 
         /* `true` if client-side code should setup a service worker. */
         useServiceWorker: Boolean(o.workbox),
@@ -147,16 +136,10 @@ module.exports = function configFactory(ops) {
   ]);
 
   const plugins = [
-    new MiniCssExtractPlugin({
-      chunkFilename: `[name]${outputFilenameSuffix}.css`,
-      filename: `[name]${outputFilenameSuffix}.css`,
-    }),
-    new webpack.DefinePlugin({
+    new DefinePlugin({
       BUILD_INFO: JSON.stringify(buildInfo),
     }),
-    new StatsWriterPlugin({
-      filename: '__stats__.json',
-    }),
+    new ProgressPlugin(),
   ];
 
   /* Adds InjectManifest plugin from WorkBox, if opted to. */
@@ -174,12 +157,11 @@ module.exports = function configFactory(ops) {
     entry,
     node: {
       __dirname: true,
-      fs: 'empty',
     },
     mode: o.mode,
     output: {
-      chunkFilename: `[name]${outputFilenameSuffix}.js`,
-      filename: `[name]${outputFilenameSuffix}.js`,
+      chunkFilename: '[contenthash].js',
+      filename: '[contenthash].js',
       path: path.resolve(__dirname, o.context, o.outputPath),
       publicPath: `${o.publicPath}/`,
     },
@@ -207,7 +189,7 @@ module.exports = function configFactory(ops) {
         options: {
           outputPath: 'fonts/',
           publicPath: `${o.publicPath}/fonts`,
-          name: '[md5:hash].[ext]',
+          name: '[contenthash].[ext]',
         },
       }, {
         /* Loads JS and JSX moudles, and inlines SVG assets. */
@@ -228,7 +210,7 @@ module.exports = function configFactory(ops) {
         options: {
           outputPath: 'images/',
           publicPath: `${o.publicPath}/images`,
-          name: '[md5:hash].[ext]',
+          name: '[contenthash].[ext]',
         },
       }, {
         /* Loads SCSS stylesheets. */
@@ -238,6 +220,7 @@ module.exports = function configFactory(ops) {
             loader: 'css-loader',
             options: {
               modules: {
+                getLocalIdent,
                 localIdentName: o.cssLocalIdent,
               },
             },
@@ -264,12 +247,6 @@ module.exports = function configFactory(ops) {
           'css-loader',
         ],
       }],
-    },
-    optimization: {
-      /* TODO: Dynamic chunk splitting does not play along with server-side
-       * rendering of split chunks. Probably there is a way to achieve that,
-       * but it is not a priority now. */
-      splitChunks: false,
     },
   };
 };

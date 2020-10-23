@@ -9,7 +9,7 @@
 /* global window */
 
 import PT from 'prop-types';
-import React from 'react';
+import { createElement } from 'react';
 
 import './style.scss';
 
@@ -50,7 +50,7 @@ export default function GenericLink({
   }
 
   /* Otherwise we render the link as React Router's Link or NavLink element. */
-  return React.createElement(routerLinkType, {
+  return createElement(routerLinkType, {
     className,
     disabled,
     onMouseDown,

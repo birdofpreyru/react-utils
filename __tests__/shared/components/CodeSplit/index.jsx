@@ -27,7 +27,7 @@ const TEST_WEBPACK_CONFIG = {
   context: `${__dirname}/test_data`,
   output: {
     path: '/test/path',
-    publicPath: '/test/public/path',
+    publicPath: '/test/public/path/',
   },
 };
 
@@ -54,7 +54,16 @@ async function renderServerSide(Scene, maxSsrRounds) {
         webpackStats: {
           toJson: () => ({
             assetsByChunkName: {
-              'test-chunk-a': 'test-chunk-a-1511941200000.css',
+              main: [
+                'main-1511941200000.css',
+                'main-1511941200000.js',
+              ],
+              polyfills: [
+                'polyfills-1511941200000.js',
+              ],
+              'test-chunk-a': [
+                'test-chunk-a-1511941200000.css',
+              ],
               'test-chunk-b': [
                 'test-chunk-b-1511941200000.js',
                 'test-chunk-b-1511941200000.css',
