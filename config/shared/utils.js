@@ -30,7 +30,7 @@ function escapeLocalident(localident) {
       .replace(/^((-?[0-9])|--)/, '_$1')
       .replace(filenameReservedRegex, '-')
       .replace(reControlChars, '-')
-      .replace(/[.@]/g, '-'),
+      .replace(/\./g, '-'),
     { isIdentifier: true },
   );
 }
@@ -62,36 +62,43 @@ function getLocalIdent(
   { resourcePath },
   localIdentName,
   localName,
-  options,
+  options = {},
 ) {
   const packageInfo = getPackageInfo(path.dirname(resourcePath));
   const request = normalizePath(path.relative(packageInfo.root, resourcePath));
-  const localIdent = interpolateName({
+  return interpolateName({
     resourcePath,
   }, localIdentName, {
     ...options,
     content: `${packageInfo.name + request}\x00${localName}`,
     context: packageInfo.root,
   }).replace(/\[package\]/gi, packageInfo.name)
-    .replace(/\[local\]/gi, localName);
-  return escapeLocalident(localIdent);
+    .replace(/\[local\]/gi, localName)
+    .replace(/@/g, '-');
 }
 
 function generateScopedNameDev(localName, assetPath) {
-  return getLocalIdent(
-    { resourcePath: assetPath },
-    '[package]___[path][name]___[local]___[hash:base64:6]',
-    localName,
-    {},
+  // Mind: "css-loader" additionally escapes identifiers returned by
+  // getLocalIdent(); the babel plugins - don't, thus we need to escape
+  // ourselves.
+  return escapeLocalident(
+    getLocalIdent(
+      { resourcePath: assetPath },
+      '[package]___[path][name]___[local]___[hash:base64:6]',
+      localName,
+      {},
+    ),
   );
 }
 
 function generateScopedNameProd(localName, assetPath) {
-  return getLocalIdent(
-    { resourcePath: assetPath },
-    '[hash:base64:6]',
-    localName,
-    {},
+  return escapeLocalident(
+    getLocalIdent(
+      { resourcePath: assetPath },
+      '[hash:base64:6]',
+      localName,
+      {},
+    ),
   );
 }
 
