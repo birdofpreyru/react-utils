@@ -172,7 +172,7 @@ export default function factory(webpackConfig, options) {
       }
 
       let assetsByChunkName;
-      const { webpackStats } = res.locals;
+      const webpackStats = _.get(res.locals, 'webpack.devMiddleware.stats');
       if (webpackStats) {
         ({ assetsByChunkName } = webpackStats.toJson());
       } else if (WEBPACK_STATS) ({ assetsByChunkName } = WEBPACK_STATS);

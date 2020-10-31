@@ -51,25 +51,31 @@ async function renderServerSide(Scene, maxSsrRounds) {
     _.cloneDeep(TEST_HTTP_REQUEST),
     {
       locals: {
-        webpackStats: {
-          toJson: () => ({
-            assetsByChunkName: {
-              main: [
-                'main-1511941200000.css',
-                'main-1511941200000.js',
-              ],
-              polyfills: [
-                'polyfills-1511941200000.js',
-              ],
-              'test-chunk-a': [
-                'test-chunk-a-1511941200000.css',
-              ],
-              'test-chunk-b': [
-                'test-chunk-b-1511941200000.js',
-                'test-chunk-b-1511941200000.css',
-              ],
+        webpack: {
+          // TODO: Rather than mocking the middleware, use it, to safeguard
+          // against any breaking changes in future middleware releases.
+          devMiddleware: {
+            stats: {
+              toJson: () => ({
+                assetsByChunkName: {
+                  main: [
+                    'main-1511941200000.css',
+                    'main-1511941200000.js',
+                  ],
+                  polyfills: [
+                    'polyfills-1511941200000.js',
+                  ],
+                  'test-chunk-a': [
+                    'test-chunk-a-1511941200000.css',
+                  ],
+                  'test-chunk-b': [
+                    'test-chunk-b-1511941200000.js',
+                    'test-chunk-b-1511941200000.css',
+                  ],
+                },
+              }),
             },
-          }),
+          },
         },
       },
       send: (x) => { render += x; },

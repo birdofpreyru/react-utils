@@ -109,7 +109,6 @@ export default async function factory(webpackConfig, options) {
     const webpackHotMiddleware = require('webpack-hot-middleware');
     const compiler = webpack(webpackConfig);
     server.use(webpackDevMiddleware(compiler, {
-      name: 'main.js',
       publicPath,
       serverSideRender: true,
     }));

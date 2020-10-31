@@ -46,6 +46,9 @@ afterAll(() => {
   Helmet.canUseDOM = true;
 });
 
+// TODO: Can we update this test to generate the webpack stats and attach
+// them to locals by the actual run of webpack-dev-middleware, thus allowing
+// to catch any issues caused by breaking changes in the middleware?
 /**
  * Performs tests with the specified configuration and options.
  * @param {Object} webpackConfig
@@ -68,30 +71,35 @@ async function coreTest(webpackConfig, options) {
       _.clone(TEST_HTTP_REQUEST),
       {
         locals: {
-          webpackStats: {
-            toJson: () => ({
-              // Note: asset names here do not match the currently used naming
-              // template [contenthash].xxx, but older name template
-              // [chunkname]-[buildTimestamp].xxx The actual names are not
-              // important for the test, and using older names allows to
-              // check there is no actual change in the code logic.
-              assetsByChunkName: {
-                main: [
-                  'main-1511941200000.css',
-                  'main-1511941200000.js',
-                ],
-                polyfills: [
-                  'polyfills-1511941200000.js',
-                ],
-                'test-chunk-a': [
-                  'test-chunk-a-1511941200000.css',
-                ],
-                'test-chunk-b': [
-                  'test-chunk-b-1511941200000.js',
-                  'test-chunk-b-1511941200000.css',
-                ],
+          webpack: {
+            devMiddleware: {
+              stats: {
+                toJson: () => ({
+                  // Note: asset names here do not match the currently
+                  // used naming
+                  // template [contenthash].xxx, but older name template
+                  // [chunkname]-[buildTimestamp].xxx The actual names are not
+                  // important for the test, and using older names allows to
+                  // check there is no actual change in the code logic.
+                  assetsByChunkName: {
+                    main: [
+                      'main-1511941200000.css',
+                      'main-1511941200000.js',
+                    ],
+                    polyfills: [
+                      'polyfills-1511941200000.js',
+                    ],
+                    'test-chunk-a': [
+                      'test-chunk-a-1511941200000.css',
+                    ],
+                    'test-chunk-b': [
+                      'test-chunk-b-1511941200000.js',
+                      'test-chunk-b-1511941200000.css',
+                    ],
+                  },
+                }),
               },
-            }),
+            },
           },
         },
         send: (x) => { render += x; },
