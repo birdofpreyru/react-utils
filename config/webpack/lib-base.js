@@ -56,7 +56,7 @@ module.exports = function configFactory(ops) {
       'react-helmet',
       /react-hot-loader/,
       'react-router-dom',
-      'shortid',
+      'uuid',
       'url-parse',
     ],
     mode: ops.mode,
