@@ -42,7 +42,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/test/path/images/[contenthash].[ext]",
+        "name": "/test/path/images/[hash].[ext]",
       },
     ],
     Array [
@@ -111,7 +111,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/images/[contenthash].[ext]",
+        "name": "/images/[hash].[ext]",
       },
     ],
   ],
@@ -175,7 +175,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/images/[contenthash].[ext]",
+        "name": "/images/[hash].[ext]",
       },
     ],
     Array [
@@ -255,7 +255,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/test/path/images/[contenthash].[ext]",
+        "name": "/test/path/images/[hash].[ext]",
       },
     ],
     Array [
@@ -324,7 +324,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/images/[contenthash].[ext]",
+        "name": "/images/[hash].[ext]",
       },
     ],
   ],
@@ -388,7 +388,7 @@ Object {
           "jpg",
           "png",
         ],
-        "name": "/images/[contenthash].[ext]",
+        "name": "/images/[hash].[ext]",
       },
     ],
     Array [

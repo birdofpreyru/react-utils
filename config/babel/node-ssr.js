@@ -28,7 +28,7 @@ function newBase(babel, options = {}) {
     '@babel/syntax-dynamic-import',
     ['transform-assets', {
       extensions: ['gif', 'jpeg', 'jpg', 'png'],
-      name: `${baseAssetsOutputPath}/images/[contenthash].[ext]`,
+      name: `${baseAssetsOutputPath}/images/[hash].[ext]`,
     }],
   );
 

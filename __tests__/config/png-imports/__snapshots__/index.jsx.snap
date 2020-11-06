@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PNG import by Babel 1`] = `"/images/75c30800b99652d0714de6d16f3c497c.png"`;
