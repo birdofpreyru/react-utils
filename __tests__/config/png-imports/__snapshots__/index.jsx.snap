@@ -1,3 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PNG import by Babel 1`] = `"/images/75c30800b99652d0714de6d16f3c497c.png"`;
+exports[`Client-side import 1`] = `"images/cd564973d92d0a8a8a1787f4eafd8f51.png"`;
+
+exports[`Server-side import 1`] = `
+<img
+  alt="logo"
+  src="/images/cd564973d92d0a8a8a1787f4eafd8f51.png"
+/>
+`;

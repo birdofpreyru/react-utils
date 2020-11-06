@@ -26,7 +26,7 @@ function newBase(babel, options = {}) {
   const baseAssetsOutputPath = options.baseAssetsOutputPath || '';
   config.plugins.push(
     '@babel/syntax-dynamic-import',
-    ['transform-assets', {
+    ['@dr.pogodin/transform-assets', {
       extensions: ['gif', 'jpeg', 'jpg', 'png'],
       name: `${baseAssetsOutputPath}/images/[hash].[ext]`,
     }],

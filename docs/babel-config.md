@@ -78,7 +78,7 @@ rendering);
   6-symbols hashes in the *production* Babel environment, for compactness of the
   compiled JS and CSS modules;
 
-  - Uses [`babel-plugin-tranform-assets`](https://www.npmjs.com/package/babel-plugin-transform-assets)
+  - Uses [`babel-plugin-tranform-assets`](https://www.npmjs.com/package/@dr.pogodin/babel-plugin-transform-assets)
   to convert GIF, JPEG, JPG, and PNG imports into
   `/images/[FILE_HASH].[FILE_EXTENSION]` URL strings. Use the
   **`baseAssetsOutputPath`** preset option to prefix generated paths with an

@@ -34,7 +34,7 @@ Object {
     ],
     "@babel/syntax-dynamic-import",
     Array [
-      "transform-assets",
+      "@dr.pogodin/transform-assets",
       Object {
         "extensions": Array [
           "gif",
@@ -103,7 +103,7 @@ Object {
     "@babel/transform-runtime",
     "@babel/syntax-dynamic-import",
     Array [
-      "transform-assets",
+      "@dr.pogodin/transform-assets",
       Object {
         "extensions": Array [
           "gif",
@@ -167,7 +167,7 @@ Object {
     ],
     "@babel/syntax-dynamic-import",
     Array [
-      "transform-assets",
+      "@dr.pogodin/transform-assets",
       Object {
         "extensions": Array [
           "gif",
@@ -247,7 +247,7 @@ Object {
     ],
     "@babel/syntax-dynamic-import",
     Array [
-      "transform-assets",
+      "@dr.pogodin/transform-assets",
       Object {
         "extensions": Array [
           "gif",
@@ -316,7 +316,7 @@ Object {
     "@babel/transform-runtime",
     "@babel/syntax-dynamic-import",
     Array [
-      "transform-assets",
+      "@dr.pogodin/transform-assets",
       Object {
         "extensions": Array [
           "gif",
@@ -380,7 +380,7 @@ Object {
     ],
     "@babel/syntax-dynamic-import",
     Array [
-      "transform-assets",
+      "@dr.pogodin/transform-assets",
       Object {
         "extensions": Array [
           "gif",

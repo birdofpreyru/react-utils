@@ -52,18 +52,18 @@
     "@babel/preset-react": "^7.12.5",
     "@babel/types": "^7.12.6",
     "@dr.pogodin/babel-plugin-css-modules-transform": "^1.8.2",
+    "@dr.pogodin/babel-plugin-transform-assets": "^1.1.1",
     "@dr.pogodin/babel-preset-svgr": "^1.2.0",
     "autoprefixer": "^10.0.1",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.1.0",
     "babel-plugin-module-resolver": "^4.0.0",
-    "babel-plugin-transform-assets": "^1.0.2",
     "core-js": "^3.7.0",
     "css-loader": "^5.0.1",
     "css-minimizer-webpack-plugin": "^1.1.5",
     "eslint": "^7.12.1",
-    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-import-resolver-babel-module": "^5.2.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.1.0",
@@ -131,5 +131,5 @@
     "lint:scss": "stylelint **/*.scss --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "1.0.4"
+  "version": "1.0.5"
 }
