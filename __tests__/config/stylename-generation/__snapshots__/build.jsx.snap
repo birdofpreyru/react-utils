@@ -10,7 +10,7 @@ Object.defineProperty(exports, \\"__esModule\\", {
 });
 exports.default = TestApp;
 
-var _jsxRuntime = require(\\"react/jsx-runtime.js\\");
+var _jsxRuntime = require(\\"react/jsx-runtime\\");
 
 var _TestComponent = _interopRequireDefault(require(\\"./MockPackageA/TestComponent\\"));
 
@@ -35,7 +35,7 @@ Object.defineProperty(exports, \\"__esModule\\", {
 });
 exports.default = TestComponent;
 
-var _jsxRuntime = require(\\"react/jsx-runtime.js\\");
+var _jsxRuntime = require(\\"react/jsx-runtime\\");
 
 var style = {
   \\"testClassName\\": \\"mock-package-a___TestComponent-style___testClassName___2DANxU\\"
@@ -59,7 +59,7 @@ Object.defineProperty(exports, \\"__esModule\\", {
 });
 exports.default = TestApp;
 
-var _jsxRuntime = require(\\"react/jsx-runtime.js\\");
+var _jsxRuntime = require(\\"react/jsx-runtime\\");
 
 var _TestComponent = _interopRequireDefault(require(\\"./MockPackageA/TestComponent\\"));
 
@@ -84,7 +84,7 @@ Object.defineProperty(exports, \\"__esModule\\", {
 });
 exports.default = TestComponent;
 
-var _jsxRuntime = require(\\"react/jsx-runtime.js\\");
+var _jsxRuntime = require(\\"react/jsx-runtime\\");
 
 var style = {
   \\"testClassName\\": \\"_2DANxU\\"
