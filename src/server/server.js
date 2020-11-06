@@ -52,20 +52,14 @@ export default async function factory(webpackConfig, options) {
     // added for each request.
     let cspSettings = {
       directives: {
-        defaultSrc: ["'self'"],
-        baseUri: ["'self'"],
-        blockAllMixedContent: [],
-        fontSrc: ["'self'", 'https:', 'data:'],
-        frameAncestors: ["'self'"],
-        frameSrc: ["'self'", 'https://*.youtube.com'],
-        imgSrc: ["'self'", 'data:'],
-        objectSrc: ["'none'"],
-        scriptSrc: ["'self'", "'unsafe-eval'", `'nonce-${req.cspNonce}'`],
-        scriptSrcAttr: ["'none'"],
-        styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        'frame-src': ["'self'", 'https://*.youtube.com'],
+        'script-src': ["'self'", "'unsafe-eval'", `'nonce-${req.cspNonce}'`],
       },
     };
-    if (!isDevBuild()) cspSettings.directives.upgradeInsecureRequests = [];
+    if (isDevBuild()) {
+      delete cspSettings.directives['upgrade-insecure-requests'];
+    }
     if (options.cspSettingsHook) {
       cspSettings = options.cspSettingsHook(cspSettings, req);
     }

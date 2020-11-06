@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import supertest from 'supertest';
+
 import serverFactory from 'server/server';
 
 jest.mock('serve-favicon', () => jest.fn(() => (req, res, next) => next()));
@@ -46,4 +48,24 @@ test('Launch with dev tools', () => {
   process.env.DEV_TOOLS = true;
   const server = serverFactory(TEST_WEBPACK_CONFIG, { logger: console });
   return server;
+});
+
+describe('Server is functional', () => {
+  let server;
+
+  beforeAll(async () => {
+    server = supertest(
+      // TODO: I guess, it is better to completely mock the logger here,
+      // to not print anything into console during the normal test pass.
+      await serverFactory(TEST_WEBPACK_CONFIG, { logger: console }),
+    );
+  });
+
+  test(
+    'Simple request',
+    () => server.get('/').expect(200)
+      .expect((res) => {
+        expect(res.headers['content-security-policy']).toMatchSnapshot();
+      }),
+  );
 });
