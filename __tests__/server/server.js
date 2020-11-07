@@ -57,15 +57,24 @@ describe('Server is functional', () => {
     server = supertest(
       // TODO: I guess, it is better to completely mock the logger here,
       // to not print anything into console during the normal test pass.
-      await serverFactory(TEST_WEBPACK_CONFIG, { logger: console }),
+      await serverFactory(TEST_WEBPACK_CONFIG, {
+        cspSettingsHook: (csp) => {
+          csp.directives['default-src'].push('https://sample.url');
+          return csp;
+        },
+        logger: console,
+      }),
     );
   });
 
-  test(
-    'Simple request',
-    () => server.get('/').expect(200)
+  test('Simple request', async () => {
+    await server.get('/').expect(200)
       .expect((res) => {
         expect(res.headers['content-security-policy']).toMatchSnapshot();
-      }),
-  );
+      });
+    await server.get('/').expect(200)
+      .expect((res) => {
+        expect(res.headers['content-security-policy']).toMatchSnapshot();
+      });
+  });
 });
