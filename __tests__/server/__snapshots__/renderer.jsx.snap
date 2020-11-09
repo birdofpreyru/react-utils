@@ -9,7 +9,7 @@ exports[`"favicon" option 1`] = `
             
             <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
             
-            <link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
             <link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\" />
             <meta charset=\\"utf-8\\" />
             <meta
@@ -28,7 +28,7 @@ exports[`"favicon" option 1`] = `
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5xA+viJ5vnfnY2/UbytYsQvQ==\\"
             </script>
-            <script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script><script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script><script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
             
           </body>
         </html>"
@@ -43,7 +43,7 @@ exports[`Base rendering of HTML template 1`] = `
             
             <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
             
-            <link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
             
             <meta charset=\\"utf-8\\" />
             <meta
@@ -62,7 +62,7 @@ exports[`Base rendering of HTML template 1`] = `
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5xA+viJ5vnfnY2/UbytYsQvQ==\\"
             </script>
-            <script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script><script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script><script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
             
           </body>
         </html>"
@@ -77,7 +77,7 @@ exports[`Config overriding for injection 1`] = `
             
             <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
             
-            <link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
             
             <meta charset=\\"utf-8\\" />
             <meta
@@ -96,7 +96,7 @@ exports[`Config overriding for injection 1`] = `
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cTi9VQX8OW0+JoVNYcuVavL1zUfXa/F+j/uVT8wF5mV+OD+JFE4PXHgKEkoOxVKClTYCuusupNawOFnXjAKzQTAr1w2Y1xfsnhT1PDqLQP3ngQ==\\"
             </script>
-            <script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script><script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script><script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
             
           </body>
         </html>"
@@ -111,7 +111,7 @@ exports[`Hemlet integration works 1`] = `
             <meta data-react-helmet=\\"true\\" property=\\"description\\" content=\\"Test Page Description\\"/>
             <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
             
-            <link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
             
             <meta charset=\\"utf-8\\" />
             <meta
@@ -130,7 +130,7 @@ exports[`Hemlet integration works 1`] = `
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5xA+viJ5vnfnY2/UbytYsQvQ==\\"
             </script>
-            <script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script><script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script><script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
             
           </body>
         </html>"
@@ -145,7 +145,7 @@ exports[`Injection of additional JS scripts 1`] = `
             
             <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
             
-            <link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
             
             <meta charset=\\"utf-8\\" />
             <meta
@@ -164,7 +164,7 @@ exports[`Injection of additional JS scripts 1`] = `
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5xA+viJ5vnfnY2/UbytYsQvQ==\\"
             </script>
-            <script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script><script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script><script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
             <script>Dummy JS Sript</script><script>Another Dummy JS Script</script><script>Yet another Dummy JS Script</script>
           </body>
         </html>"
@@ -179,7 +179,7 @@ exports[`Server-side rendering (SSR); injection of CSS chunks & Redux state 1`] 
             
             <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
             
-            <link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" /><link data-chunk=\\"test-chunk-a\\" href=\\"/test/public/path/test-chunk-a-1511941200000.css\\" rel=\\"stylesheet\\" /><link data-chunk=\\"test-chunk-b\\" href=\\"/test/public/path/test-chunk-b-1511941200000.css\\" rel=\\"stylesheet\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" /><link href=\\"/test/public/path/test-chunk-a-1511941200000.css\\" rel=\\"stylesheet\\" /><link href=\\"/test/public/path/test-chunk-b-1511941200000.css\\" rel=\\"stylesheet\\" />
             
             <meta charset=\\"utf-8\\" />
             <meta
@@ -198,7 +198,7 @@ exports[`Server-side rendering (SSR); injection of CSS chunks & Redux state 1`] 
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5xv8WlAVnlWdgNvB/Q3AKydAbxyFdVF8mjQAb1ExDvse1qjIa7JIOESht5ICAGbdminx9y/KAn4bYuq7OEVZTV+owDk7nfArmDZTvVMMFaL0c=\\"
             </script>
-            <script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script><script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script><script data-chunk=\\"test-chunk-b\\" src=\\"/test/public/path/test-chunk-b-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script><script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script><script src=\\"/test/public/path/test-chunk-b-1511941200000.js\\" type=\\"application/javascript\\"></script>
             
           </body>
         </html>"
@@ -214,7 +214,7 @@ exports[`Setting of response HTTP status the server-side rendering 1`] = `
             
             <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
             
-            <link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
             
             <meta charset=\\"utf-8\\" />
             <meta
@@ -233,7 +233,7 @@ exports[`Setting of response HTTP status the server-side rendering 1`] = `
               window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5xA+viJ5vnfnY2/UbytYsQvQ==\\"
             </script>
-            <script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script><script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script><script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
             
           </body>
         </html>"

@@ -5,7 +5,7 @@ exports[`Client-side rendering 1`] = `
 
 <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
 
-<link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+<link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
 
 <meta charset=\\"utf-8\\">
 <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">"
@@ -92,8 +92,8 @@ exports[`Client-side rendering 2`] = `
   }
   window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5x/O9WytXifp+Rrn07OeSezKzgU1DBmTNhGLGN6Ne6p4skptTPyzMu96urfoEiiwAm\\"
 </script>
-<script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
-<script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>"
+<script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
+<script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>"
 `;
 
 exports[`Client-side rendering 3`] = `
@@ -101,7 +101,7 @@ exports[`Client-side rendering 3`] = `
 
 <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
 
-<link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+<link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
 
 <meta charset=\\"utf-8\\">
 <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">"
@@ -181,8 +181,8 @@ exports[`Client-side rendering 4`] = `
   </div>
 </div>
 
-<script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
-<script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>"
+<script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
+<script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>"
 `;
 
 exports[`Server-side rendring 1`] = `
@@ -195,7 +195,7 @@ exports[`Server-side rendring 1`] = `
 
     <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
 
-    <link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+    <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
 
     <meta charset=\\"utf-8\\" />
     <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
@@ -241,8 +241,8 @@ exports[`Server-side rendring 1`] = `
       }
       window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5x/O9WytXifp+Rrn07OeSezKzgU1DBmTNhGLGN6Ne6p4skptTPyzMu96urfoEiiwAm\\"
     </script>
-    <script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
-    <script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+    <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
+    <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
 
   </body>
 
@@ -259,7 +259,7 @@ exports[`Server-side rendring 2`] = `
 
     <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
 
-    <link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+    <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
 
     <meta charset=\\"utf-8\\" />
     <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
@@ -347,8 +347,8 @@ exports[`Server-side rendring 2`] = `
       }
       window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5x/O9WytXifp+Rrn07OeSezKzgU1DBmTNhGLGN6Ne6p4skptTPyzMu96urfoEiiwAm\\"
     </script>
-    <script data-chunk=\\"polyfills\\" src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
-    <script data-chunk=\\"main\\" src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+    <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
+    <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
 
   </body>
 

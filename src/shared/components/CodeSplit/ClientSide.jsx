@@ -12,12 +12,6 @@ import dayjs from 'dayjs';
 import { getBuildInfo } from 'utils/isomorphy';
 import time from 'utils/time';
 
-/* Specifies the maximal number of unused CSS stylesheets to be kept in memory.
- */
-const MAX_UNUSED_STYLESHEETS = 10;
-
-let unusedCssStamp = 0;
-
 export default function ClientSide({
   chunkName,
   getComponentAsync,
@@ -85,50 +79,28 @@ export default function ClientSide({
     if (heap.mounted) throw Error('Illegal attempt to remount a CodeSplit');
     else heap.mounted = true;
 
+    const assets = window.ASSETS_BY_CHUNK_NAME[chunkName];
+    const cssAsset = assets.find((item) => item.endsWith('.css'));
+
     /* The links to stylesheets are injected into document header using
     * browser's API, rather than ReactJS rendering mechanism, because
     * it gives a better control over reloading of the stylesheets and
     * helps to avoid some unnecessary flickering when the app loads a
     * page already pre-rendered at the server side. */
-    let link = document.querySelector(
-      `link[data-chunk="${chunkName}"]`,
-    );
-    if (link) {
-      /* Marking the chunk being used again. */
-      link.removeAttribute('data-chunk-unused');
-    } else {
-      const assets = window.ASSETS_BY_CHUNK_NAME[chunkName];
-      const cssAsset = assets.find((item) => item.endsWith('.css'));
-
+    let link = document.querySelector(`link[href*="${cssAsset}"]`);
+    if (!link) {
       link = document.createElement('link');
-      link.setAttribute('data-chunk', chunkName);
       link.setAttribute('href', cssAsset);
       link.setAttribute('rel', 'stylesheet');
       const head = document.getElementsByTagName('head')[0];
       head.appendChild(link);
-
-      /* Unloads unused CSS stylesheets, if too many of them are
-      * loaded. */
-      const unused = head.querySelectorAll('link[data-chunk-unused]');
-      if (unused.length > MAX_UNUSED_STYLESHEETS) {
-        const arr = [];
-        unused.forEach((x) => {
-          /* eslint-disable no-param-reassign */
-          x.chunkOrder = Number(x.getAttribute('data-chunk-unused'));
-          /* eslint-enable no-param-reassign */
-          arr.push(x);
-        });
-        arr.sort((a, b) => a.chunkOrder - b.chunkOrder);
-        arr.slice(0, unused.length - MAX_UNUSED_STYLESHEETS)
-          .forEach((x) => head.removeChild(x));
-      }
     }
     return () => {
-      const link2 = document.querySelector(`link[data-chunk="${chunkName}"]`);
-
-      /* TODO: This unusedCssStamp thing should be revised. Probably, not needed
-       * at all. */
-      if (link2) link2.setAttribute('data-chunk-unused', unusedCssStamp += 1);
+      link = document.querySelector(`link[href*="${cssAsset}"]`);
+      if (link) {
+        const head = document.getElementsByTagName('head')[0];
+        head.removeChild(link);
+      }
     };
   }, [buildTimestamp, chunkName, heap, publicPath]);
 

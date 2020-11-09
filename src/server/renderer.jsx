@@ -217,7 +217,7 @@ export default function factory(webpackConfig, options) {
         assets.forEach((asset) => {
           if (asset.endsWith('.css')) {
             chunkStyles.push((
-              `<link data-chunk="${chunk}" href="${publicPath}${asset}" rel="stylesheet" />`
+              `<link href="${publicPath}${asset}" rel="stylesheet" />`
             ));
           } else if (
             asset.endsWith('.js')
@@ -226,7 +226,7 @@ export default function factory(webpackConfig, options) {
               && !asset.endsWith('.hot-update.js')
           ) {
             chunkScripts.push((
-              `<script data-chunk="${chunk}" src="${publicPath}${asset}" type="application/javascript"></script>`
+              `<script src="${publicPath}${asset}" type="application/javascript"></script>`
             ));
           }
         });
