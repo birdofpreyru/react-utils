@@ -47,6 +47,12 @@ module.exports = function configFactory(ops) {
           'process.env.REACT_GLOBAL_STATE_DEBUG': JSON.stringify(true),
         }),
       ],
+      snapshot: {
+        // This enforces Webpack to watch for possible changes in node_modules
+        // dependencies, which is a great convenience in library-centric dev
+        // workflows.
+        managedPaths: [],
+      },
     },
   );
 };

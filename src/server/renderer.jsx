@@ -216,10 +216,8 @@ export default function factory(webpackConfig, options) {
 
         assets.forEach((asset) => {
           if (asset.endsWith('.css')) {
-            // TODO: Do we really need "tru-style" ids, or we just can match
-            // by other attribute values?
             chunkStyles.push((
-              `<link data-chunk="${chunk}" id="tru-style" href="${publicPath}${asset}" rel="stylesheet" />`
+              `<link data-chunk="${chunk}" href="${publicPath}${asset}" rel="stylesheet" />`
             ));
           } else if (
             asset.endsWith('.js')

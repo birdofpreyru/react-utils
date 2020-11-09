@@ -55,6 +55,12 @@ module.exports = function configFactory(ops) {
       }),
       new webpack.HotModuleReplacementPlugin(),
     ],
+    snapshot: {
+      // This enforces Webpack to watch for possible changes in node_modules
+      // dependencies, which is a great convenience in library-centric dev
+      // workflows.
+      managedPaths: [],
+    },
   });
   if (!_.isArray(res.entry.main)) {
     res.entry.main = [res.entry.main];

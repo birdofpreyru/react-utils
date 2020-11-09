@@ -5,7 +5,7 @@ exports[`Client-side rendering 1`] = `
 
 <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
 
-<link data-chunk=\\"main\\" id=\\"tru-style\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+<link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
 
 <meta charset=\\"utf-8\\">
 <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">"
@@ -101,7 +101,7 @@ exports[`Client-side rendering 3`] = `
 
 <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
 
-<link data-chunk=\\"main\\" id=\\"tru-style\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+<link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
 
 <meta charset=\\"utf-8\\">
 <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">"
@@ -195,7 +195,7 @@ exports[`Server-side rendring 1`] = `
 
     <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
 
-    <link data-chunk=\\"main\\" id=\\"tru-style\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+    <link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
 
     <meta charset=\\"utf-8\\" />
     <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
@@ -259,7 +259,7 @@ exports[`Server-side rendring 2`] = `
 
     <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
 
-    <link data-chunk=\\"main\\" id=\\"tru-style\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+    <link data-chunk=\\"main\\" href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
 
     <meta charset=\\"utf-8\\" />
     <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />

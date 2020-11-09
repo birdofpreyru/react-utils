@@ -8,7 +8,6 @@ import {
   GlobalStateProvider,
   useGlobalState,
 } from '@dr.pogodin/react-global-state';
-import { v4 as uuid } from 'uuid';
 
 import { useState } from 'react';
 import ReactDom from 'react-dom';
@@ -84,15 +83,5 @@ export default async function Launch({
         render(getApplication(), { hmrEpoch });
       },
     );
-
-    /* HMR of CSS code each time webpack hot middleware updates the code. */
-    moduleHot.addStatusHandler((status) => {
-      if (status !== 'ready') return;
-      const stamp = uuid();
-      const links = document.querySelectorAll('link[rel=stylesheet][id="tru-style"]');
-      for (let i = 0; i < links.length; i += 1) {
-        links[i].href = `${links[i].href.match(/[^?]*/)}?v=${stamp}`;
-      }
-    });
   }
 }

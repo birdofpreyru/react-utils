@@ -103,7 +103,6 @@ export default function ClientSide({
       link = document.createElement('link');
       link.setAttribute('data-chunk', chunkName);
       link.setAttribute('href', cssAsset);
-      link.setAttribute('id', 'tru-style');
       link.setAttribute('rel', 'stylesheet');
       const head = document.getElementsByTagName('head')[0];
       head.appendChild(link);
