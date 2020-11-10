@@ -10,7 +10,14 @@ function Dropdown({
   theme,
   value,
 }) {
-  const optionArray = [<option className={theme.hiddenOption}>&zwnj;</option>];
+  const optionArray = [(
+    <option
+      className={theme.hiddenOption}
+      key="__reactUtilsHiddenOption"
+    >
+      &zwnj;
+    </option>
+  )];
   for (let i = 0; i < options.length; ++i) {
     let op = options[i];
     if (!filter || filter(op)) {
@@ -40,6 +47,7 @@ function Dropdown({
 const ThemedDropdown = themed('Dropdown', [
   'arrow',
   'container',
+  'hiddenOption',
   'label',
   'option',
   'select',
