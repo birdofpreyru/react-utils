@@ -86,7 +86,7 @@
     "regenerator-runtime": "^0.13.7",
     "resolve-url-loader": "^3.1.2",
     "sass": "^1.29.0",
-    "sass-loader": "^10.0.5",
+    "sass-loader": "^10.1.0",
     "sitemap": "^6.3.3",
     "stylelint": "^13.7.2",
     "stylelint-config-standard": "^20.0.0",
@@ -131,5 +131,5 @@
     "lint:scss": "stylelint **/*.scss --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "1.0.8"
+  "version": "1.0.9"
 }
