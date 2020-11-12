@@ -54,6 +54,11 @@ export default async function factory(webpackConfig, options) {
   const { publicPath } = webpackConfig.output;
 
   const server = express();
+
+  if (options.beforeExpressJsSetup) {
+    await options.beforeExpressJsSetup(server);
+  }
+
   server.logger = options.logger;
 
   if (options.httpsRedirect) {
@@ -144,34 +149,45 @@ export default async function factory(webpackConfig, options) {
     next(err);
   });
 
+  let dontAttachDefaultErrorHandler;
+  if (options.beforeExpressJsError) {
+    dontAttachDefaultErrorHandler = await options.beforeExpressJsError(server);
+  }
+
   /* Error handler. */
-  server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-    options.logger.error(err.stack);
+  if (!dontAttachDefaultErrorHandler) {
+    // TODO: It is better to move the default error handler definition
+    // to a stand-alone function at top-level, but the use of options.logger
+    // prevents to do it without some extra refactoring. Should be done sometime
+    // though.
+    server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+      options.logger.error(err.stack);
 
-    let errorResponse = null;
-    const status = err.isJoi ? 400 : err.httpStatus || err.status || 500;
+      let errorResponse = null;
+      const status = err.isJoi ? 400 : err.httpStatus || err.status || 500;
 
-    if (err.isJoi && _.isArray(err.details)) {
-      _.map(err.details, (e) => {
-        if (e.message) {
-          if (!errorResponse) errorResponse = e.message;
-          else errorResponse += `, ${e.message}`;
-        }
+      if (err.isJoi && _.isArray(err.details)) {
+        _.map(err.details, (e) => {
+          if (e.message) {
+            if (!errorResponse) errorResponse = e.message;
+            else errorResponse += `, ${e.message}`;
+          }
+        });
+      }
+      errorResponse = errorResponse || err.message || 'Internal Server Error';
+
+      /* Sets locals. The actual errors are exposed only in dev. */
+      _.assign(res, {
+        locals: {
+          error: req.app.get('env') === 'development' ? err : {},
+          message: err.message,
+        },
       });
-    }
-    errorResponse = errorResponse || err.message || 'Internal Server Error';
 
-    /* Sets locals. The actual errors are exposed only in dev. */
-    _.assign(res, {
-      locals: {
-        error: req.app.get('env') === 'development' ? err : {},
-        message: err.message,
-      },
+      /* Finally, the error response. */
+      res.status(status).send(errorResponse);
     });
-
-    /* Finally, the error response. */
-    res.status(status).send(errorResponse);
-  });
+  }
 
   return server;
 }

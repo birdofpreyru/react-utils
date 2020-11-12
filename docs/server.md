@@ -34,6 +34,16 @@ development tools, including Hot Module Reloading (HMR).
     component of the app to use for the server-side rendering. When not provided
     the server-side rendering is disabled.
 
+  - `options.beforeExpressJsError?: (server) => Promise<boolean>?` &ndash;
+    Optional. An async callback to be executed just before the default error
+    handler is added to ExpressJS server. If the callback is provided and its
+    result resolves to a truly value, `react-utils` won't attach the default
+    error handler.
+
+  - `options.beforeExpressJsSetup?: (server) => Promise?` &ndash; Optional.
+    An async callback to be executed right after ExpressJS server creation,
+    bofore any configuration is performed.
+
   - `[options.beforeRender]` ([_Before Render Hook_](#before-render-hook))
     &ndash; Optional. The hook to run just before the server-side rendering.
     For each incoming request, it will be executed just before the HTML markup
@@ -100,23 +110,17 @@ development tools, including Hot Module Reloading (HMR).
     system. This article is helpful:
     [How to get HTTPS working on your local development environment in 5 minutes](https://medium.freecodecamp.org/how-to-get-https-working-on-your-local-development-environment-in-5-minutes-7af615770eec)
 
-  - `[options.logger]` (_Object_) &ndash; Optional. The logger to use at server
+  - `options.logger?: Logger` &ndash; Optional. The logger to use at server
     side. By default [`winston`](https://www.npmjs.com/package/winston) logger
     with console transport is used. The logger you provide, or the default
     `winston` logger otherwise, will be attached to the created ExpressJS server
     object.
 
-  - `[options.onExpressJsSetup]` (_Function_) &ndash; Optional. An async hook
-    to run upon ExpressJS server configuration:
-    
-    `async onExpressJsSetupHook(server)` &rArr; `Promise`
-
-    If provided, it will be called with the created ExpressJS `server` passed in
-    as the only argument. The call will happen when the server is mostly ready,
-    just before the server-side renderer, and the error handler are attached
-    to it. You can use it to mount custom API routes to the server.
-    You can access the server-side logger as `server.logger`. The caller code
-    will wait for resolution of `Promise` returned by the hook.
+  - `options.onExpressJsSetup?: (server) => Promise?` (_Function_) &ndash;
+    Optional. An async callback to be triggered when most of the server
+    configuration is completed, just before the server-side renderer,
+    and the default error handler are attached. You can use it to mount
+    custom API routes. The server-side logger can be accessed as `server.logger`.
 
   - `[port]` (_Number_ or _String_) &ndash; Optional. The port to start
     the server on. Defaults **3000**.

@@ -61,7 +61,17 @@ function normalizePort(value) {
  *    - initialState {Any} - Initial value of the global state.
  * @param {Number} [options.maxSsrRounds=10] Maximum number of SSR rounds
  *  (the default is set inside the renderer).
- * @param {Function} [options.onExpressJsSetup] Custom setup of ExpressJS server.
+ *
+ * @param {function} [options.beforeExpressJsSetup] Optional. The callback to be
+ *  executed after creation of Express server, before any server configuration
+ *  is performed. The server is passed in as the only argument. The callback
+ *  can be async.
+ * @param {function} [options.onExpressJsSetup] Optional. Custom setup of
+ *  ExpressJS server.
+ * @param {function} [options.beforeExpressJsError] Optional. The callback to be
+ *  called just before the default error handler is added to ExpressJS server.
+ *  The server is passed in as the only argument. The callback can be async.
+ *
  * @param {String} [options.port=3000] The port to listen (number or name).
  *  When not specified the value will be taken from PORT environmental variable,
  *  or default to 3000 otherwise.
