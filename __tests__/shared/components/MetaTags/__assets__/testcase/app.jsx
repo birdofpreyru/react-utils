@@ -1,5 +1,7 @@
 import PT from 'prop-types';
 
+import { useGlobalState } from '@dr.pogodin/react-global-state';
+
 import MetaTags from 'components/MetaTags';
 
 export const MODES = {
@@ -21,13 +23,14 @@ function Component() {
 }
 
 function AllTagsComponent() {
+  const [domain] = useGlobalState('domain');
   return (
     <div>
       <p>A dummy internal component.</p>
       <MetaTags
         title="Title from Component"
         description="Component description"
-        image="/THUMBNAIL_PATH"
+        image={`${domain}/THUMBNAIL_PATH`}
         siteName="SITE_NAME"
         socialDescription="SOCIAL_DESCRIPTION"
         socialTitle="SOCIAL_TITLE"

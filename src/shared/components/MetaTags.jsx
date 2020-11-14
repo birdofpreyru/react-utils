@@ -1,17 +1,16 @@
 /**
  * Auxiliary wrapper around React Helmet that helps to generate meta tags for
  * generic use cases.
- *
- * NOTE: This component relies on `domain` path of global state to hold
- * the current app domain, which will serve as the base path for the bundled
- * images.
  */
 
-import { useGlobalState } from '@dr.pogodin/react-global-state';
 import PT from 'prop-types';
+import { createContext } from 'react';
 import { Helmet } from 'react-helmet';
 
+const Context = createContext();
+
 export default function MetaTags({
+  children,
   description,
   image,
   siteName,
@@ -20,43 +19,63 @@ export default function MetaTags({
   title,
   url,
 }) {
-  const [domain] = useGlobalState('domain');
-  const img = `${domain}${image}`;
   const socTitle = socialTitle || title;
   const socDesc = socialDescription || description;
   return (
-    <Helmet>
-      {/* General tags. */}
-      <title>
-        {title}
-      </title>
-      <meta name="description" content={description} />
+    <>
+      <Helmet>
+        {/* General tags. */}
+        <title>
+          {title}
+        </title>
+        <meta name="description" content={description} />
 
-      {/* Twitter cards. */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={socTitle} />
-      <meta name="twitter:description" content={socDesc} />
-      { image ? <meta name="twitter:image" content={img} /> : null }
+        {/* Twitter cards. */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={socTitle} />
+        <meta name="twitter:description" content={socDesc} />
+        { image ? <meta name="twitter:image" content={image} /> : null }
+        {
+          siteName ? (
+            <meta name="twitter:site" content={`@${siteName}`} />
+          ) : null
+        }
+
+        {/* Open Graph data. */}
+        <meta name="og:title" content={socTitle} />
+        { image ? <meta name="og:image" content={image} /> : null }
+        { image ? <meta name="og:image:alt" content={socTitle} /> : null }
+        <meta name="og:description" content={socDesc} />
+        {
+          siteName ? (<meta name="og:sitename" content={siteName} />) : null
+        }
+        { url ? (<meta name="og:url" content={url} />) : null }
+      </Helmet>
       {
-        siteName ? (
-          <meta name="twitter:site" content={`@${siteName}`} />
+        children ? (
+          <Context.Provider
+            value={{
+              description,
+              image,
+              siteName,
+              socialDescription,
+              socialTitle,
+              title,
+              url,
+            }}
+          >
+            {children}
+          </Context.Provider>
         ) : null
       }
-
-      {/* Open Graph data. */}
-      <meta name="og:title" content={socTitle} />
-      { image ? <meta name="og:image" content={img} /> : null }
-      { image ? <meta name="og:image:alt" content={socTitle} /> : null }
-      <meta name="og:description" content={socDesc} />
-      {
-        siteName ? (<meta name="og:sitename" content={siteName} />) : null
-      }
-      { url ? (<meta name="og:url" content={url} />) : null }
-    </Helmet>
+    </>
   );
 }
 
+MetaTags.Context = Context;
+
 MetaTags.defaultProps = {
+  children: null,
   image: null,
   siteName: null,
   socialDescription: null,
@@ -65,6 +84,7 @@ MetaTags.defaultProps = {
 };
 
 MetaTags.propTypes = {
+  children: PT.node,
   description: PT.string.isRequired,
   image: PT.string,
   siteName: PT.string,

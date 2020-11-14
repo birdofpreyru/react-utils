@@ -6,11 +6,6 @@ The `<MetaTags>` component is an auxiliary wrapper around `react-helmet`, which
 helps to inject meta tags (page title, a brief content description, and social
 media thumbnails) into generated pages.
 
-**IMPORTANT:** This component relies on the `domain` path of
-[Global State](https://www.npmjs.com/package/@dr.pogodin/react-global-state)
-containing domain of the current page. The domain is used as prefix for image
-URLs.
-
 - [Example](#example)
 - [Reference](#reference)
 
@@ -20,7 +15,6 @@ The minimal use-case example:
 ```js
 // Top-level app component
 
-import React from 'react';
 import { MetaTags } from '@dr.pogodin/react-utils';
 
 export default function ApplicationRoot() {
@@ -47,13 +41,35 @@ down in the app's tree.
 
 #### Properties
 
+- `children?: object` &ndash; Optional. React children to render at
+  the `<MetaTag>` component location. If provided, it is rendered within
+  the context passing down all meta tag properties of the current `<MetaTag>`
+  instance. These properties can fetched within children hierarchy in
+  the following way, thus facilitating tags modification by children.
+
+  ```jsx
+  import { useContext } from 'react';
+  import { MetaTags } from '@dr.pogodin/react-utils';
+
+  export default function SampleComponent() {
+    const { title, description, ...rest } = useContext(MetaTags.Context);
+    /* Do something with these props here, e.g. prefix the page title with
+     * the component name: */
+    return (
+      <MetaTags title={`Sample component - ${title}`} />
+    );
+  }
+  ```
+
 - `description: string` &ndash; Page description to use in the `description`
   meta tag, and as a default description of Open Graph Tags.
 
-- `image?: string` &ndash; Optional. Pathname of thumbnail to use in the Open
-  Graph Tags (`twitter:image`, and `og:image`). The value is automatically
-  prefixed by the page domain, taken from `domain` path of Global State.
-  By default these tags are not injected.
+- `image?: string` &ndash; Optional. The absolute URL of thumbnail image to use
+  in Open Graph Tags (`twitter:image`, and `og:image`). By default these tags
+  are not injected.
+
+  **BEWARE:** It must be a complete, absolute URL, including the correct
+  website domain and HTTP schema.
 
 - `siteName?: string` &ndash; Optional. The site name to use in `twitter:site`,
   and `og:sitename` tags. By default these tags are not injected.

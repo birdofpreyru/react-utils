@@ -101,3 +101,71 @@ exports[`Basic tags, with override 1`] = `
           </body>
         </html>"
 `;
+
+exports[`Using <MetaTags> children feature Basic tags, no override 1`] = `
+"<!DOCTYPE html>
+        <html lang=\\"en\\">
+          <head>
+            
+            <title data-react-helmet=\\"true\\">Application Title</title>
+            <meta data-react-helmet=\\"true\\" name=\\"description\\" content=\\"Application Description\\"/><meta data-react-helmet=\\"true\\" name=\\"twitter:card\\" content=\\"summary_large_image\\"/><meta data-react-helmet=\\"true\\" name=\\"twitter:title\\" content=\\"Application Title\\"/><meta data-react-helmet=\\"true\\" name=\\"twitter:description\\" content=\\"Application Description\\"/><meta data-react-helmet=\\"true\\" name=\\"og:title\\" content=\\"Application Title\\"/><meta data-react-helmet=\\"true\\" name=\\"og:description\\" content=\\"Application Description\\"/>
+            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
+            
+            
+            
+            <meta charset=\\"utf-8\\" />
+            <meta
+              content=\\"width=device-width,initial-scale=1.0\\"
+              name=\\"viewport\\"
+            />
+          </head>
+          <body>
+            
+            <div id=\\"react-view\\"><div><p>Hello World!</p></div></div>
+            <script
+              id=\\"inj\\"
+              type=\\"application/javascript\\"
+              nonce=\\"00000000-0000-0000-0000-000000000004\\"
+            >
+              window.SPLITS = {}
+              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REwYKcPE758aPLRuaQ02LEBBYqgZBiO5Vma6fu1+zlzHwNu/HyOy33seAI2DkrHtdt/twv/ZR0AKwIdiBypqS1qfaNXhclpoYfURRfoDBD+OQyGvbgm/LD02bmvwRxzuZMcg3q7kFVGI7nb/WCG4zPTQ==\\"
+            </script>
+            
+            
+          </body>
+        </html>"
+`;
+
+exports[`Using <MetaTags> children feature Basic tags, with override 1`] = `
+"<!DOCTYPE html>
+        <html lang=\\"en\\">
+          <head>
+            
+            <title data-react-helmet=\\"true\\">Title from Component - Application Title</title>
+            <meta data-react-helmet=\\"true\\" name=\\"description\\" content=\\"Component description - Application Description\\"/><meta data-react-helmet=\\"true\\" name=\\"twitter:card\\" content=\\"summary_large_image\\"/><meta data-react-helmet=\\"true\\" name=\\"twitter:title\\" content=\\"Title from Component - Application Title\\"/><meta data-react-helmet=\\"true\\" name=\\"twitter:description\\" content=\\"Component description - Application Description\\"/><meta data-react-helmet=\\"true\\" name=\\"og:title\\" content=\\"Title from Component - Application Title\\"/><meta data-react-helmet=\\"true\\" name=\\"og:description\\" content=\\"Component description - Application Description\\"/>
+            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
+            
+            
+            
+            <meta charset=\\"utf-8\\" />
+            <meta
+              content=\\"width=device-width,initial-scale=1.0\\"
+              name=\\"viewport\\"
+            />
+          </head>
+          <body>
+            
+            <div id=\\"react-view\\"><div><p>Hello World!</p><div><p>A dummy internal component.</p></div></div></div>
+            <script
+              id=\\"inj\\"
+              type=\\"application/javascript\\"
+              nonce=\\"00000000-0000-0000-0000-000000000005\\"
+            >
+              window.SPLITS = {}
+              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REwYKcPE758aPLRuaQ02LEBBYqgZBiO5Vma6fu1+zlzHwNu/HyOy33seAI2DkrHtdt/twv/ZR0AKwIdiBypqS1qfaNXhclpoYfURRfoDBD+OQyGvbgm/LD02bmvwRxzuZMcg3q7kFVGI7nb/WCG4zPTQ==\\"
+            </script>
+            
+            
+          </body>
+        </html>"
+`;
