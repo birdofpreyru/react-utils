@@ -34,6 +34,7 @@ module.exports = function configFactory(ops) {
     babelEnv: 'production',
     mode: 'production',
   }), {
+    devtool: 'source-map',
     optimization: {
       minimizer: [
         '...',

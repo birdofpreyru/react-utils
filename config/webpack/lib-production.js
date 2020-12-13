@@ -33,6 +33,7 @@ module.exports = function configFactory(ops) {
     outputPath: path.resolve(__dirname, ops.context, 'build/production'),
   });
   return merge(baseConfig, {
+    devtool: 'source-map',
     optimization: {
       minimizer: [
         '...',

@@ -98,11 +98,14 @@ function testWebpackBuild(configFactory) {
       expect(stats.compilation.errors).toEqual([]);
       const cssChunkName = Object.keys(stats.compilation.assets)
         .find((key) => key.endsWith('.css'));
+
       /* eslint-disable no-underscore-dangle */
-      const asset = stats.compilation.assets[cssChunkName];
-      const compiledCss = asset._value || asset._source._value
-        || asset._source._children.map(({ _value }) => _value).join('\n');
+      let asset = stats.compilation.assets[cssChunkName];
+      if (asset._source) asset = asset._source;
+      const compiledCss = asset._value
+        || asset._children.map(({ _value }) => _value).join('\n');
       /* eslint-enable no-underscore-dangle */
+
       expect(compiledCss).toMatchSnapshot();
       resolve(stats);
     });
