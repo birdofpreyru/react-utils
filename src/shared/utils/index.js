@@ -42,6 +42,32 @@ function newBarrier() {
   return promise;
 }
 
+/**
+ * Attempts to execute provided async "action" up to "maxRetries" time with
+ * the given "interval". If any of attempts is successful it returns its result,
+ * otherwise if all attempts fail it throws the error of last attempt.
+ * @param {function} action
+ * @param {number} [maxRetries=5] Optional. Maximum number of retries. Defaults
+ *  to 5 attempts.
+ * @param {number} [interval=1000] Optional. Interval between retries [ms].
+ *  Defaults to 1 second.
+ * @return {Promise} Resolves to the result of successful operation, or
+ *  rejects with the error from the latst failed attempt.
+ */
+async function withRetries(action, maxRetries = 5, interval = 1000) {
+  /* eslint-disable no-await-in-loop */
+  for (let n = 1; ; ++n) {
+    try {
+      console.log('N', n);
+      return await action();
+    } catch (error) {
+      if (n < maxRetries) await time.timer(interval);
+      else throw error;
+    }
+  }
+  /* eslint-enable no-await-in-loop */
+}
+
 export {
   _,
   api,
@@ -55,4 +81,5 @@ export {
   time,
   url,
   webpack,
+  withRetries,
 };

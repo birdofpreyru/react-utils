@@ -152,6 +152,7 @@ Object {
     "requireWeak": [Function],
     "resolveWeak": [Function],
   },
+  "withRetries": [Function],
 }
 `;
 
@@ -815,6 +816,7 @@ Object {
     "requireWeak": [Function],
     "resolveWeak": [Function],
   },
+  "withRetries": [Function],
 }
 `;
 

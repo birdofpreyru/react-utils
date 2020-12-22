@@ -118,6 +118,9 @@ $ ./node_modules/.bin/react-utils-setup
   &ndash; An alias for the `useGlobalState(..)` hook from `@dr.pogodin/react-global-state`.
 - [`webpack`](docs/webpack-utils.md) &ndash; Various utils related to the
   Webpack bundling process.
+- [`withRetries(..)`](doc/with-retries.md) &ndash; Attempts to execute an async
+  operation up to specified number of times with given intervals (in case of
+  attempts failure).
 
 ## Development
 
