@@ -70,7 +70,6 @@ function prepareCipher(key) {
     forge.random.getBytes(32, (err, iv) => {
       if (err) reject(err);
       else {
-        // console.log('KEY', key);
         const cipher = forge.cipher.createCipher('AES-CBC', key);
         cipher.start({ iv });
         resolve({ cipher, iv });

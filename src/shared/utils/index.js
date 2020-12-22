@@ -58,7 +58,6 @@ async function withRetries(action, maxRetries = 5, interval = 1000) {
   /* eslint-disable no-await-in-loop */
   for (let n = 1; ; ++n) {
     try {
-      console.log('N', n);
       return await action();
     } catch (error) {
       if (n < maxRetries) await time.timer(interval);
