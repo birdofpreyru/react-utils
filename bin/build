@@ -119,12 +119,14 @@ function handleWebpackCompilationResults(error, stats) {
   if (error) {
     console.error(error.stack || error);
     if (error.details) console.error(error.details);
-    return;
+    throw error;
   }
 
   const info = stats.toJson();
-  if (stats.hasErrors()) console.error(info.errors);
-  else if (stats.hasWarnings()) console.warn(info.warnings);
+  if (stats.hasErrors()) {
+    console.error('Error defailts:', info.errors);
+    throw Error('Webpack build failed');
+  } else if (stats.hasWarnings()) console.warn(info.warnings);
 
   const logOps = { colors: true };
   if (firstWebpackStats) {
