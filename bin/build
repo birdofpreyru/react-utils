@@ -68,8 +68,10 @@ commander
 
 commander.parse(process.argv);
 
+const { buildType } = commander;
+
 /* Validates the build type argument,  */
-if (!VALID_BUILD_TYPES.includes(commander.buildType)) {
+if (!VALID_BUILD_TYPES.includes(buildType)) {
   throw new Error('Invalid build type');
 }
 
@@ -78,9 +80,7 @@ const cwd = process.cwd();
 const inDir = path.resolve(cwd, commander.inDir);
 
 let outDir = path.resolve(cwd, commander.outDir);
-if (commander.lib) {
-  outDir += `/${commander.buildType}`;
-}
+if (commander.lib) outDir += `/${buildType}`;
 
 /* Prepares output directory: cleans existing files, creates the folders. */
 rimraf.sync(outDir);
@@ -90,9 +90,7 @@ fs.mkdirSync(outDir, { recursive: true });
 /* Webpack compilation of isomorphic library bundle.                          */
 
 let webpackConfig = require(path.resolve(cwd, commander.webpackConfig));
-if (_.isFunction(webpackConfig)) {
-  webpackConfig = webpackConfig(commander.buildType);
-}
+if (_.isFunction(webpackConfig)) webpackConfig = webpackConfig(buildType);
 
 let webpackOutDir = outDir;
 if (!commander.lib) webpackOutDir += '/web-public';
@@ -119,13 +117,15 @@ function handleWebpackCompilationResults(error, stats) {
   if (error) {
     console.error(error.stack || error);
     if (error.details) console.error(error.details);
-    throw error;
+    if (buildType !== BUILD_TYPES.DEVELOPMENT) throw error;
   }
 
   const info = stats.toJson();
   if (stats.hasErrors()) {
     console.error('Error defailts:', info.errors);
-    throw Error('Webpack build failed');
+    if (buildType !== BUILD_TYPES.DEVELOPMENT) {
+      throw Error('Webpack build failed');
+    }
   } else if (stats.hasWarnings()) console.warn(info.warnings);
 
   const logOps = { colors: true };
@@ -155,17 +155,13 @@ else {
 /* Babel compilation of JS, JSX, and SVG files.                               */
 
 const BABEL_EXEC_OPTIONS = {
-  env: {
-    ...process.env,
-    BABEL_ENV: commander.buildType,
-  },
+  env: { ...process.env, BABEL_ENV: buildType },
 };
 
 let BABEL_CMD_JS = `${cwd}/node_modules/.bin/babel`;
 BABEL_CMD_JS += ` ${inDir} --out-dir ${outDir} --source-maps`;
-if (commander.buildType === BUILD_TYPES.PRODUCTION) {
-  BABEL_CMD_JS += ' --minified';
-}
+if (buildType === BUILD_TYPES.PRODUCTION) BABEL_CMD_JS += ' --minified';
+
 /* TODO: The watch is deactivated for Babel compilation because of SVG files:
  * currently there is no way to tell Babel that SVG files should be compiled
  * keeping their SVG extensions, while JS and JSX are compiled with extensions
