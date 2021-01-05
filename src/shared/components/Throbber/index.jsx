@@ -1,8 +1,9 @@
 import PT from 'prop-types';
+import themed from '@dr.pogodin/react-themes';
 
-import './styles.scss';
+import defaultTheme from './theme.scss';
 
-export default function Throbber({
+function Throbber({
   theme,
 }) {
   return (
@@ -24,3 +25,8 @@ Throbber.propTypes = {
     circle: PT.string,
   }),
 };
+
+export default themed('Throbber', [
+  'circle',
+  'container',
+], defaultTheme)(Throbber);

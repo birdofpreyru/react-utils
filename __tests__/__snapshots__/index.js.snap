@@ -109,7 +109,11 @@ Object {
   },
   "ScalableRect": [Function],
   "ThemeProvider": [Function],
-  "Throbber": [Function],
+  "Throbber": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+    "themeType": [Function],
+  },
   "WithTooltip": Object {
     "$$typeof": Symbol(react.forward_ref),
     "PLACEMENTS": Object {
@@ -769,7 +773,11 @@ Object {
   },
   "ScalableRect": [Function],
   "ThemeProvider": [Function],
-  "Throbber": [Function],
+  "Throbber": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+    "themeType": [Function],
+  },
   "WithTooltip": Object {
     "$$typeof": Symbol(react.forward_ref),
     "PLACEMENTS": Object {
