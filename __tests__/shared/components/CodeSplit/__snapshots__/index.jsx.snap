@@ -14,7 +14,7 @@ exports[`Client-side rendering 1`] = `
 exports[`Client-side rendering 2`] = `
 "<div id=\\"react-view\\">
   <h1>testValue</h1>
-  <div>
+  <div data-chunk-name=\\"sample-component-1\\">
     <div>
       <h1>Sample Component</h1><pre>{
   \\"test\\": {
@@ -37,7 +37,7 @@ exports[`Client-side rendering 2`] = `
 }</pre>
     </div>
   </div>
-  <div>
+  <div data-chunk-name=\\"sample-component-2\\">
     <div>
       <h1>Sample Component</h1><pre>{
   \\"test\\": {
@@ -60,7 +60,7 @@ exports[`Client-side rendering 2`] = `
 }</pre>
     </div>
   </div>
-  <div>
+  <div data-chunk-name=\\"sample-component-3\\">
     <div>
       <h1>Sample Component</h1><pre>{
   \\"test\\": {
@@ -85,11 +85,6 @@ exports[`Client-side rendering 2`] = `
   </div>
 </div>
 <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
-  window.SPLITS = {
-    \\"sample-component-1\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\",
-    \\"sample-component-2\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\",
-    \\"sample-component-3\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\"
-  }
   window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5x/O9WytXifp+Rrn07OeSezKzgU1DBmTNhGLGN6Ne6p4skptTPyzMu96urfoEiiwAm\\"
 </script>
 <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
@@ -110,7 +105,7 @@ exports[`Client-side rendering 3`] = `
 exports[`Client-side rendering 4`] = `
 "<div id=\\"react-view\\">
   <h1>testValue</h1>
-  <div>
+  <div data-chunk-name=\\"sample-component-1\\">
     <div>
       <h1>Sample Component</h1><pre>{
   \\"test\\": {
@@ -133,7 +128,7 @@ exports[`Client-side rendering 4`] = `
 }</pre>
     </div>
   </div>
-  <div>
+  <div data-chunk-name=\\"sample-component-2\\">
     <div>
       <h1>Sample Component</h1><pre>{
   \\"test\\": {
@@ -156,7 +151,7 @@ exports[`Client-side rendering 4`] = `
 }</pre>
     </div>
   </div>
-  <div>
+  <div data-chunk-name=\\"sample-component-3\\">
     <div>
       <h1>Sample Component</h1><pre>{
   \\"test\\": {
@@ -205,11 +200,11 @@ exports[`Server-side rendring 1`] = `
 
     <div id=\\"react-view\\">
       <h1>testValue</h1>
-      <div></div>
-      <div>
+      <div data-chunk-name=\\"sample-component-1\\"></div>
+      <div data-chunk-name=\\"sample-component-2\\">
         <div>PLACEHOLDER!</div>
       </div>
-      <div>
+      <div data-chunk-name=\\"sample-component-3\\">
         <div>
           <h1>Sample Component</h1><pre>{
   &quot;test&quot;: {
@@ -234,11 +229,6 @@ exports[`Server-side rendring 1`] = `
       </div>
     </div>
     <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
-      window.SPLITS = {
-        \\"sample-component-1\\": \\"\\",
-        \\"sample-component-2\\": \\"\\\\u003Cdiv\\\\u003EPLACEHOLDER!\\\\u003C\\\\u002Fdiv\\\\u003E\\",
-        \\"sample-component-3\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: null,\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;00000000-0000-0000-0000-000000000001&quot;,\\\\n      &quot;timestamp&quot;: 0\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: null,\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;00000000-0000-0000-0000-000000000002&quot;,\\\\n      &quot;timestamp&quot;: 0\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\"
-      }
       window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5x/O9WytXifp+Rrn07OeSezKzgU1DBmTNhGLGN6Ne6p4skptTPyzMu96urfoEiiwAm\\"
     </script>
     <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
@@ -269,7 +259,7 @@ exports[`Server-side rendring 2`] = `
 
     <div id=\\"react-view\\">
       <h1>testValue</h1>
-      <div>
+      <div data-chunk-name=\\"sample-component-1\\">
         <div>
           <h1>Sample Component</h1><pre>{
   &quot;test&quot;: {
@@ -292,7 +282,7 @@ exports[`Server-side rendring 2`] = `
 }</pre>
         </div>
       </div>
-      <div>
+      <div data-chunk-name=\\"sample-component-2\\">
         <div>
           <h1>Sample Component</h1><pre>{
   &quot;test&quot;: {
@@ -315,7 +305,7 @@ exports[`Server-side rendring 2`] = `
 }</pre>
         </div>
       </div>
-      <div>
+      <div data-chunk-name=\\"sample-component-3\\">
         <div>
           <h1>Sample Component</h1><pre>{
   &quot;test&quot;: {
@@ -340,11 +330,6 @@ exports[`Server-side rendring 2`] = `
       </div>
     </div>
     <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
-      window.SPLITS = {
-        \\"sample-component-1\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\",
-        \\"sample-component-2\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\",
-        \\"sample-component-3\\": \\"\\\\u003Cdiv\\\\u003E\\\\u003Ch1\\\\u003ESample Component\\\\u003C\\\\u002Fh1\\\\u003E\\\\u003Cpre\\\\u003E{\\\\n  &quot;test&quot;: {\\\\n    &quot;key&quot;: &quot;testValue&quot;\\\\n  },\\\\n  &quot;dr_pogodin_react_utils___split_components&quot;: {\\\\n    &quot;sample-component-1&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    },\\\\n    &quot;sample-component-2&quot;: {\\\\n      &quot;data&quot;: {},\\\\n      &quot;numRefs&quot;: 0,\\\\n      &quot;operationId&quot;: &quot;&quot;,\\\\n      &quot;timestamp&quot;: 1574985600000\\\\n    }\\\\n  }\\\\n}\\\\u003C\\\\u002Fpre\\\\u003E\\\\u003C\\\\u002Fdiv\\\\u003E\\"
-      }
       window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5x/O9WytXifp+Rrn07OeSezKzgU1DBmTNhGLGN6Ne6p4skptTPyzMu96urfoEiiwAm\\"
     </script>
     <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>

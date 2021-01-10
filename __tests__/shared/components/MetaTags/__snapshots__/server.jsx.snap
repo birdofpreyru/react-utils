@@ -25,7 +25,6 @@ exports[`All tags, with override 1`] = `
               type=\\"application/javascript\\"
               nonce=\\"00000000-0000-0000-0000-000000000003\\"
             >
-              window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REwYKcPE758aPLRuaQ02LEBBYqgZBiO5Vma6fu1+zlzHwNu/HyOy33seAI2DkrHtdt/twv/ZR0AKwIdiBypqS1qfaNXhclpoYfURRfoDBD+OQyGvbgm/LD02bmvwRxzuZMcg3q7kFVGI7nb/WCG4zPTQ==\\"
             </script>
             
@@ -59,7 +58,6 @@ exports[`Basic tags, no override 1`] = `
               type=\\"application/javascript\\"
               nonce=\\"00000000-0000-0000-0000-000000000001\\"
             >
-              window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REwYKcPE758aPLRuaQ02LEBBYqgZBiO5Vma6fu1+zlzHwNu/HyOy33seAI2DkrHtdt/twv/ZR0AKwIdiBypqS1qfaNXhclpoYfURRfoDBD+OQyGvbgm/LD02bmvwRxzuZMcg3q7kFVGI7nb/WCG4zPTQ==\\"
             </script>
             
@@ -93,7 +91,6 @@ exports[`Basic tags, with override 1`] = `
               type=\\"application/javascript\\"
               nonce=\\"00000000-0000-0000-0000-000000000002\\"
             >
-              window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REwYKcPE758aPLRuaQ02LEBBYqgZBiO5Vma6fu1+zlzHwNu/HyOy33seAI2DkrHtdt/twv/ZR0AKwIdiBypqS1qfaNXhclpoYfURRfoDBD+OQyGvbgm/LD02bmvwRxzuZMcg3q7kFVGI7nb/WCG4zPTQ==\\"
             </script>
             
@@ -127,7 +124,6 @@ exports[`Using <MetaTags> children feature Basic tags, no override 1`] = `
               type=\\"application/javascript\\"
               nonce=\\"00000000-0000-0000-0000-000000000004\\"
             >
-              window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REwYKcPE758aPLRuaQ02LEBBYqgZBiO5Vma6fu1+zlzHwNu/HyOy33seAI2DkrHtdt/twv/ZR0AKwIdiBypqS1qfaNXhclpoYfURRfoDBD+OQyGvbgm/LD02bmvwRxzuZMcg3q7kFVGI7nb/WCG4zPTQ==\\"
             </script>
             
@@ -161,7 +157,6 @@ exports[`Using <MetaTags> children feature Basic tags, with override 1`] = `
               type=\\"application/javascript\\"
               nonce=\\"00000000-0000-0000-0000-000000000005\\"
             >
-              window.SPLITS = {}
               window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REwYKcPE758aPLRuaQ02LEBBYqgZBiO5Vma6fu1+zlzHwNu/HyOy33seAI2DkrHtdt/twv/ZR0AKwIdiBypqS1qfaNXhclpoYfURRfoDBD+OQyGvbgm/LD02bmvwRxzuZMcg3q7kFVGI7nb/WCG4zPTQ==\\"
             </script>
             

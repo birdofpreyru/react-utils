@@ -25,48 +25,31 @@ export default function ClientSide({
 
   let res;
 
+  // Async loading of React component necessary to render the chunk.
   const { data } = useAsyncData(
     `dr_pogodin_react_utils___split_components.${chunkName}`,
     getComponentAsync,
-    {
-      maxage: time.YEAR_MS,
-    },
+    { maxage: time.YEAR_MS },
   );
+
+  // If the necessary component has been loaded already, it is used to render
+  // the chunk.
   if (data) {
     const Scene = data.default || data;
-    res = (
-      <div>
-        <Scene {...rest} />
-      </div>
-    );
-  } else if (window.SPLITS[chunkName]) {
-    /* Client side rendering using SSR pre-rendered partial markup. */
-    /* If the page has been pre-rendered at the server-side, we render
-      * exactly the same until the splitted code is loaded. */
+    res = <div><Scene {...rest} /></div>;
+
+  // Otherwise we just render the same static markup which has been pre-rendered
+  // for this chunk at the server side.
+  } else {
     /* eslint-disable react/no-danger */
+    const node = document.querySelector(`[data-chunk-name=${chunkName}]`);
     res = (
       <div
-        dangerouslySetInnerHTML={{
-          __html: window.SPLITS[chunkName],
-        }}
+        dangerouslySetInnerHTML={{ __html: node.innerHTML }}
+        data-chunk-name={chunkName}
       />
     );
     /* eslint-disable react/no-danger */
-  } else if (placeholder) {
-    /* If the page has not been pre-rendered, the best we can do prior
-     * the loading of split code, is to render the placeholder, if
-     * provided.
-     *
-     * NOTE: The <div> wrappings here and in other places below may
-     * look unnecessary, but they are important: we want to be sure
-     * that all render options produce the same markup, thus helping
-     * ReactJS to be efficient. */
-    const Scene = placeholder;
-    res = (
-      <div>
-        <Scene {...rest} />
-      </div>
-    );
   }
 
   /* TODO: Revise this, especially, what happens when parameters, like the

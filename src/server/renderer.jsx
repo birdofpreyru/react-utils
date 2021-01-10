@@ -10,7 +10,6 @@ import forge from 'node-forge';
 import fs from 'fs';
 import path from 'path';
 import ReactDOM from 'react-dom/server';
-import serializeJs from 'serialize-javascript';
 
 import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom';
@@ -129,9 +128,6 @@ export default function factory(webpackConfig, options) {
 
         // Array of chunk names encountered during the rendering.
         chunks: [],
-
-        /* Pre-rendered HTML markup for dymanic chunks. */
-        splits: {},
       };
       if (App) {
         let markup;
@@ -144,7 +140,6 @@ export default function factory(webpackConfig, options) {
         ) {
           /* eslint-disable no-await-in-loop */
           ssrContext.chunks = [];
-          ssrContext.splits = {};
           markup = ReactDOM.renderToString((
             <GlobalStateProvider
               initialState={ssrContext.state}
@@ -281,7 +276,6 @@ export default function factory(webpackConfig, options) {
               type="application/javascript"
               nonce="${req.cspNonce}"
             >
-              window.SPLITS = ${serializeJs(ssrContext.splits, { isJSON: true })}
               window.INJ="${INJ}"
             </script>
             ${chunkScripts.join('')}
