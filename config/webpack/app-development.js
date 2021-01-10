@@ -37,7 +37,6 @@ module.exports = function configFactory(ops) {
     babelEnv: 'development',
     mode: 'development',
   }), {
-    devtool: false,
     output: {
       chunkFilename: '[id].js',
       filename: '[id].js',
