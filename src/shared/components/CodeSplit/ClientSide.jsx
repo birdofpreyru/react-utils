@@ -36,7 +36,7 @@ export default function ClientSide({
   // the chunk.
   if (data) {
     const Scene = data.default || data;
-    res = <div><Scene {...rest} /></div>;
+    res = <div data-chunk-name={chunkName}><Scene {...rest} /></div>;
 
   // Otherwise we just render the same static markup which has been pre-rendered
   // for this chunk at the server side.
