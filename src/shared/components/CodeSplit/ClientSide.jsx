@@ -42,7 +42,10 @@ export default function ClientSide({
   // for this chunk at the server side.
   } else {
     /* eslint-disable react/no-danger */
-    const node = document.querySelector(`[data-chunk-name=${chunkName}]`);
+    // Note: It looks like in dev mode with HMR the data-chunk-name attribute
+    // may be lost from DOM, thus no node will be found here on re-render, and
+    // thus default {} should be used as a fallback.
+    const node = document.querySelector(`[data-chunk-name=${chunkName}]`) || {};
     res = (
       <div
         dangerouslySetInnerHTML={{ __html: node.innerHTML }}
