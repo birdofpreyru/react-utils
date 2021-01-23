@@ -49,6 +49,8 @@ commander
   )
   .parse(process.argv);
 
+const cmdLineArgs = commander.opts();
+
 /**
  * Generates a string containing name and version of the package to be
  * installed.
@@ -167,7 +169,7 @@ function updateProdDependencies(donorData, hostData) {
 
 const hostData = getHostPackageJson();
 libs.forEach((library) => {
-  if (!commander.justFixDeps) install(library);
+  if (!cmdLineArgs.justFixDeps) install(library);
   const libData = getPackageJson(library);
   adoptDevDependencies(libData, hostData);
   updateProdDependencies(libData, hostData);

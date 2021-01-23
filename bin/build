@@ -67,8 +67,11 @@ commander
   );
 
 commander.parse(process.argv);
+const cmdLineArgs = commander.opts();
 
-const { buildType } = commander;
+const { buildType } = cmdLineArgs;
+
+console.log('BUILD TYPE', buildType);
 
 /* Validates the build type argument,  */
 if (!VALID_BUILD_TYPES.includes(buildType)) {
@@ -77,10 +80,10 @@ if (!VALID_BUILD_TYPES.includes(buildType)) {
 
 /* Resolves the target build directory. */
 const cwd = process.cwd();
-const inDir = path.resolve(cwd, commander.inDir);
+const inDir = path.resolve(cwd, cmdLineArgs.inDir);
 
-let outDir = path.resolve(cwd, commander.outDir);
-if (commander.lib) outDir += `/${buildType}`;
+let outDir = path.resolve(cwd, cmdLineArgs.outDir);
+if (cmdLineArgs.lib) outDir += `/${buildType}`;
 
 /* Prepares output directory: cleans existing files, creates the folders. */
 rimraf.sync(outDir);
@@ -89,11 +92,11 @@ fs.mkdirSync(outDir, { recursive: true });
 /* ************************************************************************** */
 /* Webpack compilation of isomorphic library bundle.                          */
 
-let webpackConfig = require(path.resolve(cwd, commander.webpackConfig));
+let webpackConfig = require(path.resolve(cwd, cmdLineArgs.webpackConfig));
 if (_.isFunction(webpackConfig)) webpackConfig = webpackConfig(buildType);
 
 let webpackOutDir = outDir;
-if (!commander.lib) webpackOutDir += '/web-public';
+if (!cmdLineArgs.lib) webpackOutDir += '/web-public';
 
 _.merge(webpackConfig, {
   output: { path: webpackOutDir },
@@ -145,7 +148,7 @@ function handleWebpackCompilationResults(error, stats) {
   );
 }
 
-if (commander.watch) webpackCompiler.watch({}, handleWebpackCompilationResults);
+if (cmdLineArgs.watch) webpackCompiler.watch({}, handleWebpackCompilationResults);
 else {
   webpackCompiler.run(handleWebpackCompilationResults);
   webpackCompiler.close(() => null);
@@ -170,7 +173,7 @@ if (buildType === BUILD_TYPES.PRODUCTION) BABEL_CMD_JS += ' --minified';
  * JS, JSX, and copying all other files; then the second pass to compile SVG
  * files keeping extensions. */
 /*
-if (commander.watch) BABEL_CMD_JS += ' --watch';
+if (cmdLineArgs.watch) BABEL_CMD_JS += ' --watch';
 */
 
 const BABEL_CMD_SVG = `${BABEL_CMD_JS} --extensions ".svg" --keep-file-extension`;
@@ -199,7 +202,7 @@ function copyFromFolder(from, to, regex) {
   });
 }
 
-if (commander.copyFiles) {
-  const regex = new RegExp(commander.copyFiles);
+if (cmdLineArgs.copyFiles) {
+  const regex = new RegExp(cmdLineArgs.copyFiles);
   copyFromFolder(inDir, outDir, regex);
 }
