@@ -88,10 +88,31 @@ async function launch(webpackConfig, options) {
   });
 
   if (_.isUndefined(ops.logger)) {
+    const { format, transports } = winston;
     ops.logger = winston.createLogger({
-      level: 'info',
-      format: winston.format.cli(),
-      transports: [new winston.transports.Console()],
+      level: 'info', // TODO: Should be configurable via env vars or options?
+      format: format.combine(
+        format.splat(),
+        format.timestamp(),
+        format.colorize(),
+        format.printf(
+          ({
+            level,
+            message,
+            timestamp,
+            stack,
+            ...rest
+          }) => {
+            let res = `${level}\t(at ${timestamp}):\t${message}`;
+            if (Object.keys(rest).length) {
+              res += `\n${JSON.stringify(rest, null, 2)}`;
+            }
+            if (stack) res += `\n${stack}`;
+            return res;
+          },
+        ),
+      ),
+      transports: [new transports.Console()],
     });
   }
 
