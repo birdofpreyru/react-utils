@@ -29,7 +29,10 @@ async function baseTest(Component) {
       beforeRender: () => ({
         initialState: { domain: 'https://sample.domain' },
       }),
-      logger: console,
+      logger: {
+        ...console,
+        info: () => null,
+      },
     }),
   );
   await server.get('/').expect(200)

@@ -92,6 +92,10 @@ development tools, including Hot Module Reloading (HMR).
     - `upgradeInsecureRequests` directive is removed in development mode,
       to simplify local testing with http requests.
 
+  - `options.defaultLoggerLogLevel = 'info'` &ndash; Optional. Log level for
+    the default logger, which is created if no `logger` option provided.
+    Defaults to `info`.
+
   - `[options.devMode]` (_Boolean_) &ndash; Optional. Pass in `true` to start
     the server in development mode.
 

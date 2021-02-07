@@ -71,8 +71,6 @@ const cmdLineArgs = commander.opts();
 
 const { buildType } = cmdLineArgs;
 
-console.log('BUILD TYPE', buildType);
-
 /* Validates the build type argument,  */
 if (!VALID_BUILD_TYPES.includes(buildType)) {
   throw new Error('Invalid build type');

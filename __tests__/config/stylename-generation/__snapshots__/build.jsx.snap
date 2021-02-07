@@ -10,9 +10,9 @@ Object.defineProperty(exports, \\"__esModule\\", {
 });
 exports.default = TestApp;
 
-var _jsxRuntime = require(\\"react/jsx-runtime\\");
-
 var _TestComponent = _interopRequireDefault(require(\\"./MockPackageA/TestComponent\\"));
+
+var _jsxRuntime = require(\\"react/jsx-runtime\\");
 
 var styles = {
   \\"sampleClassName\\": \\"-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___iZBsN-\\"
@@ -59,9 +59,9 @@ Object.defineProperty(exports, \\"__esModule\\", {
 });
 exports.default = TestApp;
 
-var _jsxRuntime = require(\\"react/jsx-runtime\\");
-
 var _TestComponent = _interopRequireDefault(require(\\"./MockPackageA/TestComponent\\"));
+
+var _jsxRuntime = require(\\"react/jsx-runtime\\");
 
 var styles = {
   \\"sampleClassName\\": \\"iZBsN-\\"
