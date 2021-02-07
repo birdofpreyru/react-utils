@@ -3,10 +3,11 @@
  */
 
 import path from 'path';
+import { useGlobalState } from '@dr.pogodin/react-global-state';
 
 import CodeSplit from 'components/CodeSplit';
 
-import { useGlobalState, webpack } from 'utils';
+import { webpack } from 'utils';
 
 export default function SampleCodeSplit() {
   const [testKey] = useGlobalState('test.key', 'testValue');

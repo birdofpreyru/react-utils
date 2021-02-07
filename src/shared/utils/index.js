@@ -1,21 +1,14 @@
-import _ from 'lodash';
-
 import themed, {
   COMPOSE,
   PRIORITY,
   ThemeProvider,
 } from '@dr.pogodin/react-themes';
 
-import api from 'axios';
-import * as PT from 'prop-types';
-
 import config from './config';
 import * as isomorphy from './isomorphy';
 import time from './time';
 import * as url from './url';
 import * as webpack from './webpack';
-
-export { useGlobalState, useAsyncData } from '@dr.pogodin/react-global-state';
 
 themed.COMPOSE = COMPOSE;
 themed.PRIORITY = PRIORITY;
@@ -68,13 +61,10 @@ async function withRetries(action, maxRetries = 5, interval = 1000) {
 }
 
 export {
-  _,
-  api,
   config,
   isomorphy,
   JU,
   newBarrier,
-  PT,
   themed,
   ThemeProvider,
   time,

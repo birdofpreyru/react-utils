@@ -3,9 +3,10 @@
  */
 /* global window */
 
+import PT from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
-import { PT, themed } from 'utils';
+import { themed } from 'utils';
 
 import Tooltip, { PLACEMENTS } from './Tooltip';
 

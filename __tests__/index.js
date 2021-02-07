@@ -24,3 +24,8 @@ test('Export at server side', () => {
   expect({ ...lib.api }).toMatchSnapshot();
   expect(Object.keys(lib.time)).toMatchSnapshot();
 });
+
+test('Lodash alias works', () => {
+  const { _ } = require('../src');
+  expect(_.upperCase('it works')).toBe('IT WORKS');
+});

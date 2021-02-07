@@ -1,4 +1,6 @@
-import { PT, themed } from 'utils';
+import PT from 'prop-types';
+
+import { themed } from 'utils';
 
 import defaultTheme from './theme.scss';
 

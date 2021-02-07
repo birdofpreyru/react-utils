@@ -134,6 +134,7 @@ Object {
   "api": [Function],
   "client": [Function],
   "config": undefined,
+  "getGlobalState": [Function],
   "isomorphy": Object {
     "IS_CLIENT_SIDE": true,
     "IS_SERVER_SIDE": false,
@@ -150,6 +151,7 @@ Object {
     "default": null,
     "parent": [Function],
   },
+  "useAsyncCollection": [Function],
   "useAsyncData": [Function],
   "useGlobalState": [Function],
   "webpack": Object {
@@ -803,6 +805,7 @@ Object {
     },
     "dummyKey": "Dummy Value",
   },
+  "getGlobalState": [Function],
   "isomorphy": Object {
     "IS_CLIENT_SIDE": false,
     "IS_SERVER_SIDE": true,
@@ -819,6 +822,7 @@ Object {
     "default": null,
     "parent": [Function],
   },
+  "useAsyncCollection": [Function],
   "useAsyncData": [Function],
   "useGlobalState": [Function],
   "webpack": Object {
