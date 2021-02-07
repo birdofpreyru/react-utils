@@ -19,6 +19,9 @@ import WithTooltip from 'components/WithTooltip';
 import YouTubeVideo from 'components/YouTubeVideo';
 import * as utils from 'utils';
 
+// TODO: Actually, re-write this module to export all stuff this way:
+export { default as NewDropdown } from 'components/NewDropdown';
+
 let server = null; // eslint-disable-line import/no-mutable-exports
 if (utils.isomorphy.IS_SERVER_SIDE) {
   const path = utils.webpack.requireWeak('path');
