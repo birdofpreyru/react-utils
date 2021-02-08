@@ -11,9 +11,10 @@ import defaultTheme from './theme.scss';
 
 function Dropdown({
   arrow,
-  // filter,
+  filter,
   label,
-  // options,
+  onChange,
+  options,
   // renderValue,
   theme,
   value,
@@ -63,8 +64,14 @@ function Dropdown({
       {
         optionListLayout ? (
           <Options
+            filter={filter}
             layout={optionListLayout}
             onCancel={() => setOptionListLayout(null)}
+            onChange={(newValue) => {
+              setOptionListLayout(null);
+              if (onChange) onChange(newValue);
+            }}
+            options={options}
             theme={theme}
           />
         ) : null

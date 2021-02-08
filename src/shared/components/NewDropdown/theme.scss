@@ -1,6 +1,10 @@
 *,
 .context,
 .ad.hoc {
+  // The outermost dropdown container, holding together the label (if any),
+  // and the select element with arrow. Note, that the dropdown option list,
+  // when opened, exists completely outside the dropdown DOM hierarchy, and
+  // is aligned into the correct position by JS.
   &.container {
     align-items: center;
     display: inline-flex;
@@ -8,10 +12,13 @@
     position: relative;
   }
 
+  // Styling of default label next to the dropdown (has no effect on custom
+  // non-string label node, if provided).
   &.label {
     margin: 0 0.6em 0 1.2em;
   }
 
+  // The main select input.
   &.select {
     border: 1px solid gray;
     border-radius: 0.3em;
@@ -22,6 +29,7 @@
 
     &:focus {
       border-color: blue;
+      border-radius: 0.3em 0.3em 0 0;
       box-shadow: 0 0 3px 1px lightblue;
 
       .arrow {
@@ -42,13 +50,23 @@
     }
   }
 
+  &.option {
+    cursor: default;
+    outline: none;
+    padding: 0 1.2em;
+
+    &:hover {
+      background: deepskyblue;
+      color: white;
+    }
+  }
+
   // The dropdown option list container.
   &.options {
     background: white;
     border: 1px solid gray;
+    box-shadow: 0 0 6px 3px lightgray;
     position: absolute;
-    // left: 50px;
-    // top: 50px;
     z-index: 1000;
   }
 
