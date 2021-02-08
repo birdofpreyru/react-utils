@@ -2,7 +2,7 @@
  * URL utils.
  */
 
-import _ from 'lodash';
+import { trimEnd } from 'lodash';
 
 /**
  * Given URL string returns the parent URL.
@@ -10,7 +10,7 @@ import _ from 'lodash';
  * @return {String}
  */
 export function parent(path) {
-  return path.slice(0, _.trimEnd(path, '/').lastIndexOf('/'));
+  return path.slice(0, trimEnd(path, '/').lastIndexOf('/'));
 }
 
 export default null;

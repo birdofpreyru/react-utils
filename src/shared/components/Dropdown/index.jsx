@@ -1,4 +1,7 @@
-import { _, PT, themed } from 'utils';
+import { isString } from 'lodash';
+import PT from 'prop-types';
+
+import { themed } from 'utils';
 
 import defaultTheme from './theme.scss';
 
@@ -21,7 +24,7 @@ function Dropdown({
   for (let i = 0; i < options.length; ++i) {
     let op = options[i];
     if (!filter || filter(op)) {
-      if (_.isString(op)) op = { value: op };
+      if (isString(op)) op = { value: op };
       optionArray.push((
         <option className={theme.option} key={op.value} value={op.value}>
           {op.name === undefined ? op.value : op.name }
