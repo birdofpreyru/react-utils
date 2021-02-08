@@ -14,20 +14,55 @@
 
   &.select {
     border: 1px solid gray;
-    border-radius: 0.3em 0 0 0.3em;
-    border-right: none;
+    border-radius: 0.3em;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
     padding: 0.3em 1.2em;
+
+    &:focus {
+      border-color: blue;
+      box-shadow: 0 0 3px 1px lightblue;
+
+      .arrow {
+        background-image: linear-gradient(to bottom, lightgray, white 50%, white);
+      }
+    }
   }
 
   &.arrow {
     background-image: linear-gradient(to top, lightgray, white 50%, white);
-    border: 1px solid gray;
-    border-radius: 0 0.3em 0.3em 0;
-    cursor: pointer;
+    border-left: 1px solid gray;
+    display: inline-block;
+    margin: -0.3em -1.2em -0.3em 1.2em;
     padding: 0.3em 0.6em;
 
     &::after {
       content: '▼';
     }
+  }
+
+  // The dropdown option list container.
+  &.options {
+    background: white;
+    border: 1px solid gray;
+    position: absolute;
+    // left: 50px;
+    // top: 50px;
+    z-index: 1000;
+  }
+
+  // An overlay covering entire viewport under the dropdown options list, when
+  // the list is opened. It is used to close the dropdown without changing its
+  // value, and may be used to shadow the page when the dropdown is opened.
+  &.optionsOverlay {
+    // background: red;
+    height: 100%;
+    left: 0;
+    outline: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
   }
 }
