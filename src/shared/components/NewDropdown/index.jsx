@@ -1,11 +1,18 @@
 /* global window */
 
+import { noop } from 'lodash';
 import PT from 'prop-types';
 import { useCallback, useRef, useState } from 'react';
 
 import { themed } from 'utils';
 
 import Options from './Options';
+
+import {
+  findNextOptionIndex,
+  findPrevOptionIndex,
+  optionValue,
+} from './utils';
 
 import defaultTheme from './theme.scss';
 
@@ -19,6 +26,10 @@ function Dropdown({
   theme,
   value,
 }) {
+  const [active, setActive] = useState(value);
+
+  const multi = Array.isArray(value);
+
   const selectRef = useRef();
 
   // If "null" no option list is shown, otherwise it holds parameters specifying
@@ -43,6 +54,57 @@ function Dropdown({
   else renderedValue = value;
   */
 
+  let selectClass = theme.select;
+  if (optionListLayout) selectClass += ` ${theme.active}`;
+
+  // Handles key down events on the main dropdown component.
+  const keyEventHandler = useCallback((event) => {
+    // Sets the option at given index of option array as active,
+    // and as the new value. Does nothing if index is negative.
+    const setValueByIndex = (index) => {
+      if (index >= 0) {
+        const newValue = optionValue(options[index]);
+        setActive(newValue);
+        onChange(newValue);
+      }
+    };
+
+    console.log('KEY', event.key);
+
+    switch (event.key) {
+      case 'ArrowLeft':
+      case 'ArrowUp': {
+        event.preventDefault();
+        setValueByIndex(findPrevOptionIndex(value, options, filter));
+        break;
+      }
+      case 'ArrowDown':
+      case 'ArrowRight':
+        event.preventDefault();
+        setValueByIndex(findNextOptionIndex(value, options, filter));
+        break;
+      case 'Enter':
+        if (optionListLayout) {
+          onChange(active);
+          setOptionListLayout(null);
+        } else openOptionList();
+        break;
+      case 'Escape':
+      case 'Tab':
+        setOptionListLayout(null);
+        break;
+      default:
+    }
+  }, [
+    active,
+    filter,
+    onChange,
+    optionListLayout,
+    options,
+    openOptionList,
+    value,
+  ]);
+
   return (
     <div className={theme.container}>
       {
@@ -51,9 +113,9 @@ function Dropdown({
         ) : label
       }
       <div
-        className={theme.select}
-        onKeyDown={openOptionList}
+        className={selectClass}
         onClick={openOptionList}
+        onKeyDown={keyEventHandler}
         ref={selectRef}
         role="listbox"
         tabIndex={0}
@@ -64,6 +126,7 @@ function Dropdown({
       {
         optionListLayout ? (
           <Options
+            active={active}
             filter={filter}
             layout={optionListLayout}
             onCancel={() => setOptionListLayout(null)}
@@ -72,7 +135,9 @@ function Dropdown({
               if (onChange) onChange(newValue);
             }}
             options={options}
+            setActive={setActive}
             theme={theme}
+            value={value}
           />
         ) : null
       }
@@ -92,6 +157,7 @@ const ThemedDropdown = themed('Dropdown', [
 Dropdown.propTypes = {
   arrow: PT.node,
   label: PT.node,
+  onChange: PT.func,
   /*
   options: PT.arrayOf(
     PT.oneOfType([
@@ -114,6 +180,7 @@ Dropdown.propTypes = {
 Dropdown.defaultProps = {
   arrow: null,
   label: null,
+  onChange: noop,
   // options: [],
   // renderValue: null,
   value: undefined,

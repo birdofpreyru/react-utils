@@ -5,15 +5,20 @@
 import PT from 'prop-types';
 
 export default function Option({
+  active,
+  onActive,
   onToggle,
   name,
   theme,
 }) {
+  let className = theme.option;
+  if (active) className += ` ${theme.active}`;
   return (
     <div
-      className={theme.option}
+      className={className}
       onClick={onToggle}
       onKeyPress={onToggle}
+      onMouseEnter={onActive}
       role="button"
       tabIndex={0}
     >

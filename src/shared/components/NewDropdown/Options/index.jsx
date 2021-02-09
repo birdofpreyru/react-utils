@@ -9,13 +9,18 @@ import { createPortal } from 'react-dom';
 
 import Option from '../Option';
 
+import { optionNameValue } from '../utils';
+
 export default function Options({
+  active,
   filter,
   layout,
   options,
   onCancel,
   onChange,
+  setActive,
   theme,
+  value,
 }) {
   const [portal, setPortal] = useState();
 
@@ -29,21 +34,18 @@ export default function Options({
   const renderedOptions = [];
   options.forEach((option) => {
     if (!filter || filter(option)) {
-      let name;
-      let value;
-      if (typeof option === 'string') {
-        name = option;
-        value = option;
-      } else ({ name, value } = option);
+      const [name, optionValue] = optionNameValue(option);
       renderedOptions.push((
         <Option
-          key={value}
-          name={name === undefined ? value : name}
+          active={optionValue === active}
+          key={optionValue}
+          name={name === undefined ? optionValue : name}
+          onActive={() => setActive(optionValue)}
           onToggle={() => {
-            onChange(value);
+            onChange(optionValue);
           }}
           theme={theme}
-          value={value}
+          value={optionValue}
         />
       ));
     }
@@ -69,12 +71,14 @@ export default function Options({
       <div
         className={theme.options}
         ref={(node) => {
-          if (node) node.scrollIntoView();
+          // TODO: Only scroll if it does not fit into the viewport.
+          // Also as it is done now it blocks the page scrolling
+          // if (node) node.scrollIntoView();
         }}
         style={{
           left: layout.left,
+          minWidth: layout.width,
           top: layout.top,
-          width: layout.width,
         }}
       >
         {renderedOptions}
@@ -84,14 +88,21 @@ export default function Options({
 }
 
 Options.propTypes = {
+  active: PT.string,
   options: PT.arrayOf(
     PT.oneOfType([
       PT.object,
       PT.string,
     ]).isRequired,
   ),
+  setActive: PT.func.isRequired,
+  value: PT.oneOfType([
+    PT.arrayOf(PT.string),
+    PT.string,
+  ]),
 };
 
 Options.defaultProps = {
   options: [],
+  value: undefined,
 };
