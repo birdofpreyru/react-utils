@@ -11,10 +11,16 @@ import Options from './Options';
 import {
   findNextOptionIndex,
   findPrevOptionIndex,
+  isSymbolKey,
   optionValue,
+  searchOption,
 } from './utils';
 
 import defaultTheme from './theme.scss';
+
+// This is the maximum pause between entered characters pressed on
+// the main select element to be considered as a consequent text.
+const SEARCH_INPUT_TIMEOUT = 1000;
 
 function Dropdown({
   arrow,
@@ -22,13 +28,17 @@ function Dropdown({
   label,
   onChange,
   options,
-  // renderValue,
   theme,
   value,
 }) {
   const [active, setActive] = useState(value);
+  const { current: heap } = useRef({
+    lockActive: false,
+    searchTimestamp: 0,
+    searchText: '',
+  });
 
-  const multi = Array.isArray(value);
+  // const multi = Array.isArray(value);
 
   const selectRef = useRef();
 
@@ -37,6 +47,7 @@ function Dropdown({
   const [optionListLayout, setOptionListLayout] = useState(null);
 
   const openOptionList = useCallback(() => {
+    heap.lockActive = true;
     const { scrollX, scrollY } = window;
     const rect = selectRef.current.getBoundingClientRect();
     setOptionListLayout({
@@ -44,15 +55,16 @@ function Dropdown({
       top: rect.bottom + scrollY,
       width: rect.width,
     });
-  }, []);
+    const unlockTimer = setTimeout(() => {
+      heap.lockActive = false;
+    }, 100);
+    return () => {
+      clearTimeout(unlockTimer);
+    };
+  }, [heap]);
 
+  // TODO: Wrong, should render name instead!!!
   const renderedValue = value;
-  /*
-  if (renderValue) renderedValue = renderValue(value);
-  // TODO: Not quite correct, should be option names.
-  else if (Array.isArray(value)) renderedValue = value.join(', ');
-  else renderedValue = value;
-  */
 
   let selectClass = theme.select;
   if (optionListLayout) selectClass += ` ${theme.active}`;
@@ -63,25 +75,29 @@ function Dropdown({
     // and as the new value. Does nothing if index is negative.
     const setValueByIndex = (index) => {
       if (index >= 0) {
+        heap.lockActive = true;
         const newValue = optionValue(options[index]);
         setActive(newValue);
         onChange(newValue);
+        setTimeout(() => {
+          heap.lockActive = false;
+        }, 100);
       }
     };
 
-    console.log('KEY', event.key);
-
+    const now = Date.now();
+    let search = false;
     switch (event.key) {
       case 'ArrowLeft':
       case 'ArrowUp': {
         event.preventDefault();
-        setValueByIndex(findPrevOptionIndex(value, options, filter));
+        setValueByIndex(findPrevOptionIndex(active, options, filter));
         break;
       }
       case 'ArrowDown':
       case 'ArrowRight':
         event.preventDefault();
-        setValueByIndex(findNextOptionIndex(value, options, filter));
+        setValueByIndex(findNextOptionIndex(active, options, filter));
         break;
       case 'Enter':
         if (optionListLayout) {
@@ -94,15 +110,30 @@ function Dropdown({
         setOptionListLayout(null);
         break;
       default:
+        if (isSymbolKey(event.key)) {
+          if (event.key === heap.searchText
+          || now - heap.searchTimestamp > SEARCH_INPUT_TIMEOUT) {
+            heap.searchText = event.key;
+          } else heap.searchText += event.key;
+          setValueByIndex(
+            searchOption(heap.searchText, options, active, filter),
+          );
+          heap.searchTimestamp = now;
+          search = true;
+        }
+    }
+    if (!search) {
+      heap.searchTimestamp = 0;
+      heap.searchText = '';
     }
   }, [
     active,
     filter,
+    heap,
     onChange,
     optionListLayout,
     options,
     openOptionList,
-    value,
   ]);
 
   return (
@@ -135,7 +166,9 @@ function Dropdown({
               if (onChange) onChange(newValue);
             }}
             options={options}
-            setActive={setActive}
+            setActive={(newActive) => {
+              if (!heap.lockActive) setActive(newActive);
+            }}
             theme={theme}
             value={value}
           />
@@ -146,9 +179,11 @@ function Dropdown({
 }
 
 const ThemedDropdown = themed('Dropdown', [
+  'active',
   'arrow',
   'container',
   'label',
+  'option',
   'options',
   'optionsOverlay',
   'select',
@@ -156,20 +191,10 @@ const ThemedDropdown = themed('Dropdown', [
 
 Dropdown.propTypes = {
   arrow: PT.node,
+  filter: PT.func,
   label: PT.node,
   onChange: PT.func,
-  /*
-  options: PT.arrayOf(
-    PT.oneOfType([
-      PT.shape({
-        name: PT.node,
-        value: PT.string.isRequired,
-      }),
-      PT.string,
-    ]).isRequired,
-  ),
-  */
-  // renderValue: PT.func,
+  options: PT.arrayOf(PT.any).isRequired,
   theme: ThemedDropdown.themeType.isRequired,
   value: PT.oneOfType([
     PT.arrayOf(PT.string),
@@ -179,10 +204,9 @@ Dropdown.propTypes = {
 
 Dropdown.defaultProps = {
   arrow: null,
+  filter: null,
   label: null,
   onChange: noop,
-  // options: [],
-  // renderValue: null,
   value: undefined,
 };
 

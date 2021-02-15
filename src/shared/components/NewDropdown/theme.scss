@@ -69,6 +69,8 @@
     background: white;
     border: 1px solid gray;
     box-shadow: 0 0 6px 3px lightgray;
+    max-height: 80vh;
+    overflow-y: auto;
     position: absolute;
     z-index: 1000;
   }

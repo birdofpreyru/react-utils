@@ -3,8 +3,9 @@
  */
 /* global document */
 
+import { noop } from 'lodash';
 import PT from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import Option from '../Option';
@@ -20,8 +21,11 @@ export default function Options({
   onChange,
   setActive,
   theme,
-  value,
 }) {
+  const { current: heap } = useRef({
+    setActive,
+  });
+  const optionsRef = useRef();
   const [portal, setPortal] = useState();
 
   useEffect(() => {
@@ -40,7 +44,7 @@ export default function Options({
           active={optionValue === active}
           key={optionValue}
           name={name === undefined ? optionValue : name}
-          onActive={() => setActive(optionValue)}
+          onActive={() => heap.setActive(optionValue)}
           onToggle={() => {
             onChange(optionValue);
           }}
@@ -51,8 +55,6 @@ export default function Options({
     }
   });
 
-  // TODO: This should also handle Tabs, arrow clicks to navigate around with
-  // keyboard.
   return portal ? createPortal((
     // TODO: This turns out to be quite similar to the code used in <Modal>
     // component, but not exactly the same. Still might be a good exercise,
@@ -71,9 +73,14 @@ export default function Options({
       <div
         className={theme.options}
         ref={(node) => {
-          // TODO: Only scroll if it does not fit into the viewport.
-          // Also as it is done now it blocks the page scrolling
-          // if (node) node.scrollIntoView();
+          if (node && !optionsRef.current) {
+            heap.setActive = noop;
+            node.scrollIntoView();
+            setTimeout(() => {
+              heap.setActive = setActive;
+            });
+          }
+          optionsRef.current = node;
         }}
         style={{
           left: layout.left,
