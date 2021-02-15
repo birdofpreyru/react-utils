@@ -23,9 +23,10 @@ export default function Options({
   theme,
 }) {
   const { current: heap } = useRef({
+    activeRef: null,
+    optionsRef: null,
     setActive,
   });
-  const optionsRef = useRef();
   const [portal, setPortal] = useState();
 
   useEffect(() => {
@@ -35,18 +36,38 @@ export default function Options({
     return () => document.body.removeChild(p);
   }, []);
 
+  // Scrolls the option list to the active item.
+  useEffect(() => {
+    const { activeRef, optionsRef } = heap;
+    if (activeRef && optionsRef) {
+      if (activeRef.offsetTop < optionsRef.scrollTop
+      || activeRef.offsetTop + activeRef.offsetHeight
+        > optionsRef.scrollTop + optionsRef.offsetHeight) {
+        heap.setActive = noop;
+        activeRef.scrollIntoView();
+        setTimeout(() => {
+          heap.setActive = setActive;
+        }, 100);
+      }
+    }
+  });
+
   const renderedOptions = [];
   options.forEach((option) => {
     if (!filter || filter(option)) {
       const [name, optionValue] = optionNameValue(option);
+      const activeItem = optionValue === active;
       renderedOptions.push((
         <Option
-          active={optionValue === active}
+          active={activeItem}
           key={optionValue}
           name={name === undefined ? optionValue : name}
           onActive={() => heap.setActive(optionValue)}
           onToggle={() => {
             onChange(optionValue);
+          }}
+          ref={(node) => {
+            if (activeItem) heap.activeRef = node;
           }}
           theme={theme}
           value={optionValue}
@@ -73,14 +94,14 @@ export default function Options({
       <div
         className={theme.options}
         ref={(node) => {
-          if (node && !optionsRef.current) {
+          if (node && !heap.optionsRef) {
             heap.setActive = noop;
             node.scrollIntoView();
             setTimeout(() => {
               heap.setActive = setActive;
             });
           }
-          optionsRef.current = node;
+          heap.optionsRef = node;
         }}
         style={{
           left: layout.left,

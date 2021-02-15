@@ -33,9 +33,9 @@ function Dropdown({
 }) {
   const [active, setActive] = useState(value);
   const { current: heap } = useRef({
-    lockActive: false,
     searchTimestamp: 0,
     searchText: '',
+    setActive,
   });
 
   // const multi = Array.isArray(value);
@@ -47,7 +47,6 @@ function Dropdown({
   const [optionListLayout, setOptionListLayout] = useState(null);
 
   const openOptionList = useCallback(() => {
-    heap.lockActive = true;
     const { scrollX, scrollY } = window;
     const rect = selectRef.current.getBoundingClientRect();
     setOptionListLayout({
@@ -55,13 +54,7 @@ function Dropdown({
       top: rect.bottom + scrollY,
       width: rect.width,
     });
-    const unlockTimer = setTimeout(() => {
-      heap.lockActive = false;
-    }, 100);
-    return () => {
-      clearTimeout(unlockTimer);
-    };
-  }, [heap]);
+  }, []);
 
   // TODO: Wrong, should render name instead!!!
   const renderedValue = value;
@@ -75,12 +68,12 @@ function Dropdown({
     // and as the new value. Does nothing if index is negative.
     const setValueByIndex = (index) => {
       if (index >= 0) {
-        heap.lockActive = true;
+        heap.setActive = noop;
         const newValue = optionValue(options[index]);
         setActive(newValue);
         onChange(newValue);
         setTimeout(() => {
-          heap.lockActive = false;
+          heap.setActive = setActive;
         }, 100);
       }
     };
@@ -166,9 +159,7 @@ function Dropdown({
               if (onChange) onChange(newValue);
             }}
             options={options}
-            setActive={(newActive) => {
-              if (!heap.lockActive) setActive(newActive);
-            }}
+            setActive={(newActive) => heap.setActive(newActive)}
             theme={theme}
             value={value}
           />

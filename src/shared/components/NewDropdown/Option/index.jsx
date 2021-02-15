@@ -3,44 +3,31 @@
  */
 
 import PT from 'prop-types';
-import { useEffect, useRef } from 'react';
+import { forwardRef } from 'react';
 
-export default function Option({
+const Option = forwardRef(({
   active,
   onActive,
   onToggle,
   name,
   theme,
-}) {
+}, ref) => {
   let className = theme.option;
   if (active) className += ` ${theme.active}`;
-
-  const { current: heap } = useRef({
-    ref: null,
-  });
-
-  useEffect(() => {
-    if (active && heap.ref) {
-      heap.ref.scrollIntoView();
-    }
-  }, [active, heap]);
-
   return (
     <div
       className={className}
       onClick={onToggle}
       onKeyPress={onToggle}
       onMouseEnter={onActive}
-      ref={(node) => {
-        heap.ref = node;
-      }}
+      ref={ref}
       role="button"
       tabIndex={0}
     >
       {name}
     </div>
   );
-}
+});
 
 Option.propTypes = {
   active: PT.bool.isRequired,
@@ -49,3 +36,5 @@ Option.propTypes = {
   onToggle: PT.func.isRequired,
   theme: PT.shape().isRequired,
 };
+
+export default Option;
