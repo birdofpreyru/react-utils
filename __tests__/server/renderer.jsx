@@ -75,6 +75,8 @@ async function coreTest(webpackConfig, options) {
             devMiddleware: {
               stats: {
                 toJson: () => ({
+                  assets: [],
+
                   // Note: asset names here do not match the currently
                   // used naming
                   // template [contenthash].xxx, but older name template
@@ -97,6 +99,8 @@ async function coreTest(webpackConfig, options) {
                       'test-chunk-b-1511941200000.css',
                     ],
                   },
+
+                  context: webpackConfig.context,
                 }),
               },
             },
