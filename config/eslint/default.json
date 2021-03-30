@@ -1,6 +1,6 @@
 {
   "extends": ["airbnb", "airbnb/hooks"],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "rules": {
     "jsx-a11y/anchor-is-valid": ["error", {
       "components": [],
