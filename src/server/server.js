@@ -3,7 +3,6 @@
  */
 
 import _ from 'lodash';
-import bodyParser from 'body-parser';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import express from 'express';
@@ -95,8 +94,8 @@ export default async function factory(webpackConfig, options) {
 
   server.use('/robots.txt', (req, res) => res.send('User-agent: *\nDisallow:'));
 
-  server.use(bodyParser.json({ limit: '300kb' }));
-  server.use(bodyParser.urlencoded({ extended: false }));
+  server.use(express.json({ limit: '300kb' }));
+  server.use(express.urlencoded({ extended: false }));
   server.use(cookieParser());
   server.use(requestIp.mw());
 
