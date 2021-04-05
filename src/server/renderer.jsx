@@ -14,19 +14,6 @@ import ReactDOM from 'react-dom/server';
 import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom';
 
-// A peculiar way to import this is needed, as we want to use that import
-// between the "react-utils-build" script, and the core library code, both
-// in dev and built code.
-/* eslint-disable global-require, import/no-unresolved */
-let generateAssetMap;
-try {
-  generateAssetMap = require('../../../generate-asset-map');
-} catch (error) {
-  generateAssetMap = require('../../generate-asset-map');
-}
-generateAssetMap = generateAssetMap.generateAssetMap;
-/* eslint-disable global-require, import/no-unresolved */
-
 const sanitizedConfig = _.omit(config, 'SECRET');
 
 const DEFAULT_MAX_SSR_ROUNDS = 10;
@@ -52,16 +39,14 @@ function getBuildInfo(context) {
 }
 
 /**
- * Attempts to read from the disk "__asset_map__.json" file generated from
- * Webpack stats during the build.
- * It will not work for development builds, where the same information should
- * be (re-)generated on-fly from Webpack stats being captured
+ * Attempts to read from the disk Webpack stats generated during the build.
+ * It will not work for development builds, where these stats should be captured
  * via compilator callback.
  * @param {String} buildDir
  * @return {Object} Resolves to the stats, or null, if cannot be read.
  */
-function getGeneratedAssetMap(buildDir) {
-  const url = path.resolve(buildDir, '__asset_map__.json');
+function getWebpackStats(buildDir) {
+  const url = path.resolve(buildDir, '__stats__.json');
   let res;
   try {
     res = JSON.parse(fs.readFileSync(url));
@@ -113,7 +98,7 @@ export default function factory(webpackConfig, options) {
     `<link rel="manifest" href="${publicPath}manifest.json"></link>`
   ) : '';
 
-  const ASSET_MAP = getGeneratedAssetMap(outputPath);
+  const WEBPACK_STATS = getWebpackStats(outputPath);
 
   const ops = _.defaults(_.clone(options), {
     beforeRender: () => Promise.resolve({}),
@@ -135,24 +120,9 @@ export default function factory(webpackConfig, options) {
 
       let helmet;
 
-      let assetMap;
-      const webpackStats = _.get(res.locals, 'webpack.devMiddleware.stats');
-      if (webpackStats) {
-        assetMap = generateAssetMap(webpackStats.toJson(), webpackConfig);
-      } else if (ASSET_MAP) {
-        assetMap = ASSET_MAP;
-      } else {
-        assetMap = {
-          assets: {},
-          assetsByChunkName: {},
-          context: webpackConfig.context,
-        };
-      }
-
       /* Optional server-side rendering. */
       let App = options.Application;
       const ssrContext = {
-        assetMap,
         req,
         state: _.cloneDeep(initialState || {}),
 
@@ -195,6 +165,13 @@ export default function factory(webpackConfig, options) {
         helmet = Helmet.renderStatic();
       }
 
+      let assetsByChunkName;
+      const webpackStats = _.get(res.locals, 'webpack.devMiddleware.stats');
+      if (webpackStats) {
+        ({ assetsByChunkName } = webpackStats.toJson());
+      } else if (WEBPACK_STATS) ({ assetsByChunkName } = WEBPACK_STATS);
+      else assetsByChunkName = {};
+
       /* Encrypts data to be injected into HTML.
        * Keep in mind, that this encryption is no way secure: as the JS bundle
        * contains decryption key and is able to decode it at the client side.
@@ -202,7 +179,7 @@ export default function factory(webpackConfig, options) {
        * better than injection of a plain text. */
       delete ssrContext.state.dr_pogodin_react_utils___split_components;
       cipher.update(forge.util.createBuffer(JSON.stringify({
-        ASSETS_BY_CHUNK_NAME: assetMap.assetsByChunkName,
+        ASSETS_BY_CHUNK_NAME: assetsByChunkName,
         CONFIG: configToInject || sanitizedConfig,
         ISTATE: ssrContext.state,
       }), 'utf8'));
@@ -227,7 +204,7 @@ export default function factory(webpackConfig, options) {
         'main',
         ...ssrContext.chunks,
       ].forEach((chunk) => {
-        let assets = assetMap.assetsByChunkName[chunk];
+        let assets = assetsByChunkName[chunk];
         if (!assets) return;
         if (!_.isArray(assets)) assets = [assets];
 

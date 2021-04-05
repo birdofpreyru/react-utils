@@ -57,7 +57,6 @@ async function renderServerSide(Scene, maxSsrRounds) {
           devMiddleware: {
             stats: {
               toJson: () => ({
-                assets: [],
                 assetsByChunkName: {
                   main: [
                     'main-1511941200000.css',
@@ -74,7 +73,6 @@ async function renderServerSide(Scene, maxSsrRounds) {
                     'test-chunk-b-1511941200000.css',
                   ],
                 },
-                context: TEST_WEBPACK_CONFIG.context,
               }),
             },
           },

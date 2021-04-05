@@ -13,19 +13,6 @@ const _ = require('lodash');
 const commander = require('commander');
 const rimraf = require('rimraf');
 
-// A peculiar way to import this is needed, as we want to use that import
-// between the "react-utils-build" script, and the core library code, both
-// in dev and built code.
-/* eslint-disable global-require, import/no-unresolved */
-let generateAssetMap;
-try {
-  generateAssetMap = require('@dr.pogodin/react-utils/generate-asset-map');
-} catch (error) {
-  generateAssetMap = require('../generate-asset-map');
-}
-generateAssetMap = generateAssetMap.generateAssetMap;
-/* eslint-enable global-require, import/no-unresolved */
-
 /* eslint-disable import/no-extraneous-dependencies */
 const webpack = require('webpack');
 /* eslint-enable import/no-extraneous-dependencies */
@@ -150,9 +137,9 @@ function handleWebpackCompilationResults(error, stats) {
   console.log(stats.toString(logOps));
 
   fs.writeFileSync(
-    `${webpackOutDir}/__asset_map__.json`,
+    `${webpackOutDir}/__stats__.json`,
     JSON.stringify(
-      generateAssetMap(stats.toJson(), webpackConfig),
+      _.pick(stats.toJson('minimal'), ['assetsByChunkName']),
       null,
       2,
     ),
