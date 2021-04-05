@@ -78,10 +78,11 @@ export default function ClientSide({
       link = document.createElement('link');
       link.setAttribute('href', cssAsset);
       link.setAttribute('rel', 'stylesheet');
-      link.dependants = new Set([chunkName]);
       const head = document.getElementsByTagName('head')[0];
       head.appendChild(link);
-    } else link.dependants.add(chunkName);
+    }
+    if (!link.dependants) link.dependants = new Set([chunkName]);
+    else link.dependants.add(chunkName);
     return () => {
       link = document.querySelector(`link[href*="${cssAsset}"]`);
       link.dependants.delete(chunkName);
