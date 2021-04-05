@@ -9,7 +9,7 @@ const childProcess = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const _ = require('lodash');
+const { isFunction, mapValues, merge } = require('lodash');
 const commander = require('commander');
 const rimraf = require('rimraf');
 
@@ -91,12 +91,12 @@ fs.mkdirSync(outDir, { recursive: true });
 /* Webpack compilation of isomorphic library bundle.                          */
 
 let webpackConfig = require(path.resolve(cwd, cmdLineArgs.webpackConfig));
-if (_.isFunction(webpackConfig)) webpackConfig = webpackConfig(buildType);
+if (isFunction(webpackConfig)) webpackConfig = webpackConfig(buildType);
 
 let webpackOutDir = outDir;
 if (!cmdLineArgs.lib) webpackOutDir += '/web-public';
 
-_.merge(webpackConfig, {
+merge(webpackConfig, {
   output: { path: webpackOutDir },
 });
 
@@ -136,13 +136,15 @@ function handleWebpackCompilationResults(error, stats) {
   }
   console.log(stats.toString(logOps));
 
+  // Here we emit the mapping of named chunk groups, needed at runtime
+  // for SSR and code-splitting.
+  const chunks = mapValues(
+    stats.toJson({ all: false, chunkGroups: true }).namedChunkGroups,
+    (item) => item.assets.map(({ name }) => name),
+  );
   fs.writeFileSync(
-    `${webpackOutDir}/__stats__.json`,
-    JSON.stringify(
-      _.pick(stats.toJson('minimal'), ['assetsByChunkName']),
-      null,
-      2,
-    ),
+    `${webpackOutDir}/__chunk_groups__.json`,
+    JSON.stringify(chunks, null, 2),
   );
 }
 

@@ -39,14 +39,15 @@ function getBuildInfo(context) {
 }
 
 /**
- * Attempts to read from the disk Webpack stats generated during the build.
+ * Attempts to read from disk the named chunk groups mapping generated
+ * by Webpack during the compilation.
  * It will not work for development builds, where these stats should be captured
  * via compilator callback.
- * @param {String} buildDir
- * @return {Object} Resolves to the stats, or null, if cannot be read.
+ * @param {string} buildDir
+ * @return {object}
  */
-function getWebpackStats(buildDir) {
-  const url = path.resolve(buildDir, '__stats__.json');
+function readChunkGroupsJson(buildDir) {
+  const url = path.resolve(buildDir, '__chunk_groups__.json');
   let res;
   try {
     res = JSON.parse(fs.readFileSync(url));
@@ -98,7 +99,7 @@ export default function factory(webpackConfig, options) {
     `<link rel="manifest" href="${publicPath}manifest.json"></link>`
   ) : '';
 
-  const WEBPACK_STATS = getWebpackStats(outputPath);
+  const CHUNK_GROUPS = readChunkGroupsJson(outputPath);
 
   const ops = _.defaults(_.clone(options), {
     beforeRender: () => Promise.resolve({}),
@@ -165,12 +166,18 @@ export default function factory(webpackConfig, options) {
         helmet = Helmet.renderStatic();
       }
 
-      let assetsByChunkName;
+      let chunkGroups;
       const webpackStats = _.get(res.locals, 'webpack.devMiddleware.stats');
       if (webpackStats) {
-        ({ assetsByChunkName } = webpackStats.toJson());
-      } else if (WEBPACK_STATS) ({ assetsByChunkName } = WEBPACK_STATS);
-      else assetsByChunkName = {};
+        chunkGroups = _.mapValues(
+          webpackStats.toJson({
+            all: false,
+            chunkGroups: true,
+          }).namedChunkGroups,
+          (item) => item.assets.map(({ name }) => name),
+        );
+      } else if (CHUNK_GROUPS) chunkGroups = CHUNK_GROUPS;
+      else chunkGroups = {};
 
       /* Encrypts data to be injected into HTML.
        * Keep in mind, that this encryption is no way secure: as the JS bundle
@@ -179,7 +186,7 @@ export default function factory(webpackConfig, options) {
        * better than injection of a plain text. */
       delete ssrContext.state.dr_pogodin_react_utils___split_components;
       cipher.update(forge.util.createBuffer(JSON.stringify({
-        ASSETS_BY_CHUNK_NAME: assetsByChunkName,
+        CHUNK_GROUPS: chunkGroups,
         CONFIG: configToInject || sanitizedConfig,
         ISTATE: ssrContext.state,
       }), 'utf8'));
@@ -188,8 +195,7 @@ export default function factory(webpackConfig, options) {
 
       if (ssrContext.status) res.status(ssrContext.status);
 
-      const chunkStyles = [];
-      const chunkScripts = [];
+      const chunkSet = new Set();
 
       // TODO: "polyfills", and "main" chunks have to be added explicitly,
       // because unlike all other chunks they are not managed by <CodeSplit>
@@ -204,26 +210,23 @@ export default function factory(webpackConfig, options) {
         'main',
         ...ssrContext.chunks,
       ].forEach((chunk) => {
-        let assets = assetsByChunkName[chunk];
-        if (!assets) return;
-        if (!_.isArray(assets)) assets = [assets];
+        const assets = chunkGroups[chunk];
+        if (assets) assets.forEach((asset) => chunkSet.add(asset));
+      });
 
-        assets.forEach((asset) => {
-          if (asset.endsWith('.css')) {
-            chunkStyles.push((
-              `<link href="${publicPath}${asset}" rel="stylesheet" />`
-            ));
-          } else if (
-            asset.endsWith('.js')
-              // In dev mode HMR adds JS updates into asset arrays,
-              // and they (updates) should be ignored.
-              && !asset.endsWith('.hot-update.js')
-          ) {
-            chunkScripts.push((
-              `<script src="${publicPath}${asset}" type="application/javascript"></script>`
-            ));
-          }
-        });
+      let styleChunkString = '';
+      let scriptChunkString = '';
+      chunkSet.forEach((chunk) => {
+        if (chunk.endsWith('.css')) {
+          styleChunkString += `<link href="${publicPath}${chunk}" rel="stylesheet" />`;
+        } else if (
+          chunk.endsWith('.js')
+            // In dev mode HMR adds JS updates into asset arrays,
+            // and they (updates) should be ignored.
+            && !chunk.endsWith('.hot-update.js')
+        ) {
+          scriptChunkString += `<script src="${publicPath}${chunk}" type="application/javascript"></script>`;
+        }
       });
 
       let bodyOpenExtraScripts;
@@ -260,7 +263,7 @@ export default function factory(webpackConfig, options) {
             ${helmet ? helmet.meta.toString() : ''}
             <meta name="theme-color" content="#FFFFFF"/>
             ${manifestLink}
-            ${chunkStyles.join('')}
+            ${styleChunkString}
             ${faviconLink}
             <meta charset="utf-8" />
             <meta
@@ -278,7 +281,7 @@ export default function factory(webpackConfig, options) {
             >
               window.INJ="${INJ}"
             </script>
-            ${chunkScripts.join('')}
+            ${scriptChunkString}
             ${defaultExtraScripts || ''}
           </body>
         </html>`

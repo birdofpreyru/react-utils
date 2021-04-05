@@ -81,21 +81,25 @@ async function coreTest(webpackConfig, options) {
                   // [chunkname]-[buildTimestamp].xxx The actual names are not
                   // important for the test, and using older names allows to
                   // check there is no actual change in the code logic.
-                  assetsByChunkName: {
-                    main: [
-                      'main-1511941200000.css',
-                      'main-1511941200000.js',
-                    ],
-                    polyfills: [
-                      'polyfills-1511941200000.js',
-                    ],
-                    'test-chunk-a': [
-                      'test-chunk-a-1511941200000.css',
-                    ],
-                    'test-chunk-b': [
-                      'test-chunk-b-1511941200000.js',
-                      'test-chunk-b-1511941200000.css',
-                    ],
+                  namedChunkGroups: {
+                    main: {
+                      assets: [
+                        { name: 'main-1511941200000.css' },
+                        { name: 'main-1511941200000.js' },
+                      ],
+                    },
+                    polyfills: {
+                      assets: [{ name: 'polyfills-1511941200000.js' }],
+                    },
+                    'test-chunk-a': {
+                      assets: [{ name: 'test-chunk-a-1511941200000.css' }],
+                    },
+                    'test-chunk-b': {
+                      assets: [
+                        { name: 'test-chunk-b-1511941200000.js' },
+                        { name: 'test-chunk-b-1511941200000.css' },
+                      ],
+                    },
                   },
                 }),
               },

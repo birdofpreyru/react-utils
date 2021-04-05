@@ -47,6 +47,6 @@ decipher.update(forge.util.createBuffer(data.slice(32)));
 decipher.finish();
 data = JSON.parse(forge.util.decodeUtf8(decipher.output.data));
 
-window.ASSETS_BY_CHUNK_NAME = data.ASSETS_BY_CHUNK_NAME;
+window.CHUNK_GROUPS = data.CHUNK_GROUPS;
 window.CONFIG = data.CONFIG;
 window.ISTATE = data.ISTATE;

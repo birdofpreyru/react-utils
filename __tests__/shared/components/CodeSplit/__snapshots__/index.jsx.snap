@@ -85,7 +85,7 @@ exports[`Client-side rendering 2`] = `
   </div>
 </div>
 <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
-  window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5x/O9WytXifp+Rrn07OeSezKzgU1DBmTNhGLGN6Ne6p4skptTPyzMu96urfoEiiwAm\\"
+  window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBqrVlCGhUyhXTWTPFlSbgmX7mf9UJCV6o+6N49TRM8T/Zt5SRase/W0YFEHYmiKSLZgUQPXsUoxsSTABdZa9BdRV/oUK68Qi2md0HR0J+b+HTZLAIsrRxHKMjBsUfmWUQjhOXxz8uZkjMyqgSptcNXEftmR5kazR/qzkkQcObSKPuDAKU03KPvQYU8IFE4CiNOX2Iw+T3MoeOLcuMcbBkvEUpXOo8tg7/9XQIY2QxEY+VOgOOywhCiFCspUah8KD+PeKXkuJdPx731E90C7TJz6AAvBfqtI2xCmRQrm5eP/Hk+E+WziLt4iuX0A+KQf2GhT7h2B6WWz+OiLd4i7p2hLaS8dJOsWjmKmAPz8mqTlA=\\"
 </script>
 <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
 <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>"
@@ -229,7 +229,7 @@ exports[`Server-side rendring 1`] = `
       </div>
     </div>
     <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
-      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5x/O9WytXifp+Rrn07OeSezKzgU1DBmTNhGLGN6Ne6p4skptTPyzMu96urfoEiiwAm\\"
+      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBqrVlCGhUyhXTWTPFlSbgmX7mf9UJCV6o+6N49TRM8T/Zt5SRase/W0YFEHYmiKSLZgUQPXsUoxsSTABdZa9BdRV/oUK68Qi2md0HR0J+b+HTZLAIsrRxHKMjBsUfmWUQjhOXxz8uZkjMyqgSptcNXEftmR5kazR/qzkkQcObSKPuDAKU03KPvQYU8IFE4CiNOX2Iw+T3MoeOLcuMcbBkvEUpXOo8tg7/9XQIY2QxEY+VOgOOywhCiFCspUah8KD+PeKXkuJdPx731E90C7TJz6AAvBfqtI2xCmRQrm5eP/Hk+E+WziLt4iuX0A+KQf2GhT7h2B6WWz+OiLd4i7p2hLaS8dJOsWjmKmAPz8mqTlA=\\"
     </script>
     <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
     <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
@@ -330,7 +330,7 @@ exports[`Server-side rendring 2`] = `
       </div>
     </div>
     <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
-      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDGxqHiEs7kHDY44Xxn5w1REclHuC2M3QGvQLK2naeWTzCJpXWctF+ki6HirgIkIyx4BfBIqlJbTLnShL1wyMPDARKNI4xpk9YGnthf9zGmb1ZElRTRh7QU4i6pTuK68/j92srOJYT+ccoyqPwGMJheURmW3JxPMKpqVhILhX7+HB82hJ5hxYefuQi4Y2Ad+zmnB1q/YWY+3O8tfpLoprbCH8lG9bQF8y4L3QXepFHWKkGQrxc6kLWmC9u7yEbUehrEnpZXFcp1Okw8Ox0gxT6GYtbpbMKeQmydOpe4ag6ReKjpokG/1ivpFHdgH+eVbB+sESBiVozhNa9vPJ6FBHKN2GDlyf5Gy7oUkFexI6ozoxxhBmdxFcm8+BvO9nuC7cThbhLgot65FgVWXtWnkhh5x/O9WytXifp+Rrn07OeSezKzgU1DBmTNhGLGN6Ne6p4skptTPyzMu96urfoEiiwAm\\"
+      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBqrVlCGhUyhXTWTPFlSbgmX7mf9UJCV6o+6N49TRM8T/Zt5SRase/W0YFEHYmiKSLZgUQPXsUoxsSTABdZa9BdRV/oUK68Qi2md0HR0J+b+HTZLAIsrRxHKMjBsUfmWUQjhOXxz8uZkjMyqgSptcNXEftmR5kazR/qzkkQcObSKPuDAKU03KPvQYU8IFE4CiNOX2Iw+T3MoeOLcuMcbBkvEUpXOo8tg7/9XQIY2QxEY+VOgOOywhCiFCspUah8KD+PeKXkuJdPx731E90C7TJz6AAvBfqtI2xCmRQrm5eP/Hk+E+WziLt4iuX0A+KQf2GhT7h2B6WWz+OiLd4i7p2hLaS8dJOsWjmKmAPz8mqTlA=\\"
     </script>
     <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
     <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>

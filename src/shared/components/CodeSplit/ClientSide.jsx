@@ -65,7 +65,7 @@ export default function ClientSide({
     if (heap.mounted) throw Error('Illegal attempt to remount a CodeSplit');
     else heap.mounted = true;
 
-    const assets = window.ASSETS_BY_CHUNK_NAME[chunkName];
+    const assets = window.CHUNK_GROUPS[chunkName];
     const cssAsset = assets.find((item) => item.endsWith('.css'));
 
     /* The links to stylesheets are injected into document header using
@@ -78,12 +78,14 @@ export default function ClientSide({
       link = document.createElement('link');
       link.setAttribute('href', cssAsset);
       link.setAttribute('rel', 'stylesheet');
+      link.dependants = new Set([chunkName]);
       const head = document.getElementsByTagName('head')[0];
       head.appendChild(link);
-    }
+    } else link.dependants.add(chunkName);
     return () => {
       link = document.querySelector(`link[href*="${cssAsset}"]`);
-      if (link) {
+      link.dependants.delete(chunkName);
+      if (!link.dependants.size) {
         const head = document.getElementsByTagName('head')[0];
         head.removeChild(link);
       }
