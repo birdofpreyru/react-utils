@@ -9,8 +9,9 @@ import config from 'config';
 import forge from 'node-forge';
 import fs from 'fs';
 import path from 'path';
-import ReactDOM from 'react-dom/server';
+import { gunzipSync, gzipSync } from 'zlib';
 
+import ReactDOM from 'react-dom/server';
 import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom';
 
@@ -118,8 +119,14 @@ export default function factory(webpackConfig, options) {
       if (cache) {
         cacheRef = options.staticCacheController(req);
         if (cacheRef) {
-          const data = cache.get(cacheRef);
+          let data = cache.get(cacheRef);
           if (data !== null) {
+            if (!req.acceptsEncodings('gzip')) {
+              data = gunzipSync(data);
+            } else {
+              res.set('Content-Encoding', 'gzip');
+              res.set('Content-Type', 'text/html');
+            }
             res.send(data);
             return;
           }
@@ -306,7 +313,7 @@ export default function factory(webpackConfig, options) {
 
       res.send(html);
 
-      if (cacheRef) cache.add(html, cacheRef.key);
+      if (cacheRef) cache.add(gzipSync(html), cacheRef.key);
     } catch (error) {
       next(error);
     }
