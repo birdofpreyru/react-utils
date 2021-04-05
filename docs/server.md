@@ -126,8 +126,21 @@ development tools, including Hot Module Reloading (HMR).
     and the default error handler are attached. You can use it to mount
     custom API routes. The server-side logger can be accessed as `server.logger`.
 
-  - `[port]` (_Number_ or _String_) &ndash; Optional. The port to start
-    the server on. Defaults **3000**.
+  - `options.port?: number|string = 3000` &ndash; Optional. The port to start
+    the server on, given as a number or string. Defaults to `3000`.
+
+  - `options.staticCacheSize?: number = 1.e7` &ndash; Optional. The maximum
+    static cache size in bytes. Defaults to ~10 MB.
+
+  - `options.staticCacheController?: function` &ndash; Optional. When given,
+    it activates, and controls the static caching of generated HTML markup.
+    When this function is provided, on each incoming request it is triggered
+    with the request passed in as the argument. To attempt to serve
+    the response from the cache it should return the object with the following
+    fields:
+    - `key: string` &ndash; the cache key for the response;
+    - `maxage?: number` &ndash; the maximum age of cached result in ms.
+      If undefined - infinite age is assumed.
 
   **Returns** `Promise`resolving to the object with fields
 

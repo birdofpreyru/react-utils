@@ -77,6 +77,11 @@ function normalizePort(value) {
  * @param {String} [options.port=3000] The port to listen (number or name).
  *  When not specified the value will be taken from PORT environmental variable,
  *  or default to 3000 otherwise.
+ * @param {function} [options.staticCacheSize=1.e7] Optional. The maximum
+ *  static cache size. Defaults to ~10 MB.
+ * @param {function} [options.staticCacheController] Optional. Allows to easily
+ *  setup and control static server-side caching of SSR-generated HTML markup
+ *  with quite rich possibilities.
  * @return {Promise} Resolves to the result object has two fields:
  *  - express {Object} - ExpressJS server;
  *  - httpServer {Object} - NodeJS HTTP(S) server.
@@ -88,6 +93,7 @@ async function launch(webpackConfig, options) {
   _.defaults(ops, {
     httpsRedirect: true,
   });
+  if (!ops.staticCacheSize) ops.staticCacheSize = 1.e7;
 
   if (_.isUndefined(ops.logger)) {
     const { format, transports } = winston;

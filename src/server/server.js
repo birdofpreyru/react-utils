@@ -48,6 +48,8 @@ export default async function factory(webpackConfig, options) {
     'beforeRender',
     'favicon',
     'maxSsrRounds',
+    'staticCacheController',
+    'staticCacheSize',
   ]);
   const renderer = rendererFactory(webpackConfig, rendererOps);
   const { publicPath } = webpackConfig.output;

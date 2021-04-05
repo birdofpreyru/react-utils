@@ -14,6 +14,8 @@ import ReactDOM from 'react-dom/server';
 import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom';
 
+import Cache from './Cache';
+
 const sanitizedConfig = _.omit(config, 'SECRET');
 
 const DEFAULT_MAX_SSR_ROUNDS = 10;
@@ -99,6 +101,11 @@ export default function factory(webpackConfig, options) {
     `<link rel="manifest" href="${publicPath}manifest.json"></link>`
   ) : '';
 
+  // TODO: Update the caching mechanics to stored cached data gzipped,
+  // and serve them without a need to unpacking server-side.
+  const cache = options.staticCacheController
+    ? new Cache(options.staticCacheSize) : null;
+
   const CHUNK_GROUPS = readChunkGroupsJson(outputPath);
 
   const ops = _.defaults(_.clone(options), {
@@ -107,6 +114,18 @@ export default function factory(webpackConfig, options) {
 
   return async (req, res, next) => {
     try {
+      let cacheRef;
+      if (cache) {
+        cacheRef = options.staticCacheController(req);
+        if (cacheRef) {
+          const data = cache.get(cacheRef);
+          if (data !== null) {
+            res.send(data);
+            return;
+          }
+        }
+      }
+
       const [{
         configToInject,
         extraScripts,
@@ -254,8 +273,7 @@ export default function factory(webpackConfig, options) {
         '<link rel="shortcut icon" href="/favicon.ico" />'
       ) : '';
 
-      res.send((
-        `<!DOCTYPE html>
+      const html = `<!DOCTYPE html>
         <html lang="en">
           <head>
             ${headOpenExtraScripts || ''}
@@ -284,8 +302,11 @@ export default function factory(webpackConfig, options) {
             ${scriptChunkString}
             ${defaultExtraScripts || ''}
           </body>
-        </html>`
-      ));
+        </html>`;
+
+      res.send(html);
+
+      if (cacheRef) cache.add(html, cacheRef.key);
     } catch (error) {
       next(error);
     }
