@@ -9,7 +9,7 @@ import config from 'config';
 import forge from 'node-forge';
 import fs from 'fs';
 import path from 'path';
-import { gunzipSync, gzipSync } from 'zlib';
+import { gunzip, gzip } from 'zlib';
 
 import ReactDOM from 'react-dom/server';
 import { Helmet } from 'react-helmet';
@@ -119,15 +119,14 @@ export default function factory(webpackConfig, options) {
       if (cache) {
         cacheRef = options.staticCacheController(req);
         if (cacheRef) {
-          let data = cache.get(cacheRef);
+          const data = cache.get(cacheRef);
           if (data !== null) {
-            if (!req.acceptsEncodings('gzip')) {
-              data = gunzipSync(data);
-            } else {
-              res.set('Content-Encoding', 'gzip');
-              res.set('Content-Type', 'text/html');
-            }
-            res.send(data);
+            gunzip(data, (error, html) => {
+              if (error) next(error);
+              else {
+                res.send(html.toString().replaceAll(data.nonce, req.cspNonce));
+              }
+            });
             return;
           }
         }
@@ -313,7 +312,15 @@ export default function factory(webpackConfig, options) {
 
       res.send(html);
 
-      if (cacheRef) cache.add(gzipSync(html), cacheRef.key);
+      if (cacheRef) {
+        gzip(html, (error, buffer) => {
+          if (error) throw error;
+          /* eslint-disable no-param-reassign */
+          buffer.nonce = req.cspNonce;
+          /* eslint-enable no-param-reassign */
+          cache.add(buffer, cacheRef.key);
+        });
+      }
     } catch (error) {
       next(error);
     }
