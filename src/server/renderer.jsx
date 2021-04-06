@@ -124,7 +124,11 @@ export default function factory(webpackConfig, options) {
             gunzip(data, (error, html) => {
               if (error) next(error);
               else {
-                res.send(html.toString().replaceAll(data.nonce, req.cspNonce));
+                // TODO: Starting from Node v15 we'll be able to use string's
+                // .replaceAll() method instead relying on reg. expression for
+                // global matching.
+                const regex = new RegExp(data.nonce, 'g');
+                res.send(html.toString().replace(regex, req.cspNonce));
               }
             });
             return;
