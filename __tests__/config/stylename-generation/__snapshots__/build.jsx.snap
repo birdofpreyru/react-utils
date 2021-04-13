@@ -123,7 +123,7 @@ exports[`Webpack build App: development 1`] = `
 "
 `;
 
-exports[`Webpack build App: production 1`] = `"._2DANxU{background:red;width:10px;height:10px}.iZBsN-{color:#00f}._1gb0n8{background:red;width:10px;height:10px}"`;
+exports[`Webpack build App: production 1`] = `"._2DANxU{background:red;height:10px;width:10px}.iZBsN-{color:#00f}._1gb0n8{background:red;height:10px;width:10px}"`;
 
 exports[`Webpack build Lib: development 1`] = `
 "/*
@@ -151,7 +151,7 @@ exports[`Webpack build Lib: development 1`] = `
 `;
 
 exports[`Webpack build Lib: production 1`] = `
-"._2DANxU{background:red;width:10px;height:10px}.iZBsN-{color:#00f}._1gb0n8{background:red;width:10px;height:10px}
+"._2DANxU{background:red;height:10px;width:10px}.iZBsN-{color:#00f}._1gb0n8{background:red;height:10px;width:10px}
 
 /*# sourceMappingURL=style.css.map*/"
 `;
