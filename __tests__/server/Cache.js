@@ -23,5 +23,4 @@ it('works as expected', () => {
   expect(cache.get({ key: 'A', maxage: 0 })).toBe(null);
   cache.add('21', 'C');
   expect(cache).toMatchSnapshot();
-  console.log(cache);
 });
