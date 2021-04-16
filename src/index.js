@@ -9,7 +9,19 @@ if (isomorphy.IS_SERVER_SIDE) {
 }
 
 export { default as _ } from 'lodash';
+
+/**
+ * @category Utilities
+ * @module api
+ * @desc
+ * ```js
+ * import { api } from '@dr.pogodin/react-utils';
+ * ```
+ * `api` is just an alias for [`axios`](https://www.npmjs.com/package/axios)
+ * library, which provides a great HTTP(S) client.
+ */
 export { default as api } from 'axios';
+
 export * as PT from 'prop-types';
 
 export {

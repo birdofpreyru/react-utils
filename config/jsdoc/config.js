@@ -10,7 +10,7 @@ module.exports = {
     'node_modules/better-docs/category',
   ],
   source: {
-    include: ['src'],
+    include: ['config', 'src'],
   },
   tags: {
     allowUnknownTags: ['category', 'subcategory'],
