@@ -59,6 +59,7 @@
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
     "babel-plugin-module-resolver": "^4.1.0",
+    "better-docs": "^2.3.2",
     "core-js": "^3.10.1",
     "css-loader": "^5.2.1",
     "css-minimizer-webpack-plugin": "^2.0.0",
@@ -74,6 +75,7 @@
     "file-loader": "^6.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
+    "jsdoc": "^3.6.6",
     "mini-css-extract-plugin": "^1.4.1",
     "mockdate": "^3.0.5",
     "nodelist-foreach-polyfill": "^1.2.0",
@@ -125,6 +127,7 @@
   },
   "scripts": {
     "build": "rimraf build && node bin/build -t development --lib && node bin/build -t production --lib",
+    "docs": "rimraf new-docs && jsdoc -c config/jsdoc/config.js",
     "jest": "NODE_CONFIG_ENV=test jest --no-cache --config config/jest/default.js",
     "lint": "npm run lint:js && npm run lint:scss",
     "lint:js": "eslint --ext .js,.jsx . && eslint bin/*",
