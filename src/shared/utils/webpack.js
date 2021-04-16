@@ -18,9 +18,16 @@
  */
 export function requireWeak(modulePath) {
   /* eslint-disable no-eval */
-  const mod = eval('require')(modulePath);
+  const { default: def, ...named } = eval('require')(modulePath);
   /* eslint-enable no-eval */
-  return mod.default || mod;
+
+  if (!def) return named;
+
+  Object.entries(named).forEach(([key, value]) => {
+    if (def[key]) throw Error('Conflict between default and named exports');
+    def[key] = value;
+  });
+  return def;
 }
 
 /**

@@ -16,6 +16,8 @@ import winston from 'winston';
 import serverFactory from './server';
 import { SCRIPT_LOCATIONS } from './renderer';
 
+export * from './utils';
+
 /**
  * Normalizes a port into a number, string, or false.
  * @param {String} value Port name or number.
