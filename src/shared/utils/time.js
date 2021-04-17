@@ -77,7 +77,7 @@ dayjs.now = Date.now;
 
 /**
  * @static
- * @func time
+ * @func timer
  * @desc Creates a Promise, which resolves after the given timeout.
  * @param {number} timeout Timeout [ms].
  * @return {Promise} Resolves after the timeout.

@@ -1,7 +1,4 @@
-/**
- * Initialization of client-side code.
- */
-
+// Initialization of client-side code.
 /* global document, window */
 
 import {
@@ -16,6 +13,7 @@ import { BrowserRouter } from 'react-router-dom';
 /**
  * This dummy component clears the code chunk cache in the global state each
  * time the epoch prop changes.
+ * @ignore
  */
 function HmrHelper({ epoch }) {
   const [currentEpoch, setCurrentEpoch] = useState(epoch);
@@ -37,6 +35,7 @@ function HmrHelper({ epoch }) {
  * @param {Object} initialState Optional. Initial value of the global state.
  * @param {Number} hmrEpoch Optional. HMR epoch. It is needed to handle HMR of
  *  split code chunks.
+ * @ignore
  */
 function render(Application, { initialState, hmrEpoch } = {}) {
   let app = (
@@ -54,14 +53,30 @@ function render(Application, { initialState, hmrEpoch } = {}) {
 }
 
 /**
- * Initializes the code at client side. It takes care about receiving the data
- * injected at the server-side, and also about setting up client side of hot
- * module reloading (HMR).
- * @param {String} applicationModulePath Optional.
- * @param {Function} getApplication
- * @param {Object} moduleHot
+ * @category Utilities
+ * @func client
+ * @desc
+ * ```js
+ * import { client } from '@dr.pogodin/react-utils';
+ * ```
+ * Prepares and launches the app at client side.
+ * @param {object} options App configuraiton options. Most of them are necessary
+ * to correctly set up Hot Module Reloading in _development_ mode.
+ * @param {string} options.applicationModulePath Path to the root application
+ * module.
+ * @param {function} options.getApplication A function which on each call
+ * requires the root app module, and returns the root application component.
+ * @param {object} options.moduleHot This should be set to `module.hot` value
+ * from the caller module's context.
+ * @example
+ * import { client } from '@dr.pogodin/react-utils';
+ * client({
+ *   applicationModulePath: require.resolve('../shared'),
+ *   getApplication: () => require('../shared').default,
+ *   moduleHot: module.hot,
+ * });
  */
-export default async function Launch({
+export default function Launch({
   applicationModulePath,
   getApplication,
   moduleHot,

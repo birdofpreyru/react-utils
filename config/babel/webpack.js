@@ -1,5 +1,5 @@
 /**
- * @category Config
+ * @category Configs
  * @module babel/webpack
  * @desc [Babel](https://babeljs.io/) preset for Webpack builds.
  *
@@ -61,7 +61,11 @@ const {
 
 /**
  * @static
- * @desc Supported Babel environments.
+ * @desc
+ * ```js
+ * import { ENVIRONMENTS } from '@dr.pogodin/react-utils/config/babel/webpack';
+ * ```
+ * Supported Babel environments.
  * @prop {string} DEV `development`
  * @prop {string} PROD `production`
  * @prop {string} TEST `test`
@@ -78,6 +82,7 @@ const ENVIRONMENTS = {
  * @param {string|string[]|object} [options.targets=defaults]
  *  `@babel/preset-env` targets.
  * @return {object} Generated config.
+ * @ignore
  */
 function newBaseConfig(options = {}) {
   return {
@@ -110,8 +115,9 @@ function newBaseConfig(options = {}) {
  * **Beware:** It mutates `config`.
  *
  * @param {object} config
- * @param {string} env Target environment: "development" or "production".
+ * @param {string} env Target environment: `development` or `production`.
  * @return {object} Returns mutated config for chaining.
+ * @ignore
  */
 function addStyling(config, env) {
   const cssModulesOps = {
@@ -135,7 +141,11 @@ function addStyling(config, env) {
 
 /**
  * @static
- * @desc Generates Babel preset for Webpack.
+ * @desc
+ * ```js
+ * import getPreset from '@dr.pogodin/react-utils/config/babel/webpack';
+ * ```
+ * Generates Babel preset for Webpack.
  * @param {object} babel Babel compiler.
  * @param {object} [ops] Preset options.
  * @param {boolean} [ops.noStyling] If truthy all setup related to styling

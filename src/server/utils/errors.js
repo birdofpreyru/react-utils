@@ -1,4 +1,13 @@
-// Assertion & error handling helpers.
+/**
+ * @category Utilities
+ * @module server/errors
+ * @desc
+ * ```js
+ * import { server } from '@dr.pogodin/react-utils';
+ * const { errors } = server;
+ * ```
+ * Server-side helpers for error handling.
+ */
 
 import {
   StatusCodes as CODES,
@@ -9,20 +18,70 @@ import {
 import joi from 'joi';
 
 /**
- * Auxiliary aliases.
+ * @static
+ * @const CODES
+ * @desc An alias for
+ * [StatusCodes object from **http-status-codes** library](https://www.npmjs.com/package/http-status-codes).
+ * It is a map between HTTP status code names and corresponding numeric codes.
+ * @example
+ * import { server } from '@dr.pogodin/react-utils';
+ * const { CODES } = server.errors;
+ * console.log(CODES.BAD_REQUEST); // Prints: 400
  */
-export {
-  CODES,
-  ERRORS,
-  getErrorForCode,
-  joi,
-};
+export { CODES };
 
 /**
- * Creates a new error with given message, and attached HTTP status code.
+ * @static
+ * @const ERRORS
+ * @desc An alias for
+ * [ReasonPhrases object from **http-status-codes** library](https://www.npmjs.com/package/http-status-codes).
+ * It is a map between HTTP status code names and their pretty-printed forms.
+ * @example
+ * import { server } from '@dr.pogodin/react-utils';
+ * const { ERRORS } = server.errors;
+ * console.log(ERRORS.BAD_REQUEST); // Prints: Bad Request
+ */
+export { ERRORS };
+
+/**
+ * @static
+ * @func getErrorForCode
+ * @desc An alias for
+ * [getReasonPhrase() function from **http-status-codes** library](https://www.npmjs.com/package/http-status-codes).
+ * Given an HTTP code it returns the corresponding error text.
+ * @param {number} code HTTP code.
+ * @return {string} HTTP error text.
+ * @example
+ * import { server } from '@dr.pogodin/react-utils';
+ * console.log(server.errors.getErrorForCode(400)); // Prints: Bad Request
+ */
+export { getErrorForCode };
+
+/**
+ * @static
+ * @const joi
+ * @desc An alias for [Joi library](https://joi.dev/api/?v=17.4.0),
+ * which provides tooling for HTTP request validation. You can use it in any
+ * way you would use that library import.
+ * @example
+ * import { server } from '@dr.pogodin/react-utils';
+ * const { joi } = server.errors;
+ * const requestBodySchema = joi.object({
+ *   sampleKey: joi.string().max(16).required(),
+ * });
+ */
+export { joi };
+
+/**
+ * ```js
+ * import { server } from '@dr.pogodin/react-utils';
+ * const { newError } = server.errors;
+ * ```
+ * Creates a new `Error` object with given message, and HTTP status code
+ * attached as `status` field.
  * @param {string} message Error message.
- * @param {number} [statusCode=500] Optional. HTTP status code. Defaults to 500
- *  (Internal Server Error).
+ * @param {number} [statusCode=500] HTTP status code. Defaults to 500 (Internal
+ * Server Error).
  * @return {Error}
  */
 export function newError(message, statusCode = CODES.INTERNAL_SERVER_ERROR) {
@@ -32,10 +91,14 @@ export function newError(message, statusCode = CODES.INTERNAL_SERVER_ERROR) {
 }
 
 /**
+ * ```js
+ * import { server } from '@dr.pogodin/react-utils';
+ * const { fail } = server.errors;
+ * ```
  * Throws an error with given message and HTTP status code.
  * @param {string} message Error message.
- * @param {number} [statusCode=500] Optional. HTTP error code. Defaults to 500
- *  (Internal Server Error).
+ * @param {number} [statusCode=500] HTTP error code. Defaults to 500 (Internal
+ * Server Error).
  * @throws {Error}
  */
 export function fail(message, statusCode = CODES.INTERNAL_SERVER_ERROR) {
@@ -43,13 +106,17 @@ export function fail(message, statusCode = CODES.INTERNAL_SERVER_ERROR) {
 }
 
 /**
- * Validates a value using the given Joi schema, and throws an error with
- * the given message and HTTP status code in case of the validation failure.
+ * ```js
+ * import { server } from '@dr.pogodin/react-utils';
+ * const { assert } = server.errors;
+ * ```
+ * Validates a value using given Joi schema, and throws an error with given
+ * message and HTTP status code in case of the validation failure.
  * @param {any} value
  * @param {object} schema
- * @param {string} [message] Optional. Error message.
- * @param {number} [statusCode=500] Optional. HTTP status code. Defaults to 400
- *  (Bad Request).
+ * @param {string} [message] Error message.
+ * @param {number} [statusCode=500] HTTP status code. Defaults to 400 (Bad
+ * Request).
  * @throws {Error}
  */
 export function assert(

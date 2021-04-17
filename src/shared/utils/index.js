@@ -37,14 +37,10 @@ function newBarrier() {
 
 /**
  * @category Utilities
- * @module withRetries
  * @desc
  * ```js
  * import { withRetries } from '@dr.pogodin/react-utils';
  * ```
- */
-
-/**
  * Attempts to perform given asynchronous `action` up to `maxRetries` times,
  * with the given `interval` between attempts. If any attempt is successful,
  * the result is returned immediately, with no further attempts done;
