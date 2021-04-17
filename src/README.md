@@ -10,6 +10,7 @@ provides the setup which takes full advantage of this library.
 - [Reference](#reference)
   - [Configs](#configs)
   - [Components](#components)
+  - [(S)CSS Styling](#styling)
   - [Utilities](#utilities)
 
 ## <a name="reference"></a> Reference
@@ -19,16 +20,27 @@ provides the setup which takes full advantage of this library.
   NodeJS compilation and server-side execution.
 - {@link module:babel/webpack babel/webpack} &ndash; Babel configuration for
   Webpack builds.
+- {@link module:eslint/default eslint/default} &ndash; Default ESLint
+  configuration.
+- {@link module:eslint/jest eslint/jest} &ndash; ESLint configuration for
+  files with Jest tests.
 
 ### <a name="components"></a> Components
 - {@link Button} &ndash; Implements themeable buttons and button-like components
   (components that look like regular buttons, but behave as links) in the same
   uniform manner.
 - {@link Checkbox} &ndash; Implements themeable checkboxes.
+- {@link CodeSplit} &ndash; Implements code splitting into separate code chunks.
+- {@link Dropdown} &ndash; Implements themeable dropdown element.
+
+### <a name="styling"></a> (S)CSS Styling
+- {@link module:Global_Styles Global Styles} &ndash; Provides global CSS styles
+  good to have in any application.
 
 ### <a name="utilities"></a> Utilities
 - {@link module:api api} &ndash; An alias for `axios` (HTTP(S) client).
-- {@link client} &ndash; Client-side app initialization code.
+- {@link client} &ndash; Client-side application initialization.
+- {@link module:config config} &ndash; Isomorphic application config.
 - {@link module:time time} &ndash; Date & time utilities: an alias for `dayjs`
   library, extended with some auxiliary constants and methods.
 - {@link module:server/errors server/errors} &ndash; Server-side helpers

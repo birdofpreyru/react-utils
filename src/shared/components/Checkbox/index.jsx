@@ -27,9 +27,9 @@ function Checkbox({
  * @category Components
  * @typedef {object} CheckboxTheme {@link Checkbox} component theme: a map of
  * CSS classes to append to its elements:
- * @prop {string} checkbox to the underlying checkbox `<input>` element.
- * @prop {string} container to the root checkbox element.
- * @prop {string} label to the checkbox label element.
+ * @prop {string} [checkbox] to the underlying checkbox `<input>` element.
+ * @prop {string} [container] to the root checkbox element.
+ * @prop {string} [label] to the checkbox label element.
  */
 const ThemedCheckbox = themed('Checkbox', [
   'checkbox',

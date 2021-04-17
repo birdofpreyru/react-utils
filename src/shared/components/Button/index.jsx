@@ -63,9 +63,9 @@ function BaseButton({
  * @category Components
  * @typedef {object} ButtonTheme {@link Button} component theme: a map of CSS
  * class names to append to button elements:
- * @prop {string} active to the root element of active button.
- * @prop {string} button to the root element of any button.
- * @prop {string} disabled to the root element of disabled button.
+ * @prop {string} [active] to the root element of active button.
+ * @prop {string} [button] to the root element of any button.
+ * @prop {string} [disabled] to the root element of disabled button.
  */
 const ThemedButton = themed('Button', [
   'active',
