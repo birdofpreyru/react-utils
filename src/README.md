@@ -32,15 +32,19 @@ provides the setup which takes full advantage of this library.
 - {@link Checkbox} &ndash; Implements themeable checkboxes.
 - {@link CodeSplit} &ndash; Implements code splitting into separate code chunks.
 - {@link Dropdown} &ndash; Implements themeable dropdown element.
+- {@link Input} &ndash; Implements themeable input field.
 
 ### <a name="styling"></a> (S)CSS Styling
 - {@link module:Global_Styles Global Styles} &ndash; Provides global CSS styles
   good to have in any application.
 
 ### <a name="utilities"></a> Utilities
+- {@link module:_ _} &ndash; An alias for `lodash` library (generic JS helpers).
 - {@link module:api api} &ndash; An alias for `axios` (HTTP(S) client).
 - {@link client} &ndash; Client-side application initialization.
 - {@link module:config config} &ndash; Isomorphic application config.
+- {@link module:isomorphy isomorphy} &ndash; Collection of helpers dealing with
+  isomorphic aspects of code.
 - {@link module:time time} &ndash; Date & time utilities: an alias for `dayjs`
   library, extended with some auxiliary constants and methods.
 - {@link module:server/errors server/errors} &ndash; Server-side helpers

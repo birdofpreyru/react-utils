@@ -8,6 +8,16 @@ if (isomorphy.IS_SERVER_SIDE) {
   server = webpack.requireWeak(path.resolve(__dirname, './server'));
 }
 
+/**
+ * @category Utilities
+ * @module _
+ * @desc
+ * ```js
+ * import { _ } from '@dr.pogodin/react-utils';
+ * ```
+ * `_` is just an alias for [lodash](https://lodash.com/docs) library,
+ * which provides various generic JS helpers.
+ */
 export { default as _ } from 'lodash';
 
 /**
