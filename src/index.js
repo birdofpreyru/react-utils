@@ -32,6 +32,17 @@ export { default as _ } from 'lodash';
  */
 export { default as api } from 'axios';
 
+/**
+ * @category Utilities
+ * @module PT
+ * @desc
+ * ```js
+ * import { PT } from '@dr.pogodin/react-utils';
+ * ```
+ * `PT` (short for `prop-types`) is an alias for
+ * [prop-types](https://www.npmjs.com/package/prop-types) library,
+ * which facilitates runtime type checks for React.
+ */
 export * as PT from 'prop-types';
 
 export {

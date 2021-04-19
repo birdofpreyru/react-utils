@@ -1,3 +1,23 @@
+/**
+ * @category Utilities
+ * @module themed
+ * @desc
+ * ```js
+ * import { themed, ThemeProvider } from '@dr.pogodin/react-utils';
+ * ```
+ * Encapsulates
+ * [`dr.pogodin/react-themes`](https://www.npmjs.com/package/@dr.pogodin/react-themes)
+ * library for React component styling with theme composition. For convenience,
+ * the aliases are provided for react themes exports. They work the same as
+ * specified in the `react-themes` documentation, and `react-utils`
+ * configration is fully compliant with expected CSS Modules setup.
+ * | Export from `react-utils` | Original export from `react-themes`    |
+ * | ------------------------- | -------------------------------------- |
+ * | `themed`                  | _default export_ (component decorator) |
+ * | `themed.COMPOSE`          | `COMPOSE`                              |
+ * | `themed.PRIORITY`         | `PRIORITY`                             |
+ * | `ThemeProvider`           | `ThemeProvider`                        |
+ */
 import themed, {
   COMPOSE,
   PRIORITY,
@@ -24,9 +44,23 @@ if (isomorphy.IS_SERVER_SIDE
 }
 
 /**
+ * @category Utilities
+ * @func newBarrier
+ * @desc
+ * ```js
+ * import { newBarrier } from '@dr.pogodin/react-utils';
+ * ```
  * Creates a new async barrier: a Promise instance with its resolve method
- * attached as .resolve field.
+ * attached as `.resolve` field.
  * @return {Promise}
+ * @example
+ * import { newBarrier } from '@dr.pogodin/react-utils';
+ * (async () => {
+ *   const barrier = newBarrier();
+ *   setTimeout(() => barrier.resolve(), 5000);
+ *   await barrier;
+ *   console.log('This will be printed only after the timeout fires.');
+ * })();
  */
 function newBarrier() {
   let resolve;
