@@ -55,7 +55,7 @@ function PageLayout({
 
 /**
  * @category Components
- * @typedef PageLayoutTheme {@link PageLayout} component theme.
+ * @typedef {object} PageLayoutTheme {@link PageLayout} component theme.
  * @prop {string} [container] Class for the root container of page layout.
  * @prop {string} [mainPanel] Class for the main content panel.
  * @prop {string} [sidePanel] Class for each side panel.

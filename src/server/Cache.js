@@ -1,5 +1,6 @@
 /**
  * Implements the static cache.
+ * @ignore
  */
 export default class Cache {
   constructor(maxSize) {
@@ -12,6 +13,7 @@ export default class Cache {
 
   /**
    * Cache lookup.
+   * @ignore
    * @param {string} key Item key to look for.
    * @param {number} [maxage=Number.MAX_VALUE] Optional. The maximum age of
    *  cached item to serve. Default to infinite.
@@ -25,6 +27,7 @@ export default class Cache {
 
   /**
    * Adds item to cache.
+   * @ignore
    * @param {string} data Item to add.
    * @param {string} key Key to store the item at.
    */

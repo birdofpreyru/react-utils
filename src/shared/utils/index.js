@@ -46,6 +46,7 @@ if (isomorphy.IS_SERVER_SIDE
 /**
  * @category Utilities
  * @func newBarrier
+ * @global
  * @desc
  * ```js
  * import { newBarrier } from '@dr.pogodin/react-utils';
@@ -71,6 +72,8 @@ function newBarrier() {
 
 /**
  * @category Utilities
+ * @global
+ * @func withRetries
  * @desc
  * ```js
  * import { withRetries } from '@dr.pogodin/react-utils';
@@ -87,7 +90,6 @@ function newBarrier() {
  *  Defaults to 1 second.
  * @return {Promise} Resolves to the result of successful operation, or
  *  rejects with the error from the latst failed attempt.
- *
  * @example
  * import { withRetries } from '@dr.pogodin/react-utils';
  *

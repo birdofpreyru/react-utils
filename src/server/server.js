@@ -28,6 +28,7 @@ import {
 
 /**
  * Default Content Security Policy settings.
+ * @ignore
  */
 const defaultCspSettings = {
   directives: mapValues(

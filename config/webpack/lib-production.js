@@ -1,5 +1,8 @@
 /**
- * Development Webpack configuration for ReactJS libraries.
+ * @category Configs
+ * @module webpack/lib-production
+ * @desc
+ * Production Webpack config for ReactJS libraries.
  */
 
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -10,19 +13,13 @@ const { merge } = require('webpack-merge');
 const baseFactory = require('./lib-base');
 
 /**
- * Creates a new Webpack config.
- *
- * @param {Object} ops Configuration params. This helps to conveniently set
- * the most useful options. You still can modify other config parameters with
- * help of "webpack-merge", or by a direct mutation of the created config
- * object.
- *
- * @param {String} ops.context Base URL for resolution of relative config
- * paths.
- *
- * @param {String} ops.entry Entry point of the library.
- *
- * @return {Object} Webpack configuration.
+ * @func configFactory
+ * @desc
+ * Extends and tunes {@link module:webpack/lib-production lib-production}
+ * to use *production* Babel environment, and sets `[hash:base64:6]` as
+ * the template for generated CSS classnames.
+ * @param {object} ops
+ * @return {object}
  */
 module.exports = function configFactory(ops) {
   const baseConfig = baseFactory({

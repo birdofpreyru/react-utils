@@ -1,5 +1,7 @@
 /**
- * Production Webpack configuration for ReactJS applications.
+ * @category Configs
+ * @module webpack/app-production
+ * @desc Production Webpack configuration for applications.
  */
 
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -9,24 +11,24 @@ const { merge } = require('webpack-merge');
 const baseFactory = require('./app-base');
 
 /**
+ * @func factoryConfig
+ * @desc
+ * ```js
+ * const configFactory = require('@dr.pogodin/react-utils/config/webpack/app-production');
+ * ```
  * Creates a new production Webpack config, and performs some auxiliary
- * operations on the way.
- * @param {Object} ops Configuration options. This allows to modify some
- *  frequently changed options in a convenient way, without a need to manipulate
- *  directly with the created config object.
- *
- *  The following options are accepted:
- *
- * @param {Object|String|String[]} ops.entry Entry points. If an object is
- *  passed, in the "polyfills" entry point will be extended or appended to
- *  include some polyfills we consider obligatory. If a string or an array is
- *  passed in, it will be turned into "main" entry point, and the "polyfills"
- *  entry point will be added to it.
- *
- * @param {String} ops.context Base URL for resolution of relative
- *  config paths.
- *
- * @param {String} ops.publicPath Base URL for the output of the build assets.
+ * operations on the way. This configuration is based on
+ * {@link module:webpack/app-base webpack/app-base}
+ * and it differs from that in the following:
+ * - *production* Babel environment is enforced;
+ * - Emulates the following environment variables:
+ *   - **`BABEL_ENV`** &mdash; It is set to *production*;
+ *   - **`NODE_ENV`** &mdash; It is set to *production*.
+ * - Adds the following plugins:
+ *   - [CSS Minimizer Webpack Plugin](https://www.npmjs.com/package/css-minimizer-webpack-plugin);
+ *   - [UglifyJsPlugin](https://webpack.js.org/plugins/uglifyjs-webpack-plugin/).
+ * @param {object} ops Accepts same options as the base config.
+ * @return {object}
  */
 module.exports = function configFactory(ops) {
   const res = merge(baseFactory({

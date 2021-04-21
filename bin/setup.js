@@ -98,6 +98,7 @@ const cmdLineArgs = commander.opts();
 /**
  * Generates a string containing name and version of the package to be
  * installed.
+ * @ignore
  * @param {Array} entry Array with package name as the first element, and
  *  corresponding version or URI given in a `package.json`.
  * @return {String} Package name and version as a string that can be passed
@@ -115,6 +116,7 @@ function generateTargetPackage(entry) {
  * which are known host's dependencies. This is to avoid changing their status
  * in host from prod to dev. They will be upgraded to appropriate version
  * by the updateProdDependencies() method below.
+ * @ignore
  * @param {Object} donorData Donor's package JSON data.
  * @param {Object} hostData Host's package JSON data.
  */
@@ -145,6 +147,7 @@ function adoptDevDependencies(donorData, hostData) {
 /**
  * Locates and loads `package.json` of the host package (assumed to be inside
  * the current working directory).
+ * @ignore
  * @return {Object} Data from `package.json` parsed into JSON.
  */
 function getHostPackageJson() {
@@ -154,6 +157,7 @@ function getHostPackageJson() {
 
 /**
  * Locates and loads `package.json` file of the specified package.
+ * @ignore
  * @param {String} package Package name.
  * @return {Object} Data from `package.json` parsed into JSON.
  */
@@ -175,6 +179,7 @@ function getPackageJson(packageName = '@dr.pogodin/react-utils') {
 
 /**
  * Installs specified library.
+ * @ignore
  * @param {String} library Library name.
  */
 function install(library) {
@@ -186,6 +191,7 @@ function install(library) {
 /**
  * Updates prod dependencies of `host` package that are also prod dependencies
  * of `donor` to the same versions specified in the donor's `package.json`.
+ * @ignore
  * @param {Object} donorData Data from donor's `package.json`.
  * @param {Object} hostData Data from host's `package.json`.
  */

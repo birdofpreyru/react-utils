@@ -9,12 +9,35 @@ provides the setup which takes full advantage of this library.
 [Release Notes](https://github.com/birdofpreyru/react-utils/releases)
 
 ### Content
+- [Installation](#installation)
 - [Reference](#reference)
   - [Configs](#configs)
   - [Components](#components)
   - [NodeJS Scripts](#nodejs-scripts)
   - [(S)CSS Styling](#styling)
   - [Utilities](#utilities)
+
+## <a name="installation"></a> Installation
+Install the package as
+```bash
+$ npm install --save @dr.pogodin/react-utils
+$ ./node_modules/.bin/react-utils-setup
+```
+Then import the global stylesheet into the root ReactJS component of your app:
+```jsx
+/* eslint-disable global-require */
+if (process.env.NODE_ENV === 'production') {
+  require('@dr.pogodin/react-utils/prod-styles');
+} else {
+  require('@dr.pogodin/react-utils/dev-styles');
+}
+/* eslint-enable global-require */
+```
+
+To upgrade this library to the latest version just execute again
+```bash
+$ ./node_modules/.bin/react-utils-setup
+```
 
 ## <a name="reference"></a> Reference
 
@@ -27,6 +50,19 @@ provides the setup which takes full advantage of this library.
   configuration.
 - {@link module:eslint/jest eslint/jest} &ndash; ESLint configuration for
   files with Jest tests.
+- {@link module:stylelint stylelint} &ndash; Stylelint configuration.
+- {@link module:webpack/app-base webpack/app-base} &ndash; Base Webpack config
+  for applications.
+- {@link module:webpack/app-development webpack/app-development} &ndash;
+  Development Webpack config for applications.
+- {@link module:webpack/app-production webpack/app-production} &ndash;
+  Production Webpack config for applications.
+- {@link module:webpack/lib-base webpack/lib-base} &ndash; Base Webpack config
+  for libraries.
+- {@link module:webpack/lib-development webpack/lib-development} &ndash;
+  Development Webpack config for libraries.
+- {@link module:webpack/lib-production webpack/lib-production} &ndash;
+  Production Webpack config for libraries.
 
 ### <a name="components"></a> Components
 - {@link Button} &ndash; Implements themeable buttons and button-like components
@@ -45,8 +81,13 @@ provides the setup which takes full advantage of this library.
   `<NavLink>`. Allow to handle external and internal links in the same uniform
   manner.
 - {@link PageLayout} &ndash; Simple and themeable page layout.
+- {@link ScalableRect} &ndash; Container keeping given aspect ratio of its sides
+  regardless the width you set.
 - {@link module:themed ThemeProvider} &ndash; Alias for `<ThemeProvider>`
   from `dr.pogodin/react-themes`.
+- {@link Throbber} &ndash; Simple activity indicator (three bouncing circles).
+- {@link WithTooltip} &ndash; Tooltip component.
+- {@link YouTubeVideo} &ndash; Embed YouTube video component.
 
 ### <a name="nodejs-scripts"></a> NodeJS Scripts
 - {@link react-utils-build} &ndash; The script for Babel, and Webpack build of
@@ -58,6 +99,7 @@ provides the setup which takes full advantage of this library.
 ### <a name="styling"></a> (S)CSS Styling
 - {@link module:Global_Styles Global Styles} &ndash; Provides global CSS styles
   good to have in any application.
+- {@link module:SCSS_Mixins SCSS Mixins} &ndash; Collection of useful style mixins;
 
 ### <a name="utilities"></a> Utilities
 - {@link module:_ _} (lodash) &ndash; An alias for `lodash` library (generic JS
@@ -72,12 +114,16 @@ provides the setup which takes full advantage of this library.
   a Promise with its resolve method attached as `.resolve` field.
 - {@link module:PT PT} &ndash; Alias for
   [prop-types](https://www.npmjs.com/package/prop-types) library.
+- {@link server} &ndash; Creates & launches ReactJS server.
 - {@link module:server/errors server/errors} &ndash; Server-side helpers
   for error handling.
 - {@link module:themed themed} &ndash; Aliases for `dr.pogodin/react-themes`
   (UI styling with theme composition).
 - {@link module:time time} &ndash; Date & time utilities: an alias for `dayjs`
   library, extended with some auxiliary constants and methods.
+- {@link module:url url} &ndash; URL utilities.
+- {@link module:webpack webpack} &ndash; Various utils related to
+  the Webpack bundling process.
 - {@link withRetries withRetries(..)} &ndash; A helper which attempts
   to execute given async operation up to the specified number of times with
   given intervals between attempts. It stops and returns the operation result

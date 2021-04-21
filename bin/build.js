@@ -155,7 +155,7 @@ const VALID_BUILD_TYPES = Object.values(BUILD_TYPES);
  *
  * TODO: Move to a server-side unitility module.
  * TODO: The same code is duplicated in one of the tests.
- *
+ * @ignore
  * @param {String} command Command to execute;
  * @param {Object} [options] See https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback
  * @return {Promise} Resolves to { error, stdout, stderr }.
@@ -237,6 +237,7 @@ let firstWebpackStats = true;
 /**
  * The handler of Webpack compilation results, written according to Webpack docs
  * https://webpack.js.org/api/node/#error-handling
+ * @ignore
  * @param {Object} error
  * @param {Object} stats
  */

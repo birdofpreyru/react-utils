@@ -10,7 +10,7 @@ __tests__/
 dr.pogodin-react-utils-*
 
 # Ignores documentation
-docs/
+/docs
 
 # Ignores sources, beside SCSS mixins
 src/**

@@ -134,7 +134,7 @@ function BaseModal({
 
 /**
  * @category Components
- * @typedef ModalTheme {@link Modal} component theme.
+ * @typedef {object} ModalTheme {@link Modal} component theme.
  * @prop {string} [container] Class for modal container.
  * @prop {string} [overlay] Class for modal overlay (the background closing
  * the page underneath the modal).

@@ -1,14 +1,3 @@
-/**
- * Renders a YouTube video into a page. Not that it is difficult to embed
- * a YouTube video, but this component makes it even easier, and smooths some
- * corners: like drawing a gray placeholder with a loading indicator while your
- * network communicates with YouTube to get the actual video.
- *
- * Probably, it works out of the box for other video hosting platforms, and
- * also for embeding of other similar objects, but to be on the safe side, lets
- * call it YouTubeVideo for now.
- */
-
 import PT from 'prop-types';
 import qs from 'qs';
 import ScalableRect from 'components/ScalableRect';
@@ -18,6 +7,27 @@ import Throbber from 'components/Throbber';
 import baseTheme from './base.scss';
 import throbberTheme from './throbber.scss';
 
+/**
+ * @category Components
+ * @func YouTubeVideo
+ * @desc
+ * ```js
+ * import { YouTubeVideo } from '@dr.pogodin/react-utils';
+ * ```
+ * A component for embeding a YouTube video.
+ * @param {object} [props] Component properties.
+ * @param {boolean} [props.autoplay] If `true` the video will start to play
+ * automatically once loaded.
+ * @param {string} [props.src] URL of the video to play. Can be in any of
+ * the following formats, and keeps any additional query parameters understood
+ * by the YouTube IFrame player:
+ * - `https://www.youtube.com/watch?v=NdF6Rmt6Ado`
+ * - `https://youtu.be/NdF6Rmt6Ado`
+ * - `https://www.youtube.com/embed/NdF6Rmt6Ado`
+ * @param {YouTubeVideoTheme} [props.theme] _Ad hoc_ theme.
+ * @param {string} [props.title] The `title` attribute to add to the player
+ * IFrame.
+ */
 function YouTubeVideo({
   autoplay,
   src,
