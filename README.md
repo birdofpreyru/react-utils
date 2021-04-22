@@ -5,8 +5,11 @@
 
 # React Utils
 
-ReactJS development kit.
-The [ReactJS Starter Pack](https://github.com/birdofpreyru/react-starter)
+ReactJS development kit. It provides a selection of configurations, setups,
+and tools needed in almost every React project, which greately facilitates
+rapid development and prototyping.
+
+[ReactJS Starter Pack](https://github.com/birdofpreyru/react-starter)
 implements required setup, and provides usage examples.
 
-Documentation TODO: LINK NEW DOCUMENTATION.
+[**Documentation**](https://dr.pogodin.studio/docs/react-utils/index.html)
