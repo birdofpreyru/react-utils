@@ -1,4 +1,6 @@
-__coverage__
-build/*
-node_modules
-dr.pogodin-react-utils-*.*.*.tgz
+/__coverage__
+/build/*
+/docs
+/dr.pogodin-react-utils-*.*.*.tgz
+/new-docs/
+/node_modules

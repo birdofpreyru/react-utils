@@ -1,7 +1,8 @@
 /**
- * Development Webpack configuration for ReactJS applications.
+ * @category Configs
+ * @module webpack/app-development
+ * @desc development Webpack configuration for applications.
  */
-
 const _ = require('lodash');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
@@ -9,24 +10,29 @@ const { merge } = require('webpack-merge');
 const baseFactory = require('./app-base');
 
 /**
- * Creates a new development Webpack config, and performs some auxiliary
- * operations on the way.
- * @param {Object} ops Configuration options. This allows to modify some
- *  frequently changed options in a convenient way, without a need to manipulate
- *  directly with the created config object.
- *
- *  The following options are accepted:
- *
- * @param {String} ops.context Base URL for resolution of relative
- *  config paths.
- *
- * @param {Object|String|String[]} ops.entry Entry points. If an object is
- *  passed, in the "polyfills" entry point will be extended or appended to
- *  include some polyfills we consider obligatory. If a string or an array is
- *  passed in, it will be turned into "main" entry point, and the "polyfills"
- *  entry point will be added to it.
- *
- * @param {String} ops.publicPath Base URL for the output of the build assets.
+ * @func configFactory
+ * @desc
+ * ```js
+ * const configFactory = require('@dr.pogodin/react-utils/config/webpack/app-development');
+ * ```
+ * Creates development Webpack configuration for applications. It is based on
+ * {@link module:webpack/app-base webpack/app-base}, and differs form that in
+ * the following:
+ * - *development* Babel environment is enforced, and sets
+ *   `[path][name]___[local]___[hash:base64:6]` as the default value of
+ *   `cssLocalIdent` argument for the base config.
+ * - Adds as polyfills the code necessary to support the Hot Module Reloading:
+ *   - [`react-hot-loader/patch`](https://github.com/gaearon/react-hot-loader)
+ *   - [`webpack-hot-middleware/client?reload=true`](https://github.com/glenjamin/webpack-hot-middleware)
+ * - Emulates the following environment variables:
+ *   - **`BABEL_ENV`** &mdash; It is set to *development* to inform any
+ *     interested code that it is running in dev mode;
+ *   - **`NODE_ENV`** &mdash; It is set to *development*.
+ * - Adds the following plugins:
+ *   - [HotModuleReplacementPlugin](https://webpack.js.org/plugins/hot-module-replacement-plugin/);
+ *   - [NamedModulesPlugin](https://webpack.js.org/plugins/named-modules-plugin/).
+ * @param {object} ops Config options, the saeme options as in the base config
+ * are accepted.
  */
 module.exports = function configFactory(ops) {
   const o = _.defaults(_.clone(ops), {

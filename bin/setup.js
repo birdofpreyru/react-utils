@@ -1,7 +1,49 @@
 #!/usr/bin/env node
 
-/* Auxiliary script that helps to install and upgrade libraries
- * published to NPM. */
+/**
+ * @category NodeJS Scripts
+ * @const react-utils-setup
+ * @desc
+ * ```bash
+ * $ ./node_modules/.bin/react-utils-setup [options] [libraries...]
+ * ```
+ * The NodeJS script for library setup and upgrades. It helps to install library
+ * depedencies into a host package, using the same versions, and also saving
+ * them into the host's `package.json`.
+ *
+ * This script installs each library from the whitespace separated list
+ * `[libraries...]`. After installing each library, it also installs into the
+ * host package:
+ *
+ * 1. All development dependencies of that library, with the versions taken from
+ *    the library's `package.json`. Installed dependencies are also saved as dev
+ *    dependencies of the host package.
+ *
+ * 2. All production dependencies, commong between the library and the host
+ *    package, using the versions from the library's `package.json`.
+ *    The versions are also saved into the host's `package.json`.
+ *
+ * If no `[libraries...]` are specified, the latest version of
+ * `@dr.pogodin/react-utils` is installed by default.
+ *
+ * With `--just-fix-deps` no libraries are installed, but their currently
+ * installed versions are checked, and their dependencies are installed into
+ * the host package in the way described above.
+ *
+ * In other words, the command
+ * ```bash
+ * $ ./node_modules/.bin/react-utils-setup
+ * ```
+ *
+ * is equivalent to calling
+ * ```bash
+ * $ npm install --save @dr.pogodin/react-utils@latest
+ * $ npm install --save-dev dev-dep-1@version dev-dep-2@version ...
+ * $ npm install --save prod-dep-1@version prod-dep-2@version ...
+ * ```
+ * where the lists of dev and prod dependencies are formed in the way described
+ * above.
+ */
 /* eslint-disable import/no-extraneous-dependencies, no-console  */
 
 const { spawnSync } = require('child_process');
@@ -56,6 +98,7 @@ const cmdLineArgs = commander.opts();
 /**
  * Generates a string containing name and version of the package to be
  * installed.
+ * @ignore
  * @param {Array} entry Array with package name as the first element, and
  *  corresponding version or URI given in a `package.json`.
  * @return {String} Package name and version as a string that can be passed
@@ -73,6 +116,7 @@ function generateTargetPackage(entry) {
  * which are known host's dependencies. This is to avoid changing their status
  * in host from prod to dev. They will be upgraded to appropriate version
  * by the updateProdDependencies() method below.
+ * @ignore
  * @param {Object} donorData Donor's package JSON data.
  * @param {Object} hostData Host's package JSON data.
  */
@@ -103,6 +147,7 @@ function adoptDevDependencies(donorData, hostData) {
 /**
  * Locates and loads `package.json` of the host package (assumed to be inside
  * the current working directory).
+ * @ignore
  * @return {Object} Data from `package.json` parsed into JSON.
  */
 function getHostPackageJson() {
@@ -112,6 +157,7 @@ function getHostPackageJson() {
 
 /**
  * Locates and loads `package.json` file of the specified package.
+ * @ignore
  * @param {String} package Package name.
  * @return {Object} Data from `package.json` parsed into JSON.
  */
@@ -133,6 +179,7 @@ function getPackageJson(packageName = '@dr.pogodin/react-utils') {
 
 /**
  * Installs specified library.
+ * @ignore
  * @param {String} library Library name.
  */
 function install(library) {
@@ -144,6 +191,7 @@ function install(library) {
 /**
  * Updates prod dependencies of `host` package that are also prod dependencies
  * of `donor` to the same versions specified in the donor's `package.json`.
+ * @ignore
  * @param {Object} donorData Data from donor's `package.json`.
  * @param {Object} hostData Data from host's `package.json`.
  */

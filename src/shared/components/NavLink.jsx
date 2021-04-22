@@ -1,15 +1,17 @@
-/**
- * The NavLink wraps around React Router's NavLink component, to automatically
- * replace it by the regular <a> element when:
- * - The target reference points to another domain;
- * - User opts to open the reference in a new tab;
- * - User explicitely opts to use <a>.
- */
-
 import { NavLink as RrNavLink } from 'react-router-dom';
 
 import GenericLink from './GenericLink';
 
+/**
+ * @category Components
+ * @func NavLink
+ * @desc
+ * ```js
+ * import { NavLink } from '@dr.pogodin/react-utils';
+ * ```
+ * See {@link Link} documentation.
+ * @param {object} [props] Component properties.
+ */
 export default function NavLink(props) {
   /* eslint-disable react/jsx-props-no-spreading */
   return <GenericLink {...props} routerLinkType={RrNavLink} />;

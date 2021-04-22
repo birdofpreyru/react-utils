@@ -11,6 +11,7 @@ const { interpolateName } = require('loader-utils');
 
 /**
  * Normalizes file path to OS-independent format (adopted from css-loader).
+ * @ignore
  * @param {string} file
  * @return {string}
  */
@@ -39,6 +40,7 @@ function escapeLocalident(localident) {
  * Returns the name of package containing the folder; i.e. it recursively looks
  * up from the folder for the closest package.json file, and returns the name in
  * that file. It also caches the results from previously fisited folders.
+ * @ignore
  * @param {string} folder
  * @return {string}
  */

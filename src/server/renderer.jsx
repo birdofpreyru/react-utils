@@ -33,6 +33,7 @@ export const SCRIPT_LOCATIONS = {
  * ".build-info" file in the context folder specified in Webpack config.
  * At the moment, that file contains build timestamp and a random 32-bit key,
  * suitable for cryptographical use.
+ * @ignore
  * @param {String} context Webpack context path used during the build.
  * @return {Object} Resolves to the build-time information.
  */
@@ -46,6 +47,7 @@ function getBuildInfo(context) {
  * by Webpack during the compilation.
  * It will not work for development builds, where these stats should be captured
  * via compilator callback.
+ * @ignore
  * @param {string} buildDir
  * @return {object}
  */
@@ -62,6 +64,7 @@ function readChunkGroupsJson(buildDir) {
 
 /**
  * Prepares a new Cipher for data encryption.
+ * @ignore
  * @param {String} key Encryption key (32-bit random key is expected, see
  *  node-forge documentation, in case of doubts).
  * @return {Promise} Resolves to the object with two fields:

@@ -1,9 +1,9 @@
 /**
- * Base Webpack configuration for ReactJS libraries. It is further extended for
- * development and production use in the "lib-development" and "lib-production"
- * configs.
+ * @category Configs
+ * @module webpack/lib-base
+ * @desc
+ * Base Webpack config for ReactJS libraries.
  */
-
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
@@ -12,30 +12,74 @@ const { ProgressPlugin } = require('webpack');
 const { getLocalIdent } = require('../shared/utils');
 
 /**
+ * @func configFactory
+ * @desc
+ * ```js
+ * const configFactory = require('@dr.pogodin/react-utils/config/webpack/lib-base');
+ * ```
  * Creates a new Webpack config object.
+ * @param {object} ops Configuration params. This allows to conveniently set
+ * options that should be customized for specific libraries.
+ * @param {string} ops.babelEnv Babel environment to use for Babel compilation
+ * step;
+ * @param {object} [ops.babelLoaderOptions] Overrides for default Babel options
+ * of JSX and SVG files loader.
+ * @param {string} ops.context Base URL for resolution of relative config paths.
+ * @param {string} [ops.cssLocalIdent=hash:base64:6] The template for CSS
+ * classnames generation by the Webpack's css-loader; it is passed into
+ * the localIdentName param of the loader. It should match the corresponding
+ * setting in the Babel config.
+ * @param {object|string|string[]} ops.entry Entry points. If an object is
+ * passed in, the polyfills entry point (chunk) is extended or appended to
+ * include some polyfills we consider obligatory (babel-polyfill,
+ * nodelist-foreach-polyfill). If a string or a string array is passed in,
+ * it is assigned to the main entry pont, and the polyfills entry point is added
+ * then;
+ * @param {string} ops.library Name of the library to be build. It is important
+ * for proper resolution of the library assets.
+ * @param {string} [ops.outputPath=build] Output path.
+ * @param {string} [ops.mode] [Webpack mode](https://webpack.js.org/concepts/mode/).
+ * @return {Object}
+ * - The generated config will opt to:
+ *   - References to the font assets (EOF, OTF, SVG, TTF, WOFF, WOFF2 files from
+ *     the `src/assets/fonts` folder of the library source code) will rewritten
+ *     to `~LIBRARY_NAME/src/assets/fonts/FILENAME.FILE_EXTENSION`
+ *     so that the host package of the library will be able to find and bundle
+ *     them;
+ * - Bundle SCSS files from any folder of your source code, beside
+ *  `node_modules` and its subfolders. The files will be compiled,
+ *   bundled and extracted into the `build/{type}/style.css`
+ *   bundles;
+ * - Bundle JS, JSX, and SVG files; they will be compiled into the
+ *   `build/{type}/web.bundle.js` bundles, using the Babel environment
+ *    specified in the factory options, and
+ *    [`config/babel/webpack`](./babel-config.js#webpack) config.
  *
- * @param {Object} ops Configuration params. This allows to conveniently set
- *  the options that should be customized for specific libraries.
+ * - The following path aliases will be automatically set:
+ *   - **`assets`** for `[CONTEXT]/src/assets`;
+ *   - **`components`** for `[CONTEXT]/src/shared/components`;
+ *   - **`fonts`** for `[CONTEXT]/src/assets/fonts`;
+ *   - **`styles`** for `[CONTEXT]/src/styles`.
  *
- * @param {String} ops.babelEnv BABEL_ENV to be used by Babel during the build.
+ * Also `resolve.symlinks` Webpack option is set to *false* to avoid problems
+ * with resolution of assets from packages linked with `npm link`.
  *
- * @param {object} [ops.babelLoaderOptions] Optional. Overrides for babel-loader
- *  of JSX and SVG files.
- *
- * @param {String} ops.context Base URL for resolution of relative config paths.
- *
- * @param {String} ops.cssLocalIdent Template for CSS classname
- *  generation by css-loader (it will be passed into the "localIdentName" param
- *  of the loader). It should match the corresponding setting in the Babel
- *  config.
- *
- * @param {String} ops.entry Entry point of the library.
- *
- * @param {String} ops.library Name of the library.
- *
- * @param {String} ops.outputPath Output path.
- *
- * @return {Object} Webpack config.
+ * - The following packages are declared as externals:
+ *   - `@babel/runtime`
+ *   - `@dr.pogodin/react-global-state`
+ *   - `@dr.pogodin/react-themes`
+ *   - `@dr.pogodin/react-utils`
+ *   - `axios`
+ *   - `dayjs`
+ *   - `lodash`
+ *   - `prop-types`
+ *   - `react`
+ *   - `react-dom`
+ *   - `react-helmet`
+ *   - `react-hot-loader`
+ *   - `react-router-dom`
+ *   - `shortid`
+ *   - `url-parse`
  */
 module.exports = function configFactory(ops) {
   return {

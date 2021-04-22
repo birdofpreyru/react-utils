@@ -2,7 +2,12 @@
  * Creation of standard ExpressJS server for ReactJS apps.
  */
 
-import _ from 'lodash';
+import {
+  cloneDeep,
+  mapValues,
+  pick,
+} from 'lodash';
+
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import express from 'express';
@@ -14,11 +19,19 @@ import { v4 as uuid } from 'uuid';
 
 import rendererFactory from './renderer';
 
+import {
+  CODES,
+  ERRORS,
+  fail,
+  getErrorForCode,
+} from './utils/errors';
+
 /**
  * Default Content Security Policy settings.
+ * @ignore
  */
 const defaultCspSettings = {
-  directives: _.mapValues(
+  directives: mapValues(
     helmet.contentSecurityPolicy.getDefaultDirectives(),
 
     // 'https:' options (automatic re-write of insecure URLs to secure ones)
@@ -43,7 +56,7 @@ defaultCspSettings.directives['script-src'].push("'unsafe-eval'");
 delete defaultCspSettings.directives['upgrade-insecure-requests'];
 
 export default async function factory(webpackConfig, options) {
-  const rendererOps = _.pick(options, [
+  const rendererOps = pick(options, [
     'Application',
     'beforeRender',
     'favicon',
@@ -82,7 +95,7 @@ export default async function factory(webpackConfig, options) {
 
     // The deep clone is necessary here to ensure that default value can't be
     // mutated during request processing.
-    let cspSettings = _.cloneDeep(defaultCspSettings);
+    let cspSettings = cloneDeep(defaultCspSettings);
     cspSettings.directives['script-src'].push(`'nonce-${req.cspNonce}'`);
     if (options.cspSettingsHook) {
       cspSettings = options.cspSettingsHook(cspSettings, req);
@@ -144,11 +157,7 @@ export default async function factory(webpackConfig, options) {
   server.use(renderer);
 
   /* Detects 404 errors, and forwards them to the error handler. */
-  server.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-  });
+  server.use(() => fail(ERRORS.NOT_FOUND, CODES.NOT_FOUND));
 
   let dontAttachDefaultErrorHandler;
   if (options.beforeExpressJsError) {
@@ -161,32 +170,21 @@ export default async function factory(webpackConfig, options) {
     // to a stand-alone function at top-level, but the use of options.logger
     // prevents to do it without some extra refactoring. Should be done sometime
     // though.
-    server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-      options.logger.error(err.stack);
+    /* eslint-disable no-unused-vars */
+    server.use((error, req, res, next) => {
+    /* eslint-enable no-unused-vars */
+      const status = error.status || CODES.INTERNAL_SERVER_ERROR;
+      const serverSide = status >= CODES.INTERNAL_SERVER_ERROR;
 
-      let errorResponse = null;
-      const status = err.isJoi ? 400 : err.httpStatus || err.status || 500;
+      // Log server-side errors always, client-side at debug level only.
+      options.logger.log(serverSide ? 'error' : 'debug', error);
 
-      if (err.isJoi && _.isArray(err.details)) {
-        _.map(err.details, (e) => {
-          if (e.message) {
-            if (!errorResponse) errorResponse = e.message;
-            else errorResponse += `, ${e.message}`;
-          }
-        });
+      let message = error.message || getErrorForCode(status);
+      if (serverSide && process.env.NODE_ENV === 'production') {
+        message = ERRORS.INTERNAL_SERVER_ERROR;
       }
-      errorResponse = errorResponse || err.message || 'Internal Server Error';
 
-      /* Sets locals. The actual errors are exposed only in dev. */
-      _.assign(res, {
-        locals: {
-          error: req.app.get('env') === 'development' ? err : {},
-          message: err.message,
-        },
-      });
-
-      /* Finally, the error response. */
-      res.status(status).send(errorResponse);
+      res.status(status).send(message);
     });
   }
 

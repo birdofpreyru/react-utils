@@ -1,17 +1,23 @@
-/**
- * Creates a dynamically scalable rectangular container with the specified fixed
- * ratio of its sides.
- *
- * Sometimes it is necessary, but not straightforward to implement with HTML and
- * CSS, thus this component: juts tell it what sides ration you need (in the
- * form W:H, like 4:3 or 16:9 via the "ratio" prop, and pass in the children
- * you want to render in this container).
- */
-
 import PT from 'prop-types';
 
 import './style.scss';
 
+/**
+ * @category Components
+ * @func ScalableRect
+ * @desc
+ * ```js
+ * import { ScalableRect } from '@dr.pogodin/react-utils';
+ * ```
+ * The `<ScalableRect>` component implements container keeping given aspect
+ * ratio, while its width is altered.
+ *
+ * **Children:** Component children are rendered as the component's content.
+ * @param {object} props
+ * @param {string} [props.className] CSS class for component container.
+ * @param {string} [props.ratio=1:1] Ratio of the rendered rectangle sides,
+ * in `W:H` form.
+ */
 export default function ScalableRect({ children, className, ratio }) {
   const aux = ratio.split(':');
   const paddingBottom = `${(100 * aux[1]) / aux[0]}%`;

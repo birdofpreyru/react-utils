@@ -1,12 +1,3 @@
-/**
- * This generic component will implement the semi-transparent background
- * and the white window in the center, which wraps the content provided as
- * children.
- *
- * When semi-transparent background is clicked, it should trigger the onCancel()
- * callback passed from the parent.
- */
-
 /* global document */
 
 import _ from 'lodash';
@@ -23,6 +14,44 @@ import themed from '@dr.pogodin/react-themes';
 import baseTheme from './base-theme.scss';
 import './styles.scss';
 
+/**
+ * @category Components
+ * @func Modal
+ * @desc
+ * ```jsx
+ * import { BaseModal, Modal } from '@dr.pogodin/react-utils';
+ * ```
+ * The `<Modal>` component implements a simple themeable modal window, wrapped
+ * into the default theme. `<BaseModal>` exposes the base non-themed component.
+ * **Children:** Component children are rendered as the modal content.
+ * @param {object} props Component properties.
+ * @param {function} [props.onCancel] The callback to trigger when user
+ * clicks outside the modal, or presses Escape. It is expected to hide the
+ * modal.
+ * @param {ModalTheme} [props.theme] _Ad hoc_ theme.
+ * @param {...any} [props....]
+ * [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
+ * @example
+ * import React, { useState } from 'react';
+ * import { Button, Modal } from '@dr.pogodin/react-utils';
+ *
+ * export default function ModalDemo() {
+ *   const [visible, setVisible] = useState(false);
+ *   return (
+ *     <div>
+ *       <Button onClick={() => setVisible(true)}>Show Modal</Button>
+ *       {
+ *         visible ? (
+ *           <Modal onCancel={() => setVisible(false)}>
+ *             This is a simple modal. Click outside, or press Escape to close
+ *             it.
+ *           </Modal>
+ *         ) : null
+ *       }
+ *     </div>
+ *   );
+ * }
+ */
 function BaseModal({
   children,
   onCancel,
@@ -103,6 +132,13 @@ function BaseModal({
   ) : null;
 }
 
+/**
+ * @category Components
+ * @typedef {object} ModalTheme {@link Modal} component theme.
+ * @prop {string} [container] Class for modal container.
+ * @prop {string} [overlay] Class for modal overlay (the background closing
+ * the page underneath the modal).
+ */
 const ThemedModal = themed(
   'Modal',
   [

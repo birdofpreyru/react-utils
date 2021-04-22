@@ -1,3 +1,23 @@
+/**
+ * @category Utilities
+ * @module themed
+ * @desc
+ * ```js
+ * import { themed, ThemeProvider } from '@dr.pogodin/react-utils';
+ * ```
+ * Encapsulates
+ * [`dr.pogodin/react-themes`](https://www.npmjs.com/package/@dr.pogodin/react-themes)
+ * library for React component styling with theme composition. For convenience,
+ * the aliases are provided for react themes exports. They work the same as
+ * specified in the `react-themes` documentation, and `react-utils`
+ * configration is fully compliant with expected CSS Modules setup.
+ * | Export from `react-utils` | Original export from `react-themes`    |
+ * | ------------------------- | -------------------------------------- |
+ * | `themed`                  | _default export_ (component decorator) |
+ * | `themed.COMPOSE`          | `COMPOSE`                              |
+ * | `themed.PRIORITY`         | `PRIORITY`                             |
+ * | `ThemeProvider`           | `ThemeProvider`                        |
+ */
 import themed, {
   COMPOSE,
   PRIORITY,
@@ -24,9 +44,24 @@ if (isomorphy.IS_SERVER_SIDE
 }
 
 /**
+ * @category Utilities
+ * @func newBarrier
+ * @global
+ * @desc
+ * ```js
+ * import { newBarrier } from '@dr.pogodin/react-utils';
+ * ```
  * Creates a new async barrier: a Promise instance with its resolve method
- * attached as .resolve field.
- * @return {Promise<>}
+ * attached as `.resolve` field.
+ * @return {Promise}
+ * @example
+ * import { newBarrier } from '@dr.pogodin/react-utils';
+ * (async () => {
+ *   const barrier = newBarrier();
+ *   setTimeout(() => barrier.resolve(), 5000);
+ *   await barrier;
+ *   console.log('This will be printed only after the timeout fires.');
+ * })();
  */
 function newBarrier() {
   let resolve;
@@ -36,9 +71,18 @@ function newBarrier() {
 }
 
 /**
- * Attempts to execute provided async "action" up to "maxRetries" time with
- * the given "interval". If any of attempts is successful it returns its result,
- * otherwise if all attempts fail it throws the error of last attempt.
+ * @category Utilities
+ * @global
+ * @func withRetries
+ * @desc
+ * ```js
+ * import { withRetries } from '@dr.pogodin/react-utils';
+ * ```
+ * Attempts to perform given asynchronous `action` up to `maxRetries` times,
+ * with the given `interval` between attempts. If any attempt is successful,
+ * the result is returned immediately, with no further attempts done;
+ * otherwise, if all attempts fail, the result Promise rejects after the last
+ * attempt.
  * @param {function} action
  * @param {number} [maxRetries=5] Optional. Maximum number of retries. Defaults
  *  to 5 attempts.
@@ -46,8 +90,22 @@ function newBarrier() {
  *  Defaults to 1 second.
  * @return {Promise} Resolves to the result of successful operation, or
  *  rejects with the error from the latst failed attempt.
+ * @example
+ * import { withRetries } from '@dr.pogodin/react-utils';
+ *
+ * let firstCall = true;
+ *
+ * function sampleAction() {
+ *   if (!firstCall) return 'success';
+ *   firstCall = false;
+ *   throw Error('The first call to this method fails');
+ * }
+ *
+ * withRetries(sampleAction).then(console.log);
+ * // It will print 'success' after one second, once the second attempt
+ * // is performed.
  */
-async function withRetries(action, maxRetries = 5, interval = 1000) {
+export async function withRetries(action, maxRetries = 5, interval = 1000) {
   /* eslint-disable no-await-in-loop */
   for (let n = 1; ; ++n) {
     try {
@@ -70,5 +128,4 @@ export {
   time,
   url,
   webpack,
-  withRetries,
 };

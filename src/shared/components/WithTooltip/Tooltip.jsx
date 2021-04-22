@@ -38,6 +38,7 @@ const ARROW_STYLE_UP = [
 
 /**
  * Creates tooltip components.
+ * @ignore
  * @param {object} theme Themes to use for tooltip container, arrow,
  *  and content.
  * @return {object} Object with DOM references to the container components:
@@ -62,6 +63,7 @@ function createTooltipComponents(theme) {
 
 /**
  * Generates bounding client rectangles for tooltip components.
+ * @ignore
  * @param {object} tooltip DOM references to the tooltip components.
  * @param {object} tooltip.arrow
  * @param {object} tooltip.container
@@ -77,6 +79,7 @@ function calcTooltipRects(tooltip) {
 
 /**
  * Calculates the document viewport size.
+ * @ignore
  * @return {{x, y, width, height}}
  */
 function calcViewportRect() {
@@ -93,6 +96,7 @@ function calcViewportRect() {
 /**
  * Calculates tooltip and arrow positions for the placement just above
  * the cursor.
+ * @ignore
  * @param {number} x Cursor page-x position.
  * @param {number} y Cursor page-y position.
  * @param {object} tooltipRects Bounding client rectangles of tooltip parts.
@@ -176,6 +180,7 @@ function xPageFitCorrection(x, y, pos, pageXOffset, pageXWidth) {
 /**
  * Sets positions of tooltip components to point the tooltip to the specified
  * page point.
+ * @ignore
  * @param {number} pageX
  * @param {number} pageY
  * @param {PLACEMENTS} placement
