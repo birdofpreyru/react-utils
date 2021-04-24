@@ -30,7 +30,12 @@ it('Prevents class name clashes across modules', (done) => {
   compiler.run((err, stats) => {
     try {
       expect(err).toBe(null);
-      expect(stats.hasErrors()).toBe(false);
+
+      if (stats.hasErrors()) {
+        console.error(stats.toJson('errors-warnings'));
+        throw Error('Compilation error');
+      }
+
       const cssChunkName = Object.keys(stats.compilation.assets)
         .find((key) => key.endsWith('.css'));
       /* eslint-disable no-underscore-dangle */
