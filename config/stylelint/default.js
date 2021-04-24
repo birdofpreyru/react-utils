@@ -1,6 +1,3 @@
-// This module only contains documentation for "default.json" config.
-// TODO: Move it to the actual default config, and rename that to default.js
-
 /**
  * @category Configs
  * @module stylelint
@@ -15,7 +12,26 @@
  * To use it, just create the following `.stylelintrc`:
  * ```json
  * {
- *   "extends": "./node_modules/@dr.pogodin/react-utils/config/stylelint/default.json"
+ *   "extends": "./node_modules/@dr.pogodin/react-utils/config/stylelint/default"
  * }
  * ```
  */
+module.exports = {
+  extends: 'stylelint-config-standard',
+  rules: {
+    'at-rule-no-unknown': [true, {
+      ignoreAtRules: [
+        'content',
+        'each',
+        'extend',
+        'for',
+        'include',
+        'mixin',
+        'use',
+      ],
+    }],
+    'selector-pseudo-class-no-unknown': [
+      true, { ignorePseudoClasses: ['global'] },
+    ],
+  },
+};
