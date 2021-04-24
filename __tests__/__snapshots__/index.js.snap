@@ -1249,6 +1249,13 @@ Array [
 
 exports[`Export at server side 6`] = `
 Array [
+  "getDefaultCspSettings",
+  [Function],
+]
+`;
+
+exports[`Export at server side 7`] = `
+Array [
   "errors",
   Object {
     "CODES": Object {
@@ -1500,5 +1507,3 @@ Array [
   },
 ]
 `;
-
-exports[`Export at server side 7`] = `undefined`;

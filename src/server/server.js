@@ -55,6 +55,25 @@ defaultCspSettings.directives['script-src'].push("'unsafe-eval'");
 // in production cloud deployments.
 delete defaultCspSettings.directives['upgrade-insecure-requests'];
 
+/**
+ * @category Utilities
+ * @func server/getDefaultCspSettings
+ * @global
+ * @desc
+ * ```js
+ * import { server } from '@dr.pogodin/react-utils';
+ * const { getDefaultCspSettings } from '@dr.pogodin/react-utils';
+ * ```
+ * @return {{
+ *   directives: object
+ * }} A deep copy of default CSP settings object used by `react-utils`,
+ * with the exception of `nonce-xxx` clause in `script-src` directive,
+ * which is added dynamically for each request.
+ */
+export function getDefaultCspSettings() {
+  return cloneDeep(defaultCspSettings);
+}
+
 export default async function factory(webpackConfig, options) {
   const rendererOps = pick(options, [
     'Application',

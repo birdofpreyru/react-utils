@@ -25,7 +25,6 @@ test('Export at server side', () => {
   expect(Object.keys(lib.time)).toMatchSnapshot();
 
   Object.entries(lib.server).forEach((item) => expect(item).toMatchSnapshot());
-  expect(lib.server.utils).toMatchSnapshot();
 });
 
 test('Lodash alias works', () => {

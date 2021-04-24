@@ -12,6 +12,7 @@ import winston from 'winston';
 import serverFactory from './server';
 import { SCRIPT_LOCATIONS } from './renderer';
 
+export { getDefaultCspSettings } from './server';
 export * from './utils';
 
 /**
