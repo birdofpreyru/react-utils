@@ -63,7 +63,7 @@ describe('Babel build', () => {
       'utf8',
     );
     expect(generated).toMatchSnapshot();
-  }, 30000);
+  }, 60000);
 
   it('Node: production', async () => {
     await exec(`${BABEL} ${__dirname}/__assets__ --out-dir ${tmpDir}`, {
@@ -76,7 +76,7 @@ describe('Babel build', () => {
       'utf8',
     );
     expect(generated).toMatchSnapshot();
-  }, 30000);
+  }, 60000);
 });
 
 function testWebpackBuild(configFactory) {
