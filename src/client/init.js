@@ -4,7 +4,10 @@
 
 /* global BUILD_INFO, document, window */
 
-import forge from 'node-forge';
+// Note: this way, only required part of "node-forge": AES, and some utils,
+// is bundled into client-side code.
+import forge from 'node-forge/lib/forge';
+import 'node-forge/lib/aes';
 
 /* `BUILD_INFO` is always injected by Webpack build, but this check is needed
  * to adopt the code for usage in tests. */
