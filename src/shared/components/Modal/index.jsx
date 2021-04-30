@@ -1,6 +1,6 @@
 /* global document */
 
-import _ from 'lodash';
+import { noop } from 'lodash';
 import {
   useEffect,
   useMemo,
@@ -155,7 +155,7 @@ BaseModal.propTypes = {
 };
 
 BaseModal.defaultProps = {
-  onCancel: _.noop,
+  onCancel: noop,
   children: null,
 };
 
