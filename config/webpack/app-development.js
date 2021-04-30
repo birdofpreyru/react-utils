@@ -74,7 +74,6 @@ module.exports = function configFactory(ops) {
     'webpack-hot-middleware/client?reload=true',
   ].concat(res.entry.main);
   res.entry.polyfills.push(
-    '@dr.pogodin/react-utils/build/development/client/event-source-polyfill',
     '@dr.pogodin/react-utils/build/development/client/init',
   );
   return res;
