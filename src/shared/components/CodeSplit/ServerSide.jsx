@@ -13,6 +13,32 @@ import {
 } from '@dr.pogodin/react-global-state';
 import { StaticRouter } from 'react-router-dom';
 
+/**
+ * A specially wrapped `require()`, which is passed as an argument into
+ * the optional `getComponentServer` prop of <{@link CodeSplit}> component.
+ * @param {string} base Path resolution base, you want to pass in `__dirname`
+ * value from the host module using `<CodeSplit>`.
+ * @param {string} path The path of module to require.
+ * @return {object} Required module.
+ */
+function resolveRequire(base, path) {
+  // NOTE: A part of code here attempts to correctly load ES6 modules
+  // transformed by Babel; namely if required module has "default" field,
+  // all other fields (presumed to be named exports) are attached to
+  // the "default".
+  const p = require.resolve(path, { paths: [base] });
+  /* eslint-disable global-require, import/no-dynamic-require */
+  const { default: def, ...named } = require(p);
+  /* eslint-enable global-require, import/no-dynamic-require */
+  if (!def) return named;
+
+  Object.entries(named).forEach(([key, value]) => {
+    if (def[key]) throw Error('Conflict between default and named exports');
+    def[key] = value;
+  });
+  return def;
+}
+
 export default function ServerSide({
   chunkName,
   getComponentAsync,
@@ -27,7 +53,7 @@ export default function ServerSide({
    *    to load the component is provider, `useAsyncData(..)` is used to
    *    attempt to load and use the component via SSR mechanics. */
   let Scene;
-  if (getComponentServer) Scene = getComponentServer();
+  if (getComponentServer) Scene = getComponentServer(resolveRequire);
   else {
     // In this case we are sure the condition won't change during the rendering
     // loop, thus we can ignore the rule.

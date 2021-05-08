@@ -20,9 +20,11 @@
  * @param {function} [props.getComponentServer] A synchronous version of
  * `getComponentAsync()` to be used during server-side rendering. If not
  * provided, the server-side code will fallback to the asynchronous
- * `getComponentAsync()`, which is sub-optimal. If provided, it should
- * use `webpack.requireWeak()` instead of regular `require()` to prevent
- * imported module to be statically bundled into primary chunks.
+ * `getComponentAsync()`, which is sub-optimal. If provided, it will be called
+ * with a special {@link resolveRequire} function passed in as the only
+ * argument, which should be used to correctly resolve & require necessary
+ * modules, without Webpack being able to detect it and thus bundle them
+ * into client-side code (also see the example below).
  * @param {function} [props.placeholder] Placeholder React component to render
  * while the code for actual splitted component is being loaded.
  * @param {...any} [props....] Any other properties are passed as is into
@@ -43,23 +45,17 @@
  *     <CodeSplit
  *       chunkName="sample-component"
  *       getComponentAsync={
- *         // Note: Use the normal comment block opening and closing at
+ *         // NOTE: Use the normal comment block opening and closing at
  *         // the next line instead of / * and * / (whitespaces between
  *         // start and slash had to be added due to limitations of our
  *         // documentation setup).
  *         () => import(/ * webpackChunkName: 'sample-component' * / 'path/to/SampleComponent')
  *       }
  *       getComponentServer={
- *         () => {
- *           // webpack.requireWeak() and webpack.resolveWeak() work
- *           // at server-side as the standard require() and
- *           // require.resolve(), but are ignored by Webpack,
- *           // and thus required and resolved modules are not
- *           // bundled into the client-side code.
- *           const path = webpack.requireWeak('path');
- *           const p = webpack.resolveWeak('path/to/SampleComponent');
- *           return webpack.requireWeap(path.resolve(__dirname, p));
- *         }
+ *         // NOTE: You cannot just use the standard require() here, as it would
+ *         // cause Webpack to bundle in required module into the current chunk,
+ *         // instead of the split one. Thus, this workaround.
+ *         (resolveRequire) => resolveRequire(__dirname, 'path/to/SampleComponent');
  *       }
  *       placeholder={() => <div>Optional Placeholder</div>}
  *       {...props}
