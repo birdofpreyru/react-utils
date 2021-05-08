@@ -80,6 +80,7 @@ export default async function factory(webpackConfig, options) {
     'beforeRender',
     'favicon',
     'maxSsrRounds',
+    'noCsp',
     'staticCacheController',
     'staticCacheSize',
   ]);
@@ -120,7 +121,7 @@ export default async function factory(webpackConfig, options) {
       // The deep clone is necessary here to ensure that default value can't be
       // mutated during request processing.
       let cspSettings = cloneDeep(defaultCspSettings);
-      cspSettings.directives['script-src'].push(`'nonce-${req.cspNonce}'`);
+      cspSettings.directives['script-src'].push(`'nonce-${req.nonce}'`);
       if (options.cspSettingsHook) {
         cspSettings = options.cspSettingsHook(cspSettings, req);
       }

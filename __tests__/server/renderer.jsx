@@ -17,7 +17,7 @@ const TEST_INITIAL_STATE = {
 };
 
 const TEST_HTTP_REQUEST = {
-  cspNonce: 'abcdef-dummy-nonce',
+  nonce: 'abcdef-dummy-nonce',
   info: 'I am a dummy HTTP request! No need for a complex mock here!',
 };
 

@@ -19,7 +19,7 @@ jest.useFakeTimers();
 mockdate.set('2019-11-29Z');
 
 const TEST_HTTP_REQUEST = {
-  cspNonce: 'abcdef-dummy-nonce',
+  nonce: 'abcdef-dummy-nonce',
   info: 'I am a dummy HTTP request! No need for a complex mock here!',
 };
 

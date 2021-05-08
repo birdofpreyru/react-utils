@@ -88,8 +88,11 @@ function prepareCipher(key) {
  * Creates the middleware.
  * @param {object} webpackConfig
  * @param {object} options Additional options:
- * @param {boolean} [options.favicon] Optional. `true` will include favicon
+ * @param {boolean} [options.favicon] `true` will include favicon
  *  link into the rendered HTML templates.
+ * @param {boolean} [options.noCsp] `true` means that no
+ * Content-Security-Policy (CSP) is used by server, thus the renderer
+ * may cut a few corners.
  * @return {function} Created middleware.
  */
 export default function factory(webpackConfig, options) {
@@ -127,11 +130,20 @@ export default function factory(webpackConfig, options) {
             gunzip(data, (error, html) => {
               if (error) next(error);
               else {
-                // TODO: Starting from Node v15 we'll be able to use string's
-                // .replaceAll() method instead relying on reg. expression for
-                // global matching.
-                const regex = new RegExp(data.nonce, 'g');
-                res.send(html.toString().replace(regex, req.cspNonce));
+                let h = html.toString();
+                // If there is no CSP activated, there is no need to do
+                // nonce replacement. And, actually, in such case there is
+                // no need to unzip cached response, it can be directly piped
+                // into res... however, it still requires a careful update,
+                // will do later.
+                if (!options.noCsp) {
+                  // TODO: Starting from Node v15 we'll be able to use string's
+                  // .replaceAll() method instead relying on reg. expression for
+                  // global matching.
+                  const regex = new RegExp(data.nonce, 'g');
+                  h = h.replace(regex, req.nonce);
+                }
+                res.send(h);
               }
             });
             return;
@@ -308,7 +320,7 @@ export default function factory(webpackConfig, options) {
             <script
               id="inj"
               type="application/javascript"
-              nonce="${req.cspNonce}"
+              ${options.noCsp ? '' : `nonce="${req.nonce}"`}
             >
               window.INJ="${INJ}"
             </script>
@@ -323,7 +335,7 @@ export default function factory(webpackConfig, options) {
         gzip(html, (error, buffer) => {
           if (error) throw error;
           /* eslint-disable no-param-reassign */
-          buffer.nonce = req.cspNonce;
+          buffer.nonce = req.nonce;
           /* eslint-enable no-param-reassign */
           cache.add(buffer, cacheRef.key);
         });
