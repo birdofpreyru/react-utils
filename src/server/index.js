@@ -84,6 +84,9 @@ function normalizePort(value) {
  * or detailed configuration, supports server-side rendering,
  * and development tools, including Hot Module Reloading (HMR).
  *
+ * See {@link module:ReactGlobalState ReactGlobalState} for some additional
+ * notes related to SSR, access to incoming requests during SSR, _etc._
+ *
  * @param {object} webpackConfig Webpack configuration used to build
  * the frontend bundle. In production mode the server will read out of it
  * `context`, `publicPath`, and a few other parameters, necessary to locate

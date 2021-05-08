@@ -45,6 +45,32 @@ export { default as api } from 'axios';
  */
 export * as PT from 'prop-types';
 
+/**
+ * @category Utilities
+ * @module ReactGlobalState
+ * @desc
+ * ```jsx
+ * import {
+ *   getGlobalState,
+ *   GlobalStateProvider,
+ *   useAsyncCollection,
+ *   useAsyncData,
+ *   useGlobalState,
+ * } from '@dr.pogodin/react-utils';
+ * ```
+ * For convenience, `react-utils` re-exports components and hooks provided by
+ * [react-global-state](https://dr.pogodin.studio/docs/react-global-state/index.html)
+ * library, which  is a state of the art library for global state and
+ * asynchronous data managment in React applications, powered by hooks and
+ * Context API. It is simple, efficient, and with a full server-side rendering
+ * (SSR) support.
+ *
+ * The standard {@link client} and {@link server} automatically wrap your
+ * app into `<GlobalStateProvider>`, also `server` wires `react-global-state` to
+ * SSR setup, and also exposes the actual incoming HTTP request object via SSR
+ * context, to which it attaches it as `req` field.
+ */
+
 export {
   getGlobalState,
   GlobalStateProvider,
