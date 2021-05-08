@@ -35,7 +35,7 @@ function normalizePort(value) {
  * @desc A hook for {@link server}'s `beforeRender` option.
  * @param {object} req Incoming ExpressJS HTTP request, with some extra
  * fields attached:
- *  - `.cspNonce: string` &ndash; CSP nonce for `<script>` tags, which should be
+ *  - `.nonce: string` &ndash; CSP nonce for `<script>` tags, which should be
  *    added to the tags injected into the page to allow them to work.
  * @param {object} config Application config that server wants to
  * inject into generated HTML template.
@@ -107,6 +107,8 @@ function normalizePort(value) {
  * just before the HTML markup is generated at the server. It allows to load
  * and provide the data necessary for server-side rendering, and also to inject
  * additional configuration and scripts into the generated HTML code.
+ * @param {boolean} [options.noCsp] Set `true` to disable
+ * Content-Security-Policy (CSP) headers altogether.
  * @param {function} [options.cspSettingsHook] A hook allowing
  * to customize [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
  * settings for [helmet](https://github.com/helmetjs/helmet)'s
@@ -143,7 +145,7 @@ function normalizePort(value) {
  *   the {@link YouTubeVideo} component works.
  * - An unique per-request nonce is added to `scriptSrc` directive to
  *   whitelist auxiliary scripts injected by react-utils. The actual nonce
- *   value can be fetched by host code via `.cspNonce` field of `req` argument
+ *   value can be fetched by host code via `.nonce` field of `req` argument
  *   of `.beforeRender` hook.
  * - `upgradeInsecureRequests` directive is removed in development mode,
  *   to simplify local testing with http requests.

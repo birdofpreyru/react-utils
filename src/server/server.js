@@ -109,18 +109,24 @@ export default async function factory(webpackConfig, options) {
   server.use(compression());
   server.use(helmet({ contentSecurityPolicy: false }));
 
-  server.use((req, res, next) => {
-    req.cspNonce = uuid();
+  if (!options.noCsp) {
+    server.use((req, res, next) => {
+      req.nonce = uuid();
 
-    // The deep clone is necessary here to ensure that default value can't be
-    // mutated during request processing.
-    let cspSettings = cloneDeep(defaultCspSettings);
-    cspSettings.directives['script-src'].push(`'nonce-${req.cspNonce}'`);
-    if (options.cspSettingsHook) {
-      cspSettings = options.cspSettingsHook(cspSettings, req);
-    }
-    helmet.contentSecurityPolicy(cspSettings)(req, res, next);
-  });
+      // TODO: This is deprecated, but it is kept for now for backward
+      // compatibility. Should be removed sometime later.
+      req.cspNonce = req.nonce;
+
+      // The deep clone is necessary here to ensure that default value can't be
+      // mutated during request processing.
+      let cspSettings = cloneDeep(defaultCspSettings);
+      cspSettings.directives['script-src'].push(`'nonce-${req.cspNonce}'`);
+      if (options.cspSettingsHook) {
+        cspSettings = options.cspSettingsHook(cspSettings, req);
+      }
+      helmet.contentSecurityPolicy(cspSettings)(req, res, next);
+    });
+  }
 
   if (options.favicon) {
     server.use(favicon(options.favicon));
