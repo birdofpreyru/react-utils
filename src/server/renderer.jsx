@@ -15,6 +15,8 @@ import ReactDOM from 'react-dom/server';
 import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom';
 
+import time from 'utils/time';
+
 import Cache from './Cache';
 
 const sanitizedConfig = _.omit(config, 'SECRET');
@@ -198,6 +200,7 @@ export default function factory(webpackConfig, options) {
         chunks: [],
       };
       if (App) {
+        const ssrStart = Date.now();
         let markup;
         /* TODO: The limit number of rounds should be exposed as a config
          * option. */
@@ -222,7 +225,12 @@ export default function factory(webpackConfig, options) {
             </GlobalStateProvider>
           ));
           if (ssrContext.dirty) {
-            await Promise.allSettled(ssrContext.pending);
+            const result = await Promise.race([
+              Promise.allSettled(ssrContext.pending),
+              time.timer(ssrStart + options.ssrTimeout - Date.now())
+                .then(() => 'TIMEOUT'),
+            ]);
+            if (result === 'TIMEOUT') break;
           } else break;
           /* eslint-enable no-await-in-loop */
         }
