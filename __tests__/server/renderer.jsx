@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import factory, { SCRIPT_LOCATIONS } from 'server/renderer';
+import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable } from 'server/renderer';
 import fs from 'fs';
 
 import { Helmet } from 'react-helmet';
@@ -225,4 +225,25 @@ test('Setting of response HTTP status the server-side rendering', () => {
 test('Throws in case of forge.random.getBytes(..) failure', () => {
   global.mockFailsForgeRandomGetBytesMethod = true;
   return coreTest(TEST_WEBPACK_CONFIG, {});
+});
+
+it('correctly tests if brotli-encoded responses are acceptable', () => {
+  const res = (header) => isBrotliAcceptable({
+    get: (name) => (name.toLowerCase() === 'accept-encoding'
+      ? header : undefined),
+  });
+  expect(res('')).toBe(false);
+  expect(res('*')).toBe(true);
+  expect(res('br')).toBe(true);
+  expect(res('gzip')).toBe(false);
+  expect(res('gzip,br')).toBe(true);
+  expect(res('gzip, br')).toBe(true);
+  expect(res('gzip,br,deflate')).toBe(true);
+  expect(res('gzip, br ,deflate')).toBe(true);
+  expect(res('gzip,br;q=0.5,deflate')).toBe(true);
+  expect(res('gzip,br;q=0.0,deflate')).toBe(false);
+  expect(res('gzip,br;q=0,deflate')).toBe(false);
+  expect(res('gzip, br;q=0 ,deflate')).toBe(false);
+  expect(res('*;q=0')).toBe(false);
+  expect(res('br;q=0,*;q=0.5')).toBe(true);
 });

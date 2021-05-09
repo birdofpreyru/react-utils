@@ -9,7 +9,7 @@ import config from 'config';
 import forge from 'node-forge';
 import fs from 'fs';
 import path from 'path';
-import { gunzip, gzip } from 'zlib';
+import { brotliCompress, brotliDecompress } from 'zlib';
 
 import ReactDOM from 'react-dom/server';
 import { Helmet } from 'react-helmet';
@@ -85,6 +85,28 @@ function prepareCipher(key) {
 }
 
 /**
+ * Given an incoming HTTP requests, it deduces whether Brotli-encoded responses
+ * are acceptable to the caller.
+ * @param {object} req
+ * @return {boolean}
+ * @ignore
+ */
+export function isBrotliAcceptable(req) {
+  const acceptable = req.get('accept-encoding');
+  if (acceptable) {
+    const ops = acceptable.split(',');
+    for (let i = 0; i < ops.length; ++i) {
+      const [type, priority] = ops[i].trim().split(';q=');
+      if ((type === '*' || type === 'br')
+      && (!priority || parseFloat(priority) > 0)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+/**
  * Creates the middleware.
  * @param {object} webpackConfig
  * @param {object} options Additional options:
@@ -127,25 +149,26 @@ export default function factory(webpackConfig, options) {
         if (cacheRef) {
           const data = cache.get(cacheRef);
           if (data !== null) {
-            gunzip(data, (error, html) => {
-              if (error) next(error);
-              else {
-                let h = html.toString();
-                // If there is no CSP activated, there is no need to do
-                // nonce replacement. And, actually, in such case there is
-                // no need to unzip cached response, it can be directly piped
-                // into res... however, it still requires a careful update,
-                // will do later.
-                if (!options.noCsp) {
-                  // TODO: Starting from Node v15 we'll be able to use string's
-                  // .replaceAll() method instead relying on reg. expression for
-                  // global matching.
-                  const regex = new RegExp(data.nonce, 'g');
-                  h = h.replace(regex, req.nonce);
+            if (options.noCsp && isBrotliAcceptable(req)) {
+              res.set('Content-Type', 'text/html');
+              res.set('Content-Encoding', 'br');
+              res.send(data);
+            } else {
+              brotliDecompress(data, (error, html) => {
+                if (error) next(error);
+                else {
+                  let h = html.toString();
+                  if (!options.noCsp) {
+                    // TODO: Starting from Node v15 we'll be able to use string's
+                    // .replaceAll() method instead relying on reg. expression for
+                    // global matching.
+                    const regex = new RegExp(data.nonce, 'g');
+                    h = h.replace(regex, req.nonce);
+                  }
+                  res.send(h);
                 }
-                res.send(h);
-              }
-            });
+              });
+            }
             return;
           }
         }
@@ -332,11 +355,9 @@ export default function factory(webpackConfig, options) {
       res.send(html);
 
       if (cacheRef) {
-        gzip(html, (error, buffer) => {
+        brotliCompress(html, (error, buffer) => {
           if (error) throw error;
-          /* eslint-disable no-param-reassign */
-          buffer.nonce = req.nonce;
-          /* eslint-enable no-param-reassign */
+          buffer.nonce = req.nonce; // eslint-disable-line no-param-reassign
           cache.add(buffer, cacheRef.key);
         });
       }
