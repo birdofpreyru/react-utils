@@ -99,7 +99,7 @@ exports[`Config overriding for injection 1`] = `
         </html>"
 `;
 
-exports[`Hemlet integration works 1`] = `
+exports[`Helmet integration works 1`] = `
 "<!DOCTYPE html>
         <html lang=\\"en\\">
           <head>

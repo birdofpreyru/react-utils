@@ -140,7 +140,7 @@ test('Config overriding for injection',
     },
   }));
 
-test('Hemlet integration works',
+test('Helmet integration works',
   () => coreTest(TEST_WEBPACK_CONFIG, {
     Application: () => (
       <div>
@@ -158,6 +158,8 @@ test('Hemlet integration works',
         </p>
       </div>
     ),
+    maxSsrRounds: 3,
+    ssrTimeout: Number.MAX_VALUE,
   }));
 
 test('Injection of additional JS scripts',
@@ -203,6 +205,8 @@ test('Server-side rendering (SSR); injection of CSS chunks & Redux state',
     beforeRender: async () => ({
       initialState: _.cloneDeep(TEST_INITIAL_STATE),
     }),
+    maxSsrRounds: 3,
+    ssrTimeout: Number.MAX_VALUE,
   }));
 
 test('Setting of response HTTP status the server-side rendering', () => {
@@ -219,6 +223,8 @@ test('Setting of response HTTP status the server-side rendering', () => {
         }}
       />
     ),
+    maxSsrRounds: 3,
+    ssrTimeout: Number.MAX_VALUE,
   });
 });
 

@@ -81,6 +81,7 @@ export default async function factory(webpackConfig, options) {
     'favicon',
     'maxSsrRounds',
     'noCsp',
+    'ssrTimeout',
     'staticCacheController',
     'staticCacheSize',
   ]);

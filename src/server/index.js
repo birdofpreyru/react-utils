@@ -15,6 +15,10 @@ import { SCRIPT_LOCATIONS } from './renderer';
 export { getDefaultCspSettings } from './server';
 export * from './utils';
 
+// Various default settings of server factory (launch() function).
+const DEFAULT_MAX_SSR_ROUNDS = 10;
+const DEFAULT_SSR_TIMEOUT = 1000;
+
 /**
  * Normalizes a port into a number, string, or false.
  * TODO: Drop this function?
@@ -192,6 +196,8 @@ function normalizePort(value) {
  * - `maxage?: number` &ndash; the maximum age of cached result in ms.
  *   If undefined - infinite age is assumed.
  * @param {number} [options.maxSsrRounds=10] Maximum number of SSR rounds.
+ * @param {number} [options.ssrTimeout=1000] SSR timeout in milliseconds,
+ * defaults to 1 second.
  * @return {Promise<{ expressServer: object, httpServer: object }>} Resolves to
  * an object with created Express and HTTP servers.
  */
@@ -201,6 +207,8 @@ async function launch(webpackConfig, options) {
   ops.port = normalizePort(ops.port || process.env.PORT || 3000);
   _.defaults(ops, {
     httpsRedirect: true,
+    maxSsrRounds: DEFAULT_MAX_SSR_ROUNDS,
+    ssrTimeout: DEFAULT_SSR_TIMEOUT,
   });
   if (!ops.staticCacheSize) ops.staticCacheSize = 1.e7;
 
