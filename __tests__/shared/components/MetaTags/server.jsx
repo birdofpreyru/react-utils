@@ -33,6 +33,8 @@ async function baseTest(Component) {
         ...console,
         info: () => null,
       },
+      maxSsrRounds: 3,
+      ssrTimeout: Number.MAX_VALUE,
     }),
   );
   await server.get('/').expect(200)

@@ -21,8 +21,6 @@ import Cache from './Cache';
 
 const sanitizedConfig = _.omit(config, 'SECRET');
 
-const DEFAULT_MAX_SSR_ROUNDS = 10;
-
 export const SCRIPT_LOCATIONS = {
   BODY_OPEN: 'BODY_OPEN',
   DEFAULT: 'DEFAULT',
@@ -117,6 +115,8 @@ export function isBrotliAcceptable(req) {
  * @param {boolean} [options.noCsp] `true` means that no
  * Content-Security-Policy (CSP) is used by server, thus the renderer
  * may cut a few corners.
+ * @param {number} options.maxSsrRounds
+ * @param {number} options.ssrTimeout
  * @return {function} Created middleware.
  */
 export default function factory(webpackConfig, options) {
@@ -200,16 +200,9 @@ export default function factory(webpackConfig, options) {
         chunks: [],
       };
       if (App) {
-        const ssrStart = Date.now();
         let markup;
-        /* TODO: The limit number of rounds should be exposed as a config
-         * option. */
-        for (
-          let round = 0;
-          round < (options.maxSsrRounds || DEFAULT_MAX_SSR_ROUNDS);
-          round += 1
-        ) {
-          /* eslint-disable no-await-in-loop */
+        const ssrStart = Date.now();
+        for (let round = 0; round < options.maxSsrRounds; ++round) {
           ssrContext.chunks = [];
           markup = ReactDOM.renderToString((
             <GlobalStateProvider
@@ -224,14 +217,16 @@ export default function factory(webpackConfig, options) {
               </StaticRouter>
             </GlobalStateProvider>
           ));
-          if (ssrContext.dirty) {
-            const result = await Promise.race([
-              Promise.allSettled(ssrContext.pending),
-              time.timer(ssrStart + options.ssrTimeout - Date.now())
-                .then(() => 'TIMEOUT'),
-            ]);
-            if (result === 'TIMEOUT') break;
-          } else break;
+
+          if (!ssrContext.dirty) break;
+
+          /* eslint-disable no-await-in-loop */
+          const timeout = options.ssrTimeout + ssrStart - Date.now();
+          const ok = timeout > 0 && await Promise.race([
+            Promise.allSettled(ssrContext.pending),
+            time.timer(timeout).then(() => false),
+          ]);
+          if (!ok) break;
           /* eslint-enable no-await-in-loop */
         }
         App = markup;

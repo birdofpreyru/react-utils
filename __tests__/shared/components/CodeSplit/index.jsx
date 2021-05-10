@@ -44,6 +44,7 @@ async function renderServerSide(Scene, maxSsrRounds) {
     {
       Application: Scene,
       maxSsrRounds,
+      ssrTimeout: Number.MAX_VALUE,
     },
   );
   let render = '';
@@ -113,7 +114,7 @@ beforeEach(async () => {
   resetModules();
 });
 
-test('Server-side rendring', async () => {
+test('Server-side rendering', async () => {
   const { IS_SERVER_SIDE } = require('utils/isomorphy');
   expect(IS_SERVER_SIDE).toBe(true);
   let markup = await renderServerSide(SampleCodeSplit, 1);

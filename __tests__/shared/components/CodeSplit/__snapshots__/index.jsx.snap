@@ -180,7 +180,7 @@ exports[`Client-side rendering 4`] = `
 <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>"
 `;
 
-exports[`Server-side rendring 1`] = `
+exports[`Server-side rendering 1`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">
 
@@ -214,13 +214,13 @@ exports[`Server-side rendring 1`] = `
     &quot;sample-component-1&quot;: {
       &quot;data&quot;: null,
       &quot;numRefs&quot;: 0,
-      &quot;operationId&quot;: &quot;00000000-0000-0000-0000-000000000001&quot;,
+      &quot;operationId&quot;: &quot;S00000000-0000-0000-0000-000000000001&quot;,
       &quot;timestamp&quot;: 0
     },
     &quot;sample-component-2&quot;: {
       &quot;data&quot;: null,
       &quot;numRefs&quot;: 0,
-      &quot;operationId&quot;: &quot;00000000-0000-0000-0000-000000000002&quot;,
+      &quot;operationId&quot;: &quot;S00000000-0000-0000-0000-000000000002&quot;,
       &quot;timestamp&quot;: 0
     }
   }
@@ -239,7 +239,7 @@ exports[`Server-side rendring 1`] = `
 </html>"
 `;
 
-exports[`Server-side rendring 2`] = `
+exports[`Server-side rendering 2`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">
 
