@@ -7,7 +7,6 @@
 import { useRef, useEffect } from 'react';
 
 import { useAsyncData } from '@dr.pogodin/react-global-state';
-import dayjs from 'dayjs';
 
 import { getBuildInfo } from 'utils/isomorphy';
 import time from 'utils/time';
@@ -20,8 +19,9 @@ export default function ClientSide({
 }) {
   const { current: heap } = useRef({ mounted: false });
   const buildInfo = getBuildInfo();
+
+  // publicPath from buildInfo does not have a trailing slash at the end.
   const { publicPath } = buildInfo;
-  const { buildTimestamp } = dayjs(buildInfo.timestamp).valueOf();
 
   let res;
 
@@ -65,33 +65,39 @@ export default function ClientSide({
     if (heap.mounted) throw Error('Illegal attempt to remount a CodeSplit');
     else heap.mounted = true;
 
+    // Stylesheets are injected via basic web APIs, rather than ReactJS,
+    // because it gives a better control of stylesheet reloading, and helps
+    // to avoid some unnecessary flickering when the app loads a page
+    // pre-rendered at the server.
     const assets = window.CHUNK_GROUPS[chunkName];
-    const cssAsset = assets.find((item) => item.endsWith('.css'));
-
-    /* The links to stylesheets are injected into document header using
-    * browser's API, rather than ReactJS rendering mechanism, because
-    * it gives a better control over reloading of the stylesheets and
-    * helps to avoid some unnecessary flickering when the app loads a
-    * page already pre-rendered at the server side. */
-    let link = document.querySelector(`link[href*="${cssAsset}"]`);
-    if (!link) {
-      link = document.createElement('link');
-      link.setAttribute('href', cssAsset);
-      link.setAttribute('rel', 'stylesheet');
-      const head = document.getElementsByTagName('head')[0];
-      head.appendChild(link);
-    }
-    if (!link.dependants) link.dependants = new Set([chunkName]);
-    else link.dependants.add(chunkName);
-    return () => {
-      link = document.querySelector(`link[href*="${cssAsset}"]`);
-      link.dependants.delete(chunkName);
-      if (!link.dependants.size) {
-        const head = document.getElementsByTagName('head')[0];
-        head.removeChild(link);
+    assets.forEach((item) => {
+      if (!item.endsWith('.css')) return;
+      const path = `${publicPath}/${item}`;
+      let link = document.querySelector(`link[href="${path}"]`);
+      if (!link) {
+        link = document.createElement('link');
+        link.setAttribute('href', path);
+        link.setAttribute('rel', 'stylesheet');
+        const head = document.querySelector('head');
+        head.appendChild(link);
       }
+      if (!link.dependants) link.dependants = new Set([chunkName]);
+      else link.dependants.add(chunkName);
+    });
+
+    return () => {
+      assets.forEach((item) => {
+        if (!item.endsWith('.css')) return;
+        const path = `${publicPath}/${item}`;
+        const link = document.querySelector(`link[href="${path}"]`);
+        link.dependants.delete(chunkName);
+        if (!link.dependants.size) {
+          const head = document.querySelector('head');
+          head.removeChild(link);
+        }
+      });
     };
-  }, [buildTimestamp, chunkName, heap, publicPath]);
+  }, [chunkName, heap, publicPath]);
 
   return res;
 }

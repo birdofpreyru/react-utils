@@ -124,7 +124,7 @@ export default function factory(webpackConfig, options) {
 
   global.TRU_BUILD_INFO = buildInfo;
 
-  /* It is supposed to end with '/' symbol as path separator. */
+  // publicPath from webpack.output has a trailing slash at the end.
   const { publicPath, path: outputPath } = webpackConfig.output;
 
   let manifestLink = fs.existsSync(`${outputPath}/manifest.json`);
