@@ -68,13 +68,19 @@ async function renderServerSide(Scene, maxSsrRounds) {
                   polyfills: {
                     assets: [{ name: 'polyfills-1511941200000.js' }],
                   },
-                  'test-chunk-a': {
-                    assets: [{ name: 'test-chunk-a-1511941200000.css' }],
+                  'sample-component-1': {
+                    assets: [{ name: 'sample-component-1-1511941200000.css' }],
                   },
-                  'test-chunk-b': {
+                  'sample-component-2': {
                     assets: [
-                      { name: 'test-chunk-b-1511941200000.js' },
-                      { name: 'test-chunk-b-1511941200000.css' },
+                      { name: 'sample-component-2-1511941200000.js' },
+                      { name: 'sample-component-2-1511941200000.css' },
+                    ],
+                  },
+                  'sample-component-3': {
+                    assets: [
+                      { name: 'sample-component-3-1511941200000.js' },
+                      { name: 'sample-component-3-1511941200000.css' },
                     ],
                   },
                 },
@@ -143,7 +149,7 @@ test('Client-side rendering', async () => {
   const { IS_CLIENT_SIDE } = require('utils/isomorphy');
   expect(IS_CLIENT_SIDE).toBe(true);
   let Launch = require('client').default;
-  await act(() => Launch({ getApplication: () => SampleCodeSplit }));
+  act(() => Launch({ getApplication: () => SampleCodeSplit }));
   let head = pretty(document.head.innerHTML);
   let body = pretty(document.body.innerHTML);
   expect(head).toEqual(ssrHead);
@@ -157,7 +163,7 @@ test('Client-side rendering', async () => {
   delete window.TRU_KEEP_INJ_SCRIPT;
   require('client/init');
   Launch = require('client').default;
-  await act(() => Launch({ getApplication: () => SampleCodeSplit }));
+  act(() => Launch({ getApplication: () => SampleCodeSplit }));
   head = pretty(document.head.innerHTML);
   body = pretty(document.body.innerHTML);
   expect(head).toMatchSnapshot();

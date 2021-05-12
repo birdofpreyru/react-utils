@@ -6,6 +6,9 @@ exports[`Client-side rendering 1`] = `
 <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
 
 <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+<link href=\\"/test/public/path/sample-component-1-1511941200000.css\\" rel=\\"stylesheet\\">
+<link href=\\"/test/public/path/sample-component-2-1511941200000.css\\" rel=\\"stylesheet\\">
+<link href=\\"/test/public/path/sample-component-3-1511941200000.css\\" rel=\\"stylesheet\\">
 
 <meta charset=\\"utf-8\\">
 <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">"
@@ -85,10 +88,12 @@ exports[`Client-side rendering 2`] = `
   </div>
 </div>
 <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
-  window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBqrVlCGhUyhXTWTPFlSbgmX7mf9UJCV6o+6N49TRM8T/Zt5SRase/W0YFEHYmiKSLZgUQPXsUoxsSTABdZa9BdRV/oUK68Qi2md0HR0J+b+HTZLAIsrRxHKMjBsUfmWUQjhOXxz8uZkjMyqgSptcNXEftmR5kazR/qzkkQcObSKPuDAKU03KPvQYU8IFE4CiNOX2Iw+T3MoeOLcuMcbBkvEUpXOo8tg7/9XQIY2QxEY+VOgOOywhCiFCspUah8KD+PeKXkuJdPx731E90C7TJz6AAvBfqtI2xCmRQrm5eP/Hk+E+WziLt4iuX0A+KQf2GhT7h2B6WWz+OiLd4i7p2hLaS8dJOsWjmKmAPz8mqTlA=\\"
+  window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBqrVlCGhUyhXTWTPFlSbgmX7mf9UJCV6o+6N49TRM8T/Zt5SRase/W0YFEHYmiKSLxDLs7UoU0ZyMSsJmQ+xO+W/sdRBxK9za1x2iLyFxjuD2PetMKvQiyJzmr/5qBDoztSPT/kU7MWMdRCf7EJLeZSSck1vN2HmocqattyfTts0Ag46hV/DbiDsqmifkYp9VflZMUc+z1+rxkRNhWYn3dnw+Uij3QtSHMD/QnUd5yCMWajFDmo7lTV6XHLiPsqedqMdro/S7W3KdcRBQV7VN6baRZ9GkujC4tG2xRmrncxBrhX1Z0wxC/+D83EmcxlzMdZPOyzbONwJwiJqSuGMr/dMbHJHpXQVv0CGBBIE62/kuLwfY7/uZB3AgY0GIoJaa8GjoMRqZABmBR7DS6DnXGbXgFYzsuNr0a+bVGit5YtxtXLqXmQAGr2AD07AJcKDc1aNxqElaR0UUzxTcy91Y4aMtYVq/XgvPRhtLNGlWbVlhG7jtqvtwZyCmP5xLm2baMYIvwVsIukuudkgIn2a55PKer/EB5D8LuX0JPfd0FME=\\"
 </script>
 <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
-<script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>"
+<script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+<script src=\\"/test/public/path/sample-component-2-1511941200000.js\\" type=\\"application/javascript\\"></script>
+<script src=\\"/test/public/path/sample-component-3-1511941200000.js\\" type=\\"application/javascript\\"></script>"
 `;
 
 exports[`Client-side rendering 3`] = `
@@ -97,6 +102,9 @@ exports[`Client-side rendering 3`] = `
 <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
 
 <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+<link href=\\"/test/public/path/sample-component-1-1511941200000.css\\" rel=\\"stylesheet\\">
+<link href=\\"/test/public/path/sample-component-2-1511941200000.css\\" rel=\\"stylesheet\\">
+<link href=\\"/test/public/path/sample-component-3-1511941200000.css\\" rel=\\"stylesheet\\">
 
 <meta charset=\\"utf-8\\">
 <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">"
@@ -177,7 +185,9 @@ exports[`Client-side rendering 4`] = `
 </div>
 
 <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
-<script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>"
+<script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+<script src=\\"/test/public/path/sample-component-2-1511941200000.js\\" type=\\"application/javascript\\"></script>
+<script src=\\"/test/public/path/sample-component-3-1511941200000.js\\" type=\\"application/javascript\\"></script>"
 `;
 
 exports[`Server-side rendering 1`] = `
@@ -191,6 +201,9 @@ exports[`Server-side rendering 1`] = `
     <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
 
     <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+    <link href=\\"/test/public/path/sample-component-1-1511941200000.css\\" rel=\\"stylesheet\\" />
+    <link href=\\"/test/public/path/sample-component-2-1511941200000.css\\" rel=\\"stylesheet\\" />
+    <link href=\\"/test/public/path/sample-component-3-1511941200000.css\\" rel=\\"stylesheet\\" />
 
     <meta charset=\\"utf-8\\" />
     <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
@@ -229,10 +242,12 @@ exports[`Server-side rendering 1`] = `
       </div>
     </div>
     <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
-      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBqrVlCGhUyhXTWTPFlSbgmX7mf9UJCV6o+6N49TRM8T/Zt5SRase/W0YFEHYmiKSLZgUQPXsUoxsSTABdZa9BdRV/oUK68Qi2md0HR0J+b+HTZLAIsrRxHKMjBsUfmWUQjhOXxz8uZkjMyqgSptcNXEftmR5kazR/qzkkQcObSKPuDAKU03KPvQYU8IFE4CiNOX2Iw+T3MoeOLcuMcbBkvEUpXOo8tg7/9XQIY2QxEY+VOgOOywhCiFCspUah8KD+PeKXkuJdPx731E90C7TJz6AAvBfqtI2xCmRQrm5eP/Hk+E+WziLt4iuX0A+KQf2GhT7h2B6WWz+OiLd4i7p2hLaS8dJOsWjmKmAPz8mqTlA=\\"
+      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBqrVlCGhUyhXTWTPFlSbgmX7mf9UJCV6o+6N49TRM8T/Zt5SRase/W0YFEHYmiKSLxDLs7UoU0ZyMSsJmQ+xO+W/sdRBxK9za1x2iLyFxjuD2PetMKvQiyJzmr/5qBDoztSPT/kU7MWMdRCf7EJLeZSSck1vN2HmocqattyfTts0Ag46hV/DbiDsqmifkYp9VflZMUc+z1+rxkRNhWYn3dnw+Uij3QtSHMD/QnUd5yCMWajFDmo7lTV6XHLiPsqedqMdro/S7W3KdcRBQV7VN6baRZ9GkujC4tG2xRmrncxBrhX1Z0wxC/+D83EmcxlzMdZPOyzbONwJwiJqSuGMr/dMbHJHpXQVv0CGBBIE62/kuLwfY7/uZB3AgY0GIoJaa8GjoMRqZABmBR7DS6DnXGbXgFYzsuNr0a+bVGit5YtxtXLqXmQAGr2AD07AJcKDc1aNxqElaR0UUzxTcy91Y4aMtYVq/XgvPRhtLNGlWbVlhG7jtqvtwZyCmP5xLm2baMYIvwVsIukuudkgIn2a55PKer/EB5D8LuX0JPfd0FME=\\"
     </script>
     <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
     <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+    <script src=\\"/test/public/path/sample-component-2-1511941200000.js\\" type=\\"application/javascript\\"></script>
+    <script src=\\"/test/public/path/sample-component-3-1511941200000.js\\" type=\\"application/javascript\\"></script>
 
   </body>
 
@@ -250,6 +265,9 @@ exports[`Server-side rendering 2`] = `
     <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
 
     <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+    <link href=\\"/test/public/path/sample-component-1-1511941200000.css\\" rel=\\"stylesheet\\" />
+    <link href=\\"/test/public/path/sample-component-2-1511941200000.css\\" rel=\\"stylesheet\\" />
+    <link href=\\"/test/public/path/sample-component-3-1511941200000.css\\" rel=\\"stylesheet\\" />
 
     <meta charset=\\"utf-8\\" />
     <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
@@ -330,10 +348,12 @@ exports[`Server-side rendering 2`] = `
       </div>
     </div>
     <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
-      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBqrVlCGhUyhXTWTPFlSbgmX7mf9UJCV6o+6N49TRM8T/Zt5SRase/W0YFEHYmiKSLZgUQPXsUoxsSTABdZa9BdRV/oUK68Qi2md0HR0J+b+HTZLAIsrRxHKMjBsUfmWUQjhOXxz8uZkjMyqgSptcNXEftmR5kazR/qzkkQcObSKPuDAKU03KPvQYU8IFE4CiNOX2Iw+T3MoeOLcuMcbBkvEUpXOo8tg7/9XQIY2QxEY+VOgOOywhCiFCspUah8KD+PeKXkuJdPx731E90C7TJz6AAvBfqtI2xCmRQrm5eP/Hk+E+WziLt4iuX0A+KQf2GhT7h2B6WWz+OiLd4i7p2hLaS8dJOsWjmKmAPz8mqTlA=\\"
+      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBqrVlCGhUyhXTWTPFlSbgmX7mf9UJCV6o+6N49TRM8T/Zt5SRase/W0YFEHYmiKSLxDLs7UoU0ZyMSsJmQ+xO+W/sdRBxK9za1x2iLyFxjuD2PetMKvQiyJzmr/5qBDoztSPT/kU7MWMdRCf7EJLeZSSck1vN2HmocqattyfTts0Ag46hV/DbiDsqmifkYp9VflZMUc+z1+rxkRNhWYn3dnw+Uij3QtSHMD/QnUd5yCMWajFDmo7lTV6XHLiPsqedqMdro/S7W3KdcRBQV7VN6baRZ9GkujC4tG2xRmrncxBrhX1Z0wxC/+D83EmcxlzMdZPOyzbONwJwiJqSuGMr/dMbHJHpXQVv0CGBBIE62/kuLwfY7/uZB3AgY0GIoJaa8GjoMRqZABmBR7DS6DnXGbXgFYzsuNr0a+bVGit5YtxtXLqXmQAGr2AD07AJcKDc1aNxqElaR0UUzxTcy91Y4aMtYVq/XgvPRhtLNGlWbVlhG7jtqvtwZyCmP5xLm2baMYIvwVsIukuudkgIn2a55PKer/EB5D8LuX0JPfd0FME=\\"
     </script>
     <script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
     <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+    <script src=\\"/test/public/path/sample-component-2-1511941200000.js\\" type=\\"application/javascript\\"></script>
+    <script src=\\"/test/public/path/sample-component-3-1511941200000.js\\" type=\\"application/javascript\\"></script>
 
   </body>
 
