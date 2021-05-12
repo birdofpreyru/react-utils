@@ -4,7 +4,7 @@
 /* global document, window */
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useAsyncData } from '@dr.pogodin/react-global-state';
 
@@ -19,15 +19,19 @@ export default function ClientSide({
   ...rest
 }) {
   const { current: heap } = useRef({
-    mounted: false,
     pendingStyles: [],
+    renderInitialized: false,
+    stylesInitialized: false,
   });
 
   // publicPath from buildInfo does not have a trailing slash at the end.
   const { publicPath } = getBuildInfo();
 
-  if (!heap.mounted) {
-    heap.mounted = true;
+  // This code block initiates style loading as soon as possible; it collects
+  // into heap.pendingStyles all style load promises; and heap.stylesInitialized
+  // flag remains set until the styles are teared down upon unmounting.
+  if (!heap.stylesInitialized) {
+    heap.stylesInitialized = true;
     window.CHUNK_GROUPS[chunkName].forEach((asset) => {
       if (!asset.endsWith('.css')) return;
       const path = `${publicPath}/${asset}`;
@@ -52,41 +56,48 @@ export default function ClientSide({
   // Async loading of React component necessary to render the chunk.
   const { data } = useAsyncData(
     `dr_pogodin_react_utils___split_components.${chunkName}`,
-    async (...args) => {
-      const res = await getComponentAsync(...args);
-      if (heap.pendingStyles.length) await Promise.all(heap.pendingStyles);
-      return res;
-    },
+    getComponentAsync,
     { maxage: time.YEAR_MS },
   );
 
-  let res;
-
-  // If the necessary component has been loaded already, it is used to render
-  // the chunk.
-  if (data) {
+  const createRender = () => {
     const Scene = data.default || data;
-    res = <div data-chunk-name={chunkName}><Scene {...rest} /></div>;
+    return <div data-chunk-name={chunkName}><Scene {...rest} /></div>;
+  };
 
-  // Otherwise we just render the same static markup which has been pre-rendered
-  // for this chunk at the server side.
-  } else {
+  const [render, setRender] = useState(() => {
+    // No need to await anything, we can render the final component right away.
+    if (data && !heap.pendingStyles.length) {
+      heap.renderInitialized = true;
+      return createRender();
+    }
+
+    // Otherwse, renders placeholder filled with SSR-genereated HTML,
+    // or falls back to empty <div> (if HMR mode corrupted the node).
     /* eslint-disable react/no-danger */
-    // Note: It looks like in dev mode with HMR the data-chunk-name attribute
-    // may be lost from DOM, thus no node will be found here on re-render, and
-    // thus default {} should be used as a fallback.
     const node = document.querySelector(`[data-chunk-name=${chunkName}]`) || {};
-    res = (
+    return (
       <div
-        dangerouslySetInnerHTML={{ __html: node.innerHTML }}
+        dangerouslySetInnerHTML={{ __html: node.innerHTML || '' }}
         data-chunk-name={chunkName}
       />
     );
     /* eslint-disable react/no-danger */
+  });
+
+  // At this point, if we have data, the absense of heap.renderInitialized flag
+  // means we have to await styles loading; once it is done, and if we are still
+  // mounted, we can set the final render.
+  if (data && !heap.renderInitialized) {
+    heap.renderInitialized = true;
+    Promise.all(heap.pendingStyles).then(() => {
+      if (heap.stylesInitialized) setRender(createRender());
+    });
   }
 
   // This effectively fires only once, just before the component unmounts.
   useEffect(() => () => {
+    heap.stylesInitialized = false;
     window.CHUNK_GROUPS[chunkName].forEach((item) => {
       if (!item.endsWith('.css')) return;
       const path = `${publicPath}/${item}`;
@@ -99,5 +110,5 @@ export default function ClientSide({
     });
   }, [chunkName, heap, publicPath]);
 
-  return res;
+  return render;
 }
