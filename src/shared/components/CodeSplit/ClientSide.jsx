@@ -72,17 +72,22 @@ export default function ClientSide({
       return createRender();
     }
 
-    // Otherwse, renders placeholder filled with SSR-genereated HTML,
-    // or falls back to empty <div> (if HMR mode corrupted the node).
-    /* eslint-disable react/no-danger */
-    const node = document.querySelector(`[data-chunk-name=${chunkName}]`) || {};
-    return (
-      <div
-        dangerouslySetInnerHTML={{ __html: node.innerHTML || '' }}
-        data-chunk-name={chunkName}
-      />
-    );
-    /* eslint-disable react/no-danger */
+    // Try to reuse the markup rendered during SSR.
+    const node = document.querySelector(`[data-chunk-name=${chunkName}]`);
+    if (node) {
+      return (
+        <div
+          /* eslint-disable react/no-danger */
+          dangerouslySetInnerHTML={{ __html: node.innerHTML || '' }}
+          /* eslint-disable react/no-danger */
+          data-chunk-name={chunkName}
+        />
+      );
+    }
+
+    // Else render placeholder, or empty div.
+    const Scene = placeholder || (() => null);
+    return <div><Scene /></div>;
   });
 
   // At this point, if we have data, the absense of heap.renderInitialized flag
