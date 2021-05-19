@@ -245,16 +245,21 @@ function handleWebpackCompilationResults(error, stats) {
   if (error) {
     console.error(error.stack || error);
     if (error.details) console.error(error.details);
-    if (buildType !== BUILD_TYPES.DEVELOPMENT) throw error;
+    if (buildType !== BUILD_TYPES.DEVELOPMENT) {
+      process.exitCode = 1;
+      return;
+    }
   }
 
   const info = stats.toJson();
   if (stats.hasErrors()) {
     console.error('Error defailts:', info.errors);
     if (buildType !== BUILD_TYPES.DEVELOPMENT) {
-      throw Error('Webpack build failed');
+      process.exitCode = 1;
+      return;
     }
-  } else if (stats.hasWarnings()) console.warn(info.warnings);
+  }
+  if (stats.hasWarnings()) console.warn(info.warnings);
 
   const logOps = { colors: true };
   if (firstWebpackStats) {
@@ -275,8 +280,9 @@ function handleWebpackCompilationResults(error, stats) {
   );
 }
 
-if (cmdLineArgs.watch) webpackCompiler.watch({}, handleWebpackCompilationResults);
-else {
+if (cmdLineArgs.watch) {
+  webpackCompiler.watch({}, handleWebpackCompilationResults);
+} else {
   webpackCompiler.run(handleWebpackCompilationResults);
   webpackCompiler.close(() => null);
 }
