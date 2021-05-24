@@ -61,7 +61,7 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "better-docs": "^2.3.2",
     "core-js": "^3.12.1",
-    "css-loader": "^5.2.5",
+    "css-loader": "^5.2.6",
     "css-minimizer-webpack-plugin": "^3.0.0",
     "eslint": "^7.27.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -133,5 +133,5 @@
     "lint:scss": "stylelint -- **/*.{css,scss} --syntax scss",
     "test": "npm run lint && npm run jest"
   },
-  "version": "1.4.9"
+  "version": "1.4.10"
 }
