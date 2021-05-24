@@ -19,7 +19,7 @@ if (typeof BUILD_INFO !== 'undefined') {
  * The if block is here for test purposes. */
 if (!window.TRU_KEEP_INJ_SCRIPT) {
   const block = document.querySelector('script[id="inj"]');
-  document.getElementsByTagName('body')[0].removeChild(block);
+  if (block) document.getElementsByTagName('body')[0].removeChild(block);
 }
 
 /* TODO: A proper logger should be moved to `@dr.pogodin/react-utils`. */
@@ -42,14 +42,21 @@ if (useServiceWorker) {
 /* eslint-enable no-console */
 
 /* Decodes data injected at the server side. */
-const { key } = window.TRU_BUILD_INFO;
-let data = forge.util.decode64(window.INJ);
-const decipher = forge.cipher.createDecipher('AES-CBC', key);
-decipher.start({ iv: data.slice(0, 32) });
-decipher.update(forge.util.createBuffer(data.slice(32)));
-decipher.finish();
-data = JSON.parse(forge.util.decodeUtf8(decipher.output.data));
+if (window.INJ) {
+  const { key } = window.TRU_BUILD_INFO;
+  let data = forge.util.decode64(window.INJ);
+  const decipher = forge.cipher.createDecipher('AES-CBC', key);
+  decipher.start({ iv: data.slice(0, 32) });
+  decipher.update(forge.util.createBuffer(data.slice(32)));
+  decipher.finish();
+  data = JSON.parse(forge.util.decodeUtf8(decipher.output.data));
 
-window.CHUNK_GROUPS = data.CHUNK_GROUPS;
-window.CONFIG = data.CONFIG;
-window.ISTATE = data.ISTATE;
+  window.CHUNK_GROUPS = data.CHUNK_GROUPS;
+  window.CONFIG = data.CONFIG;
+  window.ISTATE = data.ISTATE;
+} else {
+  // This is possible when the client-side bundle is launched as a stand-alone
+  // precompiled website, rather than served by react-utils' based server.
+  window.CHUNK_GROUPS = {};
+  window.CONFIG = {};
+}
