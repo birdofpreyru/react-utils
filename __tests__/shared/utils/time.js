@@ -18,16 +18,3 @@ test('Misc aliases', () => {
   expect(time.YEAR_MS).toBe(365 * 24 * 60 * 60 * 1000);
   expect(time.now()).toBe(TEST_TIME_MS);
 });
-
-test('time.timer()', (done) => {
-  let timer = time.timer(time.SEC_MS).then(() => { timer = null; });
-  jest.advanceTimersByTime(time.SEC_MS - 1);
-  setImmediate(() => {
-    expect(timer).toBeTruthy();
-    jest.advanceTimersByTime(1);
-  });
-  setImmediate(() => {
-    expect(timer).toBe(null);
-    done();
-  });
-});

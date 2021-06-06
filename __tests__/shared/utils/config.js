@@ -1,4 +1,7 @@
+/** @jest-environment jsdom */
 /* eslint-env browser */
+
+// TODO: Split client- and server-side tests into two separate test modules.
 
 import _ from 'lodash';
 import { mockClientSide, unmockClientSide } from 'utils/jest';

@@ -33,7 +33,7 @@ export default function SampleCodeSplit() {
           () => import(/* webpackChunkName: 'sample-component-3' */ './SampleComponent')
         }
         getComponentServer={() => {
-          const p = webpack.resolveWeak('components/CodeSplit/__mocks__/SampleComponent');
+          const p = webpack.resolveWeak('./SampleComponent');
           return webpack.requireWeak(path.resolve(__dirname, p));
         }}
         placeholder={() => <div>PLACEHOLDER!</div>}

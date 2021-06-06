@@ -1,3 +1,7 @@
+/** @jest-environment jsdom */
+
+// TODO: Split client- and server-side tests into separate modules.
+
 import mockdate from 'mockdate';
 import { mockClientSide, unmockClientSide } from 'utils/jest';
 

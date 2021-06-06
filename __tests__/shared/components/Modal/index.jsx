@@ -1,3 +1,5 @@
+/** @jest-environment jsdom */
+
 import pretty from 'pretty';
 
 import Modal from 'components/Modal';

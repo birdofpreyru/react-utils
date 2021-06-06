@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Client-side rendering 1`] = `
+"<title data-react-helmet=\\"true\\"></title>
+
+<meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
+
+<link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+<link href=\\"/test/public/path/sample-component-1-1511941200000.css\\" rel=\\"stylesheet\\">
+<link href=\\"/test/public/path/sample-component-2-1511941200000.css\\" rel=\\"stylesheet\\">
+<link href=\\"/test/public/path/sample-component-3-1511941200000.css\\" rel=\\"stylesheet\\">
+
+<meta charset=\\"utf-8\\">
+<meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">"
+`;
+
+exports[`Client-side rendering 2`] = `
+"<div id=\\"react-view\\">
+  <h1>testValue</h1>
+  <div data-chunk-name=\\"sample-component-1\\">
+    <div>
+      <h1>Sample Component</h1><pre>{
+  \\"test\\": {
+    \\"key\\": \\"testValue\\"
+  },
+  \\"dr_pogodin_react_utils___split_components\\": {
+    \\"sample-component-1\\": {
+      \\"data\\": {},
+      \\"numRefs\\": 0,
+      \\"operationId\\": \\"\\",
+      \\"timestamp\\": 1574985600000
+    },
+    \\"sample-component-2\\": {
+      \\"data\\": {},
+      \\"numRefs\\": 0,
+      \\"operationId\\": \\"\\",
+      \\"timestamp\\": 1574985600000
+    }
+  }
+}</pre>
+    </div>
+  </div>
+  <div data-chunk-name=\\"sample-component-2\\">
+    <div>
+      <h1>Sample Component</h1><pre>{
+  \\"test\\": {
+    \\"key\\": \\"testValue\\"
+  },
+  \\"dr_pogodin_react_utils___split_components\\": {
+    \\"sample-component-1\\": {
+      \\"data\\": {},
+      \\"numRefs\\": 0,
+      \\"operationId\\": \\"\\",
+      \\"timestamp\\": 1574985600000
+    },
+    \\"sample-component-2\\": {
+      \\"data\\": {},
+      \\"numRefs\\": 0,
+      \\"operationId\\": \\"\\",
+      \\"timestamp\\": 1574985600000
+    }
+  }
+}</pre>
+    </div>
+  </div>
+  <div data-chunk-name=\\"sample-component-3\\">
+    <div>
+      <h1>Sample Component</h1><pre>{
+  \\"test\\": {
+    \\"key\\": \\"testValue\\"
+  },
+  \\"dr_pogodin_react_utils___split_components\\": {
+    \\"sample-component-1\\": {
+      \\"data\\": {},
+      \\"numRefs\\": 0,
+      \\"operationId\\": \\"\\",
+      \\"timestamp\\": 1574985600000
+    },
+    \\"sample-component-2\\": {
+      \\"data\\": {},
+      \\"numRefs\\": 0,
+      \\"operationId\\": \\"\\",
+      \\"timestamp\\": 1574985600000
+    }
+  }
+}</pre>
+    </div>
+  </div>
+</div>
+<script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
+  window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBqrVlCGhUyhXTWTPFlSbgmX7mf9UJCV6o+6N49TRM8T/Zt5SRase/W0YFEHYmiKSLxDLs7UoU0ZyMSsJmQ+xO+W/sdRBxK9za1x2iLyFxjuD2PetMKvQiyJzmr/5qBDoztSPT/kU7MWMdRCf7EJLeZSSck1vN2HmocqattyfTts0Ag46hV/DbiDsqmifkYp9VflZMUc+z1+rxkRNhWYn3dnw+Uij3QtSHMD/QnUd5yCMWajFDmo7lTV6XHLiPsqedqMdro/S7W3KdcRBQV7VN6baRZ9GkujC4tG2xRmrncxBrhX1Z0wxC/+D83EmcxlzMdZPOyzbONwJwiJqSuGMr/dMbHJHpXQVv0CGBBIE62/kuLwfY7/uZB3AgY0GIoJaa8GjoMRqZABmBR7DS6DnXGbXgFYzsuNr0a+bVGit5YtxtXLqXmQAGr2AD07AJcKDc1aNxqElaR0UUzxTcy91Y4aMtYVq/XgvPRhtLNGlWbVlhG7jtqvtwZyCmP5xLm2baMYIvwVsIukuudkgIn2a55PKer/EB5D8LuX0JPfd0FME=\\"
+</script>
+<script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
+<script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+<script src=\\"/test/public/path/sample-component-2-1511941200000.js\\" type=\\"application/javascript\\"></script>
+<script src=\\"/test/public/path/sample-component-3-1511941200000.js\\" type=\\"application/javascript\\"></script>"
+`;
+
+exports[`Client-side rendering 3`] = `
+"<title data-react-helmet=\\"true\\"></title>
+
+<meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
+
+<link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+<link href=\\"/test/public/path/sample-component-1-1511941200000.css\\" rel=\\"stylesheet\\">
+<link href=\\"/test/public/path/sample-component-2-1511941200000.css\\" rel=\\"stylesheet\\">
+<link href=\\"/test/public/path/sample-component-3-1511941200000.css\\" rel=\\"stylesheet\\">
+
+<meta charset=\\"utf-8\\">
+<meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">"
+`;
+
+exports[`Client-side rendering 4`] = `
+"<div id=\\"react-view\\">
+  <h1>testValue</h1>
+  <div data-chunk-name=\\"sample-component-1\\">
+    <div>
+      <h1>Sample Component</h1><pre>{
+  \\"test\\": {
+    \\"key\\": \\"testValue\\"
+  },
+  \\"dr_pogodin_react_utils___split_components\\": {
+    \\"sample-component-1\\": {
+      \\"data\\": {},
+      \\"numRefs\\": 0,
+      \\"operationId\\": \\"\\",
+      \\"timestamp\\": 1574985600000
+    },
+    \\"sample-component-2\\": {
+      \\"data\\": {},
+      \\"numRefs\\": 0,
+      \\"operationId\\": \\"\\",
+      \\"timestamp\\": 1574985600000
+    }
+  }
+}</pre>
+    </div>
+  </div>
+  <div data-chunk-name=\\"sample-component-2\\">
+    <div>
+      <h1>Sample Component</h1><pre>{
+  \\"test\\": {
+    \\"key\\": \\"testValue\\"
+  },
+  \\"dr_pogodin_react_utils___split_components\\": {
+    \\"sample-component-1\\": {
+      \\"data\\": {},
+      \\"numRefs\\": 0,
+      \\"operationId\\": \\"\\",
+      \\"timestamp\\": 1574985600000
+    },
+    \\"sample-component-2\\": {
+      \\"data\\": {},
+      \\"numRefs\\": 0,
+      \\"operationId\\": \\"\\",
+      \\"timestamp\\": 1574985600000
+    }
+  }
+}</pre>
+    </div>
+  </div>
+  <div data-chunk-name=\\"sample-component-3\\">
+    <div>
+      <h1>Sample Component</h1><pre>{
+  \\"test\\": {
+    \\"key\\": \\"testValue\\"
+  },
+  \\"dr_pogodin_react_utils___split_components\\": {
+    \\"sample-component-1\\": {
+      \\"data\\": {},
+      \\"numRefs\\": 0,
+      \\"operationId\\": \\"\\",
+      \\"timestamp\\": 1574985600000
+    },
+    \\"sample-component-2\\": {
+      \\"data\\": {},
+      \\"numRefs\\": 0,
+      \\"operationId\\": \\"\\",
+      \\"timestamp\\": 1574985600000
+    }
+  }
+}</pre>
+    </div>
+  </div>
+</div>
+
+<script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
+<script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+<script src=\\"/test/public/path/sample-component-2-1511941200000.js\\" type=\\"application/javascript\\"></script>
+<script src=\\"/test/public/path/sample-component-3-1511941200000.js\\" type=\\"application/javascript\\"></script>"
+`;
