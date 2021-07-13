@@ -5,8 +5,12 @@
  */
 const _ = require('lodash');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
+
 const baseFactory = require('./app-base');
 
 /**
@@ -21,8 +25,6 @@ const baseFactory = require('./app-base');
  * - *development* Babel environment is enforced, and sets
  *   `[path][name]___[local]___[hash:base64:6]` as the default value of
  *   `cssLocalIdent` argument for the base config.
- * - Adds as polyfills the code necessary to support the Hot Module Reloading:
- *   - [`react-hot-loader/patch`](https://github.com/gaearon/react-hot-loader)
  *   - [`webpack-hot-middleware/client?reload=true`](https://github.com/glenjamin/webpack-hot-middleware)
  * - Emulates the following environment variables:
  *   - **`BABEL_ENV`** &mdash; It is set to *development* to inform any
@@ -38,9 +40,17 @@ module.exports = function configFactory(ops) {
   const o = _.defaults(_.clone(ops), {
     cssLocalIdent: '[package]___[path][name]___[local]___[hash:base64:6]',
   });
+
+  const entry = [
+    '@dr.pogodin/react-utils/build/development/client/init',
+    'webpack-hot-middleware/client?reload=true',
+    ...Array.isArray(o.entry) ? o.entry : [o.entry],
+  ];
+
   const res = merge(baseFactory({
     ...o,
     babelEnv: 'development',
+    entry,
     mode: 'development',
   }), {
     output: {
@@ -59,6 +69,11 @@ module.exports = function configFactory(ops) {
         'process.env.REACT_GLOBAL_STATE_DEBUG': JSON.stringify(true),
       }),
       new webpack.HotModuleReplacementPlugin(),
+      new ReactRefreshPlugin({
+        overlay: {
+          sockIntegration: 'whm',
+        },
+      }),
     ],
     snapshot: {
       // This enforces Webpack to watch for possible changes in node_modules
@@ -67,14 +82,5 @@ module.exports = function configFactory(ops) {
       managedPaths: [],
     },
   });
-  if (!_.isArray(res.entry.main)) {
-    res.entry.main = [res.entry.main];
-  }
-  res.entry.main = [
-    'webpack-hot-middleware/client?reload=true',
-  ].concat(res.entry.main);
-  res.entry.polyfills.push(
-    '@dr.pogodin/react-utils/build/development/client/init',
-  );
   return res;
 };

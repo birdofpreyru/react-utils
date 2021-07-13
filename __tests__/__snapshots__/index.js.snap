@@ -1498,7 +1498,7 @@ Array [
       "types": [Function],
       "untrace": [Function],
       "valid": [Function],
-      "version": "17.4.0",
+      "version": "17.4.1",
       "when": [Function],
       "x": [Function],
       Symbol(@hapi/lab/coverage/initialize): [Function],

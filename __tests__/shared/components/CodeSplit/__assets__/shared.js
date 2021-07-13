@@ -50,9 +50,6 @@ export async function renderServerSide(Scene, maxSsrRounds) {
                       { name: 'main-1511941200000.js' },
                     ],
                   },
-                  polyfills: {
-                    assets: [{ name: 'polyfills-1511941200000.js' }],
-                  },
                   'sample-component-1': {
                     assets: [{ name: 'sample-component-1-1511941200000.css' }],
                   },

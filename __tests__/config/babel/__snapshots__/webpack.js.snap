@@ -17,7 +17,7 @@ Object {
       },
     ],
     "@babel/transform-runtime",
-    "react-hot-loader/babel",
+    "react-refresh/babel",
   ],
   "presets": Array [
     Array [
@@ -65,7 +65,7 @@ Object {
         "generateScopedName": [Function],
       },
     ],
-    "react-hot-loader/babel",
+    "react-refresh/babel",
   ],
   "presets": Array [
     Array [

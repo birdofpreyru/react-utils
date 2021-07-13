@@ -13,7 +13,7 @@ module.exports = function buildConfig(env) {
   const babelLoader = config.module.rules.find(
     (x) => x.loader === 'babel-loader',
   );
-  babelLoader.options.presets[0] = `${__dirname}/config/babel/webpack`;
+  babelLoader.options.presets[0][0] = `${__dirname}/config/babel/webpack`;
 
   return config;
 };

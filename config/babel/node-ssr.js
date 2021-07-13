@@ -42,9 +42,7 @@
  *   `/images/[FILE_HASH].[FILE_EXTENSION]`. The `baseAssetsOutputPath` preset
  *   option allows to add custom prefix to these paths.
  *
- * - In _development_ environment it removes
- *   [react-hot-loader/babel](https://www.npmjs.com/package/react-hot-loader),
- *   plugin setup by the underlying config for webpack.
+ * - In _development_ environment it removes `react-refresh/babel`.
  */
 /* eslint-disable import/no-extraneous-dependencies */
 
@@ -94,7 +92,7 @@ function newBase(babel, options = {}) {
   ];
 
   if (babel.env() === getWebpackBabelConfig.ENVIRONMENTS.DEV) {
-    _.pull(config.plugins, 'react-hot-loader/babel');
+    _.pull(config.plugins, 'react-refresh/babel');
   }
 
   return config;

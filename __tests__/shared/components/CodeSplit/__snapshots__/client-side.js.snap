@@ -88,9 +88,8 @@ exports[`Client-side rendering 2`] = `
   </div>
 </div>
 <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
-  window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBqrVlCGhUyhXTWTPFlSbgmX7mf9UJCV6o+6N49TRM8T/Zt5SRase/W0YFEHYmiKSLxDLs7UoU0ZyMSsJmQ+xO+W/sdRBxK9za1x2iLyFxjuD2PetMKvQiyJzmr/5qBDoztSPT/kU7MWMdRCf7EJLeZSSck1vN2HmocqattyfTts0Ag46hV/DbiDsqmifkYp9VflZMUc+z1+rxkRNhWYn3dnw+Uij3QtSHMD/QnUd5yCMWajFDmo7lTV6XHLiPsqedqMdro/S7W3KdcRBQV7VN6baRZ9GkujC4tG2xRmrncxBrhX1Z0wxC/+D83EmcxlzMdZPOyzbONwJwiJqSuGMr/dMbHJHpXQVv0CGBBIE62/kuLwfY7/uZB3AgY0GIoJaa8GjoMRqZABmBR7DS6DnXGbXgFYzsuNr0a+bVGit5YtxtXLqXmQAGr2AD07AJcKDc1aNxqElaR0UUzxTcy91Y4aMtYVq/XgvPRhtLNGlWbVlhG7jtqvtwZyCmP5xLm2baMYIvwVsIukuudkgIn2a55PKer/EB5D8LuX0JPfd0FME=\\"
+  window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBb1VDFWdXsViFyeX13tuynQ88EETx6RuQyms6aHDjsZzm54u6pdtE5bElWjYQQYYKWQ6Q7AG6jOJ0m4jyHJEL2hbRtKnBKIGH+RZ8NtSPyZUdQIHOOyAmEjNWwTcoflKwqX1yZQFqY61t71j0sQev32jJQxdFCAfnIPEBbQyoMOthnONT2MDoAhYBo7mW5WvIIwKZOdbtEV00hm8UfXRtHfiDZlOuY93yXGAlvaXY18BqM3DPSi818K7Z1H4SWC1VYTGrNkXoMDIE6ybStZpZjR4spwNSQv32yICqmIFSe5L6VP07D+zuaRT8l8Kisyjw5b2Xh3ZZWsXzZjicu32lyebon9uckaiJy3Jj8fVO83oGnoVoG23K8ksWQe5vTPxUvDNJMayc7CzFtcUZFtdicQT0RPhKYtcvngtzc19MY6rKHS5iMFX5Ms6j+LMWfYk3Np31TfQ3q5XhqvVHZPciRN1TTzEdcfcEJ+d8oQ+6GKM=\\"
 </script>
-<script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
 <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
 <script src=\\"/test/public/path/sample-component-2-1511941200000.js\\" type=\\"application/javascript\\"></script>
 <script src=\\"/test/public/path/sample-component-3-1511941200000.js\\" type=\\"application/javascript\\"></script>"
@@ -184,7 +183,6 @@ exports[`Client-side rendering 4`] = `
   </div>
 </div>
 
-<script src=\\"/test/public/path/polyfills-1511941200000.js\\" type=\\"application/javascript\\"></script>
 <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
 <script src=\\"/test/public/path/sample-component-2-1511941200000.js\\" type=\\"application/javascript\\"></script>
 <script src=\\"/test/public/path/sample-component-3-1511941200000.js\\" type=\\"application/javascript\\"></script>"

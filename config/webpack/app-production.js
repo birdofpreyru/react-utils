@@ -31,9 +31,15 @@ const baseFactory = require('./app-base');
  * @return {object}
  */
 module.exports = function configFactory(ops) {
+  const entry = [
+    '@dr.pogodin/react-utils/build/production/client/init',
+    ...Array.isArray(ops.entry) ? ops.entry : [ops.entry],
+  ];
+
   const res = merge(baseFactory({
     ...ops,
     babelEnv: 'production',
+    entry,
     mode: 'production',
   }), {
     optimization: {
@@ -63,8 +69,5 @@ module.exports = function configFactory(ops) {
       }),
     ],
   });
-  res.entry.polyfills.push(
-    '@dr.pogodin/react-utils/build/production/client/init',
-  );
   return res;
 };

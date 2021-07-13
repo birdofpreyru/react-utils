@@ -267,7 +267,7 @@ export default function factory(webpackConfig, options) {
 
       const chunkSet = new Set();
 
-      // TODO: "polyfills", and "main" chunks have to be added explicitly,
+      // TODO: "main" chunk has to be added explicitly,
       // because unlike all other chunks they are not managed by <CodeSplit>
       // component, thus they are not added to the ssrContext.chunks
       // automatically. Actually, names of these entry chunks should be
@@ -276,7 +276,6 @@ export default function factory(webpackConfig, options) {
       // efforts to figure out how to automatically order them right,
       // thus for now this handles the default config.
       [
-        'polyfills',
         'main',
         ...ssrContext.chunks,
       ].forEach((chunk) => {

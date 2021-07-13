@@ -29,12 +29,8 @@ const { getLocalIdent } = require('../shared/utils');
  * classnames generation by the Webpack's css-loader; it is passed into
  * the localIdentName param of the loader. It should match the corresponding
  * setting in the Babel config.
- * @param {object|string|string[]} ops.entry Entry points. If an object is
- * passed in, the polyfills entry point (chunk) is extended or appended to
- * include some polyfills we consider obligatory (babel-polyfill,
- * nodelist-foreach-polyfill). If a string or a string array is passed in,
- * it is assigned to the main entry pont, and the polyfills entry point is added
- * then;
+ * @param {string|string[]} ops.entry Entry point(s). The config may prepend
+ * them by necessary polyfills.
  * @param {string} ops.library Name of the library to be build. It is important
  * for proper resolution of the library assets.
  * @param {string} [ops.outputPath=build] Output path.
@@ -76,7 +72,6 @@ const { getLocalIdent } = require('../shared/utils');
  *   - `react`
  *   - `react-dom`
  *   - `react-helmet`
- *   - `react-hot-loader`
  *   - `react-router-dom`
  *   - `shortid`
  *   - `url-parse`
@@ -98,7 +93,6 @@ module.exports = function configFactory(ops) {
       'react',
       /react-dom/,
       'react-helmet',
-      /react-hot-loader/,
       'react-router-dom',
       'uuid',
       'url-parse',
@@ -151,7 +145,14 @@ module.exports = function configFactory(ops) {
           babelrc: false,
           configFile: false,
           envName: ops.babelEnv,
-          presets: ['@dr.pogodin/react-utils/config/babel/webpack'],
+          presets: [
+            // NOTE: For the compilation of this very library (react-utils),
+            // this plugin path is overriden in webpack.config.js in the root of
+            // the codebase.
+            ['@dr.pogodin/react-utils/config/babel/webpack', {
+              noRR: true,
+            }],
+          ],
           ...ops.babelLoaderOptions || {},
         },
       }, {

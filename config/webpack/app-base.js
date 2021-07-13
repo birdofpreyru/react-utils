@@ -39,13 +39,10 @@ const { getLocalIdent } = require('../shared/utils');
  * setting in the Babel config.
  * @param {boolean} [ops.dontEmitBuildInfo] If set the `.build-info` file won't
  * be created at the disk during the compilation.
- * @param {object|string|string[]} ops.entry Entry points. If an object is
- * passed in, the `polyfills` entry point (chunk) is extended or appended to
- * include some polyfills we consider obligatory
+ * @param {string|string[]} ops.entry Entry points for "main" chunk. The config
+ * will prepend them by some necessary polyfills, e.g.:
  * ([babel-polyfill](https://babeljs.io/docs/usage/polyfill/),
  * [nodelist-foreach-polyfill](https://www.npmjs.com/package/nodelist-foreach-polyfill)).
- * If a string or a string array is passed in, it is assigned to the *main*
- * entry pont, and the *polyfills* entry point is added then;
  * @param {boolean|object} ops.workbox If evaluates to a truthy value,
  * [Workbox's InjectManifest plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin#injectmanifest_plugin)
  * is added to the array of Webpack plugins, to generate service worker for
@@ -182,18 +179,12 @@ module.exports = function configFactory(ops) {
   }
 
   /* Entry points normalization. */
-  const entry = _.isPlainObject(o.entry)
-    ? _.cloneDeep(o.entry) : { main: o.entry };
-  if (!entry.polyfills) entry.polyfills = [];
-  else if (!_.isArray(entry.polyfills)) {
-    entry.polyfills = [entry.polyfills];
-  }
-
-  entry.polyfills = _.union(entry.polyfills, [
+  const entry = [
     'core-js/stable',
     'regenerator-runtime/runtime',
     'nodelist-foreach-polyfill',
-  ]);
+    ...Array.isArray(o.entry) ? o.entry : [o.entry],
+  ];
 
   const plugins = [
     new DefinePlugin({

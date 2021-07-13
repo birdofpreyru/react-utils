@@ -88,9 +88,6 @@ async function coreTest(webpackConfig, options) {
                         { name: 'main-1511941200000.js' },
                       ],
                     },
-                    polyfills: {
-                      assets: [{ name: 'polyfills-1511941200000.js' }],
-                    },
                     'test-chunk-a': {
                       assets: [{ name: 'test-chunk-a-1511941200000.css' }],
                     },

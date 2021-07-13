@@ -47,9 +47,7 @@
  *   debugging, and they are short 6-symbol-long hashes in _production_ Babel
  *   environment, to ensure compact CSS and JS output code.
  *
- * - In _development_ environment it also sets up
- *   [react-hot-loader/babel](https://www.npmjs.com/package/react-hot-loader),
- *   which is necessary for Hot Module Reloading support.
+ * - In _development_ environment it also sets up `react-refresh/babel`.
  */
 
 const _ = require('lodash');
@@ -148,6 +146,8 @@ function addStyling(config, env) {
  * Generates Babel preset for Webpack.
  * @param {object} babel Babel compiler.
  * @param {object} [ops] Preset options.
+ * @param {boolean} [ops.noRR] If truthy `react-refresh/babel` plugin is not
+ *  included into config, no matter the environment.
  * @param {boolean} [ops.noStyling] If truthy all setup related to styling
  *  ((S)CSS processing) will be skipped.
  * @param {string|string[]|object} [ops.targets=defaults] Targets for
@@ -161,7 +161,9 @@ function getPreset(babel, ops = {}) {
   const res = newBaseConfig(baseOps);
 
   if (!ops.noStyling) addStyling(res, env);
-  if (env === ENVIRONMENTS.DEV) res.plugins.push('react-hot-loader/babel');
+  if (env === ENVIRONMENTS.DEV && !ops.noRR) {
+    res.plugins.push('react-refresh/babel');
+  }
   return res;
 }
 

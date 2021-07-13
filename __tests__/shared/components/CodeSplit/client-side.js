@@ -50,7 +50,7 @@ test('Client-side rendering', async () => {
   expect(IS_CLIENT_SIDE).toBe(true);
 
   let Launch = require('client').default;
-  act(() => Launch({ getApplication: () => SampleCodeSplit }));
+  act(() => Launch(SampleCodeSplit));
   let head = pretty(document.head.innerHTML);
   let body = pretty(document.body.innerHTML);
   expect(head).toEqual(ssrHead);
@@ -65,7 +65,7 @@ test('Client-side rendering', async () => {
   delete window.TRU_KEEP_INJ_SCRIPT;
   require('client/init');
   Launch = require('client').default;
-  act(() => Launch({ getApplication: () => SampleCodeSplit }));
+  act(() => Launch(SampleCodeSplit));
   head = pretty(document.head.innerHTML);
   body = pretty(document.body.innerHTML);
   expect(head).toMatchSnapshot();
