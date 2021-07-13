@@ -134,11 +134,9 @@ module.exports = function configFactory(ops) {
           /node_modules/,
           /src[/\\]assets[/\\]fonts/,
         ],
-        loader: 'file-loader',
-        options: {
-          emitFile: true,
-          name: '[path][name].[ext]',
-          outputPath: '../shared',
+        type: 'asset/resource',
+        generator: {
+          filename: '../shared/[path][name].[ext]',
           publicPath: `~${ops.library}/build/shared`,
         },
       }, {

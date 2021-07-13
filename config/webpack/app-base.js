@@ -245,11 +245,9 @@ module.exports = function configFactory(ops) {
           /node_modules/,
           /src[/\\]assets[/\\]fonts/,
         ],
-        loader: 'file-loader',
-        options: {
-          outputPath: 'fonts/',
-          publicPath: `${o.publicPath}/fonts`,
-          name: '[contenthash].[ext]',
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[contenthash].[ext][query]',
         },
       }, {
         /* Loads JS and JSX moudles, and inlines SVG assets. */
@@ -266,11 +264,9 @@ module.exports = function configFactory(ops) {
       }, {
         /* Loads image assets. */
         test: /\.(gif|jpe?g|png)$/,
-        loader: 'file-loader',
-        options: {
-          outputPath: 'images/',
-          publicPath: `${o.publicPath}/images`,
-          name: '[contenthash].[ext]',
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[contenthash].[ext][query]',
         },
       }, {
         /* Loads SCSS stylesheets. */
