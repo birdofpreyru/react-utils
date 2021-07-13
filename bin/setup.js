@@ -51,7 +51,7 @@ const fs = require('fs');
 const path = require('path');
 
 const _ = require('lodash');
-const commander = require('commander');
+const { program } = require('commander');
 
 const NPM_COMMAND = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 
@@ -78,7 +78,7 @@ described above.`;
 let libs;
 
 /* Command-line config. */
-commander
+program
   .version('0.1.1')
   .name('react-utils-setup')
   .arguments('[libraries...]')
@@ -93,7 +93,7 @@ commander
   )
   .parse(process.argv);
 
-const cmdLineArgs = commander.opts();
+const cmdLineArgs = program.opts();
 
 /**
  * Generates a string containing name and version of the package to be

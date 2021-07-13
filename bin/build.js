@@ -136,7 +136,7 @@ const fs = require('fs');
 const path = require('path');
 
 const { isFunction, mapValues, merge } = require('lodash');
-const commander = require('commander');
+const { program } = require('commander');
 const rimraf = require('rimraf');
 
 /* eslint-disable import/no-extraneous-dependencies */
@@ -173,7 +173,7 @@ async function exec(command, options = {}) {
 }
 
 /* Command-line config. */
-commander
+program
   .description('Library build script')
   .option('--lib', 'library build', false)
   .option('-i, --in-dir <path>', 'input folder for the build', 'src')
@@ -192,8 +192,8 @@ commander
     '-c, --copy-files <regex>', 'copy files matching the pattern into the build folder',
   );
 
-commander.parse(process.argv);
-const cmdLineArgs = commander.opts();
+program.parse(process.argv);
+const cmdLineArgs = program.opts();
 
 const { buildType } = cmdLineArgs;
 
