@@ -238,7 +238,7 @@ module.exports = function configFactory(ops) {
         ],
         type: 'asset/resource',
         generator: {
-          filename: 'fonts/[contenthash].[ext][query]',
+          filename: 'fonts/[contenthash][ext][query]',
         },
       }, {
         /* Loads JS and JSX moudles, and inlines SVG assets. */
@@ -257,7 +257,7 @@ module.exports = function configFactory(ops) {
         test: /\.(gif|jpe?g|png)$/,
         type: 'asset/resource',
         generator: {
-          filename: 'images/[contenthash].[ext][query]',
+          filename: 'images/[contenthash][ext][query]',
         },
       }, {
         /* Loads SCSS stylesheets. */

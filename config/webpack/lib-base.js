@@ -130,7 +130,10 @@ module.exports = function configFactory(ops) {
         ],
         type: 'asset/resource',
         generator: {
-          filename: '../shared/[path][name].[ext]',
+          // TODO: This comes from the older config version which relied on
+          // file-loader. It might require some correction to correctly join
+          // `publicPath` and `filename`.
+          filename: '../shared/[path][name][ext]',
           publicPath: `~${ops.library}/build/shared`,
         },
       }, {
