@@ -79,7 +79,7 @@ function newBase(babel, options = {}) {
     '@babel/syntax-dynamic-import',
     ['@dr.pogodin/transform-assets', {
       extensions: ['gif', 'jpeg', 'jpg', 'png'],
-      name: `${baseAssetsOutputPath}/images/[hash].[ext]`,
+      name: `${baseAssetsOutputPath}/images/[hash:20].[ext]`,
     }],
   );
 
