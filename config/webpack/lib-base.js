@@ -39,7 +39,7 @@ const { getLocalIdent } = require('../shared/utils');
  * - The generated config will opt to:
  *   - References to the font assets (EOF, OTF, SVG, TTF, WOFF, WOFF2 files from
  *     the `src/assets/fonts` folder of the library source code) will rewritten
- *     to `~LIBRARY_NAME/src/assets/fonts/FILENAME.FILE_EXTENSION`
+ *     to `LIBRARY_NAME/src/assets/fonts/FILENAME.FILE_EXTENSION`
  *     so that the host package of the library will be able to find and bundle
  *     them;
  * - Bundle SCSS files from any folder of your source code, beside
@@ -134,7 +134,7 @@ module.exports = function configFactory(ops) {
           // file-loader. It might require some correction to correctly join
           // `publicPath` and `filename`.
           filename: '../shared/[path][name][ext]',
-          publicPath: `~${ops.library}/build/shared`,
+          publicPath: `${ops.library}/build/shared`,
         },
       }, {
         /* Loads JS and JSX moudles, and inlines SVG assets. */
