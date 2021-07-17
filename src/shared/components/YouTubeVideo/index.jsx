@@ -37,7 +37,7 @@ function YouTubeVideo({
   let [url, query] = src.split('?');
   query = query ? qs.parse(query) : {};
 
-  const videoId = query.v || url.match(/\/([a-zA-Z0-9-]*)$/)[1];
+  const videoId = query.v || url.match(/\/([a-zA-Z0-9-_]*)$/)[1];
   url = `https://www.youtube.com/embed/${videoId}`;
 
   delete query.v;
