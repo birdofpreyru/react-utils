@@ -5,6 +5,6 @@ exports[`Client-side import 1`] = `"images/cd564973d92d0a8a8a17.png"`;
 exports[`Server-side import 1`] = `
 <img
   alt="logo"
-  src="/images/cd564973d92d0a8a8a1787f4eafd8f51.png"
+  src="/images/cd564973d92d0a8a8a17.png"
 />
 `;
