@@ -2,7 +2,7 @@
 
 exports[`Matches snapshots when active 1`] = `
 <div
-  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___2629gm   BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___2qX90D   ACTIVE_CLASS"
+  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___3-kJlZ   BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___3UaAP4   ACTIVE_CLASS"
   onClick={[Function]}
   onKeyPress={[Function]}
   role="button"
@@ -14,7 +14,7 @@ exports[`Matches snapshots when active 1`] = `
 
 exports[`Matches snapshots when disabled 1`] = `
 <div
-  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___2629gm   BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___disabled___24vuTm   DISABLED_CLASS"
+  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___3-kJlZ   BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___disabled___JnSSAY   DISABLED_CLASS"
 >
   BUTTON
 </div>
@@ -22,7 +22,7 @@ exports[`Matches snapshots when disabled 1`] = `
 
 exports[`Matches snapshots when disabled 2`] = `
 <div
-  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___2629gm   BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___disabled___24vuTm"
+  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___3-kJlZ   BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___disabled___JnSSAY"
 >
   BUTTON
 </div>
@@ -30,7 +30,7 @@ exports[`Matches snapshots when disabled 2`] = `
 
 exports[`Matches snapshots when rendered as link 1`] = `
 <a
-  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___2629gm   BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___2qX90D   ACTIVE_CLASS"
+  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___3-kJlZ   BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___3UaAP4   ACTIVE_CLASS"
   disabled={false}
   href="/SOME/TEST/URL"
   onClick={[Function]}

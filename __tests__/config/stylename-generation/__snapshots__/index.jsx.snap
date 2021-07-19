@@ -7,7 +7,7 @@ exports[`Prevents class name clashes across modules 1`] = `
 /*
   Sample multi-line comment
 */
-.mock-package-a___TestComponent-style___testClassName___2XMk4o {
+.mock-package-a___TestComponent-style___testClassName___2DANxU {
   background: red;
   width: 10px;
   height: 10px;
@@ -16,7 +16,7 @@ exports[`Prevents class name clashes across modules 1`] = `
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\\\\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/resolve-url-loader/index.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[4]!./__tests__/config/stylename-generation/__assets__/style.scss ***!
   \\\\*******************************************************************************************************************************************************************************************************************************************************************************************************************************/
-.-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___3qrfGl {
+.-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___iZBsN- {
   color: blue;
 }
 
@@ -26,7 +26,7 @@ exports[`Prevents class name clashes across modules 1`] = `
 /*
   Sample multi-line comment
 */
-.-mock-scope-mock-package_b___TestComponent-style___testClassName___1LBVKQ {
+.-mock-scope-mock-package_b___TestComponent-style___testClassName___1gb0n8 {
   background: red;
   width: 10px;
   height: 10px;
@@ -37,15 +37,15 @@ exports[`Prevents class name clashes across modules 1`] = `
 exports[`Prevents class name clashes in server-side code 1`] = `
 Array [
   <div
-    className="mock-package-a___TestComponent-style___testClassName___2XMk4o"
+    className="mock-package-a___TestComponent-style___testClassName___2DANxU"
   >
-    {"testClassName":"mock-package-a___TestComponent-style___testClassName___2XMk4o"}
+    {"testClassName":"mock-package-a___TestComponent-style___testClassName___2DANxU"}
   </div>,
   <div
-    className="-mock-scope-mock-package_b___TestComponent-style___testClassName___1LBVKQ"
+    className="-mock-scope-mock-package_b___TestComponent-style___testClassName___1gb0n8"
   >
-    {"testClassName":"-mock-scope-mock-package_b___TestComponent-style___testClassName___1LBVKQ"}
+    {"testClassName":"-mock-scope-mock-package_b___TestComponent-style___testClassName___1gb0n8"}
   </div>,
-  "{\\"sampleClassName\\":\\"-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___3qrfGl\\"}",
+  "{\\"sampleClassName\\":\\"-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___iZBsN-\\"}",
 ]
 `;
