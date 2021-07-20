@@ -232,8 +232,6 @@ const webpackCompiler = webpack(webpackConfig);
 // output progress with Webpack@5?
 // webpackCompiler.apply(new webpack.ProgressPlugin());
 
-let firstWebpackStats = true;
-
 /**
  * The handler of Webpack compilation results, written according to Webpack docs
  * https://webpack.js.org/api/node/#error-handling
@@ -261,12 +259,7 @@ function handleWebpackCompilationResults(error, stats) {
   }
   if (stats.hasWarnings()) console.warn(info.warnings);
 
-  const logOps = { colors: true };
-  if (firstWebpackStats) {
-    firstWebpackStats = false;
-    logOps.all = true;
-  }
-  console.log(stats.toString(logOps));
+  console.log(stats.toString({ colors: true }));
 
   // Here we emit the mapping of named chunk groups, needed at runtime
   // for SSR and code-splitting.
