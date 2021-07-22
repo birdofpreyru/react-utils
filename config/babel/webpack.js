@@ -119,6 +119,7 @@ function newBaseConfig(options = {}) {
  */
 function addStyling(config, env) {
   const cssModulesOps = {
+    autoResolveMultipleImports: true,
     filetypes: {
       '.scss': { syntax: 'postcss-scss' },
     },

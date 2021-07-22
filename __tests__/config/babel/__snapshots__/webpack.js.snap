@@ -57,6 +57,7 @@ Object {
     Array [
       "@dr.pogodin/react-css-modules",
       Object {
+        "autoResolveMultipleImports": true,
         "filetypes": Object {
           ".scss": Object {
             "syntax": "postcss-scss",
@@ -141,6 +142,7 @@ Object {
     Array [
       "@dr.pogodin/react-css-modules",
       Object {
+        "autoResolveMultipleImports": true,
         "filetypes": Object {
           ".scss": Object {
             "syntax": "postcss-scss",
