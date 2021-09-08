@@ -519,6 +519,11 @@ Object {
     "transformResponse": Array [
       [Function],
     ],
+    "transitional": Object {
+      "clarifyTimeoutError": false,
+      "forcedJSONParsing": true,
+      "silentJSONParsing": true,
+    },
     "validateStatus": [Function],
     "xsrfCookieName": "XSRF-TOKEN",
     "xsrfHeaderName": "X-XSRF-TOKEN",
@@ -1190,6 +1195,11 @@ Object {
     "transformResponse": Array [
       [Function],
     ],
+    "transitional": Object {
+      "clarifyTimeoutError": false,
+      "forcedJSONParsing": true,
+      "silentJSONParsing": true,
+    },
     "validateStatus": [Function],
     "xsrfCookieName": "XSRF-TOKEN",
     "xsrfHeaderName": "X-XSRF-TOKEN",

@@ -151,7 +151,7 @@ const ThemedModal = themed(
 BaseModal.propTypes = {
   onCancel: PT.func,
   children: PT.node,
-  theme: ThemedModal.themeType,
+  theme: ThemedModal.themeType.isRequired,
 };
 
 BaseModal.defaultProps = {
