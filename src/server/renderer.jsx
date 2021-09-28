@@ -14,6 +14,7 @@ import { brotliCompress, brotliDecompress } from 'zlib';
 import ReactDOM from 'react-dom/server';
 import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom';
+import serializeJs from 'serialize-javascript';
 
 import time from 'utils/time';
 
@@ -255,11 +256,16 @@ export default function factory(webpackConfig, options) {
        * Hovewer, for a number of reasons, encryption of injected data is still
        * better than injection of a plain text. */
       delete ssrContext.state.dr_pogodin_react_utils___split_components;
-      cipher.update(forge.util.createBuffer(JSON.stringify({
+
+      const payload = serializeJs({
         CHUNK_GROUPS: chunkGroups,
         CONFIG: configToInject || sanitizedConfig,
         ISTATE: ssrContext.state,
-      }), 'utf8'));
+      }, {
+        ignoreFunction: true,
+        unsafe: true,
+      });
+      cipher.update(forge.util.createBuffer(payload, 'utf8'));
       cipher.finish();
       const INJ = forge.util.encode64(`${iv}${cipher.output.data}`);
 

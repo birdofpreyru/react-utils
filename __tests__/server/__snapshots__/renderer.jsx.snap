@@ -165,6 +165,39 @@ exports[`Injection of additional JS scripts 1`] = `
         </html>"
 `;
 
+exports[`JS constructs in global state 1`] = `
+"<!DOCTYPE html>
+        <html lang=\\"en\\">
+          <head>
+            
+            <title data-react-helmet=\\"true\\"></title>
+            
+            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
+            
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+            
+            <meta charset=\\"utf-8\\" />
+            <meta
+              content=\\"width=device-width,initial-scale=1.0\\"
+              name=\\"viewport\\"
+            />
+          </head>
+          <body>
+            
+            <div id=\\"react-view\\"><div>{&quot;test&quot;:Array.prototype.slice.call({&quot;1&quot;:&quot;defaultValue&quot;,&quot;length&quot;:2}),&quot;set&quot;:new Set([1,2])}</div></div>
+            <script
+              id=\\"inj\\"
+              type=\\"application/javascript\\"
+              nonce=\\"abcdef-dummy-nonce\\"
+            >
+              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWKKnXdbyS28Kq8fENTebXTg==\\"
+            </script>
+            <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            
+          </body>
+        </html>"
+`;
+
 exports[`Server-side rendering (SSR); injection of CSS chunks & Redux state 1`] = `
 "<!DOCTYPE html>
         <html lang=\\"en\\">

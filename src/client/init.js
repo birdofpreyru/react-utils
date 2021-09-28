@@ -49,7 +49,9 @@ if (window.INJ) {
   decipher.start({ iv: data.slice(0, 32) });
   decipher.update(forge.util.createBuffer(data.slice(32)));
   decipher.finish();
-  data = JSON.parse(forge.util.decodeUtf8(decipher.output.data));
+
+  data = forge.util.decodeUtf8(decipher.output.data);
+  data = eval(`(${data})`); // eslint-disable-line no-eval
 
   window.CHUNK_GROUPS = data.CHUNK_GROUPS;
   window.CONFIG = data.CONFIG;

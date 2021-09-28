@@ -2,6 +2,14 @@ import _ from 'lodash';
 import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable } from 'server/renderer';
 import fs from 'fs';
 
+import serializeJs from 'serialize-javascript';
+
+import {
+  getGlobalState,
+  GlobalStateProvider,
+  useGlobalState,
+} from '@dr.pogodin/react-global-state';
+
 import { Helmet } from 'react-helmet';
 import { Route } from 'react-router-dom';
 
@@ -136,6 +144,23 @@ test('Config overriding for injection',
       };
     },
   }));
+
+test('JS constructs in global state', () => {
+  const Component = () => {
+    useGlobalState('test.1', 'defaultValue');
+    useGlobalState('set', new Set([1, 2]));
+    const { state } = getGlobalState();
+    return <div>{serializeJs(state)}</div>;
+  };
+  return coreTest(TEST_WEBPACK_CONFIG, {
+    Application: () => (
+      <GlobalStateProvider>
+        <Component />
+      </GlobalStateProvider>
+    ),
+    maxSsrRounds: 3,
+  });
+});
 
 test('Helmet integration works',
   () => coreTest(TEST_WEBPACK_CONFIG, {
