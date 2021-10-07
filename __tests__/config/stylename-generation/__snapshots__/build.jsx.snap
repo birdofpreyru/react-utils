@@ -15,7 +15,7 @@ var _TestComponent = _interopRequireDefault(require(\\"./MockPackageA/TestCompon
 var _jsxRuntime = require(\\"react/jsx-runtime\\");
 
 var styles = {
-  \\"sampleClassName\\": \\"-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___iZBsN-\\"
+  \\"sampleClassName\\": \\"-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___3qrfGl\\"
 };
 
 const B = require(\\"./MockPackageB/TestComponent\\").default;
@@ -38,12 +38,12 @@ exports.default = TestComponent;
 var _jsxRuntime = require(\\"react/jsx-runtime\\");
 
 var style = {
-  \\"testClassName\\": \\"mock-package-a___TestComponent-style___testClassName___2DANxU\\"
+  \\"testClassName\\": \\"mock-package-a___TestComponent-style___testClassName___2XMk4o\\"
 };
 
 function TestComponent() {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(\\"div\\", {
-    className: \\"mock-package-a___TestComponent-style___testClassName___2DANxU\\",
+    className: \\"mock-package-a___TestComponent-style___testClassName___2XMk4o\\",
     children: JSON.stringify(style)
   });
 }"
@@ -64,7 +64,7 @@ var _TestComponent = _interopRequireDefault(require(\\"./MockPackageA/TestCompon
 var _jsxRuntime = require(\\"react/jsx-runtime\\");
 
 var styles = {
-  \\"sampleClassName\\": \\"iZBsN-\\"
+  \\"sampleClassName\\": \\"_3qrfGl\\"
 };
 
 const B = require(\\"./MockPackageB/TestComponent\\").default;
@@ -87,12 +87,12 @@ exports.default = TestComponent;
 var _jsxRuntime = require(\\"react/jsx-runtime\\");
 
 var style = {
-  \\"testClassName\\": \\"_2DANxU\\"
+  \\"testClassName\\": \\"_2XMk4o\\"
 };
 
 function TestComponent() {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(\\"div\\", {
-    className: \\"_2DANxU\\",
+    className: \\"_2XMk4o\\",
     children: JSON.stringify(style)
   });
 }"
@@ -106,7 +106,7 @@ exports[`Webpack build App: development 1`] = `
 /*
   Sample multi-line comment
 */
-.mock-package-a___TestComponent-style___testClassName___2DANxU {
+.mock-package-a___TestComponent-style___testClassName___2XMk4o {
   background: red;
   width: 10px;
   height: 10px;
@@ -116,7 +116,7 @@ exports[`Webpack build App: development 1`] = `
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/resolve-url-loader/index.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[4]!./__tests__/config/stylename-generation/__assets__/style.scss ***!
   \\\\*******************************************************************************************************************************************************************************************************************************************************************************************************************************/
 
-.-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___iZBsN- {
+.-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___3qrfGl {
   color: blue;
 }
 
@@ -127,7 +127,7 @@ exports[`Webpack build App: development 1`] = `
 /*
   Sample multi-line comment
 */
-.-mock-scope-mock-package_b___TestComponent-style___testClassName___1gb0n8 {
+.-mock-scope-mock-package_b___TestComponent-style___testClassName___1LBVKQ {
   background: red;
   width: 10px;
   height: 10px;
@@ -135,7 +135,7 @@ exports[`Webpack build App: development 1`] = `
 "
 `;
 
-exports[`Webpack build App: production 1`] = `"._2DANxU{background:red;height:10px;width:10px}.iZBsN-{color:blue}._1gb0n8{background:red;height:10px;width:10px}"`;
+exports[`Webpack build App: production 1`] = `"._2XMk4o{background:red;height:10px;width:10px}._3qrfGl{color:blue}._1LBVKQ{background:red;height:10px;width:10px}"`;
 
 exports[`Webpack build Lib: development 1`] = `
 "/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\\\\
@@ -145,7 +145,7 @@ exports[`Webpack build Lib: development 1`] = `
 /*
   Sample multi-line comment
 */
-.mock-package-a___TestComponent-style___testClassName___2DANxU {
+.mock-package-a___TestComponent-style___testClassName___2XMk4o {
   background: red;
   width: 10px;
   height: 10px;
@@ -155,7 +155,7 @@ exports[`Webpack build Lib: development 1`] = `
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/resolve-url-loader/index.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[2].use[4]!./__tests__/config/stylename-generation/__assets__/style.scss ***!
   \\\\*******************************************************************************************************************************************************************************************************************************************************************************************************************************/
 
-.-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___iZBsN- {
+.-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___3qrfGl {
   color: blue;
 }
 
@@ -166,7 +166,7 @@ exports[`Webpack build Lib: development 1`] = `
 /*
   Sample multi-line comment
 */
-.-mock-scope-mock-package_b___TestComponent-style___testClassName___1gb0n8 {
+.-mock-scope-mock-package_b___TestComponent-style___testClassName___1LBVKQ {
   background: red;
   width: 10px;
   height: 10px;
@@ -175,7 +175,7 @@ exports[`Webpack build Lib: development 1`] = `
 `;
 
 exports[`Webpack build Lib: production 1`] = `
-"._2DANxU{background:red;height:10px;width:10px}.iZBsN-{color:blue}._1gb0n8{background:red;height:10px;width:10px}
+"._2XMk4o{background:red;height:10px;width:10px}._3qrfGl{color:blue}._1LBVKQ{background:red;height:10px;width:10px}
 
 /*# sourceMappingURL=style.css.map*/"
 `;

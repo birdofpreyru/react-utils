@@ -15,7 +15,9 @@ const SM = require('sitemap');
 const { DefinePlugin, ProgressPlugin } = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
-const { getLocalIdent } = require('../shared/utils');
+const {
+  getLocalIdent,
+} = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
 
 /**
  * @func configFactory

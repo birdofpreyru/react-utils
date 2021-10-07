@@ -9,7 +9,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const { ProgressPlugin } = require('webpack');
 
-const { getLocalIdent } = require('../shared/utils');
+const {
+  getLocalIdent,
+} = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
 
 /**
  * @func configFactory
