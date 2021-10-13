@@ -4,12 +4,6 @@ import themed from '@dr.pogodin/react-themes';
 import defaultTheme from './theme.scss';
 
 /**
- * @category Components
- * @func Throbber
- * @desc
- * ```jsx
- * import { Throbber } from '@dr.pogodin/react-utils';
- * ```
  * Throbber is an "action in progress" indicator, which renders
  * three bouncing circles as a simple pending activity indicator,
  * and can be further themed to a certain degree.
@@ -41,12 +35,6 @@ Throbber.propTypes = {
   }),
 };
 
-/**
- * @category Components
- * @typedef {object} ThrobberTheme {@link Throbber} theme.
- * @prop {string} [container] Class name to add to the throbber container.
- * @prop {string} [circle] Class name to add to each throbber circle.
- */
 export default themed('Throbber', [
   'circle',
   'container',

@@ -7,12 +7,6 @@ import ReactDom from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
 /**
- * @category Utilities
- * @func client
- * @desc
- * ```js
- * import { client } from '@dr.pogodin/react-utils';
- * ```
  * Prepares and launches the app at client side.
  * @param {object} Application Root application component
  */

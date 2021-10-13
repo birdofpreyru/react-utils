@@ -1,16 +1,3 @@
-/**
- * @category Utilities
- * @module JU
- * @desc
- * ```js
- * import { JU } from '@dr.pogodin/react-utils`;
- * ```
- * The `JU` module (short for `jest-utils`) provides helpers useful in Jest
- * tests.
- *
- * **BEWARE:** This module is exported and functional only within development,
- * Jest environment.
- */
 /* global expect, jest, document */
 /* eslint-disable import/no-extraneous-dependencies */
 
@@ -27,13 +14,6 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 /* eslint-enable import/no-extraneous-dependencies */
 
 /**
- * @static
- * @func act
- * @desc
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { act } = JU;
- * ```
  * An alias for [act(..)](https://reactjs.org/docs/test-utils.html#act)
  * from `react-dom/test-utils`.
  * @param {function} action
@@ -43,10 +23,6 @@ export { act } from 'react-dom/test-utils';
 const originalProcessVersions = process.versions;
 
 /**
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { mockClientSide } = JU;
- * ```
  * Tricks **react-utils** into thinking the test is running within client-side
  * (browser) environment.
  */
@@ -55,10 +31,6 @@ export function mockClientSide() {
 }
 
 /**
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { unmockClientSide } = JU;
- * ```
  * Reverts the effect of {@link module:JU.mockClientSide mockClientSide(..)}.
  */
 export function unmockClientSide() {
@@ -69,10 +41,6 @@ export function unmockClientSide() {
 }
 
 /**
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { getMockUuid } = JU;
- * ```
  * Generates a mock UUID, or better said it determenistically transforms given
  * `seed` number into a UUID-formatted string.
  * @param {number} seed
@@ -84,10 +52,6 @@ export function getMockUuid(seed = 0) {
 }
 
 /**
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { mockTimer } = JU;
- * ```
  * Advances mock timers, and mock date by the specified time.
  * @param {number} time Time step [ms].
  * @returns {Promise} Wait for this to "jump after" any async code which should
@@ -99,10 +63,6 @@ export async function mockTimer(time) {
 }
 
 /**
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { mount } = JU;
- * ```
  * Mounts `scene` to the DOM, and returns the root scene element.
  * @param {React.ReactNode} scene
  * @return {HTMLElement}
@@ -115,10 +75,6 @@ export function mount(scene) {
 }
 
 /**
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { unmount } = JU;
- * ```
  * Unmounts `scene` from the DOM.
  * @param {HTMLElement} scene
  */
@@ -130,10 +86,6 @@ export function unmount(scene) {
 /* OLD STUFF BELOW THIS MARK */
 
 /**
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { findInDomByClass } = JU;
- * ```
  * Just an alias for
  * [findRenderedDOMComponentWithClass(..)](https://reactjs.org/docs/test-utils.html#findrendereddomcomponentwithclass).
  * @param {object} dom
@@ -145,10 +97,6 @@ export function findInDomByClass(dom, className) {
 }
 
 /**
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { findInDomManyByClass } = JU;
- * ```
  * Just an alias for
  * [scryRenderedDOMComponentsWithClass(..)](https://reactjs.org/docs/test-utils.html#scryrendereddomcomponentswithclass).
  * @param {object} dom
@@ -160,10 +108,6 @@ export function findInDomManyByClass(dom, className) {
 }
 
 /**
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { render } = JU;
- * ```
  * Renders provided ReactJS component into JSON representation of the component
  * tree, using [`react-test-renderer`](https://www.npmjs.com/package/react-test-renderer).
  * @param {object} component ReactJS component to render.
@@ -194,28 +138,9 @@ Wrapper.propTypes = {
 };
 
 /**
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { renderDom } = JU;
- * ```
  * Renders given ReactJS component into DOM, using `react-dom/test-utils`.
  * @param {object} component ReactJS component to render.
  * @return {object} Rendered DOM.
- * @example
- * // In many cases you will want to render and find
- * // a rendered node in the resulting tree, you can do it like this:
- *
- * import React from 'react';
- * import { JU } from '@dr.pogodin/react-utils/jest-utils';
- *
- * const dom = JU.renderDom(
- *   <div>
- *     Example component, containing a button you want to find in the render.
- *     <button className="BUTTON">Click me!</button>
- *   </div>
- * );
- *
- * const button = JU.findInDomByClass(dom, 'BUTTON');
  */
 export function renderDom(component) {
   return TU.renderIntoDocument((
@@ -226,18 +151,11 @@ export function renderDom(component) {
 }
 
 /**
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { shallowRender } = JU;
- * ```
  * Generates a shallow render of given ReactJS component, using
  * [react-test-renderer/shallow](https://reactjs.org/docs/shallow-renderer.html)
  * and returns the result.
  * @param {object} component ReactJS component to render.
  * @return {object} JSON representation of the shallow component's render tree.
- * @example
- * import { JU } from '@dr.pogodin/react-utils/jest-utils';
- * console.log(JU.shallowRender(<div>Example</div>));
  */
 export function shallowRender(component) {
   const renderer = new ShallowRenderer();
@@ -246,10 +164,6 @@ export function shallowRender(component) {
 }
 
 /**
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { shallowSnapshot } = JU;
- * ```
  * Makes a shallow snapshot test of the given ReactJS component, and also
  * returns JSON representation of the rendered component tree. Under the hood
  * it uses {@link module:JU.shallowRender shallowRender(..)} to generate
@@ -257,11 +171,6 @@ export function shallowRender(component) {
  * and finally returns the `RENDER_RESULT` to the caller.
  * @param {object} component ReactJS component to render.
  * @return {object} JSON representation of shallow render.
- * @example
- * import { JU } from '@dr.pogodin/react-utils/jest-utils';
- * test('A snapshot test', () => {
- *   console.log(JU.shallowSnapshot(<div>Example</div>));
- * });
  */
 export function shallowSnapshot(component) {
   const res = shallowRender(component);
@@ -270,21 +179,12 @@ export function shallowSnapshot(component) {
 }
 
 /**
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { shallow } = JU;
- * ```
  * Makes snapshot test of the given ReactJS component, and also returns JSON
  * representation of the rendered component tree. Under the hood, it uses
  * {@link module:JU.render render(..)} to render it, then executes
  * `expect(RENDER_RESULT).toMatchSnapshot()`, and then returns `RENDER_RESULT`.
  * @param {object} component ReactJS component to render.
  * @return {object} JSON render of the component.
- * @example
- * import { JU } from '@dr.pogodin/react-utils/jest-utils';
- * test('A snapshot test', () => {
- *   console.log(JU.snapshot(<div>Example</div>));
- * });
  */
 export function snapshot(component) {
   const res = render(component);
@@ -292,16 +192,4 @@ export function snapshot(component) {
   return res;
 }
 
-/**
- * @static
- * @func simulate
- * @desc
- * ```js
- * import { JU } from '@dr.pogodin/react-utils';
- * const { simulate } = JU;
- * ```
- * An alias for
- * [Simulate](https://reactjs.org/docs/test-utils.html#simulate) from
-  `react-dom/test-utils`.
- */
 export const simulate = TU.Simulate;

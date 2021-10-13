@@ -6,33 +6,11 @@ import { createElement } from 'react';
 import './style.scss';
 
 /**
- * @category Components
- * @func Link
- * @desc
- * ```js
- * import { Link } from '@dr.pogodin/react-utils';
- * ```
  * The `<Link>` component, and almost identical `<NavLink>` component, are
  * auxiliary wrappers around
  * [React Router](https://github.com/ReactTraining/react-router)'s
  * `<Link>` and `<NavLink>` components; they help to handle external and
  * internal links in uniform manner.
- *
- * The `<Link>` (`<NavLink>`) component is rendered as a simple `<a>` element
- * when:
- * 1. The link is absolute, i.e. starts with `http://` or `https://`.
- * 2. The link points to an anchor, i.e. starts with `#` symbol.
- * 3. The link should be opened in a new tab (`openNewTab` property).
- * 4. Explicitly opted by the `enforceA` property.
- *
- * Otherwise it is rendered as the usual React Router's `<Link>` (`<NavLink>`).
- * Also in this case links to the current page scroll the page to its top when
- * clicked.
- *
- * Both `<Link>` and `<NavLink>` support all properties of the underlying React
- * Router's components, along with some additional props:
- *
- * **Children:** Child components are rendered as link's content.
  *
  * @param {object} [props] Component properties.
  * @param {string} [props.className] CSS classes to apply to the link.

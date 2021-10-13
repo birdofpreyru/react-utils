@@ -3,12 +3,6 @@ import PT from 'prop-types';
 import './style.scss';
 
 /**
- * @category Components
- * @func ScalableRect
- * @desc
- * ```js
- * import { ScalableRect } from '@dr.pogodin/react-utils';
- * ```
  * The `<ScalableRect>` component implements container keeping given aspect
  * ratio, while its width is altered.
  *

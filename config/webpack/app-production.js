@@ -10,26 +10,6 @@ const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const baseFactory = require('./app-base');
 
-/**
- * @func factoryConfig
- * @desc
- * ```js
- * const configFactory = require('@dr.pogodin/react-utils/config/webpack/app-production');
- * ```
- * Creates a new production Webpack config, and performs some auxiliary
- * operations on the way. This configuration is based on
- * {@link module:webpack/app-base webpack/app-base}
- * and it differs from that in the following:
- * - *production* Babel environment is enforced;
- * - Emulates the following environment variables:
- *   - **`BABEL_ENV`** &mdash; It is set to *production*;
- *   - **`NODE_ENV`** &mdash; It is set to *production*.
- * - Adds the following plugins:
- *   - [CSS Minimizer Webpack Plugin](https://www.npmjs.com/package/css-minimizer-webpack-plugin);
- *   - [UglifyJsPlugin](https://webpack.js.org/plugins/uglifyjs-webpack-plugin/).
- * @param {object} ops Accepts same options as the base config.
- * @return {object}
- */
 module.exports = function configFactory(ops) {
   const entry = [
     '@dr.pogodin/react-utils/build/production/client/init',

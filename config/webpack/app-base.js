@@ -20,11 +20,6 @@ const {
 } = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
 
 /**
- * @func configFactory
- * @desc
- * ```js
- * const configFactory = require('@dr.pogodin/react-utils/config/webpack/app-base');
- * ```
  * Creates a new Webpack config object, and performs some auxiliary operations
  * on the way.
  * @param {object} ops Configuration params. This allows to modify some

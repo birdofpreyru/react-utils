@@ -8,12 +8,6 @@ import baseTheme from './base.scss';
 import throbberTheme from './throbber.scss';
 
 /**
- * @category Components
- * @func YouTubeVideo
- * @desc
- * ```js
- * import { YouTubeVideo } from '@dr.pogodin/react-utils';
- * ```
  * A component for embeding a YouTube video.
  * @param {object} [props] Component properties.
  * @param {boolean} [props.autoplay] If `true` the video will start to play

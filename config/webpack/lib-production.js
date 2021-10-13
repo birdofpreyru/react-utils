@@ -12,15 +12,6 @@ const { merge } = require('webpack-merge');
 
 const baseFactory = require('./lib-base');
 
-/**
- * @func configFactory
- * @desc
- * Extends and tunes {@link module:webpack/lib-production lib-production}
- * to use *production* Babel environment, and sets `[hash:base64:6]` as
- * the template for generated CSS classnames.
- * @param {object} ops
- * @return {object}
- */
 module.exports = function configFactory(ops) {
   const baseConfig = baseFactory({
     ...ops,
