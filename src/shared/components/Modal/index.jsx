@@ -15,12 +15,6 @@ import baseTheme from './base-theme.scss';
 import './styles.scss';
 
 /**
- * @category Components
- * @func Modal
- * @desc
- * ```jsx
- * import { BaseModal, Modal } from '@dr.pogodin/react-utils';
- * ```
  * The `<Modal>` component implements a simple themeable modal window, wrapped
  * into the default theme. `<BaseModal>` exposes the base non-themed component.
  * **Children:** Component children are rendered as the modal content.
@@ -31,26 +25,6 @@ import './styles.scss';
  * @param {ModalTheme} [props.theme] _Ad hoc_ theme.
  * @param {...any} [props....]
  * [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
- * @example
- * import React, { useState } from 'react';
- * import { Button, Modal } from '@dr.pogodin/react-utils';
- *
- * export default function ModalDemo() {
- *   const [visible, setVisible] = useState(false);
- *   return (
- *     <div>
- *       <Button onClick={() => setVisible(true)}>Show Modal</Button>
- *       {
- *         visible ? (
- *           <Modal onCancel={() => setVisible(false)}>
- *             This is a simple modal. Click outside, or press Escape to close
- *             it.
- *           </Modal>
- *         ) : null
- *       }
- *     </div>
- *   );
- * }
  */
 function BaseModal({
   children,
@@ -132,13 +106,6 @@ function BaseModal({
   ) : null;
 }
 
-/**
- * @category Components
- * @typedef {object} ModalTheme {@link Modal} component theme.
- * @prop {string} [container] Class for modal container.
- * @prop {string} [overlay] Class for modal overlay (the background closing
- * the page underneath the modal).
- */
 const ThemedModal = themed(
   'Modal',
   [

@@ -1,7 +1,5 @@
 /**
- * @category Configs
- * @module babel/webpack
- * @desc [Babel](https://babeljs.io/) preset for Webpack builds.
+ * [Babel](https://babeljs.io/) preset for Webpack builds.
  *
  * To include it into a Babel configuration:
  * ```json
@@ -139,11 +137,6 @@ function addStyling(config, env) {
 }
 
 /**
- * @static
- * @desc
- * ```js
- * import getPreset from '@dr.pogodin/react-utils/config/babel/webpack';
- * ```
  * Generates Babel preset for Webpack.
  * @param {object} babel Babel compiler.
  * @param {object} [ops] Preset options.

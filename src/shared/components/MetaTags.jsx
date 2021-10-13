@@ -5,12 +5,6 @@ import { Helmet } from 'react-helmet';
 const Context = createContext();
 
 /**
- * @category Components
- * @func MetaTags
- * @desc
- * ```js
- * import { MetaTags } from '@dr.pogodin/react-utils';
- * ```
  * The `<MetaTags>` component is an auxiliary wrapper around `react-helmet`,
  * which helps to inject meta tags (page title, a brief content description,
  * and social media thumbnails) into generated pages.
@@ -62,21 +56,6 @@ const Context = createContext();
  *
  * @param {string} [props.url] The page URL to use in `og:url` tag.
  * By default the tag is not injected.
- *
- * @example
- * // Top-level app component.
- * import { MetaTags } from '@dr.pogodin/react-utils';
- * export default function ApplicationRoot() {
- *   return (
- *     <>
- *       <MetaTags
- *         title="Sample website title"
- *         description="Just the minimal example of MetaTags usage"
- *       >
- *       // The actual application content here.
- *       </>
- *   );
- * }
  */
 export default function MetaTags({
   children,

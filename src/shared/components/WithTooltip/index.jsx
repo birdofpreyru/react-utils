@@ -10,12 +10,6 @@ import Tooltip, { PLACEMENTS } from './Tooltip';
 import defaultTheme from './default-theme.scss';
 
 /**
- * @category Components
- * @func WithTooltip
- * @desc
- * ```js
- * import { WithTooltip } from '@dr.pogodin/react-utils';
- * ```
  * Implements a simple to use and themeable tooltip component, _e.g._
  * ```js
  * <WithTooltip tip="This is example tooltip.">

@@ -45,10 +45,6 @@ export function requireWeak(modulePath) {
 }
 
 /**
- * ```js
- * import { webpack } from '@dr.pogodin/react-utils';
- * const { resolveWeak } = webpack;
- * ```
  * Resolves specified module path with help of Babel's module resolver.
  * Yes, the function itself just returns its argument to the caller, but Babel
  * is configured to resolve the first argument of resolveWeak(..) function, thus

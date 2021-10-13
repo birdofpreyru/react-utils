@@ -1,7 +1,5 @@
 /**
- * @category Configs
- * @module babel/node-ssr
- * @desc [Babel](https://babeljs.io/) preset for NodeJS builds & server-side
+ * [Babel](https://babeljs.io/) preset for NodeJS builds & server-side
  * execution.
  *
  * To include it into a Babel configuration:
@@ -131,11 +129,6 @@ function addStyling(config, env) {
 }
 
 /**
- * @static
- * @desc
- * ```js
- * import getConfig from '@dr.pogodin/react-utils/config/babel/node-ssr';
- * ```
  * Generates Babel config for NodeJS compilation and server-side  execution.
  * @param {object} babel Babel compiler instance.
  * @param {object} [ops] Preset options. It supports all options accepted by

@@ -34,56 +34,6 @@ function normalizePort(value) {
 }
 
 /**
- * @category Utilities
- * @callback BeforeRenderHook
- * @desc A hook for {@link server}'s `beforeRender` option.
- * @param {object} req Incoming ExpressJS HTTP request, with some extra
- * fields attached:
- *  - `.nonce: string` &ndash; CSP nonce for `<script>` tags, which should be
- *    added to the tags injected into the page to allow them to work.
- * @param {object} config Application config that server wants to
- * inject into generated HTML template.
- * @return {Promise<{
- *   configToInject: object,
- *   extraScript: Array<object|string>,
- *   initialState: object
- * }>} `Promise` resolving to the object with fields:
- *  - `[configToInject]` (_Object_) &ndash; Optional. The actual config object
- * to inject into the generated page. If not provided, the `config` provided as
- * argument will be injected as is.
- * - `[extraScripts]` (_Array of Objects and/or Strings_) &ndash; Optional.
- * Additional scripts to inject into the generated page. Each script given
- * as a string will be injected as is in the end of generated document's
- * `<body>`, just before the main application bundle. Each script given as
- * an object is expected to have two fields: `code` holding the actual code
- * to inject, and `location` specifying where to inject that `code`. The valid
- * locations are exposed via the `server.SCRIPT_LOCATIONS` object. The scripts
- * intended for the same location are injected in the order
- * they are listed in the `extraScript` array.
- * - `[initialState]` (_Object_) &ndash; Optional. Initial value of the global
- * state.
- *
- * `server.SCRIPT_LOCATIONS`
- * - `server.SCRIPT_LOCATIONS.BODY_OPEN` &ndash; Right after the opening
- * `<body>`
- * tag.
- * - `server.SCRIPT_LOCATIONS.DEFAULT` &ndash; In the end of `<body>` block, just
- * before the main application bundle.
- * - `server.SCRIPT_LOCATIONS.HEAD_OPEN` &ndash; Right after the opening
- * `<head>` tag.
-*/
-
-/**
- * @category Utilities
- * @func server
- * @desc
- * ```js
- * import { server } from '@dr.pogodin/react-utils`;
- * import webpackConfig from 'path/to/your/webpack.config';
- * server(webpackConfig);
- * // Web server is up, running, and serving the app specified by the provided
- * // Webpack config.
- * ```
  * Creates and launches web-server for ReactJS application. Allows zero
  * or detailed configuration, supports server-side rendering,
  * and development tools, including Hot Module Reloading (HMR).

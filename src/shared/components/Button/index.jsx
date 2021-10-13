@@ -60,8 +60,7 @@ function BaseButton({
 }
 
 /**
- * @category Components
- * @typedef {object} ButtonTheme {@link Button} component theme: a map of CSS
+ * Button component theme: a map of CSS
  * class names to append to button elements:
  * @prop {string} [active] to the root element of active button.
  * @prop {string} [button] to the root element of any button.
@@ -74,25 +73,8 @@ const ThemedButton = themed('Button', [
 ], defaultTheme)(BaseButton);
 
 /**
- * @category Components
- * @func Button
- * @desc
- * ```js
- * import { Button } from '@dr.pogodin/react-utils';
- * ```
  * Implements themeable buttons, and button-line links (elements which look
  * like buttons, but behave as links) in the same uniform manner.
- *
- * Under the hood, a `<Button>` instance is rendered as:
- * 1. `<div>` when the button is disabled. It helps to ensure exactly
- *    the same style of disabled buttons and button-like links.
- * 2. `<Link>` when `to` property is set.
- *    This takes care about internal and external links.
- * 3. `<div>` element, otherwise. `<Link>` component could also play the button
- *    role, but is more efficient to use `<div>` in this case.
- *
- * **Children:** Component children, if any, are rendered as button content.
- *
  * @param {object} [props] Component props.
  * @param {boolean} [props.active] Set `true` to render the button as
  * active, even if it is not active otherwise.
@@ -115,23 +97,6 @@ const ThemedButton = themed('Button', [
  * or URL.
  * @param {...any} [props....]
  * [Other properties of themeable components](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
- *
- * @example
- * import React from 'react';
- * import { Button } from '@dr.pogodin/react-utils';
- *
- * export default function ButtonDemo() {
- *   return (
- *     <div>
- *       <Button onClick={() => alert('Button Clicked')}>Button</Button>
- *       <Button to="https://dr.pogodin.studio" openNewTab>
- *         Button-Like Link
- *       </Button>
- *       <Button disabled>Disabled Button</Button>
- *       <Button active>Forced-Active Button</Button>
- *     </div>
- *   );
- * }
  */
 BaseButton.defaultProps = {
   active: false,

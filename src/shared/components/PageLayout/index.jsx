@@ -5,19 +5,6 @@ import { themed } from 'utils';
 import baseTheme from './base-theme.scss';
 
 /**
- * @category Components
- * @func PageLayout
- * @desc
- * ```jsx
- * import { PageLayout } from '@dr.pogodin/react-utils';
- * export default PageLayoutDemo() {
- *   return (
- *     <PageLayout>
- *       Page content.
- *     </PageLayout>
- *   );
- * }
- * ```
  * Simple and themeable page layout. It keeps the main content centered in
  * a column of limited width, which fills entire viewport on small screens
  * (under `$screen-md = 1024px` size). At larger screens the column keeps
@@ -53,17 +40,6 @@ function PageLayout({
   );
 }
 
-/**
- * @category Components
- * @typedef {object} PageLayoutTheme {@link PageLayout} component theme.
- * @prop {string} [container] Class for the root container of page layout.
- * @prop {string} [mainPanel] Class for the main content panel.
- * @prop {string} [sidePanel] Class for each side panel.
- * @prop {string} [leftSidePanel] Class for the left side panel (in addition to
- * `.sidePanel`, if also provided).
- * @prop {string} [rightSidePanel] Class for the right side panel (in addition
- * to `.sidePanel`, if also provided).
- */
 const ThemedPageLayout = themed('PageLayout', [
   'container',
   'leftSidePanel',
