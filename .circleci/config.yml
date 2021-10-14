@@ -25,7 +25,7 @@ jobs:
           working_directory: docs
       - save_cache:
           key: docs-node-modules-{{ checksum "docs/package-lock.json" }}
-          path:
+          paths:
             - docs/node_modules
       - run: rm -rf docs/node_modules
       - persist_to_workspace:
