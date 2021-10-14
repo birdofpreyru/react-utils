@@ -7,15 +7,26 @@
 /* eslint-disable global-require, import/no-dynamic-require,
   import/no-unresolved, no-eval */
 
-const IS_NODE = typeof process !== 'undefined'
-  && process.versions && process.versions.node;
+let lib;
 
-/* Note: The check must be placed directly inside if(..) so that webpack
- * is able to drop out unnecessary branch during the optimization. */
-if (process.env.NODE_ENV === 'production') {
-  module.exports = IS_NODE ? eval('require')('./build/production')
-    : require('./build/production/web.bundle');
-} else {
-  module.exports = IS_NODE ? eval('require')('./build/development')
-    : require('./build/development/web.bundle');
+try {
+  if (process.versions.node) {
+    lib = process.env.NODE_ENV === 'production'
+      ? './build/production' : './build/development';
+    lib = eval('require')(lib);
+  }
+} catch (error) {
+  lib = undefined;
 }
+
+if (!lib) {
+  // NOTE: process.env.NODE_ENV check must be done explicitly here to ensure
+  // that webpack is able to optimize out the unncessary branch.
+  if (process.env.NODE_ENV === 'production') {
+    lib = require('./build/production/web.bundle');
+  } else {
+    lib = require('./build/development/web.bundle');
+  }
+}
+
+module.exports = lib;

@@ -22,5 +22,5 @@ automatically wrap the app into `<GlobalStateProvider>`, also the [server] wires
 incoming HTTP request object via SSR context, attaching it as `req` field to
 the context.
 
-[client]: /docs/api/utils/client
-[server]: /docs/api/utils/server
+[client]: /docs/api/functions/client
+[server]: /docs/api/functions/server

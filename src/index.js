@@ -4,8 +4,12 @@ import { isomorphy, webpack } from 'utils';
 
 let server = null; // eslint-disable-line import/no-mutable-exports
 if (isomorphy.IS_SERVER_SIDE) {
-  const path = webpack.requireWeak('path');
-  server = webpack.requireWeak(path.resolve(__dirname, './server'));
+  try {
+    const path = webpack.requireWeak('path');
+    server = webpack.requireWeak(path.resolve(__dirname, './server'));
+  } catch (error) {
+    server = null;
+  }
 }
 
 export { default as _ } from 'lodash';
