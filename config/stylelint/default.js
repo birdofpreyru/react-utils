@@ -1,5 +1,5 @@
 module.exports = {
-  extends: 'stylelint-config-standard',
+  extends: 'stylelint-config-standard-scss',
   rules: {
     'at-rule-no-unknown': [true, {
       ignoreAtRules: [
@@ -12,6 +12,7 @@ module.exports = {
         'use',
       ],
     }],
+    'selector-class-pattern': null,
     'selector-pseudo-class-no-unknown': [
       true, { ignorePseudoClasses: ['global'] },
     ],

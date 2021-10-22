@@ -12,12 +12,12 @@
  */
 @mixin font-family($font-name, $font-weight, $font-style, $font-url, $font-file) {
   @font-face {
-    font-family: '#{$font-name}';
+    font-family: "#{$font-name}";
     font-display: block;
     font-weight: $font-weight;
     font-style: $font-style;
-    src: url('#{$font-url}#{$font-file}.eot');
-    src: url('#{$font-url}#{$font-file}.eot?#iefix') format('embedded-opentype'), url('#{$font-url}#{$font-file}.woff') format('woff'), url('#{$font-url}#{$font-file}.ttf') format('truetype'), url('#{$font-url}#{$font-file}.svg##{$font-name}') format('svg');
+    src: url("#{$font-url}#{$font-file}.eot");
+    src: url("#{$font-url}#{$font-file}.eot?#iefix") format("embedded-opentype"), url("#{$font-url}#{$font-file}.woff") format("woff"), url("#{$font-url}#{$font-file}.ttf") format("truetype"), url("#{$font-url}#{$font-file}.svg##{$font-name}") format("svg");
   }
 }
 
@@ -35,6 +35,6 @@
     font-display: block;
     font-style: $font-style;
     font-weight: $font-weight;
-    src: url('#{$font-url}.ttf') format('truetype');
+    src: url("#{$font-url}.ttf") format("truetype");
   }
 }

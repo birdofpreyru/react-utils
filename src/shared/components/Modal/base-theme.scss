@@ -1,4 +1,4 @@
-@import 'styles/mixins';
+@import "styles/mixins";
 
 *,
 .context,
@@ -7,7 +7,7 @@
     background: #eee;
     height: 100%;
     left: 0;
-    opacity: 0.8;
+    opacity: 80%;
     position: fixed;
     top: 0;
     width: 100%;
@@ -18,7 +18,7 @@
 
   &.container {
     background: #fff;
-    box-shadow: 0 0 14px 1px rgba(38, 38, 40, 0.15);
+    box-shadow: 0 0 14px 1px rgba(38 38 40 / 15%);
     border-radius: 4;
     max-height: 95vh;
     max-width: $screen-md;
