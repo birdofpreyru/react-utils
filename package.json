@@ -89,7 +89,7 @@
     "sass-loader": "^12.3.0",
     "sitemap": "^7.0.0",
     "stylelint": "^14.0.1",
-    "stylelint-config-standard-scss": "^2.0.0",
+    "stylelint-config-standard-scss": "^2.0.1",
     "supertest": "^6.1.6",
     "webpack": "^5.61.0",
     "webpack-dev-middleware": "^5.2.1",
