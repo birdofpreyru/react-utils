@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import Button from 'components/Button';
 import { snapshot } from 'utils/jest';
-import { StaticRouter } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom/server';
 
 const testTheme = {
   active: 'ACTIVE_CLASS',
@@ -43,7 +43,7 @@ describe('Matches snapshots', () => {
   });
   test('when rendered as link', () => {
     snapshot((
-      <StaticRouter>
+      <StaticRouter location="/">
         <Button
           active
           theme={testTheme}

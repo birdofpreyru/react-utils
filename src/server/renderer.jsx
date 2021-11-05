@@ -13,7 +13,7 @@ import { brotliCompress, brotliDecompress } from 'zlib';
 
 import ReactDOM from 'react-dom/server';
 import { Helmet } from 'react-helmet';
-import { StaticRouter } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom/server';
 import serializeJs from 'serialize-javascript';
 
 import time from 'utils/time';
@@ -210,10 +210,7 @@ export default function factory(webpackConfig, options) {
               initialState={ssrContext.state}
               ssrContext={ssrContext}
             >
-              <StaticRouter
-                context={ssrContext}
-                location={req.url}
-              >
+              <StaticRouter location={req.url || '/'}>
                 <App />
               </StaticRouter>
             </GlobalStateProvider>

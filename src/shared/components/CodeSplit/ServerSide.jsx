@@ -11,7 +11,7 @@ import {
   GlobalStateProvider,
   useAsyncData,
 } from '@dr.pogodin/react-global-state';
-import { StaticRouter } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom/server';
 
 /**
  * A specially wrapped `require()`, which is passed as an argument into
@@ -69,10 +69,7 @@ export default function ServerSide({
   const globalState = getGlobalState();
   const html = ReactDom.renderToString((
     <GlobalStateProvider stateProxy={globalState}>
-      <StaticRouter
-        context={globalState.ssrContext}
-        location={globalState.ssrContext.req.url}
-      >
+      <StaticRouter location={globalState.ssrContext.req.url || '/'}>
         <Scene {...rest} />
       </StaticRouter>
     </GlobalStateProvider>
