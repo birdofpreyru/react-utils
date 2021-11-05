@@ -2,7 +2,7 @@
 
 exports[`Absolute link, starting with http:// 1`] = `
 <a
-  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___2InLXV"
+  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
   disabled={false}
   href="http://www.domain.com/test"
   onClick={null}
@@ -16,7 +16,7 @@ exports[`Absolute link, starting with http:// 1`] = `
 
 exports[`Absolute link, starting with https:// 1`] = `
 <a
-  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___2InLXV"
+  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
   disabled={false}
   href="https://www.domain.com/test"
   onClick={[Function]}
@@ -30,7 +30,7 @@ exports[`Absolute link, starting with https:// 1`] = `
 
 exports[`Anchor link 1`] = `
 <a
-  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___2InLXV"
+  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
   disabled={false}
   href="#anchor"
   onClick={null}
@@ -54,7 +54,7 @@ exports[`Relative link 1`] = `
 
 exports[`Relative link, with \`enforceA\` 1`] = `
 <a
-  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___2InLXV"
+  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
   disabled={false}
   href="/relative/link"
   onClick={null}
@@ -68,7 +68,7 @@ exports[`Relative link, with \`enforceA\` 1`] = `
 
 exports[`Relative link, with \`openNewTab\` 1`] = `
 <a
-  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___2InLXV"
+  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
   disabled={false}
   href="relative/link"
   onClick={null}
