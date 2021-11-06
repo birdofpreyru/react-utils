@@ -46,21 +46,16 @@ Both `<Link>` and `<NavLink>` support all properties of the underlying
 - `to` - **string** - Target URL.
 
 ### [NavLink]-only
-- `activeClassName` - **string** - CSS class(es) to apply when
-  the link is active.
-- `activeStyle` - **string** - CSS style(s) to apply when the link is active.
-- `exact` - **boolean** - Opts to only apply the active class (style) if
-  the location exactly matches link URL.
-- `isActive` - **function** - Custom logic to determine whether the link is
-  active (the default logic just tests whether the current location URL matches
-  the link's pathname).
-- `location` - **object** - A custom location to test the active state against.
-  By default the current history location (usually the current browser's URL)
-  is used.
-- `strict` - **boolean** Opts to strictly account for the absense (presence) of
-  the trailing slash in the current URL when the active state is tested.
+- `caseSensitive` - **boolean**
+- `className` - **string** | **function** - By default "active" classname is
+  automatically added if the link is active. The prop can be a function with
+  the signature: `(isActive: boolean) => string`.
+- `end` - **boolean** - Opts to apply the active state only if the current
+  location is at the end of this link's URL.
+- `style` - **object** | **function** - Can be either styles object,
+  or a function with the signature `(isActive: boolean) => object`.
 
 [Link]: /docs/api/components/link
 [NavLink]: /docs/api/components/navlink
-[React Router]: https://reactrouter.com/web/guides/quick-start
+[React Router]: https://reactrouter.com/docs/en/v6
 
