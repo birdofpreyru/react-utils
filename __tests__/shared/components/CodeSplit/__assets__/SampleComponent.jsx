@@ -5,21 +5,23 @@
  * that code splitting has not broke related functionality.
  */
 
-import { Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { useGlobalState } from '@dr.pogodin/react-global-state';
 
 export default function SampleComponent() {
   const [state] = useGlobalState();
   return (
-    <Route
-      path=""
-      component={() => (
-        <div>
-          <h1>Sample Component</h1>
-          <pre>{JSON.stringify(state, null, 2)}</pre>
-        </div>
-      )}
-    />
+    <Routes>
+      <Route
+        path=""
+        element={(
+          <div>
+            <h1>Sample Component</h1>
+            <pre>{JSON.stringify(state, null, 2)}</pre>
+          </div>
+        )}
+      />
+    </Routes>
   );
 }

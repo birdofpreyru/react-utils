@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import Button from 'components/Button';
 import { snapshot } from 'utils/jest';
-import { StaticRouter } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom/server';
 
 const testTheme = {
   active: 'ACTIVE_CLASS',

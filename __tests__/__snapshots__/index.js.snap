@@ -147,10 +147,6 @@ Object {
   "server": null,
   "themed": [Function],
   "time": [Function],
-  "url": Object {
-    "default": null,
-    "parent": [Function],
-  },
   "useAsyncCollection": [Function],
   "useAsyncData": [Function],
   "useGlobalState": [Function],
@@ -824,10 +820,6 @@ Object {
   "server": [Function],
   "themed": [Function],
   "time": [Function],
-  "url": Object {
-    "default": null,
-    "parent": [Function],
-  },
   "useAsyncCollection": [Function],
   "useAsyncData": [Function],
   "useGlobalState": [Function],

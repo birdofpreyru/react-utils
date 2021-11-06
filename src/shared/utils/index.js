@@ -7,7 +7,6 @@ import themed, {
 import config from './config';
 import * as isomorphy from './isomorphy';
 import time from './time';
-import * as url from './url';
 import * as webpack from './webpack';
 
 themed.COMPOSE = COMPOSE;
@@ -106,6 +105,5 @@ export {
   themed,
   ThemeProvider,
   time,
-  url,
   webpack,
 };

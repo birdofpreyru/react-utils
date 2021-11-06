@@ -72,7 +72,6 @@ title: Overview
 - [themed](/docs/api/utils/themed) - Aliases for
   [React Themes](https://dr.pogodin.studio/docs/react-themes) library.
 - [time](/docs/api/utils/time) - Date & time utils.
-- [url](/docs/api/utils/url) - URL utils.
 - [webpack](/docs/api/utils/webpack) - [Webpack]-related utils.
 
 [axios]: https://www.npmjs.com/package/axios

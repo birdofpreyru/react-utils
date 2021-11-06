@@ -6,12 +6,12 @@ import serializeJs from 'serialize-javascript';
 
 import {
   getGlobalState,
+  getSsrContext,
   GlobalStateProvider,
   useGlobalState,
 } from '@dr.pogodin/react-global-state';
 
 import { Helmet } from 'react-helmet';
-import { Route } from 'react-router-dom';
 
 global.mockFailsForgeRandomGetBytesMethod = false;
 
@@ -211,19 +211,12 @@ test('Injection of additional JS scripts',
 
 test('Server-side rendering (SSR); injection of CSS chunks & Redux state',
   () => coreTest(TEST_WEBPACK_CONFIG, {
-    Application: () => (
-      <Route
-        component={({ staticContext }) => {
-          staticContext.chunks.push('test-chunk-a');
-          staticContext.chunks.push('test-chunk-b');
-          return (
-            <div>
-              Hello Wold!
-            </div>
-          );
-        }}
-      />
-    ),
+    Application: () => {
+      const context = getSsrContext();
+      context.chunks.push('test-chunk-a');
+      context.chunks.push('test-chunk-b');
+      return <div>Hello Wold!</div>;
+    },
     beforeRender: async () => ({
       initialState: _.cloneDeep(TEST_INITIAL_STATE),
     }),
@@ -233,18 +226,11 @@ test('Server-side rendering (SSR); injection of CSS chunks & Redux state',
 
 test('Setting of response HTTP status the server-side rendering', () => {
   coreTest(TEST_WEBPACK_CONFIG, {
-    Application: () => (
-      <Route
-        component={({ staticContext }) => {
-          staticContext.status = 404; // eslint-disable-line no-param-reassign
-          return (
-            <div>
-              404 Error Test
-            </div>
-          );
-        }}
-      />
-    ),
+    Application: () => {
+      const context = getSsrContext();
+      context.status = 404; // eslint-disable-line no-param-reassign
+      return <div>404 Error Test</div>;
+    },
     maxSsrRounds: 3,
     ssrTimeout: Number.MAX_VALUE,
   });

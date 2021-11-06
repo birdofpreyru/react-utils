@@ -13,23 +13,6 @@ exports[`Matches snapshots 1`] = `
   routerLinkType={
     Object {
       "$$typeof": Symbol(react.forward_ref),
-      "propTypes": Object {
-        "activeClassName": [Function],
-        "activeStyle": [Function],
-        "aria-current": [Function],
-        "className": [Function],
-        "exact": [Function],
-        "innerRef": [Function],
-        "isActive": [Function],
-        "location": [Function],
-        "onClick": [Function],
-        "replace": [Function],
-        "sensitive": [Function],
-        "strict": [Function],
-        "style": [Function],
-        "target": [Function],
-        "to": [Function],
-      },
       "render": [Function],
     }
   }
@@ -50,23 +33,6 @@ exports[`Matches snapshots 2`] = `
   routerLinkType={
     Object {
       "$$typeof": Symbol(react.forward_ref),
-      "propTypes": Object {
-        "activeClassName": [Function],
-        "activeStyle": [Function],
-        "aria-current": [Function],
-        "className": [Function],
-        "exact": [Function],
-        "innerRef": [Function],
-        "isActive": [Function],
-        "location": [Function],
-        "onClick": [Function],
-        "replace": [Function],
-        "sensitive": [Function],
-        "strict": [Function],
-        "style": [Function],
-        "target": [Function],
-        "to": [Function],
-      },
       "render": [Function],
     }
   }
