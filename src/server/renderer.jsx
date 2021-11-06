@@ -210,7 +210,7 @@ export default function factory(webpackConfig, options) {
               initialState={ssrContext.state}
               ssrContext={ssrContext}
             >
-              <StaticRouter location={req.url || '/'}>
+              <StaticRouter location={req.url}>
                 <App />
               </StaticRouter>
             </GlobalStateProvider>

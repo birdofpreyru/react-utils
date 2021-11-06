@@ -69,7 +69,7 @@ export default function ServerSide({
   const globalState = getGlobalState();
   const html = ReactDom.renderToString((
     <GlobalStateProvider stateProxy={globalState}>
-      <StaticRouter location={globalState.ssrContext.req.url || '/'}>
+      <StaticRouter location={globalState.ssrContext.req.url}>
         <Scene {...rest} />
       </StaticRouter>
     </GlobalStateProvider>
