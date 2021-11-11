@@ -8,13 +8,13 @@ import rimraf from 'rimraf';
 import webpack, { ProgressPlugin } from 'webpack';
 
 import webpackConfigFactoryAppDev
-from '../../../config/webpack/app-development';
+  from '../../../config/webpack/app-development';
 import webpackConfigFactoryAppProd
-from '../../../config/webpack/app-production';
+  from '../../../config/webpack/app-production';
 import webpackConfigFactoryLibDev
-from '../../../config/webpack/lib-development';
+  from '../../../config/webpack/lib-development';
 import webpackConfigFactoryLibProd
-from '../../../config/webpack/lib-production';
+  from '../../../config/webpack/lib-production';
 
 const tmpDir = `${__dirname}/__tmp__`;
 const BABEL = path.resolve('node_modules/.bin/babel');

@@ -5,7 +5,7 @@ import webpack, { ProgressPlugin } from 'webpack';
 import { snapshot } from 'utils/jest';
 
 import webpackConfigFactoryAppDev
-from '../../../config/webpack/app-production';
+  from '../../../config/webpack/app-production';
 
 import App from './__assets__';
 
