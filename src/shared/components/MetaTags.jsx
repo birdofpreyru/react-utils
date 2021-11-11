@@ -1,5 +1,5 @@
 import PT from 'prop-types';
-import { createContext } from 'react';
+import { createContext, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 
 const Context = createContext();
@@ -69,6 +69,25 @@ export default function MetaTags({
 }) {
   const socTitle = socialTitle || title;
   const socDesc = socialDescription || description;
+
+  const context = useMemo(() => ({
+    description,
+    image,
+    siteName,
+    socialDescription,
+    socialTitle,
+    title,
+    url,
+  }), [
+    description,
+    image,
+    siteName,
+    socialDescription,
+    socialTitle,
+    title,
+    url,
+  ]);
+
   return (
     <>
       <Helmet>
@@ -101,17 +120,7 @@ export default function MetaTags({
       </Helmet>
       {
         children ? (
-          <Context.Provider
-            value={{
-              description,
-              image,
-              siteName,
-              socialDescription,
-              socialTitle,
-              title,
-              url,
-            }}
-          >
+          <Context.Provider value={context}>
             {children}
           </Context.Provider>
         ) : null

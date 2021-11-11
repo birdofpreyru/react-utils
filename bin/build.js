@@ -59,9 +59,7 @@ program
     'path to the webpack config',
     'webpack.config.js',
   )
-  .option(
-    '-c, --copy-files <regex>', 'copy files matching the pattern into the build folder',
-  );
+  .option('-c, --copy-files <regex>', 'copy files matching the pattern into the build folder');
 
 program.parse(process.argv);
 const cmdLineArgs = program.opts();

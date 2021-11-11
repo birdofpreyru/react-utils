@@ -9,7 +9,7 @@
       "aspects": ["invalidHref", "noHref", "preferButton"]
     }],
     "no-plusplus": 0,
-    "react/function-component-definition": [2, {
+    "react/function-component-definition": ["error", {
       "namedComponents": "function-declaration",
       "unnamedComponents": "arrow-function"
     }],

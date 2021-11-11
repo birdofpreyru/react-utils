@@ -14,6 +14,7 @@ var _TestComponent = _interopRequireDefault(require(\\"./MockPackageA/TestCompon
 
 var _jsxRuntime = require(\\"react/jsx-runtime\\");
 
+// eslint-disable-next-line import/no-relative-packages
 var styles = {
   \\"sampleClassName\\": \\"-dr-pogodin-react-utils_____tests__-config-stylename-generation-__assets__-style___sampleClassName___QXUpkv\\"
 };
@@ -63,6 +64,7 @@ var _TestComponent = _interopRequireDefault(require(\\"./MockPackageA/TestCompon
 
 var _jsxRuntime = require(\\"react/jsx-runtime\\");
 
+// eslint-disable-next-line import/no-relative-packages
 var styles = {
   \\"sampleClassName\\": \\"QXUpkv\\"
 };

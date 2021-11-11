@@ -11,11 +11,13 @@ import { BrowserRouter } from 'react-router-dom';
  * @param {object} Application Root application component
  */
 export default function Launch(Application) {
-  ReactDom.hydrate((
-    <GlobalStateProvider initialState={window.ISTATE}>
-      <BrowserRouter>
-        <Application />
-      </BrowserRouter>
-    </GlobalStateProvider>
-  ), document.getElementById('react-view'));
+  ReactDom.hydrate(
+    (
+      <GlobalStateProvider initialState={window.ISTATE}>
+        <BrowserRouter>
+          <Application />
+        </BrowserRouter>
+      </GlobalStateProvider>
+    ), document.getElementById('react-view'),
+  );
 }

@@ -9,6 +9,10 @@ import CodeSplit from 'components/CodeSplit';
 
 import { webpack } from 'utils';
 
+function Placeholder() {
+  return <div>PLACEHOLDER!</div>;
+}
+
 export default function SampleCodeSplit() {
   const [testKey] = useGlobalState('test.key', 'testValue');
   return (
@@ -25,7 +29,7 @@ export default function SampleCodeSplit() {
         getComponentAsync={
           () => import(/* webpackChunkName: 'sample-component-2' */ './SampleComponent')
         }
-        placeholder={() => <div>PLACEHOLDER!</div>}
+        placeholder={Placeholder}
       />
       <CodeSplit
         chunkName="sample-component-3"
@@ -36,7 +40,7 @@ export default function SampleCodeSplit() {
           const p = webpack.resolveWeak('./SampleComponent');
           return webpack.requireWeak(path.resolve(__dirname, p));
         }}
-        placeholder={() => <div>PLACEHOLDER!</div>}
+        placeholder={Placeholder}
       />
     </>
   );

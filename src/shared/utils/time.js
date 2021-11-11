@@ -86,7 +86,9 @@ dayjs.now = Date.now;
  * time.timer(5000).then(() => console.log('5 seconds have passed'))
  */
 dayjs.timer = async function timer(timeout) {
-  return new Promise((resolve) => setTimeout(resolve, timeout));
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
 };
 
 export default dayjs;

@@ -92,7 +92,7 @@
     "stylelint": "^14.0.1",
     "stylelint-config-standard-scss": "^2.0.1",
     "supertest": "^6.1.6",
-    "webpack": "^5.63.0",
+    "webpack": "^5.64.0",
     "webpack-dev-middleware": "^5.2.1",
     "webpack-hot-middleware": "^2.25.1",
     "webpack-merge": "^5.8.0",

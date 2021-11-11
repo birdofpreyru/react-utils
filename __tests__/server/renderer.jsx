@@ -122,15 +122,18 @@ async function coreTest(webpackConfig, options) {
   }
 }
 
-test('Base rendering of HTML template',
-  () => coreTest(TEST_WEBPACK_CONFIG, {}));
+test(
+  'Base rendering of HTML template',
+  () => coreTest(TEST_WEBPACK_CONFIG, {}),
+);
 
 test(
   '"favicon" option',
   () => coreTest(TEST_WEBPACK_CONFIG, { favicon: '/path/to/favicon.ico' }),
 );
 
-test('Config overriding for injection',
+test(
+  'Config overriding for injection',
   () => coreTest(TEST_WEBPACK_CONFIG, {
     beforeRender: async (res, sanitizedConfig) => {
       expect(res).toEqual(TEST_HTTP_REQUEST);
@@ -143,15 +146,16 @@ test('Config overriding for injection',
         },
       };
     },
-  }));
+  }),
+);
 
 test('JS constructs in global state', () => {
-  const Component = () => {
+  function Component() {
     useGlobalState('test.1', 'defaultValue');
     useGlobalState('set', new Set([1, 2]));
     const { state } = getGlobalState();
     return <div>{serializeJs(state)}</div>;
-  };
+  }
   return coreTest(TEST_WEBPACK_CONFIG, {
     Application: () => (
       <GlobalStateProvider>
@@ -162,7 +166,8 @@ test('JS constructs in global state', () => {
   });
 });
 
-test('Helmet integration works',
+test(
+  'Helmet integration works',
   () => coreTest(TEST_WEBPACK_CONFIG, {
     Application: () => (
       <div>
@@ -182,9 +187,11 @@ test('Helmet integration works',
     ),
     maxSsrRounds: 3,
     ssrTimeout: Number.MAX_VALUE,
-  }));
+  }),
+);
 
-test('Injection of additional JS scripts',
+test(
+  'Injection of additional JS scripts',
   () => coreTest(TEST_WEBPACK_CONFIG, {
     beforeRender: async () => ({
       extraScripts: [
@@ -207,9 +214,11 @@ test('Injection of additional JS scripts',
         },
       ],
     }),
-  }));
+  }),
+);
 
-test('Server-side rendering (SSR); injection of CSS chunks & Redux state',
+test(
+  'Server-side rendering (SSR); injection of CSS chunks & Redux state',
   () => coreTest(TEST_WEBPACK_CONFIG, {
     Application: () => {
       const context = getSsrContext();
@@ -222,7 +231,8 @@ test('Server-side rendering (SSR); injection of CSS chunks & Redux state',
     }),
     maxSsrRounds: 3,
     ssrTimeout: Number.MAX_VALUE,
-  }));
+  }),
+);
 
 test('Setting of response HTTP status the server-side rendering', () => {
   coreTest(TEST_WEBPACK_CONFIG, {

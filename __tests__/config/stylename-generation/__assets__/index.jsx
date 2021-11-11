@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-relative-packages
 import A from './MockPackageA/TestComponent';
 import styles from './style.scss';
 
