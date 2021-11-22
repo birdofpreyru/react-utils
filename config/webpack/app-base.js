@@ -5,7 +5,13 @@
  * Base [Webpack](https://webpack.js.org/) configuration for apps.
  */
 
-const _ = require('lodash');
+const {
+  clone,
+  defaults,
+  isFunction,
+  isObject,
+} = require('lodash');
+
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const forge = require('node-forge');
@@ -122,7 +128,7 @@ const {
  *   - **`timestamp`** &mdash; The value set for `BUILD_TIMESTAMP`.
  */
 module.exports = function configFactory(ops) {
-  const o = _.defaults(_.clone(ops), {
+  const o = defaults(clone(ops), {
     babelLoaderOptions: {},
     cssLocalIdent: '[hash:base64:6]',
     outputPath: 'build/web-public',
@@ -135,7 +141,7 @@ module.exports = function configFactory(ops) {
     const sitemapUrl = path.resolve(o.context, o.sitemap);
     /* eslint-disable global-require, import/no-dynamic-require */
     let source = require(sitemapUrl);
-    if (_.isFunction(source)) source = source();
+    if (isFunction(source)) source = source();
     /* eslint-enable global-require, import/no-dynamic-require */
     const sm = new SM.SitemapStream();
     source.forEach((item) => sm.write(item));
@@ -192,7 +198,7 @@ module.exports = function configFactory(ops) {
 
   /* Adds InjectManifest plugin from WorkBox, if opted to. */
   if (o.workbox) {
-    if (!_.isObject(o.workbox)) o.workbox = {};
+    if (!isObject(o.workbox)) o.workbox = {};
     plugins.push(new WorkboxPlugin.InjectManifest({
       swSrc: path.resolve(__dirname, '../workbox/default.js'),
       ...o.workbox,

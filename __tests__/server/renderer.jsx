@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { clone, cloneDeep } from 'lodash';
 import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable } from 'server/renderer';
 import fs from 'fs';
 
@@ -76,7 +76,7 @@ async function coreTest(webpackConfig, options) {
   try {
     let render = '';
     await renderer(
-      _.clone(TEST_HTTP_REQUEST),
+      clone(TEST_HTTP_REQUEST),
       {
         locals: {
           webpack: {
@@ -227,7 +227,7 @@ test(
       return <div>Hello Wold!</div>;
     },
     beforeRender: async () => ({
-      initialState: _.cloneDeep(TEST_INITIAL_STATE),
+      initialState: cloneDeep(TEST_INITIAL_STATE),
     }),
     maxSsrRounds: 3,
     ssrTimeout: Number.MAX_VALUE,

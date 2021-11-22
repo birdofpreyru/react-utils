@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { noop, omit } from 'lodash';
 import Button from 'components/Button';
 import { snapshot } from 'utils/jest';
 import { StaticRouter } from 'react-router-dom/server';
@@ -14,7 +14,7 @@ describe('Matches snapshots', () => {
     snapshot((
       <Button
         active
-        onClick={_.noop}
+        onClick={noop}
         theme={testTheme}
       >
         BUTTON
@@ -25,7 +25,7 @@ describe('Matches snapshots', () => {
     snapshot((
       <Button
         disabled
-        onClick={_.noop}
+        onClick={noop}
         theme={testTheme}
       >
         BUTTON
@@ -34,8 +34,8 @@ describe('Matches snapshots', () => {
     snapshot((
       <Button
         disabled
-        onClick={_.noop}
-        theme={_.omit(testTheme, 'disabled')}
+        onClick={noop}
+        theme={omit(testTheme, 'disabled')}
       >
         BUTTON
       </Button>

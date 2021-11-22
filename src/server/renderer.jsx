@@ -4,7 +4,17 @@
 
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
 
-import _ from 'lodash';
+import {
+  clone,
+  cloneDeep,
+  defaults,
+  isObject,
+  isString,
+  get,
+  mapValues,
+  omit,
+} from 'lodash';
+
 import config from 'config';
 import forge from 'node-forge';
 import fs from 'fs';
@@ -20,7 +30,7 @@ import time from 'utils/time';
 
 import Cache from './Cache';
 
-const sanitizedConfig = _.omit(config, 'SECRET');
+const sanitizedConfig = omit(config, 'SECRET');
 
 export const SCRIPT_LOCATIONS = {
   BODY_OPEN: 'BODY_OPEN',
@@ -140,7 +150,7 @@ export default function factory(webpackConfig, options) {
 
   const CHUNK_GROUPS = readChunkGroupsJson(outputPath);
 
-  const ops = _.defaults(_.clone(options), {
+  const ops = defaults(clone(options), {
     beforeRender: () => Promise.resolve({}),
   });
 
@@ -195,7 +205,7 @@ export default function factory(webpackConfig, options) {
       let App = options.Application;
       const ssrContext = {
         req,
-        state: _.cloneDeep(initialState || {}),
+        state: cloneDeep(initialState || {}),
 
         // Array of chunk names encountered during the rendering.
         chunks: [],
@@ -235,9 +245,9 @@ export default function factory(webpackConfig, options) {
       }
 
       let chunkGroups;
-      const webpackStats = _.get(res.locals, 'webpack.devMiddleware.stats');
+      const webpackStats = get(res.locals, 'webpack.devMiddleware.stats');
       if (webpackStats) {
-        chunkGroups = _.mapValues(
+        chunkGroups = mapValues(
           webpackStats.toJson({
             all: false,
             chunkGroups: true,
@@ -306,17 +316,17 @@ export default function factory(webpackConfig, options) {
       let headOpenExtraScripts;
       if (extraScripts) {
         bodyOpenExtraScripts = extraScripts
-          .filter((script) => _.isObject(script)
+          .filter((script) => isObject(script)
             && script.location === SCRIPT_LOCATIONS.BODY_OPEN)
           .map((script) => script.code)
           .join('');
         defaultExtraScripts = extraScripts
-          .filter((script) => _.isString(script)
+          .filter((script) => isString(script)
             || script.location === SCRIPT_LOCATIONS.DEFAULT)
-          .map((script) => (_.isString(script) ? script : script.code))
+          .map((script) => (isString(script) ? script : script.code))
           .join('');
         headOpenExtraScripts = extraScripts
-          .filter((script) => _.isObject(script)
+          .filter((script) => isObject(script)
             && script.location === SCRIPT_LOCATIONS.HEAD_OPEN)
           .map((script) => script.code)
           .join('');

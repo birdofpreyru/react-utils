@@ -30,8 +30,3 @@ test('Export at server side', () => {
 
   Object.entries(lib.server).forEach((item) => expect(item).toMatchSnapshot());
 });
-
-test('Lodash alias works', () => {
-  const { _ } = require('../src');
-  expect(_.upperCase('it works')).toBe('IT WORKS');
-});

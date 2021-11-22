@@ -3,7 +3,7 @@
 
 // TODO: Split client- and server-side tests into two separate test modules.
 
-import _ from 'lodash';
+import { clone } from 'lodash';
 import { mockClientSide, unmockClientSide } from 'utils/jest';
 
 test('Base test', () => {
@@ -23,8 +23,8 @@ describe('Isomorphy behavior tests', () => {
   beforeEach(() => {
     unmockClientSide();
     jest.resetModules();
-    jest.setMock('config', _.clone(SERVER_SIDE_CONFIG));
-    window.CONFIG = _.clone(CLIENT_SIDE_CONFIG);
+    jest.setMock('config', clone(SERVER_SIDE_CONFIG));
+    window.CONFIG = clone(CLIENT_SIDE_CONFIG);
   });
 
   afterEach(() => unmockClientSide());

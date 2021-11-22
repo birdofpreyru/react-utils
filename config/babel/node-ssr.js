@@ -44,7 +44,7 @@
  */
 /* eslint-disable import/no-extraneous-dependencies */
 
-const _ = require('lodash');
+const { pick, pull } = require('lodash');
 const postcssScss = require('postcss-scss');
 const getWebpackBabelConfig = require('./webpack');
 
@@ -66,7 +66,7 @@ const {
  * @ignore
  */
 function newBase(babel, options = {}) {
-  const baseOps = _.pick(options, ['noStyling']);
+  const baseOps = pick(options, ['noStyling']);
   const config = getWebpackBabelConfig(
     babel,
     { ...baseOps, targets: 'current node' },
@@ -90,7 +90,7 @@ function newBase(babel, options = {}) {
   ];
 
   if (babel.env() === getWebpackBabelConfig.ENVIRONMENTS.DEV) {
-    _.pull(config.plugins, 'react-refresh/babel');
+    pull(config.plugins, 'react-refresh/babel');
   }
 
   return config;

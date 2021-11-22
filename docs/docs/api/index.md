@@ -57,8 +57,6 @@ title: Overview
 - [SCSS Mixins](/docs/api/styles/mixins) - Useful SCSS mixins.
 
 ## Utilities
-- [_ (lodash)](/docs/api/utils/lodash) - An alias for [Lodash] library (generic
-  JS helpers).
 - [api](/docs/api/utils/api) - An alias for [axios] library (HTTP(S) client).
 - [config](/docs/api/utils/config) - Isomorphic app config.
 - [isomorphy](/docs/api/utils/isomorphy) - Helpers for isomorphic code logic.
@@ -78,7 +76,6 @@ title: Overview
 [Babel]: https://babeljs.io
 [ESLint]: https://eslint.org
 [Jest]: https://jestjs.io
-[Lodash]: https://lodash.com
 [prop-types]: https://www.npmjs.com/package/prop-types
 [Stylelint]: https://stylelint.io
 [Webpack]: https://webpack.js.org

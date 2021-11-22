@@ -1,6 +1,15 @@
 import 'source-map-support/register';
 
-import _ from 'lodash';
+import {
+  cloneDeep,
+  defaults,
+  isFinite,
+  isNumber,
+  isUndefined,
+  isString,
+  toNumber,
+} from 'lodash';
+
 import http from 'http';
 import https from 'https';
 
@@ -27,9 +36,9 @@ const DEFAULT_SSR_TIMEOUT = 1000;
  * @return Port number (Number), name (String), or false.
  */
 function normalizePort(value) {
-  const port = _.toNumber(value);
-  if (_.isFinite(port)) return port; /* port number */
-  if (!_.isNumber(port)) return value; /* named pipe */
+  const port = toNumber(value);
+  if (isFinite(port)) return port; /* port number */
+  if (!isNumber(port)) return value; /* named pipe */
   return false;
 }
 
@@ -153,16 +162,16 @@ function normalizePort(value) {
  */
 async function launch(webpackConfig, options) {
   /* Options normalization. */
-  const ops = options ? _.cloneDeep(options) : {};
+  const ops = options ? cloneDeep(options) : {};
   ops.port = normalizePort(ops.port || process.env.PORT || 3000);
-  _.defaults(ops, {
+  defaults(ops, {
     httpsRedirect: true,
     maxSsrRounds: DEFAULT_MAX_SSR_ROUNDS,
     ssrTimeout: DEFAULT_SSR_TIMEOUT,
   });
   if (!ops.staticCacheSize) ops.staticCacheSize = 1.e7;
 
-  if (_.isUndefined(ops.logger)) {
+  if (isUndefined(ops.logger)) {
     const { format, transports } = winston;
     ops.logger = winston.createLogger({
       level: ops.defaultLoggerLogLevel || 'info',
@@ -205,7 +214,7 @@ async function launch(webpackConfig, options) {
   /* Sets error handler for HTTP(S) server. */
   httpServer.on('error', (error) => {
     if (error.syscall !== 'listen') throw error;
-    const bind = _.isString(ops.port) ? `Pipe ${ops.port}` : `Port ${ops.port}`;
+    const bind = isString(ops.port) ? `Pipe ${ops.port}` : `Port ${ops.port}`;
 
     /* Human-readable message for some specific listen errors. */
     switch (error.code) {
@@ -225,7 +234,7 @@ async function launch(webpackConfig, options) {
   /* Listening event handler for HTTP(S) server. */
   httpServer.on('listening', () => {
     const addr = httpServer.address();
-    const bind = _.isString(addr) ? `pipe ${addr}` : `port ${addr.port}`;
+    const bind = isString(addr) ? `pipe ${addr}` : `port ${addr.port}`;
     ops.logger.info(`Server listening on ${bind} in ${
       process.env.NODE_ENV} mode`);
   });

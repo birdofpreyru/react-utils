@@ -3,7 +3,7 @@
  * @module webpack/app-development
  * @desc development Webpack configuration for applications.
  */
-const _ = require('lodash');
+const { clone, defaults } = require('lodash');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
@@ -14,7 +14,7 @@ const { merge } = require('webpack-merge');
 const baseFactory = require('./app-base');
 
 module.exports = function configFactory(ops) {
-  const o = _.defaults(_.clone(ops), {
+  const o = defaults(clone(ops), {
     cssLocalIdent: '[package]___[path][name]___[local]___[hash:base64:6]',
   });
 

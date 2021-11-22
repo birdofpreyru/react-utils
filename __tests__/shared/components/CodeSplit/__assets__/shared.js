@@ -1,6 +1,6 @@
 // The code needed both for server and client-side tests.
 
-import _ from 'lodash';
+import { cloneDeep } from 'lodash';
 import factory from 'server/renderer';
 
 const TEST_HTTP_REQUEST = {
@@ -25,7 +25,7 @@ export async function renderServerSide(Scene, maxSsrRounds) {
   const { IS_SERVER_SIDE } = require('utils/isomorphy');
   expect(IS_SERVER_SIDE).toBe(true);
   const renderer = factory(
-    _.cloneDeep(TEST_WEBPACK_CONFIG),
+    cloneDeep(TEST_WEBPACK_CONFIG),
     {
       Application: Scene,
       maxSsrRounds,
@@ -34,7 +34,7 @@ export async function renderServerSide(Scene, maxSsrRounds) {
   );
   let render = '';
   await renderer(
-    _.cloneDeep(TEST_HTTP_REQUEST),
+    cloneDeep(TEST_HTTP_REQUEST),
     {
       locals: {
         webpack: {

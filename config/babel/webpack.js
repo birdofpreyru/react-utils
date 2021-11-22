@@ -48,7 +48,7 @@
  * - In _development_ environment it also sets up `react-refresh/babel`.
  */
 
-const _ = require('lodash');
+const { pick } = require('lodash');
 
 const {
   generateScopedNameDev,
@@ -151,7 +151,7 @@ function addStyling(config, env) {
 function getPreset(babel, ops = {}) {
   const env = babel.env();
 
-  const baseOps = _.pick(ops, ['targets']);
+  const baseOps = pick(ops, ['targets']);
   const res = newBaseConfig(baseOps);
 
   if (!ops.noStyling) addStyling(res, env);

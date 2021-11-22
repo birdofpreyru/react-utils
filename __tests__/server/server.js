@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { clone } from 'lodash';
 import supertest from 'supertest';
 
 import serverFactory from 'server/server';
@@ -45,7 +45,7 @@ afterEach(() => {
 
 test('Favicon support', () => {
   const server = serverFactory(TEST_WEBPACK_CONFIG, {
-    favicon: _.clone(TEST_FAVICON_PATH),
+    favicon: clone(TEST_FAVICON_PATH),
     logger,
   });
   expect(require('serve-favicon')).toHaveBeenCalledWith(TEST_FAVICON_PATH);

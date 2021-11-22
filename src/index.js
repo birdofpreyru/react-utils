@@ -12,7 +12,6 @@ if (isomorphy.IS_SERVER_SIDE) {
   }
 }
 
-export { default as _ } from 'lodash';
 export { default as api } from 'axios';
 export * as PT from 'prop-types';
 

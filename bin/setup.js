@@ -6,7 +6,7 @@ const { spawnSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const _ = require('lodash');
+const { clone } = require('lodash');
 const { program } = require('commander');
 
 const NPM_COMMAND = process.platform === 'win32' ? 'npm.cmd' : 'npm';
@@ -78,7 +78,7 @@ function generateTargetPackage(entry) {
  */
 function adoptDevDependencies(donorData, hostData) {
   /* Inits deps as a map of all donor's dev dependencies. */
-  let deps = _.clone(donorData.devDependencies) || {};
+  let deps = clone(donorData.devDependencies) || {};
 
   /* Removes from the map any prod dependencies of host. */
   Object.entries(hostData.dependencies || {})
