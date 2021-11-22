@@ -1,6 +1,6 @@
 // The code needed both for server and client-side tests.
 
-import { cloneDeep } from 'lodash';
+import { cloneDeep, noop } from 'lodash';
 import factory from 'server/renderer';
 
 const TEST_HTTP_REQUEST = {
@@ -72,6 +72,7 @@ export async function renderServerSide(Scene, maxSsrRounds) {
         },
       },
       send: (x) => { render += x; },
+      set: noop,
       status: (x) => { render += `HTTP STATUS: ${x}\n`; },
     },
     (error) => expect(error).toMatchSnapshot(),

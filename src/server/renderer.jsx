@@ -156,6 +156,9 @@ export default function factory(webpackConfig, options) {
 
   return async (req, res, next) => {
     try {
+      // Ensures any caches always revalidate HTML markup before reuse.
+      res.set('Cache-Control', 'no-cache');
+
       let cacheRef;
       if (cache) {
         cacheRef = options.staticCacheController(req);

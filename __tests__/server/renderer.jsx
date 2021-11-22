@@ -1,4 +1,4 @@
-import { clone, cloneDeep } from 'lodash';
+import { clone, cloneDeep, noop } from 'lodash';
 import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable } from 'server/renderer';
 import fs from 'fs';
 
@@ -112,6 +112,7 @@ async function coreTest(webpackConfig, options) {
           },
         },
         send: (x) => { render += x; },
+        set: noop,
         status: (x) => { render += `HTTP STATUS: ${x}\n`; },
       },
       (error) => expect(error).toMatchSnapshot(),
