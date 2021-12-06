@@ -862,7 +862,7 @@ Array [
       "types": [Function],
       "untrace": [Function],
       "valid": [Function],
-      "version": "17.4.2",
+      "version": "17.5.0",
       "when": [Function],
       "x": [Function],
       Symbol(@hapi/lab/coverage/initialize): [Function],
