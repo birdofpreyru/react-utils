@@ -18,10 +18,15 @@ const TEST_WEBPACK_CONFIG = {
 
 /**
  * Reproduces the core of server-side rendering setup.
- * @param {Object} Scene
- * @param {Number} [maxSsrRounds]
+ * @param {object} Scene
+ * @param {object} [options]
+ * @param {number} [options.maxSsrRounds]
+ * @param {string} [options.url]
  */
-export async function renderServerSide(Scene, maxSsrRounds) {
+export async function renderServerSide(Scene, {
+  maxSsrRounds,
+  url,
+} = {}) {
   const { IS_SERVER_SIDE } = require('utils/isomorphy');
   expect(IS_SERVER_SIDE).toBe(true);
   const renderer = factory(
@@ -34,7 +39,10 @@ export async function renderServerSide(Scene, maxSsrRounds) {
   );
   let render = '';
   await renderer(
-    cloneDeep(TEST_HTTP_REQUEST),
+    {
+      ...TEST_HTTP_REQUEST,
+      url: url || '/',
+    },
     {
       locals: {
         webpack: {

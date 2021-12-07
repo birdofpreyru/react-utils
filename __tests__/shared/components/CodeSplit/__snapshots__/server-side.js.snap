@@ -1,5 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`React Router works inside CodeSplit 1`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+
+  <head>
+
+    <title data-react-helmet=\\"true\\"></title>
+
+    <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
+
+    <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+
+    <meta charset=\\"utf-8\\" />
+    <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
+  </head>
+
+  <body>
+
+    <div id=\\"react-view\\">
+      <div data-chunk-name=\\"split\\">
+        <div>Hello World!</div>
+      </div>
+    </div>
+    <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
+      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBb1VDFWdXsViFyeX13tuynQ88EETx6RuQyms6aHDjsZzm54u6pdtE5bElWjYQQYYKWQ6Q7AG6jOJ0m4jyHJEL2hbRtKnBKIGH+RZ8NtSPyZUdQIHOOyAmEjNWwTcoflKwqX1yZQFqY61t71j0sQev32jJQxdFCAfnIPEBbQyoMOthnONT2MDoAhYBo7mW5WvIIwKZOdbtEV00hm8UfXRtHfiDZlOuY93yXGAlvaXY18BqM3DPSi818K7Z1H4SWC1VYTGrNkXoMDIE6ybStZpZjR4spwNSQv32yICqmIFSe5L6VP07D+zuaRT8l8Kisyjw5b2Xh3ZZWsXzZjicu32lyebon9uckaiJy3Jj8fVO83oGnoVoG23K8ksWQe5vTPxUvDNJMayc7CzFtcUZFtdicQT0RPhKYtcvngtzc19MY6p+qkKCL2LZKs23sA7deEo1\\"
+    </script>
+    <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+
+  </body>
+
+</html>"
+`;
+
+exports[`React Router works inside CodeSplit 2`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+
+  <head>
+
+    <title data-react-helmet=\\"true\\"></title>
+
+    <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
+
+    <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+
+    <meta charset=\\"utf-8\\" />
+    <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
+  </head>
+
+  <body>
+
+    <div id=\\"react-view\\">
+      <div data-chunk-name=\\"split\\">
+        <div>Hello World!</div>
+      </div>
+    </div>
+    <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
+      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBb1VDFWdXsViFyeX13tuynQ88EETx6RuQyms6aHDjsZzm54u6pdtE5bElWjYQQYYKWQ6Q7AG6jOJ0m4jyHJEL2hbRtKnBKIGH+RZ8NtSPyZUdQIHOOyAmEjNWwTcoflKwqX1yZQFqY61t71j0sQev32jJQxdFCAfnIPEBbQyoMOthnONT2MDoAhYBo7mW5WvIIwKZOdbtEV00hm8UfXRtHfiDZlOuY93yXGAlvaXY18BqM3DPSi818K7Z1H4SWC1VYTGrNkXoMDIE6ybStZpZjR4spwNSQv32yICqmIFSe5L6VP07D+zuaRT8l8Kisyjw5b2Xh3ZZWsXzZjicu32lyebon9uckaiJy3Jj8fVO83oGnoVoG23K8ksWQe5vTPxUvDNJMayc7CzFtcUZFtdicQT0RPhKYtcvngtzc19MY6p+qkKCL2LZKs23sA7deEo1\\"
+    </script>
+    <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+
+  </body>
+
+</html>"
+`;
+
 exports[`Server-side rendering 1`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">

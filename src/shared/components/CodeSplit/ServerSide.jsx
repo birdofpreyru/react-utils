@@ -11,6 +11,8 @@ import {
   GlobalStateProvider,
   useAsyncData,
 } from '@dr.pogodin/react-global-state';
+
+import { useResolvedPath } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 
 /**
@@ -67,9 +69,13 @@ export default function ServerSide({
   }
 
   const globalState = getGlobalState();
+  const { pathname } = useResolvedPath('');
   const html = ReactDom.renderToString((
     <GlobalStateProvider stateProxy={globalState}>
-      <StaticRouter location={globalState.ssrContext.req.url}>
+      <StaticRouter
+        basename={pathname}
+        location={globalState.ssrContext.req.url}
+      >
         <Scene {...rest} />
       </StaticRouter>
     </GlobalStateProvider>

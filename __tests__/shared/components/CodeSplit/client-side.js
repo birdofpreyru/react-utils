@@ -25,7 +25,7 @@ test('Client-side rendering', async () => {
   Helmet.canUseDOM = false;
 
   let SampleCodeSplit = require('./__assets__/SampleCodeSplit').default;
-  let serverMarkup = renderServerSide(SampleCodeSplit, 3);
+  let serverMarkup = renderServerSide(SampleCodeSplit, { maxSsrRounds: 3 });
   await jest.runAllTimers();
   serverMarkup = await serverMarkup;
   document.write(serverMarkup);
