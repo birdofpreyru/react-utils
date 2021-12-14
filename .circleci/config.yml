@@ -17,12 +17,12 @@ jobs:
             - node_modules
       - run: npm run build && npm pack
       - restore_cache:
-          key: docs-node-modules-{{ checksum "docs/package-lock.json" }}
+          key: docs-node-modules-{{ checksum "docs/package.json" }}
       - run:
           command: npm install ../dr.pogodin-react-utils-*.tgz && npm install
           working_directory: docs
       - save_cache:
-          key: docs-node-modules-{{ checksum "docs/package-lock.json" }}
+          key: docs-node-modules-{{ checksum "docs/package.json" }}
           paths:
             - docs/node_modules
       - run: npm test
