@@ -9,6 +9,10 @@ const EDIT_BASE = `${CODE_REPO}/edit/master/docs`;
 
 const NPM_URL = 'https://www.npmjs.com/package/@dr.pogodin/react-utils';
 
+const REACT_UTILS_STYLES = process.env.NODE_ENV === 'development'
+  ? '@dr.pogodin/react-utils/dev-styles'
+  : '@dr.pogodin/react-utils/prod-styles';
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'React Utils',
@@ -32,7 +36,7 @@ const config = {
         theme: {
           customCss: [
             // TODO: Should be prod-styles for prod compilation!
-            require.resolve('@dr.pogodin/react-utils/dev-styles'),
+            require.resolve(REACT_UTILS_STYLES),
             require.resolve('./src/css/custom.scss'),
           ],
         },
