@@ -25,6 +25,7 @@ emitter.emit('Are you listening?'); // Console outputs nothing.
 - [constructor()] - Creates a new emitter with no listeners connected.
 - [addListener()] - Connects given listener to the emitter.
 - [emit()] - Calls every connected listener with given arguments.
+- [removeListener()] - Disconnects given listener from the emitter.
 
 ### constructor()
 ```jsx
@@ -57,7 +58,7 @@ emitter.removeListener(listener: function);
 Disconnects given `listener` from the emitter, or does nothing if it is not
 connected to it.
 
-[Emitter]: /docs/api/classes/emitter
+[Emitter]: /docs/api/classes/Emitter
 [addListener()]: #addlistener
 [constructor()]: #constructor
 [emit()]: #emit

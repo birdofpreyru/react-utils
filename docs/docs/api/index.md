@@ -6,7 +6,7 @@ title: Overview
 ---
 
 ## Classes
-- [Emitter](/docs/api/classes/emitter) - Simple listeneable data emitter.
+- [Emitter](/docs/api/classes/Emitter) - Simple listeneable data emitter.
 
 ## Components
 - [Button](/docs/api/components/button) - Themed button / button-like link.
