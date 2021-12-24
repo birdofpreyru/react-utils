@@ -5,6 +5,9 @@ slug: /api
 title: Overview
 ---
 
+## Classes
+- [Emitter](/docs/api/classes/emitter) - Simple listeneable data emitter.
+
 ## Components
 - [Button](/docs/api/components/button) - Themed button / button-like link.
 - [Checkbox](/docs/api/components/checkbox) - Themed checkbox.

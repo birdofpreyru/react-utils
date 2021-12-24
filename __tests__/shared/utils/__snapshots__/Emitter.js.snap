@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`.addListener() adds given listeners at most once 1`] = `
+Emitter {
+  "listeners": Array [
+    [MockFunction A],
+  ],
+}
+`;
+
+exports[`.addListener() adds given listeners at most once 2`] = `
+Emitter {
+  "listeners": Array [
+    [MockFunction A],
+  ],
+}
+`;
+
+exports[`.addListener() adds given listeners at most once 3`] = `
+Emitter {
+  "listeners": Array [
+    [MockFunction A],
+    [MockFunction B],
+  ],
+}
+`;
+
+exports[`.addListener() adds given listeners at most once 4`] = `
+Emitter {
+  "listeners": Array [
+    [MockFunction A],
+    [MockFunction B],
+  ],
+}
+`;
+
+exports[`.addListener() removes functional unsubscribe function 1`] = `
+Emitter {
+  "listeners": Array [
+    [MockFunction A],
+    [MockFunction B],
+    [MockFunction C],
+  ],
+}
+`;
+
+exports[`.addListener() removes functional unsubscribe function 2`] = `
+Emitter {
+  "listeners": Array [
+    [MockFunction A],
+    [MockFunction C],
+  ],
+}
+`;
+
+exports[`.addListener() removes functional unsubscribe function 3`] = `
+Emitter {
+  "listeners": Array [
+    [MockFunction A],
+  ],
+}
+`;
+
+exports[`.addListener() removes functional unsubscribe function 4`] = `
+Emitter {
+  "listeners": Array [
+    [MockFunction A],
+  ],
+}
+`;
+
+exports[`.emit() calls connected listeners with given arguments 1`] = `
+Array [
+  Array [
+    "ARG1",
+    "arg2",
+  ],
+]
+`;
+
+exports[`.emit() calls connected listeners with given arguments 2`] = `
+Array [
+  Array [
+    "ARG1",
+    "arg2",
+  ],
+]
+`;
+
+exports[`.emit() calls connected listeners with given arguments 3`] = `
+Array [
+  Array [
+    "ARG1",
+    "arg2",
+  ],
+]
+`;
+
+exports[`.emit() calls connected listeners with given arguments 4`] = `
+Array [
+  Array [
+    "ARG1",
+    "arg2",
+  ],
+  Array [
+    "second call",
+  ],
+]
+`;
+
+exports[`.removeListener() removes given listener if it is connected 1`] = `
+Emitter {
+  "listeners": Array [
+    [MockFunction A],
+    [MockFunction B],
+    [MockFunction C],
+    [MockFunction D],
+  ],
+}
+`;
+
+exports[`.removeListener() removes given listener if it is connected 2`] = `
+Emitter {
+  "listeners": Array [
+    [MockFunction B],
+    [MockFunction C],
+    [MockFunction D],
+  ],
+}
+`;
+
+exports[`.removeListener() removes given listener if it is connected 3`] = `
+Emitter {
+  "listeners": Array [
+    [MockFunction B],
+    [MockFunction D],
+  ],
+}
+`;
+
+exports[`.removeListener() removes given listener if it is connected 4`] = `
+Emitter {
+  "listeners": Array [
+    [MockFunction B],
+    [MockFunction D],
+  ],
+}
+`;
+
+exports[`constructor() creates a new emitter with empty listeners array 1`] = `
+Emitter {
+  "listeners": Array [],
+}
+`;

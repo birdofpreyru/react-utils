@@ -19,6 +19,7 @@ Object {
     "render": [Function],
     "themeType": [Function],
   },
+  "Emitter": [Function],
   "GlobalStateProvider": [Function],
   "Input": Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -269,6 +270,7 @@ Object {
     "render": [Function],
     "themeType": [Function],
   },
+  "Emitter": [Function],
   "GlobalStateProvider": [Function],
   "Input": Object {
     "$$typeof": Symbol(react.forward_ref),

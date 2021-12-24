@@ -9,6 +9,8 @@ import * as isomorphy from './isomorphy';
 import time from './time';
 import * as webpack from './webpack';
 
+export { default as Emitter } from './Emitter';
+
 themed.COMPOSE = COMPOSE;
 themed.PRIORITY = PRIORITY;
 
