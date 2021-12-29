@@ -250,7 +250,6 @@ The generated config does the following:
   - `react-helmet`
   - `react-router-dom`
   - `uuid`
-  - `url-parse`
 
 ### Development {#lib-dev}
 ```js

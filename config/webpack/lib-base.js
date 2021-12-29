@@ -32,7 +32,6 @@ module.exports = function configFactory(ops) {
       'react-helmet',
       'react-router-dom',
       'uuid',
-      'url-parse',
     ],
     mode: ops.mode,
     output: {
