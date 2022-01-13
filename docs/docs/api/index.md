@@ -6,6 +6,8 @@ title: Overview
 ---
 
 ## Classes
+- [Barrier] - A [Promise] with **resolve()** and **reject()** exposed as
+  instance methods.
 - [Emitter](/docs/api/classes/Emitter) - Simple listeneable data emitter.
 
 ## Components
@@ -42,8 +44,7 @@ title: Overview
 ## Functions
 - [client()](/docs/api/functions/client) - Client-side initialization and
   launch of ReactJS apps.
-- [newBarrier()](/docs/api/functions/newbarrier) - Creates an async barrier
-  object.
+- [newBarrier()](/docs/api/functions/newbarrier) - Creates a new [Barrier].
 - [server()](/docs/api/functions/server) - Creates and starts ReactJS server.
 - [withRetries()](/docs/api/functions/withretries) - Attempts an operation
   multiple times till the first success.
@@ -77,8 +78,10 @@ title: Overview
 
 [axios]: https://www.npmjs.com/package/axios
 [Babel]: https://babeljs.io
+[Barrier]: /docs/api/classes/Barrier
 [ESLint]: https://eslint.org
 [Jest]: https://jestjs.io
 [prop-types]: https://www.npmjs.com/package/prop-types
+[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [Stylelint]: https://stylelint.io
 [Webpack]: https://webpack.js.org

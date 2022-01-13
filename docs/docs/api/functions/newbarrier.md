@@ -2,21 +2,12 @@
 ```jsx
 import { newBarrier } from '@dr.pogodin/react-utils';
 
-newBarrier(): Promise
+newBarrier(): Barrier
 ```
-
-Creates a new asynchronous barrier: a **Promise** instance which has its
-`resolve()` method attached as `resolve` field.
-
-**Example**
+Creates a new [Barrier] instances. It is just a syntax sugare which makes this
+more readable:
 ```jsx
-import { newBarrier, time } from '@dr.pogodin/react-utils';
-
-(async () => {
-  const barrier = newBarrier();
-  time.timer(5000).then(() => barrier.resolve());
-  await barrier;
-  console.log('Done');
-})();
+const barrier = newBarrier().then(() => console.log('OK'));
 ```
 
+[Barrier]: /docs/api/classes/Barrier

@@ -2,6 +2,7 @@
 
 exports[`Export at client side 1`] = `
 Object {
+  "Barrier": [Function],
   "BaseModal": [Function],
   "Button": Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -253,6 +254,7 @@ Array [
 
 exports[`Export at server side 1`] = `
 Object {
+  "Barrier": [Function],
   "BaseModal": [Function],
   "Button": Object {
     "$$typeof": Symbol(react.forward_ref),

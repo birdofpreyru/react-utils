@@ -9,6 +9,7 @@ import * as isomorphy from './isomorphy';
 import time from './time';
 import * as webpack from './webpack';
 
+export * from './Barrier';
 export { default as Emitter } from './Emitter';
 
 themed.COMPOSE = COMPOSE;
@@ -22,33 +23,6 @@ if (isomorphy.IS_SERVER_SIDE
   const path = webpack.requireWeak('path');
   JU = webpack.requireWeak(path.resolve(__dirname, './jest'));
   /* eslint-enable global-require */
-}
-
-/**
- * @category Utilities
- * @func newBarrier
- * @global
- * @desc
- * ```js
- * import { newBarrier } from '@dr.pogodin/react-utils';
- * ```
- * Creates a new async barrier: a Promise instance with its resolve method
- * attached as `.resolve` field.
- * @return {Promise}
- * @example
- * import { newBarrier } from '@dr.pogodin/react-utils';
- * (async () => {
- *   const barrier = newBarrier();
- *   setTimeout(() => barrier.resolve(), 5000);
- *   await barrier;
- *   console.log('This will be printed only after the timeout fires.');
- * })();
- */
-function newBarrier() {
-  let resolve;
-  const promise = new Promise((res) => { resolve = res; });
-  promise.resolve = resolve;
-  return promise;
 }
 
 /**
@@ -103,7 +77,6 @@ export {
   config,
   isomorphy,
   JU,
-  newBarrier,
   themed,
   ThemeProvider,
   time,

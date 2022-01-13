@@ -43,7 +43,7 @@ connected. Each connected listener will be called once on each subsequent
 
 This method returns a function which can be triggered with no arguments to
 unsubscribe `listener` from the emitter. It is just an auxiliary wrapper around
-[.removeListener()] method, which can be used alternatively.
+[removeListener()] method, which can be used alternatively.
 
 ### emit()
 ```jsx
