@@ -109,7 +109,14 @@ export default async function factory(webpackConfig, options) {
   }
 
   server.use(compression());
-  server.use(helmet({ contentSecurityPolicy: false }));
+  server.use(
+    helmet({
+      contentSecurityPolicy: false,
+      crossOriginEmbedderPolicy: false,
+      crossOriginOpenerPolicy: false,
+      crossOriginResourcePolicy: false,
+    }),
+  );
 
   if (!options.noCsp) {
     server.use((req, res, next) => {
