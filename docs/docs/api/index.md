@@ -14,8 +14,8 @@ title: Overview
 ## Components
 - [Button](/docs/api/components/button) - Themed button / button-like link.
 - [Checkbox](/docs/api/components/checkbox) - Themed checkbox.
-- [CodeSplit](/docs/api/components/codesplit) - Defines a split (async-loaded)
-  app segment.
+- ~~[CodeSplit]~~ - Removed in **v1.14.0**, use [splitComponent()] instead
+  ([migration guidelines][CodeSplit]).
 - [Dropdown](/docs/api/components/dropdown) - Themed dropdown.
 - [Input](/docs/api/components/input) - Themed text input.
 - [Link](/docs/api/components/link) - External / internal hyperlink.
@@ -47,8 +47,7 @@ title: Overview
   launch of ReactJS apps.
 - [newBarrier()](/docs/api/functions/newbarrier) - Creates a new [Barrier].
 - [server()](/docs/api/functions/server) - Creates and starts ReactJS server.
-- [splitComponent()](/docs/api/functions/splitcomponent) - Wraps a React
-  component for code splitting.
+- [splitComponent()] - Wraps a React component for code splitting.
 - [withRetries()](/docs/api/functions/withretries) - Attempts an operation
   multiple times till the first success.
 
@@ -83,9 +82,11 @@ title: Overview
 [axios]: https://www.npmjs.com/package/axios
 [Babel]: https://babeljs.io
 [Barrier]: /docs/api/classes/Barrier
+[CodeSplit]: /docs/api/components/codesplit
 [ESLint]: https://eslint.org
 [Jest]: https://jestjs.io
 [prop-types]: https://www.npmjs.com/package/prop-types
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[splitComponent()]: /docs/api/functions/splitcomponent
 [Stylelint]: https://stylelint.io
 [Webpack]: https://webpack.js.org
