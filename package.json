@@ -128,5 +128,5 @@
     "lint:scss": "stylelint -- **/*.{css,scss}",
     "test": "npm run lint && npm run jest"
   },
-  "version": "1.14.0"
+  "version": "1.14.1"
 }
