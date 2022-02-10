@@ -32,9 +32,6 @@
  *   matching (S)CSS transformations done by
  *   `@dr.pogodin/babel-plugin-react-css-modules` plugin on (S)CSS code.
  *
- * - Sets up [@babel/plugin-syntax-dynamic-import](https://www.npmjs.com/package/@babel/plugin-syntax-dynamic-import)
- *   to allow for dynamic `import()` statements.
- *
  * - Sets up [babel-plugin-tranform-assets](https://www.npmjs.com/package/@dr.pogodin/babel-plugin-transform-assets)
  *   to convert GIF, JPEG, JPG, and PNG imports into emitted asset paths, like
  *   `/images/[FILE_HASH].[FILE_EXTENSION]`. The `baseAssetsOutputPath` preset
@@ -74,7 +71,6 @@ function newBase(babel, options = {}) {
 
   const baseAssetsOutputPath = options.baseAssetsOutputPath || '';
   config.plugins.push(
-    '@babel/syntax-dynamic-import',
     ['@dr.pogodin/transform-assets', {
       extensions: ['gif', 'jpeg', 'jpg', 'png'],
       name: `${baseAssetsOutputPath}/images/[hash:20].[ext]`,

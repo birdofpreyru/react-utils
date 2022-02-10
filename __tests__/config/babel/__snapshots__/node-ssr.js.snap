@@ -35,7 +35,6 @@ Object {
         "generateScopedName": [Function],
       },
     ],
-    "@babel/syntax-dynamic-import",
     Array [
       "@dr.pogodin/transform-assets",
       Object {
@@ -106,7 +105,6 @@ Object {
       },
     ],
     "@babel/transform-runtime",
-    "@babel/syntax-dynamic-import",
     Array [
       "@dr.pogodin/transform-assets",
       Object {
@@ -173,7 +171,6 @@ Object {
         "generateScopedName": [Function],
       },
     ],
-    "@babel/syntax-dynamic-import",
     Array [
       "@dr.pogodin/transform-assets",
       Object {
@@ -256,7 +253,6 @@ Object {
         "generateScopedName": [Function],
       },
     ],
-    "@babel/syntax-dynamic-import",
     Array [
       "@dr.pogodin/transform-assets",
       Object {
@@ -327,7 +323,6 @@ Object {
       },
     ],
     "@babel/transform-runtime",
-    "@babel/syntax-dynamic-import",
     Array [
       "@dr.pogodin/transform-assets",
       Object {
@@ -394,7 +389,6 @@ Object {
         "generateScopedName": [Function],
       },
     ],
-    "@babel/syntax-dynamic-import",
     Array [
       "@dr.pogodin/transform-assets",
       Object {
