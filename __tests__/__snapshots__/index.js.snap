@@ -14,7 +14,6 @@ Object {
     "render": [Function],
     "themeType": [Function],
   },
-  "CodeSplit": [Function],
   "Dropdown": Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
@@ -137,7 +136,6 @@ Object {
   },
   "api": [Function],
   "client": [Function],
-  "codeSplit": [Function],
   "config": undefined,
   "getGlobalState": [Function],
   "isomorphy": Object {
@@ -150,6 +148,7 @@ Object {
   },
   "newBarrier": [Function],
   "server": null,
+  "splitComponent": [Function],
   "themed": [Function],
   "time": [Function],
   "useAsyncCollection": [Function],
@@ -267,7 +266,6 @@ Object {
     "render": [Function],
     "themeType": [Function],
   },
-  "CodeSplit": [Function],
   "Dropdown": Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
@@ -491,7 +489,6 @@ Object {
   },
   "api": [Function],
   "client": [Function],
-  "codeSplit": [Function],
   "config": Object {
     "SECRET": Object {
       "dummySecretKey": "Dummy Secret Value",
@@ -509,6 +506,7 @@ Object {
   },
   "newBarrier": [Function],
   "server": [Function],
+  "splitComponent": [Function],
   "themed": [Function],
   "time": [Function],
   "useAsyncCollection": [Function],

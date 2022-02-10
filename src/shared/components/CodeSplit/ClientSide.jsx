@@ -8,14 +8,19 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useAsyncData } from '@dr.pogodin/react-global-state';
 
-import { newBarrier } from 'utils';
+import { newBarrier } from 'utils/Barrier';
 import { getBuildInfo } from 'utils/isomorphy';
 import time from 'utils/time';
 
 export default function ClientSide({
   chunkName,
-  getComponentAsync,
+  children,
+  getClientSide,
   placeholder,
+
+  // Not used in <ClientSide>, but should not go into "...rest" either.
+  serverSide,
+
   ...rest
 }) {
   const { current: heap } = useRef({
@@ -56,13 +61,19 @@ export default function ClientSide({
   // Async loading of React component necessary to render the chunk.
   const { data } = useAsyncData(
     `dr_pogodin_react_utils___split_components.${chunkName}`,
-    getComponentAsync,
+    getClientSide,
     { maxage: time.YEAR_MS },
   );
 
   const createRender = () => {
     const Scene = data.default || data;
-    return <div data-chunk-name={chunkName}><Scene {...rest} /></div>;
+    return (
+      <div data-chunk-name={chunkName}>
+        <Scene {...rest}>
+          {children}
+        </Scene>
+      </div>
+    );
   };
 
   const [render, setRender] = useState(() => {
@@ -87,7 +98,7 @@ export default function ClientSide({
 
     // Else render placeholder, or empty div.
     const Scene = placeholder || (() => null);
-    return <div><Scene /></div>;
+    return <div><Scene {...rest}>{children}</Scene></div>;
   });
 
   // At this point, if we have data, the absense of heap.renderInitialized flag

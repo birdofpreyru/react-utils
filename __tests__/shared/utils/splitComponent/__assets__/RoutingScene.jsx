@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import CodeSplit from 'components/CodeSplit';
+import splitComponent from 'utils/splitComponent';
 
 function Component() {
   return <div>Hello World!</div>;
@@ -13,18 +13,14 @@ function InnerRouter() {
   );
 }
 
-// NOTE: This is not how <CodeSplit> should be used to actually split the code
-// during Webpack build, but this simplistic code is enough to test its behavior
-// alongside React Router use.
-function Split() {
-  return (
-    <CodeSplit
-      chunkName="split"
-      getComponentAsync={() => InnerRouter}
-      getComponentServer={() => InnerRouter}
-    />
-  );
-}
+// Note: this is not exactly how splitComponent() should be used to actually
+// split the code during Webpack build, but this simplistic code is enough
+// to test its behavior alongside React Router use.
+const Split = splitComponent({
+  chunkName: 'split',
+  getClientSide: () => InnerRouter,
+  serverSide: InnerRouter,
+});
 
 export function RoutingScene1() {
   return (
