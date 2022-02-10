@@ -14,8 +14,6 @@ title: Overview
 ## Components
 - [Button](/docs/api/components/button) - Themed button / button-like link.
 - [Checkbox](/docs/api/components/checkbox) - Themed checkbox.
-- ~~[CodeSplit]~~ - Removed in **v1.14.0**, use [splitComponent()] instead
-  ([migration guidelines][CodeSplit]).
 - [Dropdown](/docs/api/components/dropdown) - Themed dropdown.
 - [Input](/docs/api/components/input) - Themed text input.
 - [Link](/docs/api/components/link) - External / internal hyperlink.
@@ -33,6 +31,10 @@ title: Overview
   circles).
 - [WithTooltip](/docs/api/components/withtooltip) - Themed tooltip wrapper.
 - [YouTubeVideo](/docs/api/components/youtubevideo) - Embed YouTube video.
+
+**Deprecated Components**
+- [CodeSplit] - Removed in **v1.14.0**, use [splitComponent()] instead
+  ([migration guidelines][CodeSplit]).
 
 ## Configs
 - [Babel](/docs/api/configs/babel) - Configs (presets) for [Babel] builds.
