@@ -2,15 +2,7 @@ import { webpack } from 'utils';
 
 import ClientSide from './ClientSide';
 
-let Component; // eslint-disable-line import/no-mutable-exports
-
-try {
-  Component = webpack.requireWeak('./ServerSide', __dirname);
-} catch (error) {
-  Component = undefined;
-}
-
-if (!Component) Component = ClientSide;
+const Component = webpack.requireWeak('./ServerSide', __dirname) || ClientSide;
 
 export default Component;
 

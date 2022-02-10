@@ -1,4 +1,4 @@
-import { IS_SERVER_SIDE } from './isomorphy';
+import { IS_CLIENT_SIDE } from './isomorphy';
 
 /**
  * Requires the specified module without including it into the bundle during
@@ -8,21 +8,25 @@ import { IS_SERVER_SIDE } from './isomorphy';
  * @return {object} Required module.
  */
 export function requireWeak(modulePath, basePath) {
-  if (!IS_SERVER_SIDE) return null;
+  if (IS_CLIENT_SIDE) return null;
 
-  /* eslint-disable no-eval */
-  const { resolve } = eval('require')('path');
-  const path = basePath ? resolve(basePath, modulePath) : modulePath;
-  const { default: def, ...named } = eval('require')(path);
-  /* eslint-enable no-eval */
+  try {
+    /* eslint-disable no-eval */
+    const { resolve } = eval('require')('path');
+    const path = basePath ? resolve(basePath, modulePath) : modulePath;
+    const { default: def, ...named } = eval('require')(path);
+    /* eslint-enable no-eval */
 
-  if (!def) return named;
+    if (!def) return named;
 
-  Object.entries(named).forEach(([key, value]) => {
-    if (def[key]) throw Error('Conflict between default and named exports');
-    def[key] = value;
-  });
-  return def;
+    Object.entries(named).forEach(([key, value]) => {
+      if (def[key]) throw Error('Conflict between default and named exports');
+      def[key] = value;
+    });
+    return def;
+  } catch {
+    return null;
+  }
 }
 
 /**
