@@ -2,7 +2,6 @@
  * This is a sample component, doing a code split.
  */
 
-import path from 'path';
 import { useGlobalState } from '@dr.pogodin/react-global-state';
 
 import CodeSplit from 'components/CodeSplit';
@@ -36,10 +35,9 @@ export default function SampleCodeSplit() {
         getComponentAsync={
           () => import(/* webpackChunkName: 'sample-component-3' */ './SampleComponent')
         }
-        getComponentServer={() => {
-          const p = webpack.resolveWeak('./SampleComponent');
-          return webpack.requireWeak(path.resolve(__dirname, p));
-        }}
+        getComponentServer={
+          () => webpack.requireWeak('./SampleComponent', __dirname)
+        }
         placeholder={Placeholder}
       />
     </>

@@ -1,12 +1,11 @@
-import { isomorphy, webpack } from 'utils';
+import { webpack } from 'utils';
 
 import ClientSide from './ClientSide';
 
 let Component; // eslint-disable-line import/no-mutable-exports
 
 try {
-  Component = isomorphy.IS_SERVER_SIDE
-    && webpack.requireWeak(`${__dirname}/ServerSide`);
+  Component = webpack.requireWeak('./ServerSide', __dirname);
 } catch (error) {
   Component = undefined;
 }

@@ -15,15 +15,8 @@ export { default as Emitter } from './Emitter';
 themed.COMPOSE = COMPOSE;
 themed.PRIORITY = PRIORITY;
 
-let JU = null; // eslint-disable-line import/no-mutable-exports
-if (isomorphy.IS_SERVER_SIDE
-  && (process.env.NODE_CONFIG_ENV || process.env.NODE_ENV) !== 'production'
-) {
-  /* eslint-disable global-require */
-  const path = webpack.requireWeak('path');
-  JU = webpack.requireWeak(path.resolve(__dirname, './jest'));
-  /* eslint-enable global-require */
-}
+const env = process.env.NODE_CONFIG_ENV || process.env.NODE_ENV;
+const JU = env !== 'production' && webpack.requireWeak('./jest', __dirname);
 
 /**
  * @category Utilities
