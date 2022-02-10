@@ -17,7 +17,15 @@ export { default as splitComponent } from './splitComponent';
 themed.COMPOSE = COMPOSE;
 themed.PRIORITY = PRIORITY;
 
-const env = process.env.NODE_CONFIG_ENV || process.env.NODE_ENV;
+// Note: it should be done this way, as in some environments
+// "process" might not exist, and process.env.NODE_CONFIG_ENV
+// not injected by Webpack.
+let NODE_CONFIG_ENV;
+try {
+  NODE_CONFIG_ENV = process.env.NODE_CONFIG_ENV;
+} catch { /* noop */ }
+
+const env = NODE_CONFIG_ENV || process.env.NODE_ENV;
 const JU = env !== 'production' && webpack.requireWeak('./jest', __dirname);
 
 /**

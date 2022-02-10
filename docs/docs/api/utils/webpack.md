@@ -5,8 +5,8 @@ import { webpack } from '@dr.pogodin/react-utils';
 Encapsulates Webpack-related utilities.
 
 **Functions**
-- [requireWeak()](#requireweak) - Requires a module preventing it from being
-  bundled into the client-side code by Webpack.
+- [requireWeak()] - Requires a module at server side, and prevents it from being
+  bundled by Webpack.
 - [resolveWeak()](#resolveweak) - Resolves a module path with the help of
   Babel module resolver, thus the same way the resolution works for the normal
   `require()`.
@@ -15,44 +15,27 @@ Encapsulates Webpack-related utilities.
 
 ### requireWeak()
 ```jsx
-webpack.requireWeak(modulePath): object
+webpack.requireWeak(modulePath, basePath): object
 ```
-Require the module at `modulePath` preventing it from being bundled into
-the client-side code by Webpack.
+Implements server-side loading of the specified JS module in the way which
+prevents it from being bundled into the client-side code by Webpack.
 
-:::caution Beware
-Avoid passing in relative paths: they will be resolved relative to the library
-distribution folder, which is wrong in most cases. To convert a relative path
-to the absolute one without breaking the client-side code due to leaking
-server-side-only functions to the frontend follow this:
+- **Server-side**: the `modulePath` argument is processed by Babel module
+  resolver; if `basePath` is given, the resulting module path is additionally
+  resolved from the base path using [path.resolve()]; the module is then loaded
+  from the resulting path, and returned, similar to the regular `require()`, but
+  invisible to Webpack, hence the module required this way is not bundled into
+  the client side code. If the module could not be resolved, or the loading
+  failed for other reason, [requireWeak()] returns **null**.
 
-**Example**
-```jsx
-import { isomorphy, webpack } from '@dr.pogodin/react-utils';
+- **Client-side**: always returns **null**.
 
-// This block executes at the server-side only.
-let serverSideOnlyModule;
-if (isomorphy.IS_SERVER_SIDE) {
-  // webpack.requireWeak() ensures that server-side only modules, like NodeJS
-  // "path" and dummy "server-side-only-module" are not bundled in into
-  // the client-side code compiled by Webpack.
-  const path = webpack.requireWeak('path');
-
-  // The first line is needed only if additional Babel module resolution is
-  // needed to find the given module path.
-  const relPath = webpack.resolveWeak('path/to/server-side-only-module');
-
-  // This turns a relative path into the absolute one.
-  const absPath = path.resolve(__dirname, relPath);
-
-  serverSideOnlyModule = webpack.requireWeak(p);
-}
-```
+:::info Changes across `dr.pogodin/react-utils` versions:
+- **v1.14.0**:
+  - Safe to call at the client side, and always returns **null** there.
+  - The `modulePath` argument is automatically processed by Babel module resovler.
+  - `basePath` argument introduced.
 :::
-
-**Arguments & Result**
-- `modulePath` - **string** - Absolute path to the module to load.
-- Returns **object** - Loaded module.
 
 ### resolveWeak()
 ```jsx
@@ -64,3 +47,7 @@ thus the same way the resolution works for the normal `require()`.
 **Arguments & Result**
 - `modulePath` - **string** - Module path.
 - Returns **string** - The resolved relative path to the module.
+
+<!-- Reusable links. -->
+[path.resolve()]: https://nodejs.org/dist/latest-v16.x/docs/api/path.html#pathresolvepaths
+[requireWeak()]: #requireweak

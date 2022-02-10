@@ -6,9 +6,13 @@ import { newBarrier } from './Barrier';
 export default class Semaphore {
   #barrier;
 
-  #ready = false;
+  #ready;
 
-  isReady() { return this.#ready; }
+  constructor(ready = false) {
+    this.#ready = ready;
+  }
+
+  get ready() { return this.#ready; }
 
   setReady(ready) {
     this.#ready = ready;

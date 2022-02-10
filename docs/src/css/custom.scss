@@ -22,6 +22,12 @@ body {
   @include typography;
 }
 
+.deprecated {
+  text-decoration: line-through;
+
+  a { color: lightgray; }
+}
+
 .admonition-heading {
   h5 {
     font-size: 1em;
