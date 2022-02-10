@@ -11,6 +11,7 @@ import * as webpack from './webpack';
 
 export * from './Barrier';
 export { default as Emitter } from './Emitter';
+export { default as Semaphore } from './Semaphore';
 export { default as splitComponent } from './splitComponent';
 
 themed.COMPOSE = COMPOSE;

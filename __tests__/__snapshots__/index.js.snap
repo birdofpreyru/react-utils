@@ -112,6 +112,7 @@ Object {
     "themeType": [Function],
   },
   "ScalableRect": [Function],
+  "Semaphore": [Function],
   "ThemeProvider": [Function],
   "Throbber": Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -465,6 +466,7 @@ Object {
     "themeType": [Function],
   },
   "ScalableRect": [Function],
+  "Semaphore": [Function],
   "ThemeProvider": [Function],
   "Throbber": Object {
     "$$typeof": Symbol(react.forward_ref),
