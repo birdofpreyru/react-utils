@@ -9,6 +9,7 @@ title: Overview
 - [Barrier] - A [Promise] with **resolve()** and **reject()** exposed as
   instance methods.
 - [Emitter](/docs/api/classes/Emitter) - Simple listeneable data emitter.
+- [Semaphore](/docs/api/classes/Semaphore) - Synchronization primitive.
 
 ## Components
 - [Button](/docs/api/components/button) - Themed button / button-like link.
@@ -46,6 +47,8 @@ title: Overview
   launch of ReactJS apps.
 - [newBarrier()](/docs/api/functions/newbarrier) - Creates a new [Barrier].
 - [server()](/docs/api/functions/server) - Creates and starts ReactJS server.
+- [splitComponent()](/docs/api/functions/splitcomponent) - Wraps a React
+  component for code splitting.
 - [withRetries()](/docs/api/functions/withretries) - Attempts an operation
   multiple times till the first success.
 
@@ -76,6 +79,7 @@ title: Overview
 - [time](/docs/api/utils/time) - Date & time utils.
 - [webpack](/docs/api/utils/webpack) - [Webpack]-related utils.
 
+<!-- Reusable links -->
 [axios]: https://www.npmjs.com/package/axios
 [Babel]: https://babeljs.io
 [Barrier]: /docs/api/classes/Barrier

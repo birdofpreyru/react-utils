@@ -11,19 +11,22 @@ import * as webpack from './webpack';
 
 export * from './Barrier';
 export { default as Emitter } from './Emitter';
+export { default as Semaphore } from './Semaphore';
+export { default as splitComponent } from './splitComponent';
 
 themed.COMPOSE = COMPOSE;
 themed.PRIORITY = PRIORITY;
 
-let JU = null; // eslint-disable-line import/no-mutable-exports
-if (isomorphy.IS_SERVER_SIDE
-  && (process.env.NODE_CONFIG_ENV || process.env.NODE_ENV) !== 'production'
-) {
-  /* eslint-disable global-require */
-  const path = webpack.requireWeak('path');
-  JU = webpack.requireWeak(path.resolve(__dirname, './jest'));
-  /* eslint-enable global-require */
-}
+// Note: it should be done this way, as in some environments
+// "process" might not exist, and process.env.NODE_CONFIG_ENV
+// not injected by Webpack.
+let NODE_CONFIG_ENV;
+try {
+  NODE_CONFIG_ENV = process.env.NODE_CONFIG_ENV;
+} catch { /* noop */ }
+
+const env = NODE_CONFIG_ENV || process.env.NODE_ENV;
+const JU = env !== 'production' && webpack.requireWeak('./jest', __dirname);
 
 /**
  * @category Utilities

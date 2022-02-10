@@ -15,7 +15,9 @@ Object {
           "./src",
         ],
         "transformFunctions": Array [
+          "requireWeak",
           "resolveWeak",
+          "webpack.requireWeak",
           "webpack.resolveWeak",
         ],
       },
@@ -33,7 +35,6 @@ Object {
         "generateScopedName": [Function],
       },
     ],
-    "@babel/syntax-dynamic-import",
     Array [
       "@dr.pogodin/transform-assets",
       Object {
@@ -96,13 +97,14 @@ Object {
           "./src",
         ],
         "transformFunctions": Array [
+          "requireWeak",
           "resolveWeak",
+          "webpack.requireWeak",
           "webpack.resolveWeak",
         ],
       },
     ],
     "@babel/transform-runtime",
-    "@babel/syntax-dynamic-import",
     Array [
       "@dr.pogodin/transform-assets",
       Object {
@@ -149,7 +151,9 @@ Object {
           "./src",
         ],
         "transformFunctions": Array [
+          "requireWeak",
           "resolveWeak",
+          "webpack.requireWeak",
           "webpack.resolveWeak",
         ],
       },
@@ -167,7 +171,6 @@ Object {
         "generateScopedName": [Function],
       },
     ],
-    "@babel/syntax-dynamic-import",
     Array [
       "@dr.pogodin/transform-assets",
       Object {
@@ -230,7 +233,9 @@ Object {
           "./src",
         ],
         "transformFunctions": Array [
+          "requireWeak",
           "resolveWeak",
+          "webpack.requireWeak",
           "webpack.resolveWeak",
         ],
       },
@@ -248,7 +253,6 @@ Object {
         "generateScopedName": [Function],
       },
     ],
-    "@babel/syntax-dynamic-import",
     Array [
       "@dr.pogodin/transform-assets",
       Object {
@@ -311,13 +315,14 @@ Object {
           "./src",
         ],
         "transformFunctions": Array [
+          "requireWeak",
           "resolveWeak",
+          "webpack.requireWeak",
           "webpack.resolveWeak",
         ],
       },
     ],
     "@babel/transform-runtime",
-    "@babel/syntax-dynamic-import",
     Array [
       "@dr.pogodin/transform-assets",
       Object {
@@ -364,7 +369,9 @@ Object {
           "./src",
         ],
         "transformFunctions": Array [
+          "requireWeak",
           "resolveWeak",
+          "webpack.requireWeak",
           "webpack.resolveWeak",
         ],
       },
@@ -382,7 +389,6 @@ Object {
         "generateScopedName": [Function],
       },
     ],
-    "@babel/syntax-dynamic-import",
     Array [
       "@dr.pogodin/transform-assets",
       Object {

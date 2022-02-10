@@ -1,4 +1,60 @@
+---
+sidebar_class_name: deprecated
+---
+
 # CodeSplit
+
+:::danger DEPRECATED
+The [CodeSplit] component was deprecated, and removed from the library
+in the release **v1.14.0**. Use the [splitComponent()] function instead
+to implement the code splitting. To migrate replace every use of [CodeSplit] in
+your code the following way.
+
+**Original code using [CodeSplit]:**
+```jsx
+// WrappedSampleComponent.jsx
+
+import { CodeSplit } from '@dr.pogodin/react-utils';
+
+export default function WrappedSampleComponent(props) {
+  return (
+    <CodeSplit
+      chunkName="sample-component"
+      getComponentAsync={
+        () => import(
+          /* webpackChunkName: 'sample-component' */ 'path/to/SampleComponent'
+        )
+      }
+      getComponentServer={
+        (resolveRequire) => resolveRequire(__dirname, 'path/to/SampleComponent');
+      }
+      placeholder={() => <div>Optional Placeholder</div>}
+      {...props}
+    />
+  );
+}
+```
+
+**Equivalent code using [splitComponent()]:**
+```jsx
+// WrappedSampleComponent.jsx
+
+import { splitComponent, webpack } from '@dr.pogodin/react-utils';
+
+export default splitComponent({
+  chunkName: 'sample-component',
+  getClientSide: () => import(
+    /* webpackChunkName: 'sample-component' */ 'path/to/SampleComponent'
+  ),
+  placeholder: () => <div>Optional Placeholder</div>,
+  serverSide: webpack.requireWeak('path/to/SampleComponent', __dirname),
+});
+```
+:::
+
+---
+## Archive Documentation
+_Valid for **dr.pogodin/react-utils** versions from **1.4.3** up to **1.13.1**_
 
 ```js
 import { CodeSplit } from '@dr.pogodin/react-utils';
@@ -61,7 +117,7 @@ bundling of the module into the current code chunk).
 // other chunks, will be placed into a dedicated chunk.
 
 // WrappedSampleComponent.jsx
-import { CodeSplit, webpack } from '@dr.pogodin/react-utils';
+import { CodeSplit } from '@dr.pogodin/react-utils';
 
 export default function WrappedSampleComponent(props) {
   return (
@@ -83,6 +139,8 @@ export default function WrappedSampleComponent(props) {
 }
 ```
 
+<!-- Re-usable links -->
 [CodeSplit]: /docs/api/components/codesplit
 [Examples]: #examples
 [resolveRequire()]: #resolverequire
+[splitComponent()]: /docs/api/functions/splitcomponent

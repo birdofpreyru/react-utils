@@ -2,6 +2,9 @@
  * Creation of standard ExpressJS server for ReactJS apps.
  */
 
+import { sep } from 'path';
+import { pathToFileURL } from 'url';
+
 import {
   cloneDeep,
   mapValues,
@@ -169,6 +172,16 @@ export default async function factory(webpackConfig, options) {
   /* eslint-disable import/no-extraneous-dependencies */
   /* eslint-disable import/no-unresolved */
   if (options.devMode) {
+    // This is a workaround for SASS bug:
+    // https://github.com/dart-lang/sdk/issues/27979
+    // which manifests itself sometimes when webpack dev middleware is used
+    // (in dev mode), and app modules are imported in some unfortunate ways.
+    if (!global.location) {
+      global.location = {
+        href: `${pathToFileURL(process.cwd()).href}${sep}`,
+      };
+    }
+
     const webpack = require('webpack');
     const webpackDevMiddleware = require('webpack-dev-middleware');
     const webpackHotMiddleware = require('webpack-hot-middleware');

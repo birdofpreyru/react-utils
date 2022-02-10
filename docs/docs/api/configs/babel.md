@@ -78,8 +78,6 @@ configurations, and on top of that it:
 - Includes [@dr.pogodin/babel-plugin-css-modules-transform](https://www.npmjs.com/package/@dr.pogodin/babel-plugin-css-modules-transform),
   which transforms (S)CSS imports into JS objects mapping original (S)CSS
   class names into transformed class names emitted into CSS bundle.
-- Includes [@babel/plugin-syntax-dynamic-import](https://www.npmjs.com/package/@babel/plugin-syntax-dynamic-import)
-  to allow for dynamic `import()` statements in Node environment.
 - Includes [@dr.pogodin/babel-plugin-tranform-assets](https://www.npmjs.com/package/@dr.pogodin/babel-plugin-transform-assets)
   plugin to convert GIF, JPEG, JPG, and PNG imports into emitted asset paths,
   like `/images/[FILE_HASH].[FILE_EXTENSION]`. The `baseAssetsOutputPath` preset

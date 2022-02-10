@@ -233,6 +233,6 @@ Returns **object** with the following fields:
 [http-status-codes]: https://www.npmjs.com/package/http-status-codes
 [Joi]: https://joi.dev/api/?v=17.4.2
 [Script]: #beforerender-script
-[SCRIPT_LOCATIONS]: #script_locations
+[SCRIPT_LOCATIONS]: /docs/api/utils/server#script_locations
 [server()]: /docs/api/functions/server
 [Webpack]: https://webpack.js.org
