@@ -15,7 +15,9 @@ Object {
           "./src",
         ],
         "transformFunctions": Array [
+          "requireWeak",
           "resolveWeak",
+          "webpack.requireWeak",
           "webpack.resolveWeak",
         ],
       },
@@ -96,7 +98,9 @@ Object {
           "./src",
         ],
         "transformFunctions": Array [
+          "requireWeak",
           "resolveWeak",
+          "webpack.requireWeak",
           "webpack.resolveWeak",
         ],
       },
@@ -149,7 +153,9 @@ Object {
           "./src",
         ],
         "transformFunctions": Array [
+          "requireWeak",
           "resolveWeak",
+          "webpack.requireWeak",
           "webpack.resolveWeak",
         ],
       },
@@ -230,7 +236,9 @@ Object {
           "./src",
         ],
         "transformFunctions": Array [
+          "requireWeak",
           "resolveWeak",
+          "webpack.requireWeak",
           "webpack.resolveWeak",
         ],
       },
@@ -311,7 +319,9 @@ Object {
           "./src",
         ],
         "transformFunctions": Array [
+          "requireWeak",
           "resolveWeak",
+          "webpack.requireWeak",
           "webpack.resolveWeak",
         ],
       },
@@ -364,7 +374,9 @@ Object {
           "./src",
         ],
         "transformFunctions": Array [
+          "requireWeak",
           "resolveWeak",
+          "webpack.requireWeak",
           "webpack.resolveWeak",
         ],
       },

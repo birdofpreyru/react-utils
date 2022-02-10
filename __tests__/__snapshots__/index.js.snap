@@ -137,6 +137,7 @@ Object {
   },
   "api": [Function],
   "client": [Function],
+  "codeSplit": [Function],
   "config": undefined,
   "getGlobalState": [Function],
   "isomorphy": Object {
@@ -490,6 +491,7 @@ Object {
   },
   "api": [Function],
   "client": [Function],
+  "codeSplit": [Function],
   "config": Object {
     "SECRET": Object {
       "dummySecretKey": "Dummy Secret Value",

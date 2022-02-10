@@ -85,7 +85,9 @@ function newBase(babel, options = {}) {
     (x) => x[0] === 'module-resolver',
   )[1];
   moduleResolverPluginOps.transformFunctions = [
+    'requireWeak',
     'resolveWeak',
+    'webpack.requireWeak',
     'webpack.resolveWeak',
   ];
 

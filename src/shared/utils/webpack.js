@@ -1,3 +1,5 @@
+import { IS_SERVER_SIDE } from './isomorphy';
+
 /**
  * @category Utilities
  * @module webpack
@@ -28,11 +30,16 @@
  * pass it through resolveWeak function below.
  *
  * @param {string} modulePath
+ * @param {string} [basePath]
  * @return {object} Required module.
  */
-export function requireWeak(modulePath) {
+export function requireWeak(modulePath, basePath) {
+  if (!IS_SERVER_SIDE) return undefined;
+
   /* eslint-disable no-eval */
-  const { default: def, ...named } = eval('require')(modulePath);
+  const { resolve } = eval('require')('path');
+  const path = basePath ? resolve(basePath, modulePath) : modulePath;
+  const { default: def, ...named } = eval('require')(path);
   /* eslint-enable no-eval */
 
   if (!def) return named;
