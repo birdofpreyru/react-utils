@@ -33,13 +33,10 @@ export default function ClientSide({
   const { publicPath } = getBuildInfo();
 
   // This code block initiates style loading as soon as possible, even prior to
-  // the component code loading. Style load promises are collected into
-  // heap.pendingStyles array, allowing us to wait until all styles are
-  // loaded (or failed to load), before rendering the component.
-  // Note: mini-css-extract-plugin would load necessary CSS chunks
-  // automatically, but taking the matter in our own hands helps to avoid
-  // a flash of style upon the loading. Though, we rely on
-  // mini-css-extract-plugin to unmount unnecessary CSS chunks.
+  // the component loading, and it collects all style load / failure promises
+  // into heap.pendingStyles array, allowing us to wait and thus avoid flash of
+  // unstyled content issue (that's why we don't rely on mini-css-extract-plugin
+  // to handle CSS chunk mounting and unmounting, which it is able to do).
   if (!heap.mounted) {
     heap.mounted = true;
     window.CHUNK_GROUPS[chunkName].forEach((asset) => {
@@ -54,8 +51,8 @@ export default function ClientSide({
         const barrier = newBarrier();
         link.onload = barrier.resolve;
 
-        // This assumes that better we render the page with some styles missing
-        // than fail to render it at all.
+        // Even if the style load failed, still allow to mount the component,
+        // abeit with broken styling.
         link.onerror = barrier.resolve;
 
         heap.pendingStyles.push(barrier);
@@ -63,6 +60,8 @@ export default function ClientSide({
         const head = document.querySelector('head');
         head.appendChild(link);
       }
+      if (!link.dependants) link.dependants = new Set([chunkName]);
+      else link.dependants.add(chunkName);
     });
   }
 
@@ -119,11 +118,20 @@ export default function ClientSide({
     });
   }
 
+  // This effectively fires only once, just before the component unmounts.
   useEffect(() => () => {
     heap.mounted = false;
-    // No need to remove CSS chunks from DOM, mini-css-extract-plugin injects
-    // a code which handles that automatically.
-  }, [heap]);
+    window.CHUNK_GROUPS[chunkName].forEach((item) => {
+      if (!item.endsWith('.css')) return;
+      const path = `${publicPath}/${item}`;
+      const link = document.querySelector(`link[href="${path}"]`);
+      link.dependants.delete(chunkName);
+      if (!link.dependants.size) {
+        const head = document.querySelector('head');
+        head.removeChild(link);
+      }
+    });
+  }, [chunkName, heap, publicPath]);
 
   return render;
 }
