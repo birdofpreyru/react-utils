@@ -24,19 +24,24 @@ export default function ClientSide({
   ...rest
 }) {
   const { current: heap } = useRef({
+    mounted: false,
     pendingStyles: [],
     renderInitialized: false,
-    stylesInitialized: false,
   });
 
   // publicPath from buildInfo does not have a trailing slash at the end.
   const { publicPath } = getBuildInfo();
 
-  // This code block initiates style loading as soon as possible; it collects
-  // into heap.pendingStyles all style load promises; and heap.stylesInitialized
-  // flag remains set until the styles are teared down upon unmounting.
-  if (!heap.stylesInitialized) {
-    heap.stylesInitialized = true;
+  // This code block initiates style loading as soon as possible, even prior to
+  // the component code loading. Style load promises are collected into
+  // heap.pendingStyles array, allowing us to wait until all styles are
+  // loaded (or failed to load), before rendering the component.
+  // Note: mini-css-extract-plugin would load necessary CSS chunks
+  // automatically, but taking the matter in our own hands helps to avoid
+  // a flash of style upon the loading. Though, we rely on
+  // mini-css-extract-plugin to unmount unnecessary CSS chunks.
+  if (!heap.mounted) {
+    heap.mounted = true;
     window.CHUNK_GROUPS[chunkName].forEach((asset) => {
       if (!asset.endsWith('.css')) return;
       const path = `${publicPath}/${asset}`;
@@ -48,13 +53,16 @@ export default function ClientSide({
 
         const barrier = newBarrier();
         link.onload = barrier.resolve;
+
+        // This assumes that better we render the page with some styles missing
+        // than fail to render it at all.
+        link.onerror = barrier.resolve;
+
         heap.pendingStyles.push(barrier);
 
         const head = document.querySelector('head');
         head.appendChild(link);
       }
-      if (!link.dependants) link.dependants = new Set([chunkName]);
-      else link.dependants.add(chunkName);
     });
   }
 
@@ -107,24 +115,15 @@ export default function ClientSide({
   if (data && !heap.renderInitialized) {
     heap.renderInitialized = true;
     Promise.all(heap.pendingStyles).then(() => {
-      if (heap.stylesInitialized) setRender(createRender());
+      if (heap.mounted) setRender(createRender());
     });
   }
 
-  // This effectively fires only once, just before the component unmounts.
   useEffect(() => () => {
-    heap.stylesInitialized = false;
-    window.CHUNK_GROUPS[chunkName].forEach((item) => {
-      if (!item.endsWith('.css')) return;
-      const path = `${publicPath}/${item}`;
-      const link = document.querySelector(`link[href="${path}"]`);
-      link.dependants.delete(chunkName);
-      if (!link.dependants.size) {
-        const head = document.querySelector('head');
-        head.removeChild(link);
-      }
-    });
-  }, [chunkName, heap, publicPath]);
+    heap.mounted = false;
+    // No need to remove CSS chunks from DOM, mini-css-extract-plugin injects
+    // a code which handles that automatically.
+  }, [heap]);
 
   return render;
 }
