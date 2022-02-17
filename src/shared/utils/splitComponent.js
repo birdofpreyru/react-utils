@@ -20,7 +20,7 @@ export default function splitComponent({
   serverSide,
 }) {
   // eslint-disable-next-line react/prop-types
-  return ({ children = [], ...props }) => createElement(
+  return ({ children = [], ...props } = {}) => createElement(
     CodeSplit,
     {
       ...props,
