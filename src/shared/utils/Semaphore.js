@@ -22,6 +22,15 @@ export default class Semaphore {
     }
   }
 
+  /**
+   * Waits until the semaphore is ready, and marks it as non-ready (seizes it).
+   * @return {Promise}
+   */
+  async seize() {
+    await this.waitReady();
+    this.setReady(false);
+  }
+
   async waitReady() {
     while (!this.#ready) {
       if (!this.#barrier) this.#barrier = newBarrier();
