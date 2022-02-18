@@ -43,7 +43,7 @@
   "description": "Collection of generic ReactJS components and utils",
   "devDependencies": {
     "@babel/cli": "^7.17.3",
-    "@babel/core": "^7.17.4",
+    "@babel/core": "^7.17.5",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/eslint-plugin": "^7.16.5",
     "@babel/node": "^7.16.8",
@@ -82,7 +82,7 @@
     "react-test-renderer": "^17.0.2",
     "regenerator-runtime": "^0.13.9",
     "resolve-url-loader": "^5.0.0",
-    "sass": "^1.49.7",
+    "sass": "^1.49.8",
     "sass-loader": "^12.6.0",
     "sitemap": "^7.1.1",
     "stylelint": "^14.5.1",
