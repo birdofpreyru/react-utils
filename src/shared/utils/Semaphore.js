@@ -28,7 +28,7 @@ export default class Semaphore {
   }
 
   async waitReady() {
-    if (!this.#ready) {
+    if (!this.#ready || this.#queue.length) {
       const barrier = newBarrier();
       this.#queue.push(barrier);
       await barrier;

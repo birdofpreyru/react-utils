@@ -55,7 +55,7 @@ describe('concurrent use', () => {
     expect(signals).toEqual(['A', 'B']);
   });
 
-  it('.seize() can be used for mutual exclusion', async () => {
+  test('.seize() can be used for mutual exclusion', async () => {
     const newFlow = async (signal) => {
       await sem.seize();
       signals.push(signal);
@@ -70,4 +70,20 @@ describe('concurrent use', () => {
     expect(sem.ready).toBe(false);
     expect(signals).toEqual(['A', 'B']);
   });
+
+  test(
+    '.waitReady() does not skip the drain queue when the semaphore is ready',
+    async () => {
+      const newFlow = async (signal) => {
+        await sem.waitReady();
+        signals.push(signal);
+      };
+      const flows = [newFlow('A'), newFlow('B')];
+      sem.setReady(true);
+      flows.push(newFlow('C'));
+      await Promise.all(flows);
+      expect(sem.ready).toBe(true);
+      expect(signals).toEqual(['A', 'B', 'C']);
+    },
+  );
 });
