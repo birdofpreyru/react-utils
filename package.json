@@ -1,4 +1,5 @@
 {
+  "version": "1.14.3",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -127,6 +128,5 @@
     "lint:js": "eslint --ext .js,.jsx .",
     "lint:scss": "stylelint -- **/*.{css,scss}",
     "test": "npm run lint && npm run jest"
-  },
-  "version": "1.14.2"
+  }
 }

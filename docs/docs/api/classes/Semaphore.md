@@ -21,7 +21,11 @@ const semaphore = new Semaphore(ready = false);
 Creates a new [Semaphore] instance.
 
 **Arguments**
-- `ready` - **boolean** - Optional. The initial semaphore state. Defaults **false**.
+- `ready` - **boolean** - Optional. The initial semaphore state.
+  Defaults **false**.
+
+  Note, it is safe to pass in a non-boolean `ready` argument, which will be
+  casted to boolean according to the usual JS rules.
 
 ### seize()
 ```jsx
@@ -45,6 +49,9 @@ Sets semaphore to the specified state.
 **Arguments**
 - `ready` - **boolean** - Target state.
 
+  Note, it is safe to pass in a non-boolean `ready` argument, which will be
+  casted to boolean according to the usual JS rules.
+
 ### waitReady()
 ```jsx
 semaphore.waitReady(): Promise;
@@ -52,15 +59,24 @@ semaphore.waitReady(): Promise;
 Creates a [Promise] which resolves as soon as the semaphore is in the "ready"
 state.
 
-Note that unlike [Barrier] instances, a semaphore does not resolve all
-pending [waitReady()] promises immediately when switched to "ready" state.
-Setting a semaphore to "ready" will trigger an attempt to _synchronously_
-resolve each pending [waitReady()] promise for that semaphore, for each of
-these promises the actual state of the semaphore at the moment of resolution
-attempt will be tested, and if it has switched back to "non-ready", the promise
-will remain pending until the next resolution chance. Thus, a semaphore can
-be used as [mutex], if each asynchronous code waiting for a semaphore sets it
-back to "non-ready" state as soon as it resolved.
+Unlike [Barrier] instances, a semaphore does not resolve all pending
+[waitReady()] promises immediately when switched to the "ready" state.
+It rather resolves them _synchronously_ one by one, giving each async
+code flow waiting for it a chance to re-lock the semaphore before next
+pending promise is resolved. Thus, a semaphore can be used as [mutex],
+if each asynchronous code waiting for a semaphore sets it back to "non-ready"
+state as soon as it resolved.
+
+:::tip
+Note that [seize()] function is essentially a short for doing
+```js
+await semaphore.waitReady();
+semaphore.setReady(false);
+```
+:::
+
+It is guaranteed that a later call to `semaphore.waitReady()` is resolved
+later than an earlier call.
 
 ## Properties
 - `semaphore.ready` - **boolean** - Read-only. Current semaphore state.

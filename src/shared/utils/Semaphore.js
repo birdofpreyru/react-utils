@@ -4,7 +4,7 @@ import { newBarrier } from './Barrier';
  * Implements a simple semaphore for async code logic.
  */
 export default class Semaphore {
-  constructor(ready = false) {
+  constructor(ready) {
     this.#ready = !!ready;
   }
 
