@@ -100,10 +100,20 @@ argument is an object with the following valid fields:
 
   - `sitemap` - **function | string** - The path to JS or JSON config for
     sitemap. It can be relative to the context, and can be a factory, which
-    returns the config. The config should be compatible with
-    [`sitemap`](https://www.npmjs.com/package/sitemap) library, and if
+    returns the config. The config should be compatible with [`sitemap` library]
+     library, and if
     provided the Webpack config factory will use it to gererate `sitemap.xml`
     file in the output folder, and then serve it from the app root.
+
+    :::tip Complex Sitemap Setup
+    In case a complex sitemap setup is needed (_e.g._ a runtime sitemap
+    generation, or serving the sitemap from alternative routes, _etc._),
+    instead of this option use
+    [onExpressSetup](/docs/react-utils/docs/api/functions/server#onexpressjssetup)
+    option of the [server factory](/docs/react-utils/docs/api/functions/server)
+    to mount a custom sitemap controller implementing necessary sitemap logic
+    on the desired route(s) of created ExpressJS server.
+    :::
 
 The config factory returns a config object which
 - Bundles font assets (EOF, OTF, SVG, TTF, WOFF, WOFF2 files)
@@ -279,3 +289,4 @@ slightly modifies the resulting config as required for production needs.
 [Babel]: https://babeljs.io/
 [Library]: #library
 [Webpack]: https://webpack.js.org
+[`sitemap` library]: https://www.npmjs.com/package/sitemap

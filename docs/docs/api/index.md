@@ -32,9 +32,10 @@ title: Overview
 - [WithTooltip](/docs/api/components/withtooltip) - Themed tooltip wrapper.
 - [YouTubeVideo](/docs/api/components/youtubevideo) - Embed YouTube video.
 
-**Deprecated Components**
+:::caution Deprecated Components
 - [CodeSplit] - Removed in **v1.14.0**, use [splitComponent()] instead
   ([migration guidelines][CodeSplit]).
+:::
 
 ## Configs
 - [Babel](/docs/api/configs/babel) - Configs (presets) for [Babel] builds.

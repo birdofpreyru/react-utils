@@ -52,8 +52,7 @@ export default splitComponent({
 ```
 :::
 
----
-## Archive Documentation
+## Original Documentation
 _Valid for **dr.pogodin/react-utils** versions from **1.4.3** up to **1.13.1**_
 
 ```js
