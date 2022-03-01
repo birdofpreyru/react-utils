@@ -21,5 +21,6 @@ of [Input] component are:
 - `input` - The underlying HTML `<input>` element.
 - `label` - The label element.
 
+[Input]: #
 [InputTheme]: #inputtheme
 [React Themes]: https://dr.pogodin.studio/docs/react-themes
