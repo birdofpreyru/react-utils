@@ -6,7 +6,7 @@ The [Throbber] component is a simple "action in progress" indicator, themed
 using [React Themes] library. It is rendered as three bouncing circles, and
 can be further themed to a certain degree.
 
-import { Throbber } from '@dr.pogodin/react-utils';
+import Throbber from '../../../src/components/Throbber';
 
 :::note Demo
 By default `<Throbber />` renders as three black bouncing circles: <Throbber />,

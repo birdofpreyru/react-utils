@@ -1,0 +1,15 @@
+*,
+.context,
+.ad.hoc {
+  &.button {
+    background-image: linear-gradient(to top, #444, gray 50%, gray);
+
+    // Note: in this case we have to nest ":active" selector, as otherwise it
+    // interacts with some Docusaurus theming in undesireable way.
+    &.active,
+    &:active {
+      background-image: linear-gradient(to bottom, #444, gray 50%, gray);
+      box-shadow: inset 0 1px 3px 0 #444;
+    }
+  }
+}

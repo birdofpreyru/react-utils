@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
-import { Button, Modal } from '@dr.pogodin/react-utils';
+import { useColorMode } from '@docusaurus/theme-common';
+import { Button, Modal, ThemeProvider } from '@dr.pogodin/react-utils';
+
+import darkButtonTheme from '../themes/buttons/dark.module.scss';
+import darkModalTheme from '../themes/modals/dark.module.scss';
 
 export default function ModalExample() {
   const [open, setOpen] = useState(false);
+  const { isDarkTheme } = useColorMode();
   return (
-    <>
+    <ThemeProvider
+      themes={
+        isDarkTheme ? {
+          Button: darkButtonTheme,
+          Modal: darkModalTheme,
+        } : undefined
+      }
+    >
       {
         open ? (
           <Modal onCancel={() => setOpen(false)}>
@@ -16,6 +28,6 @@ export default function ModalExample() {
         ) : null
       }
       <Button onClick={() => setOpen(true)}>Click to open the Modal</Button>
-    </>
+    </ThemeProvider>
   );
 }

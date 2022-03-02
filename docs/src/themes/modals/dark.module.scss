@@ -1,0 +1,11 @@
+*,
+.context,
+.ad.hoc {
+  &.container {
+    background: dimgray;
+  }
+
+  &.overlay {
+    background: black;
+  }
+}
