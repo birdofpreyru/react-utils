@@ -60,8 +60,9 @@ export default function ClientSide({
         const head = document.querySelector('head');
         head.appendChild(link);
       }
-      if (!link.dependants) link.dependants = new Set([chunkName]);
-      else link.dependants.add(chunkName);
+      window.STYLESHEET_USAGE_COUNTERS ||= {};
+      window.STYLESHEET_USAGE_COUNTERS[path] ||= 0;
+      ++window.STYLESHEET_USAGE_COUNTERS[path];
     });
   }
 
@@ -124,9 +125,8 @@ export default function ClientSide({
     window.CHUNK_GROUPS[chunkName].forEach((item) => {
       if (!item.endsWith('.css')) return;
       const path = `${publicPath}/${item}`;
-      const link = document.querySelector(`link[href="${path}"]`);
-      link.dependants.delete(chunkName);
-      if (!link.dependants.size) {
+      if (--window.STYLESHEET_USAGE_COUNTERS[path] <= 0) {
+        const link = document.querySelector(`link[href="${path}"]`);
         const head = document.querySelector('head');
         head.removeChild(link);
       }
