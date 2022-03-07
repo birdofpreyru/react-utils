@@ -5,91 +5,31 @@ slug: /api
 title: Overview
 ---
 
+import ClassIndex from './classes/_index.md';
+import ComponentIndex from './components/_index.md';
+import ConfigIndex from './configs/_index.md';
+import FunctionIndex from './configs/_index.md';
+import ScriptIndex from './scripts/_index.md';
+import StyleIndex from './scripts/_index.md';
+import UtilsIndex from './utils/_index.md';
+
 ## Classes
-- [Barrier] - A [Promise] with **resolve()** and **reject()** exposed as
-  instance methods.
-- [Emitter](/docs/api/classes/Emitter) - Simple listeneable data emitter.
-- [Semaphore](/docs/api/classes/Semaphore) - Synchronization primitive.
+<ClassIndex />
 
 ## Components
-- [Button](/docs/api/components/button) - Themed button / button-like link.
-- [Checkbox](/docs/api/components/checkbox) - Themed checkbox.
-- [Dropdown](/docs/api/components/dropdown) - Themed dropdown.
-- [Input](/docs/api/components/input) - Themed text input.
-- [Link](/docs/api/components/link) - External / internal hyperlink.
-- [MetaTags](/docs/api/components/metatags) - Manages document's meta tags
-  (title, description, social media thumbnails, _etc._).
-- [Modal](/docs/api/components/modal) - Themed modal.
-- [NavLink](/docs/api/components/navlink) - Navigation links (specially styled
-  when match the current location).
-- [PageLayout](/docs/api/components/pagelayout) - A simple themed page layout.
-- [ScalableRect](/docs/api/components/scalablerect) - Container that keeps given
-  aspect ratio while its width alters.
-- [ThemeProvider](/docs/api/components/themeprovider) - Provides context visual
-  themes to its children tree.
-- [Throbber](/docs/api/components/throbber) - A simple throbber (three bouncing
-  circles).
-- [WithTooltip](/docs/api/components/withtooltip) - Themed tooltip wrapper.
-- [YouTubeVideo](/docs/api/components/youtubevideo) - Embed YouTube video.
-
-:::caution Deprecated Components
-- [CodeSplit] - Removed in **v1.14.0**, use [splitComponent()] instead
-  ([migration guidelines][CodeSplit]).
-:::
+<ComponentIndex />
 
 ## Configs
-- [Babel](/docs/api/configs/babel) - Configs (presets) for [Babel] builds.
-- [ESLint](/docs/api/configs/eslint) - Configs for [ESlint] code scans.
-- [Jest](/docs/api/configs/jest) - Configs for [Jest] test framework.
-- [Stylelint](/docs/api/configs/stylelint) - Configs for [Stylelint] code scans.
-- [Webpack](/docs/api/configs/webpack) - Configs for [Webpack] builds of apps
-  and libs.
+<ConfigIndex />
 
 ## Functions
-- [client()](/docs/api/functions/client) - Client-side initialization and
-  launch of ReactJS apps.
-- [newBarrier()](/docs/api/functions/newbarrier) - Creates a new [Barrier].
-- [server()](/docs/api/functions/server) - Creates and starts ReactJS server.
-- [splitComponent()] - Wraps a React component for code splitting.
-- [withRetries()](/docs/api/functions/withretries) - Attempts an operation
-  multiple times till the first success.
+<FunctionIndex />
 
 ## Scripts
-- [react-utils-build](/docs/api/scripts/react-utils-build) - Encapsulates [Babel]
-  and [Webpack] compilation for apps and libs.
-- [react-utils-setup](/docs/api/scripts/react-utils-setup) - Library setup and
-  upgrades.
+<ScriptIndex />
 
 ## Styles
-- [Global SCSS Styles](/docs/api/styles/global) - Generic global CSS stylesheet
-  for apps.
-- [SCSS Mixins](/docs/api/styles/mixins) - Useful SCSS mixins.
+<StyleIndex />
 
 ## Utilities
-- [api](/docs/api/utils/api) - An alias for [axios] library (HTTP(S) client).
-- [config](/docs/api/utils/config) - Isomorphic app config.
-- [isomorphy](/docs/api/utils/isomorphy) - Helpers for isomorphic code logic.
-- [JU (Jest utils)](/docs/api/utils/jest-utils) - Helpers useful in [Jest] tests.
-- [PT (prop-types)](/docs/api/utils/prop-types) - An alias for [prop-types] lib
-  for runtime ReactJS prop type checks.
-- [React Global State](/docs/api/utils/react-global-state) - Aliases for
-  [react-global-state](https://dr.pogodin.studio/docs/react-global-state/index.html)
-  lib.
-- [server](/docs/api/utils/server) - Server-side constants and functions.
-- [themed](/docs/api/utils/themed) - Aliases for
-  [React Themes](https://dr.pogodin.studio/docs/react-themes) library.
-- [time](/docs/api/utils/time) - Date & time utils.
-- [webpack](/docs/api/utils/webpack) - [Webpack]-related utils.
-
-<!-- Reusable links -->
-[axios]: https://www.npmjs.com/package/axios
-[Babel]: https://babeljs.io
-[Barrier]: /docs/api/classes/Barrier
-[CodeSplit]: /docs/api/components/codesplit
-[ESLint]: https://eslint.org
-[Jest]: https://jestjs.io
-[prop-types]: https://www.npmjs.com/package/prop-types
-[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[splitComponent()]: /docs/api/functions/splitcomponent
-[Stylelint]: https://stylelint.io
-[Webpack]: https://webpack.js.org
+<UtilsIndex />
