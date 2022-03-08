@@ -1,59 +1,16 @@
-/**
- * [Babel](https://babeljs.io/) preset for Webpack builds.
- *
- * To include it into a Babel configuration:
- * ```json
- * {
- *   "presets": ["@dr.pogodin/react-utils/config/babel/webpack"]
- * }
- * ```
- *
- * To provide additional options (for supported options see documentation for
- * _ops_ argument of {@link module:babel/webpack.getPreset getPreset()} method
- * below):
- * ```json
- * {
- *   "presets": [
- *     ["@dr.pogodin/react-utils/config/babel/webpack", {
- *       "someOption": "someValue"
- *     }]
- *   ]
- * }
- * ```
- *
- * This preset does the following:
- *
- * - Sets up [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env),
- *   and [@babel/preset-react](https://babeljs.io/docs/en/babel-preset-react)
- *   presets which are needed to compile modern JS(X) code.
- *
- * - Sets up [@dr.pogodin/babel-preset-svgr](https://www.npmjs.com/package/@dr.pogodin/babel-preset-svgr)
- *   preset, which allows to import SVG files as React components.
- *
- * - Sets up [babel-plugin-module-resolver](https://www.npmjs.com/package/babel-plugin-module-resolver),
- *   which helps to resolve module imports relative to `/src/shared`,
- *   and `/src` folders of host codebase.
- *
- * - Sets up [@babel/plugin-transform-runtime](https://babeljs.io/docs/en/babel-plugin-transform-runtime),
- *   which enables the re-use of Babel's injected helper code to save on
- *   codesize.
- *
- * - Sets up [@dr.pogodin/babel-plugin-react-css-modules](https://www.npmjs.com/package/@dr.pogodin/babel-plugin-react-css-modules),
- *   which is a part of CSS modules setup that transforms `styleName` props of
- *   React components into globally unique `className` props. Generated class
- *   names are verbose in _development_ and _test_ environments, to faciliate
- *   debugging, and they are short 6-symbol-long hashes in _production_ Babel
- *   environment, to ensure compact CSS and JS output code.
- *
- * - In _development_ environment it also sets up `react-refresh/babel`.
- */
-
 const { pick } = require('lodash');
 
 const {
-  generateScopedNameDev,
-  generateScopedNameProd,
-} = require('../shared/utils');
+  generateScopedNameFactory,
+} = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
+
+const generateScopedNameDev = generateScopedNameFactory(
+  '[package]___[path][name]___[local]___[hash:base64:6]',
+);
+
+const generateScopedNameProd = generateScopedNameFactory(
+  '[hash:base64:6]',
+);
 
 /**
  * @static

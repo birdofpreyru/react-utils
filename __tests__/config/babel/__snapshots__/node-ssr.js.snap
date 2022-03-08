@@ -33,6 +33,7 @@ Object {
           },
         },
         "generateScopedName": [Function],
+        "replaceImport": true,
       },
     ],
     Array [
@@ -45,22 +46,6 @@ Object {
           "png",
         ],
         "name": "/test/path/images/[hash:20].[ext]",
-      },
-    ],
-    Array [
-      "@dr.pogodin/css-modules-transform",
-      Object {
-        "extensions": Array [
-          ".css",
-          ".scss",
-        ],
-        "generateScopedName": [Function],
-        "processorOpts": Object {
-          "parser": Object {
-            "parse": [Function],
-            "stringify": [Function],
-          },
-        },
       },
     ],
   ],
@@ -169,6 +154,7 @@ Object {
           },
         },
         "generateScopedName": [Function],
+        "replaceImport": true,
       },
     ],
     Array [
@@ -181,22 +167,6 @@ Object {
           "png",
         ],
         "name": "/images/[hash:20].[ext]",
-      },
-    ],
-    Array [
-      "@dr.pogodin/css-modules-transform",
-      Object {
-        "extensions": Array [
-          ".css",
-          ".scss",
-        ],
-        "generateScopedName": [Function],
-        "processorOpts": Object {
-          "parser": Object {
-            "parse": [Function],
-            "stringify": [Function],
-          },
-        },
       },
     ],
   ],
@@ -251,6 +221,7 @@ Object {
           },
         },
         "generateScopedName": [Function],
+        "replaceImport": true,
       },
     ],
     Array [
@@ -263,22 +234,6 @@ Object {
           "png",
         ],
         "name": "/test/path/images/[hash:20].[ext]",
-      },
-    ],
-    Array [
-      "@dr.pogodin/css-modules-transform",
-      Object {
-        "extensions": Array [
-          ".css",
-          ".scss",
-        ],
-        "generateScopedName": [Function],
-        "processorOpts": Object {
-          "parser": Object {
-            "parse": [Function],
-            "stringify": [Function],
-          },
-        },
       },
     ],
   ],
@@ -387,6 +342,7 @@ Object {
           },
         },
         "generateScopedName": [Function],
+        "replaceImport": true,
       },
     ],
     Array [
@@ -399,22 +355,6 @@ Object {
           "png",
         ],
         "name": "/images/[hash:20].[ext]",
-      },
-    ],
-    Array [
-      "@dr.pogodin/css-modules-transform",
-      Object {
-        "extensions": Array [
-          ".css",
-          ".scss",
-        ],
-        "generateScopedName": [Function],
-        "processorOpts": Object {
-          "parser": Object {
-            "parse": [Function],
-            "stringify": [Function],
-          },
-        },
       },
     ],
   ],

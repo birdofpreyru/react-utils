@@ -1,54 +1,7 @@
-/**
- * [Babel](https://babeljs.io/) preset for NodeJS builds & server-side
- * execution.
- *
- * To include it into a Babel configuration:
- * ```json
- * {
- *   "presets": ["@dr.pogodin/react-utils/config/babel/node-ssr"]
- * }
- * ```
- *
- * To provide additional preset options (for supported options see
- * documentation for _ops_ argument of
- * {@link module:babel/node.getConfig getConfig()} method below):
- * ```json
- * {
- *   "presets": [
- *     ["@dr.pogodin/react-utils/config/babel/node-ssr", {
- *       "someOption": "someValue"
- *     }]
- *   ]
- * }
- * ```
- *
- * This preset builds on top of {@link module:babel/webpack babel/webpack}
- * preset: it performs all the same setups, then on top of it does
- * the following:
- *
- * - Sets up [babel-plugin-css-modules-transform](https://www.npmjs.com/package/babel-plugin-css-modules-transform),
- *   which transforms (S)CSS imports into JS objects mapping original (S)CSS
- *   class names into transformed class names emitted into CSS bundle (thus,
- *   matching (S)CSS transformations done by
- *   `@dr.pogodin/babel-plugin-react-css-modules` plugin on (S)CSS code.
- *
- * - Sets up [babel-plugin-tranform-assets](https://www.npmjs.com/package/@dr.pogodin/babel-plugin-transform-assets)
- *   to convert GIF, JPEG, JPG, and PNG imports into emitted asset paths, like
- *   `/images/[FILE_HASH].[FILE_EXTENSION]`. The `baseAssetsOutputPath` preset
- *   option allows to add custom prefix to these paths.
- *
- * - In _development_ environment it removes `react-refresh/babel`.
- */
 /* eslint-disable import/no-extraneous-dependencies */
 
 const { pick, pull } = require('lodash');
-const postcssScss = require('postcss-scss');
 const getWebpackBabelConfig = require('./webpack');
-
-const {
-  generateScopedNameDev,
-  generateScopedNameProd,
-} = require('../shared/utils');
 
 /**
  * Creates a new base config.
@@ -100,29 +53,14 @@ function newBase(babel, options = {}) {
  * **Beware:** It mutates `config`.
  *
  * @param {object} config
- * @param {string} env `development` or `production`.
  * @return {object} Returns mutated config for chaining.
  * @ignore
  */
-function addStyling(config, env) {
-  const cssModulesTransformOps = {
-    extensions: ['.css', '.scss'],
-    processorOpts: { parser: postcssScss },
-  };
-  switch (env) {
-    case getWebpackBabelConfig.ENVIRONMENTS.DEV:
-    case getWebpackBabelConfig.ENVIRONMENTS.TEST:
-      cssModulesTransformOps.generateScopedName = generateScopedNameDev;
-      break;
-    case getWebpackBabelConfig.ENVIRONMENTS.PROD:
-      cssModulesTransformOps.generateScopedName = generateScopedNameProd;
-      break;
-    default:
-  }
-  config.plugins.push([
-    '@dr.pogodin/css-modules-transform',
-    cssModulesTransformOps,
-  ]);
+function addStyling(config) {
+  const cssModulesOps = config.plugins.find(
+    ([name]) => name === '@dr.pogodin/react-css-modules',
+  )[1];
+  cssModulesOps.replaceImport = true;
   return config;
 }
 
