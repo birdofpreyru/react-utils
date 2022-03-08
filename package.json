@@ -101,6 +101,27 @@
     "node": ">=14.x",
     "npm": ">=6.x"
   },
+  "exports": {
+    ".": {
+      "browser": {
+        "development": "./build/development/web.bundle.js",
+        "production": "./build/production/web.bundle.js"
+      },
+      "node": "./node-entry.js"
+    },
+    "./config/*": "./config/*.js",
+    "./mixins": "./src/styles/mixins.scss",
+    "./dev-styles": {
+      "node": "./null.js",
+      "browser": "./build/development/style.css"
+    },
+    "./prod-styles": {
+      "node": "./null.js",
+      "browser": "./build/production/style.css"
+    },
+    "./build/development/client/init": "./build/development/client/init.js",
+    "./build/production/client/init": "./build/production/client/init.js"
+  },
   "homepage": "https://dr.pogodin.studio",
   "keywords": [
     "Development",
@@ -115,7 +136,6 @@
     "Web"
   ],
   "license": "MIT",
-  "main": "index.js",
   "name": "@dr.pogodin/react-utils",
   "repository": {
     "type": "git",
