@@ -75,15 +75,23 @@ Alternatively, to pass-in custom [options](#server-side-options):
 
 This preset is build on top of the [client-side] one. It performs the same
 configurations, and on top of that it:
-- Includes [@dr.pogodin/babel-plugin-css-modules-transform](https://www.npmjs.com/package/@dr.pogodin/babel-plugin-css-modules-transform),
-  which transforms (S)CSS imports into JS objects mapping original (S)CSS
-  class names into transformed class names emitted into CSS bundle.
+
+- Enables `replaceImport` feature of [@dr.pogodin/babel-plugin-react-css-modules]
+  plugin to replace stylesheet imports with maps of generated classnames, and
+  remove anonymous stylesheet imports.
 - Includes [@dr.pogodin/babel-plugin-tranform-assets](https://www.npmjs.com/package/@dr.pogodin/babel-plugin-transform-assets)
   plugin to convert GIF, JPEG, JPG, and PNG imports into emitted asset paths,
   like `/images/[FILE_HASH].[FILE_EXTENSION]`. The `baseAssetsOutputPath` preset
   option allows to add custom prefix to these paths.
 - In **development** environment it remove `react-refresh/babel` plugin,
   if it was included by the client-side preset.
+
+:::info Info
+Prior to **v1.15.0**
+[@dr.pogodin/babel-plugin-css-modules-transform](https://www.npmjs.com/package/@dr.pogodin/babel-plugin-css-modules-transform)
+was included to achieve the same logic covered now by `replaceImport` feature of
+[@dr.pogodin/babel-plugin-react-css-modules].
+:::
 
 ### Options {#server-side-options}
 It accepts all [client-side preset option](#client-side-options), and on top of
