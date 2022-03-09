@@ -1,5 +1,5 @@
 {
-  "version": "1.15.3",
+  "version": "1.15.4",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -9,10 +9,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.17.2",
-    "@dr.pogodin/babel-plugin-react-css-modules": "^6.7.0",
+    "@dr.pogodin/babel-plugin-react-css-modules": "^6.8.0",
     "@dr.pogodin/react-global-state": "^0.7.1",
     "@dr.pogodin/react-themes": "^1.4.1",
-    "axios": "^0.26.0",
+    "axios": "^0.26.1",
     "commander": "^9.0.0",
     "compression": "^1.7.4",
     "config": "^3.3.7",
