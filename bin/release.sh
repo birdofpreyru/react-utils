@@ -14,6 +14,7 @@ sudo apt-get update && sudo apt-get install google-cloud-sdk
 # Releases documentation.
 echo $GCLOUD_KEY > ${HOME}/gcloud-key.json
 gcloud auth activate-service-account --key-file ${HOME}/gcloud-key.json
+gcloud config set disable_prompts true
 gcloud config set project dr-pogodin-studio-website
 gsutil rsync -d -r docs/build gs://docs.pogodin.studio/react-utils
 
