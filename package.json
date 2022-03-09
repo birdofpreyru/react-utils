@@ -1,5 +1,5 @@
 {
-  "version": "1.15.0",
+  "version": "1.15.1",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -107,7 +107,10 @@
         "development": "./build/development/web.bundle.js",
         "production": "./build/production/web.bundle.js"
       },
-      "node": "./node-entry.js"
+      "node": {
+        "webpack": "./build/production/web.bundle.js",
+        "default": "./node-entry.js"
+      }
     },
     "./config/*": "./config/*.js",
     "./mixins": "./src/styles/mixins.scss",
