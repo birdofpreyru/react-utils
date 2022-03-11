@@ -137,7 +137,7 @@ Object {
   },
   "api": [Function],
   "client": [Function],
-  "config": undefined,
+  "config": Object {},
   "getGlobalState": [Function],
   "isomorphy": Object {
     "IS_CLIENT_SIDE": true,
