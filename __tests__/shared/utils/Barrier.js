@@ -1,15 +1,25 @@
 import { Barrier } from 'utils/Barrier';
 
 describe('Base usage', () => {
+  it('.resolved and .rejected are "false" initially', () => {
+    const barrier = new Barrier();
+    expect(barrier.rejected).toBe(false);
+    expect(barrier.resolved).toBe(false);
+  });
+
   it('resolves', async () => {
     const barrier = new Barrier();
     barrier.resolve('OK');
+    expect(barrier.rejected).toBe(false);
+    expect(barrier.resolved).toBe(true);
     await expect(barrier).resolves.toBe('OK');
   });
 
   it('rejects', async () => {
     const barrier = new Barrier();
     barrier.reject('OK');
+    expect(barrier.rejected).toBe(true);
+    expect(barrier.resolved).toBe(false);
     await expect(barrier).rejects.toBe('OK');
   });
 });
