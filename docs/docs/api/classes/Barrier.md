@@ -7,6 +7,12 @@ its resolution and rejection functions attached as methods to the class instance
 It sometimes comes handy for synchronisation between different asynchronous
 operations.
 
+## Fields
+- `.resolved` - **boolean** - **true** once the barrier has been resolved,
+  **false** before it.
+- `.rejected` - **boolean** - **true** once the barrier has been rejected,
+  **false** before it.
+
 ## Methods
 - [constructor()] - Creates a new [Barrier].
 - [catch()] - Similar to a [**Promise** catch()].
