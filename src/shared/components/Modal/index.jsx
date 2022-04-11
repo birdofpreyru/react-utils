@@ -18,13 +18,12 @@ import './styles.scss';
  * The `<Modal>` component implements a simple themeable modal window, wrapped
  * into the default theme. `<BaseModal>` exposes the base non-themed component.
  * **Children:** Component children are rendered as the modal content.
- * @param {object} props Component properties.
+ * @param {object} props Component properties. Beside props documented below,
+ *  [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties) are supported as well.
  * @param {function} [props.onCancel] The callback to trigger when user
  * clicks outside the modal, or presses Escape. It is expected to hide the
  * modal.
  * @param {ModalTheme} [props.theme] _Ad hoc_ theme.
- * @param {...any} [props....]
- * [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
  */
 function BaseModal({
   children,

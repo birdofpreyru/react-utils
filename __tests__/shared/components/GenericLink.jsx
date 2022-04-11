@@ -2,12 +2,7 @@
 
 import GenericLink from 'components/GenericLink';
 import PT from 'prop-types';
-import {
-  findInDomByClass,
-  renderDom,
-  simulate,
-  snapshot,
-} from 'utils/jest';
+import { mount, simulate, snapshot } from 'utils/jest';
 
 function Link(props) {
   const { className, onClick } = props;
@@ -103,7 +98,7 @@ test('Anchor link', () => {
 test('onClick(..) callback in custom <Link>', () => {
   window.scroll = jest.fn();
   const clickHandler = jest.fn();
-  const doc = renderDom((
+  const doc = mount((
     <GenericLink
       className="LINK"
       onClick={clickHandler}
@@ -113,7 +108,7 @@ test('onClick(..) callback in custom <Link>', () => {
       LINK
     </GenericLink>
   ));
-  const link = findInDomByClass(doc, 'LINK');
+  const link = doc.querySelector('.LINK');
   simulate.click(link);
   expect(clickHandler).toHaveBeenCalled();
   expect(window.scroll).toHaveBeenCalledTimes(1);
