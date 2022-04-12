@@ -71,15 +71,14 @@ describe('Server is functional', () => {
         },
         logger,
         maxSsrRounds: 3,
+
+        // Use cache in tests as well.
+        staticCacheController: () => 'key',
       }),
     );
   });
 
   test('Simple request', async () => {
-    await server.get('/').expect(200)
-      .expect((res) => {
-        expect(res.headers['content-security-policy']).toMatchSnapshot();
-      });
     await server.get('/').expect(200)
       .expect((res) => {
         expect(res.headers['content-security-policy']).toMatchSnapshot();

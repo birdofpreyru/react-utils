@@ -2,13 +2,14 @@
  * ExpressJS middleware for server-side rendering of a ReactJS app.
  */
 
+import { Writable } from 'stream';
+
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
 
 import {
   clone,
   cloneDeep,
   defaults,
-  isObject,
   isString,
   get,
   mapValues,
@@ -21,7 +22,7 @@ import fs from 'fs';
 import path from 'path';
 import { brotliCompress, brotliDecompress } from 'zlib';
 
-import ReactDOM from 'react-dom/server';
+import { renderToPipeableStream } from 'react-dom/server';
 import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom/server';
 import serializeJs from 'serialize-javascript';
@@ -118,6 +119,39 @@ export function isBrotliAcceptable(req) {
 }
 
 /**
+ * Given an array of extra script strings / objects, it returns an object with
+ * arrays of scripts to inject in different HTML template locations. During
+ * the script groupping it also filters out any empty scripts.
+ * @param {({
+ *  code: string;
+ *  location: string;
+ * }|string)[]} [scripts=[]]
+ * @return {{
+ *  BODY_OPEN: string[];
+ *  DEFAULT: string[];
+ *  HEAD_OPEN: string[];
+ * }}
+ */
+function groupExtraScripts(scripts = []) {
+  const res = {
+    [SCRIPT_LOCATIONS.BODY_OPEN]: '',
+    [SCRIPT_LOCATIONS.DEFAULT]: '',
+    [SCRIPT_LOCATIONS.HEAD_OPEN]: '',
+  };
+  for (let i = 0; i < scripts.length; ++i) {
+    const script = scripts[i];
+    if (isString(script)) {
+      if (script) res[SCRIPT_LOCATIONS.DEFAULT] += script;
+    } else if (script.code) {
+      if (res[script.location] !== undefined) {
+        res[script.location] += script.code;
+      } else throw Error(`Invalid location "${script.location}"`);
+    }
+  }
+  return res;
+}
+
+/**
  * Creates the middleware.
  * @param {object} webpackConfig
  * @param {object} options Additional options:
@@ -128,6 +162,7 @@ export function isBrotliAcceptable(req) {
  * may cut a few corners.
  * @param {number} options.maxSsrRounds
  * @param {number} options.ssrTimeout
+ * @param {function} [options.staticCacheController]
  * @return {function} Created middleware.
  */
 export default function factory(webpackConfig, options) {
@@ -138,13 +173,9 @@ export default function factory(webpackConfig, options) {
   // publicPath from webpack.output has a trailing slash at the end.
   const { publicPath, path: outputPath } = webpackConfig.output;
 
-  let manifestLink = fs.existsSync(`${outputPath}/manifest.json`);
-  manifestLink = manifestLink ? (
-    `<link rel="manifest" href="${publicPath}manifest.json"></link>`
-  ) : '';
+  const manifestLink = fs.existsSync(`${outputPath}/manifest.json`)
+    ? `<link rel="manifest" href="${publicPath}manifest.json"></link>` : '';
 
-  // TODO: Update the caching mechanics to stored cached data gzipped,
-  // and serve them without a need to unpacking server-side.
   const cache = options.staticCacheController
     ? new Cache(options.staticCacheSize) : null;
 
@@ -213,21 +244,32 @@ export default function factory(webpackConfig, options) {
         // Array of chunk names encountered during the rendering.
         chunks: [],
       };
+      let stream;
       if (App) {
-        let markup;
         const ssrStart = Date.now();
-        for (let round = 0; round < options.maxSsrRounds; ++round) {
+
+        const renderPass = async () => {
           ssrContext.chunks = [];
-          markup = ReactDOM.renderToString((
-            <GlobalStateProvider
-              initialState={ssrContext.state}
-              ssrContext={ssrContext}
-            >
-              <StaticRouter location={req.url}>
-                <App />
-              </StaticRouter>
-            </GlobalStateProvider>
-          ));
+          return new Promise((resolve, reject) => {
+            const pipeableStream = renderToPipeableStream(
+              <GlobalStateProvider
+                initialState={ssrContext.state}
+                ssrContext={ssrContext}
+              >
+                <StaticRouter location={req.url}>
+                  <App />
+                </StaticRouter>
+              </GlobalStateProvider>,
+              {
+                onAllReady: () => resolve(pipeableStream),
+                onError: reject,
+              },
+            );
+          });
+        };
+
+        for (let round = 0; round < options.maxSsrRounds; ++round) {
+          stream = await renderPass(); // eslint-disable-line no-await-in-loop
 
           if (!ssrContext.dirty) break;
 
@@ -240,7 +282,14 @@ export default function factory(webpackConfig, options) {
           if (!ok) break;
           /* eslint-enable no-await-in-loop */
         }
-        App = markup;
+
+        App = '';
+        stream.pipe(new Writable({
+          write: (chunk, _, done) => {
+            App += chunk.toString();
+            done();
+          },
+        }));
 
         /* This takes care about server-side rendering of page title and meta tags
         * (still demands injection into HTML template, which happens below). */
@@ -314,26 +363,7 @@ export default function factory(webpackConfig, options) {
         }
       });
 
-      let bodyOpenExtraScripts;
-      let defaultExtraScripts;
-      let headOpenExtraScripts;
-      if (extraScripts) {
-        bodyOpenExtraScripts = extraScripts
-          .filter((script) => isObject(script)
-            && script.location === SCRIPT_LOCATIONS.BODY_OPEN)
-          .map((script) => script.code)
-          .join('');
-        defaultExtraScripts = extraScripts
-          .filter((script) => isString(script)
-            || script.location === SCRIPT_LOCATIONS.DEFAULT)
-          .map((script) => (isString(script) ? script : script.code))
-          .join('');
-        headOpenExtraScripts = extraScripts
-          .filter((script) => isObject(script)
-            && script.location === SCRIPT_LOCATIONS.HEAD_OPEN)
-          .map((script) => script.code)
-          .join('');
-      }
+      const grouppedExtraScripts = groupExtraScripts(extraScripts);
 
       const faviconLink = ops.favicon ? (
         '<link rel="shortcut icon" href="/favicon.ico" />'
@@ -342,7 +372,7 @@ export default function factory(webpackConfig, options) {
       const html = `<!DOCTYPE html>
         <html lang="en">
           <head>
-            ${headOpenExtraScripts || ''}
+            ${grouppedExtraScripts[SCRIPT_LOCATIONS.HEAD_OPEN]}
             ${helmet ? helmet.title.toString() : ''}
             ${helmet ? helmet.meta.toString() : ''}
             <meta name="theme-color" content="#FFFFFF"/>
@@ -356,7 +386,7 @@ export default function factory(webpackConfig, options) {
             />
           </head>
           <body>
-            ${bodyOpenExtraScripts || ''}
+            ${grouppedExtraScripts[SCRIPT_LOCATIONS.BODY_OPEN]}
             <div id="react-view">${App || ''}</div>
             <script
               id="inj"
@@ -366,7 +396,7 @@ export default function factory(webpackConfig, options) {
               window.INJ="${INJ}"
             </script>
             ${scriptChunkString}
-            ${defaultExtraScripts || ''}
+            ${grouppedExtraScripts[SCRIPT_LOCATIONS.DEFAULT]}
           </body>
         </html>`;
 
