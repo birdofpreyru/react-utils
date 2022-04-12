@@ -11,8 +11,13 @@ import { renderServerSide } from './__assets__/shared';
 jest.mock('node-forge');
 jest.mock('uuid');
 
-jest.useFakeTimers();
 mockdate.set('2019-11-29Z');
+
+// Note: this will do as a simplistic polyfill for setImmediate(),
+// which otherwise is not available in Jest's JSDom environment,
+// but is necessary for us in this test as we need to run SSR
+// alongside the client-side testing.
+global.setImmediate = setTimeout;
 
 test('Client-side rendering', async () => {
   // Emulates server-sider render to figure out the markup that should be
@@ -26,7 +31,6 @@ test('Client-side rendering', async () => {
 
   let SampleCodeSplit = require('./__assets__/SampleCodeSplit').default;
   let serverMarkup = renderServerSide(SampleCodeSplit, { maxSsrRounds: 3 });
-  await jest.runAllTimers();
   serverMarkup = await serverMarkup;
   document.write(serverMarkup);
   document.close();

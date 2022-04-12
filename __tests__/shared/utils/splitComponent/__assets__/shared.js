@@ -34,7 +34,7 @@ export async function renderServerSide(Scene, {
     {
       Application: Scene,
       maxSsrRounds,
-      ssrTimeout: Number.MAX_VALUE,
+      ssrTimeout: 1000,
     },
   );
   let render = '';
