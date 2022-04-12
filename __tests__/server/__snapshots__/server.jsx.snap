@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Server is functional Simple request 1`] = `"default-src 'self' https://sample.url;base-uri 'self';block-all-mixed-content;font-src 'self' data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self' 'unsafe-eval' 'nonce-00000000-0000-0000-0000-000000000001';script-src-attr 'none';style-src 'self' 'unsafe-inline';frame-src 'self' https://*.youtube.com;upgrade-insecure-requests"`;
+
+exports[`Server is functional Simple request 2`] = `"default-src 'self' https://sample.url;base-uri 'self';block-all-mixed-content;font-src 'self' data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self' 'unsafe-eval' 'nonce-00000000-0000-0000-0000-000000000002';script-src-attr 'none';style-src 'self' 'unsafe-inline';frame-src 'self' https://*.youtube.com;upgrade-insecure-requests"`;
+
+exports[`Server is functional Simple request 3`] = `
+"<!DOCTYPE html>
+        <html lang=\\"en\\">
+          <head>
+            
+            <title data-react-helmet=\\"true\\"></title>
+            
+            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
+            
+            
+            
+            <meta charset=\\"utf-8\\" />
+            <meta
+              content=\\"width=device-width,initial-scale=1.0\\"
+              name=\\"viewport\\"
+            />
+          </head>
+          <body>
+            
+            <div id=\\"react-view\\"><div>Hello World!</div></div>
+            <script
+              id=\\"inj\\"
+              type=\\"application/javascript\\"
+              nonce=\\"00000000-0000-0000-0000-000000000002\\"
+            >
+              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghgc5WRH69eBKHiBZQmMDPrDIZjS0mo8ysGCjayxGzD6WmL8eLQdJGGbkbV9YPqFyABasN0sKSQcvlSF0QOvH+XQ==\\"
+            </script>
+            
+            
+          </body>
+        </html>"
+`;
