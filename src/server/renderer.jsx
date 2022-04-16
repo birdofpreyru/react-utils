@@ -174,7 +174,7 @@ export default function factory(webpackConfig, options) {
   const { publicPath, path: outputPath } = webpackConfig.output;
 
   const manifestLink = fs.existsSync(`${outputPath}/manifest.json`)
-    ? `<link rel="manifest" href="${publicPath}manifest.json"></link>` : '';
+    ? `<link rel="manifest" href="${publicPath}manifest.json">` : '';
 
   const cache = options.staticCacheController
     ? new Cache(options.staticCacheSize) : null;
@@ -352,7 +352,7 @@ export default function factory(webpackConfig, options) {
       let scriptChunkString = '';
       chunkSet.forEach((chunk) => {
         if (chunk.endsWith('.css')) {
-          styleChunkString += `<link href="${publicPath}${chunk}" rel="stylesheet" />`;
+          styleChunkString += `<link href="${publicPath}${chunk}" rel="stylesheet">`;
         } else if (
           chunk.endsWith('.js')
             // In dev mode HMR adds JS updates into asset arrays,
@@ -366,7 +366,7 @@ export default function factory(webpackConfig, options) {
       const grouppedExtraScripts = groupExtraScripts(extraScripts);
 
       const faviconLink = ops.favicon ? (
-        '<link rel="shortcut icon" href="/favicon.ico" />'
+        '<link rel="shortcut icon" href="/favicon.ico">'
       ) : '';
 
       const html = `<!DOCTYPE html>
@@ -375,15 +375,15 @@ export default function factory(webpackConfig, options) {
             ${grouppedExtraScripts[SCRIPT_LOCATIONS.HEAD_OPEN]}
             ${helmet ? helmet.title.toString() : ''}
             ${helmet ? helmet.meta.toString() : ''}
-            <meta name="theme-color" content="#FFFFFF"/>
+            <meta name="theme-color" content="#FFFFFF">
             ${manifestLink}
             ${styleChunkString}
             ${faviconLink}
-            <meta charset="utf-8" />
+            <meta charset="utf-8">
             <meta
               content="width=device-width,initial-scale=1.0"
               name="viewport"
-            />
+            >
           </head>
           <body>
             ${grouppedExtraScripts[SCRIPT_LOCATIONS.BODY_OPEN]}

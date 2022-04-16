@@ -9,15 +9,15 @@ exports[`Server is functional Simple request 2`] = `
             
             <title data-react-helmet=\\"true\\"></title>
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
+            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
             
             
             
-            <meta charset=\\"utf-8\\" />
+            <meta charset=\\"utf-8\\">
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"
               name=\\"viewport\\"
-            />
+            >
           </head>
           <body>
             

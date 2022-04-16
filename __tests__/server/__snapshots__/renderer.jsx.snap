@@ -7,15 +7,15 @@ exports[`"favicon" option 1`] = `
             
             
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
+            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
-            <link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\" />
-            <meta charset=\\"utf-8\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+            <link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\">
+            <meta charset=\\"utf-8\\">
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"
               name=\\"viewport\\"
-            />
+            >
           </head>
           <body>
             
@@ -40,15 +40,15 @@ exports[`Base rendering of HTML template 1`] = `
             
             
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
+            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
             
-            <meta charset=\\"utf-8\\" />
+            <meta charset=\\"utf-8\\">
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"
               name=\\"viewport\\"
-            />
+            >
           </head>
           <body>
             
@@ -73,15 +73,15 @@ exports[`Config overriding for injection 1`] = `
             
             
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
+            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
             
-            <meta charset=\\"utf-8\\" />
+            <meta charset=\\"utf-8\\">
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"
               name=\\"viewport\\"
-            />
+            >
           </head>
           <body>
             
@@ -106,15 +106,15 @@ exports[`Helmet integration works 1`] = `
             
             <title data-react-helmet=\\"true\\">Test Page Title</title>
             <meta data-react-helmet=\\"true\\" property=\\"description\\" content=\\"Test Page Description\\"/>
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
+            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
             
-            <meta charset=\\"utf-8\\" />
+            <meta charset=\\"utf-8\\">
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"
               name=\\"viewport\\"
-            />
+            >
           </head>
           <body>
             
@@ -139,15 +139,15 @@ exports[`Injection of additional JS scripts 1`] = `
             <script>1-st script after opening <head></script><script>2-nd script after opening <head></script>
             
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
+            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
             
-            <meta charset=\\"utf-8\\" />
+            <meta charset=\\"utf-8\\">
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"
               name=\\"viewport\\"
-            />
+            >
           </head>
           <body>
             <script>1-st script after opening <body></script><script>2-nd script after opening <body></script>
@@ -172,15 +172,15 @@ exports[`JS constructs in global state 1`] = `
             
             <title data-react-helmet=\\"true\\"></title>
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
+            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
             
-            <meta charset=\\"utf-8\\" />
+            <meta charset=\\"utf-8\\">
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"
               name=\\"viewport\\"
-            />
+            >
           </head>
           <body>
             
@@ -205,15 +205,15 @@ exports[`Server-side rendering (SSR); injection of CSS chunks & Redux state 1`] 
             
             <title data-react-helmet=\\"true\\"></title>
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
+            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" /><link href=\\"/test/public/path/test-chunk-a-1511941200000.css\\" rel=\\"stylesheet\\" /><link href=\\"/test/public/path/test-chunk-b-1511941200000.css\\" rel=\\"stylesheet\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\"><link href=\\"/test/public/path/test-chunk-a-1511941200000.css\\" rel=\\"stylesheet\\"><link href=\\"/test/public/path/test-chunk-b-1511941200000.css\\" rel=\\"stylesheet\\">
             
-            <meta charset=\\"utf-8\\" />
+            <meta charset=\\"utf-8\\">
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"
               name=\\"viewport\\"
-            />
+            >
           </head>
           <body>
             
@@ -239,15 +239,15 @@ exports[`Setting of response HTTP status the server-side rendering 1`] = `
             
             <title data-react-helmet=\\"true\\"></title>
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\"/>
+            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
             
-            <meta charset=\\"utf-8\\" />
+            <meta charset=\\"utf-8\\">
             <meta
               content=\\"width=device-width,initial-scale=1.0\\"
               name=\\"viewport\\"
-            />
+            >
           </head>
           <body>
             

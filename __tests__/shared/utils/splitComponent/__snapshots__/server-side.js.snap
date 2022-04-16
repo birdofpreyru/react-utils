@@ -8,20 +8,20 @@ exports[`React Router works inside CodeSplit 1`] = `
 
     <title data-react-helmet=\\"true\\"></title>
 
-    <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
+    <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
 
-    <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+    <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
 
-    <meta charset=\\"utf-8\\" />
-    <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
+    <meta charset=\\"utf-8\\">
+    <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">
   </head>
 
   <body>
 
     <div id=\\"react-view\\">
-      <div data-chunk-name=\\"split\\">
-        <div>Hello World!</div>
-      </div>
+      <!--$-->
+      <div>Hello World!</div>
+      <!--/$-->
     </div>
     <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
       window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBb1VDFWdXsViFyeX13tuynQ88EETx6RuQyms6aHDjsZzm54u6pdtE5bElWjYQQYYKWQ6Q7AG6jOJ0m4jyHJEL2hbRtKnBKIGH+RZ8NtSPyZUdQIHOOyAmEjNWwTcoflKwqX1yZQFqY61t71j0sQev32jJQxdFCAfnIPEBbQyoMOthnONT2MDoAhYBo7mW5WvIIwKZOdbtEV00hm8UfXRtHfiDZlOuY93yXGAlvaXY18BqM3DPSi818K7Z1H4SWC1VYTGrNkXoMDIE6ybStZpZjR4spwNSQv32yICqmIFSe5L6VP07D+zuaRT8l8Kisyjw5b2Xh3ZZWsXzZjicu32lyebon9uckaiJy3Jj8fVO83oGnoVoG23K8ksWQe5vTPxUvDNJMayc7CzFtcUZFtdicQT0RPhKYtcvngtzc19MY6p+qkKCL2LZKs23sA7deEo1\\"
@@ -41,20 +41,20 @@ exports[`React Router works inside CodeSplit 2`] = `
 
     <title data-react-helmet=\\"true\\"></title>
 
-    <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
+    <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
 
-    <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
+    <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
 
-    <meta charset=\\"utf-8\\" />
-    <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
+    <meta charset=\\"utf-8\\">
+    <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">
   </head>
 
   <body>
 
     <div id=\\"react-view\\">
-      <div data-chunk-name=\\"split\\">
-        <div>Hello World!</div>
-      </div>
+      <!--$-->
+      <div>Hello World!</div>
+      <!--/$-->
     </div>
     <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
       window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBb1VDFWdXsViFyeX13tuynQ88EETx6RuQyms6aHDjsZzm54u6pdtE5bElWjYQQYYKWQ6Q7AG6jOJ0m4jyHJEL2hbRtKnBKIGH+RZ8NtSPyZUdQIHOOyAmEjNWwTcoflKwqX1yZQFqY61t71j0sQev32jJQxdFCAfnIPEBbQyoMOthnONT2MDoAhYBo7mW5WvIIwKZOdbtEV00hm8UfXRtHfiDZlOuY93yXGAlvaXY18BqM3DPSi818K7Z1H4SWC1VYTGrNkXoMDIE6ybStZpZjR4spwNSQv32yICqmIFSe5L6VP07D+zuaRT8l8Kisyjw5b2Xh3ZZWsXzZjicu32lyebon9uckaiJy3Jj8fVO83oGnoVoG23K8ksWQe5vTPxUvDNJMayc7CzFtcUZFtdicQT0RPhKYtcvngtzc19MY6p+qkKCL2LZKs23sA7deEo1\\"
@@ -74,153 +74,55 @@ exports[`Server-side rendering 1`] = `
 
     <title data-react-helmet=\\"true\\"></title>
 
-    <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
+    <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
 
-    <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
-    <link href=\\"/test/public/path/sample-component-1-1511941200000.css\\" rel=\\"stylesheet\\" />
-    <link href=\\"/test/public/path/sample-component-2-1511941200000.css\\" rel=\\"stylesheet\\" />
-    <link href=\\"/test/public/path/sample-component-3-1511941200000.css\\" rel=\\"stylesheet\\" />
+    <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+    <link href=\\"/test/public/path/sample-component-1-1511941200000.css\\" rel=\\"stylesheet\\">
+    <link href=\\"/test/public/path/sample-component-2-1511941200000.css\\" rel=\\"stylesheet\\">
+    <link href=\\"/test/public/path/sample-component-3-1511941200000.css\\" rel=\\"stylesheet\\">
 
-    <meta charset=\\"utf-8\\" />
-    <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
+    <meta charset=\\"utf-8\\">
+    <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">
   </head>
 
   <body>
 
     <div id=\\"react-view\\">
-      <h1>testValue</h1>
-      <div data-chunk-name=\\"sample-component-1\\"></div>
-      <div data-chunk-name=\\"sample-component-2\\">
-        <div>PLACEHOLDER!</div>
+      <h1>SampleCodeSplit</h1>
+      <div>testValue</div>
+      <!--$-->
+      <div>
+        <h1>Sample Component</h1>
+        <div>testValue</div>
+        <h3>Prop</h3>
+        <div></div>
+        <h3>Children</h3>
+        <div></div>
       </div>
-      <div data-chunk-name=\\"sample-component-3\\">
+      <!--/$-->
+      <!--$-->
+      <div>
+        <h1>Sample Component</h1>
+        <div>testValue</div>
+        <h3>Prop</h3>
+        <div>test</div>
+        <h3>Children</h3>
+        <div>Test</div>
+      </div>
+      <!--/$-->
+      <!--$-->
+      <div>
+        <h1>Sample Component</h1>
+        <div>testValue</div>
+        <h3>Prop</h3>
+        <div></div>
+        <h3>Children</h3>
         <div>
-          <h1>Sample Component</h1><pre>{
-  &quot;test&quot;: {
-    &quot;key&quot;: &quot;testValue&quot;
-  },
-  &quot;dr_pogodin_react_utils___split_components&quot;: {
-    &quot;sample-component-1&quot;: {
-      &quot;data&quot;: null,
-      &quot;numRefs&quot;: 0,
-      &quot;operationId&quot;: &quot;S00000000-0000-0000-0000-000000000001&quot;,
-      &quot;timestamp&quot;: 0
-    },
-    &quot;sample-component-2&quot;: {
-      &quot;data&quot;: null,
-      &quot;numRefs&quot;: 0,
-      &quot;operationId&quot;: &quot;S00000000-0000-0000-0000-000000000002&quot;,
-      &quot;timestamp&quot;: 0
-    }
-  }
-}</pre>
+          <div>a</div>
+          <div>b</div>
         </div>
       </div>
-    </div>
-    <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
-      window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBb1VDFWdXsViFyeX13tuynQ88EETx6RuQyms6aHDjsZzm54u6pdtE5bElWjYQQYYKWQ6Q7AG6jOJ0m4jyHJEL2hbRtKnBKIGH+RZ8NtSPyZUdQIHOOyAmEjNWwTcoflKwqX1yZQFqY61t71j0sQev32jJQxdFCAfnIPEBbQyoMOthnONT2MDoAhYBo7mW5WvIIwKZOdbtEV00hm8UfXRtHfiDZlOuY93yXGAlvaXY18BqM3DPSi818K7Z1H4SWC1VYTGrNkXoMDIE6ybStZpZjR4spwNSQv32yICqmIFSe5L6VP07D+zuaRT8l8Kisyjw5b2Xh3ZZWsXzZjicu32lyebon9uckaiJy3Jj8fVO83oGnoVoG23K8ksWQe5vTPxUvDNJMayc7CzFtcUZFtdicQT0RPhKYtcvngtzc19MY6rKHS5iMFX5Ms6j+LMWfYk3Np31TfQ3q5XhqvVHZPciRN1TTzEdcfcEJ+d8oQ+6GKM=\\"
-    </script>
-    <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
-    <script src=\\"/test/public/path/sample-component-2-1511941200000.js\\" type=\\"application/javascript\\"></script>
-    <script src=\\"/test/public/path/sample-component-3-1511941200000.js\\" type=\\"application/javascript\\"></script>
-
-  </body>
-
-</html>"
-`;
-
-exports[`Server-side rendering 2`] = `
-"<!DOCTYPE html>
-<html lang=\\"en\\">
-
-  <head>
-
-    <title data-react-helmet=\\"true\\"></title>
-
-    <meta name=\\"theme-color\\" content=\\"#FFFFFF\\" />
-
-    <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\" />
-    <link href=\\"/test/public/path/sample-component-1-1511941200000.css\\" rel=\\"stylesheet\\" />
-    <link href=\\"/test/public/path/sample-component-2-1511941200000.css\\" rel=\\"stylesheet\\" />
-    <link href=\\"/test/public/path/sample-component-3-1511941200000.css\\" rel=\\"stylesheet\\" />
-
-    <meta charset=\\"utf-8\\" />
-    <meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\" />
-  </head>
-
-  <body>
-
-    <div id=\\"react-view\\">
-      <h1>testValue</h1>
-      <div data-chunk-name=\\"sample-component-1\\">
-        <div>
-          <h1>Sample Component</h1><pre>{
-  &quot;test&quot;: {
-    &quot;key&quot;: &quot;testValue&quot;
-  },
-  &quot;dr_pogodin_react_utils___split_components&quot;: {
-    &quot;sample-component-1&quot;: {
-      &quot;data&quot;: {},
-      &quot;numRefs&quot;: 0,
-      &quot;operationId&quot;: &quot;&quot;,
-      &quot;timestamp&quot;: 1574985600000
-    },
-    &quot;sample-component-2&quot;: {
-      &quot;data&quot;: {},
-      &quot;numRefs&quot;: 0,
-      &quot;operationId&quot;: &quot;&quot;,
-      &quot;timestamp&quot;: 1574985600000
-    }
-  }
-}</pre>
-        </div>
-      </div>
-      <div data-chunk-name=\\"sample-component-2\\">
-        <div>
-          <h1>Sample Component</h1><pre>{
-  &quot;test&quot;: {
-    &quot;key&quot;: &quot;testValue&quot;
-  },
-  &quot;dr_pogodin_react_utils___split_components&quot;: {
-    &quot;sample-component-1&quot;: {
-      &quot;data&quot;: {},
-      &quot;numRefs&quot;: 0,
-      &quot;operationId&quot;: &quot;&quot;,
-      &quot;timestamp&quot;: 1574985600000
-    },
-    &quot;sample-component-2&quot;: {
-      &quot;data&quot;: {},
-      &quot;numRefs&quot;: 0,
-      &quot;operationId&quot;: &quot;&quot;,
-      &quot;timestamp&quot;: 1574985600000
-    }
-  }
-}</pre>
-        </div>
-      </div>
-      <div data-chunk-name=\\"sample-component-3\\">
-        <div>
-          <h1>Sample Component</h1><pre>{
-  &quot;test&quot;: {
-    &quot;key&quot;: &quot;testValue&quot;
-  },
-  &quot;dr_pogodin_react_utils___split_components&quot;: {
-    &quot;sample-component-1&quot;: {
-      &quot;data&quot;: {},
-      &quot;numRefs&quot;: 0,
-      &quot;operationId&quot;: &quot;&quot;,
-      &quot;timestamp&quot;: 1574985600000
-    },
-    &quot;sample-component-2&quot;: {
-      &quot;data&quot;: {},
-      &quot;numRefs&quot;: 0,
-      &quot;operationId&quot;: &quot;&quot;,
-      &quot;timestamp&quot;: 1574985600000
-    }
-  }
-}</pre>
-        </div>
-      </div>
+      <!--/$-->
     </div>
     <script id=\\"inj\\" type=\\"application/javascript\\" nonce=\\"abcdef-dummy-nonce\\">
       window.INJ = \\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBb1VDFWdXsViFyeX13tuynQ88EETx6RuQyms6aHDjsZzm54u6pdtE5bElWjYQQYYKWQ6Q7AG6jOJ0m4jyHJEL2hbRtKnBKIGH+RZ8NtSPyZUdQIHOOyAmEjNWwTcoflKwqX1yZQFqY61t71j0sQev32jJQxdFCAfnIPEBbQyoMOthnONT2MDoAhYBo7mW5WvIIwKZOdbtEV00hm8UfXRtHfiDZlOuY93yXGAlvaXY18BqM3DPSi818K7Z1H4SWC1VYTGrNkXoMDIE6ybStZpZjR4spwNSQv32yICqmIFSe5L6VP07D+zuaRT8l8Kisyjw5b2Xh3ZZWsXzZjicu32lyebon9uckaiJy3Jj8fVO83oGnoVoG23K8ksWQe5vTPxUvDNJMayc7CzFtcUZFtdicQT0RPhKYtcvngtzc19MY6rKHS5iMFX5Ms6j+LMWfYk3Np31TfQ3q5XhqvVHZPciRN1TTzEdcfcEJ+d8oQ+6GKM=\\"

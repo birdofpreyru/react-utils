@@ -18,9 +18,7 @@ mockdate.set('2019-11-29Z');
 
 test('Server-side rendering', async () => {
   expect(IS_SERVER_SIDE).toBe(true);
-  let markup = await renderServerSide(SampleCodeSplit, { maxSsrRounds: 1 });
-  expect(pretty(markup)).toMatchSnapshot();
-  markup = await renderServerSide(SampleCodeSplit, { maxSsrRounds: 3 });
+  const markup = await renderServerSide(SampleCodeSplit, { maxSsrRounds: 1 });
   expect(pretty(markup)).toMatchSnapshot();
 });
 

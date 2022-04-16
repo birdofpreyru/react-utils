@@ -32,6 +32,7 @@ test('Client-side rendering', async () => {
   let SampleCodeSplit = require('./__assets__/SampleCodeSplit').default;
   let serverMarkup = renderServerSide(SampleCodeSplit, { maxSsrRounds: 3 });
   serverMarkup = await serverMarkup;
+  document.open();
   document.write(serverMarkup);
   document.close();
   const ssrHead = pretty(document.head.innerHTML);
@@ -48,13 +49,14 @@ test('Client-side rendering', async () => {
   mockClientSide();
   window.TRU_KEEP_INJ_SCRIPT = true;
   SampleCodeSplit = require('./__assets__/SampleCodeSplit').default;
+
   require('client/init');
 
   const { IS_CLIENT_SIDE } = require('utils/isomorphy');
   expect(IS_CLIENT_SIDE).toBe(true);
 
   let Launch = require('client').default;
-  act(() => Launch(SampleCodeSplit));
+  act(() => Launch(SampleCodeSplit, { hydrate: true }));
   let head = pretty(document.head.innerHTML);
   let body = pretty(document.body.innerHTML);
   expect(head).toEqual(ssrHead);
@@ -64,12 +66,13 @@ test('Client-side rendering', async () => {
    * is auto-removed from the document during the injection. */
   jest.resetModules();
   SampleCodeSplit = require('./__assets__/SampleCodeSplit').default;
+  document.open();
   document.write(serverMarkup);
   document.close();
   delete window.TRU_KEEP_INJ_SCRIPT;
   require('client/init');
   Launch = require('client').default;
-  act(() => Launch(SampleCodeSplit));
+  act(() => Launch(SampleCodeSplit, { hydrate: true }));
   head = pretty(document.head.innerHTML);
   body = pretty(document.body.innerHTML);
   expect(head).toMatchSnapshot();
