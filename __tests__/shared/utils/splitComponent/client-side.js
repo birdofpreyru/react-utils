@@ -11,8 +11,13 @@ import { renderServerSide } from './__assets__/shared';
 jest.mock('node-forge');
 jest.mock('uuid');
 
-jest.useFakeTimers();
 mockdate.set('2019-11-29Z');
+
+// Note: this will do as a simplistic polyfill for setImmediate(),
+// which otherwise is not available in Jest's JSDom environment,
+// but is necessary for us in this test as we need to run SSR
+// alongside the client-side testing.
+global.setImmediate = setTimeout;
 
 test('Client-side rendering', async () => {
   // Emulates server-sider render to figure out the markup that should be
@@ -26,8 +31,8 @@ test('Client-side rendering', async () => {
 
   let SampleCodeSplit = require('./__assets__/SampleCodeSplit').default;
   let serverMarkup = renderServerSide(SampleCodeSplit, { maxSsrRounds: 3 });
-  await jest.runAllTimers();
   serverMarkup = await serverMarkup;
+  document.open();
   document.write(serverMarkup);
   document.close();
   const ssrHead = pretty(document.head.innerHTML);
@@ -44,13 +49,14 @@ test('Client-side rendering', async () => {
   mockClientSide();
   window.TRU_KEEP_INJ_SCRIPT = true;
   SampleCodeSplit = require('./__assets__/SampleCodeSplit').default;
+
   require('client/init');
 
   const { IS_CLIENT_SIDE } = require('utils/isomorphy');
   expect(IS_CLIENT_SIDE).toBe(true);
 
   let Launch = require('client').default;
-  act(() => Launch(SampleCodeSplit));
+  act(() => Launch(SampleCodeSplit, { hydrate: true }));
   let head = pretty(document.head.innerHTML);
   let body = pretty(document.body.innerHTML);
   expect(head).toEqual(ssrHead);
@@ -60,12 +66,13 @@ test('Client-side rendering', async () => {
    * is auto-removed from the document during the injection. */
   jest.resetModules();
   SampleCodeSplit = require('./__assets__/SampleCodeSplit').default;
+  document.open();
   document.write(serverMarkup);
   document.close();
   delete window.TRU_KEEP_INJ_SCRIPT;
   require('client/init');
   Launch = require('client').default;
-  act(() => Launch(SampleCodeSplit));
+  act(() => Launch(SampleCodeSplit, { hydrate: true }));
   head = pretty(document.head.innerHTML);
   body = pretty(document.body.innerHTML);
   expect(head).toMatchSnapshot();

@@ -1,4 +1,7 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 import { createElement } from 'react';
+
 import CodeSplit from 'components/CodeSplit';
 
 /**
@@ -8,27 +11,24 @@ import CodeSplit from 'components/CodeSplit';
  * the client-side.
  * @param {object} options
  * @param {string} options.chunkName
- * @param {function} options.getClientSide
- * @param {React.ElementType} [options.placeholder]
- * @param {React.ElementType} [options.serverSide]
- * @returns {React.ElementType}
+ * @param {function} options.getComponent
+ * @param {React.Element} [options.placeholder]
+ * @return {React.ElementType}
  */
 export default function splitComponent({
   chunkName,
-  getClientSide,
+  getComponent,
   placeholder,
-  serverSide,
 }) {
   // eslint-disable-next-line react/prop-types
-  return ({ children = [], ...props } = {}) => createElement(
+  return ({ children, ...props }) => createElement(
     CodeSplit,
     {
       ...props,
       chunkName,
-      getClientSide,
+      getComponent,
       placeholder,
-      serverSide,
     },
-    ...children,
+    children,
   );
 }

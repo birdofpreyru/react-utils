@@ -14,10 +14,6 @@ environment.
 - [act()](#act) - An alias for
   the [act()](https://reactjs.org/docs/test-utils.html#act) function from
   **react-dom/test-utils**.
-- [findInDomByClass()](#findindombyclass) - An alias for
-  [findRenderedDOMComponentWithClass()](https://reactjs.org/docs/test-utils.html#findrendereddomcomponentwithclass).
-- [findInDomManyByClass()](#findindommanybyclass) - An alias for
-  [scryRenderedDOMComponentsWithClass()](https://reactjs.org/docs/test-utils.html#scryrendereddomcomponentswithclass).
 - [getMockUuid()](#getmockuuid) - Generates a mock UUID (formats the given `seed`
   into an UUID-formatted string).
 - [mockClientSide()] - Tricks **react-utils** into thinking the test is running
@@ -25,10 +21,9 @@ environment.
 - [mockTimer()](#mocktimer) - Advances mock timers, and mock date by
   the specified time step.
 - [mount()](#mount) - Mounts `scene` to the DOM, and returns the root scene
-  element.
+  element with **.destroy()** method attached.
 - [render()](#render) - Renders ReactJS component into JSON representation of
   the component tree.
-- [renderDom()](#renderdom) - Renders ReactJS component into DOM.
 - [shallowRender()] - Generates a shallow render of ReactJS component.
 - [shallowSnapshot()](#shallowsnapshot) - It does a shallow snapshot test of
   the given ReactJS component.
@@ -39,7 +34,6 @@ environment.
   component, and also returns JSON representation of is render.
 - [unmockClientSide()](#unmockclientside) - Reverts the effect of previous
   [mockClientSide()] call.
-- [unmount()](#unmount) - Unmounts `scene` from DOM.
 
 ### act()
 ```jsx
@@ -48,20 +42,6 @@ JU.act(action)
 This method is just an alias for
 [act()](https://reactjs.org/docs/test-utils.html#act) function from
 `react-dom/test-utils`.
-
-### findInDomByClass()
-```jsx
-JU.findInDomByClass(dom, className) => HTMLElement
-```
-Just an alias for
-[findRenderedDOMComponentWithClass()](https://reactjs.org/docs/test-utils.html#findrendereddomcomponentwithclass).
-
-### findInDomManyByClass()
-```jsx
-JU.findInDomManyByClass(dom, className) => HTMLElement[]
-```
-An alias for
-[scryRenderedDOMComponentsWithClass()](https://reactjs.org/docs/test-utils.html#scryrendereddomcomponentswithclass).
 
 ### getMockUuid()
 ```jsx
@@ -102,13 +82,15 @@ Advances mock timers, and mock date by the specified time step.
 ```jsx
 JU.mount(scene) => HTMLElement
 ```
-Mounts `scene` to the DOM and returns the root scene element.
+Mounts `scene` to the DOM and returns the root scene element (DOM node) with
+**.destroy()** method attached, which unmounts the scene from DOM.
 
 **Arguments**
 - `scene` - **React.ReactNode** - The scene.
 
 **Returns**
-- **HTMLElement** - The root DOM element of the mounted scene.
+- **HTMLElement** - The root DOM element of the mounted scene with
+  **.destroy()** method attached.
 
 ### render()
 ```jsx
@@ -128,32 +110,6 @@ tree, using [`react-test-renderer`](https://www.npmjs.com/package/react-test-ren
 import { JU } from '@dr.pogodin/react-utils';
 
 const tree = JU.render(<div>Example</div>);
-```
-
-### renderDom()
-```jsx
-JU.renderDom(component) => object
-```
-Renders given ReactJS component into DOM, using `react-dom/test-utils`.
-
-**Arguments**
-- `component` - **React.Node** - ReactJS component to render.
-
-**Returns**
-- **object** - Rendered DOM.
-
-**Example**
-```jsx title="Renders a component, and finds its element in the render."
-import { JU } from '@dr.pogodin/react-utils/jest-utils';
-
-const dom = JU.renderDom(
-  <div>
-    Example component, containing a button you want to find in the render.
-    <button className="BUTTON">Click me!</button>
-  </div>
-);
-
-const button = JU.findInDomByClass(dom, 'BUTTON');
 ```
 
 ### shallowRender()
@@ -239,15 +195,6 @@ test('A snapshot test', () => {
 JU.unmockClientSide()
 ```
 Reverts the effect of previous [mockClientSide()] call.
-
-### unmount()
-```jsx
-JU.unmount(scene)
-```
-Unmounts `scene` from DOM.
-
-**Arguments**
-- `scene` - **HTMLElement** - The root DOM element of the scene.
 
 [Jest]: https://jestjs.io
 [JU]: /docs/api/utils/jest-utils

@@ -5,12 +5,9 @@ import { WithTooltip } from '@dr.pogodin/react-utils';
 [WithTooltip] implements a simple to use tooltip component, themed using
 [React Themes] library.
 
-import Example from '../../../src/components/WithTooltipExample';
-
-:::note Demo
-<Example />
-
-Find [the source code below][Examples].
+:::danger Live Example Is Temporarily Removed
+The live example is temporarily removed, until Docusaurus is fully
+compatible with React **v18+**.
 :::
 
 ## Properties

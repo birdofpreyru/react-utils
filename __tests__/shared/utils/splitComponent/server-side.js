@@ -14,16 +14,11 @@ import { renderServerSide } from './__assets__/shared';
 jest.mock('node-forge');
 jest.mock('uuid');
 
-jest.useFakeTimers();
 mockdate.set('2019-11-29Z');
 
 test('Server-side rendering', async () => {
   expect(IS_SERVER_SIDE).toBe(true);
-  let markup = await renderServerSide(SampleCodeSplit, { maxSsrRounds: 1 });
-  expect(pretty(markup)).toMatchSnapshot();
-  markup = renderServerSide(SampleCodeSplit, { maxSsrRounds: 3 });
-  jest.runAllTimers();
-  markup = await markup;
+  const markup = await renderServerSide(SampleCodeSplit, { maxSsrRounds: 1 });
   expect(pretty(markup)).toMatchSnapshot();
 });
 

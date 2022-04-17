@@ -18,8 +18,7 @@ function InnerRouter() {
 // to test its behavior alongside React Router use.
 const Split = splitComponent({
   chunkName: 'split',
-  getClientSide: () => InnerRouter,
-  serverSide: InnerRouter,
+  getComponent: () => InnerRouter,
 });
 
 export function RoutingScene1() {

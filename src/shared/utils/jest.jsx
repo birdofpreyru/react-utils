@@ -1,12 +1,9 @@
 /* global expect, jest, document */
 /* eslint-disable import/no-extraneous-dependencies */
 
-import { Component } from 'react';
-
 import mockdate from 'mockdate';
-import PT from 'prop-types';
-import { render as newRender, unmountComponentAtNode } from 'react-dom';
-import TU from 'react-dom/test-utils';
+import { createRoot } from 'react-dom/client';
+import TU, { act } from 'react-dom/test-utils';
 
 /* eslint-disable import/no-extraneous-dependencies */
 import Renderer from 'react-test-renderer';
@@ -18,7 +15,9 @@ import ShallowRenderer from 'react-test-renderer/shallow';
  * from `react-dom/test-utils`.
  * @param {function} action
  */
-export { act } from 'react-dom/test-utils';
+export { act };
+
+global.IS_REACT_ACT_ENVIRONMENT = true;
 
 const originalProcessVersions = process.versions;
 
@@ -65,47 +64,25 @@ export async function mockTimer(time) {
 /**
  * Mounts `scene` to the DOM, and returns the root scene element.
  * @param {React.ReactNode} scene
- * @return {HTMLElement}
+ * @return {HTMLElement} Created container DOM element with destroy() function
+ *  attached.
  */
 export function mount(scene) {
+  let root;
   const res = document.createElement('div');
   document.body.appendChild(res);
-  newRender(scene, res);
+  res.destroy = () => {
+    act(() => root.unmount());
+    res.remove();
+  };
+  act(() => {
+    root = createRoot(res);
+    root.render(scene);
+  });
   return res;
 }
 
-/**
- * Unmounts `scene` from the DOM.
- * @param {HTMLElement} scene
- */
-export function unmount(scene) {
-  unmountComponentAtNode(scene);
-  scene.remove();
-}
-
 /* OLD STUFF BELOW THIS MARK */
-
-/**
- * Just an alias for
- * [findRenderedDOMComponentWithClass(..)](https://reactjs.org/docs/test-utils.html#findrendereddomcomponentwithclass).
- * @param {object} dom
- * @param {string} className
- * @return {object}
- */
-export function findInDomByClass(dom, className) {
-  return TU.findRenderedDOMComponentWithClass(dom, className);
-}
-
-/**
- * Just an alias for
- * [scryRenderedDOMComponentsWithClass(..)](https://reactjs.org/docs/test-utils.html#scryrendereddomcomponentswithclass).
- * @param {object} dom
- * @param {stirng} className
- * @return {array}
- */
-export function findInDomManyByClass(dom, className) {
-  return TU.scryRenderedDOMComponentsWithClass(dom, className);
-}
 
 /**
  * Renders provided ReactJS component into JSON representation of the component
@@ -118,36 +95,6 @@ export function findInDomManyByClass(dom, className) {
  */
 export function render(component) {
   return Renderer.create(component).toJSON();
-}
-
-// The Wrapper is necessary for the "renderDom(..)" function, because
-// the "renderIntoDocument(..)" function from "react-dom/test-utils" works
-// only with state components, so we have to wrap our ReactJS components into
-// such Wrapper.
-class Wrapper extends Component {
-  componentDidMount() {}
-
-  render() {
-    const { children } = this.props;
-    return children;
-  }
-}
-
-Wrapper.propTypes = {
-  children: PT.node.isRequired,
-};
-
-/**
- * Renders given ReactJS component into DOM, using `react-dom/test-utils`.
- * @param {object} component ReactJS component to render.
- * @return {object} Rendered DOM.
- */
-export function renderDom(component) {
-  return TU.renderIntoDocument((
-    <Wrapper>
-      {component}
-    </Wrapper>
-  ));
 }
 
 /**

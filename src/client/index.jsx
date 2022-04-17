@@ -3,7 +3,7 @@
 
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
 
-import ReactDom from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 /**
@@ -11,13 +11,12 @@ import { BrowserRouter } from 'react-router-dom';
  * @param {object} Application Root application component
  */
 export default function Launch(Application) {
-  ReactDom.hydrate(
-    (
-      <GlobalStateProvider initialState={window.ISTATE}>
-        <BrowserRouter>
-          <Application />
-        </BrowserRouter>
-      </GlobalStateProvider>
-    ), document.getElementById('react-view'),
+  hydrateRoot(
+    document.getElementById('react-view'),
+    <GlobalStateProvider initialState={window.ISTATE}>
+      <BrowserRouter>
+        <Application />
+      </BrowserRouter>
+    </GlobalStateProvider>,
   );
 }

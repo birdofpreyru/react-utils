@@ -64,11 +64,16 @@ describe('Server is functional', () => {
   beforeAll(async () => {
     server = supertest(
       await serverFactory(TEST_WEBPACK_CONFIG, {
+        Application: () => <div>Hello World!</div>,
         cspSettingsHook: (csp) => {
           csp.directives['default-src'].push('https://sample.url');
           return csp;
         },
         logger,
+        maxSsrRounds: 3,
+
+        // Use cache in tests as well.
+        staticCacheController: () => 'key',
       }),
     );
   });
@@ -77,10 +82,7 @@ describe('Server is functional', () => {
     await server.get('/').expect(200)
       .expect((res) => {
         expect(res.headers['content-security-policy']).toMatchSnapshot();
-      });
-    await server.get('/').expect(200)
-      .expect((res) => {
-        expect(res.headers['content-security-policy']).toMatchSnapshot();
+        expect(res.text).toMatchSnapshot();
       });
   });
 });

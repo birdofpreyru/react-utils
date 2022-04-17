@@ -235,8 +235,9 @@ test(
   }),
 );
 
-test('Setting of response HTTP status the server-side rendering', () => {
-  coreTest(TEST_WEBPACK_CONFIG, {
+test(
+  'Setting of response HTTP status the server-side rendering',
+  () => coreTest(TEST_WEBPACK_CONFIG, {
     Application: () => {
       const context = getSsrContext();
       context.status = 404; // eslint-disable-line no-param-reassign
@@ -244,8 +245,8 @@ test('Setting of response HTTP status the server-side rendering', () => {
     },
     maxSsrRounds: 3,
     ssrTimeout: Number.MAX_VALUE,
-  });
-});
+  }),
+);
 
 test('Throws in case of forge.random.getBytes(..) failure', () => {
   global.mockFailsForgeRandomGetBytesMethod = true;

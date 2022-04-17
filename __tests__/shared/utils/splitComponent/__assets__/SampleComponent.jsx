@@ -5,12 +5,14 @@
  * that code splitting has not broke related functionality.
  */
 
+import PT from 'prop-types';
 import { Route, Routes } from 'react-router-dom';
-
 import { useGlobalState } from '@dr.pogodin/react-global-state';
 
-export default function SampleComponent() {
-  const [state] = useGlobalState();
+import './style.scss';
+
+export default function SampleComponent({ children, prop }) {
+  const [testKey] = useGlobalState('test.key');
   return (
     <Routes>
       <Route
@@ -18,10 +20,26 @@ export default function SampleComponent() {
         element={(
           <div>
             <h1>Sample Component</h1>
-            <pre>{JSON.stringify(state, null, 2)}</pre>
+            <div>{testKey}</div>
+            <h3>Prop</h3>
+            <div>{prop}</div>
+            <h3>Children</h3>
+            <div>
+              {children}
+            </div>
           </div>
         )}
       />
     </Routes>
   );
 }
+
+SampleComponent.propTypes = {
+  children: PT.node,
+  prop: PT.string,
+};
+
+SampleComponent.defaultProps = {
+  children: undefined,
+  prop: '',
+};

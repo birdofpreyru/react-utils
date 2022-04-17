@@ -4,12 +4,7 @@ import pretty from 'pretty';
 
 import Modal from 'components/Modal';
 
-import {
-  act,
-  mount,
-  unmount,
-  simulate,
-} from 'utils/jest';
+import { act, mount, simulate } from 'utils/jest';
 
 jest.useFakeTimers();
 
@@ -37,16 +32,12 @@ beforeEach(() => {
 
 afterEach(() => {
   if (scene) {
-    unmount(scene);
+    scene.destroy();
     scene = null;
   }
 });
 
 test('Snapshot match', () => {
-  expect(pretty(document.body.innerHTML)).toMatchSnapshot();
-  act(() => {
-    jest.runAllTimers();
-  });
   expect(pretty(document.body.innerHTML)).toMatchSnapshot();
 });
 
