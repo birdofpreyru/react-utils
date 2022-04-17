@@ -10,7 +10,7 @@
   "dependencies": {
     "@babel/runtime": "^7.17.9",
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.8.0",
-    "@dr.pogodin/react-global-state": "^0.8.0",
+    "@dr.pogodin/react-global-state": "^0.8.1",
     "@dr.pogodin/react-themes": "^1.4.2",
     "axios": "^0.26.1",
     "commander": "^9.0.0",
@@ -85,7 +85,7 @@
     "sass": "^1.50.0",
     "sass-loader": "^12.6.0",
     "sitemap": "^7.1.1",
-    "stylelint": "^14.7.0",
+    "stylelint": "^14.7.1",
     "stylelint-config-standard-scss": "^3.0.0",
     "supertest": "^6.2.2",
     "webpack": "^5.72.0",

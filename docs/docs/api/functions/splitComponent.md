@@ -2,12 +2,7 @@
 ```jsx
 import { splitComponent } from '@dr.pogodin/react-utils';
 
-splitComponent({
-  chunkName,
-  getClientSide,
-  placeholder,
-  serverSide,
-}): React.ElementType;
+splitComponent({ chunkName, getComponent, placeholder }): React.ElementType;
 ```
 The [splitComponent()] function wraps a specified React component for
 [Code Splitting]. In other words, if a `<Component>` is only imported into
@@ -25,26 +20,31 @@ See [the example](#example) to understand how to use it.
   object, holding all required parameters.
   - `chunkName` - **string** - Unique name for the new code chunk, _e.g._
     `"sample-code-chunk"`.
-  - `getClientSide` - **function** - A function which resolves to the original
+  - `getComponent` - **function** - A function which resolves to the original
     component element, and uses dynamic `import()` with `webpackChunkName` magic
     comment matching the name provided via `chunkName` option, _e.g._ (that assumes
     the component is the default export from its module):
     ```jsx
     () => import(/* webpackChunkName: 'sample-code-chunk' */ 'path/to/SampleComponent')
     ```
-  - `serverSide` - **React.ElementType** - At the server side a weakly loaded
-    original component should be passed in here, _e.g._
-    ```jsx
-    webpack.requireWeak('path/to/SampleComponent', __dirname)
-    ```
-    Note that [webpack.requireWeak()] method requires **SampleComponent**
-    at the server-side only, at the client side it returns **null**, and
-    it is also prevents Webpack from bundling in the module required
-    using this method.
-    
-  - `placeholder` - **React.ElementType** - Optional. Placeholder component to
-    render in-place of the splitted component while its code chunk is being
+    :::tip Note
+    The matching `chunkName` argument and `webpackChunkName` magic comment are
+    used to dynamically inject necessary CSS chunks into the page. The library
+    will throw if the same chunk name is used for different split components.
+    Unfortunately, it does not automatically check whether `chunkName` and
+    `webpackChunkName` match, nor allows to avoid using them altogether.
+    :::
+
+  - `placeholder` - **React.ReactNode** - Optional. Placeholder element
+    to render in-place of the splitted component while its code chunk is being
     loaded.
+
+:::caution Changelog
+[splitComponent()] signature was changed in **react-utils** release **v1.16.0**,
+see
+[release description](https://github.com/birdofpreyru/react-utils/releases/tag/v1.16.0)
+for details of older signature.
+:::
 
 ## Example
 
@@ -68,10 +68,10 @@ To split it into a separate code chunk:
 
   export default splitComponent({
     chunkName: 'sample-component-chunk',
-    getClientSide: () => import(
+    getComponent: () => import(
       /* webpackChunkName: 'sample-component-chunk' */ 'path/to/SampleComponent'
     ),
-    serverSide: wepback.requireWeak('path/to/SampleComponent', __dirname),
+    placeholder: <div>Optional Placeholder</div>,
   });
   ```
 2) Everywhere **SampleComponent** is used (outside its new chunk), you replace
