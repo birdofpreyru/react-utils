@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import Barrier from './Barrier';
+import { Barrier } from './Barrier';
 
 /**
  * @static
