@@ -1,17 +1,5 @@
-/**
- * @category Utilities
- * @module time
- * @desc
- * ```js
- * import { time } from '@dr.pogodin/react-utils';
- * ```
- * Date & time utilities. The `time` export is a convenient alias for
- * [dayjs](https://day.js.org/en/) library, _i.e._ you can use `time`
- * in all ways you would use `dayjs`. It is further extended with
- * the following additional members.
- */
-
 import dayjs from 'dayjs';
+import Barrier from './Barrier';
 
 /**
  * @static
@@ -76,19 +64,17 @@ dayjs.YEAR_MS = 365 * dayjs.DAY_MS;
 dayjs.now = Date.now;
 
 /**
- * @static
- * @func timer
- * @desc Creates a Promise, which resolves after the given timeout.
+ * Creates a Promise, which resolves after the given timeout.
  * @param {number} timeout Timeout [ms].
- * @return {Promise} Resolves after the timeout.
- * @example
- * import { time } from '@dr.pogodin/react-utils';
- * time.timer(5000).then(() => console.log('5 seconds have passed'))
+ * @return {Barrier} Resolves after the timeout. It has additional
+ *  .abort() method attached, which cancels the pending timer resolution
+ *  (without resolving or rejecting the barrier).
  */
 dayjs.timer = async function timer(timeout) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, timeout);
-  });
+  const res = new Barrier();
+  const id = setTimeout(res.resolve.bind(res), timeout);
+  res.abort = () => clearTimeout(id);
+  return res;
 };
 
 export default dayjs;

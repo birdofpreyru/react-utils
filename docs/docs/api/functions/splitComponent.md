@@ -15,6 +15,15 @@ as a whole.
 
 See [the example](#example) to understand how to use it.
 
+:::caution History
+- [v1.16.0](https://github.com/birdofpreyru/react-utils/releases/tag/v1.16.0) -
+  multiple [splitComponent()] signature changes:
+  - `getClientSide` option was renamed into `getComponent`.
+  - `serverSide` option was removed.
+  - `placeholder` option was changed to accept React node instead of element
+    type, _i.e._ `<Component />` instead of `Component`.
+:::
+
 ## Arguments
 - `options` - **object** - The only argument of [splitComponent()] is an option
   object, holding all required parameters.
@@ -38,13 +47,6 @@ See [the example](#example) to understand how to use it.
   - `placeholder` - **React.ReactNode** - Optional. Placeholder element
     to render in-place of the splitted component while its code chunk is being
     loaded.
-
-:::caution Changelog
-[splitComponent()] signature was changed in **react-utils** release **v1.16.0**,
-see
-[release description](https://github.com/birdofpreyru/react-utils/releases/tag/v1.16.0)
-for details of older signature.
-:::
 
 ## Example
 

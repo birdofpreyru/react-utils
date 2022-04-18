@@ -15,8 +15,9 @@ additional constants and functions are attached.
 
 **Functions**
 - [now()](#now) - Returns current Unix timestamp in milliseconds.
-- [timer()](#timer) - Creates a **Promise** which resolves after the specified
-  timeout.
+- [timer()](#timer) - Creates a [Barrier] which resolves after the specified
+  timeout. The timer can be aborted by **.abort()** method attached to
+  the [Barrier].
 
 ## Constants
 
@@ -62,10 +63,20 @@ Returns the current Unix timestamp in milliseconds, thus just an alias for
 
 ### timer()
 ```jsx
-time.timer(timeout): Promise
+time.timer(timeout): Barrier
 ```
-Creates a **Promise** which resolves after the specified `timeout`.
+Creates a [Barrier] which resolves after the specified `timeout`. Additional
+**.abort()** method is attached to the returned [Barrier], and it allows to
+cancel the timer, without resolving nor rejecting the barrier (if needed,
+it can be done by explicitly calling the standard [.resolve()] or [.reject()]
+methods of the [Barrier] after aborting the timer).
 
 **Arguments & Result**
 - `timeout` - **number** - Timeout in milliseconds.
-- Returns **Promise** which resolves after the given `timeout`.
+- Returns [Barrier] which resolves after the given `timeout`. Additional
+  **.abort()** method is attached to the [Barrier], as explained above.
+
+<!-- links -->
+[Barrier]: /docs/api/classes/Barrier
+[.resolve()]: /docs/api/classes/Barrier#resolve
+[.reject()]: http://localhost:3000/docs/react-utils/docs/api/classes/Barrier#reject
