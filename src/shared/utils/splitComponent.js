@@ -21,7 +21,7 @@ export default function splitComponent({
   placeholder,
 }) {
   // eslint-disable-next-line react/prop-types
-  return ({ children, ...props }) => createElement(
+  return ({ children, ...props } = {}) => createElement(
     CodeSplit,
     {
       ...props,

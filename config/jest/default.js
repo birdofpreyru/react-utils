@@ -22,7 +22,9 @@ module.exports = {
     '/__assets__/',
     '/node_modules/',
   ],
-  testURL: 'http://localhost',
+  testEnvironmentOptions: {
+    url: 'http://localhost',
+  },
   transform: {
     '\\.(jsx?|svg)$': 'babel-jest',
   },

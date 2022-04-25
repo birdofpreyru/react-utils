@@ -1,4 +1,7 @@
-// The code needed both for server and client-side tests.
+// Note: originally this code was intended to be shared between the client and
+// server side, but with the later Jest updates it is only functional on
+// the server side. Thus, we gonna rework the tests to only use it in
+// the Node environment.
 
 import { cloneDeep, noop } from 'lodash';
 import factory from 'server/renderer';

@@ -1,12 +1,12 @@
 /** @jest-environment jsdom */
 
+import fs from 'fs';
+
 import { Helmet } from 'react-helmet';
 import mockdate from 'mockdate';
 import pretty from 'pretty';
 
 import { act, mockClientSide } from 'utils/jest';
-
-import { renderServerSide } from './__assets__/shared';
 
 jest.mock('node-forge');
 jest.mock('uuid');
@@ -19,19 +19,30 @@ mockdate.set('2019-11-29Z');
 // alongside the client-side testing.
 global.setImmediate = setTimeout;
 
+// The SSR markup is loaded from the server-side test snapshot.
+const serverTestSnapshots = require('./__snapshots__/server-side.js.snap');
+
+const SSR_TEST_NAME = 'Server-side rendering 1';
+
+// Goofy way to deserialize Jest snapshot, but it works for us for now.
+const serverMarkup = serverTestSnapshots[SSR_TEST_NAME]
+  .slice(2, -2)
+  .replaceAll('\\"', '"');
+
+// Note: this must match the mock file in ./__assets__/test_data/.build-info
+// Because the JSDom environment, it is far easier to copy/paste the file,
+// rather than dynamically load it (I guess, fs is not available)
+window.TRU_BUILD_INFO = JSON.parse(
+  fs.readFileSync(`${__dirname}/__assets__/test_data/.build-info`, 'utf8'),
+);
+
+test('The loaded server markup has not changed', () => {
+  expect(serverMarkup).toMatchSnapshot();
+});
+
 test('Client-side rendering', async () => {
-  // Emulates server-sider render to figure out the markup that should be
-  // matched at the client-side.
-
-  const { IS_SERVER_SIDE } = require('utils/isomorphy');
-  expect(IS_SERVER_SIDE).toBe(true);
-
   // Forces Helmet to believe it runs server-side.
-  Helmet.canUseDOM = false;
-
   let SampleCodeSplit = require('./__assets__/SampleCodeSplit').default;
-  let serverMarkup = renderServerSide(SampleCodeSplit, { maxSsrRounds: 3 });
-  serverMarkup = await serverMarkup;
   document.open();
   document.write(serverMarkup);
   document.close();
