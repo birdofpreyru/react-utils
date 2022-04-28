@@ -10,6 +10,8 @@ import Renderer from 'react-test-renderer';
 import ShallowRenderer from 'react-test-renderer/shallow';
 /* eslint-enable import/no-extraneous-dependencies */
 
+export { default as E2eSsrEnv } from './E2eSsrEnv';
+
 /**
  * An alias for [act(..)](https://reactjs.org/docs/test-utils.html#act)
  * from `react-dom/test-utils`.

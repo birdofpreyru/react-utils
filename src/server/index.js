@@ -24,10 +24,6 @@ import { SCRIPT_LOCATIONS } from './renderer';
 export { getDefaultCspSettings } from './server';
 export * from './utils';
 
-// Various default settings of server factory (launch() function).
-const DEFAULT_MAX_SSR_ROUNDS = 10;
-const DEFAULT_SSR_TIMEOUT = 1000;
-
 /**
  * Normalizes a port into a number, string, or false.
  * TODO: Drop this function?
@@ -47,8 +43,9 @@ function normalizePort(value) {
  * or detailed configuration, supports server-side rendering,
  * and development tools, including Hot Module Reloading (HMR).
  *
- * See {@link module:ReactGlobalState ReactGlobalState} for some additional
- * notes related to SSR, access to incoming requests during SSR, _etc._
+ * NOTE: Many of options defined below are passed down to the server and
+ * renderer factories, and their declared default values are set in those
+ * factories, rather than here.
  *
  * @param {object} webpackConfig Webpack configuration used to build
  * the frontend bundle. In production mode the server will read out of it
@@ -164,12 +161,7 @@ async function launch(webpackConfig, options) {
   /* Options normalization. */
   const ops = options ? cloneDeep(options) : {};
   ops.port = normalizePort(ops.port || process.env.PORT || 3000);
-  defaults(ops, {
-    httpsRedirect: true,
-    maxSsrRounds: DEFAULT_MAX_SSR_ROUNDS,
-    ssrTimeout: DEFAULT_SSR_TIMEOUT,
-  });
-  if (!ops.staticCacheSize) ops.staticCacheSize = 1.e7;
+  defaults(ops, { httpsRedirect: true });
 
   if (isUndefined(ops.logger)) {
     const { format, transports } = winston;

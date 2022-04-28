@@ -59,5 +59,7 @@ module.exports = function configFactory(ops) {
       managedPaths: [],
     },
   });
+
+  configFactory.buildInfo = baseFactory.buildInfo;
   return res;
 };

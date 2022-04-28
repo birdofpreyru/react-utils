@@ -10,6 +10,12 @@ const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const baseFactory = require('./app-base');
 
+/**
+ * @param {object} ops
+ * @param {string} ops.context Base URL for resolution of relative config paths.
+ * @param {boolean} [ops.dontEmitBuildInfo] If set the `.build-info` file won't
+ * be created at the disk during the compilation.
+ */
 module.exports = function configFactory(ops) {
   const entry = [
     '@dr.pogodin/react-utils/build/production/client/init',
@@ -49,5 +55,7 @@ module.exports = function configFactory(ops) {
       }),
     ],
   });
+
+  configFactory.buildInfo = baseFactory.buildInfo;
   return res;
 };

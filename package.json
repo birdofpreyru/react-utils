@@ -1,5 +1,5 @@
 {
-  "version": "1.17.1",
+  "version": "1.17.2",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -12,7 +12,7 @@
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.8.0",
     "@dr.pogodin/react-global-state": "^0.8.3",
     "@dr.pogodin/react-themes": "^1.4.3",
-    "axios": "^0.27.1",
+    "axios": "^0.27.2",
     "commander": "^9.0.0",
     "compression": "^1.7.4",
     "config": "^3.3.7",
@@ -51,14 +51,15 @@
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@babel/register": "^7.17.7",
     "@dr.pogodin/babel-plugin-transform-assets": "^1.1.1",
     "@dr.pogodin/babel-preset-svgr": "^1.4.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
     "autoprefixer": "^10.4.5",
-    "babel-jest": "^28.0.1",
+    "babel-jest": "^28.0.2",
     "babel-loader": "^8.2.5",
     "babel-plugin-module-resolver": "^4.1.0",
-    "core-js": "^3.22.2",
+    "core-js": "^3.22.3",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
     "eslint": "^8.14.0",
@@ -70,8 +71,9 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^28.0.1",
-    "jest-environment-jsdom": "^28.0.1",
+    "jest": "^28.0.2",
+    "jest-environment-jsdom": "^28.0.2",
+    "memfs": "^3.4.1",
     "mini-css-extract-plugin": "^2.6.0",
     "mockdate": "^3.0.5",
     "nodelist-foreach-polyfill": "^1.2.0",
@@ -88,7 +90,7 @@
     "sitemap": "^7.1.1",
     "stylelint": "^14.8.0",
     "stylelint-config-standard-scss": "^3.0.0",
-    "supertest": "^6.2.2",
+    "supertest": "^6.2.3",
     "webpack": "^5.72.0",
     "webpack-dev-middleware": "^5.3.1",
     "webpack-hot-middleware": "^2.25.1",
@@ -125,7 +127,8 @@
       "browser": "./build/production/style.css"
     },
     "./build/development/client/init": "./build/development/client/init.js",
-    "./build/production/client/init": "./build/production/client/init.js"
+    "./build/production/client/init": "./build/production/client/init.js",
+    "./jest-e2e-ssr-env": "./build/production/shared/utils/jest/E2eSsrEnv.js"
   },
   "homepage": "https://dr.pogodin.studio",
   "keywords": [

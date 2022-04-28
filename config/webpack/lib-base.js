@@ -13,7 +13,19 @@ const {
   getLocalIdent,
 } = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
 
+/**
+ * @param {object} ops
+ * @param {boolean} [ops.dontUseProgressPlugin] Set to not include progress
+ *  plugin.
+ * @return {object}
+ */
 module.exports = function configFactory(ops) {
+  const plugins = [
+    new MiniCssExtractPlugin({ filename: 'style.css' }),
+  ];
+
+  if (!ops.dontUseProgressPlugin) plugins.push(new ProgressPlugin());
+
   return {
     context: ops.context,
     entry: ops.entry,
@@ -47,12 +59,7 @@ module.exports = function configFactory(ops) {
       path: ops.outputPath,
       libraryTarget: 'umd',
     },
-    plugins: [
-      new MiniCssExtractPlugin({
-        filename: 'style.css',
-      }),
-      new ProgressPlugin(),
-    ],
+    plugins,
     module: {
       rules: [{
         /* Handles font imports in url(..) instructions in CSS. Effectively,
