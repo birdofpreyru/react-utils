@@ -15,16 +15,6 @@ import ssrFactory from 'server/renderer';
 import JsdomEnv from 'jest-environment-jsdom';
 import { createFsFromVolume, Volume } from 'memfs';
 import webpack from 'webpack';
-
-// import 'core-js/stable';
-// import 'regenerator-runtime/runtime';
-
-// Note: This ensures that Babel is used to transform imports used during
-// the environment preparation, in particular the application code imported
-// dynamically for SSR purposes.
-require('@babel/register')({
-  extensions: ['.js', '.jsx', '.svg'],
-});
 /* eslint-enable import/no-extraneous-dependencies */
 
 class E2eSsrEnv extends JsdomEnv {
@@ -52,25 +42,40 @@ class E2eSsrEnv extends JsdomEnv {
       },
     );
 
-    let ssrOptions = pragmas['ssr-options'];
-    ssrOptions = ssrOptions ? JSON.parse(ssrOptions) : {};
-    if (ssrOptions.Application) {
-      // eslint-disable-next-line global-require, import/no-dynamic-require
-      ssrOptions.Application = require(
-        path.resolve(testFolder, ssrOptions.Application),
-      ).default;
-    }
+    // TODO: This entire block should be in a separate method, I guess.
+    if (pragmas['no-ssr']) this.noSsr = true;
+    else {
+      let ssrOptions = pragmas['ssr-options'];
+      ssrOptions = ssrOptions ? JSON.parse(ssrOptions) : {};
 
-    let ssrRequest = pragmas['ssr-request'];
-    ssrRequest = ssrRequest ? JSON.parse(ssrRequest) : {};
+      // Note: This ensures that Babel is used to transform imports used during
+      // the environment preparation, in particular the application code imported
+      // dynamically for SSR purposes.
+      /* eslint-disable global-require, import/no-extraneous-dependencies */
+      require('@babel/register')({
+        envName: ssrOptions.babelEnv,
+        extensions: ['.js', '.jsx', '.svg'],
+      });
+      /* eslint-disable global-require, import/no-extraneous-dependencies */
+
+      if (ssrOptions.Application) {
+        // eslint-disable-next-line global-require, import/no-dynamic-require
+        ssrOptions.Application = require(
+          path.resolve(testFolder, ssrOptions.Application),
+        ).default;
+      }
+
+      let ssrRequest = pragmas['ssr-request'];
+      ssrRequest = ssrRequest ? JSON.parse(ssrRequest) : {};
+      this.global.ssrOptions = ssrOptions;
+      this.global.ssrRequest = ssrRequest;
+    }
 
     // eslint-disable-next-line global-require, import/no-dynamic-require
     const factory = require(path.resolve(rootDir, configFactoryPath));
 
     this.global.webpackConfig = factory(configOptions);
     this.global.buildInfo = factory.buildInfo;
-    this.global.ssrOptions = ssrOptions;
-    this.global.ssrRequest = ssrRequest;
   }
 
   async runWebpackBuild() {
@@ -122,7 +127,7 @@ class E2eSsrEnv extends JsdomEnv {
   async setup() {
     await super.setup();
     await this.runWebpackBuild();
-    await this.runSsr();
+    if (!this.noSsr) await this.runSsr();
   }
 }
 
