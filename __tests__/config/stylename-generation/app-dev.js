@@ -5,7 +5,7 @@
  *  "entry": "./__assets__/index.js",
  *  "dontUseHmr": true,
  *  "dontUseReactGlobalStateDebugging": true }
- * @ssr-options { "Application": "./__assets__/Scene.jsx" }
+ * @ssr-options { "entry": "./__assets__/Scene.jsx" }
  */
 
 import { act } from 'react-dom/test-utils';

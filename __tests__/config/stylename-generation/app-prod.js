@@ -3,8 +3,8 @@
  * @webpack-config-factory ./config/webpack/app-production.js
  * @webpack-config-options { "entry": "./__assets__/index.js" }
  * @ssr-options {
- *  "Application": "./__assets__/Scene.jsx",
- *  "babelEnv": "production" }
+ *  "babelEnv": "production",
+ *  "entry": "./__assets__/Scene.jsx" }
  */
 
 import { act } from 'react-dom/test-utils';

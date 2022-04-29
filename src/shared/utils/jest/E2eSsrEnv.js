@@ -4,6 +4,7 @@
  * Webpack build of the code for client-side execution, it further exposes
  * Jsdom environment for the client-side testing of the outcomes.
  */
+/* eslint-disable global-require, import/no-dynamic-require */
 
 import path from 'path';
 import { defaults, noop } from 'lodash';
@@ -12,6 +13,7 @@ import ssrFactory from 'server/renderer';
 // As this environment is a part of the Jest testing utils,
 // we assume development dependencies are available when it is used.
 /* eslint-disable import/no-extraneous-dependencies */
+import register from '@babel/register';
 import JsdomEnv from 'jest-environment-jsdom';
 import { createFsFromVolume, Volume } from 'memfs';
 import webpack from 'webpack';
@@ -19,66 +21,30 @@ import webpack from 'webpack';
 
 class E2eSsrEnv extends JsdomEnv {
   /**
-   * Gets Webpack config, saving it into .webpackConfig field of the environment
-   * object.
-   * @param {object} config
-   * @param {object} context
+   * Loads Webpack config, and exposes it to the environment via global
+   * webpackConfig object.
    */
-  loadWebpackConfig(config, context) {
-    const { rootDir } = config.projectConfig;
-    const testFolder = path.dirname(context.testPath);
+  loadWebpackConfig() {
+    let options = this.pragmas['webpack-config-options'];
+    options = options ? JSON.parse(options) : {};
+    defaults(options, {
+      context: this.testFolder,
+      dontEmitBuildInfo: true,
+    });
 
-    const pragmas = context.docblockPragmas;
-
-    let configFactoryPath = pragmas['webpack-config-factory'];
-    configFactoryPath = path.resolve(rootDir, configFactoryPath);
-
-    let configOptions = pragmas['webpack-config-options'];
-    configOptions = defaults(
-      configOptions ? JSON.parse(configOptions) : {},
-      {
-        context: testFolder,
-        dontEmitBuildInfo: true,
-      },
-    );
-
-    // TODO: This entire block should be in a separate method, I guess.
-    if (pragmas['no-ssr']) this.noSsr = true;
-    else {
-      let ssrOptions = pragmas['ssr-options'];
-      ssrOptions = ssrOptions ? JSON.parse(ssrOptions) : {};
-
-      // Note: This ensures that Babel is used to transform imports used during
-      // the environment preparation, in particular the application code imported
-      // dynamically for SSR purposes.
-      /* eslint-disable global-require, import/no-extraneous-dependencies */
-      require('@babel/register')({
-        envName: ssrOptions.babelEnv,
-        extensions: ['.js', '.jsx', '.svg'],
-      });
-      /* eslint-disable global-require, import/no-extraneous-dependencies */
-
-      if (ssrOptions.Application) {
-        // eslint-disable-next-line global-require, import/no-dynamic-require
-        ssrOptions.Application = require(
-          path.resolve(testFolder, ssrOptions.Application),
-        ).default;
-      }
-
-      let ssrRequest = pragmas['ssr-request'];
-      ssrRequest = ssrRequest ? JSON.parse(ssrRequest) : {};
-      this.global.ssrOptions = ssrOptions;
-      this.global.ssrRequest = ssrRequest;
-    }
-
-    // eslint-disable-next-line global-require, import/no-dynamic-require
-    const factory = require(path.resolve(rootDir, configFactoryPath));
-
-    this.global.webpackConfig = factory(configOptions);
+    let factory = this.pragmas['webpack-config-factory'] || '';
+    factory = require(path.resolve(this.rootDir, factory));
+    this.global.webpackConfig = factory(options);
     this.global.buildInfo = factory.buildInfo;
   }
 
-  async runWebpackBuild() {
+  /**
+   * Executes Webpack build.
+   * @return {Promise}
+   */
+  async runWebpack() {
+    this.loadWebpackConfig();
+
     const compiler = webpack(this.global.webpackConfig);
     compiler.outputFileSystem = createFsFromVolume(new Volume());
     return new Promise((done, fail) => {
@@ -92,17 +58,31 @@ class E2eSsrEnv extends JsdomEnv {
   }
 
   async runSsr() {
-    const { ssrOptions } = this.global;
-    if (!ssrOptions.buildInfo) ssrOptions.buildInfo = this.global.buildInfo;
+    let options = this.pragmas['ssr-options'];
+    options = options ? JSON.parse(options) : {};
 
-    const renderer = ssrFactory(
-      this.global.webpackConfig,
-      this.global.ssrOptions,
-    );
+    // Note: This enables Babel transformation for the code dynamically loaded
+    // below, as the usual Jest Babel setup does not seem to apply to
+    // the environment code, and imports from it.
+    register({
+      envName: options.babelEnv,
+      extensions: ['.js', '.jsx', '.svg'],
+    });
 
-    const ssrMarkup = await new Promise((done, fail) => {
+    if (!options.buildInfo) options.buildInfo = this.global.buildInfo;
+
+    if (options.entry) {
+      const p = path.resolve(this.testFolder, options.entry);
+      options.Application = require(p).default;
+    }
+
+    let request = this.pragmas['ssr-request'];
+    request = request ? JSON.parse(request) : {};
+
+    const renderer = ssrFactory(this.global.webpackConfig, options);
+    const markup = await new Promise((done, fail) => {
       renderer(
-        this.global.ssrRequest,
+        request,
 
         // TODO: This will do for now, with the current implementation of
         // the renderer, but it will require a rework once the renderer is
@@ -116,18 +96,40 @@ class E2eSsrEnv extends JsdomEnv {
       );
     });
 
-    this.global.ssrMarkup = ssrMarkup;
+    this.global.ssrMarkup = markup;
+    this.global.ssrOptions = options;
+    this.global.ssrRequest = request;
   }
 
   constructor(config, context) {
     super(config, context);
-    this.loadWebpackConfig(config, context);
+
+    // Extracts necessary settings from config and context.
+    const { projectConfig } = config;
+    this.rootDir = projectConfig.rootDir;
+    this.testFolder = path.dirname(context.testPath);
+    this.pragmas = context.docblockPragmas;
+    this.withSsr = !this.pragmas['no-ssr'];
   }
 
   async setup() {
     await super.setup();
-    await this.runWebpackBuild();
-    if (!this.noSsr) await this.runSsr();
+    await this.runWebpack();
+    if (this.withSsr) await this.runSsr();
+  }
+
+  async teardown() {
+    // Resets module cache and @babel/register. Effectively this ensures that
+    // the next time an instance of this environment is set up, all modules are
+    // transformed by Babel from scratch, thus taking into account the latest
+    // Babel config (which may change between different environment instances,
+    // which does not seem to be taken into account by Babel / Node caches
+    // automatically).
+    Object.keys(require.cache).forEach((key) => {
+      delete require.cache[key];
+    });
+    register.revert();
+    super.teardown();
   }
 }
 
