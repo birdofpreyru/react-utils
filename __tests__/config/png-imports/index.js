@@ -2,7 +2,7 @@
  * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.js
  * @webpack-config-factory ./config/webpack/app-production.js
  * @webpack-config-options { "entry": "./__assets__/client.jsx" }
- * @ssr-options { "Application": "./__assets__/Scene.jsx" }
+ * @ssr-options { "entry": "./__assets__/Scene.jsx" }
  */
 
 import { act } from 'react-dom/test-utils';

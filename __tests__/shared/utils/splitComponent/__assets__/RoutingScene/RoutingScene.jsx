@@ -1,24 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
 import splitComponent from 'utils/splitComponent';
 
-function Component() {
-  return <div>Hello World!</div>;
-}
-
-function InnerRouter() {
-  return (
-    <Routes>
-      <Route path="hello-world" element={<Component />} />
-    </Routes>
-  );
-}
-
 // Note: this is not exactly how splitComponent() should be used to actually
 // split the code during Webpack build, but this simplistic code is enough
 // to test its behavior alongside React Router use.
 const Split = splitComponent({
   chunkName: 'split',
-  getComponent: () => InnerRouter,
+  getComponent: () => import(
+    /* webpackChunkName: 'split' */'./InnerRouter'
+  ),
 });
 
 export function RoutingScene1() {

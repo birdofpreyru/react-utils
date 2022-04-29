@@ -154,7 +154,7 @@ function groupExtraScripts(scripts = []) {
 /**
  * Creates the middleware.
  * @param {object} webpackConfig
- * @param {object} OLD_options Additional options:
+ * @param {object} options Additional options:
  * @param {Component} [options.Application] The root ReactJS component of
  * the app to use for the server-side rendering. When not provided
  * the server-side rendering is disabled.

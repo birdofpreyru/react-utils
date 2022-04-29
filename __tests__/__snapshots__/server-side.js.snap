@@ -275,7 +275,7 @@ Object {
   "Cancel": [Function],
   "CancelToken": [Function],
   "CanceledError": [Function],
-  "VERSION": "0.27.1",
+  "VERSION": "0.27.2",
   "all": [Function],
   "create": [Function],
   "default": [Function],
