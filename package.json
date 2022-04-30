@@ -77,7 +77,7 @@
     "mini-css-extract-plugin": "^2.6.0",
     "mockdate": "^3.0.5",
     "nodelist-foreach-polyfill": "^1.2.0",
-    "postcss": "^8.4.12",
+    "postcss": "^8.4.13",
     "postcss-loader": "^6.2.1",
     "postcss-scss": "^4.0.4",
     "pretty": "^2.0.0",
