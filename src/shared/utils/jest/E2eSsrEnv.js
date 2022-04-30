@@ -29,7 +29,7 @@ import { createFsFromVolume, Volume } from 'memfs';
 import webpack from 'webpack';
 /* eslint-enable import/no-extraneous-dependencies */
 
-class E2eSsrEnv extends JsdomEnv {
+export default class E2eSsrEnv extends JsdomEnv {
   /**
    * Loads Webpack config, and exposes it to the environment via global
    * webpackConfig object.
@@ -177,5 +177,3 @@ class E2eSsrEnv extends JsdomEnv {
     super.teardown();
   }
 }
-
-export default E2eSsrEnv;

@@ -43,6 +43,9 @@ server(webpackConfig);
     server-side rendering for each incoming request just before the HTML markup
     is generated. It allows to load and provide data necessary for SSR, and also
     to inject additional config and scripts into the rendered HTML code.
+  - `buildInfo` - **object** - Optional. The "[build info]" object to use.
+    Without this option provided it will be loaded from the `.build-info` file
+    in the "context" folder of the Webpack build being served.
   - `noCsp` - **boolean** - Disables [CSP] altogether.
   - [cspSettingsHook](#cspsettingshook) - **callback** allowing to customize
     [CSP] headers managed by the [helmet]'s `contentSecurityPolicy`
@@ -227,6 +230,7 @@ Returns **object** with the following fields:
     Defaults to unlimited maxage.
 
 [beforeRender()]: #beforerender
+[build info]: /docs/api/configs/webpack#build-info
 [CSP]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 [ExpressJS]: https://expressjs.com
 [helmet]: https://github.com/helmetjs/helmet

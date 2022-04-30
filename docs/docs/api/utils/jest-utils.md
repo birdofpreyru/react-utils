@@ -10,6 +10,12 @@ The [JU] module is exported and functional only within the development, [Jest]
 environment.
 :::
 
+## E2eSsrEnv
+Although it is not exported from this module for technical reasons, [E2eSsrEnv]
+class implements Jest environment for end-to-end testing of SSR and client-side
+execution of Webpack-built code with Jest, and thus should be considered as
+a very important part of Jest-testing utilities provided by the library.
+
 ## Methods
 - [act()](#act) - An alias for
   the [act()](https://reactjs.org/docs/test-utils.html#act) function from
@@ -196,6 +202,7 @@ JU.unmockClientSide()
 ```
 Reverts the effect of previous [mockClientSide()] call.
 
+[E2eSsrEnv]: /docs/api/classes/E2eSsrEnv
 [Jest]: https://jestjs.io
 [JU]: /docs/api/utils/jest-utils
 [mockClientSide()]: #mockclientside

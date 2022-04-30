@@ -16,10 +16,26 @@ work correctly with a different app setup.
 :::
 
 ## Constants
-- `isomorphy.IS_CLIENT_SIDE` - **boolean** - equals **true** within the client-side
-  (browser) environment, and equals **false** at the server-side (NodeJS).
-- `isomorphy.IS_SERVER_SIDE` - **boolean** - equals **true** within the server-side
-  (NodeJS) environment, and equals **false** at the client-side (browser).
+- `isomorphy.IS_CLIENT_SIDE` - **boolean** - equals **true** within
+  the client-side (browser) environment, and equals **false** at the server-side
+  (NodeJS).
+- `isomorphy.IS_SERVER_SIDE` - **boolean** - equals **true** within
+  the server-side (NodeJS) environment, and equals **false** at the client-side
+  (browser).
+
+:::info INFO
+For the purpose of `.IS_CLIENT_SIDE` and `.IS_SERVER_SIDE` constants the client-
+and server-side are distinguished based on the presence in the environment of
+the `process` object with Node version stored at its `process.versions.node`
+path.
+
+For the test purposes the library provides [JU].[mockClientSide()] and
+[JU].[unmockClientSide()] functions, which enforce client side values of
+these constants by removing / restoring `process.versions.node` value.
+
+Alternatively, the client-side may be enforced by setting **true** the global
+`REACT_UTILS_FORCE_CLIENT_SIDE` variable.
+:::
 
 ## Methods
 - [buildTimestamp()](#buildtimestamp) - Returns the build timestamp of
@@ -56,4 +72,8 @@ isomorphy.isProdBuild() => boolean
 Returns **boolean**: **true** if the production version of code is running,
 **false** otherwise.
 
+<!-- links -->
+[JU]: /docs/api/utils/jest-utils#mockclientside
+[mockClientSide()]: /docs/api/utils/jest-utils#mockclientside
+[unmockClientSide()]: /docs/api/utils/jest-utils#unmockclientside
 [Isomorphy]: /docs/api/utils/isomorphy
