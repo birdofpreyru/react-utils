@@ -1,7 +1,8 @@
 # ESLint
 The library provides default [ESLint] configurations.
-- [Default](#default)
-- [Jest](#jest)
+- [ESLint](#eslint)
+  - [Default](#default)
+  - [Jest](#jest)
 
 ## Default
 Under the hood this is mostly
@@ -46,9 +47,11 @@ To include it into [ESLint] config:
 On top of [default](#default) configuration this config:
 - Enables `browser` and `jest` environment targets, and adds `jest` [ESLint]
   plugin.
-- Disables [global-require](https://eslint.org/docs/rules/global-require) and
-  [import/no-dynamic-require](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-dynamic-require.md)
-  rules to allow for local and conditional requires often needed in tests.
+- Disables [global-require](https://eslint.org/docs/rules/global-require),
+  [import/no-dynamic-require](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-dynamic-require.md), and
+  [import/no-extraneous-dependencies](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md)
+  rules to allow in tests local and conditional requires, as well as requires of
+  development dependencies.
 - Disables [no-console](https://eslint.org/docs/rules/no-console) rule,
   allowing console use in tests.
 

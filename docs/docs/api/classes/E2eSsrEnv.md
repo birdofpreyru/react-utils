@@ -77,6 +77,21 @@ The following docblock pragma parameters are recognized by the environment:
     based on the "**default**" export from the module pointed by `.entry` path.
     When this field is set, the corresponding named export is used instead.
 
+  - `.root` - **string** - By default, SSR runs with the current working
+    directory, `process.cwd()`,
+    as the [Babel's root](https://babeljs.io/docs/en/options#root),
+    where default configuration files for Babel are looked up.
+    This option allows to alter it. It currently accepts a single valid value:
+    - "`TEST`" - To use the current test folder as the root.
+
+      :::tip TIP
+      You may want to use this option to place a custom `babel.config.json` file
+      into the test folder. Mind that to completely override Babel settings for
+      the tested codebase, you probably should set to **false**
+      the [babelrc](https://babeljs.io/docs/en/options#babelrc) flag
+      in that  `babel.config.json`  config.
+      :::
+
 - `@ssr-request OBJECT` - Optional. The request object to use for SSR,
   _e.g._ to provide a custom `url`.
 

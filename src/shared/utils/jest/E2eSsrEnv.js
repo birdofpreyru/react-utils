@@ -84,9 +84,6 @@ export default class E2eSsrEnv extends JsdomEnv {
       default: root = process.cwd();
     }
 
-    const babelConfig = options.babelConfig || {};
-    babelConfig.root = this.testFolder;
-
     // Note: This enables Babel transformation for the code dynamically loaded
     // below, as the usual Jest Babel setup does not seem to apply to
     // the environment code, and imports from it.

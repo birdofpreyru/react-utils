@@ -81,8 +81,13 @@ configurations, and on top of that it:
   remove anonymous stylesheet imports.
 - Includes [@dr.pogodin/babel-plugin-tranform-assets](https://www.npmjs.com/package/@dr.pogodin/babel-plugin-transform-assets)
   plugin to convert GIF, JPEG, JPG, and PNG imports into emitted asset paths,
-  like `/images/[FILE_HASH].[FILE_EXTENSION]`. The `baseAssetsOutputPath` preset
-  option allows to add custom prefix to these paths.
+  like `/images/[FILE_HASH].[FILE_EXTENSION]`.
+
+  The `baseAssetsOutputPath` <a id="server-side-base-assets-output-path"></a>
+  preset option allows to add custom prefix to these
+  paths. You want it to match the `publicPath` value provided to the Webpack
+  config (_e.g_ see [`publicPath` option of the base Webpack config for apps](/docs/api/configs/webpack#app-base-public-path)).
+
 - In **development** environment it remove `react-refresh/babel` plugin,
   if it was included by the client-side preset.
 
