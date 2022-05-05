@@ -1,0 +1,6 @@
+@import "../../../../src/styles/mixins";
+@include font-family-ttf(Empty, 400, normal, "~empty");
+
+.container {
+  font: 12pt Empty, serif;
+}

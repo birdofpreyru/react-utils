@@ -78,12 +78,22 @@ export default class E2eSsrEnv extends JsdomEnv {
     let options = this.pragmas['ssr-options'];
     options = options ? JSON.parse(options) : {};
 
+    let root;
+    switch (options.root) {
+      case 'TEST': root = this.testFolder; break;
+      default: root = process.cwd();
+    }
+
+    const babelConfig = options.babelConfig || {};
+    babelConfig.root = this.testFolder;
+
     // Note: This enables Babel transformation for the code dynamically loaded
     // below, as the usual Jest Babel setup does not seem to apply to
     // the environment code, and imports from it.
     register({
       envName: options.babelEnv,
       extensions: ['.js', '.jsx', '.svg'],
+      root,
     });
 
     if (!options.buildInfo) options.buildInfo = this.global.buildInfo;
