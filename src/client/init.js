@@ -24,14 +24,14 @@ if (!window.TRU_KEEP_INJ_SCRIPT) {
 
 /* TODO: A proper logger should be moved to `@dr.pogodin/react-utils`. */
 /* eslint-disable no-console */
-const { useServiceWorker } = window.TRU_BUILD_INFO;
+const { publicPath, useServiceWorker } = window.TRU_BUILD_INFO;
 if (useServiceWorker) {
   const { navigator } = window;
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', async () => {
       try {
         const reg = await navigator
-          .serviceWorker.register('/__service-worker.js');
+          .serviceWorker.register(`${publicPath}/__service-worker.js`);
         console.log('SW registered:', reg);
       } catch (err) {
         console.log('SW registration failed:', err);
