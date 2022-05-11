@@ -87,7 +87,7 @@ argument is an object with the following valid fields:
     :::
 
   - `workbox` - **boolean | object** - When set the
-    [Workbox's InjectManifest plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin#injectmanifest_plugin)
+    [Workbox's InjectManifest plugin](https://developer.chrome.com/docs/workbox/modules/workbox-webpack-plugin/#injectmanifest-plugin)
     is included into the array of [Webpack] plugins, and it generates server
     worker for browser. If the value is an object it is merged into options
     passed into the plugin, otherwise default options are used:

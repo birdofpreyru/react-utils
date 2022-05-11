@@ -40,7 +40,7 @@ Alternatively, the client-side may be enforced by setting **true** the global
 ## Methods
 - [buildTimestamp()](#buildtimestamp) - Returns the build timestamp of
   the frontend JS bundle.
-- [getBuildInfo()](#getbuildinfo) - Returns the build info object.
+- [getBuildInfo()](#getbuildinfo) - Returns the [build info] object.
 - [isDevBuild()](#isdevbuild) - Returns **true** if the development version of
   code is running.
 - [isProdBuild()](#isprodbuild) - Returns **true** if the production version of
@@ -56,7 +56,7 @@ Returns **string**: the build timestamp of the frontend JS bundle in ISO format.
 ```jsx
 isomorphy.getBuildInfo() => object
 ```
-Returns **object**: the build info object.
+Returns **object**: the [build info] object.
 
 ### isDevBuild()
 ```jsx
@@ -73,6 +73,7 @@ Returns **boolean**: **true** if the production version of code is running,
 **false** otherwise.
 
 <!-- links -->
+[build info]: /docs/api/configs/webpack#build-info
 [JU]: /docs/api/utils/jest-utils#mockclientside
 [mockClientSide()]: /docs/api/utils/jest-utils#mockclientside
 [unmockClientSide()]: /docs/api/utils/jest-utils#unmockclientside
