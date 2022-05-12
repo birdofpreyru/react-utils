@@ -2,6 +2,7 @@
 ```jsx
 import {
   getGlobalState,
+  getSsrContext,
   GlobalStateProvider,
   useAsyncCollection,
   useAsyncData,

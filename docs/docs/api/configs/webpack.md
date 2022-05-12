@@ -66,13 +66,16 @@ argument is an object with the following valid fields:
     option of the loader. It should match corresponding option in the [Babel]
     config. Defaults `hash:base64:6`.
   - `dontEmitBuildInfo` - **boolean** - Set **true** to opt out of writing
-    generated "[build info]" data to the disk (the object will still be
-    attached to the `.buildInfo` field of the factory).
+    generated "[build info]" data to the disk.
 
   - `dontUseProgressPlugin` - **boolean** - Set **true** to opt out of including
     the [Webpack]'s [ProgressPlugin] into the config. This is intended for test
     scenarious, to avoid polluting test logs with detailed console output from
     test [Webpack] builds.
+
+  - `fs` - **object** - Alternative filesystem (_e.g._ [memfs]) to use instead
+    of the standard Node's filesystem to output artifacts created during
+    the Webpack config generation by the factory (_e.g._ "[build info]", _etc._).
 
   - `publicPath` - **string** - <a id="app-base-public-path"></a>
     Public URL of the output directory when
@@ -170,8 +173,7 @@ The config factory returns a config object which
 - The config opts to polyfill the `__dirname` global variable, and to ignore
   imports of the `fs` Node package;
 - By default the config factory also generates and emits
-  "[build info]" data, also available via the `.buildInfo` field
-  attached to the factory after each build.
+  "[build info]" data.
 
 ### Development {#app-dev}
 ```js
@@ -251,13 +253,20 @@ This object is made accessible to the app during the runtime both at the client
 side (it is injected into the bundled JS code), and at the server side (see
 [isomorphy].[getBuildInfo()]). The [config factory][base app config] writes this
 object into the "context" folder of the build, as `.build-info` file (it can be
-opted out by `dontEmitBuildInfo` option of the config factory), and it also
-attaches it to the `.buildInfo` field of the factory function (to allow easy
-access to the object after build in tests).
+opted out by `dontEmitBuildInfo` option of the config factory, also `fs` option
+can be used to output the file into a virtual filesystem).
 
 The `keepBuildInfo` option of the [base app config factory][base app config]
 allows to reuse old "[build info]" data, which is inteded for development and
 test scenarious.
+
+:::info Changelog
+- In the library versions **v1.17.2** &div; **v1.17.4** the "[build info]"
+  object was also exposed via the `.buildInfo` field attached to the standard
+  config factories after each build. This was dropped in **v1.17.5** in favour
+  of passing it via a virtual filesystem (see `fs` option of
+  the [config factory][base app config]).
+:::
 
 ## Library Config
 ### Base {#lib-base}
@@ -355,6 +364,7 @@ as required for production needs.
 [Babel]: https://babeljs.io/
 [Build Info]: #build-info
 [Library Config]: #library-config
+[memfs]: https://www.npmjs.com/package/memfs
 [ProgressPlugin]: https://webpack.js.org/plugins/progress-plugin/
 [Webpack]: https://webpack.js.org
 [`sitemap` library]: https://www.npmjs.com/package/sitemap

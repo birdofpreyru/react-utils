@@ -221,6 +221,12 @@ HTML is returned by the server. Otherwise HTML markup is generated from scratch
 for the request, and stored into the cache under the given `key` for future
 reuse.
 
+:::caution WARNING
+If during SSR some component writes **5xx** value into `.status` field of
+**ssrContext** (see [getSsrContext()]) the generated HTML markup won't be
+cached, no matter the result of [staticCacheController()] call.
+:::
+
 **Arguments**
 - `req` - **object** - The incoming [ExpressJS] HTTP request.
 
@@ -234,9 +240,11 @@ Returns **object** with the following fields:
 [CSP]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 [ExpressJS]: https://expressjs.com
 [helmet]: https://github.com/helmetjs/helmet
+[getSsrContext()]: https://dr.pogodin.studio/docs/react-global-state/docs/api/hooks/getssrcontext
 [http-status-codes]: https://www.npmjs.com/package/http-status-codes
 [Joi]: https://joi.dev/api/?v=17.4.2
 [Script]: #beforerender-script
 [SCRIPT_LOCATIONS]: /docs/api/utils/server#script_locations
 [server()]: /docs/api/functions/server
+[staticCacheController()]: /docs/api/functions/server#staticcachecontroller
 [Webpack]: https://webpack.js.org
