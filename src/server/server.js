@@ -25,8 +25,8 @@ import rendererFactory from './renderer';
 import {
   CODES,
   ERRORS,
-  fail,
   getErrorForCode,
+  newError,
 } from './utils/errors';
 
 /**
@@ -204,7 +204,9 @@ export default async function factory(webpackConfig, options) {
   server.use(renderer);
 
   /* Detects 404 errors, and forwards them to the error handler. */
-  server.use(() => fail(ERRORS.NOT_FOUND, CODES.NOT_FOUND));
+  server.use((req, res, next) => {
+    next(newError(ERRORS.NOT_FOUND, CODES.NOT_FOUND));
+  });
 
   let dontAttachDefaultErrorHandler;
   if (options.beforeExpressJsError) {
