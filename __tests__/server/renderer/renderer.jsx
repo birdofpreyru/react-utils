@@ -1,4 +1,4 @@
-import { clone, cloneDeep, noop } from 'lodash';
+import { cloneDeep } from 'lodash';
 import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable } from 'server/renderer';
 import fs from 'fs';
 
@@ -13,28 +13,21 @@ import {
 
 import { Helmet } from 'react-helmet';
 
+import {
+  mockHttpRequest,
+  mockHttpResponse,
+  mockWebpackConfig,
+} from './__assets__/common';
+
 global.mockFailsForgeRandomGetBytesMethod = false;
 
 jest.mock('node-forge');
 
-const TEST_CONTEXT = `${__dirname}/test_data`;
+const TEST_CONTEXT = `${__dirname}/__assets__`;
 
 const TEST_INITIAL_STATE = {
   stateKey1: 'State Value #1',
   stateKey2: 'State Value #2',
-};
-
-const TEST_HTTP_REQUEST = {
-  nonce: 'abcdef-dummy-nonce',
-  info: 'I am a dummy HTTP request! No need for a complex mock here!',
-};
-
-const TEST_WEBPACK_CONFIG = {
-  context: TEST_CONTEXT,
-  output: {
-    path: '/test/path',
-    publicPath: '/test/public/path/',
-  },
 };
 
 const testBuildInfo = JSON.parse(
@@ -74,50 +67,14 @@ async function coreTest(webpackConfig, options) {
   expect(global.TRU_BUILD_INFO).toEqual(testBuildInfo);
 
   try {
-    let render = '';
+    const { render, res } = mockHttpResponse();
     await renderer(
-      clone(TEST_HTTP_REQUEST),
-      {
-        locals: {
-          webpack: {
-            devMiddleware: {
-              stats: {
-                toJson: () => ({
-                  // Note: asset names here do not match the currently
-                  // used naming
-                  // template [contenthash].xxx, but older name template
-                  // [chunkname]-[buildTimestamp].xxx The actual names are not
-                  // important for the test, and using older names allows to
-                  // check there is no actual change in the code logic.
-                  namedChunkGroups: {
-                    main: {
-                      assets: [
-                        { name: 'main-1511941200000.css' },
-                        { name: 'main-1511941200000.js' },
-                      ],
-                    },
-                    'test-chunk-a': {
-                      assets: [{ name: 'test-chunk-a-1511941200000.css' }],
-                    },
-                    'test-chunk-b': {
-                      assets: [
-                        { name: 'test-chunk-b-1511941200000.js' },
-                        { name: 'test-chunk-b-1511941200000.css' },
-                      ],
-                    },
-                  },
-                }),
-              },
-            },
-          },
-        },
-        send: (x) => { render += x; },
-        set: noop,
-        status: (x) => { render += `HTTP STATUS: ${x}\n`; },
-      },
+      mockHttpRequest(),
+      res,
       (error) => expect(error).toMatchSnapshot(),
     );
-    expect(render).toMatchSnapshot();
+    expect(render.markup).toMatchSnapshot();
+    expect(render.status).toMatchSnapshot();
   } catch (e) {
     expect(e).toMatchSnapshot();
   }
@@ -125,19 +82,19 @@ async function coreTest(webpackConfig, options) {
 
 test(
   'Base rendering of HTML template',
-  () => coreTest(TEST_WEBPACK_CONFIG, {}),
+  () => coreTest(mockWebpackConfig(), {}),
 );
 
 test(
   '"favicon" option',
-  () => coreTest(TEST_WEBPACK_CONFIG, { favicon: '/path/to/favicon.ico' }),
+  () => coreTest(mockWebpackConfig(), { favicon: '/path/to/favicon.ico' }),
 );
 
 test(
   'Config overriding for injection',
-  () => coreTest(TEST_WEBPACK_CONFIG, {
+  () => coreTest(mockWebpackConfig(), {
     beforeRender: async (res, sanitizedConfig) => {
-      expect(res).toEqual(TEST_HTTP_REQUEST);
+      expect(res).toEqual(mockHttpRequest());
       expect(sanitizedConfig).toBeInstanceOf(Object);
       expect(sanitizedConfig).not.toHaveProperty('SECRET');
       return {
@@ -157,7 +114,7 @@ test('JS constructs in global state', () => {
     const { state } = getGlobalState();
     return <div>{serializeJs(state)}</div>;
   }
-  return coreTest(TEST_WEBPACK_CONFIG, {
+  return coreTest(mockWebpackConfig(), {
     Application: () => (
       <GlobalStateProvider>
         <Component />
@@ -169,7 +126,7 @@ test('JS constructs in global state', () => {
 
 test(
   'Helmet integration works',
-  () => coreTest(TEST_WEBPACK_CONFIG, {
+  () => coreTest(mockWebpackConfig(), {
     Application: () => (
       <div>
         <p>
@@ -193,7 +150,7 @@ test(
 
 test(
   'Injection of additional JS scripts',
-  () => coreTest(TEST_WEBPACK_CONFIG, {
+  () => coreTest(mockWebpackConfig(), {
     beforeRender: async () => ({
       extraScripts: [
         '<script>Dummy JS Sript</script>',
@@ -220,7 +177,7 @@ test(
 
 test(
   'Server-side rendering (SSR); injection of CSS chunks & Redux state',
-  () => coreTest(TEST_WEBPACK_CONFIG, {
+  () => coreTest(mockWebpackConfig(), {
     Application: () => {
       const context = getSsrContext();
       context.chunks.push('test-chunk-a');
@@ -237,7 +194,7 @@ test(
 
 test(
   'Setting of response HTTP status the server-side rendering',
-  () => coreTest(TEST_WEBPACK_CONFIG, {
+  () => coreTest(mockWebpackConfig(), {
     Application: () => {
       const context = getSsrContext();
       context.status = 404; // eslint-disable-line no-param-reassign
@@ -250,7 +207,7 @@ test(
 
 test('Throws in case of forge.random.getBytes(..) failure', () => {
   global.mockFailsForgeRandomGetBytesMethod = true;
-  return coreTest(TEST_WEBPACK_CONFIG, {});
+  return coreTest(mockWebpackConfig(), {});
 });
 
 it('correctly tests if brotli-encoded responses are acceptable', () => {

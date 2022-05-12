@@ -33,6 +33,8 @@ exports[`"favicon" option 1`] = `
         </html>"
 `;
 
+exports[`"favicon" option 2`] = `200`;
+
 exports[`Base rendering of HTML template 1`] = `
 "<!DOCTYPE html>
         <html lang=\\"en\\">
@@ -65,6 +67,8 @@ exports[`Base rendering of HTML template 1`] = `
           </body>
         </html>"
 `;
+
+exports[`Base rendering of HTML template 2`] = `200`;
 
 exports[`Config overriding for injection 1`] = `
 "<!DOCTYPE html>
@@ -99,6 +103,8 @@ exports[`Config overriding for injection 1`] = `
         </html>"
 `;
 
+exports[`Config overriding for injection 2`] = `200`;
+
 exports[`Helmet integration works 1`] = `
 "<!DOCTYPE html>
         <html lang=\\"en\\">
@@ -131,6 +137,8 @@ exports[`Helmet integration works 1`] = `
           </body>
         </html>"
 `;
+
+exports[`Helmet integration works 2`] = `200`;
 
 exports[`Injection of additional JS scripts 1`] = `
 "<!DOCTYPE html>
@@ -165,6 +173,8 @@ exports[`Injection of additional JS scripts 1`] = `
         </html>"
 `;
 
+exports[`Injection of additional JS scripts 2`] = `200`;
+
 exports[`JS constructs in global state 1`] = `
 "<!DOCTYPE html>
         <html lang=\\"en\\">
@@ -197,6 +207,8 @@ exports[`JS constructs in global state 1`] = `
           </body>
         </html>"
 `;
+
+exports[`JS constructs in global state 2`] = `200`;
 
 exports[`Server-side rendering (SSR); injection of CSS chunks & Redux state 1`] = `
 "<!DOCTYPE html>
@@ -231,9 +243,10 @@ exports[`Server-side rendering (SSR); injection of CSS chunks & Redux state 1`] 
         </html>"
 `;
 
+exports[`Server-side rendering (SSR); injection of CSS chunks & Redux state 2`] = `200`;
+
 exports[`Setting of response HTTP status the server-side rendering 1`] = `
-"HTTP STATUS: 404
-<!DOCTYPE html>
+"<!DOCTYPE html>
         <html lang=\\"en\\">
           <head>
             
@@ -265,6 +278,10 @@ exports[`Setting of response HTTP status the server-side rendering 1`] = `
         </html>"
 `;
 
+exports[`Setting of response HTTP status the server-side rendering 2`] = `404`;
+
 exports[`Throws in case of forge.random.getBytes(..) failure 1`] = `[Error: Emulated Failure of forge.random.getBytes(..)]`;
 
 exports[`Throws in case of forge.random.getBytes(..) failure 2`] = `""`;
+
+exports[`Throws in case of forge.random.getBytes(..) failure 3`] = `200`;

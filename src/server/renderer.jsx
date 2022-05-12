@@ -215,24 +215,30 @@ export default function factory(webpackConfig, options) {
         if (cacheRef) {
           const data = cache.get(cacheRef);
           if (data !== null) {
+            const { buffer, status } = data;
             if (ops.noCsp && isBrotliAcceptable(req)) {
               res.set('Content-Type', 'text/html');
               res.set('Content-Encoding', 'br');
-              res.send(data);
+              if (status !== 200) res.status(status);
+              res.send(buffer);
             } else {
-              brotliDecompress(data, (error, html) => {
-                if (error) next(error);
-                else {
-                  let h = html.toString();
-                  if (!ops.noCsp) {
-                    // TODO: Starting from Node v15 we'll be able to use string's
-                    // .replaceAll() method instead relying on reg. expression for
-                    // global matching.
-                    const regex = new RegExp(data.nonce, 'g');
-                    h = h.replace(regex, req.nonce);
+              await new Promise((done, failed) => {
+                brotliDecompress(buffer, (error, html) => {
+                  if (error) failed(error);
+                  else {
+                    let h = html.toString();
+                    if (!ops.noCsp) {
+                      // TODO: Starting from Node v15 we'll be able to use string's
+                      // .replaceAll() method instead relying on reg. expression for
+                      // global matching.
+                      const regex = new RegExp(buffer.nonce, 'g');
+                      h = h.replace(regex, req.nonce);
+                    }
+                    if (status !== 200) res.status(status);
+                    res.send(h);
+                    done();
                   }
-                  res.send(h);
-                }
+                });
               });
             }
             return;
@@ -347,7 +353,8 @@ export default function factory(webpackConfig, options) {
       cipher.finish();
       const INJ = forge.util.encode64(`${iv}${cipher.output.data}`);
 
-      if (ssrContext.status) res.status(ssrContext.status);
+      const status = ssrContext.status || 200;
+      if (status !== 200) res.status(status);
 
       const chunkSet = new Set();
 
@@ -421,11 +428,18 @@ export default function factory(webpackConfig, options) {
 
       res.send(html);
 
-      if (cacheRef) {
-        brotliCompress(html, (error, buffer) => {
-          if (error) throw error;
-          buffer.nonce = req.nonce; // eslint-disable-line no-param-reassign
-          cache.add(buffer, cacheRef.key);
+      if (cacheRef && status < 500) {
+        // Note: waiting for the caching to complete is not strictly necessary,
+        // but it greately simplifies testing, and error reporting.
+        await new Promise((done, failed) => {
+          brotliCompress(html, (error, buffer) => {
+            if (error) failed(error);
+            else {
+              buffer.nonce = req.nonce; // eslint-disable-line no-param-reassign
+              cache.add({ buffer, status }, cacheRef.key);
+              done();
+            }
+          });
         });
       }
     } catch (error) {
