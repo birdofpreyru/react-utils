@@ -1,16 +1,12 @@
-import fs from 'fs';
-
-let configFactory;
-
-beforeAll(() => {
-  fs.writeFileSync = jest.fn();
-  configFactory = require('../../../config/webpack/app-base');
-});
+import { createFsFromVolume, Volume } from 'memfs';
+import configFactory from '../../../config/webpack/app-base';
 
 describe('.build-info output', () => {
   test('Timestamp matches Webpack config', () => {
-    const config = configFactory({ context: '/mock/context/path' });
-    expect(fs.writeFileSync).toHaveBeenCalledTimes(1);
+    const fs = createFsFromVolume(new Volume());
+    const context = '/mock/context/path';
+    const config = configFactory({ context, fs });
+    expect(fs.existsSync(`${context}/.build-info`)).toBe(true);
     expect('[contenthash].js').toBe(config.output.filename);
   });
 });

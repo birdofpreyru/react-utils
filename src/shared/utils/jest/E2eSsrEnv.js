@@ -39,13 +39,19 @@ export default class E2eSsrEnv extends JsdomEnv {
     options = options ? JSON.parse(options) : {};
     defaults(options, {
       context: this.testFolder,
-      dontEmitBuildInfo: true,
+      fs: this.global.webpackOutputFs,
     });
 
     let factory = this.pragmas['webpack-config-factory'] || '';
     factory = require(path.resolve(this.rootDir, factory));
     this.global.webpackConfig = factory(options);
-    this.global.buildInfo = factory.buildInfo;
+
+    const fs = this.global.webpackOutputFs;
+    let buildInfo = `${options.context}/.build-info`;
+    if (fs.existsSync(buildInfo)) {
+      buildInfo = fs.readFileSync(buildInfo, 'utf8');
+      this.global.buildInfo = JSON.parse(buildInfo);
+    }
   }
 
   /**
@@ -56,12 +62,11 @@ export default class E2eSsrEnv extends JsdomEnv {
     this.loadWebpackConfig();
 
     const compiler = webpack(this.global.webpackConfig);
-    const fs = createFsFromVolume(new Volume());
-    compiler.outputFileSystem = fs;
+    compiler.outputFileSystem = this.global.webpackOutputFs;
     return new Promise((done, fail) => {
       compiler.run((err, stats) => {
         if (err) fail(err);
-        this.global.webpackOutputFs = fs;
+
         this.global.webpackStats = stats.toJson();
 
         // Keeps reference to the raw Webpack stats object, which should be
@@ -156,6 +161,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     super(config, context);
 
     this.global.dom = this.dom;
+    this.global.webpackOutputFs = createFsFromVolume(new Volume());
 
     // Extracts necessary settings from config and context.
     const { projectConfig } = config;

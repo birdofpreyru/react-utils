@@ -76,6 +76,5 @@ module.exports = function configFactory(ops) {
     },
   });
 
-  configFactory.buildInfo = baseFactory.buildInfo;
   return res;
 };
