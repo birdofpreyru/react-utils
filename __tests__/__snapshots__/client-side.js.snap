@@ -139,6 +139,7 @@ Object {
   "client": [Function],
   "config": Object {},
   "getGlobalState": [Function],
+  "getSsrContext": [Function],
   "isomorphy": Object {
     "IS_CLIENT_SIDE": true,
     "IS_SERVER_SIDE": false,

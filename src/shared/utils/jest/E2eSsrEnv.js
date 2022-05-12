@@ -101,6 +101,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     }
 
     const renderer = ssrFactory(this.global.webpackConfig, options);
+    let status = 200; // OK
     const markup = await new Promise((done, fail) => {
       renderer(
         this.ssrRequest,
@@ -111,6 +112,9 @@ export default class E2eSsrEnv extends JsdomEnv {
         {
           send: done,
           set: noop,
+          status: (value) => {
+            status = value;
+          },
 
           // This is how up-to-date Webpack stats are passed to the server in
           // development mode, and we use this here always, instead of having
@@ -133,6 +137,7 @@ export default class E2eSsrEnv extends JsdomEnv {
 
     this.global.ssrMarkup = markup;
     this.global.ssrOptions = options;
+    this.global.ssrStatus = status;
   }
 
   constructor(config, context) {

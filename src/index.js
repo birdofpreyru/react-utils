@@ -9,6 +9,7 @@ export * as PT from 'prop-types';
 
 export {
   getGlobalState,
+  getSsrContext,
   GlobalStateProvider,
   useAsyncCollection,
   useAsyncData,

@@ -242,6 +242,7 @@ Object {
     "dummyKey": "Dummy Value",
   },
   "getGlobalState": [Function],
+  "getSsrContext": [Function],
   "isomorphy": Object {
     "IS_CLIENT_SIDE": false,
     "IS_SERVER_SIDE": true,
