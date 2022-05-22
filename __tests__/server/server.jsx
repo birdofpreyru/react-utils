@@ -5,7 +5,6 @@ import serverFactory from 'server/server';
 
 // Test logger, which omits regular info message from the console.
 const logger = {
-  ...console,
   info: () => null,
 };
 
@@ -54,7 +53,7 @@ test('Favicon support', () => {
 
 test('Launch with dev tools', () => {
   process.env.DEV_TOOLS = true;
-  const server = serverFactory(TEST_WEBPACK_CONFIG, { logger: console });
+  const server = serverFactory(TEST_WEBPACK_CONFIG, { logger });
   return server;
 });
 

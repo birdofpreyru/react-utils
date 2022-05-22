@@ -5,7 +5,6 @@ import {
   defaults,
   isFinite,
   isNumber,
-  isUndefined,
   isString,
   toNumber,
 } from 'lodash';
@@ -16,10 +15,8 @@ import https from 'https';
 /* Polyfill required by ReactJS. */
 import 'raf/polyfill';
 
-import winston from 'winston';
-
 import serverFactory from './server';
-import { SCRIPT_LOCATIONS } from './renderer';
+import { SCRIPT_LOCATIONS, newDefaultLogger } from './renderer';
 
 export { getDefaultCspSettings } from './server';
 export * from './utils';
@@ -112,7 +109,7 @@ function normalizePort(value) {
  *   of `.beforeRender` hook.
  * - `upgradeInsecureRequests` directive is removed in development mode,
  *   to simplify local testing with http requests.
- * @param {string} [options.defaultLoggerLogLevel=info] Log level for
+ * @param {string} [options.defaultLoggerLogLevel='info'] Log level for
  * the default logger, which is created if no `logger` option provided.
  * @param {boolean} [options.devMode] Pass in `true` to start the server in
  * development mode.
@@ -163,32 +160,9 @@ async function launch(webpackConfig, options) {
   ops.port = normalizePort(ops.port || process.env.PORT || 3000);
   defaults(ops, { httpsRedirect: true });
 
-  if (isUndefined(ops.logger)) {
-    const { format, transports } = winston;
-    ops.logger = winston.createLogger({
-      level: ops.defaultLoggerLogLevel || 'info',
-      format: format.combine(
-        format.splat(),
-        format.timestamp(),
-        format.colorize(),
-        format.printf(
-          ({
-            level,
-            message,
-            timestamp,
-            stack,
-            ...rest
-          }) => {
-            let res = `${level}\t(at ${timestamp}):\t${message}`;
-            if (Object.keys(rest).length) {
-              res += `\n${JSON.stringify(rest, null, 2)}`;
-            }
-            if (stack) res += `\n${stack}`;
-            return res;
-          },
-        ),
-      ),
-      transports: [new transports.Console()],
+  if (ops.logger === undefined) {
+    ops.logger = newDefaultLogger({
+      defaultLogLevel: ops.defaultLoggerLogLevel,
     });
   }
 
@@ -212,12 +186,10 @@ async function launch(webpackConfig, options) {
     switch (error.code) {
       case 'EACCES':
         ops.logger.error(`${bind} requires elevated privileges`);
-        process.exit(1);
-        break;
+        return process.exit(1);
       case 'EADDRINUSE':
         ops.logger.error(`${bind} is already in use`);
-        process.exit(1);
-        break;
+        return process.exit(1);
       default:
         throw error;
     }

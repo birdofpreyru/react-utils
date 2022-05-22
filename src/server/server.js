@@ -82,6 +82,7 @@ export default async function factory(webpackConfig, options) {
     'Application',
     'beforeRender',
     'favicon',
+    'logger',
     'maxSsrRounds',
     'noCsp',
     'ssrTimeout',

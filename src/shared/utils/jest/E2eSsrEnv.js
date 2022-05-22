@@ -83,6 +83,11 @@ export default class E2eSsrEnv extends JsdomEnv {
     let options = this.pragmas['ssr-options'];
     options = options ? JSON.parse(options) : {};
 
+    // TODO: This is temporary to shortcut the logging added to SSR.
+    if (options.logger === undefined) {
+      options.logger = { debug: noop, info: noop };
+    }
+
     let root;
     switch (options.root) {
       case 'TEST': root = this.testFolder; break;

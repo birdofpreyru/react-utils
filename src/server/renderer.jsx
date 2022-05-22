@@ -26,8 +26,8 @@ import { renderToPipeableStream } from 'react-dom/server';
 import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom/server';
 import serializeJs from 'serialize-javascript';
-
 import time from 'utils/time';
+import winston from 'winston';
 
 import Cache from './Cache';
 
@@ -152,6 +152,43 @@ function groupExtraScripts(scripts = []) {
 }
 
 /**
+ * Creates a new default (Winston) logger.
+ * @param {object} [options={}]
+ * @param {string} [options.defaultLogLevel='info']
+ * @return {object}
+ */
+export function newDefaultLogger({
+  defaultLogLevel = 'info',
+} = {}) {
+  const { format, transports } = winston;
+  return winston.createLogger({
+    level: defaultLogLevel,
+    format: format.combine(
+      format.splat(),
+      format.timestamp(),
+      format.colorize(),
+      format.printf(
+        ({
+          level,
+          message,
+          timestamp,
+          stack,
+          ...rest
+        }) => {
+          let res = `${level}\t(at ${timestamp}):\t${message}`;
+          if (Object.keys(rest).length) {
+            res += `\n${JSON.stringify(rest, null, 2)}`;
+          }
+          if (stack) res += `\n${stack}`;
+          return res;
+        },
+      ),
+    ),
+    transports: [new transports.Console()],
+  });
+}
+
+/**
  * Creates the middleware.
  * @param {object} webpackConfig
  * @param {object} options Additional options:
@@ -189,6 +226,15 @@ export default function factory(webpackConfig, options) {
     ssrTimeout: 1000,
     staticCacheSize: 1.e7,
   });
+
+  // Note: in normal use the default logger is created and set in the root
+  // server function, and this initialization is for testing uses, where
+  // renderer is imported directly.
+  if (ops.logger === undefined) {
+    ops.logger = newDefaultLogger({
+      defaultLogLevel: ops.defaultLoggerLogLevel,
+    });
+  }
 
   const buildInfo = ops.buildInfo || getBuildInfo(webpackConfig.context);
   global.TRU_BUILD_INFO = buildInfo;
@@ -296,7 +342,10 @@ export default function factory(webpackConfig, options) {
         for (let round = 0; round < ops.maxSsrRounds; ++round) {
           stream = await renderPass(); // eslint-disable-line no-await-in-loop
 
-          if (!ssrContext.dirty) break;
+          if (!ssrContext.dirty) {
+            ops.logger.info(`SSR completed in ${round + 1} rounds`);
+            break;
+          }
 
           /* eslint-disable no-await-in-loop */
           const timeout = ops.ssrTimeout + ssrStart - Date.now();
@@ -304,8 +353,17 @@ export default function factory(webpackConfig, options) {
             Promise.allSettled(ssrContext.pending),
             time.timer(timeout).then(() => false),
           ]);
-          if (!ok) break;
+          if (!ok) {
+            ops.logger.warn(`SSR timed out (${ops.ssrTimeout}sec)`);
+            break;
+          }
           /* eslint-enable no-await-in-loop */
+
+          if (round + 1 === ops.maxSsrRounds) {
+            ops.logger.warn(
+              `SSR reached max number of rounds ${ops.maxSsrRounds}`,
+            );
+          }
         }
 
         App = '';

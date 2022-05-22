@@ -2,6 +2,7 @@
  * Tests for the server-side MetaTags integration.
  */
 
+import { noop } from 'lodash';
 import supertest from 'supertest';
 import { Helmet } from 'react-helmet';
 
@@ -29,10 +30,7 @@ async function baseTest(Component) {
       beforeRender: () => ({
         initialState: { domain: 'https://sample.domain' },
       }),
-      logger: {
-        ...console,
-        info: () => null,
-      },
+      logger: { info: noop },
       maxSsrRounds: 3,
       ssrTimeout: Number.MAX_VALUE,
     }),

@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash';
+import { cloneDeep, noop } from 'lodash';
 import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable } from 'server/renderer';
 import fs from 'fs';
 
@@ -56,12 +56,17 @@ afterAll(() => {
  * @param {Object} options
  * @return {Promise}
  */
-async function coreTest(webpackConfig, options) {
+async function coreTest(webpackConfig, options = {}) {
   expect(global.TRU_BUILD_INFO).toBeUndefined();
 
   let renderer;
   expect(() => {
-    renderer = factory(webpackConfig, options);
+    renderer = factory(webpackConfig, {
+      ...options,
+      logger: {
+        info: noop,
+      },
+    });
   }).not.toThrow();
   expect(renderer).toBeInstanceOf(Function);
   expect(global.TRU_BUILD_INFO).toEqual(testBuildInfo);

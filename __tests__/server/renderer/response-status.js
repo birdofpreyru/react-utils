@@ -1,6 +1,7 @@
 // Tests how response status is handled by the renderer and its cache.
 
 import { getSsrContext } from '@dr.pogodin/react-global-state';
+import { noop } from 'lodash';
 import factory from 'server/renderer';
 
 import {
@@ -20,6 +21,7 @@ beforeAll(() => {
       const context = getSsrContext();
       context.status = mockStatus;
     },
+    logger: { info: noop },
     staticCacheController: cacheController,
   });
 });
