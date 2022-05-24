@@ -63,9 +63,7 @@ async function coreTest(webpackConfig, options = {}) {
   expect(() => {
     renderer = factory(webpackConfig, {
       ...options,
-      logger: {
-        info: noop,
-      },
+      logger: { info: noop, log: noop },
     });
   }).not.toThrow();
   expect(renderer).toBeInstanceOf(Function);

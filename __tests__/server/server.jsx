@@ -1,12 +1,10 @@
-import { clone } from 'lodash';
+import { clone, noop } from 'lodash';
 import supertest from 'supertest';
 
 import serverFactory from 'server/server';
 
 // Test logger, which omits regular info message from the console.
-const logger = {
-  info: () => null,
-};
+const logger = { info: noop, log: noop };
 
 jest.mock('serve-favicon', () => jest.fn(() => (req, res, next) => next()));
 

@@ -21,7 +21,7 @@ beforeAll(() => {
       const context = getSsrContext();
       context.status = mockStatus;
     },
-    logger: { info: noop },
+    logger: { info: noop, log: noop },
     staticCacheController: cacheController,
   });
 });

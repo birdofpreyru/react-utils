@@ -85,7 +85,12 @@ export default class E2eSsrEnv extends JsdomEnv {
 
     // TODO: This is temporary to shortcut the logging added to SSR.
     if (options.logger === undefined) {
-      options.logger = { debug: noop, info: noop };
+      options.logger = {
+        debug: noop,
+        info: noop,
+        log: noop,
+        warn: noop,
+      };
     }
 
     let root;

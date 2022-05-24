@@ -1,0 +1,43 @@
+/**
+ * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.js
+ * @webpack-config-factory ./config/webpack/app-production.js
+ * @webpack-config-options {
+ *  "entry": "./__assets__/incomplete-ssr-hydration/index.js" }
+ * @ssr-options {
+ *  "babelEnv": "production",
+ *  "entry": "./__assets__/incomplete-ssr-hydration/Scene.jsx",
+ *  "maxSsrRounds": 1 }
+ */
+
+import { noop } from 'lodash';
+import { act } from 'react-dom/test-utils';
+
+document.write(global.ssrMarkup);
+const markup = document.querySelector('#react-view').innerHTML;
+
+const fs = global.webpackOutputFs;
+const outputPath = global.webpackConfig.output.path;
+const jsFilename = global.webpackStats.namedChunkGroups.main.assets[0].name;
+
+beforeAll(() => {
+  // This simple polyfill is enough for our purposes.
+  window.crypto = {
+    getRandomValues: (array) => {
+      for (let i = 0; i < array.length; ++i) {
+        array[i] = 256 * Math.random(); // eslint-disable-line no-param-reassign
+      }
+    },
+  };
+});
+
+it('generates expected SSR markup', () => {
+  expect(markup).toMatchSnapshot();
+});
+
+it('hydrates successfully', async () => {
+  console.error = noop;
+  const js = fs.readFileSync(`${outputPath}/${jsFilename}`, 'utf8');
+  await act(new Function(js)); // eslint-disable-line no-new-func
+  const container = document.querySelector('#react-view');
+  expect(container.innerHTML).toBe(markup);
+});

@@ -339,32 +339,35 @@ export default function factory(webpackConfig, options) {
           });
         };
 
-        for (let round = 0; round < ops.maxSsrRounds; ++round) {
+        let ssrRound = 0;
+        let bailed = false;
+        for (; ssrRound < ops.maxSsrRounds; ++ssrRound) {
           stream = await renderPass(); // eslint-disable-line no-await-in-loop
 
-          if (!ssrContext.dirty) {
-            ops.logger.info(`SSR completed in ${round + 1} rounds`);
-            break;
-          }
+          if (!ssrContext.dirty) break;
 
           /* eslint-disable no-await-in-loop */
           const timeout = ops.ssrTimeout + ssrStart - Date.now();
-          const ok = timeout > 0 && await Promise.race([
+          bailed = timeout <= 0 || !await Promise.race([
             Promise.allSettled(ssrContext.pending),
             time.timer(timeout).then(() => false),
           ]);
-          if (!ok) {
-            ops.logger.warn(`SSR timed out (${ops.ssrTimeout}sec)`);
-            break;
-          }
+          if (bailed) break;
           /* eslint-enable no-await-in-loop */
-
-          if (round + 1 === ops.maxSsrRounds) {
-            ops.logger.warn(
-              `SSR reached max number of rounds ${ops.maxSsrRounds}`,
-            );
-          }
         }
+
+        let logMsg;
+        if (ssrContext.dirty) {
+          // NOTE: In the case of incomplete SSR one more round is necessary
+          // to ensure the correct hydration when some pending promises have
+          // resolved and placed their data into the initial global state.
+          stream = await renderPass();
+
+          logMsg = bailed ? `SSR timed out after ${ops.ssrTimeout} second(s)`
+            : `SSR bailed out after ${ops.maxSsrRounds} round(s)`;
+        } else logMsg = `SSR completed in ${ssrRound + 1} round(s)`;
+
+        ops.logger.log(ssrContext.dirty ? 'warn' : 'info', logMsg);
 
         App = '';
         stream.pipe(new Writable({
