@@ -26,7 +26,7 @@ import { renderToPipeableStream } from 'react-dom/server';
 import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom/server';
 import serializeJs from 'serialize-javascript';
-import time from 'utils/time';
+import { timer } from 'utils/time';
 import winston from 'winston';
 
 import Cache from './Cache';
@@ -350,7 +350,7 @@ export default function factory(webpackConfig, options) {
           const timeout = ops.ssrTimeout + ssrStart - Date.now();
           bailed = timeout <= 0 || !await Promise.race([
             Promise.allSettled(ssrContext.pending),
-            time.timer(timeout).then(() => false),
+            timer(timeout).then(() => false),
           ]);
           if (bailed) break;
           /* eslint-enable no-await-in-loop */

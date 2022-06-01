@@ -1,5 +1,5 @@
 import { useAsyncData } from '@dr.pogodin/react-global-state';
-import time from 'utils/time';
+import { timer } from 'utils/time';
 
 // The first one never resolves, the second one resolves right away.
 
@@ -7,7 +7,7 @@ import time from 'utils/time';
 // an obscure crash in react-global-state, thus the version with 30ms timeout.
 // const badLoader = () => new Promise();
 const badLoader = async () => {
-  await time.timer(30);
+  await timer(30);
 };
 
 const goodLoader = () => Promise.resolve('Hello World!');

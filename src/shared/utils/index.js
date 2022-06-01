@@ -6,7 +6,7 @@ import themed, {
 
 import config from './config';
 import * as isomorphy from './isomorphy';
-import time from './time';
+import time, { timer } from './time';
 import * as webpack from './webpack';
 
 export * from './Barrier';
@@ -69,7 +69,7 @@ export async function withRetries(action, maxRetries = 5, interval = 1000) {
     try {
       return await action();
     } catch (error) {
-      if (n < maxRetries) await time.timer(interval);
+      if (n < maxRetries) await timer(interval);
       else throw error;
     }
   }
