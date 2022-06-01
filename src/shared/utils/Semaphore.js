@@ -32,6 +32,7 @@ export default class Semaphore {
       const barrier = newBarrier();
       this.#queue.push(barrier);
       await barrier;
+      this.#queue.shift();
     }
   }
 
@@ -45,8 +46,7 @@ export default class Semaphore {
    */
   #drainQueue() {
     if (this.#ready && this.#queue.length) {
-      const next = this.#queue.shift();
-      next.resolve();
+      this.#queue[0].resolve();
 
       // Re-schedules itself for the next event loop iteration.
       if (this.#queue.length) {

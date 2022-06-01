@@ -70,11 +70,13 @@ dayjs.now = Date.now;
  *  .abort() method attached, which cancels the pending timer resolution
  *  (without resolving or rejecting the barrier).
  */
-dayjs.timer = async function timer(timeout) {
+export async function timer(timeout) {
   const res = new Barrier();
   const id = setTimeout(res.resolve.bind(res), timeout);
   res.abort = () => clearTimeout(id);
   return res;
-};
+}
+
+dayjs.timer = timer;
 
 export default dayjs;

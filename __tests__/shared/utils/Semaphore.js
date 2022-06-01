@@ -1,4 +1,7 @@
+/* eslint-disable no-await-in-loop */
+
 import Semaphore from 'utils/Semaphore';
+import { timer } from 'utils/time';
 
 describe('constructor', () => {
   it('creates non-ready semaphore by default', () => {
@@ -18,71 +21,95 @@ describe('constructor', () => {
 });
 
 describe('concurrent use', () => {
-  let sem;
-  let signals;
-
-  beforeEach(() => {
-    sem = new Semaphore();
-    signals = [];
-  });
-
   test('.waitReady() can be used as a simple barrier', async () => {
-    const newFlow = async (signal) => {
+    let flag = false;
+    const sem = new Semaphore();
+
+    (async () => {
       await sem.waitReady();
-      signals.push(signal);
-    };
-    const flows = [newFlow('A'), newFlow('B')];
+      flag = true;
+    })();
+
+    await timer(10);
+    expect(flag).toBe(false);
     sem.setReady(true);
-    await Promise.all(flows);
-    expect(sem.ready).toBe(true);
-    expect(signals).toEqual(['A', 'B']);
+    await timer(10);
+    expect(flag).toBe(true);
   });
 
   test('.waitReady() can be used for mutual exclusion', async () => {
+    const dT = 30;
+    const signals = [];
+    const sem = new Semaphore();
+
     const newFlow = async (signal) => {
-      await sem.waitReady();
-      sem.setReady(false);
-      signals.push(signal);
+      for (let i = 1; i <= 2; ++i) {
+        await sem.waitReady();
+        sem.setReady(false);
+        signals.push(`${signal}-${i}`);
+        await timer(dT);
+        sem.setReady(true);
+      }
     };
-    const flows = [newFlow('A'), newFlow('B')];
+
+    newFlow('A');
+    newFlow('B');
+
+    expect(signals).toEqual([]);
     sem.setReady(true);
-    await Promise.race(flows);
-    expect(sem.ready).toBe(false);
-    expect(signals).toEqual(['A']);
-    sem.setReady(true);
-    await Promise.all(flows);
-    expect(sem.ready).toBe(false);
-    expect(signals).toEqual(['A', 'B']);
+    await timer(dT / 2);
+    expect(signals).toEqual(['A-1']);
+    await timer(dT);
+    expect(signals).toEqual(['A-1', 'B-1']);
+    await timer(dT);
+    expect(signals).toEqual(['A-1', 'B-1', 'A-2']);
+    await timer(dT);
+    expect(signals).toEqual(['A-1', 'B-1', 'A-2', 'B-2']);
   });
 
   test('.seize() can be used for mutual exclusion', async () => {
+    const dT = 30;
+    const signals = [];
+    const sem = new Semaphore();
+
     const newFlow = async (signal) => {
-      await sem.seize();
-      signals.push(signal);
+      for (let i = 1; i <= 2; ++i) {
+        await sem.seize();
+        signals.push(`${signal}-${i}`);
+        await timer(dT);
+        sem.setReady(true);
+      }
     };
-    const flows = [newFlow('A'), newFlow('B')];
+
+    newFlow('A');
+    newFlow('B');
+
+    expect(signals).toEqual([]);
     sem.setReady(true);
-    await Promise.race(flows);
-    expect(sem.ready).toBe(false);
-    expect(signals).toEqual(['A']);
-    sem.setReady(true);
-    await Promise.all(flows);
-    expect(sem.ready).toBe(false);
-    expect(signals).toEqual(['A', 'B']);
+    await timer(dT / 2);
+    expect(signals).toEqual(['A-1']);
+    await timer(dT);
+    expect(signals).toEqual(['A-1', 'B-1']);
+    await timer(dT);
+    expect(signals).toEqual(['A-1', 'B-1', 'A-2']);
+    await timer(dT);
+    expect(signals).toEqual(['A-1', 'B-1', 'A-2', 'B-2']);
   });
 
   test(
     '.waitReady() does not skip the drain queue when the semaphore is ready',
     async () => {
+      const signals = [];
+      const sem = new Semaphore();
       const newFlow = async (signal) => {
         await sem.waitReady();
         signals.push(signal);
       };
-      const flows = [newFlow('A'), newFlow('B')];
+      newFlow('A');
+      newFlow('B');
       sem.setReady(true);
-      flows.push(newFlow('C'));
-      await Promise.all(flows);
-      expect(sem.ready).toBe(true);
+      newFlow('C');
+      await timer(10);
       expect(signals).toEqual(['A', 'B', 'C']);
     },
   );
