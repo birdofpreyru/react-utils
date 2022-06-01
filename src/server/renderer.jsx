@@ -414,9 +414,6 @@ export default function factory(webpackConfig, options) {
       cipher.finish();
       const INJ = forge.util.encode64(`${iv}${cipher.output.data}`);
 
-      const status = ssrContext.status || 200;
-      if (status !== 200) res.status(status);
-
       const chunkSet = new Set();
 
       // TODO: "main" chunk has to be added explicitly,
@@ -487,6 +484,8 @@ export default function factory(webpackConfig, options) {
           </body>
         </html>`;
 
+      const status = ssrContext.status || 200;
+      if (status !== 200) res.status(status);
       res.send(html);
 
       if (cacheRef && status < 500) {
