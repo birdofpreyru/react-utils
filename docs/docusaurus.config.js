@@ -10,8 +10,10 @@ const EDIT_BASE = `${CODE_REPO}/edit/master/docs`;
 const NPM_URL = 'https://www.npmjs.com/package/@dr.pogodin/react-utils';
 
 const REACT_UTILS_STYLES = process.env.NODE_ENV === 'development'
-  ? '@dr.pogodin/react-utils/dev-styles'
-  : '@dr.pogodin/react-utils/prod-styles';
+  // Note: "-forced" version of these style imports does not fallback to null
+  // imports on Node, unlike these imports without "-forced" syffixes.
+  ? '@dr.pogodin/react-utils/dev-styles-forced'
+  : '@dr.pogodin/react-utils/prod-styles-forced';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -35,7 +37,6 @@ const config = {
         },
         theme: {
           customCss: [
-            // TODO: Should be prod-styles for prod compilation!
             require.resolve(REACT_UTILS_STYLES),
             require.resolve('./src/css/custom.scss'),
           ],

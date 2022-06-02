@@ -1,12 +1,14 @@
 /* global document */
 
 import { noop } from 'lodash';
+
 import {
   useEffect,
   useMemo,
   useRef,
   useState,
 } from 'react';
+
 import ReactDom from 'react-dom';
 import PT from 'prop-types';
 import themed from '@dr.pogodin/react-themes';
