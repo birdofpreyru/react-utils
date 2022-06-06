@@ -8,9 +8,9 @@ can be further themed to a certain degree.
 
 import Throbber from '../../../src/components/Throbber';
 
-:::note Demo
-By default `<Throbber />` renders as three black bouncing circles: <Throbber />,
-which can be further styled to a certain degree using [React Themes] mechanics.
+:::danger Demo
+The live example is temporarily removed, until Docusaurus is fully
+compatible with React **v18+**.
 :::
 
 ## Properties

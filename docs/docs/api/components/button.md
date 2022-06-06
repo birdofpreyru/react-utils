@@ -9,10 +9,9 @@ The [Button] component implements themeable buttons, and button-line links
 
 import Example from '../../../src/components/ButtonsExample';
 
-:::note Demo
-<Example />
-
-See [the source code below][Examples].
+:::danger Demo
+The live example is temporarily removed, until Docusaurus is fully
+compatible with React **v18+**.
 :::
 
 A [Button] instance is rendered in different ways:

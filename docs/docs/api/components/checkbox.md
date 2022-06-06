@@ -8,10 +8,9 @@ The [Checkbox] component implements checkboxes themed with [React Themes].
 
 import CheckboxExample from '../../../src/components/CheckboxExample';
 
-:::note Demo
-<CheckboxExample />
-
-See [the source code below][Examples]
+:::danger Demo
+The live example is temporarily removed, until Docusaurus is fully
+compatible with React **v18+**.
 :::
 
 ## Properties
