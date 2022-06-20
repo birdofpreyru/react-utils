@@ -1,5 +1,5 @@
 {
-  "version": "1.17.12",
+  "version": "1.18.0",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -10,7 +10,7 @@
   "dependencies": {
     "@babel/runtime": "^7.18.3",
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.8.2",
-    "@dr.pogodin/react-global-state": "^0.8.3",
+    "@dr.pogodin/react-global-state": "^0.9.0",
     "@dr.pogodin/react-themes": "^1.4.4",
     "axios": "^0.27.2",
     "commander": "^9.0.0",
@@ -62,7 +62,7 @@
     "core-js": "^3.23.1",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.0.0",
-    "eslint": "^8.17.0",
+    "eslint": "^8.18.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-import-resolver-babel-module": "^5.3.1",
     "eslint-plugin-import": "^2.26.0",
@@ -73,7 +73,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^28.1.1",
     "jest-environment-jsdom": "^28.1.1",
-    "memfs": "^3.4.4",
+    "memfs": "^3.4.6",
     "mini-css-extract-plugin": "^2.6.1",
     "mockdate": "^3.0.5",
     "nodelist-foreach-polyfill": "^1.2.0",

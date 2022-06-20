@@ -7,7 +7,6 @@ import serializeJs from 'serialize-javascript';
 import {
   getGlobalState,
   getSsrContext,
-  GlobalStateProvider,
   useGlobalState,
 } from '@dr.pogodin/react-global-state';
 
@@ -114,15 +113,11 @@ test('JS constructs in global state', () => {
   function Component() {
     useGlobalState('test.1', 'defaultValue');
     useGlobalState('set', new Set([1, 2]));
-    const { state } = getGlobalState();
+    const state = getGlobalState().get();
     return <div>{serializeJs(state)}</div>;
   }
   return coreTest(mockWebpackConfig(), {
-    Application: () => (
-      <GlobalStateProvider>
-        <Component />
-      </GlobalStateProvider>
-    ),
+    Application: Component,
     maxSsrRounds: 3,
   });
 });

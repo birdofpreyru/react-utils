@@ -200,7 +200,7 @@ exports[`JS constructs in global state 1`] = `
               type=\\"application/javascript\\"
               nonce=\\"abcdef-dummy-nonce\\"
             >
-              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWKKnXdbyS28Kq8fENTebXTg==\\"
+              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWUL3h5uSa0xzfT5XBfc+dkJg03js0tc5Fdq1/L/xrtEoxXCKrg6lCyYKZwCTky5ib0caXGM8E73+cVSWoPghSnS4NUPLasB0oQjzb4nzzrnCbhluCzJjpPO8adT213jGzJprOm1VjBtqksqp0zqbPGg==\\"
             </script>
             <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
             

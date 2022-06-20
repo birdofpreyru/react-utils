@@ -17,7 +17,7 @@
     "@docusaurus/core": "^2.0.0-beta.21",
     "@docusaurus/preset-classic": "^2.0.0-beta.21",
     "@docusaurus/theme-common": "^2.0.0-beta.21",
-    "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.17.12.tgz",
+    "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.18.0.tgz",
     "@mdx-js/react": "^1.6.21",
     "@svgr/webpack": "^6.2.1",
     "clsx": "^1.1.1",
