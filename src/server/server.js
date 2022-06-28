@@ -216,13 +216,19 @@ export default async function factory(webpackConfig, options) {
 
   /* Error handler. */
   if (!dontAttachDefaultErrorHandler) {
+    // TODO: Do we need this error handler at all? It actually seems to do
+    // what the default ExpressJS error handler does anyway, see:
+    // https://expressjs.com/en/guide/error-handling.html
+    //
     // TODO: It is better to move the default error handler definition
     // to a stand-alone function at top-level, but the use of options.logger
     // prevents to do it without some extra refactoring. Should be done sometime
     // though.
-    /* eslint-disable no-unused-vars */
     server.use((error, req, res, next) => {
-    /* eslint-enable no-unused-vars */
+      // TODO: This is needed to correctly handled any errors thrown after
+      // sending initial response to the client.
+      if (res.headersSent) return next(error);
+
       const status = error.status || CODES.INTERNAL_SERVER_ERROR;
       const serverSide = status >= CODES.INTERNAL_SERVER_ERROR;
 
@@ -235,6 +241,7 @@ export default async function factory(webpackConfig, options) {
       }
 
       res.status(status).send(message);
+      return undefined;
     });
   }
 

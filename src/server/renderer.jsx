@@ -486,7 +486,6 @@ export default function factory(webpackConfig, options) {
 
       const status = ssrContext.status || 200;
       if (status !== 200) res.status(status);
-      res.send(html);
 
       if (cacheRef && status < 500) {
         // Note: waiting for the caching to complete is not strictly necessary,
@@ -502,6 +501,11 @@ export default function factory(webpackConfig, options) {
           });
         });
       }
+
+      // Note: as caching code above may throw in some cases, sending response
+      // before it completes will likely hide the error, making it difficult
+      // to debug. Thus, at least for now, lets send response after it.
+      res.send(html);
     } catch (error) {
       next(error);
     }
