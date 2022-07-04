@@ -1,5 +1,5 @@
 {
-  "version": "1.18.1",
+  "version": "1.18.2",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -33,13 +33,13 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^6.3.0",
-    "request-ip": "^2.2.0",
+    "request-ip": "^3.0.2",
     "rimraf": "^3.0.2",
     "serialize-javascript": "^6.0.0",
     "serve-favicon": "^2.5.0",
     "source-map-support": "^0.5.21",
     "uuid": "^8.3.2",
-    "winston": "^3.8.0"
+    "winston": "^3.8.1"
   },
   "description": "Collection of generic ReactJS components and utils",
   "devDependencies": {
@@ -56,13 +56,13 @@
     "@dr.pogodin/babel-preset-svgr": "^1.4.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "autoprefixer": "^10.4.7",
-    "babel-jest": "^28.1.1",
+    "babel-jest": "^28.1.2",
     "babel-loader": "^8.2.5",
     "babel-plugin-module-resolver": "^4.1.0",
     "core-js": "^3.23.3",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.0.0",
-    "eslint": "^8.18.0",
+    "eslint": "^8.19.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-import-resolver-babel-module": "^5.3.1",
     "eslint-plugin-import": "^2.26.0",
@@ -71,8 +71,8 @@
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^28.1.1",
-    "jest-environment-jsdom": "^28.1.1",
+    "jest": "^28.1.2",
+    "jest-environment-jsdom": "^28.1.2",
     "memfs": "^3.4.7",
     "mini-css-extract-plugin": "^2.6.1",
     "mockdate": "^3.0.5",
@@ -90,7 +90,7 @@
     "sitemap": "^7.1.1",
     "stylelint": "^14.9.1",
     "stylelint-config-standard-scss": "^4.0.0",
-    "supertest": "^6.2.3",
+    "supertest": "^6.2.4",
     "webpack": "^5.73.0",
     "webpack-dev-middleware": "^5.3.3",
     "webpack-hot-middleware": "^2.25.1",
