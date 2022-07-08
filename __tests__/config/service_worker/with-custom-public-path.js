@@ -39,5 +39,8 @@ it('registers service worker with the correct URL', async () => {
   await act(onLoad);
   console.log = log;
 
-  expect(register.mock.calls[0]).toEqual(['/public-path/__service-worker.js']);
+  expect(register.mock.calls[0]).toEqual(['/__service-worker.js']);
+
+  // TODO: Test also that the server correctly wires the service worker at root
+  // to the actual file in the outputs folder.
 });

@@ -160,11 +160,16 @@ export default async function factory(webpackConfig, options) {
     },
   }));
 
-  /* Ensures no caching for the service worker script. */
-  server.use(`${publicPath}service-worker.js`, (req, res, next) => {
-    res.header('Cache-Control', 'no-cache');
-    next();
-  });
+  // Note: no matter the "public path", we want the service worker, if any,
+  // to be served from the root, to have all web app pages in its scope.
+  // Thus, this setup to serve it. Probably, need some more configuration
+  // for special cases, but this will do for now.
+  server.get('/__service-worker.js', express.static(
+    webpackConfig.output.path,
+    {
+      setHeaders: (res) => res.set('Cache-Control', 'no-cache'),
+    },
+  ));
 
   /* Setup of Hot Module Reloading for development environment.
    * These dependencies are not used, nor installed for production use,
