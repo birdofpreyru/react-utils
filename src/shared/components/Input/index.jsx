@@ -1,4 +1,5 @@
 import PT from 'prop-types';
+import { forwardRef } from 'react';
 
 import { themed } from 'utils';
 
@@ -9,25 +10,24 @@ import defaultTheme from './theme.scss';
  * @param {object} [props]
  * @param {string} [props.label] Input label.
  * @param {InputTheme} [props.theme] _Ad hoc_ theme.
- * @param {...any} [props....] [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
- * @param {...any} [props....] Any other properties are passed to the underlying
+ * @param {...any} [props...] [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
+ * @param {...any} [props...] Any other properties are passed to the underlying
  * `<input>` element.
  */
-function Input({
+const Input = forwardRef(({
   label,
   theme,
   ...rest
-}) {
-  return (
-    <div className={theme.container}>
-      { label === undefined ? null : <p className={theme.label}>{label}</p> }
-      <input
-        className={theme.input}
-        {...rest} // eslint-disable-line react/jsx-props-no-spreading
-      />
-    </div>
-  );
-}
+}, ref) => (
+  <div className={theme.container}>
+    { label === undefined ? null : <p className={theme.label}>{label}</p> }
+    <input
+      className={theme.input}
+      ref={ref}
+      {...rest} // eslint-disable-line react/jsx-props-no-spreading
+    />
+  </div>
+));
 
 const ThemedInput = themed('Input', [
   'container',
