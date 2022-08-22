@@ -22,9 +22,11 @@
       color: inherit;
     }
 
-    &:hover {
+    &.active,
+    &:active {
+      background-image: linear-gradient(to bottom, lightgray, white 50%, white);
+      box-shadow: inset 0 1px 3px 0 lightgray;
       border-color: gray;
-      cursor: pointer;
     }
 
     &:focus {
@@ -32,18 +34,20 @@
       border-color: blue;
       outline: none;
     }
-
-    &.active,
-    &:active {
-      background-image: linear-gradient(to bottom, lightgray, white 50%, white);
-      box-shadow: inset 0 1px 3px 0 lightgray;
-      border-color: gray;
-    }
   }
 
   /* Additional styling of disabled buttons. */
   &.disabled {
     cursor: not-allowed;
     opacity: 0.33;
+
+    // Note: this "cancels out" the active state styling of an active button,
+    // which is defined above, thus ensuring a click on disabled button does
+    // not alter its appearance (does not result in visual press).
+    &.active,
+    &:active {
+      background-image: linear-gradient(to top, lightgray, white 50%, white);
+      box-shadow: none;
+    }
   }
 }
