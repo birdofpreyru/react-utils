@@ -9,6 +9,22 @@ configuration it support the server-side rendering (SSR), in-memory caching of
 rendered HTML markup, Hot Module Reloading (HMR) in development environment, and
 other useful stuff.
 
+:::caution
+Since [v1.19.0](https://github.com/birdofpreyru/react-utils/releases/tag/v1.19.0)
+[CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) protection is
+enabled by default for all HTTP methods of created server, beside `GET`, `HEAD`,
+and `OPTIONS`. It is implemented using [csurf] middleware with
+[double submit cookie method](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#double-submit-cookie).
+The CSRF Token is injected into the client-side [config] under `SCRF` key,
+and its value should be included into all requests to protected endpoints,
+using one of the default methods listed in [csurf] documentation (_e.g._ as
+`_csrf` value of `POST` body, or query).
+
+Note, CSRF Token is not injected into the server side [config], and it is not
+supposed to be used during SSR, as doing so would complicate
+[server-side caching of rendered pages][staticCacheController()].
+:::
+
 ## Examples
 
 ### Simple server
@@ -237,7 +253,9 @@ Returns **object** with the following fields:
 
 [beforeRender()]: #beforerender
 [build info]: /docs/api/configs/webpack#build-info
+[config]: /docs/api/utils/config
 [CSP]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+[csurf]: http://expressjs.com/en/resources/middleware/csurf.html
 [ExpressJS]: https://expressjs.com
 [helmet]: https://github.com/helmetjs/helmet
 [getSsrContext()]: https://dr.pogodin.studio/docs/react-global-state/docs/api/hooks/getssrcontext

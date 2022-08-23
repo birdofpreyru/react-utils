@@ -6,6 +6,12 @@ The [server](/docs/api/utils/server) module provides constants and methods
 facilitating implementation, setup and launch of a configurable ReactJS web
 server.
 
+:::info
+Beside holding attached constants and functions documented below, `server`
+export itself is also a function, which creates and launches a web-server for
+ReactJS application. See [server()] documentation for further details.
+:::
+
 **Constants**
 - [errors.CODES](#errorscodes) - A map from HTTP status code names to
   the corresponding numeric codes.
@@ -161,5 +167,5 @@ dynamically for each request.
 [Script]: #beforerender-script
 [server]: /docs/api/utils/server
 [SCRIPT_LOCATIONS]: #script_locations
-[server()]: #server
+[server()]: /docs/api/functions/server
 [Webpack]: https://webpack.js.org

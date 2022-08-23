@@ -96,7 +96,6 @@ test(
   'Config overriding for injection',
   () => coreTest(mockWebpackConfig(), {
     beforeRender: async (res, sanitizedConfig) => {
-      expect(res).toEqual(mockHttpRequest());
       expect(sanitizedConfig).toBeInstanceOf(Object);
       expect(sanitizedConfig).not.toHaveProperty('SECRET');
       return {

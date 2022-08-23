@@ -255,6 +255,8 @@ export default function factory(webpackConfig, options) {
       // Ensures any caches always revalidate HTML markup before reuse.
       res.set('Cache-Control', 'no-cache');
 
+      res.cookie('csrfToken', req.csrfToken());
+
       let cacheRef;
       if (cache) {
         cacheRef = ops.staticCacheController(req);

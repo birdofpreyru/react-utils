@@ -125,6 +125,7 @@ export default class E2eSsrEnv extends JsdomEnv {
         // the renderer, but it will require a rework once the renderer is
         // updated to do streaming.
         {
+          cookie: noop,
           send: done,
           set: noop,
           status: (value) => {
@@ -160,6 +161,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     let request = pragmas['ssr-request'];
     request = request ? JSON.parse(request) : {};
     if (!request.url) request.url = '/';
+    request.csrfToken = noop;
 
     // This ensures the initial JsDom URL matches the value we use for SSR.
     set(

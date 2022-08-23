@@ -4,6 +4,8 @@
 
 /* global BUILD_INFO, document, window */
 
+import cookie from 'cookie';
+
 // Note: this way, only required part of "node-forge": AES, and some utils,
 // is bundled into client-side code.
 import forge from 'node-forge/lib/forge';
@@ -66,3 +68,5 @@ if (window.INJ) {
   window.CHUNK_GROUPS = {};
   window.CONFIG = {};
 }
+
+window.CONFIG.CSRF = cookie.parse(document.cookie).csrfToken;

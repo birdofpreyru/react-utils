@@ -13,6 +13,7 @@ import {
 
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
+import csrf from 'csurf';
 import express from 'express';
 import favicon from 'serve-favicon';
 import helmet from 'helmet';
@@ -151,6 +152,8 @@ export default async function factory(webpackConfig, options) {
   server.use(express.urlencoded({ extended: false }));
   server.use(cookieParser());
   server.use(requestIp.mw());
+
+  server.use(csrf({ cookie: true }));
 
   loggerMiddleware.token('ip', (req) => req.clientIp);
   const FORMAT = ':ip > :status :method :url :response-time ms :res[content-length] :referrer :user-agent';

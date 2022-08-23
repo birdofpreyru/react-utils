@@ -12,6 +12,7 @@ export function mockHttpRequest({
   url = '/mock/path',
 } = {}) {
   return {
+    csrfToken: noop,
     nonce: 'abcdef-dummy-nonce',
     info: 'I am a dummy HTTP request! No need for a complex mock here!',
     url,
@@ -47,6 +48,7 @@ class Render {
 export function mockHttpResponse() {
   const render = new Render();
   const res = {
+    cookie: noop,
     locals: {
       webpack: {
         devMiddleware: {
