@@ -72,7 +72,8 @@ it can be done by explicitly calling the standard [.resolve()] or [.reject()]
 methods of the [Barrier] after aborting the timer).
 
 **Arguments & Result**
-- `timeout` - **number** - Timeout in milliseconds.
+- `timeout` - **number** - Timeout in milliseconds. If a non-positive value is
+  passed in, the operation is noop (returns immediately resolved [Barrier]).
 - Returns [Barrier] which resolves after the given `timeout`. Additional
   **.abort()** method is attached to the [Barrier], as explained above.
 
