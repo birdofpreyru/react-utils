@@ -19,14 +19,14 @@ const Input = forwardRef(({
   theme,
   ...rest
 }, ref) => (
-  <div className={theme.container}>
+  <span className={theme.container}>
     { label === undefined ? null : <p className={theme.label}>{label}</p> }
     <input
       className={theme.input}
       ref={ref}
       {...rest} // eslint-disable-line react/jsx-props-no-spreading
     />
-  </div>
+  </span>
 ));
 
 const ThemedInput = themed('Input', [
