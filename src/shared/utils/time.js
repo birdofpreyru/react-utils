@@ -1,4 +1,6 @@
 import dayjs from 'dayjs';
+import { noop } from 'lodash';
+
 import { Barrier } from './Barrier';
 
 /**
@@ -72,8 +74,13 @@ dayjs.now = Date.now;
  */
 export async function timer(timeout) {
   const res = new Barrier();
-  const id = setTimeout(res.resolve.bind(res), timeout);
-  res.abort = () => clearTimeout(id);
+  if (timeout > 0) {
+    const id = setTimeout(res.resolve.bind(res), timeout);
+    res.abort = () => clearTimeout(id);
+  } else {
+    res.abort = noop;
+    res.resolve();
+  }
   return res;
 }
 
