@@ -2,7 +2,7 @@
 
 exports[`Base test 1`] = `
 Config {
-  "SECRET": Object {
+  "SECRET": {
     "dummySecretKey": "Dummy Secret Value",
   },
   "dummyKey": "Dummy Value",

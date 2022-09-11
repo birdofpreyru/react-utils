@@ -11,7 +11,7 @@ exports[`Matches snapshots 1`] = `
   openNewTab={false}
   replace={false}
   routerLinkType={
-    Object {
+    {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     }
@@ -31,7 +31,7 @@ exports[`Matches snapshots 2`] = `
   openNewTab={false}
   replace={false}
   routerLinkType={
-    Object {
+    {
       "$$typeof": Symbol(react.forward_ref),
       "render": [Function],
     }

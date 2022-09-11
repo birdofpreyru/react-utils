@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
-Object {
-  "plugins": Array [
-    Array [
+{
+  "plugins": [
+    [
       "module-resolver",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           ".js",
           ".jsx",
         ],
-        "root": Array [
+        "root": [
           "./src/shared",
           "./src",
         ],
-        "transformFunctions": Array [
+        "transformFunctions": [
           "requireWeak",
           "resolveWeak",
           "webpack.requireWeak",
@@ -23,12 +23,12 @@ Object {
       },
     ],
     "@babel/transform-runtime",
-    Array [
+    [
       "@dr.pogodin/react-css-modules",
-      Object {
+      {
         "autoResolveMultipleImports": true,
-        "filetypes": Object {
-          ".scss": Object {
+        "filetypes": {
+          ".scss": {
             "syntax": "postcss-scss",
           },
         },
@@ -36,10 +36,10 @@ Object {
         "replaceImport": true,
       },
     ],
-    Array [
+    [
       "@dr.pogodin/transform-assets",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           "gif",
           "jpeg",
           "jpg",
@@ -49,16 +49,16 @@ Object {
       },
     ],
   ],
-  "presets": Array [
-    Array [
+  "presets": [
+    [
       "@babel/env",
-      Object {
+      {
         "targets": "current node",
       },
     ],
-    Array [
+    [
       "@babel/react",
-      Object {
+      {
         "runtime": "automatic",
       },
     ],
@@ -68,20 +68,20 @@ Object {
 `;
 
 exports[`"development" environment "noStyling" variation 1`] = `
-Object {
-  "plugins": Array [
-    Array [
+{
+  "plugins": [
+    [
       "module-resolver",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           ".js",
           ".jsx",
         ],
-        "root": Array [
+        "root": [
           "./src/shared",
           "./src",
         ],
-        "transformFunctions": Array [
+        "transformFunctions": [
           "requireWeak",
           "resolveWeak",
           "webpack.requireWeak",
@@ -90,10 +90,10 @@ Object {
       },
     ],
     "@babel/transform-runtime",
-    Array [
+    [
       "@dr.pogodin/transform-assets",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           "gif",
           "jpeg",
           "jpg",
@@ -103,16 +103,16 @@ Object {
       },
     ],
   ],
-  "presets": Array [
-    Array [
+  "presets": [
+    [
       "@babel/env",
-      Object {
+      {
         "targets": "current node",
       },
     ],
-    Array [
+    [
       "@babel/react",
-      Object {
+      {
         "runtime": "automatic",
       },
     ],
@@ -122,20 +122,20 @@ Object {
 `;
 
 exports[`"development" environment Default config 1`] = `
-Object {
-  "plugins": Array [
-    Array [
+{
+  "plugins": [
+    [
       "module-resolver",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           ".js",
           ".jsx",
         ],
-        "root": Array [
+        "root": [
           "./src/shared",
           "./src",
         ],
-        "transformFunctions": Array [
+        "transformFunctions": [
           "requireWeak",
           "resolveWeak",
           "webpack.requireWeak",
@@ -144,12 +144,12 @@ Object {
       },
     ],
     "@babel/transform-runtime",
-    Array [
+    [
       "@dr.pogodin/react-css-modules",
-      Object {
+      {
         "autoResolveMultipleImports": true,
-        "filetypes": Object {
-          ".scss": Object {
+        "filetypes": {
+          ".scss": {
             "syntax": "postcss-scss",
           },
         },
@@ -157,10 +157,10 @@ Object {
         "replaceImport": true,
       },
     ],
-    Array [
+    [
       "@dr.pogodin/transform-assets",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           "gif",
           "jpeg",
           "jpg",
@@ -170,16 +170,16 @@ Object {
       },
     ],
   ],
-  "presets": Array [
-    Array [
+  "presets": [
+    [
       "@babel/env",
-      Object {
+      {
         "targets": "current node",
       },
     ],
-    Array [
+    [
       "@babel/react",
-      Object {
+      {
         "runtime": "automatic",
       },
     ],
@@ -189,20 +189,20 @@ Object {
 `;
 
 exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
-Object {
-  "plugins": Array [
-    Array [
+{
+  "plugins": [
+    [
       "module-resolver",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           ".js",
           ".jsx",
         ],
-        "root": Array [
+        "root": [
           "./src/shared",
           "./src",
         ],
-        "transformFunctions": Array [
+        "transformFunctions": [
           "requireWeak",
           "resolveWeak",
           "webpack.requireWeak",
@@ -211,12 +211,12 @@ Object {
       },
     ],
     "@babel/transform-runtime",
-    Array [
+    [
       "@dr.pogodin/react-css-modules",
-      Object {
+      {
         "autoResolveMultipleImports": true,
-        "filetypes": Object {
-          ".scss": Object {
+        "filetypes": {
+          ".scss": {
             "syntax": "postcss-scss",
           },
         },
@@ -224,10 +224,10 @@ Object {
         "replaceImport": true,
       },
     ],
-    Array [
+    [
       "@dr.pogodin/transform-assets",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           "gif",
           "jpeg",
           "jpg",
@@ -237,16 +237,16 @@ Object {
       },
     ],
   ],
-  "presets": Array [
-    Array [
+  "presets": [
+    [
       "@babel/env",
-      Object {
+      {
         "targets": "current node",
       },
     ],
-    Array [
+    [
       "@babel/react",
-      Object {
+      {
         "runtime": "automatic",
       },
     ],
@@ -256,20 +256,20 @@ Object {
 `;
 
 exports[`"production" environment "noStyling" variation 1`] = `
-Object {
-  "plugins": Array [
-    Array [
+{
+  "plugins": [
+    [
       "module-resolver",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           ".js",
           ".jsx",
         ],
-        "root": Array [
+        "root": [
           "./src/shared",
           "./src",
         ],
-        "transformFunctions": Array [
+        "transformFunctions": [
           "requireWeak",
           "resolveWeak",
           "webpack.requireWeak",
@@ -278,10 +278,10 @@ Object {
       },
     ],
     "@babel/transform-runtime",
-    Array [
+    [
       "@dr.pogodin/transform-assets",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           "gif",
           "jpeg",
           "jpg",
@@ -291,16 +291,16 @@ Object {
       },
     ],
   ],
-  "presets": Array [
-    Array [
+  "presets": [
+    [
       "@babel/env",
-      Object {
+      {
         "targets": "current node",
       },
     ],
-    Array [
+    [
       "@babel/react",
-      Object {
+      {
         "runtime": "automatic",
       },
     ],
@@ -310,20 +310,20 @@ Object {
 `;
 
 exports[`"production" environment Default config 1`] = `
-Object {
-  "plugins": Array [
-    Array [
+{
+  "plugins": [
+    [
       "module-resolver",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           ".js",
           ".jsx",
         ],
-        "root": Array [
+        "root": [
           "./src/shared",
           "./src",
         ],
-        "transformFunctions": Array [
+        "transformFunctions": [
           "requireWeak",
           "resolveWeak",
           "webpack.requireWeak",
@@ -332,12 +332,12 @@ Object {
       },
     ],
     "@babel/transform-runtime",
-    Array [
+    [
       "@dr.pogodin/react-css-modules",
-      Object {
+      {
         "autoResolveMultipleImports": true,
-        "filetypes": Object {
-          ".scss": Object {
+        "filetypes": {
+          ".scss": {
             "syntax": "postcss-scss",
           },
         },
@@ -345,10 +345,10 @@ Object {
         "replaceImport": true,
       },
     ],
-    Array [
+    [
       "@dr.pogodin/transform-assets",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           "gif",
           "jpeg",
           "jpg",
@@ -358,16 +358,16 @@ Object {
       },
     ],
   ],
-  "presets": Array [
-    Array [
+  "presets": [
+    [
       "@babel/env",
-      Object {
+      {
         "targets": "current node",
       },
     ],
-    Array [
+    [
       "@babel/react",
-      Object {
+      {
         "runtime": "automatic",
       },
     ],

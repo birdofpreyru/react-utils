@@ -1,27 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Export at client side 1`] = `
-Object {
+{
   "Barrier": [Function],
   "BaseModal": [Function],
-  "Button": Object {
+  "Button": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
   },
-  "Checkbox": Object {
+  "Checkbox": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
   },
-  "Dropdown": Object {
+  "Dropdown": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
   },
   "Emitter": [Function],
   "GlobalStateProvider": [Function],
-  "Input": Object {
+  "Input": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
@@ -29,14 +29,14 @@ Object {
   "JU": null,
   "Link": [Function],
   "MetaTags": [Function],
-  "Modal": Object {
+  "Modal": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
   },
   "NavLink": [Function],
-  "PT": Object {
-    "PropTypes": Object {
+  "PT": {
+    "PropTypes": {
       "PropTypes": [Circular],
       "any": [Function],
       "array": [Function],
@@ -66,7 +66,7 @@ Object {
     "bigint": [Function],
     "bool": [Function],
     "checkPropTypes": [Function],
-    "default": Object {
+    "default": {
       "PropTypes": [Circular],
       "any": [Function],
       "array": [Function],
@@ -106,7 +106,7 @@ Object {
     "string": [Function],
     "symbol": [Function],
   },
-  "PageLayout": Object {
+  "PageLayout": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
@@ -114,14 +114,14 @@ Object {
   "ScalableRect": [Function],
   "Semaphore": [Function],
   "ThemeProvider": [Function],
-  "Throbber": Object {
+  "Throbber": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
   },
-  "WithTooltip": Object {
+  "WithTooltip": {
     "$$typeof": Symbol(react.forward_ref),
-    "PLACEMENTS": Object {
+    "PLACEMENTS": {
       "ABOVE_CURSOR": "ABOVE_CURSOR",
       "ABOVE_ELEMENT": "ABOVE_ELEMENT",
       "BELOW_CURSOR": "BELOW_CURSOR",
@@ -130,17 +130,17 @@ Object {
     "render": [Function],
     "themeType": [Function],
   },
-  "YouTubeVideo": Object {
+  "YouTubeVideo": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
   },
   "api": [Function],
   "client": [Function],
-  "config": Object {},
+  "config": {},
   "getGlobalState": [Function],
   "getSsrContext": [Function],
-  "isomorphy": Object {
+  "isomorphy": {
     "IS_CLIENT_SIDE": true,
     "IS_SERVER_SIDE": false,
     "buildTimestamp": [Function],
@@ -156,7 +156,7 @@ Object {
   "useAsyncCollection": [Function],
   "useAsyncData": [Function],
   "useGlobalState": [Function],
-  "webpack": Object {
+  "webpack": {
     "requireWeak": [Function],
     "resolveWeak": [Function],
   },
@@ -164,10 +164,10 @@ Object {
 }
 `;
 
-exports[`Export at client side 2`] = `Object {}`;
+exports[`Export at client side 2`] = `{}`;
 
 exports[`Export at client side 3`] = `
-Object {
+{
   "Axios": [Function],
   "AxiosError": [Function],
   "Cancel": [Function],
@@ -177,38 +177,38 @@ Object {
   "all": [Function],
   "create": [Function],
   "default": [Function],
-  "defaults": Object {
+  "defaults": {
     "adapter": [Function],
-    "env": Object {
+    "env": {
       "FormData": [Function],
     },
-    "headers": Object {
-      "common": Object {
+    "headers": {
+      "common": {
         "Accept": "application/json, text/plain, */*",
       },
-      "delete": Object {},
-      "get": Object {},
-      "head": Object {},
-      "patch": Object {
+      "delete": {},
+      "get": {},
+      "head": {},
+      "patch": {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      "post": Object {
+      "post": {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      "put": Object {
+      "put": {
         "Content-Type": "application/x-www-form-urlencoded",
       },
     },
     "maxBodyLength": -1,
     "maxContentLength": -1,
     "timeout": 0,
-    "transformRequest": Array [
+    "transformRequest": [
       [Function],
     ],
-    "transformResponse": Array [
+    "transformResponse": [
       [Function],
     ],
-    "transitional": Object {
+    "transitional": {
       "clarifyTimeoutError": false,
       "forcedJSONParsing": true,
       "silentJSONParsing": true,
@@ -221,12 +221,12 @@ Object {
   "get": [Function],
   "getUri": [Function],
   "head": [Function],
-  "interceptors": Object {
+  "interceptors": {
     "request": InterceptorManager {
-      "handlers": Array [],
+      "handlers": [],
     },
     "response": InterceptorManager {
-      "handlers": Array [],
+      "handlers": [],
     },
   },
   "isAxiosError": [Function],
@@ -245,7 +245,7 @@ Object {
 `;
 
 exports[`Export at client side 4`] = `
-Array [
+[
   "extend",
   "locale",
   "isDayjs",

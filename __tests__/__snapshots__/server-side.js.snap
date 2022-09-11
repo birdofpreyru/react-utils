@@ -1,32 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Export at server side 1`] = `
-Object {
+{
   "Barrier": [Function],
   "BaseModal": [Function],
-  "Button": Object {
+  "Button": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
   },
-  "Checkbox": Object {
+  "Checkbox": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
   },
-  "Dropdown": Object {
+  "Dropdown": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
   },
   "Emitter": [Function],
   "GlobalStateProvider": [Function],
-  "Input": Object {
+  "Input": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
   },
-  "JU": Object {
+  "JU": {
     "act": [Function],
     "getMockUuid": [Function],
     "mockClientSide": [Function],
@@ -35,7 +35,7 @@ Object {
     "render": [Function],
     "shallowRender": [Function],
     "shallowSnapshot": [Function],
-    "simulate": Object {
+    "simulate": {
       "abort": [Function],
       "animationEnd": [Function],
       "animationIteration": [Function],
@@ -127,14 +127,14 @@ Object {
   },
   "Link": [Function],
   "MetaTags": [Function],
-  "Modal": Object {
+  "Modal": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
   },
   "NavLink": [Function],
-  "PT": Object {
-    "PropTypes": Object {
+  "PT": {
+    "PropTypes": {
       "PropTypes": [Circular],
       "any": [Function],
       "array": [Function],
@@ -164,7 +164,7 @@ Object {
     "bigint": [Function],
     "bool": [Function],
     "checkPropTypes": [Function],
-    "default": Object {
+    "default": {
       "PropTypes": [Circular],
       "any": [Function],
       "array": [Function],
@@ -204,7 +204,7 @@ Object {
     "string": [Function],
     "symbol": [Function],
   },
-  "PageLayout": Object {
+  "PageLayout": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
@@ -212,14 +212,14 @@ Object {
   "ScalableRect": [Function],
   "Semaphore": [Function],
   "ThemeProvider": [Function],
-  "Throbber": Object {
+  "Throbber": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
   },
-  "WithTooltip": Object {
+  "WithTooltip": {
     "$$typeof": Symbol(react.forward_ref),
-    "PLACEMENTS": Object {
+    "PLACEMENTS": {
       "ABOVE_CURSOR": "ABOVE_CURSOR",
       "ABOVE_ELEMENT": "ABOVE_ELEMENT",
       "BELOW_CURSOR": "BELOW_CURSOR",
@@ -228,22 +228,22 @@ Object {
     "render": [Function],
     "themeType": [Function],
   },
-  "YouTubeVideo": Object {
+  "YouTubeVideo": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
     "themeType": [Function],
   },
   "api": [Function],
   "client": [Function],
-  "config": Object {
-    "SECRET": Object {
+  "config": {
+    "SECRET": {
       "dummySecretKey": "Dummy Secret Value",
     },
     "dummyKey": "Dummy Value",
   },
   "getGlobalState": [Function],
   "getSsrContext": [Function],
-  "isomorphy": Object {
+  "isomorphy": {
     "IS_CLIENT_SIDE": false,
     "IS_SERVER_SIDE": true,
     "buildTimestamp": [Function],
@@ -259,7 +259,7 @@ Object {
   "useAsyncCollection": [Function],
   "useAsyncData": [Function],
   "useGlobalState": [Function],
-  "webpack": Object {
+  "webpack": {
     "requireWeak": [Function],
     "resolveWeak": [Function],
   },
@@ -267,10 +267,10 @@ Object {
 }
 `;
 
-exports[`Export at server side 2`] = `Object {}`;
+exports[`Export at server side 2`] = `{}`;
 
 exports[`Export at server side 3`] = `
-Object {
+{
   "Axios": [Function],
   "AxiosError": [Function],
   "Cancel": [Function],
@@ -280,38 +280,38 @@ Object {
   "all": [Function],
   "create": [Function],
   "default": [Function],
-  "defaults": Object {
+  "defaults": {
     "adapter": [Function],
-    "env": Object {
+    "env": {
       "FormData": [Function],
     },
-    "headers": Object {
-      "common": Object {
+    "headers": {
+      "common": {
         "Accept": "application/json, text/plain, */*",
       },
-      "delete": Object {},
-      "get": Object {},
-      "head": Object {},
-      "patch": Object {
+      "delete": {},
+      "get": {},
+      "head": {},
+      "patch": {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      "post": Object {
+      "post": {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      "put": Object {
+      "put": {
         "Content-Type": "application/x-www-form-urlencoded",
       },
     },
     "maxBodyLength": -1,
     "maxContentLength": -1,
     "timeout": 0,
-    "transformRequest": Array [
+    "transformRequest": [
       [Function],
     ],
-    "transformResponse": Array [
+    "transformResponse": [
       [Function],
     ],
-    "transitional": Object {
+    "transitional": {
       "clarifyTimeoutError": false,
       "forcedJSONParsing": true,
       "silentJSONParsing": true,
@@ -324,12 +324,12 @@ Object {
   "get": [Function],
   "getUri": [Function],
   "head": [Function],
-  "interceptors": Object {
+  "interceptors": {
     "request": InterceptorManager {
-      "handlers": Array [],
+      "handlers": [],
     },
     "response": InterceptorManager {
-      "handlers": Array [],
+      "handlers": [],
     },
   },
   "isAxiosError": [Function],
@@ -348,7 +348,7 @@ Object {
 `;
 
 exports[`Export at server side 4`] = `
-Array [
+[
   "extend",
   "locale",
   "isDayjs",
@@ -367,9 +367,9 @@ Array [
 `;
 
 exports[`Export at server side 5`] = `
-Array [
+[
   "SCRIPT_LOCATIONS",
-  Object {
+  {
     "BODY_OPEN": "BODY_OPEN",
     "DEFAULT": "DEFAULT",
     "HEAD_OPEN": "HEAD_OPEN",
@@ -378,17 +378,17 @@ Array [
 `;
 
 exports[`Export at server side 6`] = `
-Array [
+[
   "getDefaultCspSettings",
   [Function],
 ]
 `;
 
 exports[`Export at server side 7`] = `
-Array [
+[
   "errors",
-  Object {
-    "CODES": Object {
+  {
+    "CODES": {
       "100": "CONTINUE",
       "101": "SWITCHING_PROTOCOLS",
       "102": "PROCESSING",
@@ -502,7 +502,7 @@ Array [
       "UNSUPPORTED_MEDIA_TYPE": 415,
       "USE_PROXY": 305,
     },
-    "ERRORS": Object {
+    "ERRORS": {
       "ACCEPTED": "Accepted",
       "BAD_GATEWAY": "Bad Gateway",
       "BAD_REQUEST": "Bad Request",
@@ -563,7 +563,7 @@ Array [
     "assert": [Function],
     "fail": [Function],
     "getErrorForCode": [Function],
-    "joi": Object {
+    "joi": {
       "ValidationError": [Function],
       "_types": Set {
         "alternatives",
@@ -590,7 +590,7 @@ Array [
       "bool": [Function],
       "boolean": [Function],
       "build": [Function],
-      "cache": Object {
+      "cache": {
         "provision": [Function],
       },
       "checkPreferences": [Function],

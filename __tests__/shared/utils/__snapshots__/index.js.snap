@@ -1,22 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`withRetries(..) respects custom "maxRetries" and "interval" arguments 1`] = `
-Array [
-  Array [
+[
+  [
     100,
   ],
 ]
 `;
 
 exports[`withRetries(..) respects custom "maxRetries" and "interval" arguments 2`] = `
-Array [
-  Array [
+[
+  [
     100,
   ],
-  Array [
+  [
     500,
   ],
-  Array [
+  [
     100,
   ],
 ]
@@ -25,82 +25,82 @@ Array [
 exports[`withRetries(..) respects custom "maxRetries" and "interval" arguments 3`] = `"FAILURE"`;
 
 exports[`withRetries(..) respects custom "maxRetries" and "interval" arguments 4`] = `
-Array [
-  Array [
+[
+  [
     100,
   ],
-  Array [
+  [
     500,
   ],
-  Array [
+  [
     100,
   ],
 ]
 `;
 
 exports[`withRetries(..) works correctly with async actions 1`] = `
-Array [
-  Array [
+[
+  [
     100,
   ],
 ]
 `;
 
 exports[`withRetries(..) works correctly with async actions 2`] = `
-Array [
-  Array [
+[
+  [
     100,
   ],
-  Array [
+  [
     1000,
   ],
-  Array [
+  [
     100,
   ],
 ]
 `;
 
 exports[`withRetries(..) works correctly with async actions 3`] = `
-Array [
-  Array [
+[
+  [
     100,
   ],
-  Array [
+  [
     1000,
   ],
-  Array [
+  [
     100,
   ],
-  Array [
+  [
     1000,
   ],
-  Array [
+  [
     100,
   ],
 ]
 `;
 
 exports[`withRetries(..) works correctly with async actions 4`] = `
-Array [
-  Array [
+[
+  [
     100,
   ],
-  Array [
+  [
     1000,
   ],
-  Array [
+  [
     100,
   ],
-  Array [
+  [
     1000,
   ],
-  Array [
+  [
     100,
   ],
-  Array [
+  [
     1000,
   ],
-  Array [
+  [
     100,
   ],
 ]
@@ -109,67 +109,67 @@ Array [
 exports[`withRetries(..) works correctly with async actions 5`] = `"FAILURE"`;
 
 exports[`withRetries(..) works correctly with async actions 6`] = `
-Array [
-  Array [
+[
+  [
     100,
   ],
-  Array [
+  [
     1000,
   ],
-  Array [
+  [
     100,
   ],
-  Array [
+  [
     1000,
   ],
-  Array [
+  [
     100,
   ],
-  Array [
+  [
     1000,
   ],
-  Array [
+  [
     100,
   ],
-  Array [
+  [
     1000,
   ],
-  Array [
+  [
     100,
   ],
 ]
 `;
 
-exports[`withRetries(..) works correctly with sync actions 1`] = `Array []`;
+exports[`withRetries(..) works correctly with sync actions 1`] = `[]`;
 
 exports[`withRetries(..) works correctly with sync actions 2`] = `
-Array [
-  Array [
+[
+  [
     1000,
   ],
 ]
 `;
 
 exports[`withRetries(..) works correctly with sync actions 3`] = `
-Array [
-  Array [
+[
+  [
     1000,
   ],
-  Array [
+  [
     1000,
   ],
 ]
 `;
 
 exports[`withRetries(..) works correctly with sync actions 4`] = `
-Array [
-  Array [
+[
+  [
     1000,
   ],
-  Array [
+  [
     1000,
   ],
-  Array [
+  [
     1000,
   ],
 ]
@@ -178,17 +178,17 @@ Array [
 exports[`withRetries(..) works correctly with sync actions 5`] = `"FAILURE"`;
 
 exports[`withRetries(..) works correctly with sync actions 6`] = `
-Array [
-  Array [
+[
+  [
     1000,
   ],
-  Array [
+  [
     1000,
   ],
-  Array [
+  [
     1000,
   ],
-  Array [
+  [
     1000,
   ],
 ]

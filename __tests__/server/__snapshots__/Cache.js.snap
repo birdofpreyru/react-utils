@@ -2,8 +2,8 @@
 
 exports[`works as expected 1`] = `
 Cache {
-  "private": Object {
-    "items": Object {},
+  "private": {
+    "items": {},
     "maxSize": 9,
     "size": 0,
   },
@@ -12,13 +12,13 @@ Cache {
 
 exports[`works as expected 2`] = `
 Cache {
-  "private": Object {
-    "items": Object {
-      "A": Object {
+  "private": {
+    "items": {
+      "A": {
         "data": "123",
         "timestamp": 1617580800000,
       },
-      "B": Object {
+      "B": {
         "data": "123456",
         "timestamp": 1617580801000,
       },
@@ -31,13 +31,13 @@ Cache {
 
 exports[`works as expected 3`] = `
 Cache {
-  "private": Object {
-    "items": Object {
-      "A": Object {
+  "private": {
+    "items": {
+      "A": {
         "data": "ab",
         "timestamp": 1617580802000,
       },
-      "B": Object {
+      "B": {
         "data": "123456",
         "timestamp": 1617580801000,
       },
@@ -50,13 +50,13 @@ Cache {
 
 exports[`works as expected 4`] = `
 Cache {
-  "private": Object {
-    "items": Object {
-      "A": Object {
+  "private": {
+    "items": {
+      "A": {
         "data": "ab",
         "timestamp": 1617580802000,
       },
-      "C": Object {
+      "C": {
         "data": "21",
         "timestamp": 1617580803000,
       },

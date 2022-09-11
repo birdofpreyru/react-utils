@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`"development" environment "noStyling" variation 1`] = `
-Object {
-  "plugins": Array [
-    Array [
+{
+  "plugins": [
+    [
       "module-resolver",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           ".js",
           ".jsx",
         ],
-        "root": Array [
+        "root": [
           "./src/shared",
           "./src",
         ],
@@ -19,16 +19,16 @@ Object {
     "@babel/transform-runtime",
     "react-refresh/babel",
   ],
-  "presets": Array [
-    Array [
+  "presets": [
+    [
       "@babel/env",
-      Object {
+      {
         "targets": "defaults",
       },
     ],
-    Array [
+    [
       "@babel/react",
-      Object {
+      {
         "runtime": "automatic",
       },
     ],
@@ -38,28 +38,28 @@ Object {
 `;
 
 exports[`"development" environment Default config 1`] = `
-Object {
-  "plugins": Array [
-    Array [
+{
+  "plugins": [
+    [
       "module-resolver",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           ".js",
           ".jsx",
         ],
-        "root": Array [
+        "root": [
           "./src/shared",
           "./src",
         ],
       },
     ],
     "@babel/transform-runtime",
-    Array [
+    [
       "@dr.pogodin/react-css-modules",
-      Object {
+      {
         "autoResolveMultipleImports": true,
-        "filetypes": Object {
-          ".scss": Object {
+        "filetypes": {
+          ".scss": {
             "syntax": "postcss-scss",
           },
         },
@@ -68,16 +68,16 @@ Object {
     ],
     "react-refresh/babel",
   ],
-  "presets": Array [
-    Array [
+  "presets": [
+    [
       "@babel/env",
-      Object {
+      {
         "targets": "defaults",
       },
     ],
-    Array [
+    [
       "@babel/react",
-      Object {
+      {
         "runtime": "automatic",
       },
     ],
@@ -87,16 +87,16 @@ Object {
 `;
 
 exports[`"production" environment "noStyling" variation 1`] = `
-Object {
-  "plugins": Array [
-    Array [
+{
+  "plugins": [
+    [
       "module-resolver",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           ".js",
           ".jsx",
         ],
-        "root": Array [
+        "root": [
           "./src/shared",
           "./src",
         ],
@@ -104,16 +104,16 @@ Object {
     ],
     "@babel/transform-runtime",
   ],
-  "presets": Array [
-    Array [
+  "presets": [
+    [
       "@babel/env",
-      Object {
+      {
         "targets": "defaults",
       },
     ],
-    Array [
+    [
       "@babel/react",
-      Object {
+      {
         "runtime": "automatic",
       },
     ],
@@ -123,28 +123,28 @@ Object {
 `;
 
 exports[`"production" environment Default config 1`] = `
-Object {
-  "plugins": Array [
-    Array [
+{
+  "plugins": [
+    [
       "module-resolver",
-      Object {
-        "extensions": Array [
+      {
+        "extensions": [
           ".js",
           ".jsx",
         ],
-        "root": Array [
+        "root": [
           "./src/shared",
           "./src",
         ],
       },
     ],
     "@babel/transform-runtime",
-    Array [
+    [
       "@dr.pogodin/react-css-modules",
-      Object {
+      {
         "autoResolveMultipleImports": true,
-        "filetypes": Object {
-          ".scss": Object {
+        "filetypes": {
+          ".scss": {
             "syntax": "postcss-scss",
           },
         },
@@ -152,16 +152,16 @@ Object {
       },
     ],
   ],
-  "presets": Array [
-    Array [
+  "presets": [
+    [
       "@babel/env",
-      Object {
+      {
         "targets": "defaults",
       },
     ],
-    Array [
+    [
       "@babel/react",
-      Object {
+      {
         "runtime": "automatic",
       },
     ],

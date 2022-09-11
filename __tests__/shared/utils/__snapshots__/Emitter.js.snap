@@ -2,7 +2,7 @@
 
 exports[`.addListener() adds given listeners at most once 1`] = `
 Emitter {
-  "listeners": Array [
+  "listeners": [
     [MockFunction A],
   ],
 }
@@ -10,7 +10,7 @@ Emitter {
 
 exports[`.addListener() adds given listeners at most once 2`] = `
 Emitter {
-  "listeners": Array [
+  "listeners": [
     [MockFunction A],
   ],
 }
@@ -18,7 +18,7 @@ Emitter {
 
 exports[`.addListener() adds given listeners at most once 3`] = `
 Emitter {
-  "listeners": Array [
+  "listeners": [
     [MockFunction A],
     [MockFunction B],
   ],
@@ -27,7 +27,7 @@ Emitter {
 
 exports[`.addListener() adds given listeners at most once 4`] = `
 Emitter {
-  "listeners": Array [
+  "listeners": [
     [MockFunction A],
     [MockFunction B],
   ],
@@ -36,7 +36,7 @@ Emitter {
 
 exports[`.addListener() removes functional unsubscribe function 1`] = `
 Emitter {
-  "listeners": Array [
+  "listeners": [
     [MockFunction A],
     [MockFunction B],
     [MockFunction C],
@@ -46,7 +46,7 @@ Emitter {
 
 exports[`.addListener() removes functional unsubscribe function 2`] = `
 Emitter {
-  "listeners": Array [
+  "listeners": [
     [MockFunction A],
     [MockFunction C],
   ],
@@ -55,7 +55,7 @@ Emitter {
 
 exports[`.addListener() removes functional unsubscribe function 3`] = `
 Emitter {
-  "listeners": Array [
+  "listeners": [
     [MockFunction A],
   ],
 }
@@ -63,15 +63,15 @@ Emitter {
 
 exports[`.addListener() removes functional unsubscribe function 4`] = `
 Emitter {
-  "listeners": Array [
+  "listeners": [
     [MockFunction A],
   ],
 }
 `;
 
 exports[`.emit() calls connected listeners with given arguments 1`] = `
-Array [
-  Array [
+[
+  [
     "ARG1",
     "arg2",
   ],
@@ -79,8 +79,8 @@ Array [
 `;
 
 exports[`.emit() calls connected listeners with given arguments 2`] = `
-Array [
-  Array [
+[
+  [
     "ARG1",
     "arg2",
   ],
@@ -88,8 +88,8 @@ Array [
 `;
 
 exports[`.emit() calls connected listeners with given arguments 3`] = `
-Array [
-  Array [
+[
+  [
     "ARG1",
     "arg2",
   ],
@@ -97,12 +97,12 @@ Array [
 `;
 
 exports[`.emit() calls connected listeners with given arguments 4`] = `
-Array [
-  Array [
+[
+  [
     "ARG1",
     "arg2",
   ],
-  Array [
+  [
     "second call",
   ],
 ]
@@ -110,7 +110,7 @@ Array [
 
 exports[`.removeListener() removes given listener if it is connected 1`] = `
 Emitter {
-  "listeners": Array [
+  "listeners": [
     [MockFunction A],
     [MockFunction B],
     [MockFunction C],
@@ -121,7 +121,7 @@ Emitter {
 
 exports[`.removeListener() removes given listener if it is connected 2`] = `
 Emitter {
-  "listeners": Array [
+  "listeners": [
     [MockFunction B],
     [MockFunction C],
     [MockFunction D],
@@ -131,7 +131,7 @@ Emitter {
 
 exports[`.removeListener() removes given listener if it is connected 3`] = `
 Emitter {
-  "listeners": Array [
+  "listeners": [
     [MockFunction B],
     [MockFunction D],
   ],
@@ -140,7 +140,7 @@ Emitter {
 
 exports[`.removeListener() removes given listener if it is connected 4`] = `
 Emitter {
-  "listeners": Array [
+  "listeners": [
     [MockFunction B],
     [MockFunction D],
   ],
@@ -149,6 +149,6 @@ Emitter {
 
 exports[`constructor() creates a new emitter with empty listeners array 1`] = `
 Emitter {
-  "listeners": Array [],
+  "listeners": [],
 }
 `;

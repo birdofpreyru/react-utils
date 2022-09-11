@@ -1,21 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`generates expected markup during SSR 1`] = `
-"<title data-react-helmet=\\"true\\"></title>
+"<title data-react-helmet="true"></title>
 
-<meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
+<meta name="theme-color" content="#FFFFFF">
 
-<link href=\\"/main.css\\" rel=\\"stylesheet\\">
-<link href=\\"/sample-component-a.css\\" rel=\\"stylesheet\\">
-<link href=\\"/sample-component-b.css\\" rel=\\"stylesheet\\">
-<link href=\\"/sample-component-c.css\\" rel=\\"stylesheet\\">
+<link href="/main.css" rel="stylesheet">
+<link href="/sample-component-a.css" rel="stylesheet">
+<link href="/sample-component-b.css" rel="stylesheet">
+<link href="/sample-component-c.css" rel="stylesheet">
 
-<meta charset=\\"utf-8\\">
-<meta content=\\"width=device-width,initial-scale=1.0\\" name=\\"viewport\\">"
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0" name="viewport">"
 `;
 
 exports[`generates expected markup during SSR 2`] = `
-"<div class=\\"-dr-pogodin-react-utils_____tests__-shared-utils-splitComponent-__assets__-SampleScene-style___container___oJaj7t\\">
+"<div class="-dr-pogodin-react-utils_____tests__-shared-utils-splitComponent-__assets__-SampleScene-style___container___oJaj7t">
   <h1>SampleCodeSplit</h1>
   <div>testValue</div>
   <!--$-->

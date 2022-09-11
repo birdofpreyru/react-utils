@@ -4,7 +4,7 @@ exports[`Snapshots match 1`] = `
 <div
   className="-dr-pogodin-react-utils___src-shared-components-ScalableRect-style___container___EznFz3"
   style={
-    Object {
+    {
       "paddingBottom": "100%",
     }
   }
@@ -24,7 +24,7 @@ exports[`Snapshots match 2`] = `
   <div
     className="-dr-pogodin-react-utils___src-shared-components-ScalableRect-style___container___EznFz3"
     style={
-      Object {
+      {
         "paddingBottom": "100%",
       }
     }

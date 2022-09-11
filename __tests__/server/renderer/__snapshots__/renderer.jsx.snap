@@ -2,32 +2,32 @@
 
 exports[`"favicon" option 1`] = `
 "<!DOCTYPE html>
-        <html lang=\\"en\\">
+        <html lang="en">
           <head>
             
             
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
+            <meta name="theme-color" content="#FFFFFF">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
-            <link rel=\\"shortcut icon\\" href=\\"/favicon.ico\\">
-            <meta charset=\\"utf-8\\">
+            <link href="/test/public/path/main-1511941200000.css" rel="stylesheet">
+            <link rel="shortcut icon" href="/favicon.ico">
+            <meta charset="utf-8">
             <meta
-              content=\\"width=device-width,initial-scale=1.0\\"
-              name=\\"viewport\\"
+              content="width=device-width,initial-scale=1.0"
+              name="viewport"
             >
           </head>
           <body>
             
-            <div id=\\"react-view\\"></div>
+            <div id="react-view"></div>
             <script
-              id=\\"inj\\"
-              type=\\"application/javascript\\"
-              nonce=\\"abcdef-dummy-nonce\\"
+              id="inj"
+              type="application/javascript"
+              nonce="abcdef-dummy-nonce"
             >
-              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWKKnXdbyS28Kq8fENTebXTg==\\"
+              window.INJ="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWKKnXdbyS28Kq8fENTebXTg=="
             </script>
-            <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src="/test/public/path/main-1511941200000.js" type="application/javascript"></script>
             
           </body>
         </html>"
@@ -37,32 +37,32 @@ exports[`"favicon" option 2`] = `200`;
 
 exports[`Base rendering of HTML template 1`] = `
 "<!DOCTYPE html>
-        <html lang=\\"en\\">
+        <html lang="en">
           <head>
             
             
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
+            <meta name="theme-color" content="#FFFFFF">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+            <link href="/test/public/path/main-1511941200000.css" rel="stylesheet">
             
-            <meta charset=\\"utf-8\\">
+            <meta charset="utf-8">
             <meta
-              content=\\"width=device-width,initial-scale=1.0\\"
-              name=\\"viewport\\"
+              content="width=device-width,initial-scale=1.0"
+              name="viewport"
             >
           </head>
           <body>
             
-            <div id=\\"react-view\\"></div>
+            <div id="react-view"></div>
             <script
-              id=\\"inj\\"
-              type=\\"application/javascript\\"
-              nonce=\\"abcdef-dummy-nonce\\"
+              id="inj"
+              type="application/javascript"
+              nonce="abcdef-dummy-nonce"
             >
-              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWKKnXdbyS28Kq8fENTebXTg==\\"
+              window.INJ="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWKKnXdbyS28Kq8fENTebXTg=="
             </script>
-            <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src="/test/public/path/main-1511941200000.js" type="application/javascript"></script>
             
           </body>
         </html>"
@@ -72,32 +72,32 @@ exports[`Base rendering of HTML template 2`] = `200`;
 
 exports[`Config overriding for injection 1`] = `
 "<!DOCTYPE html>
-        <html lang=\\"en\\">
+        <html lang="en">
           <head>
             
             
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
+            <meta name="theme-color" content="#FFFFFF">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+            <link href="/test/public/path/main-1511941200000.css" rel="stylesheet">
             
-            <meta charset=\\"utf-8\\">
+            <meta charset="utf-8">
             <meta
-              content=\\"width=device-width,initial-scale=1.0\\"
-              name=\\"viewport\\"
+              content="width=device-width,initial-scale=1.0"
+              name="viewport"
             >
           </head>
           <body>
             
-            <div id=\\"react-view\\"></div>
+            <div id="react-view"></div>
             <script
-              id=\\"inj\\"
-              type=\\"application/javascript\\"
-              nonce=\\"abcdef-dummy-nonce\\"
+              id="inj"
+              type="application/javascript"
+              nonce="abcdef-dummy-nonce"
             >
-              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqZtQgFpXlCvPujKA0tS2UkkPMIbM7b/pz0EW+36BdmLrgRMN8VxVAW5sv2JW+cO6AwYVgAUwRGjir5yU8XAnpA\\"
+              window.INJ="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqZtQgFpXlCvPujKA0tS2UkkPMIbM7b/pz0EW+36BdmLrgRMN8VxVAW5sv2JW+cO6AwYVgAUwRGjir5yU8XAnpA"
             </script>
-            <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src="/test/public/path/main-1511941200000.js" type="application/javascript"></script>
             
           </body>
         </html>"
@@ -107,32 +107,32 @@ exports[`Config overriding for injection 2`] = `200`;
 
 exports[`Helmet integration works 1`] = `
 "<!DOCTYPE html>
-        <html lang=\\"en\\">
+        <html lang="en">
           <head>
             
-            <title data-react-helmet=\\"true\\">Test Page Title</title>
-            <meta data-react-helmet=\\"true\\" property=\\"description\\" content=\\"Test Page Description\\"/>
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
+            <title data-react-helmet="true">Test Page Title</title>
+            <meta data-react-helmet="true" property="description" content="Test Page Description"/>
+            <meta name="theme-color" content="#FFFFFF">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+            <link href="/test/public/path/main-1511941200000.css" rel="stylesheet">
             
-            <meta charset=\\"utf-8\\">
+            <meta charset="utf-8">
             <meta
-              content=\\"width=device-width,initial-scale=1.0\\"
-              name=\\"viewport\\"
+              content="width=device-width,initial-scale=1.0"
+              name="viewport"
             >
           </head>
           <body>
             
-            <div id=\\"react-view\\"><div><p>Hello World!</p><p>Goodbye World!</p></div></div>
+            <div id="react-view"><div><p>Hello World!</p><p>Goodbye World!</p></div></div>
             <script
-              id=\\"inj\\"
-              type=\\"application/javascript\\"
-              nonce=\\"abcdef-dummy-nonce\\"
+              id="inj"
+              type="application/javascript"
+              nonce="abcdef-dummy-nonce"
             >
-              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWKKnXdbyS28Kq8fENTebXTg==\\"
+              window.INJ="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWKKnXdbyS28Kq8fENTebXTg=="
             </script>
-            <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src="/test/public/path/main-1511941200000.js" type="application/javascript"></script>
             
           </body>
         </html>"
@@ -142,32 +142,32 @@ exports[`Helmet integration works 2`] = `200`;
 
 exports[`Injection of additional JS scripts 1`] = `
 "<!DOCTYPE html>
-        <html lang=\\"en\\">
+        <html lang="en">
           <head>
             <script>1-st script after opening <head></script><script>2-nd script after opening <head></script>
             
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
+            <meta name="theme-color" content="#FFFFFF">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+            <link href="/test/public/path/main-1511941200000.css" rel="stylesheet">
             
-            <meta charset=\\"utf-8\\">
+            <meta charset="utf-8">
             <meta
-              content=\\"width=device-width,initial-scale=1.0\\"
-              name=\\"viewport\\"
+              content="width=device-width,initial-scale=1.0"
+              name="viewport"
             >
           </head>
           <body>
             <script>1-st script after opening <body></script><script>2-nd script after opening <body></script>
-            <div id=\\"react-view\\"></div>
+            <div id="react-view"></div>
             <script
-              id=\\"inj\\"
-              type=\\"application/javascript\\"
-              nonce=\\"abcdef-dummy-nonce\\"
+              id="inj"
+              type="application/javascript"
+              nonce="abcdef-dummy-nonce"
             >
-              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWKKnXdbyS28Kq8fENTebXTg==\\"
+              window.INJ="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWKKnXdbyS28Kq8fENTebXTg=="
             </script>
-            <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src="/test/public/path/main-1511941200000.js" type="application/javascript"></script>
             <script>Dummy JS Sript</script><script>Another Dummy JS Script</script><script>Yet another Dummy JS Script</script>
           </body>
         </html>"
@@ -177,32 +177,32 @@ exports[`Injection of additional JS scripts 2`] = `200`;
 
 exports[`JS constructs in global state 1`] = `
 "<!DOCTYPE html>
-        <html lang=\\"en\\">
+        <html lang="en">
           <head>
             
-            <title data-react-helmet=\\"true\\"></title>
+            <title data-react-helmet="true"></title>
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
+            <meta name="theme-color" content="#FFFFFF">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+            <link href="/test/public/path/main-1511941200000.css" rel="stylesheet">
             
-            <meta charset=\\"utf-8\\">
+            <meta charset="utf-8">
             <meta
-              content=\\"width=device-width,initial-scale=1.0\\"
-              name=\\"viewport\\"
+              content="width=device-width,initial-scale=1.0"
+              name="viewport"
             >
           </head>
           <body>
             
-            <div id=\\"react-view\\"><div>{&quot;test&quot;:Array.prototype.slice.call({&quot;1&quot;:&quot;defaultValue&quot;,&quot;length&quot;:2}),&quot;set&quot;:new Set([1,2])}</div></div>
+            <div id="react-view"><div>{&quot;test&quot;:Array.prototype.slice.call({&quot;1&quot;:&quot;defaultValue&quot;,&quot;length&quot;:2}),&quot;set&quot;:new Set([1,2])}</div></div>
             <script
-              id=\\"inj\\"
-              type=\\"application/javascript\\"
-              nonce=\\"abcdef-dummy-nonce\\"
+              id="inj"
+              type="application/javascript"
+              nonce="abcdef-dummy-nonce"
             >
-              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWUL3h5uSa0xzfT5XBfc+dkJg03js0tc5Fdq1/L/xrtEoxXCKrg6lCyYKZwCTky5ib0caXGM8E73+cVSWoPghSnS4NUPLasB0oQjzb4nzzrnCbhluCzJjpPO8adT213jGzJprOm1VjBtqksqp0zqbPGg==\\"
+              window.INJ="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWUL3h5uSa0xzfT5XBfc+dkJg03js0tc5Fdq1/L/xrtEoxXCKrg6lCyYKZwCTky5ib0caXGM8E73+cVSWoPghSnS4NUPLasB0oQjzb4nzzrnCbhluCzJjpPO8adT213jGzJprOm1VjBtqksqp0zqbPGg=="
             </script>
-            <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src="/test/public/path/main-1511941200000.js" type="application/javascript"></script>
             
           </body>
         </html>"
@@ -212,32 +212,32 @@ exports[`JS constructs in global state 2`] = `200`;
 
 exports[`Server-side rendering (SSR); injection of CSS chunks & Redux state 1`] = `
 "<!DOCTYPE html>
-        <html lang=\\"en\\">
+        <html lang="en">
           <head>
             
-            <title data-react-helmet=\\"true\\"></title>
+            <title data-react-helmet="true"></title>
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
+            <meta name="theme-color" content="#FFFFFF">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\"><link href=\\"/test/public/path/test-chunk-a-1511941200000.css\\" rel=\\"stylesheet\\"><link href=\\"/test/public/path/test-chunk-b-1511941200000.css\\" rel=\\"stylesheet\\">
+            <link href="/test/public/path/main-1511941200000.css" rel="stylesheet"><link href="/test/public/path/test-chunk-a-1511941200000.css" rel="stylesheet"><link href="/test/public/path/test-chunk-b-1511941200000.css" rel="stylesheet">
             
-            <meta charset=\\"utf-8\\">
+            <meta charset="utf-8">
             <meta
-              content=\\"width=device-width,initial-scale=1.0\\"
-              name=\\"viewport\\"
+              content="width=device-width,initial-scale=1.0"
+              name="viewport"
             >
           </head>
           <body>
             
-            <div id=\\"react-view\\"><div>Hello Wold!</div></div>
+            <div id="react-view"><div>Hello Wold!</div></div>
             <script
-              id=\\"inj\\"
-              type=\\"application/javascript\\"
-              nonce=\\"abcdef-dummy-nonce\\"
+              id="inj"
+              type="application/javascript"
+              nonce="abcdef-dummy-nonce"
             >
-              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWhVyNrVmy/LG117exMdq7DaCVoYm+R3CZ699xVEmfrItuFaz3fVHwBKqFZCxZ+E96E/P6Ag2ZixSdZfUCA9pAZVJZI0yOj8D3aPaMgRX3PjY=\\"
+              window.INJ="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWhVyNrVmy/LG117exMdq7DaCVoYm+R3CZ699xVEmfrItuFaz3fVHwBKqFZCxZ+E96E/P6Ag2ZixSdZfUCA9pAZVJZI0yOj8D3aPaMgRX3PjY="
             </script>
-            <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script><script src=\\"/test/public/path/test-chunk-b-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src="/test/public/path/main-1511941200000.js" type="application/javascript"></script><script src="/test/public/path/test-chunk-b-1511941200000.js" type="application/javascript"></script>
             
           </body>
         </html>"
@@ -247,32 +247,32 @@ exports[`Server-side rendering (SSR); injection of CSS chunks & Redux state 2`] 
 
 exports[`Setting of response HTTP status the server-side rendering 1`] = `
 "<!DOCTYPE html>
-        <html lang=\\"en\\">
+        <html lang="en">
           <head>
             
-            <title data-react-helmet=\\"true\\"></title>
+            <title data-react-helmet="true"></title>
             
-            <meta name=\\"theme-color\\" content=\\"#FFFFFF\\">
+            <meta name="theme-color" content="#FFFFFF">
             
-            <link href=\\"/test/public/path/main-1511941200000.css\\" rel=\\"stylesheet\\">
+            <link href="/test/public/path/main-1511941200000.css" rel="stylesheet">
             
-            <meta charset=\\"utf-8\\">
+            <meta charset="utf-8">
             <meta
-              content=\\"width=device-width,initial-scale=1.0\\"
-              name=\\"viewport\\"
+              content="width=device-width,initial-scale=1.0"
+              name="viewport"
             >
           </head>
           <body>
             
-            <div id=\\"react-view\\"><div>404 Error Test</div></div>
+            <div id="react-view"><div>404 Error Test</div></div>
             <script
-              id=\\"inj\\"
-              type=\\"application/javascript\\"
-              nonce=\\"abcdef-dummy-nonce\\"
+              id="inj"
+              type="application/javascript"
+              nonce="abcdef-dummy-nonce"
             >
-              window.INJ=\\"MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWKKnXdbyS28Kq8fENTebXTg==\\"
+              window.INJ="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TqNfLBCrAlYYsQVZIc3TRlWKKnXdbyS28Kq8fENTebXTg=="
             </script>
-            <script src=\\"/test/public/path/main-1511941200000.js\\" type=\\"application/javascript\\"></script>
+            <script src="/test/public/path/main-1511941200000.js" type="application/javascript"></script>
             
           </body>
         </html>"
