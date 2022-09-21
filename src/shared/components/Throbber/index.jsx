@@ -16,11 +16,11 @@ function Throbber({
   theme,
 }) {
   return (
-    <div className={theme.container} styleName="container">
-      <div className={theme.circle} styleName="circle" />
-      <div className={theme.circle} styleName="circle" />
-      <div className={theme.circle} styleName="circle" />
-    </div>
+    <span className={theme.container} styleName="container">
+      <span className={theme.circle} styleName="circle" />
+      <span className={theme.circle} styleName="circle" />
+      <span className={theme.circle} styleName="circle" />
+    </span>
   );
 }
 
