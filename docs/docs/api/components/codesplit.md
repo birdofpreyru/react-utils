@@ -6,7 +6,8 @@ sidebar_class_name: deprecated
 
 :::danger DEPRECATED
 The [CodeSplit] component was deprecated, and removed from the library
-in the release **v1.14.0**. Use the [splitComponent()] function instead
+in the release [v1.14.0](https://github.com/birdofpreyru/react-utils/releases/tag/v1.14.0).
+Use the [splitComponent()] function instead
 to implement the code splitting. To migrate replace every use of [CodeSplit] in
 your code the following way.
 
@@ -36,6 +37,8 @@ export default function WrappedSampleComponent(props) {
 ```
 
 **Equivalent code using [splitComponent()]:**
+
+_Note: this code is valid for library versions from [v0.16.0](https://github.com/birdofpreyru/react-utils/releases/tag/v1.16.0) and above._
 ```jsx
 // WrappedSampleComponent.jsx
 
@@ -43,11 +46,10 @@ import { splitComponent, webpack } from '@dr.pogodin/react-utils';
 
 export default splitComponent({
   chunkName: 'sample-component',
-  getClientSide: () => import(
+  getComponent: () => import(
     /* webpackChunkName: 'sample-component' */ 'path/to/SampleComponent'
   ),
-  placeholder: () => <div>Optional Placeholder</div>,
-  serverSide: webpack.requireWeak('path/to/SampleComponent', __dirname),
+  placeholder: <div>Optional Placeholder</div>,
 });
 ```
 :::
