@@ -11,7 +11,6 @@
 .context,
 .ad.hoc {
   &.container {
-    align-items: stretch;
     display: flex;
     min-height: 100vh;
     overflow: hidden;
@@ -25,7 +24,7 @@
   }
 
   &.sidePanel {
+    flex: 1;
     overflow: hidden;
-    width: calc((100% - #{$screen-md}) / 2);
   }
 }
