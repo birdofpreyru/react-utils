@@ -270,19 +270,20 @@ exports[`Export at server side 1`] = `
 exports[`Export at server side 2`] = `{}`;
 
 exports[`Export at server side 3`] = `
-{
+wrap {
   "Axios": [Function],
   "AxiosError": [Function],
   "Cancel": [Function],
   "CancelToken": [Function],
   "CanceledError": [Function],
-  "VERSION": "0.27.2",
+  "VERSION": "1.0.0",
   "all": [Function],
+  "constructor": [Function],
   "create": [Function],
-  "default": [Function],
   "defaults": {
     "adapter": [Function],
     "env": {
+      "Blob": null,
       "FormData": [Function],
     },
     "headers": {
@@ -321,6 +322,7 @@ exports[`Export at server side 3`] = `
     "xsrfHeaderName": "X-XSRF-TOKEN",
   },
   "delete": [Function],
+  "formToJSON": [Function],
   "get": [Function],
   "getUri": [Function],
   "head": [Function],
@@ -631,7 +633,7 @@ exports[`Export at server side 7`] = `
       "types": [Function],
       "untrace": [Function],
       "valid": [Function],
-      "version": "17.6.0",
+      "version": "17.6.2",
       "when": [Function],
       "x": [Function],
       Symbol(@hapi/lab/coverage/initialize): [Function],

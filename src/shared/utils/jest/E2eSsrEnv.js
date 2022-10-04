@@ -66,6 +66,10 @@ export default class E2eSsrEnv extends JsdomEnv {
     return new Promise((done, fail) => {
       compiler.run((err, stats) => {
         if (err) fail(err);
+        if (stats.hasErrors()) {
+          console.error(stats.toJson().errors);
+          fail(Error('Webpack compilation failed'));
+        }
 
         this.global.webpackStats = stats.toJson();
 
