@@ -270,20 +270,19 @@ exports[`Export at server side 1`] = `
 exports[`Export at server side 2`] = `{}`;
 
 exports[`Export at server side 3`] = `
-wrap {
+{
   "Axios": [Function],
   "AxiosError": [Function],
   "Cancel": [Function],
   "CancelToken": [Function],
   "CanceledError": [Function],
-  "VERSION": "1.0.0",
+  "VERSION": "0.27.2",
   "all": [Function],
-  "constructor": [Function],
   "create": [Function],
+  "default": [Function],
   "defaults": {
     "adapter": [Function],
     "env": {
-      "Blob": null,
       "FormData": [Function],
     },
     "headers": {
@@ -322,7 +321,6 @@ wrap {
     "xsrfHeaderName": "X-XSRF-TOKEN",
   },
   "delete": [Function],
-  "formToJSON": [Function],
   "get": [Function],
   "getUri": [Function],
   "head": [Function],
