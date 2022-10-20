@@ -26,7 +26,7 @@ function newBase(babel, options = {}) {
   config.plugins.push(
     ['@dr.pogodin/transform-assets', {
       extensions: ['gif', 'jpeg', 'jpg', 'png'],
-      name: `${baseAssetsOutputPath}/images/[hash:20].[ext]`,
+      name: `${baseAssetsOutputPath}/images/[md4:hash:20].[ext]`,
     }],
   );
 
