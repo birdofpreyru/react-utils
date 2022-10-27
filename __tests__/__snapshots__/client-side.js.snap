@@ -260,5 +260,6 @@ exports[`Export at client side 4`] = `
   "YEAR_MS",
   "now",
   "timer",
+  "useCurrent",
 ]
 `;

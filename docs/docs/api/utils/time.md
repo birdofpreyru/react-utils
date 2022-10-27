@@ -13,6 +13,10 @@ additional constants and functions are attached.
 - [SEC_MS](#sec_ms) - One second expressed in milliseconds.
 - [YEAR_MS](#year_ms) - One year expressed in milliseconds.
 
+**Hooks**
+- [useCurrent()] - Returns the current timestamp pre-cached in the global state,
+  thus wrapping [Date.now()] in a SSR-friendly way.
+
 **Functions**
 - [now()](#now) - Returns current Unix timestamp in milliseconds.
 - [timer()](#timer) - Creates a [Barrier] which resolves after the specified
@@ -52,6 +56,75 @@ time.YEAR_MS: number = 365 * time.DAY_MS
 One year expressed in milliseconds. Equals `365 * time.DAY_MS`, thus a regular,
 non-leap year.
 
+## Hooks
+
+### useCurrent()
+```jsx
+time.useCurrent(options): number
+```
+Returns the current time (Unix timestamp in milliseconds, _i.e._ [Date.now()]
+result), pre-cached in the global state, thus ensuring all parts of the app
+dependent on this hook get the same value within the render, and it also
+matches between the server-side render and client-side hydration.
+
+:::tip Example
+This trivial component renders the current time, and when used alongside SSR
+it would break client-side hydration if [Date.now()] was used directly instead
+of [useCurrent()] hook:
+```jsx
+import { time } from '@dr.pogodin/react-utils';
+
+export default function CurrentTime() {
+
+  // const timestamp = Date.now(); // would cause issues with SSR.
+  const timestamp = time.useCurrent();
+
+  return <div>Current timestamp is: {timestamp}</div>;
+}
+```
+:::
+
+At the server-side only the first call to this hook within the render actually
+retrieves the current time from [Date.now()], and stores it in the global state.
+All subsequent calls to the hook (including from different components, and from
+subsequent SSR rounds) serve the same value stored in the global state.
+
+At the client-side the calls to this hook also return the value from the global
+state (thus, initially matching the one used in SSR), and they also schedule a
+later update of this value in the global state with a finite precision.
+By default, the update happens once after a component calling the hook has
+mounted, and if [Date.now()] result at the moment of update differs from
+the timestamp stored in the global state more than requested precision
+(5 seconds, by default), the value in the global state is updated, thus
+triggering rerender of all components using this hook, or directly watching
+updated segment of the global state. The caller may also opt for automatic
+periodic update of the value returned by the hook (beware, as the value is
+managed through the global state, it will potentially re-render entire app
+on each update).
+
+**Arguments & Result**
+- `options` - **object** - Optional. Custom settings, overriding default values
+  listed below.
+  - `autorefresh` - **boolean** - Optional. Set this **true** and the hook will
+    automatically refresh the current timestamp stored in the global state with
+    the period set by `precision` option below. Beware, as this will trigger
+    potential re-renders of other components watching affected segment of
+    the global state. Defaults **false**.
+  - `globalStatePath` - **string** - Optional. The global state path where
+    the current timestamp value will be stored. Different hooks pointing to
+    different global state paths will work completely independently.
+    Defaults to "_currentTime_".
+  - `precision` - **number** - Optional. Required result precision
+    in milliseconds. On each attempt to update the current timestamp,
+    the hook will only modify the value stored in the global state (and thus
+    the hook result) if [Date.now()] result differs from the current value
+    at `globalStatePath` by more than this `precision`. This effectively
+    sets as well the period of automatic timestamp updates if opted by
+    `autorefresh` option. Defaults _5 &times; [SEC_MS]_ (5 seconds).
+
+- Returns **number** - Unix timestamp in milliseconds, equal to the current time
+  with a finite `precision` (see options above).
+
 ## Functions
 
 ### now()
@@ -79,5 +152,8 @@ methods of the [Barrier] after aborting the timer).
 
 <!-- links -->
 [Barrier]: /docs/api/classes/Barrier
+[Date.now()]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
 [.resolve()]: /docs/api/classes/Barrier#resolve
 [.reject()]: http://localhost:3000/docs/react-utils/docs/api/classes/Barrier#reject
+[SEC_MS]: #sec_ms
+[useCurrent()]: #usecurrent

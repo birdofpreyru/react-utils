@@ -1,5 +1,8 @@
 import dayjs from 'dayjs';
 import { noop } from 'lodash';
+import { useEffect } from 'react';
+
+import { useGlobalState } from '@dr.pogodin/react-global-state';
 
 import { Barrier } from './Barrier';
 
@@ -84,6 +87,50 @@ export async function timer(timeout) {
   return res;
 }
 
+/**
+ * This react hook wraps Date.now() function in a SSR friendly way,
+ * ensuring that all calls to useCurrent() within the same render return
+ * exactly the same time (which is retrieved from Date.now() first, and
+ * then stored in the global state to be reused in all other calls), which
+ * is also passed and used in the first client side render, and then updated
+ * with a finite precision to avoid infinite re-rendering loops.
+ * @param {object} [options] Optional settings.
+ * @param {string} [options.globalStatePath="currentTime"] Global state path
+ *  to keep the current time value.
+ * @param {number} [options.precision= 5 * time.SEC_MS] Current time precision.
+ *  The hook won't update the current time stored in the global state unless it
+ *  is different from Date.now() result by this number (in milliseconds).
+ *  Default to 5 seconds.
+ * @param {boolean} [options.autorefresh=false] Set `true` to automatically
+ *  refresh time stored in the global state with the given `precision` (and
+ *  thus automatically re-rendering components dependent on this hook, or
+ *  the global state with the period equal to the `precision`.
+ * @return {number} Unix timestamp in milliseconds.
+ */
+export function useCurrent({
+  autorefresh = false,
+  globalStatePath = 'currentTime',
+  precision = 5 * dayjs.SEC_MS,
+} = {}) {
+  const [now, setter] = useGlobalState(globalStatePath, Date.now);
+  useEffect(() => {
+    let timerId;
+    const update = () => {
+      setter((old) => {
+        const neu = Date.now();
+        return Math.abs(neu - old) > precision ? neu : old;
+      });
+      if (autorefresh) timerId = setTimeout(update, precision);
+    };
+    update();
+    return () => {
+      if (timerId) clearTimeout(timerId);
+    };
+  }, [autorefresh, precision, setter]);
+  return now;
+}
+
 dayjs.timer = timer;
+dayjs.useCurrent = useCurrent;
 
 export default dayjs;

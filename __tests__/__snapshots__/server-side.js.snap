@@ -363,6 +363,7 @@ exports[`Export at server side 4`] = `
   "YEAR_MS",
   "now",
   "timer",
+  "useCurrent",
 ]
 `;
 
