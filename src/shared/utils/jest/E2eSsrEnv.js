@@ -40,6 +40,14 @@ export default class E2eSsrEnv extends JsdomEnv {
     defaults(options, {
       context: this.testFolder,
       fs: this.global.webpackOutputFs,
+
+      // TODO:
+      // It seems, forcing babel-loader to do on-disc caching with this option
+      // helps to avoid OOM failures in test runs, mentioned in this ticket:
+      // https://github.com/birdofpreyru/react-utils/issues/266
+      // Most probably, it is a workaround rather than definite solution of
+      // the problem with memory in tests.
+      babelLoaderOptions: { cacheDirectory: true },
     });
 
     let factory = this.pragmas['webpack-config-factory'] || '';
