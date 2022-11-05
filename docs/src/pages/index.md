@@ -9,6 +9,8 @@ is yet another [ReactJS] development kit. It provides a selection of
 and [utilities](/docs/api#utils)
 routinely necessary in most [ReactJS] projects.
 
+[![Sponsor](img/../../../static/img/sponsor.png)](https://github.com/sponsors/birdofpreyru)
+
 It is intended for a freelance developer who has to rapidly prototype and
 then simultaneously develop and maintain different [ReactJS] projects at
 the same time. The aim is:

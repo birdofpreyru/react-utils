@@ -14,10 +14,10 @@
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.1.0",
-    "@docusaurus/preset-classic": "^2.1.0",
-    "@docusaurus/theme-common": "^2.1.0",
-    "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.21.3.tgz",
+    "@docusaurus/core": "^2.2.0",
+    "@docusaurus/preset-classic": "^2.2.0",
+    "@docusaurus/theme-common": "^2.2.0",
+    "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.21.4.tgz",
     "@mdx-js/react": "^1.6.21",
     "docusaurus-plugin-sass": "^0.2.2",
     "file-loader": "^6.2.0",
@@ -25,7 +25,7 @@
     "raw-loader": "^4.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.1",
-    "sass": "^1.55.0",
+    "sass": "^1.56.0",
     "url-loader": "^4.1.1"
   },
   "browserslist": {

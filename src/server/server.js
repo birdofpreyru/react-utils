@@ -13,7 +13,7 @@ import {
 
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
-import csrf from 'csurf';
+import csrf from '@dr.pogodin/csurf';
 import express from 'express';
 import favicon from 'serve-favicon';
 import helmet from 'helmet';

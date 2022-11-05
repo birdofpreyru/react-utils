@@ -13,3 +13,5 @@ rapid development and prototyping.
 implements required setup, and provides usage examples.
 
 [**Documentation**](https://dr.pogodin.studio/docs/react-utils/index.html)
+
+[![Sponsor](.README/sponsor.png)](https://github.com/sponsors/birdofpreyru)
