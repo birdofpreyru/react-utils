@@ -4,7 +4,9 @@ import { Emitter } from '@dr.pogodin/react-utils';
 ```
 [Emitter] class implements a simple listeneable data emitter.
 
-**Example**
+<details>
+<summary>Example</summary>
+
 ```jsx
 const emitter = new Emitter();
 const unsubscribe = emitter.addListener(console.log);
@@ -12,6 +14,7 @@ emitter.emit('Hello World!'); // Console output: Hello World!
 unsubscribe(); // Disconnects the listener from the emitter.
 emitter.emit('Are you listening?'); // Console outputs nothing.
 ```
+</details>
 
 ## Fields
 - `.hasListeners` - **boolean** - **true** if any listener is connected

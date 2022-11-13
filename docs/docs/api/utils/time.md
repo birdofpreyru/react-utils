@@ -69,7 +69,9 @@ result), pre-cached in the global state, thus ensuring all parts of the app
 dependent on this hook get the same value within the render, and it also
 matches between the server-side render and client-side hydration.
 
-:::tip Example
+<details>
+<summary>Example</summary>
+
 This trivial component renders the current time, and when used alongside SSR
 it would break client-side hydration if [Date.now()] was used directly instead
 of [useCurrent()] hook:
@@ -84,7 +86,7 @@ export default function CurrentTime() {
   return <div>Current timestamp is: {timestamp}</div>;
 }
 ```
-:::
+</details>
 
 At the server-side only the first call to this hook within the render actually
 retrieves the current time from [Date.now()], and stores it in the global state.
@@ -137,6 +139,12 @@ timezone, and the standard timestamp for the same moment (thus, UTC time). Thus,
 adding this offset to the standard Unix timestamp will give the time in user's
 timezone.
 
+Under the hood, in the first render, both at the server and client side, this
+hook returns zero value. Then, at the client side, it determines the actual
+timezone offset, returning it going forward, and also setting it to a cookie,
+thus allowing to use that actual value in the further server-side renders for
+that user.
+
 :::caution
 Notice, the timezone offset definition we use is different from the one used by
 the standard **Date**'s
@@ -145,13 +153,9 @@ method, which returns the result in minutes, and calculates it as the difference
 between UTC and the user's timezone (vice-versa compared to our difference).
 :::
 
-Under the hood, in the first render, both at the server and client side, this
-hook returns zero value. Then, at the client side, it determines the actual
-timezone offset, returning it going forward, and also setting it to a cookie,
-thus allowing to use that actual value in the further server-side renders for
-that user.
+<details>
+<summary>Example</summary>
 
-:::tip Example
 For better understanding of this example, keep in mind that by default
 [dayjs](https://day.js.org) (aliased as **time** by this library) parses
 and displays time in the local timezone, which is apparently different for
@@ -192,7 +196,7 @@ export default function Example() {
   );
 }
 ```
-:::
+</details>
 
 **Arguments & Result**
 - `options` - **object** - Optional settings.
