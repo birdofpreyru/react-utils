@@ -261,5 +261,6 @@ exports[`Export at client side 4`] = `
   "now",
   "timer",
   "useCurrent",
+  "useTimezoneOffset",
 ]
 `;

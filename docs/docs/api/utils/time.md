@@ -15,7 +15,9 @@ additional constants and functions are attached.
 
 **Hooks**
 - [useCurrent()] - Returns the current timestamp pre-cached in the global state,
-  thus wrapping [Date.now()] in a SSR-friendly way.
+  thus wrapping [Date.now()] in an SSR-friendly way.
+- [useTimezoneOffset()] - Returns the client-side (user) timezone offset
+  in an SSR-friendly way.
 
 **Functions**
 - [now()](#now) - Returns current Unix timestamp in milliseconds.
@@ -125,6 +127,81 @@ on each update).
 - Returns **number** - Unix timestamp in milliseconds, equal to the current time
   with a finite `precision` (see options above).
 
+### useTimezoneOffset()
+```jsx
+time.useTimezoneOffset(options): number
+```
+Returns **client**'s timezone offset in an SSR-friendly way. The timezone offset
+is defined as the difference in milliseconds between a timestamp in the user's
+timezone, and the standard timestamp for the same moment (thus, UTC time). Thus,
+adding this offset to the standard Unix timestamp will give the time in user's
+timezone.
+
+:::caution
+Notice, the timezone offset definition we use is different from the one used by
+the standard **Date**'s
+[getTimezoneOffset()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTimezoneOffset)
+method, which returns the result in minutes, and calculates it as the difference
+between UTC and the user's timezone (vice-versa compared to our difference).
+:::
+
+Under the hood, in the first render, both at the server and client side, this
+hook returns zero value. Then, at the client side, it determines the actual
+timezone offset, returning it going forward, and also setting it to a cookie,
+thus allowing to use that actual value in the further server-side renders for
+that user.
+
+:::tip Example
+For better understanding of this example, keep in mind that by default
+[dayjs](https://day.js.org) (aliased as **time** by this library) parses
+and displays time in the local timezone, which is apparently different for
+server and client, in general case. To correctly handle it within SSR,
+we need to specify the correct timezone, UTC in this example.
+
+```jsx
+// UTC support by DayJS (time) must be explicitly enabled.
+import UTC from 'dayjs/plugin/utc';
+
+import { time } from '@dr.pogodin/react-utils';
+
+// Enables UTC support. It is safe to call it multiple times in different parts
+// of code, DayJS does the check that the plugin should be installed only once.
+time.extend(UTC);
+
+export default function Example() {
+  // This is Unix timestamp (thus, UTC time), retrieved in SSR-friendly way.
+  const now = time.useCurrent();
+
+  // This is the time difference between user timezone and UTC.
+  const offset = time.useTimezoneOffset();
+
+  // This is current time in UTC timezone in human-readable HH:mm format.
+  const utcTime = time.utc(now).format('HH:mm');
+
+  // This is current time in the local (user) timezone in human-readable HH:mm
+  // format. Technically, we use parsing and formatting in UTC zone, but adding
+  // the offset to our timestamp shifts the result by the correct amount to get
+  // the result in the user's timezone.
+  const localTime = time.utc(now + offset).format('HH:mm');
+
+  return (
+    <div>
+      <div>UTC time: {utcTime}</div>
+      <div>Local time: {localTime}</div>
+    </div>
+  );
+}
+```
+:::
+
+**Arguments & Result**
+- `options` - **object** - Optional settings.
+  - `cookieName` - **string** - Optional. The name of cookie to use to store
+    and pass the user's timezone to the server side. If set to a falsy value,
+    the hook won't use cookie at all, always returning zero at the server-side,
+    and in the first render at the client side. Defaults to "`timezoneOffset`".
+- Returns **number** - the timezone offset in milliseconds.
+
 ## Functions
 
 ### now()
@@ -157,3 +234,4 @@ methods of the [Barrier] after aborting the timer).
 [.reject()]: http://localhost:3000/docs/react-utils/docs/api/classes/Barrier#reject
 [SEC_MS]: #sec_ms
 [useCurrent()]: #usecurrent
+[useTimezoneOffset()]: #usetimezoneoffset
