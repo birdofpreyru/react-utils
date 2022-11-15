@@ -3,7 +3,7 @@
 import Cookie from 'cookie';
 import dayjs from 'dayjs';
 import { noop } from 'lodash';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { getSsrContext, useGlobalState } from '@dr.pogodin/react-global-state';
 
@@ -134,18 +134,13 @@ export function useCurrent({
 }
 
 /**
- * Returns client's timezone offset (the difference, in milliseconds, between
- * a timestamp evaluated in the user's timezone, and the same moment of time
- * represented as a standard timestamp in UTC timzone) in an SSR-friendly way,
- * i.e. adding the result of this hook to a standard timestamp will shift it
- * in such way that when formatted to a human-readable form it will represent
- * the time in the user's timezone.
- *
- * Technically, on the first ever call at the server-side it returns zero,
- * then at the client side it initially returns zero, then determines the actual
- * timezone offset, returns it from the hook and also sets it as a cookie.
- * Subsequent renders on the server side will use that cookie to report
- * the user's timezone right away.
+ * Wraps the standard Date.getTimezoneOffset() method in a SSR-friendly way.
+ * This hook retrieves the offset value at the client side and uses a cookie
+ * to pass it to the server in subsequent requests from that user. At the server
+ * side the value from cookie is used in renders and passed back to the client
+ * via the global state. Prior to the value being known (in the very first
+ * request from the user, when the cookie is still missing), zero value is used
+ * as the default value.
  *
  * @param {object} [options] Optional settings.
  * @param {string} [options.cookieName="timezoneOffset"] Optional. The name of
@@ -153,24 +148,27 @@ export function useCurrent({
  *  to a falsy value to forbid using cookies altogether (in that case the hook
  *  will always return zero value at the server-side, and in the first render
  *  at the client-side).
+ * @param {string} [options.timezoneOffset="timezoneOffset"] Optional.
+ *  The global state path to store the offset. Defaults "timezoneOffset".
  * @return {number} Timezone offset.
  */
 export function useTimezoneOffset({
   cookieName = 'timezoneOffset',
+  globalStatePath = 'timezoneOffset',
 } = {}) {
   const ssrContext = getSsrContext(false);
-  const [offset, setOffset] = useState(() => {
+  const [offset, setOffset] = useGlobalState(globalStatePath, () => {
     const value = cookieName && ssrContext?.req?.cookies?.[cookieName];
     return value ? parseInt(value, 10) : 0;
   });
   useEffect(() => {
     const date = new Date();
-    const value = -date.getTimezoneOffset() * dayjs.MIN_MS;
+    const value = date.getTimezoneOffset();
     setOffset(value);
     if (cookieName) {
       document.cookie = Cookie.serialize(cookieName, value, { path: '/' });
     }
-  }, [cookieName]);
+  }, [cookieName, setOffset]);
   return offset;
 }
 
