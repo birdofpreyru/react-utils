@@ -270,19 +270,25 @@ exports[`Export at server side 1`] = `
 exports[`Export at server side 2`] = `{}`;
 
 exports[`Export at server side 3`] = `
-{
+wrap {
   "Axios": [Function],
   "AxiosError": [Function],
+  "AxiosHeaders": [Function],
   "Cancel": [Function],
   "CancelToken": [Function],
   "CanceledError": [Function],
-  "VERSION": "0.27.2",
+  "VERSION": "1.2.0",
   "all": [Function],
+  "constructor": [Function],
   "create": [Function],
   "default": [Function],
   "defaults": {
-    "adapter": [Function],
+    "adapter": [
+      "xhr",
+      "http",
+    ],
     "env": {
+      "Blob": [Function],
       "FormData": [Function],
     },
     "headers": {
@@ -293,13 +299,13 @@ exports[`Export at server side 3`] = `
       "get": {},
       "head": {},
       "patch": {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": undefined,
       },
       "post": {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": undefined,
       },
       "put": {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": undefined,
       },
     },
     "maxBodyLength": -1,
@@ -321,6 +327,7 @@ exports[`Export at server side 3`] = `
     "xsrfHeaderName": "X-XSRF-TOKEN",
   },
   "delete": [Function],
+  "formToJSON": [Function],
   "get": [Function],
   "getUri": [Function],
   "head": [Function],
