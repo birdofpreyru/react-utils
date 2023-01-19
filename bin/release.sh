@@ -1,5 +1,7 @@
 #/bin/sh
 
+set -e # Interrupt deployment if any command fails.
+
 # Releases library package to NPM,
 # and its documentation to https://dr.pogodin.studio/docs/react-utils
 # (via uploading it to a Google Cloud Storage).
