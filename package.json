@@ -1,5 +1,5 @@
 {
-  "version": "1.22.4",
+  "version": "1.22.5",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -34,7 +34,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-router-dom": "^6.6.2",
+    "react-router-dom": "^6.7.0",
     "request-ip": "^3.3.0",
     "rimraf": "^4.1.1",
     "serialize-javascript": "^6.0.1",
@@ -61,7 +61,7 @@
     "babel-jest": "^29.3.1",
     "babel-loader": "^9.1.2",
     "babel-plugin-module-resolver": "^5.0.0",
-    "core-js": "^3.27.1",
+    "core-js": "^3.27.2",
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^4.2.2",
     "eslint": "^8.32.0",
