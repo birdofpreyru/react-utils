@@ -20,6 +20,29 @@ describe('constructor', () => {
   });
 });
 
+describe('basic logic', () => {
+  test('seize() turns semaphore into non-ready state', async () => {
+    const sem = new Semaphore(true);
+    expect(sem.ready).toBe(true);
+    await sem.seize();
+    expect(sem.ready).toBe(false);
+  });
+
+  test('waitReady() does not turn semaphore into non-ready state', async () => {
+    const sem = new Semaphore(true);
+    expect(sem.ready).toBe(true);
+    await sem.waitReady();
+    expect(sem.ready).toBe(true);
+  });
+
+  test('waitReady(true) turns semaphore into non-ready state', async () => {
+    const sem = new Semaphore(true);
+    expect(sem.ready).toBe(true);
+    await sem.waitReady(true);
+    expect(sem.ready).toBe(false);
+  });
+});
+
 describe('concurrent use', () => {
   test('.waitReady() can be used as a simple barrier', async () => {
     let flag = false;
@@ -75,6 +98,7 @@ describe('concurrent use', () => {
     const newFlow = async (signal) => {
       for (let i = 1; i <= 2; ++i) {
         await sem.seize();
+        expect(sem.ready).toBe(false);
         signals.push(`${signal}-${i}`);
         await timer(dT);
         sem.setReady(true);

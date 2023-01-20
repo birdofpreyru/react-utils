@@ -1,7 +1,8 @@
 # MIT License
 
-Copyright &copy; 2019 - 2020, Dr. Sergey Pogodin \
-Copyright &copy; 2018, Topcoder
+_Copyright &copy; 2019&ndash;2023, Dr. Sergey Pogodin_
+  &mdash; <doc@pogodin.studio> (https://dr.pogodin.studio) \
+_Copyright &copy; 2018, Topcoder_
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
