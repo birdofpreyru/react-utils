@@ -769,7 +769,7 @@ exports[`Export at server side 7`] = `
       "types": [Function],
       "untrace": [Function],
       "valid": [Function],
-      "version": "17.8.3",
+      "version": "17.9.1",
       "when": [Function],
       "x": [Function],
       Symbol(@hapi/lab/coverage/initialize): [Function],
