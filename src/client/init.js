@@ -2,11 +2,17 @@
  * Initialization of client-side environment.
  */
 
-/* global window */
+/* global BUILD_INFO, window */
 
 import { getBuildInfo } from 'utils/isomorphy/buildInfo';
 
 const buildInfo = getBuildInfo();
+
+if (process.env.NODE_ENV !== 'production') {
+  console.warn('Dev mode: "BUILD_INFO" attached to the global "window"');
+  // eslint-disable-next-line no-underscore-dangle
+  window.__DEV_BUILD_INFO__ = BUILD_INFO;
+}
 
 /* TODO: A proper logger should be moved to `@dr.pogodin/react-utils`. */
 /* eslint-disable no-console */

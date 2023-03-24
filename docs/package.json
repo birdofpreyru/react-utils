@@ -17,7 +17,7 @@
     "@docusaurus/core": "^2.4.0",
     "@docusaurus/preset-classic": "^2.4.0",
     "@docusaurus/theme-common": "^2.4.0",
-    "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.23.5.tgz",
+    "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.23.6.tgz",
     "@mdx-js/react": "^1.6.21",
     "docusaurus-plugin-sass": "^0.2.3",
     "file-loader": "^6.2.0",

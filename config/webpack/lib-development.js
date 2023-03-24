@@ -23,6 +23,12 @@ module.exports = function configFactory(ops) {
     {
       plugins: [
         new webpack.DefinePlugin({
+          // Dev. build of the library wraps modules inside eval() statements,
+          // hiding BUILD_INFO literals from the host code's Webpack build, thus
+          // leaving them undefined. As a work around, let's get it via global
+          // window object.
+          BUILD_INFO: 'window.__DEV_BUILD_INFO__',
+
           'process.env.BABEL_ENV': JSON.stringify('development'),
           'process.env.NODE_ENV': JSON.stringify('development'),
           'process.env.REACT_GLOBAL_STATE_DEBUG': JSON.stringify(true),
