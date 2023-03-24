@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-/* global document, window */
+/* global document */
 
 import PT from 'prop-types';
 
@@ -12,7 +12,20 @@ import {
 
 import { getGlobalState } from '@dr.pogodin/react-global-state';
 import { newBarrier } from 'utils/Barrier';
-import { getBuildInfo, IS_SERVER_SIDE } from 'utils/isomorphy';
+
+import {
+  IS_CLIENT_SIDE,
+  IS_SERVER_SIDE,
+  getBuildInfo,
+} from 'utils/isomorphy';
+
+let chunkGroups;
+let styleSheetUsageCounters;
+if (IS_CLIENT_SIDE) {
+  // eslint-disable-next-line global-require
+  chunkGroups = require('client/getInj').default().CHUNK_GROUPS;
+  styleSheetUsageCounters = {};
+}
 
 export default function CodeSplit({
   children,
@@ -45,7 +58,7 @@ export default function CodeSplit({
   } else if (!heap.mounted) {
     heap.mounted = true;
 
-    window.CHUNK_GROUPS[chunkName].forEach((asset) => {
+    chunkGroups[chunkName].forEach((asset) => {
       if (!asset.endsWith('.css')) return;
       const path = `${publicPath}/${asset}`;
       let link = document.querySelector(`link[href="${path}"]`);
@@ -66,19 +79,19 @@ export default function CodeSplit({
         const head = document.querySelector('head');
         head.appendChild(link);
       }
-      window.STYLESHEET_USAGE_COUNTERS ||= {};
-      window.STYLESHEET_USAGE_COUNTERS[path] ||= 0;
-      ++window.STYLESHEET_USAGE_COUNTERS[path];
+
+      const count = styleSheetUsageCounters[path] || 0;
+      styleSheetUsageCounters[path] = count + 1;
     });
   }
 
   // This effectively fires only once, just before the component unmounts.
   useEffect(() => () => {
     heap.mounted = false;
-    window.CHUNK_GROUPS[chunkName].forEach((item) => {
+    chunkGroups[chunkName].forEach((item) => {
       if (!item.endsWith('.css')) return;
       const path = `${publicPath}/${item}`;
-      if (--window.STYLESHEET_USAGE_COUNTERS[path] <= 0) {
+      if (--styleSheetUsageCounters[path] <= 0) {
         const link = document.querySelector(`link[href="${path}"]`);
         const head = document.querySelector('head');
         head.removeChild(link);

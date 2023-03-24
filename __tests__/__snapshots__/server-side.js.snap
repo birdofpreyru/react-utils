@@ -234,7 +234,7 @@ exports[`Export at server side 1`] = `
     "themeType": [Function],
   },
   "api": [Function],
-  "client": [Function],
+  "client": undefined,
   "config": {
     "SECRET": {
       "dummySecretKey": "Dummy Secret Value",

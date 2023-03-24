@@ -18,17 +18,11 @@ exports[`Server is functional Simple request 2`] = `
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
+            <meta itemprop="drpruinj" content="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghgc5WRH69eBKHiBZQmMDPrDIZjS0mo8ysGCjayxGzD6WmL8eLQdJGGbkbV9YPqFyABasN0sKSQcvlSF0QOvH+XQ==">
           </head>
           <body>
             
             <div id="react-view"><div>Hello World!</div></div>
-            <script
-              id="inj"
-              type="application/javascript"
-              nonce="00000000-0000-0000-0000-000000000001"
-            >
-              window.INJ="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghgc5WRH69eBKHiBZQmMDPrDIZjS0mo8ysGCjayxGzD6WmL8eLQdJGGbkbV9YPqFyABasN0sKSQcvlSF0QOvH+XQ=="
-            </script>
             
             
           </body>

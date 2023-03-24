@@ -12,6 +12,8 @@ import {
 
 import { Helmet } from 'react-helmet';
 
+import { getBuildInfo, setBuildInfo } from 'utils/isomorphy/buildInfo';
+
 import {
   mockHttpRequest,
   mockHttpResponse,
@@ -38,7 +40,10 @@ beforeAll(() => {
 });
 
 afterEach(() => {
-  delete global.TRU_BUILD_INFO;
+  // TODO: It will be better to completely re-load tested modules, and thus not
+  // having to reset this manually.
+  setBuildInfo(undefined, true);
+
   global.mockFailsForgeRandomGetBytesMethod = false;
 });
 
@@ -56,7 +61,7 @@ afterAll(() => {
  * @return {Promise}
  */
 async function coreTest(webpackConfig, options = {}) {
-  expect(global.TRU_BUILD_INFO).toBeUndefined();
+  expect(getBuildInfo).toThrowErrorMatchingSnapshot();
 
   let renderer;
   expect(() => {
@@ -66,7 +71,7 @@ async function coreTest(webpackConfig, options = {}) {
     });
   }).not.toThrow();
   expect(renderer).toBeInstanceOf(Function);
-  expect(global.TRU_BUILD_INFO).toEqual(testBuildInfo);
+  expect(getBuildInfo()).toEqual(testBuildInfo);
 
   try {
     const { render, res } = mockHttpResponse();

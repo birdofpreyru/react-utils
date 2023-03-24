@@ -2,6 +2,7 @@ import { clone, noop } from 'lodash';
 import supertest from 'supertest';
 
 import serverFactory from 'server/server';
+import { setBuildInfo } from 'utils/isomorphy/buildInfo';
 
 // Test logger, which omits regular info message from the console.
 const logger = { info: noop, log: noop };
@@ -37,6 +38,7 @@ const TEST_WEBPACK_CONFIG = {
 
 afterEach(() => {
   delete process.env.DEV_TOOLS;
+  setBuildInfo(undefined, true);
   jest.resetAllMocks();
 });
 

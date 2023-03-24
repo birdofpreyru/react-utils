@@ -26,6 +26,7 @@ import { renderToPipeableStream } from 'react-dom/server';
 import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom/server';
 import serializeJs from 'serialize-javascript';
+import { setBuildInfo } from 'utils/isomorphy/buildInfo';
 import { timer } from 'utils/time';
 import winston from 'winston';
 
@@ -237,7 +238,7 @@ export default function factory(webpackConfig, options) {
   }
 
   const buildInfo = ops.buildInfo || getBuildInfo(webpackConfig.context);
-  global.TRU_BUILD_INFO = buildInfo;
+  setBuildInfo(buildInfo);
 
   // publicPath from webpack.output has a trailing slash at the end.
   const { publicPath, path: outputPath } = webpackConfig.output;
@@ -470,17 +471,11 @@ export default function factory(webpackConfig, options) {
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
+            <meta itemprop="drpruinj" content="${INJ}">
           </head>
           <body>
             ${grouppedExtraScripts[SCRIPT_LOCATIONS.BODY_OPEN]}
             <div id="react-view">${App || ''}</div>
-            <script
-              id="inj"
-              type="application/javascript"
-              ${ops.noCsp ? '' : `nonce="${req.nonce}"`}
-            >
-              window.INJ="${INJ}"
-            </script>
             ${scriptChunkString}
             ${grouppedExtraScripts[SCRIPT_LOCATIONS.DEFAULT]}
           </body>

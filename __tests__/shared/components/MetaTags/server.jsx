@@ -7,6 +7,7 @@ import supertest from 'supertest';
 import { Helmet } from 'react-helmet';
 
 import serverFactory from 'server/server';
+import { setBuildInfo } from 'utils/isomorphy/buildInfo';
 
 import Application, { MODES } from './__assets__/testcase/app';
 import Application2, { MODES as MODES2 } from './__assets__/testcase/app2';
@@ -38,6 +39,10 @@ async function baseTest(Component) {
   await server.get('/').expect(200)
     .expect((res) => expect(res.text).toMatchSnapshot());
 }
+
+afterEach(() => {
+  setBuildInfo(undefined, true);
+});
 
 test('Basic tags, no override', () => baseTest(
   () => <Application mode={MODES.BASIC_NO_OVERRIDE} />,

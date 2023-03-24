@@ -137,7 +137,10 @@ exports[`Export at client side 1`] = `
   },
   "api": [Function],
   "client": [Function],
-  "config": {},
+  "config": {
+    "CSRF": undefined,
+    "MOCK_CONFIG_KEY": "Mock Config Value",
+  },
   "getGlobalState": [Function],
   "getSsrContext": [Function],
   "isomorphy": {

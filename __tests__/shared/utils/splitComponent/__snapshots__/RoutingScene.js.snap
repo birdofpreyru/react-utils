@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`generates expected markup during SSR 1`] = `
+exports[`generates expected head markup during SSR 1`] = `
 "<title data-react-helmet="true"></title>
 
 <meta name="theme-color" content="#FFFFFF">
@@ -11,7 +11,7 @@ exports[`generates expected markup during SSR 1`] = `
 <meta content="width=device-width,initial-scale=1.0" name="viewport">"
 `;
 
-exports[`generates expected markup during SSR 2`] = `
+exports[`generates expected markup during SSR 1`] = `
 "<!--$-->
 <div>Hello World!</div>
 <!--/$-->"

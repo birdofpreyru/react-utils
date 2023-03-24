@@ -1,9 +1,12 @@
 /** @jest-environment jsdom */
 
 import { mockClientSide } from 'utils/jest';
+import { setBuildInfo } from 'utils/isomorphy/buildInfo';
+
+// TODO: It would be nicer to do all these tests with a proper Webpack build.
 
 mockClientSide();
-window.TRU_BUILD_INFO = { timestamp: 'Test build timestamp' };
+setBuildInfo({ timestamp: 'Test build timestamp' });
 const m = require('utils/isomorphy');
 
 afterEach(() => {

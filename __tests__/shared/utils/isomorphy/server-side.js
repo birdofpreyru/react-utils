@@ -1,6 +1,8 @@
+import { setBuildInfo } from 'utils/isomorphy/buildInfo';
+
 const m = require('utils/isomorphy');
 
-global.TRU_BUILD_INFO = { timestamp: 'Test build timestamp' };
+setBuildInfo({ timestamp: 'Test build timestamp' });
 
 afterEach(() => {
   process.env.NODE_ENV = 'test';

@@ -1,16 +1,5 @@
-/* global window */
-
-/**
- * `true` within client-side environment (browser), `false` at server-side.
- */
-export const IS_CLIENT_SIDE = typeof process !== 'object'
-  || !process.versions || !process.versions.node
-  || !!global.REACT_UTILS_FORCE_CLIENT_SIDE;
-
-/**
- * `true` within the server-side environment (node), `false` at client-side.
- */
-export const IS_SERVER_SIDE = !IS_CLIENT_SIDE;
+import { getBuildInfo } from './buildInfo';
+import { IS_CLIENT_SIDE, IS_SERVER_SIDE } from './environment-check';
 
 /**
  * @ignore
@@ -39,17 +28,11 @@ export function isProdBuild() {
 }
 
 /**
- * Returns build info object.
- * @returns {object}
- */
-export function getBuildInfo() {
-  return (IS_CLIENT_SIDE ? window : global).TRU_BUILD_INFO;
-}
-
-/**
  * Returns build timestamp of the front-end JS bundle.
  * @return {string} ISO date/time string.
  */
 export function buildTimestamp() {
   return getBuildInfo().timestamp;
 }
+
+export { IS_CLIENT_SIDE, IS_SERVER_SIDE, getBuildInfo };

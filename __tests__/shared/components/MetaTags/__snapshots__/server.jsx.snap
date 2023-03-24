@@ -16,17 +16,11 @@ exports[`All tags, with override 1`] = `
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
+            <meta itemprop="drpruinj" content="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghgc5WRH69eBKHiBZQmMDPrDIZjS0mo8ysGCjayxGzD6WmL8eLQdJGGbkbV9YPqFyAc1uVFm6WcpMG4mD/Npa7cqgK6UVPOjCVTlFbZPBYhN1gUlx9R+UmuUKa6MNZMcJG">
           </head>
           <body>
             
             <div id="react-view"><div><p>Hello World!</p><div><p>A dummy internal component.</p></div></div></div>
-            <script
-              id="inj"
-              type="application/javascript"
-              nonce="00000000-0000-0000-0000-000000000003"
-            >
-              window.INJ="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghgc5WRH69eBKHiBZQmMDPrDIZjS0mo8ysGCjayxGzD6WmL8eLQdJGGbkbV9YPqFyAc1uVFm6WcpMG4mD/Npa7cqgK6UVPOjCVTlFbZPBYhN1gUlx9R+UmuUKa6MNZMcJG"
-            </script>
             
             
           </body>
@@ -49,17 +43,11 @@ exports[`Basic tags, no override 1`] = `
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
+            <meta itemprop="drpruinj" content="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghgc5WRH69eBKHiBZQmMDPrDIZjS0mo8ysGCjayxGzD6WmL8eLQdJGGbkbV9YPqFyAc1uVFm6WcpMG4mD/Npa7cqgK6UVPOjCVTlFbZPBYhN1gUlx9R+UmuUKa6MNZMcJG">
           </head>
           <body>
             
             <div id="react-view"><div><p>Hello World!</p></div></div>
-            <script
-              id="inj"
-              type="application/javascript"
-              nonce="00000000-0000-0000-0000-000000000001"
-            >
-              window.INJ="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghgc5WRH69eBKHiBZQmMDPrDIZjS0mo8ysGCjayxGzD6WmL8eLQdJGGbkbV9YPqFyAc1uVFm6WcpMG4mD/Npa7cqgK6UVPOjCVTlFbZPBYhN1gUlx9R+UmuUKa6MNZMcJG"
-            </script>
             
             
           </body>
@@ -82,17 +70,11 @@ exports[`Basic tags, with override 1`] = `
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
+            <meta itemprop="drpruinj" content="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghgc5WRH69eBKHiBZQmMDPrDIZjS0mo8ysGCjayxGzD6WmL8eLQdJGGbkbV9YPqFyAc1uVFm6WcpMG4mD/Npa7cqgK6UVPOjCVTlFbZPBYhN1gUlx9R+UmuUKa6MNZMcJG">
           </head>
           <body>
             
             <div id="react-view"><div><p>Hello World!</p><div><p>A dummy internal component.</p></div></div></div>
-            <script
-              id="inj"
-              type="application/javascript"
-              nonce="00000000-0000-0000-0000-000000000002"
-            >
-              window.INJ="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghgc5WRH69eBKHiBZQmMDPrDIZjS0mo8ysGCjayxGzD6WmL8eLQdJGGbkbV9YPqFyAc1uVFm6WcpMG4mD/Npa7cqgK6UVPOjCVTlFbZPBYhN1gUlx9R+UmuUKa6MNZMcJG"
-            </script>
             
             
           </body>
@@ -115,17 +97,11 @@ exports[`Using <MetaTags> children feature Basic tags, no override 1`] = `
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
+            <meta itemprop="drpruinj" content="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghgc5WRH69eBKHiBZQmMDPrDIZjS0mo8ysGCjayxGzD6WmL8eLQdJGGbkbV9YPqFyAc1uVFm6WcpMG4mD/Npa7cqgK6UVPOjCVTlFbZPBYhN1gUlx9R+UmuUKa6MNZMcJG">
           </head>
           <body>
             
             <div id="react-view"><div><p>Hello World!</p></div></div>
-            <script
-              id="inj"
-              type="application/javascript"
-              nonce="00000000-0000-0000-0000-000000000004"
-            >
-              window.INJ="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghgc5WRH69eBKHiBZQmMDPrDIZjS0mo8ysGCjayxGzD6WmL8eLQdJGGbkbV9YPqFyAc1uVFm6WcpMG4mD/Npa7cqgK6UVPOjCVTlFbZPBYhN1gUlx9R+UmuUKa6MNZMcJG"
-            </script>
             
             
           </body>
@@ -148,17 +124,11 @@ exports[`Using <MetaTags> children feature Basic tags, with override 1`] = `
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
+            <meta itemprop="drpruinj" content="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghgc5WRH69eBKHiBZQmMDPrDIZjS0mo8ysGCjayxGzD6WmL8eLQdJGGbkbV9YPqFyAc1uVFm6WcpMG4mD/Npa7cqgK6UVPOjCVTlFbZPBYhN1gUlx9R+UmuUKa6MNZMcJG">
           </head>
           <body>
             
             <div id="react-view"><div><p>Hello World!</p><div><p>A dummy internal component.</p></div></div></div>
-            <script
-              id="inj"
-              type="application/javascript"
-              nonce="00000000-0000-0000-0000-000000000005"
-            >
-              window.INJ="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghgc5WRH69eBKHiBZQmMDPrDIZjS0mo8ysGCjayxGzD6WmL8eLQdJGGbkbV9YPqFyAc1uVFm6WcpMG4mD/Npa7cqgK6UVPOjCVTlFbZPBYhN1gUlx9R+UmuUKa6MNZMcJG"
-            </script>
             
             
           </body>

@@ -18,14 +18,31 @@ const outputPath = global.webpackConfig.output.path;
 
 document.write(global.ssrMarkup);
 
+const INJ_REGEX = /<meta itemprop="drpruinj" content="[a-zA-Z0-9+/=]+">/;
+
+let headMarkupWithoutInj;
+
+it('generates expected head markup during SSR', () => {
+  // TODO: Should be improved, to ensure the injection part is the same between
+  // test invocations, and thus entire header can be snapshotted.
+  const headMarkup = document.head.innerHTML;
+  const inj = document.querySelector('meta[itemprop="drpruinj"]').outerHTML;
+  expect(!!inj.match(INJ_REGEX)).toBe(true);
+  headMarkupWithoutInj = headMarkup.replace(inj, '');
+  expect(pretty(headMarkupWithoutInj)).toMatchSnapshot();
+});
+
 it('generates expected markup during SSR', () => {
-  expect(pretty(document.head.innerHTML)).toMatchSnapshot();
+  // TODO: It was done this way when document body contained server-side
+  // injected data, which changed between test invocations. Now they are moved
+  // to the header (see a comment above), thus this can be simplified:
+  // snapshot entire body, or better ensure injected data do not change
+  // between test invocations, and snapshot entire document.
   const container = document.querySelector('#react-view');
   expect(pretty(container.innerHTML)).toMatchSnapshot();
 });
 
 it('hydration works as expected', async () => {
-  const headMarkup = document.head.innerHTML;
   const viewMarkup = document.querySelector('#react-view').innerHTML;
 
   const fs = global.webpackOutputFs;
@@ -42,6 +59,6 @@ it('hydration works as expected', async () => {
   await act(new Function(mainJs)); // eslint-disable-line no-new-func
   await act(new Function(splitJs)); // eslint-disable-line no-new-func
 
-  expect(document.head.innerHTML).toBe(headMarkup);
+  expect(document.head.innerHTML).toBe(headMarkupWithoutInj);
   expect(document.querySelector('#react-view').innerHTML).toBe(viewMarkup);
 });

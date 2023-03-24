@@ -44,7 +44,7 @@ it('generates expected view', () => {
 });
 
 it('matches SSR markup in hydration', async () => {
-  const inj = document.querySelector('#inj').outerHTML;
+  const inj = document.querySelector('meta[itemprop="drpruinj"]').outerHTML;
   const ssrMarkup = document.documentElement.innerHTML.replace(inj, '');
   const js = fs.readFileSync(`${outPath}/${jsFileName}`, 'utf8');
   await act(new Function(js)); // eslint-disable-line no-new-func
