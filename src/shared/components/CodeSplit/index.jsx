@@ -23,7 +23,7 @@ let chunkGroups;
 let styleSheetUsageCounters;
 if (IS_CLIENT_SIDE) {
   // eslint-disable-next-line global-require
-  chunkGroups = require('client/getInj').default().CHUNK_GROUPS;
+  chunkGroups = require('client/getInj').default().CHUNK_GROUPS || {};
   styleSheetUsageCounters = {};
 }
 
