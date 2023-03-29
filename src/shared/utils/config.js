@@ -10,7 +10,10 @@ const config = (
     : requireWeak('config')
 ) || {};
 
-if (IS_CLIENT_SIDE) {
+// The safeguard for "document" is necessary because in non-Node environments,
+// like React Native, IS_CLIENT_SIDE is "true", however "document" and a bunch
+// of other browser-world features are not available.
+if (IS_CLIENT_SIDE && typeof document !== 'undefined') {
   const cookie = require('cookie'); // eslint-disable-line global-require
   config.CSRF = cookie.parse(document.cookie).csrfToken;
 }
