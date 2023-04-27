@@ -9,6 +9,14 @@ an async code to wait until the semaphore is set to the "ready" state, if
 it is not in that state already. A semaphore can be switched between "ready"
 and "non-ready" states as needed.
 
+:::info
+The [Semaphore] source code has been moved to [JS Utils] library, and it is
+re-exported from there; thus, it also can be imported as
+```js
+import { Semaphore } from '@dr.pogodin/js-utils';
+```
+:::
+
 ## Properties
 - `semaphore.ready` &mdash; **boolean** &mdash; Read-only. Current semaphore state.
 
@@ -81,6 +89,7 @@ argument.
 
 [Barrier]: /docs/api/classes/Barrier
 [constructor()]: #constructor
+[JS Utils]: https://www.npmjs.com/package/@dr.pogodin/js-utils
 [mutex]: https://en.wikipedia.org/wiki/Mutual_exclusion
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [Semaphore]: /docs/api/classes/Semaphore

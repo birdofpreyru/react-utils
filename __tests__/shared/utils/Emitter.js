@@ -2,7 +2,8 @@ import { Emitter } from 'index';
 
 describe('constructor()', () => {
   it('creates a new emitter with empty listeners array', () => {
-    expect(new Emitter()).toMatchSnapshot();
+    const e = new Emitter();
+    expect(e.listeners).toEqual([]);
   });
 });
 
@@ -25,13 +26,13 @@ describe('.addListener()', () => {
     const fnA = jest.fn().mockName('A');
     const fnB = jest.fn().mockName('B');
     e.addListener(fnA);
-    expect(e).toMatchSnapshot();
+    expect(e.listeners).toMatchSnapshot();
     e.addListener(fnA);
-    expect(e).toMatchSnapshot();
+    expect(e.listeners).toMatchSnapshot();
     e.addListener(fnB);
-    expect(e).toMatchSnapshot();
+    expect(e.listeners).toMatchSnapshot();
     e.addListener(fnA);
-    expect(e).toMatchSnapshot();
+    expect(e.listeners).toMatchSnapshot();
   });
 
   it('removes functional unsubscribe function', () => {
@@ -42,13 +43,13 @@ describe('.addListener()', () => {
     e.addListener(fnA);
     const unB = e.addListener(fnB);
     const unC = e.addListener(fnC);
-    expect(e).toMatchSnapshot();
+    expect(e.listeners).toMatchSnapshot();
     unB();
-    expect(e).toMatchSnapshot();
+    expect(e.listeners).toMatchSnapshot();
     unC();
-    expect(e).toMatchSnapshot();
+    expect(e.listeners).toMatchSnapshot();
     unC();
-    expect(e).toMatchSnapshot();
+    expect(e.listeners).toMatchSnapshot();
   });
 });
 
@@ -80,13 +81,13 @@ describe('.removeListener()', () => {
     e.addListener(fnB);
     e.addListener(fnC);
     e.addListener(fnD);
-    expect(e).toMatchSnapshot();
+    expect(e.listeners).toMatchSnapshot();
     e.removeListener(fnA);
-    expect(e).toMatchSnapshot();
+    expect(e.listeners).toMatchSnapshot();
     e.removeListener(fnC);
-    expect(e).toMatchSnapshot();
+    expect(e.listeners).toMatchSnapshot();
     e.removeListener(fnA);
     e.removeListener(fnC);
-    expect(e).toMatchSnapshot();
+    expect(e.listeners).toMatchSnapshot();
   });
 });

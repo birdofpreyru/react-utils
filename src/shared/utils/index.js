@@ -6,12 +6,12 @@ import themed, {
 
 import config from './config';
 import * as isomorphy from './isomorphy';
-import time, { timer } from './time';
+import time from './time';
 import * as webpack from './webpack';
 
+export { Emitter, Semaphore } from '@dr.pogodin/js-utils';
+
 export * from './Barrier';
-export { default as Emitter } from './Emitter';
-export { default as Semaphore } from './Semaphore';
 export { default as splitComponent } from './splitComponent';
 
 themed.COMPOSE = COMPOSE;
@@ -69,7 +69,7 @@ export async function withRetries(action, maxRetries = 5, interval = 1000) {
     try {
       return await action();
     } catch (error) {
-      if (n < maxRetries) await timer(interval);
+      if (n < maxRetries) await time.timer(interval);
       else throw error;
     }
   }

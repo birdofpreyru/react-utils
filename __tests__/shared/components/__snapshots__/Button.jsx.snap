@@ -4,7 +4,7 @@ exports[`Matches snapshots when active 1`] = `
 <div
   className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT   BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___MAe9O6   ACTIVE_CLASS"
   onClick={[Function]}
-  onKeyPress={[Function]}
+  onKeyDown={[Function]}
   role="button"
   tabIndex={0}
 >

@@ -7,11 +7,21 @@ its resolution and rejection functions attached as methods to the class instance
 It sometimes comes handy for synchronisation between different asynchronous
 operations.
 
+:::info
+The [Barrier] source code has been moved to [JS Utils] library, and it is
+re-exported from there; thus, it also can be imported as
+```js
+import { Barrier } from '@dr.pogodin/js-utils';
+```
+:::
+
 ## Fields
-- `.resolved` - **boolean** - **true** once the barrier has been resolved,
-  **false** before it.
-- `.rejected` - **boolean** - **true** once the barrier has been rejected,
-  **false** before it.
+- `.resolved` &mdash; **boolean** &mdash; Readonly. **true** once the barrier
+  has been resolved; **false** before it.
+- `.rejected` &mdash; **boolean** &mdash; Readonly. **true** once the barrier
+  has been rejected; **false** before it.
+- `.settled` &mdash; **boolean** &mdash; Readonly. **true** once the barrier has
+  been resolved or rejected; **false** otherwise.
 
 ## Methods
 - [constructor()] - Creates a new [Barrier].
@@ -73,6 +83,7 @@ but returns a [Barrier] which [resolve()] and [reject()] methods act on
 the original `barrier`.
 
 [Barrier]: /docs/api/classes/Barrier
+[JS Utils]: https://www.npmjs.com/package/@dr.pogodin/js-utils
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [**Promise** catch()]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch
 [**Promise** finally()]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/finally

@@ -3,8 +3,32 @@
 import { time } from '@dr.pogodin/react-utils';
 ```
 Date & time utilities. The `time` export itself is an alias for
-[dayjs](https://day.js.org/en) library, to which the following
-additional constants and functions are attached.
+[dayjs] library, to which the following additional constants and functions
+are attached.
+
+:::info
+Non-React-specific additions to  [dayjs] library, attached as fields and methods
+to the exported `time` object, are now moved as stand-alone entities into
+[JS Utils] library, imported, and re-used from there. Thus, in addition to
+still being fields and methods of `time`, the following constants and methods
+can be also imported from [JS Utils] directly:
+
+```js
+import {
+  SEC_MS,
+  MIN_MS,
+  HOUR_MS,
+  DAY_MS,
+  YEAR_MS,
+  timer,
+
+  // Also there is a new Timer class, which is a new implementation behind
+  // timer() method, and is exposed to allow further extending it for more
+  // advanced scenarios.
+  Timer,
+} from '@dr.pogodin/js-utils';
+```
+:::
 
 **Constants**
 - [DAY_MS](#day_ms) - One day expressed in milliseconds.
@@ -188,7 +212,9 @@ methods of the [Barrier] after aborting the timer).
 
 <!-- links -->
 [Barrier]: /docs/api/classes/Barrier
+[dayjs]: https://day.js.org/en
 [Date.now()]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
+[JS Utils]: https://www.npmjs.com/package/@dr.pogodin/js-utils
 [.resolve()]: /docs/api/classes/Barrier#resolve
 [.reject()]: http://localhost:3000/docs/react-utils/docs/api/classes/Barrier#reject
 [SEC_MS]: #sec_ms

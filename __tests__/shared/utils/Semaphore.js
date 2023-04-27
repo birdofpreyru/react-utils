@@ -1,7 +1,8 @@
 /* eslint-disable no-await-in-loop */
 
-import Semaphore from 'utils/Semaphore';
-import { timer } from 'utils/time';
+import { timer } from '@dr.pogodin/js-utils';
+
+import { Semaphore } from 'utils';
 
 describe('constructor', () => {
   it('creates non-ready semaphore by default', () => {
@@ -67,8 +68,7 @@ describe('concurrent use', () => {
 
     const newFlow = async (signal) => {
       for (let i = 1; i <= 2; ++i) {
-        await sem.waitReady();
-        sem.setReady(false);
+        await sem.waitReady(true);
         signals.push(`${signal}-${i}`);
         await timer(dT);
         sem.setReady(true);

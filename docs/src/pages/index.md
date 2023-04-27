@@ -1,4 +1,10 @@
 # Dr. Pogodin's React Utils
+
+[![Latest NPM Release](https://img.shields.io/npm/v/@dr.pogodin/react-utils.svg)](https://www.npmjs.com/package/@dr.pogodin/react-utils)
+[![NPM Downloads](https://img.shields.io/npm/dm/@dr.pogodin/react-utils.svg)](https://www.npmjs.com/package/@dr.pogodin/react-utils)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/birdofpreyru/react-utils/tree/master.svg?style=shield)](https://app.circleci.com/pipelines/github/birdofpreyru/react-utils)
+[![GitHub Repo stars](https://img.shields.io/github/stars/birdofpreyru/react-utils?style=social)](https://github.com/birdofpreyru/react-utils)
+
 [@dr.pogodin/react-utils](https://www.npmjs.com/package/@dr.pogodin/react-utils)
 is yet another [ReactJS] development kit. It provides a selection of
 [components](/docs/api#components),
@@ -36,11 +42,21 @@ currently a one-man project, used in personal and some commercial projects.
 Thus, the documentation serves as a good reference for a user with deep
 knowledge of the library, but not that good for a newcomer.
 
+:::info
+The source code of some non-React-specific functions provided by this library
+is now moved to a separate [JS Utils] sub-library, and corresponding functions
+can also be imported directly from there, without a need to use entire
+[React Utils], and with additional benefit of being (re-)implemented
+with TypeScript there.
+:::
+
 **Continue readling**:
 - [Getting Started](/docs/tutorials)
 - [Release Notes](https://github.com/birdofpreyru/react-utils/releases)
 
+[JS Utils]: https://www.npmjs.com/package/@dr.pogodin/js-utils
 [ReactJS]: https://reactjs.org
 [React Global State]: https://dr.pogodin.studio/docs/react-global-state
 [React Themes]: https://dr.pogodin.studio/docs/react-themes
+[React Utils]: https://dr.pogodin.studio/docs/react-utils/index.html
 [Starter Pack]: https://github.com/birdofpreyru/react-starter

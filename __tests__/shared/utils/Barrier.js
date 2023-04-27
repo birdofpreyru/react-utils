@@ -39,7 +39,7 @@ describe('.then()', () => {
   });
 
   it('returns a barrier reusing the same resolve/reject', async () => {
-    const barrier = (new Barrier()).then(() => 'OK');
+    const barrier = new Barrier().then(() => 'OK');
     expect(barrier instanceof Barrier).toBe(true);
     barrier.resolve('NO');
     await expect(barrier).resolves.toBe('OK');

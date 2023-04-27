@@ -5,6 +5,7 @@
 import { Writable } from 'stream';
 
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
+import { timer } from '@dr.pogodin/js-utils';
 
 import {
   clone,
@@ -27,7 +28,6 @@ import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom/server';
 import serializeJs from 'serialize-javascript';
 import { setBuildInfo } from 'utils/isomorphy/buildInfo';
-import { timer } from 'utils/time';
 import winston from 'winston';
 
 import Cache from './Cache';

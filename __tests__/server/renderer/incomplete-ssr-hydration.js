@@ -19,17 +19,6 @@ const fs = global.webpackOutputFs;
 const outputPath = global.webpackConfig.output.path;
 const jsFilename = global.webpackStats.namedChunkGroups.main.assets[0].name;
 
-beforeAll(() => {
-  // This simple polyfill is enough for our purposes.
-  window.crypto = {
-    getRandomValues: (array) => {
-      for (let i = 0; i < array.length; ++i) {
-        array[i] = 256 * Math.random(); // eslint-disable-line no-param-reassign
-      }
-    },
-  };
-});
-
 it('generates expected SSR markup', () => {
   expect(markup).toMatchSnapshot();
 });

@@ -16,6 +16,14 @@ emitter.emit('Are you listening?'); // Console outputs nothing.
 ```
 </details>
 
+:::info
+The [Emitter] source code has been moved to [JS Utils] library, and it is
+re-exported from there; thus, it also can be imported as
+```js
+import { Emitter } from '@dr.pogodin/js-utils';
+```
+:::
+
 ## Fields
 - `.hasListeners` - **boolean** - **true** if any listener is connected
   to the emitter; **false** otherwise.
@@ -61,6 +69,7 @@ emitter.removeListener(listener: function);
 Disconnects given `listener` from the emitter, or does nothing if it is not
 connected to it.
 
+[JS Utils]: https://www.npmjs.com/package/@dr.pogodin/js-utils
 [Emitter]: /docs/api/classes/Emitter
 [addListener()]: #addlistener
 [constructor()]: #constructor

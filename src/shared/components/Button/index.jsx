@@ -49,7 +49,7 @@ function BaseButton({
     <div
       className={className}
       onClick={onClick}
-      onKeyPress={onClick}
+      onKeyDown={onClick}
       onMouseDown={onMouseDown}
       role="button"
       tabIndex={0}
