@@ -4,6 +4,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/@dr.pogodin/react-utils.svg)](https://www.npmjs.com/package/@dr.pogodin/react-utils)
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/birdofpreyru/react-utils/tree/master.svg?style=shield)](https://app.circleci.com/pipelines/github/birdofpreyru/react-utils)
 [![GitHub Repo stars](https://img.shields.io/github/stars/birdofpreyru/react-utils?style=social)](https://github.com/birdofpreyru/react-utils)
+[![Dr. Pogodin Studio](../../../.README/logo-dr-pogodin-studio.svg)](https://dr.pogodin.studio/docs/react-utils/index.html)
 
 [@dr.pogodin/react-utils](https://www.npmjs.com/package/@dr.pogodin/react-utils)
 is yet another [ReactJS] development kit. It provides a selection of
@@ -15,7 +16,7 @@ is yet another [ReactJS] development kit. It provides a selection of
 and [utilities](/docs/api#utils)
 routinely necessary in most [ReactJS] projects.
 
-[![Sponsor](../../static/img/sponsor.png)](https://github.com/sponsors/birdofpreyru)
+[![Sponsor](../../../.README/sponsor.svg)](https://github.com/sponsors/birdofpreyru)
 
 It is intended for a freelance developer who has to rapidly prototype and
 then simultaneously develop and maintain different [ReactJS] projects at
