@@ -25,18 +25,19 @@ import { Emitter } from '@dr.pogodin/js-utils';
 :::
 
 ## Fields
-- `.hasListeners` - **boolean** - **true** if any listener is connected
+- `.hasListeners` &mdash; **boolean** &mdash; **true** if any listener is connected
   to the emitter; **false** otherwise.
-- `.listeners` - **function[]** - Array of listeners connected to the emitter.
+- `.listeners` &mdash; **function[]** &mdash; Array of listeners connected to the emitter.
   Although accessible for direct manipulations, [addListener()] and
   [removeListener()] methods should be preferred to add/remove listeners
   in most cases.
 
 ## Methods
-- [constructor()] - Creates a new emitter with no listeners connected.
-- [addListener()] - Connects given listener to the emitter.
-- [emit()] - Calls every connected listener with given arguments.
-- [removeListener()] - Disconnects given listener from the emitter.
+- [constructor()] &mdash; Creates a new emitter with no listeners connected.
+- [addListener()] &mdash; Connects given listener to the emitter.
+- [emit()] &mdash; Calls every connected listener with given arguments.
+- [removeAllListeners()] &mdash; Disconnects all listeners from the emitter.
+- [removeListener()] &mdash; Disconnects given listener from the emitter.
 
 ### constructor()
 ```jsx
@@ -62,6 +63,12 @@ emitter.emit(...args: any);
 ```
 Calls every connected listener once with the given arguments.
 
+### removeAllListeners()
+```jsx
+emitter.removeAllListeners()
+```
+Diconnects all listeners from the emitter.
+
 ### removeListener()
 ```jsx
 emitter.removeListener(listener: function);
@@ -74,4 +81,5 @@ connected to it.
 [addListener()]: #addlistener
 [constructor()]: #constructor
 [emit()]: #emit
+[removeAllListeners()]: #removealllisteners
 [removeListener()]: #removelistener
