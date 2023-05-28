@@ -32,11 +32,13 @@ module.exports = function configFactory(ops) {
     externals: [
       /@babel\/runtime/,
       '@dr.pogodin/react-global-state',
+      '@dr.pogodin/js-utils',
       '@dr.pogodin/react-themes',
       '@dr.pogodin/react-utils',
       'axios',
       'dayjs',
       'lodash',
+      /node-forge/,
       'prop-types',
       'qs',
       'react',
