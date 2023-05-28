@@ -13,6 +13,6 @@ rapid development and prototyping.
 [ReactJS Starter Pack](https://github.com/birdofpreyru/react-starter)
 implements required setup, and provides usage examples.
 
-[**&rArr; Documentation &lArr;**](https://dr.pogodin.studio/docs/react-utils/index.html)
+[&rArr; Documentation &lArr;](https://dr.pogodin.studio/docs/react-utils/index.html)
 
 [![Sponsor](.README/sponsor.svg)](https://github.com/sponsors/birdofpreyru)
