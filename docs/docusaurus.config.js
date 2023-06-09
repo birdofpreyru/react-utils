@@ -108,7 +108,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © 2019 - ${new Date().getFullYear()} Dr. Sergey Pogodin`,
+        copyright: `Copyright © 2019&ndash;${new Date().getFullYear()}, Dr. Sergey Pogodin`,
       },
       prism: {
         theme: lightCodeTheme,
