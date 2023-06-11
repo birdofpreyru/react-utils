@@ -88,5 +88,5 @@ To split it into a separate code chunk:
 
 <!-- Reusable links -->
 [Code Splitting]: https://developer.mozilla.org/en-US/docs/Glossary/Code_splitting
-[splitComponent()]: /docs/api/functions/splitcomponent
+[splitComponent()]: /docs/api/functions/splitComponent
 [webpack.requireWeak()]: /docs/api/utils/webpack#requireweak

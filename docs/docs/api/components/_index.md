@@ -25,4 +25,4 @@
 
 <!-- links -->
 [CodeSplit]: /docs/api/components/codesplit
-[splitComponent()]: /docs/api/functions/splitcomponent
+[splitComponent()]: /docs/api/functions/splitComponent

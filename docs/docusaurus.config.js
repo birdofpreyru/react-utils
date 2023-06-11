@@ -22,7 +22,7 @@ const config = {
   url: 'https://dr.pogodin.studio',
   baseUrl: '/docs/react-utils/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
   plugins: ['docusaurus-plugin-sass'],
 

@@ -196,7 +196,7 @@ Currently the default [CSP] settings used in the production environment are:
 ```
 They match the default [helmet] settings for [CSP] with just a few changes:
 - YouTube host is whitelisted in the `frameScr` to ensure
-  [YouTubeVideo](/docs/api/components/YouTubeVideo) component can work.
+  [YouTubeVideo] component can work.
 - An unique per-request nonce is added to the `scriptSrc` directive to
   whitelist auxiliary scripts injected by **react-utils**. The actual nonce
   value can be accessed by the host code as `req.nonce` field inside
@@ -265,4 +265,5 @@ Returns **object** with the following fields:
 [SCRIPT_LOCATIONS]: /docs/api/utils/server#script_locations
 [server()]: /docs/api/functions/server
 [staticCacheController()]: /docs/api/functions/server#staticcachecontroller
+[YouTubeVideo]: /docs/api/components/youtubevideo
 [Webpack]: https://webpack.js.org

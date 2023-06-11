@@ -144,4 +144,4 @@ export default function WrappedSampleComponent(props) {
 [CodeSplit]: /docs/api/components/codesplit
 [Examples]: #examples
 [resolveRequire()]: #resolverequire
-[splitComponent()]: /docs/api/functions/splitcomponent
+[splitComponent()]: /docs/api/functions/splitComponent

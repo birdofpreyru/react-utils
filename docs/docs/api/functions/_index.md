@@ -13,4 +13,4 @@
 
 <!-- links -->
 [Barrier]: /docs/api/classes/Barrier
-[splitComponent()]: /docs/api/functions/splitcomponent
+[splitComponent()]: /docs/api/functions/splitComponent
