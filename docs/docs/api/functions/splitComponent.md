@@ -20,7 +20,7 @@ See [the example](#example) to understand how to use it.
   multiple [splitComponent()] signature changes:
   - `getClientSide` option was renamed into `getComponent`.
   - `serverSide` option was removed.
-  - `placeholder` option was changed to accept React node instead of element
+  - `placeholder` option was changed to accept React element instead of element
     type, _i.e._ `<Component />` instead of `Component`.
 :::
 
