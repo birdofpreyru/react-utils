@@ -151,7 +151,6 @@ exports[`Export at client side 1`] = `
     "isDevBuild": [Function],
     "isProdBuild": [Function],
   },
-  "newBarrier": [Function],
   "server": null,
   "splitComponent": [Function],
   "themed": [Function],

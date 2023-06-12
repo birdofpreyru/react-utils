@@ -251,7 +251,6 @@ exports[`Export at server side 1`] = `
     "isDevBuild": [Function],
     "isProdBuild": [Function],
   },
-  "newBarrier": [Function],
   "server": [Function],
   "splitComponent": [Function],
   "themed": [Function],

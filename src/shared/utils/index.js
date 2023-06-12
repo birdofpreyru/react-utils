@@ -9,9 +9,8 @@ import * as isomorphy from './isomorphy';
 import time from './time';
 import * as webpack from './webpack';
 
-export { Emitter, Semaphore } from '@dr.pogodin/js-utils';
+export { Barrier, Emitter, Semaphore } from '@dr.pogodin/js-utils';
 
-export * from './Barrier';
 export { default as splitComponent } from './splitComponent';
 
 themed.COMPOSE = COMPOSE;

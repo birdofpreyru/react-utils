@@ -5,8 +5,8 @@ sidebar_class_name: deprecated
 # newBarrier()
 
 :::danger Deprecated
-The [newBarrier()] function has been deprecated in **v1.23.9**, and it will be
-removed in the next minor release. Instead use [Barrier] constructor directly,
+The [newBarrier()] function was deprecated in **v1.23.9**, and removed in
+**v1.24.0**. Instead use [Barrier] constructor directly,
 _i.e._
 
 **Before:**
@@ -29,6 +29,7 @@ const barrier2 = new Barrier()
 :::
 
 # Oiginal Documentation
+_Valid for **dr.pogodin/react-utils** versions from **v0.25.0** up to **v1.23.13**._
 
 ```jsx
 import { newBarrier } from '@dr.pogodin/react-utils';

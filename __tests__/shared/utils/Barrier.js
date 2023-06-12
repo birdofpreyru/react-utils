@@ -1,4 +1,4 @@
-import { Barrier } from 'utils/Barrier';
+import { Barrier } from 'utils';
 
 describe('Base usage', () => {
   it('.resolved and .rejected are "false" initially', () => {

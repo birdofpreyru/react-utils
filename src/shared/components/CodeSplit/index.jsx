@@ -10,8 +10,8 @@ import {
   useRef,
 } from 'react';
 
+import { Barrier } from '@dr.pogodin/js-utils';
 import { getGlobalState } from '@dr.pogodin/react-global-state';
-import { newBarrier } from 'utils/Barrier';
 
 import {
   IS_CLIENT_SIDE,
@@ -67,7 +67,7 @@ export default function CodeSplit({
         link.setAttribute('href', path);
         link.setAttribute('rel', 'stylesheet');
 
-        const barrier = newBarrier();
+        const barrier = new Barrier();
         link.onload = barrier.resolve;
 
         // Even if the style load failed, still allow to mount the component,

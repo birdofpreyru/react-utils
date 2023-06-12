@@ -7,8 +7,8 @@
 
 :::caution Deprecated Functions
 - [newBarrier()](/docs/api/functions/newbarrier) &mdash; Deprecated
-  in **v1.23.9**, and it will be removed in the next minor version.
-  Instead use [Barrier] constructor directly.
+  in **v1.23.9**, and removed in **v1.24.0**. Instead use [Barrier] constructor
+  directly.
 :::
 
 <!-- links -->
