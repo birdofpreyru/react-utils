@@ -53,7 +53,7 @@ function bookStyleSheet(name, loadedSheets, refCount) {
     let link = document.querySelector(`link[href="${path}"]`);
 
     if (!link) {
-      link = document.head.createElement('link');
+      link = document.createElement('link');
       link.setAttribute('rel', 'stylesheet');
       link.setAttribute('href', path);
       document.head.appendChild(link);
