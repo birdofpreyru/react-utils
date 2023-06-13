@@ -309,6 +309,23 @@ export default function factory(webpackConfig, options) {
 
       let helmet;
 
+      // Gets the mapping between code chunk names and their asset files.
+      // These data come from the Webpack compilation, either from the stats
+      // attached to the request (in dev mode), or from a file output during
+      // the build (in prod mode).
+      let chunkGroups;
+      const webpackStats = get(res.locals, 'webpack.devMiddleware.stats');
+      if (webpackStats) {
+        chunkGroups = mapValues(
+          webpackStats.toJson({
+            all: false,
+            chunkGroups: true,
+          }).namedChunkGroups,
+          (item) => item.assets.map(({ name }) => name),
+        );
+      } else if (CHUNK_GROUPS) chunkGroups = CHUNK_GROUPS;
+      else chunkGroups = {};
+
       /* Optional server-side rendering. */
       let App = ops.Application;
       const ssrContext = {
@@ -317,6 +334,8 @@ export default function factory(webpackConfig, options) {
 
         // Array of chunk names encountered during the rendering.
         chunks: [],
+
+        chunkGroups,
       };
       let stream;
       if (App) {
@@ -385,26 +404,11 @@ export default function factory(webpackConfig, options) {
         helmet = Helmet.renderStatic();
       }
 
-      let chunkGroups;
-      const webpackStats = get(res.locals, 'webpack.devMiddleware.stats');
-      if (webpackStats) {
-        chunkGroups = mapValues(
-          webpackStats.toJson({
-            all: false,
-            chunkGroups: true,
-          }).namedChunkGroups,
-          (item) => item.assets.map(({ name }) => name),
-        );
-      } else if (CHUNK_GROUPS) chunkGroups = CHUNK_GROUPS;
-      else chunkGroups = {};
-
       /* Encrypts data to be injected into HTML.
        * Keep in mind, that this encryption is no way secure: as the JS bundle
        * contains decryption key and is able to decode it at the client side.
        * Hovewer, for a number of reasons, encryption of injected data is still
        * better than injection of a plain text. */
-      delete ssrContext.state.dr_pogodin_react_utils___split_components;
-
       const payload = serializeJs({
         CHUNK_GROUPS: chunkGroups,
         CONFIG: configToInject || sanitizedConfig,
