@@ -9,33 +9,26 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: node-modules-{{ checksum "package-lock.json" }}
-      - run: npm install
-      - save_cache:
-          key: node-modules-{{ checksum "package-lock.json" }}
-          paths:
-            - node_modules
-      - run: npm run build && npm pack
-      - restore_cache:
-          key: docs-node-modules-{{ checksum "docs/package.json" }}
+          key: node-modules-{{ checksum "package-lock.json" }}-{{ checksum "docs/package-lock.json" }}
+      - run: npm install && npm run build && npm pack
       - run:
           command: npm install ../dr.pogodin-react-utils-*.tgz && npm install
           working_directory: docs
       - save_cache:
-          key: docs-node-modules-{{ checksum "docs/package.json" }}
+          key: node-modules-{{ checksum "package-lock.json" }}-{{ checksum "docs/package-lock.json"}}
           paths:
+            - node_modules
             - docs/node_modules
       - run: npm test
       - run:
           name: Documentation build
           command: npm run build
           working_directory: docs
-      - run: rm -rf docs/node_modules
       - persist_to_workspace:
           root: .
           paths:
             - build
-            - docs
+            - docs/build
   release:
     <<: *defaults
     steps:
