@@ -1,4 +1,3 @@
-import { isString } from 'lodash';
 import PT from 'prop-types';
 
 import { themed } from 'utils';
@@ -32,25 +31,38 @@ function Dropdown({
   theme,
   value,
 }) {
-  const optionArray = [(
-    <option
-      className={theme.hiddenOption}
-      key="__reactUtilsHiddenOption"
-    >
-      &zwnj;
-    </option>
-  )];
+  let isValidValue = false;
+  const optionElements = [];
+
   for (let i = 0; i < options.length; ++i) {
-    let op = options[i];
-    if (!filter || filter(op)) {
-      if (isString(op)) op = { value: op };
-      optionArray.push((
-        <option className={theme.option} key={op.value} value={op.value}>
-          {op.name === undefined ? op.value : op.name }
-        </option>
-      ));
+    const option = options[i];
+    if (!filter || filter(option)) {
+      const optionValue = typeof option === 'string' ? option : option.value;
+      const optionName = option.name === undefined ? optionValue : option.name;
+      isValidValue ||= optionValue === value;
+      optionElements.push(
+        <option className={theme.option} key={optionValue} value={optionValue}>
+          {optionName}
+        </option>,
+      );
     }
   }
+
+  // NOTE: This element represents the current `value` when it does not match
+  // any valid option. In Chrome, and some other browsers, we are able to hide
+  // it from the opened dropdown; in others, e.g. Safari, the best we can do is
+  // to show it as disabled.
+  const hiddenOption = isValidValue ? null : (
+    <option
+      disabled
+      className={theme.hiddenOption}
+      key="__reactUtilsHiddenOption"
+      value={value}
+    >
+      {value}
+    </option>
+  );
+
   return (
     <div className={theme.container}>
       { label === undefined ? null : <p className={theme.label}>{label}</p> }
@@ -59,7 +71,8 @@ function Dropdown({
         onChange={onChange}
         value={value}
       >
-        {optionArray}
+        {hiddenOption}
+        {optionElements}
       </select>
       <div className={theme.arrow}>▼</div>
     </div>
@@ -97,7 +110,7 @@ Dropdown.defaultProps = {
   label: undefined,
   onChange: undefined,
   options: [],
-  value: undefined,
+  value: '',
 };
 
 export default ThemedDropdown;
