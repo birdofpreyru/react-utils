@@ -1,7 +1,7 @@
-import { cloneDeep, noop } from 'lodash';
-import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable } from 'server/renderer';
 import fs from 'fs';
 
+import { cloneDeep, noop } from 'lodash';
+import { Helmet } from 'react-helmet';
 import serializeJs from 'serialize-javascript';
 
 import {
@@ -10,7 +10,7 @@ import {
   useGlobalState,
 } from '@dr.pogodin/react-global-state';
 
-import { Helmet } from 'react-helmet';
+import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable } from 'server/renderer';
 
 import { getBuildInfo, setBuildInfo } from 'utils/isomorphy/buildInfo';
 

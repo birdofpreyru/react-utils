@@ -5,6 +5,9 @@
  * Base [Webpack](https://webpack.js.org/) configuration for apps.
  */
 
+const nodeFs = require('fs');
+const path = require('path');
+
 const {
   clone,
   defaults,
@@ -15,8 +18,6 @@ const {
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const forge = require('node-forge');
-const nodeFs = require('fs');
-const path = require('path');
 const SM = require('sitemap');
 const { DefinePlugin, ProgressPlugin } = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');

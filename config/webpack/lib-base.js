@@ -1,12 +1,9 @@
-/**
- * @category Configs
- * @module webpack/lib-base
- * @desc
- * Base Webpack config for ReactJS libraries.
- */
+// Base Webpack config for ReactJS libraries.
+
+const path = require('path');
+
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const path = require('path');
 const { ProgressPlugin } = require('webpack');
 
 const {
