@@ -30,13 +30,20 @@ function Wrapper({
   tip,
   theme,
 }) {
+  const { current: heap } = useRef({
+    lastCursorX: 0,
+    lastCursorY: 0,
+  });
   const tooltipRef = useRef();
   const wrapperRef = useRef();
   const [showTooltip, setShowTooltip] = useState(false);
 
   const updatePortalPosition = (cursorX, cursorY) => {
-    if (!showTooltip) setShowTooltip(true);
-    else {
+    if (!showTooltip) {
+      heap.lastCursorX = cursorX;
+      heap.lastCursorY = cursorY;
+      setShowTooltip(true);
+    } else {
       const wrapperRect = wrapperRef.current.getBoundingClientRect();
       if (
         cursorX < wrapperRect.left
@@ -47,8 +54,8 @@ function Wrapper({
         setShowTooltip(false);
       } else if (tooltipRef.current) {
         tooltipRef.current.pointTo(
-          cursorX + window.pageXOffset,
-          cursorY + window.pageYOffset,
+          cursorX + window.scrollX,
+          cursorY + window.scrollY,
           placement,
           wrapperRef.current,
         );
@@ -58,12 +65,32 @@ function Wrapper({
 
   useEffect(() => {
     if (showTooltip && tip !== null) {
+      // This is necessary to ensure that even when a single mouse event
+      // arrives to a tool-tipped component, the tooltip is correctly positioned
+      // once opened (because similar call above does not have effect until
+      // the tooltip is fully mounted, and that is delayed to future rendering
+      // cycle due to the implementation).
+      if (tooltipRef.current) {
+        tooltipRef.current.pointTo(
+          heap.lastCursorX + window.scrollX,
+          heap.lastCursorY + window.scrollY,
+          placement,
+          wrapperRef.current,
+        );
+      }
+
       const listener = () => setShowTooltip(false);
       window.addEventListener('scroll', listener);
       return () => window.removeEventListener('scroll', listener);
     }
     return undefined;
-  }, [showTooltip, tip]);
+  }, [
+    heap.lastCursorX,
+    heap.lastCursorY,
+    placement,
+    showTooltip,
+    tip,
+  ]);
 
   return (
     <div
