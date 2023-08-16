@@ -33,6 +33,8 @@ function Wrapper({
   const { current: heap } = useRef({
     lastCursorX: 0,
     lastCursorY: 0,
+    triggeredByTouch: false,
+    timerId: undefined,
   });
   const tooltipRef = useRef();
   const wrapperRef = useRef();
@@ -42,7 +44,22 @@ function Wrapper({
     if (!showTooltip) {
       heap.lastCursorX = cursorX;
       heap.lastCursorY = cursorY;
-      setShowTooltip(true);
+
+      // If tooltip was triggered by a touch, we delay its opening by a bit,
+      // to ensure it was not a touch-click - in the case of touch click we
+      // want to do the click, rather than show the tooltip, and the delay
+      // gives click handler a chance to abort the tooltip openning.
+      if (heap.triggeredByTouch) {
+        if (!heap.timerId) {
+          heap.timerId = setTimeout(() => {
+            heap.triggeredByTouch = false;
+            heap.timerId = undefined;
+            setShowTooltip(true);
+          }, 300);
+        }
+
+      // Otherwise we can just open the tooltip right away.
+      } else setShowTooltip(true);
     } else {
       const wrapperRect = wrapperRef.current.getBoundingClientRect();
       if (
@@ -97,7 +114,18 @@ function Wrapper({
       className={theme.wrapper}
       onMouseLeave={() => setShowTooltip(false)}
       onMouseMove={(e) => updatePortalPosition(e.clientX, e.clientY)}
+      onClick={() => {
+        if (heap.timerId) {
+          clearTimeout(heap.timerId);
+          heap.timerId = undefined;
+          heap.triggeredByTouch = false;
+        }
+      }}
+      onTouchStart={() => {
+        heap.triggeredByTouch = true;
+      }}
       ref={wrapperRef}
+      role="presentation"
     >
       {
         showTooltip && tip !== null ? (
