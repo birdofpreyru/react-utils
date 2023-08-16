@@ -137,6 +137,10 @@
   },
   "homepage": "https://dr.pogodin.studio/docs/react-utils/index.html",
   "author": "Dr. Sergey Pogodin <doc@pogodin.studio> (https://dr.pogodin.studio)",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/birdofpreyru"
+  },
   "keywords": [
     "JavaScript",
     "JS",
