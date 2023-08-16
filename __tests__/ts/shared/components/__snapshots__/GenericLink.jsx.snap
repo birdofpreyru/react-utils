@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Absolute link, starting with http:// 1`] = `
+<a
+  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
+  disabled={false}
+  href="http://www.domain.com/test"
+  onClick={null}
+  onMouseDown={null}
+  rel="noopener noreferrer"
+  target=""
+>
+  ABSOLUTE LINK
+</a>
+`;
+
+exports[`Absolute link, starting with https:// 1`] = `
+<a
+  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
+  disabled={false}
+  href="https://www.domain.com/test"
+  onClick={[Function]}
+  onMouseDown={null}
+  rel="noopener noreferrer"
+  target=""
+>
+  ABSOLUTE LINK
+</a>
+`;
+
+exports[`Anchor link 1`] = `
+<a
+  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
+  disabled={false}
+  href="#anchor"
+  onClick={null}
+  onMouseDown={null}
+  rel="noopener noreferrer"
+  target=""
+>
+  ANCHOR LINK
+</a>
+`;
+
+exports[`Relative link 1`] = `
+<button
+  className={null}
+  onClick={[Function]}
+  type="button"
+>
+  {"className":null,"disabled":false,"onMouseDown":null,"replace":false,"to":"http/relative/link","children":"RELATIVE LINK"}
+</button>
+`;
+
+exports[`Relative link, with \`enforceA\` 1`] = `
+<a
+  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
+  disabled={false}
+  href="/relative/link"
+  onClick={null}
+  onMouseDown={null}
+  rel="noopener noreferrer"
+  target=""
+>
+  RELATIVE LINK
+</a>
+`;
+
+exports[`Relative link, with \`openNewTab\` 1`] = `
+<a
+  className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
+  disabled={false}
+  href="relative/link"
+  onClick={null}
+  onMouseDown={null}
+  rel="noopener noreferrer"
+  target="_blank"
+>
+  RELATIVE LINL
+</a>
+`;

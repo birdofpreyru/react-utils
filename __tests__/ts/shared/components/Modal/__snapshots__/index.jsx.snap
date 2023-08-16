@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot match 1`] = `
+"<div>
+  <div data-id="Modal Code Parent">
+    <div data-id="Modal Code Sibling"></div>
+  </div>
+</div>
+<div>
+  <div tabindex="0"></div>
+  <div aria-label="Cancel" class="-dr-pogodin-react-utils___src-shared-components-Modal-base-theme___overlay___ye2BZo" role="button" tabindex="0"></div>
+  <div aria-modal="true" class="-dr-pogodin-react-utils___src-shared-components-Modal-base-theme___container___gyZ4rc ad hoc container" role="dialog">Modal Content</div>
+  <div tabindex="0"></div>
+  <div tabindex="0"></div>
+</div>"
+`;

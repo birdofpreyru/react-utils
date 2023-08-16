@@ -11,8 +11,3 @@ dr.pogodin-react-utils-*
 
 # Ignores documentation
 /docs
-
-# Ignores sources, beside SCSS mixins
-src/**
-!src/styles/_mixins/**
-!src/styles/mixins.scss

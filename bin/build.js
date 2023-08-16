@@ -152,6 +152,9 @@ if (cmdLineArgs.watch) {
 /* ************************************************************************** */
 /* Babel compilation of JS, JSX, and SVG files.                               */
 
+// TODO: It needs an option to build TS project, and use TypeScript in that case
+// to do TypeScript build with "tsc".
+
 const BABEL_EXEC_OPTIONS = {
   env: { ...process.env, BABEL_ENV: buildType },
 };

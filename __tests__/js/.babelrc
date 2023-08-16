@@ -1,0 +1,15 @@
+{
+  "presets": [
+    "../../config/babel/node-ssr"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@dr.pogodin/react-utils/build": "./src"
+        }
+      }
+    ]
+  ]
+}
