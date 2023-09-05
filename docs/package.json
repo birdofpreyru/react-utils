@@ -17,7 +17,7 @@
     "@docusaurus/core": "^2.4.1",
     "@docusaurus/preset-classic": "^2.4.1",
     "@docusaurus/theme-common": "^2.4.1",
-    "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.25.1.tgz",
+    "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.25.3.tgz",
     "@mdx-js/react": "^1.6.22",
     "docusaurus-plugin-sass": "^0.2.5",
     "file-loader": "^6.2.0",
@@ -25,7 +25,7 @@
     "raw-loader": "^4.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.1",
-    "sass": "^1.65.1",
+    "sass": "^1.66.1",
     "url-loader": "^4.1.1"
   },
   "browserslist": {

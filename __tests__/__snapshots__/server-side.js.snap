@@ -404,16 +404,13 @@ wrap {
     "UseProxy": 305,
     "VariantAlsoNegotiates": 506,
   },
-  "VERSION": "1.4.0",
+  "VERSION": "1.5.0",
   "all": [Function],
   "constructor": [Function],
   "create": [Function],
   "default": [Function],
   "defaults": {
-    "adapter": [
-      "xhr",
-      "http",
-    ],
+    "adapter": "http",
     "env": {
       "Blob": [Function],
       "FormData": [Function],
@@ -421,19 +418,14 @@ wrap {
     "headers": {
       "common": {
         "Accept": "application/json, text/plain, */*",
+        "Content-Type": undefined,
       },
       "delete": {},
       "get": {},
       "head": {},
-      "patch": {
-        "Content-Type": undefined,
-      },
-      "post": {
-        "Content-Type": undefined,
-      },
-      "put": {
-        "Content-Type": undefined,
-      },
+      "patch": {},
+      "post": {},
+      "put": {},
     },
     "maxBodyLength": -1,
     "maxContentLength": -1,
@@ -456,6 +448,7 @@ wrap {
   "delete": [Function],
   "formToJSON": [Function],
   "get": [Function],
+  "getAdapter": [Function],
   "getUri": [Function],
   "head": [Function],
   "interceptors": {
@@ -768,7 +761,7 @@ exports[`Export at server side 7`] = `
       "types": [Function],
       "untrace": [Function],
       "valid": [Function],
-      "version": "17.9.2",
+      "version": "17.10.1",
       "when": [Function],
       "x": [Function],
       Symbol(@hapi/lab/coverage/initialize): [Function],
