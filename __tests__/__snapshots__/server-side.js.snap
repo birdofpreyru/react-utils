@@ -404,13 +404,16 @@ wrap {
     "UseProxy": 305,
     "VariantAlsoNegotiates": 506,
   },
-  "VERSION": "1.5.0",
+  "VERSION": "1.5.1",
   "all": [Function],
   "constructor": [Function],
   "create": [Function],
   "default": [Function],
   "defaults": {
-    "adapter": "http",
+    "adapter": [
+      "xhr",
+      "http",
+    ],
     "env": {
       "Blob": [Function],
       "FormData": [Function],
@@ -767,7 +770,7 @@ exports[`Export at server side 7`] = `
       "types": [Function],
       "untrace": [Function],
       "valid": [Function],
-      "version": "17.10.2",
+      "version": "17.11.0",
       "when": [Function],
       "x": [Function],
       Symbol(@hapi/lab/coverage/initialize): [Function],

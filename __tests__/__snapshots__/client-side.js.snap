@@ -304,13 +304,16 @@ wrap {
     "UseProxy": 305,
     "VariantAlsoNegotiates": 506,
   },
-  "VERSION": "1.5.0",
+  "VERSION": "1.5.1",
   "all": [Function],
   "constructor": [Function],
   "create": [Function],
   "default": [Function],
   "defaults": {
-    "adapter": "xhr",
+    "adapter": [
+      "xhr",
+      "http",
+    ],
     "env": {
       "Blob": [Function],
       "FormData": [Function],
