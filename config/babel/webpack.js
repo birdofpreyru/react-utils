@@ -52,7 +52,7 @@ function newBaseConfig(options = {}) {
     ],
     plugins: [
       ['module-resolver', {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
         root: [
           './src/shared',
           './src',

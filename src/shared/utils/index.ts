@@ -62,7 +62,11 @@ const JU = env !== 'production' && webpack.requireWeak('./jest', __dirname);
  * // It will print 'success' after one second, once the second attempt
  * // is performed.
  */
-export async function withRetries(action, maxRetries = 5, interval = 1000) {
+export async function withRetries(
+  action: () => Promise<unknown>,
+  maxRetries = 5,
+  interval = 1000,
+) {
   /* eslint-disable no-await-in-loop */
   for (let n = 1; ; ++n) {
     try {

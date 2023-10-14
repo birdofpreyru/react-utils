@@ -26,7 +26,7 @@ module.exports = {
     url: 'http://localhost',
   },
   transform: {
-    '\\.(jsx?|svg)$': 'babel-jest',
+    '\\.((j|t)sx?|svg)$': 'babel-jest',
   },
   transformIgnorePatterns: [
     '/node_modules/(?!@dr.pogodin/react-utils)',

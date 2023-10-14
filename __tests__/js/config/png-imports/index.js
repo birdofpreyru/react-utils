@@ -34,6 +34,9 @@ it('generates expected markup at the client-side', async () => {
   const ssrMarkup = container.innerHTML;
   let js = global.webpackStats.entrypoints.main.assets[0].name;
   js = global.webpackOutputFs.readFileSync(`${outputPath}/${js}`, 'utf8');
-  await act(new Function(js)); // eslint-disable-line no-new-func
+
+  // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval
+  await act(new Function(js));
+
   expect(container.innerHTML).toBe(ssrMarkup);
 });

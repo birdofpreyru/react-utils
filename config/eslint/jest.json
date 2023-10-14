@@ -1,5 +1,4 @@
 {
-  "extends": "./default.json",
   "env": {
     "browser": true,
     "jest": true
@@ -8,9 +7,11 @@
     "jest"
   ],
   "rules": {
+    "@typescript-eslint/no-implied-eval": 0,
     "global-require": 0,
     "import/no-dynamic-require": 0,
     "import/no-extraneous-dependencies": 0,
-    "no-console": 0
+    "no-console": 0,
+    "no-new-func": 0
   }
 }

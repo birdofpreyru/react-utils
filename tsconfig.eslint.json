@@ -1,6 +1,14 @@
 {
   "extends": "@tsconfig/recommended",
-  "include": ["src/**/*"],
+  "include": [
+    "__mocks__/**/*",
+    "__tests__/**/*",
+    "bin/**/*",
+    "config/**/*",
+    "docs/**/*",
+    "src/**/*",
+    "*",
+  ],
   "compilerOptions": {
     "declaration": true,
     "jsx": "react-jsx",

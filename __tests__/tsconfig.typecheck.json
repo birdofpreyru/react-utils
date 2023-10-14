@@ -1,0 +1,16 @@
+{
+  "extends": "@tsconfig/recommended",
+  "exclude": ["ts-types/**/*"],
+  "include": ["**/*"],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "paths": {
+      "jest/*": ["../jest/*"],
+      "src/*": ["../src/*"],
+      "utils/*": ["../src/shared/utils/*"]
+    },
+    "rootDirs": [".."]
+  },
+  "strict": true,
+}

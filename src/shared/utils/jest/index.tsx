@@ -2,12 +2,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import mockdate from 'mockdate';
-import { createRoot } from 'react-dom/client';
+import { type ReactElement, type ReactNode } from 'react';
+import { type Root, createRoot } from 'react-dom/client';
 import TU, { act } from 'react-dom/test-utils';
 
 /* eslint-disable import/no-extraneous-dependencies */
 import Renderer from 'react-test-renderer';
-import ShallowRenderer from 'react-test-renderer/shallow';
+import { type ShallowRenderer, createRenderer } from 'react-test-renderer/shallow';
 /* eslint-enable import/no-extraneous-dependencies */
 
 /**
@@ -16,6 +17,11 @@ import ShallowRenderer from 'react-test-renderer/shallow';
  * @param {function} action
  */
 export { act };
+
+declare global {
+  // eslint-disable-next-line no-var, vars-on-top
+  var IS_REACT_ACT_ENVIRONMENT: boolean | undefined;
+}
 
 global.IS_REACT_ACT_ENVIRONMENT = true;
 
@@ -56,25 +62,32 @@ export function getMockUuid(seed = 0) {
  * @returns {Promise} Wait for this to "jump after" any async code which should
  * be executed because of the mock time movement.
  */
-export async function mockTimer(time) {
+export async function mockTimer(time: number) {
   mockdate.set(time + Date.now());
   jest.advanceTimersByTime(time);
 }
 
+type MountedSceneT = HTMLElement & {
+  destroy: () => void;
+};
+
 /**
  * Mounts `scene` to the DOM, and returns the root scene element.
  * @param {React.ReactNode} scene
- * @return {HTMLElement} Created container DOM element with destroy() function
+ * @return Created container DOM element with destroy() function
  *  attached.
  */
-export function mount(scene) {
-  let root;
-  const res = document.createElement('div');
-  document.body.appendChild(res);
+export function mount(scene: ReactNode): MountedSceneT {
+  let root: Root;
+  const element = document.createElement('div');
+  document.body.appendChild(element);
+
+  const res: MountedSceneT = (element as unknown) as MountedSceneT;
   res.destroy = () => {
     act(() => root.unmount());
     res.remove();
   };
+
   act(() => {
     root = createRoot(res);
     root.render(scene);
@@ -93,7 +106,7 @@ export function mount(scene) {
  * import { JU } from '@dr.pogodin/react-utils';
  * console.log(JU.render(<div>Example</div>));
  */
-export function render(component) {
+export function render(component: ReactElement) {
   return Renderer.create(component).toJSON();
 }
 
@@ -104,8 +117,8 @@ export function render(component) {
  * @param {object} component ReactJS component to render.
  * @return {object} JSON representation of the shallow component's render tree.
  */
-export function shallowRender(component) {
-  const renderer = new ShallowRenderer();
+export function shallowRender(component: ReactElement) {
+  const renderer: ShallowRenderer = createRenderer();
   renderer.render(component);
   return renderer.getRenderOutput();
 }
@@ -119,7 +132,7 @@ export function shallowRender(component) {
  * @param {object} component ReactJS component to render.
  * @return {object} JSON representation of shallow render.
  */
-export function shallowSnapshot(component) {
+export function shallowSnapshot(component: ReactElement) {
   const res = shallowRender(component);
   expect(res).toMatchSnapshot();
   return res;
@@ -133,7 +146,7 @@ export function shallowSnapshot(component) {
  * @param {object} component ReactJS component to render.
  * @return {object} JSON render of the component.
  */
-export function snapshot(component) {
+export function snapshot(component: ReactElement) {
   const res = render(component);
   expect(res).toMatchSnapshot();
   return res;

@@ -131,6 +131,19 @@ module.exports = function configFactory(ops) {
           },
         ],
       }, {
+        // TypeScript modules.
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        loader: 'ts-loader',
+        options: {
+          compilerOptions: {
+            // If enabled, it outputs declarations to wrong paths, and anyway
+            // we are going to compiler those separately with TSC for server-
+            // side code.
+            declaration: false,
+          },
+        },
+      }, {
         /* Loads CSS stylesheets. It is assumed that CSS stylesheets come only
         * from dependencies, as we use SCSS inside our own code. */
         test: /\.css$/,
@@ -148,7 +161,7 @@ module.exports = function configFactory(ops) {
         fonts: path.resolve(ops.context, 'src/assets/fonts'),
         styles: path.resolve(ops.context, 'src/styles'),
       },
-      extensions: ['.js', '.json', '.jsx', '.scss'],
+      extensions: ['.js', '.json', '.jsx', '.scss', '.ts', '.tsx'],
       symlinks: false,
     },
   };

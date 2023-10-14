@@ -34,6 +34,9 @@ The modified rules are:
   import `React` into JSX files.
 
 ## Jest
+
+**NOTE**: Since v1.26.0 it should be included in addition to the default or Typescript config!
+
 This configuration slightly extends [default](#default) config to be used
 to lint JS code intended for [Jest] test environment.
 
