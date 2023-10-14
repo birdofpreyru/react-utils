@@ -16,18 +16,19 @@
 //      require in that scenario.
 
 import path from 'path';
-import ssrFactory from 'server/renderer';
 
 import { defaults, noop, set } from 'lodash';
 
 // As this environment is a part of the Jest testing utils,
 // we assume development dependencies are available when it is used.
 /* eslint-disable import/no-extraneous-dependencies */
-import register from '@babel/register';
+import register from '@babel/register/experimental-worker';
 import JsdomEnv from 'jest-environment-jsdom';
 import { createFsFromVolume, Volume } from 'memfs';
 import webpack from 'webpack';
 /* eslint-enable import/no-extraneous-dependencies */
+
+import ssrFactory from 'server/renderer';
 
 export default class E2eSsrEnv extends JsdomEnv {
   /**

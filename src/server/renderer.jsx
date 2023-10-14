@@ -2,7 +2,12 @@
  * ExpressJS middleware for server-side rendering of a ReactJS app.
  */
 
+import fs from 'fs';
+import path from 'path';
+
 import { Writable } from 'stream';
+import { brotliCompress, brotliDecompress } from 'zlib';
+import winston from 'winston';
 
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
 import { timer } from '@dr.pogodin/js-utils';
@@ -19,16 +24,12 @@ import {
 
 import config from 'config';
 import forge from 'node-forge';
-import fs from 'fs';
-import path from 'path';
-import { brotliCompress, brotliDecompress } from 'zlib';
 
 import { renderToPipeableStream } from 'react-dom/server';
 import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom/server';
 import serializeJs from 'serialize-javascript';
 import { setBuildInfo } from 'utils/isomorphy/buildInfo';
-import winston from 'winston';
 
 import Cache from './Cache';
 

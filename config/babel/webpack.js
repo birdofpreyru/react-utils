@@ -40,7 +40,8 @@ const ENVIRONMENTS = {
 function newBaseConfig(options = {}) {
   return {
     presets: [
-      ['@babel/env', { targets: options.targets || 'defaults' }],
+      // Chrome 69 is the browser for Android API 28.
+      ['@babel/env', { targets: options.targets || 'defaults or chrome >= 69' }],
 
       // TODO: Starting from Babel 8, "automatic" will be the default runtime,
       // thus once upgraded to Babel 8, runtime should be removed from

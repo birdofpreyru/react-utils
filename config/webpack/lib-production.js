@@ -1,12 +1,8 @@
-/**
- * @category Configs
- * @module webpack/lib-production
- * @desc
- * Production Webpack config for ReactJS libraries.
- */
+// Production Webpack config for ReactJS libraries.
+
+const path = require('path');
 
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const path = require('path');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 

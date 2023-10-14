@@ -8,6 +8,18 @@ The [Dropdown] component implements a dropdown input themed using [React Themes]
 library. Under the hood it is rendered as the standard `<select>` element, thus
 the styling support is somewhat limited.
 
+:::info
+If current `value` does not match any provided (and filtered, if `filter` is set)
+option, [Dropdown] will add an extra &laquo;invalid&raquo; option to represent
+current `value`. This ensures [Dropdown] correctly displays such `value` when it
+is closed, rather than displaying the first valid option, not matching the actual
+`value`. In this scenario, when [Dropdown] is opened this &laquo;invalid&raquo;
+option is hidden from the list of valid selections in browsers that support it
+(_e.g._ Chrome), or it is shown as disabled (and is non-selectable) in other
+browsers (_e.g._ Safari). The CSS styling for this hidden &laquo;invalid&raquo;
+option can be modified via the `hiddenOption` theme key.
+:::
+
 ## Properties
 - `filter` - **function** - Options filter function. When provided, only those
   elements of `options` list will be used by the dropdown, for which this filter

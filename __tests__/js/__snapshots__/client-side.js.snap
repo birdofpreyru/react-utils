@@ -304,7 +304,7 @@ wrap {
     "UseProxy": 305,
     "VariantAlsoNegotiates": 506,
   },
-  "VERSION": "1.4.0",
+  "VERSION": "1.5.1",
   "all": [Function],
   "constructor": [Function],
   "create": [Function],
@@ -321,19 +321,14 @@ wrap {
     "headers": {
       "common": {
         "Accept": "application/json, text/plain, */*",
+        "Content-Type": undefined,
       },
       "delete": {},
       "get": {},
       "head": {},
-      "patch": {
-        "Content-Type": undefined,
-      },
-      "post": {
-        "Content-Type": undefined,
-      },
-      "put": {
-        "Content-Type": undefined,
-      },
+      "patch": {},
+      "post": {},
+      "put": {},
     },
     "maxBodyLength": -1,
     "maxContentLength": -1,
@@ -356,6 +351,7 @@ wrap {
   "delete": [Function],
   "formToJSON": [Function],
   "get": [Function],
+  "getAdapter": [Function],
   "getUri": [Function],
   "head": [Function],
   "interceptors": {

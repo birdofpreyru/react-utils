@@ -1,7 +1,8 @@
 import { noop, omit } from 'lodash';
+import { StaticRouter } from 'react-router-dom/server';
+
 import Button from 'components/Button';
 import { snapshot } from 'utils/jest';
-import { StaticRouter } from 'react-router-dom/server';
 
 const testTheme = {
   active: 'ACTIVE_CLASS',

@@ -1,5 +1,8 @@
 import 'source-map-support/register';
 
+import http from 'http';
+import https from 'https';
+
 import {
   cloneDeep,
   defaults,
@@ -8,9 +11,6 @@ import {
   isString,
   toNumber,
 } from 'lodash';
-
-import http from 'http';
-import https from 'https';
 
 /* Polyfill required by ReactJS. */
 import 'raf/polyfill';

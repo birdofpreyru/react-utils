@@ -72,16 +72,19 @@ server(webpackConfig);
   - `devMode` - **boolean** - Turns on development server mode.
   - `favicon` - **string** - Path to the favicon to server by the server.
     By default no favicon is served.
-  - `https` - **object** - If provided, HTTPS server will be created instead of
+
+  - `https` &mdash; **object** &mdash; If provided, HTTPS server will be created instead of
     the default HTTP one. The object should provide SSL sertificate and key via
     two string fields of the object: `cert`, and `key`.
-  - `httpsRedirect` - **boolean** - Enables automatic redirection of incoming
-    HTTP request to HTTPS protocol. This option is enabled (**true**) by default.
+
+  - `httpsRedirect` &mdash; **boolean** &mdash; Enables automatic redirection of
+    incoming HTTP requests to HTTPS protocol. Defaults _true_.
 
     To smoothly use it for local development you need to run the server in HTTPS
-    mode and alos properly create and install a self-signed SSL certificate onto
-    your system. See this article for details:
+    mode (see the `https` option above) and also properly create and install
+    a self-signed SSL certificate onto your system. See this article for details:
     [How to get HTTPS working on your local development environment in 5 minutes](https://medium.freecodecamp.org/how-to-get-https-working-on-your-local-development-environment-in-5-minutes-7af615770eec).
+
   - `logger` - **object** - The server side logger. By default
     [winston](https://www.npmjs.com/package/winston) logger with console
     transport is used. Provided logger, or the default **winston** logger,

@@ -1,7 +1,8 @@
 import PT from 'prop-types';
 import qs from 'qs';
-import ScalableRect from 'components/ScalableRect';
 import themed from '@dr.pogodin/react-themes';
+
+import ScalableRect from 'components/ScalableRect';
 import Throbber from 'components/Throbber';
 
 import baseTheme from './base.scss';

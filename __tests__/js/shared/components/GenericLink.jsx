@@ -1,7 +1,8 @@
 /** @jest-environment jsdom */
 
-import GenericLink from 'components/GenericLink';
 import PT from 'prop-types';
+
+import GenericLink from 'components/GenericLink';
 import { mount, simulate, snapshot } from 'utils/jest';
 
 function Link(props) {

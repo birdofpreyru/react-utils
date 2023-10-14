@@ -8,7 +8,13 @@ const path = require('path');
 
 const { isFunction, mapValues, merge } = require('lodash');
 const { program } = require('commander');
-const rimraf = require('rimraf');
+
+// TODO: Disabled, because ESLint still does not support "exports" declarations
+// in "package.json", and "rimraf" does not declare fallback entrance.
+// See: https://github.com/import-js/eslint-plugin-import/issues/1810
+// and update, once that issue is resolved.
+// eslint-disable-next-line import/no-unresolved
+const { rimraf } = require('rimraf');
 
 /* eslint-disable import/no-extraneous-dependencies */
 const webpack = require('webpack');

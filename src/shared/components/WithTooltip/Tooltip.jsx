@@ -9,8 +9,10 @@ import {
   forwardRef,
   useEffect,
   useImperativeHandle,
+  useRef,
   useState,
 } from 'react';
+
 import { createPortal } from 'react-dom';
 
 import PT from 'prop-types';
@@ -83,13 +85,13 @@ function calcTooltipRects(tooltip) {
  * @return {{x, y, width, height}}
  */
 function calcViewportRect() {
-  const { pageXOffset, pageYOffset } = window;
+  const { scrollX, scrollY } = window;
   const { documentElement: { clientHeight, clientWidth } } = document;
   return {
-    left: pageXOffset,
-    right: pageXOffset + clientWidth,
-    top: pageYOffset,
-    bottom: pageYOffset + clientHeight,
+    left: scrollX,
+    right: scrollX + clientWidth,
+    top: scrollY,
+    bottom: scrollY + clientHeight,
   };
 }
 
@@ -237,10 +239,31 @@ function setComponentPositions(
 
 /* The Tooltip component itself. */
 const Tooltip = forwardRef(({ children, theme }, ref) => {
+  // NOTE: The way it has to be implemented, for clean mounting and unmounting
+  // at the client side, the <Tooltip> is fully mounted into DOM in the next
+  // rendering cycles, and only then it can be correctly measured and positioned.
+  // Thus, when we create the <Tooltip> we have to record its target positioning
+  // details, and then apply them when it is created.
+
+  const { current: heap } = useRef({
+    lastElement: undefined,
+    lastPageX: 0,
+    lastPageY: 0,
+    lastPlacement: undefined,
+  });
+
   const [components, setComponents] = useState(null);
 
-  const pointTo = (pageX, pageY, placement, element) => components
-    && setComponentPositions(pageX, pageY, placement, element, components);
+  const pointTo = (pageX, pageY, placement, element) => {
+    heap.lastElement = element;
+    heap.lastPageX = pageX;
+    heap.lastPageY = pageY;
+    heap.lastPlacement = placement;
+
+    if (components) {
+      setComponentPositions(pageX, pageY, placement, element, components);
+    }
+  };
   useImperativeHandle(ref, () => ({ pointTo }));
 
   /* Inits and destroys tooltip components. */
@@ -252,6 +275,30 @@ const Tooltip = forwardRef(({ children, theme }, ref) => {
       setComponents(null);
     };
   }, [theme]);
+
+  useEffect(() => {
+    if (components) {
+      setComponentPositions(
+        heap.lastPageX,
+        heap.lastPageY,
+        heap.lastPlacement,
+        heap.lastElement,
+        components,
+      );
+    }
+  }, [
+    components,
+    // BEWARE: Careful about these dependencies - they are updated when mouse
+    // is moved over the tool-tipped element, thus potentially may cause
+    // unnecessary firing of this effect on each mouse event. It does not
+    // happen now just because the mouse movements themselves are not causing
+    // the component re-rendering, thus dependencies of this effect are not
+    // really re-evaluated.
+    heap.lastPageX,
+    heap.lastPageY,
+    heap.lastPlacement,
+    heap.lastElement,
+  ]);
 
   return components ? createPortal(children, components.content) : null;
 });
