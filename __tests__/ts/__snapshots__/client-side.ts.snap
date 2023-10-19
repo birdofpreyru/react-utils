@@ -392,8 +392,8 @@ exports[`Export at client side 4`] = `
   "MIN_MS",
   "SEC_MS",
   "YEAR_MS",
-  "now",
   "timer",
+  "now",
   "useCurrent",
   "useTimezoneOffset",
 ]

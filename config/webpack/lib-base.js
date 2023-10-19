@@ -4,6 +4,7 @@ const path = require('path');
 
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { ProgressPlugin } = require('webpack');
 
 const {
@@ -169,6 +170,7 @@ module.exports = function configFactory(ops) {
         '.json',
         '.scss',
       ],
+      plugins: [new TsconfigPathsPlugin()],
       symlinks: false,
     },
   };

@@ -15,10 +15,9 @@ exports[`generates expected head markup during SSR 1`] = `
 `;
 
 exports[`generates expected markup during SSR 1`] = `
-"<div class="-dr-pogodin-react-utils_____tests__-shared-utils-splitComponent-__assets__-SampleScene-style___container___oJaj7t">
+"<div class="-dr-pogodin-react-utils_____tests__-ts-shared-utils-splitComponent-__assets__-SampleScene-style___container___rwHR9E">
   <h1>SampleCodeSplit</h1>
-  <div>testValue</div>
-  <!--$-->
+  <div>testValue</div><!--$-->
   <div>
     <h1>Sample Component</h1>
     <div>testValue</div>
@@ -26,9 +25,7 @@ exports[`generates expected markup during SSR 1`] = `
     <div></div>
     <h3>Children</h3>
     <div></div>
-  </div>
-  <!--/$-->
-  <!--$-->
+  </div><!--/$--><!--$-->
   <div>
     <h1>Sample Component</h1>
     <div>testValue</div>
@@ -36,9 +33,7 @@ exports[`generates expected markup during SSR 1`] = `
     <div>test</div>
     <h3>Children</h3>
     <div>Test</div>
-  </div>
-  <!--/$-->
-  <!--$-->
+  </div><!--/$--><!--$-->
   <div>
     <h1>Sample Component</h1>
     <div>testValue</div>
@@ -49,7 +44,6 @@ exports[`generates expected markup during SSR 1`] = `
       <div>a</div>
       <div>b</div>
     </div>
-  </div>
-  <!--/$-->
+  </div><!--/$-->
 </div>"
 `;

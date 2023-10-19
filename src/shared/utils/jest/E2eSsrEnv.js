@@ -109,7 +109,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     // the environment code, and imports from it.
     register({
       envName: options.babelEnv,
-      extensions: ['.js', '.jsx', '.svg'],
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
       root,
     });
 

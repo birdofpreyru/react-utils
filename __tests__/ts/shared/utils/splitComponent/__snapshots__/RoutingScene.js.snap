@@ -13,6 +13,5 @@ exports[`generates expected head markup during SSR 1`] = `
 
 exports[`generates expected markup during SSR 1`] = `
 "<!--$-->
-<div>Hello World!</div>
-<!--/$-->"
+<div>Hello World!</div><!--/$-->"
 `;

@@ -8,6 +8,7 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "paths": {
+      "client/*": ["./src/client/*"],
       "utils/*": ["./src/shared/utils/*"]
     },
     "strict": true

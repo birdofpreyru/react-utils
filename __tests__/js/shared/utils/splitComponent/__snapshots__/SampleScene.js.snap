@@ -15,7 +15,7 @@ exports[`generates expected head markup during SSR 1`] = `
 `;
 
 exports[`generates expected markup during SSR 1`] = `
-"<div class="-dr-pogodin-react-utils_____tests__-shared-utils-splitComponent-__assets__-SampleScene-style___container___oJaj7t">
+"<div class="-dr-pogodin-react-utils_____tests__-js-shared-utils-splitComponent-__assets__-SampleScene-style___container___f5GnH5">
   <h1>SampleCodeSplit</h1>
   <div>testValue</div><!--$-->
   <div>
