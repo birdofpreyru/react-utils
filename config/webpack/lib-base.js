@@ -161,7 +161,14 @@ module.exports = function configFactory(ops) {
         fonts: path.resolve(ops.context, 'src/assets/fonts'),
         styles: path.resolve(ops.context, 'src/styles'),
       },
-      extensions: ['.js', '.json', '.jsx', '.scss', '.ts', '.tsx'],
+      extensions: [
+        '.ts',
+        '.tsx',
+        '.js',
+        '.jsx',
+        '.json',
+        '.scss',
+      ],
       symlinks: false,
     },
   };

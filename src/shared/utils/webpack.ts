@@ -3,11 +3,14 @@ import { IS_CLIENT_SIDE } from './isomorphy';
 /**
  * Requires the specified module without including it into the bundle during
  * Webpack build.
- * @param {string} modulePath
- * @param {string} [basePath]
- * @return {object} Required module.
+ * @param modulePath
+ * @param [basePath]
+ * @return Required module.
  */
-export function requireWeak(modulePath, basePath) {
+export function requireWeak(
+  modulePath: string,
+  basePath?: string,
+): NodeJS.Module | null {
   if (IS_CLIENT_SIDE) return null;
 
   try {
@@ -37,6 +40,6 @@ export function requireWeak(modulePath, basePath) {
  * @param {string} modulePath
  * @return {string} Absolute or relative path to the module.
  */
-export function resolveWeak(modulePath) {
+export function resolveWeak(modulePath: string): string {
   return modulePath;
 }

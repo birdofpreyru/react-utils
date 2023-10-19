@@ -9,6 +9,8 @@ exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
         "extensions": [
           ".js",
           ".jsx",
+          ".ts",
+          ".tsx",
         ],
         "root": [
           "./src/shared",
@@ -63,6 +65,7 @@ exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
+    "@babel/typescript",
   ],
 }
 `;
@@ -76,6 +79,8 @@ exports[`"development" environment "noStyling" variation 1`] = `
         "extensions": [
           ".js",
           ".jsx",
+          ".ts",
+          ".tsx",
         ],
         "root": [
           "./src/shared",
@@ -117,6 +122,7 @@ exports[`"development" environment "noStyling" variation 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
+    "@babel/typescript",
   ],
 }
 `;
@@ -130,6 +136,8 @@ exports[`"development" environment Default config 1`] = `
         "extensions": [
           ".js",
           ".jsx",
+          ".ts",
+          ".tsx",
         ],
         "root": [
           "./src/shared",
@@ -184,6 +192,7 @@ exports[`"development" environment Default config 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
+    "@babel/typescript",
   ],
 }
 `;
@@ -197,6 +206,8 @@ exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
         "extensions": [
           ".js",
           ".jsx",
+          ".ts",
+          ".tsx",
         ],
         "root": [
           "./src/shared",
@@ -251,6 +262,7 @@ exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
+    "@babel/typescript",
   ],
 }
 `;
@@ -264,6 +276,8 @@ exports[`"production" environment "noStyling" variation 1`] = `
         "extensions": [
           ".js",
           ".jsx",
+          ".ts",
+          ".tsx",
         ],
         "root": [
           "./src/shared",
@@ -305,6 +319,7 @@ exports[`"production" environment "noStyling" variation 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
+    "@babel/typescript",
   ],
 }
 `;
@@ -318,6 +333,8 @@ exports[`"production" environment Default config 1`] = `
         "extensions": [
           ".js",
           ".jsx",
+          ".ts",
+          ".tsx",
         ],
         "root": [
           "./src/shared",
@@ -372,6 +389,7 @@ exports[`"production" environment Default config 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
+    "@babel/typescript",
   ],
 }
 `;

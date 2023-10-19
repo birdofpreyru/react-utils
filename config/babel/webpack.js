@@ -49,6 +49,9 @@ function newBaseConfig(options = {}) {
       ['@babel/react', { runtime: 'automatic' }],
 
       '@dr.pogodin/babel-preset-svgr',
+
+      // TODO: Should we rather optionally include it for TS projects only?
+      '@babel/typescript',
     ],
     plugins: [
       ['module-resolver', {

@@ -7,24 +7,30 @@
 import forge from 'node-forge/lib/forge';
 import 'node-forge/lib/aes';
 
+import { type InjT } from 'utils/globalState';
+
 import { getBuildInfo } from 'utils/isomorphy/buildInfo';
 
 // Safeguard is needed here, because the server-side version of Docusaurus docs
 // is compiled (at least now) with settings suggesting it is a client-side
 // environment, but there is no document.
-let inj = typeof document !== 'undefined'
-  && document.querySelector('meta[itemprop="drpruinj"]');
+let inj: InjT = {};
 
-if (inj) {
-  inj.remove();
+const metaElement: HTMLMetaElement | null = typeof document !== 'undefined'
+  ? document.querySelector('meta[itemprop="drpruinj"]') : null;
+
+if (metaElement) {
+  metaElement.remove();
+  let data = forge.util.decode64(metaElement.content);
+
   const { key } = getBuildInfo();
-  inj = forge.util.decode64(inj.content);
   const d = forge.cipher.createDecipher('AES-CBC', key);
-  d.start({ iv: inj.slice(0, key.length) });
-  d.update(forge.util.createBuffer(inj.slice(key.length)));
+  d.start({ iv: data.slice(0, key.length) });
+  d.update(forge.util.createBuffer(data.slice(key.length)));
   d.finish();
-  inj = forge.util.decodeUtf8(d.output.data);
-  inj = eval(`(${inj})`); // eslint-disable-line no-eval
+
+  data = forge.util.decodeUtf8(d.output.data);
+  inj = eval(`(${data})`); // eslint-disable-line no-eval
 } else {
   // Otherwise, a bunch of dependent stuff will easily fail in non-standard
   // environments, where no client-side initialization is performed. Like tests,
@@ -32,6 +38,6 @@ if (inj) {
   inj = {};
 }
 
-export default function getInj() {
+export default function getInj(): InjT {
   return inj;
 }

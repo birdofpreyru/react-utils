@@ -1,7 +1,7 @@
 {
   "extends": ["airbnb", "airbnb/hooks", "airbnb-typescript"],
   "parserOptions": {
-    "project": "./tsconfig.eslint.json"
+    "project": "./tsconfig.json"
   },
   "rules": {
     "jsx-a11y/anchor-is-valid": ["error", {

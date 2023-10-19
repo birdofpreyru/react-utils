@@ -14,7 +14,26 @@ import {
   timer,
 } from '@dr.pogodin/js-utils';
 
-import { getSsrContext, useGlobalState } from '@dr.pogodin/react-global-state';
+import { useGlobalState } from '@dr.pogodin/react-global-state';
+
+import { getSsrContext } from './globalState';
+
+type TimeT = typeof dayjs & {
+  DAY_MS: typeof DAY_MS;
+  HOUR_MS: typeof HOUR_MS;
+  MIN_MS: typeof MIN_MS;
+  SEC_MS: typeof SEC_MS;
+  YEAR_MS: typeof YEAR_MS;
+  timer: typeof timer;
+};
+
+const time: TimeT = dayjs as TimeT;
+time.DAY_MS = DAY_MS;
+time.HOUR_MS = HOUR_MS;
+time.MIN_MS = MIN_MS;
+time.SEC_MS = SEC_MS;
+time.YEAR_MS = YEAR_MS;
+time.timer = timer;
 
 /**
  * This react hook wraps Date.now() function in a SSR friendly way,
@@ -23,27 +42,29 @@ import { getSsrContext, useGlobalState } from '@dr.pogodin/react-global-state';
  * then stored in the global state to be reused in all other calls), which
  * is also passed and used in the first client side render, and then updated
  * with a finite precision to avoid infinite re-rendering loops.
- * @param {object} [options] Optional settings.
- * @param {string} [options.globalStatePath="currentTime"] Global state path
+ * @param [options] Optional settings.
+ * @param [options.globalStatePath="currentTime"] Global state path
  *  to keep the current time value.
- * @param {number} [options.precision= 5 * time.SEC_MS] Current time precision.
+ * @param [options.precision= 5 * time.SEC_MS] Current time precision.
  *  The hook won't update the current time stored in the global state unless it
  *  is different from Date.now() result by this number (in milliseconds).
  *  Default to 5 seconds.
- * @param {boolean} [options.autorefresh=false] Set `true` to automatically
+ * @param [options.autorefresh=false] Set `true` to automatically
  *  refresh time stored in the global state with the given `precision` (and
  *  thus automatically re-rendering components dependent on this hook, or
  *  the global state with the period equal to the `precision`.
- * @return {number} Unix timestamp in milliseconds.
+ * @return Unix timestamp in milliseconds.
  */
+// TODO: Should we request the state type as generic parameter, to be able
+// to verify the give globalStatePath is correct?
 export function useCurrent({
   autorefresh = false,
   globalStatePath = 'currentTime',
-  precision = 5 * dayjs.SEC_MS,
+  precision = 5 * time.SEC_MS,
 } = {}) {
-  const [now, setter] = useGlobalState(globalStatePath, Date.now);
+  const [now, setter] = useGlobalState<1, number>(globalStatePath, Date.now);
   useEffect(() => {
-    let timerId;
+    let timerId: NodeJS.Timeout;
     const update = () => {
       setter((old) => {
         const neu = Date.now();
@@ -78,12 +99,14 @@ export function useCurrent({
  *  The global state path to store the offset. Defaults "timezoneOffset".
  * @return {number} Timezone offset.
  */
+// TODO: Should we request the state type as generic parameter, to be able
+// to verify the give globalStatePath is correct?
 export function useTimezoneOffset({
   cookieName = 'timezoneOffset',
   globalStatePath = 'timezoneOffset',
 } = {}) {
   const ssrContext = getSsrContext(false);
-  const [offset, setOffset] = useGlobalState(globalStatePath, () => {
+  const [offset, setOffset] = useGlobalState<1, number>(globalStatePath, () => {
     const value = cookieName && ssrContext?.req?.cookies?.[cookieName];
     return value ? parseInt(value, 10) : 0;
   });
@@ -92,7 +115,7 @@ export function useTimezoneOffset({
     const value = date.getTimezoneOffset();
     setOffset(value);
     if (cookieName) {
-      document.cookie = Cookie.serialize(cookieName, value, { path: '/' });
+      document.cookie = Cookie.serialize(cookieName, value.toString(), { path: '/' });
     }
   }, [cookieName, setOffset]);
   return offset;
@@ -110,4 +133,4 @@ assign(dayjs, {
   useTimezoneOffset,
 });
 
-export default dayjs;
+export default time;

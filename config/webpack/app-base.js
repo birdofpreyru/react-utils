@@ -19,6 +19,7 @@ const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const forge = require('node-forge');
 const SM = require('sitemap');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { DefinePlugin, ProgressPlugin } = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
@@ -196,6 +197,9 @@ module.exports = function configFactory(ops) {
 
       /* `true` if client-side code should setup a service worker. */
       useServiceWorker: Boolean(o.workbox),
+
+      // Build timestamp.
+      timestamp: new Date().toISOString(),
     });
   }
 
@@ -250,13 +254,21 @@ module.exports = function configFactory(ops) {
     plugins,
     resolve: {
       alias: {
-        /* Aliases to JS an JSX files are handled by Babel. */
+        // Aliases to JS an JSX files are handled by Babel.
         assets: path.resolve(o.context, 'src/assets'),
         components: path.resolve(o.context, 'src/shared/components'),
         fonts: path.resolve(o.context, 'src/assets/fonts'),
         styles: path.resolve(o.context, 'src/styles'),
       },
-      extensions: ['.js', '.json', '.jsx', '.scss'],
+      extensions: [
+        '.ts',
+        '.tsx',
+        '.js',
+        '.jsx',
+        '.json',
+        '.scss',
+      ],
+      plugins: [new TsconfigPathsPlugin()],
       symlinks: false,
     },
     module: {
@@ -282,6 +294,18 @@ module.exports = function configFactory(ops) {
           envName: o.babelEnv,
           presets: ['@dr.pogodin/react-utils/config/babel/webpack'],
           ...o.babelLoaderOptions,
+        },
+      }, {
+        // TypeScript modules.
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        loader: 'ts-loader',
+        options: {
+          compilerOptions: {
+            // At the moment the plan is to compile declarations separately with
+            // TSC.
+            declaration: false,
+          },
         },
       }, {
         /* Loads image assets. */

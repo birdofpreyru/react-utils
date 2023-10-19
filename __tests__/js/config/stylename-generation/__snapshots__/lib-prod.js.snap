@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`emits expected CSS 1`] = `
-".pul43I{background:red;height:10px;width:10px}.QXUpkv{color:blue}.-UjGq4{background:green;height:10px;width:10px}
+".pul43I{background:red;height:10px;width:10px}.qsmGww{color:blue}.-UjGq4{background:green;height:10px;width:10px}
 /*# sourceMappingURL=style.css.map*/"
 `;

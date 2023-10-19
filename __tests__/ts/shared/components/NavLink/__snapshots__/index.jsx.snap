@@ -22,7 +22,7 @@ exports[`Matches snapshots 1`] = `
 
 exports[`Matches snapshots 2`] = `
 <GenericLink
-  className="-dr-pogodin-react-utils_____tests__-shared-components-NavLink-styles___navLink___CYxNuq"
+  className="-dr-pogodin-react-utils_____tests__-ts-shared-components-NavLink-styles___navLink___-NlmbU"
   disabled={false}
   enforceA={false}
   keepScrollPosition={false}

@@ -1,4 +1,4 @@
-import themed, {
+import themedImpl, {
   COMPOSE,
   PRIORITY,
   ThemeProvider,
@@ -12,6 +12,13 @@ import * as webpack from './webpack';
 export { Barrier, Emitter, Semaphore } from '@dr.pogodin/js-utils';
 
 export { default as splitComponent } from './splitComponent';
+
+type ThemedT = typeof themedImpl & {
+  COMPOSE: typeof COMPOSE;
+  PRIORITY: typeof PRIORITY;
+};
+
+const themed: ThemedT = themedImpl as ThemedT;
 
 themed.COMPOSE = COMPOSE;
 themed.PRIORITY = PRIORITY;

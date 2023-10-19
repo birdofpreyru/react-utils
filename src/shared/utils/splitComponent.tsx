@@ -11,25 +11,27 @@ import {
 } from 'react';
 
 import { Barrier } from '@dr.pogodin/js-utils';
-import { getSsrContext } from '@dr.pogodin/react-global-state';
+
+import { type ChunkGroupsT, getSsrContext } from './globalState';
 
 import {
   IS_CLIENT_SIDE,
   IS_SERVER_SIDE,
   getBuildInfo,
-} from 'utils/isomorphy';
+} from './isomorphy';
 
 // Note: At the client side we can get chunk groups immediately when loading
 // the module; at the server-side we only can get them within React render flow.
 // Thus, we set and use the following variable at the client-side, and then when
 // needed on the server side, we'll fetch it differently.
-let clientChunkGroups;
+let clientChunkGroups: ChunkGroupsT;
+
 if (IS_CLIENT_SIDE) {
   // eslint-disable-next-line global-require
   clientChunkGroups = require('client/getInj').default().CHUNK_GROUPS || {};
 }
 
-const refCounts = {};
+const refCounts: { [path: string]: number } = {};
 
 function getPublicPath() {
   return getBuildInfo().publicPath;
@@ -39,13 +41,17 @@ function getPublicPath() {
  * Client-side only! Ensures the specified CSS stylesheet is loaded into
  * the document; loads if it is missing; and does simple reference counting
  * to facilitate future clean-up.
- * @param {string} name
- * @param {Set} loadedSheets
- * @param {boolean} refCount
- * @return {Promise}
+ * @param name
+ * @param loadedSheets
+ * @param refCount
+ * @return
  */
-function bookStyleSheet(name, loadedSheets, refCount) {
-  let res;
+function bookStyleSheet(
+  name: string,
+  loadedSheets: Set<string>,
+  refCount: boolean,
+): Promise<void> | undefined {
+  let res: Barrier<void> | undefined;
   const path = `${getPublicPath()}/${name}`;
   const fullPath = `${document.location.origin}${path}`;
 
@@ -59,9 +65,9 @@ function bookStyleSheet(name, loadedSheets, refCount) {
       document.head.appendChild(link);
     }
 
-    res = new Barrier();
-    link.addEventListener('load', res.resolve);
-    link.addEventListener('error', res.resolve);
+    res = new Barrier<void>();
+    link.addEventListener('load', () => res!.resolve());
+    link.addEventListener('error', () => res!.resolve());
   }
 
   if (refCount) {
@@ -74,10 +80,10 @@ function bookStyleSheet(name, loadedSheets, refCount) {
 
 /**
  * Generates the set of URLs for currently loaded, linked stylesheets.
- * @return {Set}
+ * @return
  */
-function getLoadedStyleSheets() {
-  const res = new Set();
+function getLoadedStyleSheets(): Set<string> {
+  const res = new Set<string>();
   const { styleSheets } = document;
   for (let i = 0; i < styleSheets.length; ++i) {
     const { href } = styleSheets[i];
@@ -86,7 +92,10 @@ function getLoadedStyleSheets() {
   return res;
 }
 
-function assertChunkName(chunkName, chunkGroups) {
+function assertChunkName(
+  chunkName: string,
+  chunkGroups: ChunkGroupsT,
+) {
   if (chunkGroups[chunkName]) return;
   throw Error(`Unknown chunk name "${chunkName}"`);
 }
@@ -95,12 +104,16 @@ function assertChunkName(chunkName, chunkGroups) {
  * Client-side only! Ensures all CSS stylesheets required for the specified
  * code chunk are loaded into the document; loads the missing ones; and does
  * simple reference counting to facilitate future clean-up.
- * @param {string} chunkName Chunk name.
- * @param {boolean} refCount
- * @return {Promise} Resolves once all pending stylesheets, necessary for
+ * @param chunkName Chunk name.
+ * @param refCount
+ * @return Resolves once all pending stylesheets, necessary for
  *  the chunk, are either loaded, or failed to load.
  */
-export function bookStyleSheets(chunkName, chunkGroups, refCount) {
+export function bookStyleSheets(
+  chunkName: string,
+  chunkGroups: ChunkGroupsT,
+  refCount: boolean,
+): Promise<void> {
   const promises = [];
   const assets = chunkGroups[chunkName];
   const loadedSheets = getLoadedStyleSheets();
@@ -113,7 +126,9 @@ export function bookStyleSheets(chunkName, chunkGroups, refCount) {
     }
   }
 
-  return promises.length ? Promise.allSettled(promises) : Promise.resolve();
+  return promises.length
+    ? Promise.allSettled(promises).then()
+    : Promise.resolve();
 }
 
 /**
@@ -123,14 +138,17 @@ export function bookStyleSheets(chunkName, chunkGroups, refCount) {
  * the reference counter).
  * @param {string} chunkName
  */
-export function freeStyleSheets(chunkName, chunkGroups) {
+export function freeStyleSheets(
+  chunkName: string,
+  chunkGroups: ChunkGroupsT,
+) {
   const assets = chunkGroups[chunkName];
   for (let i = 0; i < assets.length; ++i) {
     const asset = assets[i];
     if (asset.endsWith('.css')) {
       const path = `${getPublicPath()}/${asset}`;
       if (--refCounts[path] <= 0) {
-        document.head.querySelector(`link[href="${path}"]`).remove();
+        document.head.querySelector(`link[href="${path}"]`)!.remove();
       }
     }
   }
@@ -139,20 +157,30 @@ export function freeStyleSheets(chunkName, chunkGroups) {
 // Holds the set of chunk names already used for splitComponent() calls.
 const usedChunkNames = new Set();
 
+type ComponentOrModule<PropsT> = React.ComponentType<PropsT> | {
+  default: React.ComponentType<PropsT>,
+};
+
 /**
  * Given an async component retrieval function `getComponent()` it creates
  * a special "code split" component, which uses <Suspense> to asynchronously
  * load on demand the code required by `getComponent()`.
- * @param {object} options
- * @param {string} options.chunkName
+ * @param options
+ * @param options.chunkName
  * @param {function} options.getComponent
  * @param {React.Element} [options.placeholder]
  * @return {React.ElementType}
  */
-export default function splitComponent({
+export default function splitComponent<
+  ComponentPropsT extends { children?: React.ReactNode },
+>({
   chunkName,
   getComponent,
   placeholder,
+}: {
+  chunkName: string;
+  getComponent: () => Promise<ComponentOrModule<ComponentPropsT>>,
+  placeholder?: React.ReactNode,
 }) {
   // On the client side we can check right away if the chunk name is known.
   if (IS_CLIENT_SIDE) assertChunkName(chunkName, clientChunkGroups);
@@ -163,8 +191,8 @@ export default function splitComponent({
   } else usedChunkNames.add(chunkName);
 
   const LazyComponent = lazy(async () => {
-    let Component = await getComponent();
-    if (Component.default) Component = Component.default;
+    const resolved = await getComponent();
+    const Component = 'default' in resolved ? resolved.default : resolved;
 
     // This pre-loads necessary stylesheets prior to the first mount of
     // the component (the lazy load function is executed by React one at
@@ -173,11 +201,14 @@ export default function splitComponent({
       await bookStyleSheets(chunkName, clientChunkGroups, false);
     }
 
-    const Wrapper = forwardRef(({ children, ...rest }, ref) => {
+    const Wrapper = forwardRef((
+      { children, ...rest }: ComponentPropsT,
+      ref,
+    ) => {
       // On the server side we'll assert the chunk name here,
       // and also push it to the SSR chunks array.
       if (IS_SERVER_SIDE) {
-        const { chunkGroups, chunks } = getSsrContext();
+        const { chunkGroups, chunks } = getSsrContext()!;
         assertChunkName(chunkName, chunkGroups);
         if (!chunks.includes(chunkName)) chunks.push(chunkName);
       }
@@ -189,24 +220,20 @@ export default function splitComponent({
         return () => freeStyleSheets(chunkName, clientChunkGroups);
       }, []);
 
-      return <Component ref={ref} {...rest}>{children}</Component>;
+      return (
+        <Component ref={ref} {...rest as ComponentPropsT}>
+          {children}
+        </Component>
+      );
     });
-
-    Wrapper.propTypes = {
-      children: PT.node,
-    };
-
-    Wrapper.defaultProps = {
-      children: undefined,
-    };
 
     return { default: Wrapper };
   });
 
-  function CodeSplit({ children, ...rest }) {
+  function CodeSplit({ children, ...rest }: ComponentPropsT) {
     return (
       <Suspense fallback={placeholder}>
-        <LazyComponent {...rest}>
+        <LazyComponent {...rest as Parameters<typeof LazyComponent>[0]}>
           {children}
         </LazyComponent>
       </Suspense>

@@ -1,7 +1,7 @@
 {
   "extends": "@tsconfig/recommended",
-  "exclude": ["ts-types/**/*"],
-  "include": ["**/*"],
+  "exclude": ["ts-types/"],
+  "include": [".."],
   "compilerOptions": {
     "jsx": "react-jsx",
     "noEmit": true,
@@ -10,7 +10,6 @@
       "src/*": ["../src/*"],
       "utils/*": ["../src/shared/utils/*"]
     },
-    "rootDirs": [".."]
+    "strict": true,
   },
-  "strict": true,
 }
