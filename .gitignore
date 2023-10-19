@@ -1,4 +1,5 @@
 /__coverage__
 /build/*
+/config/babel
 /dr.pogodin-react-utils-*.*.*.tgz
 /node_modules
