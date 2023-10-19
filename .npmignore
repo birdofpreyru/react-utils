@@ -11,3 +11,6 @@ dr.pogodin-react-utils-*
 
 # Ignores documentation
 /docs
+
+# Config TS sources
+/config-ts-src

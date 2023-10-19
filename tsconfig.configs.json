@@ -1,0 +1,13 @@
+// TS configuration for configs pre-building from TS sources.
+
+{
+  "extends": "@tsconfig/recommended",
+  "include": ["config-ts-src"],
+  "compilerOptions": {
+    "declaration": true,
+    "jsx": "react-jsx",
+    "rootDir": "config-ts-src",
+    "outDir": "config",
+    "strict": true
+  }
+}

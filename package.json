@@ -176,7 +176,8 @@
   "name": "@dr.pogodin/react-utils",
   "repository": "github:birdofpreyru/react-utils",
   "scripts": {
-    "build": "rimraf build && node bin/build -t development --lib && node bin/build -t production --lib",
+    "build": "npm run build:configs && rimraf build && node bin/build -t development --lib && node bin/build -t production --lib",
+    "build:configs": "tsc --project tsconfig.configs.json",
     "jest:1": "NODE_CONFIG_ENV=test jest --no-cache -w 1 --config config/jest/default.js --shard=1/4",
     "jest:2": "NODE_CONFIG_ENV=test jest --no-cache -w 1 --config config/jest/default.js --shard=2/4",
     "jest:3": "NODE_CONFIG_ENV=test jest --no-cache -w 1 --config config/jest/default.js --shard=3/4",
