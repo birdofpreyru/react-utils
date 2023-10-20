@@ -15,25 +15,39 @@ import {
 /* Polyfill required by ReactJS. */
 import 'raf/polyfill';
 
-import serverFactory from './server';
+import { type Configuration } from 'webpack';
+
+import serverFactory, { type OptionsT as ServerOptionsT } from './server';
 import { SCRIPT_LOCATIONS, newDefaultLogger } from './renderer';
 
-export { getDefaultCspSettings } from './server';
+export {
+  getDefaultCspSettings,
+} from './server';
+
 export * from './utils';
 
 /**
  * Normalizes a port into a number, string, or false.
  * TODO: Drop this function?
- * @ignore
- * @param {String} value Port name or number.
+ * @param value Port name or number.
  * @return Port number (Number), name (String), or false.
  */
-function normalizePort(value) {
+function normalizePort(value: number | string) {
   const port = toNumber(value);
   if (isFinite(port)) return port; /* port number */
   if (!isNumber(port)) return value; /* named pipe */
   return false;
 }
+
+type OptionsT = ServerOptionsT & {
+  https?: {
+    cert: string;
+    key: string;
+  },
+
+  // TODO: Should we limit it to number | string, and throw if it is different value?
+  port?: false | number | string;
+};
 
 /**
  * Creates and launches web-server for ReactJS application. Allows zero
@@ -154,12 +168,14 @@ function normalizePort(value) {
  * @return {Promise<{ expressServer: object, httpServer: object }>} Resolves to
  * an object with created Express and HTTP servers.
  */
-async function launch(webpackConfig, options) {
+async function launch(webpackConfig: Configuration, options: OptionsT) {
   /* Options normalization. */
   const ops = options ? cloneDeep(options) : {};
   ops.port = normalizePort(ops.port || process.env.PORT || 3000);
   defaults(ops, { httpsRedirect: true });
 
+  // TODO: Need a separate type for normalized options, which guarantees
+  // the logger is set!
   if (ops.logger === undefined) {
     ops.logger = newDefaultLogger({
       defaultLogLevel: ops.defaultLoggerLogLevel,
@@ -169,7 +185,7 @@ async function launch(webpackConfig, options) {
   /* Creates servers, resolves and sets the port. */
   const expressServer = await serverFactory(webpackConfig, ops);
 
-  let httpServer;
+  let httpServer: http.Server;
   if (ops.https) {
     httpServer = https.createServer({
       cert: ops.https.cert,
@@ -178,17 +194,17 @@ async function launch(webpackConfig, options) {
   } else httpServer = http.createServer(expressServer);
 
   /* Sets error handler for HTTP(S) server. */
-  httpServer.on('error', (error) => {
-    if (error.syscall !== 'listen') throw error;
+  httpServer.on('error', (error: Error) => {
+    if ((error as any).syscall !== 'listen') throw error;
     const bind = isString(ops.port) ? `Pipe ${ops.port}` : `Port ${ops.port}`;
 
     /* Human-readable message for some specific listen errors. */
-    switch (error.code) {
+    switch ((error as any).code) {
       case 'EACCES':
-        ops.logger.error(`${bind} requires elevated privileges`);
+        ops.logger!.error(`${bind} requires elevated privileges`);
         return process.exit(1);
       case 'EADDRINUSE':
-        ops.logger.error(`${bind} is already in use`);
+        ops.logger!.error(`${bind} is already in use`);
         return process.exit(1);
       default:
         throw error;
@@ -197,9 +213,9 @@ async function launch(webpackConfig, options) {
 
   /* Listening event handler for HTTP(S) server. */
   httpServer.on('listening', () => {
-    const addr = httpServer.address();
+    const addr = httpServer.address()!;
     const bind = isString(addr) ? `pipe ${addr}` : `port ${addr.port}`;
-    ops.logger.info(`Server listening on ${bind} in ${
+    ops.logger!.info(`Server listening on ${bind} in ${
       process.env.NODE_ENV} mode`);
   });
 

@@ -5,12 +5,12 @@
 import fs from 'fs';
 import path from 'path';
 
-import { type RequestHandler } from 'express';
+import { type Request, type RequestHandler } from 'express';
 import { Writable } from 'stream';
 import { brotliCompress, brotliDecompress } from 'zlib';
 import winston from 'winston';
 
-import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
+import { GlobalStateProvider, SsrContext } from '@dr.pogodin/react-global-state';
 import { timer } from '@dr.pogodin/js-utils';
 
 import {
@@ -26,20 +26,70 @@ import {
 import config from 'config';
 import forge from 'node-forge';
 
-import { renderToPipeableStream } from 'react-dom/server';
+import { type PipeableStream, renderToPipeableStream } from 'react-dom/server';
 import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom/server';
 import serializeJs from 'serialize-javascript';
-import { setBuildInfo } from 'utils/isomorphy/buildInfo';
+import { type BuildInfoT, setBuildInfo } from 'utils/isomorphy/buildInfo';
+
+import { type ChunkGroupsT, type SsrContextT } from 'utils/globalState';
+
+import { type Configuration } from 'webpack';
 
 import Cache from './Cache';
 
 const sanitizedConfig = omit(config, 'SECRET');
 
-export const SCRIPT_LOCATIONS = {
-  BODY_OPEN: 'BODY_OPEN',
-  DEFAULT: 'DEFAULT',
-  HEAD_OPEN: 'HEAD_OPEN',
+// Note: These type definitions for logger are copied from Winston logger,
+// then simplified to make it easier to fit an alternative logger into this
+// interface.
+interface LogMethodI {
+  (level: string, message: string, ...meta: any[]): void;
+}
+interface LeveledLogMethodI {
+  (message: string, ...meta: any[]): void;
+}
+
+export interface LoggerI {
+  debug: LeveledLogMethodI;
+  error: LeveledLogMethodI;
+  info: LeveledLogMethodI;
+  log: LogMethodI;
+  warn: LeveledLogMethodI;
+}
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export enum SCRIPT_LOCATIONS {
+  BODY_OPEN = 'BODY_OPEN',
+  DEFAULT = 'DEFAULT',
+  HEAD_OPEN = 'HEAD_OPEN',
+}
+
+class ServerSsrContext<StateT>
+  extends SsrContext<StateT>
+  implements SsrContextT<StateT> {
+  chunkGroups: ChunkGroupsT;
+
+  chunks: string[] = [];
+
+  req: Request;
+
+  status: number = 200;
+
+  constructor(
+    req: Request,
+    chunkGroups: ChunkGroupsT,
+    initialState?: StateT,
+  ) {
+    super(cloneDeep(initialState) || ({} as StateT));
+    this.chunkGroups = chunkGroups;
+    this.req = req;
+  }
+}
+
+type ScriptT = {
+  code: string;
+  location: SCRIPT_LOCATIONS;
 };
 
 /**
@@ -48,13 +98,12 @@ export const SCRIPT_LOCATIONS = {
  * ".build-info" file in the context folder specified in Webpack config.
  * At the moment, that file contains build timestamp and a random 32-bit key,
  * suitable for cryptographical use.
- * @ignore
- * @param {String} context Webpack context path used during the build.
- * @return {Object} Resolves to the build-time information.
+ * @param context Webpack context path used during the build.
+ * @return Resolves to the build-time information.
  */
-function getBuildInfo(context) {
+function getBuildInfo(context: string) {
   const url = path.resolve(context, '.build-info');
-  return JSON.parse(fs.readFileSync(url));
+  return JSON.parse(fs.readFileSync(url, 'utf8'));
 }
 
 /**
@@ -62,15 +111,14 @@ function getBuildInfo(context) {
  * by Webpack during the compilation.
  * It will not work for development builds, where these stats should be captured
  * via compilator callback.
- * @ignore
- * @param {string} buildDir
- * @return {object}
+ * @param buildDir
+ * @return
  */
-function readChunkGroupsJson(buildDir) {
+function readChunkGroupsJson(buildDir: string) {
   const url = path.resolve(buildDir, '__chunk_groups__.json');
   let res;
   try {
-    res = JSON.parse(fs.readFileSync(url));
+    res = JSON.parse(fs.readFileSync(url, 'utf8'));
   } catch (err) {
     res = null;
   }
@@ -79,14 +127,13 @@ function readChunkGroupsJson(buildDir) {
 
 /**
  * Prepares a new Cipher for data encryption.
- * @ignore
- * @param {String} key Encryption key (32-bit random key is expected, see
+ * @param key Encryption key (32-bit random key is expected, see
  *  node-forge documentation, in case of doubts).
- * @return {Promise} Resolves to the object with two fields:
+ * @return Resolves to the object with two fields:
  *  1. cipher - a new Cipher, ready for encryption;
  *  2. iv - initial vector used by the cipher.
  */
-function prepareCipher(key) {
+function prepareCipher(key: string) {
   return new Promise((resolve, reject) => {
     forge.random.getBytes(32, (err, iv) => {
       if (err) reject(err);
@@ -106,7 +153,7 @@ function prepareCipher(key) {
  * @return {boolean}
  * @ignore
  */
-export function isBrotliAcceptable(req) {
+export function isBrotliAcceptable(req: Request) {
   const acceptable = req.get('accept-encoding');
   if (acceptable) {
     const ops = acceptable.split(',');
@@ -135,7 +182,7 @@ export function isBrotliAcceptable(req) {
  *  HEAD_OPEN: string[];
  * }}
  */
-function groupExtraScripts(scripts = []) {
+function groupExtraScripts(scripts: Array<string | ScriptT> = []) {
   const res = {
     [SCRIPT_LOCATIONS.BODY_OPEN]: '',
     [SCRIPT_LOCATIONS.DEFAULT]: '',
@@ -191,28 +238,60 @@ export function newDefaultLogger({
   });
 }
 
+type ConfigT = {
+  [key: string]: ConfigT | string;
+};
+
+type BeforeRenderResT = {
+  configToInject?: ConfigT;
+  extraScripts?: Array<ScriptT | string>;
+  initialState?: any;
+};
+
+type BeforeRenderT =
+(req: Request, config: ConfigT) => BeforeRenderResT | Promise<BeforeRenderResT>;
+
+type CacheRefT = {
+  key: string;
+  maxage?: number;
+};
+
+export type OptionsT = {
+  Application?: React.ComponentType;
+  beforeRender?: BeforeRenderT;
+  buildInfo?: BuildInfoT;
+  defaultLoggerLogLevel?: string;
+  favicon?: string;
+  logger?: LoggerI;
+  maxSsrRounds?: number;
+  noCsp?: boolean;
+  staticCacheSize?: number;
+  ssrTimeout?: number;
+  staticCacheController?: (req: Request) => CacheRefT;
+};
+
 /**
  * Creates the middleware.
- * @param {object} webpackConfig
- * @param {object} options Additional options:
- * @param {Component} [options.Application] The root ReactJS component of
+ * @param webpackConfig
+ * @param options Additional options:
+ * @param [options.Application] The root ReactJS component of
  * the app to use for the server-side rendering. When not provided
  * the server-side rendering is disabled.
- * @param {object} [options.buildInfo] "Build info" object to use. If provided,
+ * @param [options.buildInfo] "Build info" object to use. If provided,
  *  it will be used, instead of trying to load from the filesystem the one
  *  generated by the Webpack build. It is intended for test environments,
  *  where passing this stuff via file system is no bueno.
- * @param {boolean} [options.favicon] `true` will include favicon
+ * @param [options.favicon] `true` will include favicon
  *  link into the rendered HTML templates.
- * @param {boolean} [options.noCsp] `true` means that no
+ * @param [options.noCsp] `true` means that no
  * Content-Security-Policy (CSP) is used by server, thus the renderer
  * may cut a few corners.
- * @param {number} [options.maxSsrRounds=10] Maximum number of SSR rounds.
- * @param {number} [options.ssrTimeout=1000] SSR timeout in milliseconds,
+ * @param [options.maxSsrRounds=10] Maximum number of SSR rounds.
+ * @param [options.ssrTimeout=1000] SSR timeout in milliseconds,
  * defaults to 1 second.
- * @param {number} [options.staticCacheSize=1.e7] The maximum
+ * @param [options.staticCacheSize=1.e7] The maximum
  * static cache size in bytes. Defaults to ~10 MB.
- * @param {function} [options.staticCacheController] When given, it activates,
+ * @param [options.staticCacheController] When given, it activates,
  * and controls the static caching of generated HTML markup. When this function
  * is provided, on each incoming request it is triggered with the request
  * passed in as the argument. To attempt to serve the response from the cache
@@ -220,10 +299,13 @@ export function newDefaultLogger({
  * - `key: string` &ndash; the cache key for the response;
  * - `maxage?: number` &ndash; the maximum age of cached result in ms.
  *   If undefined - infinite age is assumed.
- * @return {function} Created middleware.
+ * @return Created middleware.
  */
-export default function factory(webpackConfig, options): RequestHandler {
-  const ops = defaults(clone(options), {
+export default function factory(
+  webpackConfig: Configuration,
+  options: OptionsT,
+): RequestHandler {
+  const ops: OptionsT = defaults(clone(options), {
     beforeRender: () => Promise.resolve({}),
     maxSsrRounds: 10,
     ssrTimeout: 1000,
@@ -239,19 +321,27 @@ export default function factory(webpackConfig, options): RequestHandler {
     });
   }
 
-  const buildInfo = ops.buildInfo || getBuildInfo(webpackConfig.context);
+  const buildInfo = ops.buildInfo || getBuildInfo(webpackConfig.context!);
   setBuildInfo(buildInfo);
 
   // publicPath from webpack.output has a trailing slash at the end.
-  const { publicPath, path: outputPath } = webpackConfig.output;
+  const { publicPath, path: outputPath } = webpackConfig.output!;
 
   const manifestLink = fs.existsSync(`${outputPath}/manifest.json`)
     ? `<link rel="manifest" href="${publicPath}manifest.json">` : '';
 
-  const cache = ops.staticCacheController
-    ? new Cache(ops.staticCacheSize) : null;
+  interface BufferWithNonce extends Buffer {
+    nonce: string;
+  }
 
-  const CHUNK_GROUPS = readChunkGroupsJson(outputPath);
+  const cache = ops.staticCacheController
+    ? new Cache<{
+      buffer: BufferWithNonce;
+      status: number;
+    }>(ops.staticCacheSize!)
+    : null;
+
+  const CHUNK_GROUPS = readChunkGroupsJson(outputPath!);
 
   return async (req, res, next) => {
     try {
@@ -260,9 +350,9 @@ export default function factory(webpackConfig, options): RequestHandler {
 
       res.cookie('csrfToken', req.csrfToken());
 
-      let cacheRef;
+      let cacheRef: CacheRefT | undefined;
       if (cache) {
-        cacheRef = ops.staticCacheController(req);
+        cacheRef = ops.staticCacheController!(req);
         if (cacheRef) {
           const data = cache.get(cacheRef);
           if (data !== null) {
@@ -273,7 +363,7 @@ export default function factory(webpackConfig, options): RequestHandler {
               if (status !== 200) res.status(status);
               res.send(buffer);
             } else {
-              await new Promise((done, failed) => {
+              await new Promise<void>((done, failed) => {
                 brotliDecompress(buffer, (error, html) => {
                   if (error) failed(error);
                   else {
@@ -283,7 +373,7 @@ export default function factory(webpackConfig, options): RequestHandler {
                       // .replaceAll() method instead relying on reg. expression for
                       // global matching.
                       const regex = new RegExp(buffer.nonce, 'g');
-                      h = h.replace(regex, req.nonce);
+                      h = h.replace(regex, (req as any).nonce);
                     }
                     if (status !== 200) res.status(status);
                     res.send(h);
@@ -305,8 +395,8 @@ export default function factory(webpackConfig, options): RequestHandler {
         cipher,
         iv,
       }] = await Promise.all([
-        ops.beforeRender(req, sanitizedConfig),
-        prepareCipher(buildInfo.key),
+        ops.beforeRender!(req, sanitizedConfig as any),
+        prepareCipher(buildInfo.key) as Promise<any>,
       ]);
 
       let helmet;
@@ -315,7 +405,7 @@ export default function factory(webpackConfig, options): RequestHandler {
       // These data come from the Webpack compilation, either from the stats
       // attached to the request (in dev mode), or from a file output during
       // the build (in prod mode).
-      let chunkGroups;
+      let chunkGroups: ChunkGroupsT;
       const webpackStats = get(res.locals, 'webpack.devMiddleware.stats');
       if (webpackStats) {
         chunkGroups = mapValues(
@@ -323,36 +413,33 @@ export default function factory(webpackConfig, options): RequestHandler {
             all: false,
             chunkGroups: true,
           }).namedChunkGroups,
-          (item) => item.assets.map(({ name }) => name),
+          (item) => item.assets.map(({ name }: { name: string }) => name),
         );
       } else if (CHUNK_GROUPS) chunkGroups = CHUNK_GROUPS;
       else chunkGroups = {};
 
       /* Optional server-side rendering. */
-      let App = ops.Application;
-      const ssrContext = {
-        req,
-        state: cloneDeep(initialState || {}),
-
-        // Array of chunk names encountered during the rendering.
-        chunks: [],
-
-        chunkGroups,
-      };
-      let stream;
+      const App = ops.Application;
+      let appHtmlMarkup: string = '';
+      const ssrContext = new ServerSsrContext(req, initialState, chunkGroups);
+      let stream: PipeableStream;
       if (App) {
         const ssrStart = Date.now();
 
+        // TODO: Somehow, without it TS does not realise that
+        // App has been checked to exist.
+        const App2 = App;
+
         const renderPass = async () => {
           ssrContext.chunks = [];
-          return new Promise((resolve, reject) => {
+          return new Promise<PipeableStream>((resolve, reject) => {
             const pipeableStream = renderToPipeableStream(
               <GlobalStateProvider
                 initialState={ssrContext.state}
                 ssrContext={ssrContext}
               >
                 <StaticRouter location={req.url}>
-                  <App />
+                  <App2 />
                 </StaticRouter>
               </GlobalStateProvider>,
               {
@@ -365,13 +452,13 @@ export default function factory(webpackConfig, options): RequestHandler {
 
         let ssrRound = 0;
         let bailed = false;
-        for (; ssrRound < ops.maxSsrRounds; ++ssrRound) {
+        for (; ssrRound < ops.maxSsrRounds!; ++ssrRound) {
           stream = await renderPass(); // eslint-disable-line no-await-in-loop
 
           if (!ssrContext.dirty) break;
 
           /* eslint-disable no-await-in-loop */
-          const timeout = ops.ssrTimeout + ssrStart - Date.now();
+          const timeout = ops.ssrTimeout! + ssrStart - Date.now();
           bailed = timeout <= 0 || !await Promise.race([
             Promise.allSettled(ssrContext.pending),
             timer(timeout).then(() => false),
@@ -391,12 +478,11 @@ export default function factory(webpackConfig, options): RequestHandler {
             : `SSR bailed out after ${ops.maxSsrRounds} round(s)`;
         } else logMsg = `SSR completed in ${ssrRound + 1} round(s)`;
 
-        ops.logger.log(ssrContext.dirty ? 'warn' : 'info', logMsg);
+        ops.logger!.log(ssrContext.dirty ? 'warn' : 'info', logMsg);
 
-        App = '';
-        stream.pipe(new Writable({
+        stream!.pipe(new Writable({
           write: (chunk, _, done) => {
-            App += chunk.toString();
+            appHtmlMarkup += chunk.toString();
             done();
           },
         }));
@@ -423,7 +509,7 @@ export default function factory(webpackConfig, options): RequestHandler {
       cipher.finish();
       const INJ = forge.util.encode64(`${iv}${cipher.output.data}`);
 
-      const chunkSet = new Set();
+      const chunkSet = new Set<string>();
 
       // TODO: "main" chunk has to be added explicitly,
       // because unlike all other chunks they are not managed by <CodeSplit>
@@ -481,7 +567,7 @@ export default function factory(webpackConfig, options): RequestHandler {
           </head>
           <body>
             ${grouppedExtraScripts[SCRIPT_LOCATIONS.BODY_OPEN]}
-            <div id="react-view">${App || ''}</div>
+            <div id="react-view">${appHtmlMarkup}</div>
             ${scriptChunkString}
             ${grouppedExtraScripts[SCRIPT_LOCATIONS.DEFAULT]}
           </body>
@@ -493,12 +579,13 @@ export default function factory(webpackConfig, options): RequestHandler {
       if (cacheRef && status < 500) {
         // Note: waiting for the caching to complete is not strictly necessary,
         // but it greately simplifies testing, and error reporting.
-        await new Promise((done, failed) => {
+        await new Promise<void>((done, failed) => {
           brotliCompress(html, (error, buffer) => {
+            const b = buffer as BufferWithNonce;
             if (error) failed(error);
             else {
-              buffer.nonce = req.nonce; // eslint-disable-line no-param-reassign
-              cache.add({ buffer, status }, cacheRef.key);
+              b.nonce = (req as any).nonce; // eslint-disable-line no-param-reassign
+              cache!.add({ buffer: b, status }, cacheRef!.key, buffer.length);
               done();
             }
           });

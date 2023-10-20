@@ -28,9 +28,11 @@ import loggerMiddleware from 'morgan';
 import requestIp from 'request-ip';
 import { v4 as uuid } from 'uuid';
 import { type Configuration } from 'webpack';
-import winston from 'winston';
 
-import rendererFactory from './renderer';
+import rendererFactory, {
+  type LoggerI,
+  type OptionsT as RendererOptionsT,
+} from './renderer';
 
 import {
   CODES,
@@ -46,10 +48,6 @@ interface RequestT extends Request {
   cspNonce: string;
   nonce: string;
 }
-
-type ServerT = Express & {
-  logger: winston.Logger;
-};
 
 /**
  * Default Content Security Policy settings.
@@ -99,7 +97,11 @@ export function getDefaultCspSettings() {
   return cloneDeep(defaultCspSettings);
 }
 
-type OptionsT = {
+type ServerT = Express & {
+  logger: LoggerI;
+};
+
+export type OptionsT = RendererOptionsT & {
   beforeExpressJsError?: (server: ServerT) => Promise<boolean>;
   beforeExpressJsSetup?: (server: ServerT) => Promise<void>;
   cspSettingsHook?: (
@@ -107,10 +109,7 @@ type OptionsT = {
     req: Request,
   ) => CspOptionsT;
   devMode?: boolean;
-  favicon?: string;
   httpsRedirect?: boolean;
-  logger?: winston.Logger;
-  noCsp?: boolean;
   onExpressJsSetup?: (server: ServerT) => Promise<void>;
 };
 
@@ -118,7 +117,7 @@ export default async function factory(
   webpackConfig: Configuration,
   options: OptionsT,
 ) {
-  const rendererOps = pick(options, [
+  const rendererOps: RendererOptionsT = pick(options, [
     'Application',
     'beforeRender',
     'favicon',

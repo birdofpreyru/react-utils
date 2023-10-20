@@ -16,7 +16,7 @@ document.write(global.ssrMarkup || '');
 const container = document.querySelector('#react-view');
 
 const fs = global.webpackOutputFs;
-const outputPath = global.webpackConfig.output.path;
+const outputPath = global.webpackConfig!.output!.path;
 
 it('emits expected CSS', () => {
   const css = fs?.readFileSync(`${outputPath}/main.css`, 'utf8');

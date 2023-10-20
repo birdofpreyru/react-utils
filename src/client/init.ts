@@ -4,9 +4,17 @@
 
 /* global BUILD_INFO, window */
 
-import { getBuildInfo } from 'utils/isomorphy/buildInfo';
+import { type BuildInfoT, getBuildInfo } from 'utils/isomorphy/buildInfo';
 
 const buildInfo = getBuildInfo();
+
+// TODO: Should be moved into buildInfo module?
+declare global {
+  interface Window {
+  // eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle
+    __DEV_BUILD_INFO__: BuildInfoT | undefined;
+  }
+}
 
 if (process.env.NODE_ENV !== 'production') {
   console.warn('Dev mode: "BUILD_INFO" attached to the global "window"');

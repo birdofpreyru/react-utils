@@ -2,7 +2,12 @@ import { setBuildInfo } from 'utils/isomorphy/buildInfo';
 
 const m = require('utils/isomorphy');
 
-setBuildInfo({ timestamp: 'Test build timestamp' });
+setBuildInfo({
+  key: '',
+  publicPath: '',
+  timestamp: 'Test build timestamp',
+  useServiceWorker: false,
+});
 
 afterEach(() => {
   process.env.NODE_ENV = 'test';

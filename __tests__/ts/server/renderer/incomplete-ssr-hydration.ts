@@ -18,7 +18,7 @@ document.write(global.ssrMarkup || '');
 const markup = document.querySelector('#react-view')?.innerHTML;
 
 const fs = global.webpackOutputFs;
-const outputPath = global.webpackConfig.output.path;
+const outputPath = global.webpackConfig!.output!.path;
 const jsFilename = global.webpackStats?.namedChunkGroups?.main?.assets?.[0].name;
 
 it('generates expected SSR markup', () => {

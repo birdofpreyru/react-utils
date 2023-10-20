@@ -6,7 +6,13 @@ import serverFactory, { type CspOptionsT } from 'server/server';
 import { setBuildInfo } from 'utils/isomorphy/buildInfo';
 
 // Test logger, which omits regular info message from the console.
-const logger = { info: noop, log: noop };
+const logger = {
+  debug: noop,
+  error: noop,
+  info: noop,
+  log: noop,
+  warn: noop,
+};
 
 jest.mock('serve-favicon', () => jest.fn(
   () => (req: Request, res: Response, next: NextFunction) => next()
@@ -76,7 +82,7 @@ describe('Server is functional', () => {
         maxSsrRounds: 3,
 
         // Use cache in tests as well.
-        staticCacheController: () => 'key',
+        staticCacheController: () => ({ key: 'key' }),
       }),
     );
   });

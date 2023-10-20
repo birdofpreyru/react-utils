@@ -13,12 +13,12 @@ export type InjT = {
   ISTATE?: unknown;
 };
 
-export type SsrContextT<StateT> = SsrContext<StateT> & {
+export interface SsrContextT<StateT> extends SsrContext<StateT> {
   chunkGroups: ChunkGroupsT;
   chunks: string[];
   req: Request,
   status: number;
-};
+}
 
 const {
   getSsrContext,

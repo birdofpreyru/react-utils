@@ -14,7 +14,7 @@ import { act } from 'react-dom/test-utils';
 import { global } from 'src/shared/utils/jest/E2eSsrEnv';
 
 const fs = global.webpackOutputFs;
-const outputPath = global.webpackConfig.output.path;
+const outputPath = global.webpackConfig!.output!.path;
 const jsPath = global.webpackStats?.assetsByChunkName?.main[0];
 
 document.write(global.ssrMarkup || '');

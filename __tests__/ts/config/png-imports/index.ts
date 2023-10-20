@@ -9,7 +9,7 @@ import { act } from 'react-dom/test-utils';
 
 import { global } from 'utils/jest/E2eSsrEnv';
 
-const outputPath = global.webpackConfig.output.path;
+const outputPath = global.webpackConfig!.output!.path;
 
 let container: HTMLElement | null;
 

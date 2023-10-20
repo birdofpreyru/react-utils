@@ -8,7 +8,7 @@
 import { global } from 'src/shared/utils/jest/E2eSsrEnv';
 
 const fs = global.webpackOutputFs;
-const outputPath = global.webpackConfig.output.path;
+const outputPath = global.webpackConfig!.output!.path;
 
 it('emits expected CSS', () => {
   const css = fs?.readFileSync(`${outputPath}/style.css`, 'utf8');

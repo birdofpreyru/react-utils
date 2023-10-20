@@ -35,7 +35,7 @@ const SampleComponent3 = splitComponent({
 });
 
 export default function SampleCodeSplit() {
-  const [testKey] = useGlobalState('test.key', 'testValue');
+  const [testKey] = useGlobalState<1, string>('test.key', 'testValue');
   return (
     <div styleName="container">
       <h1>SampleCodeSplit</h1>

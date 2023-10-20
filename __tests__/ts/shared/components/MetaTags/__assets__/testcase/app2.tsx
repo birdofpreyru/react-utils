@@ -3,10 +3,10 @@ import { useContext } from 'react';
 
 import MetaTags from 'components/MetaTags';
 
-export const MODES = {
-  BASIC_NO_OVERRIDE: 0,
-  BASIC_WITH_OVERRIDE: 1,
-};
+export enum MODES {
+  BASIC_NO_OVERRIDE = 0,
+  BASIC_WITH_OVERRIDE = 1,
+}
 
 function Component() {
   const { title, description } = useContext(MetaTags.Context);
@@ -21,7 +21,11 @@ function Component() {
   );
 }
 
-export default function Application({ mode }) {
+type PropsT = {
+  mode: MODES;
+};
+
+export default function Application({ mode }: PropsT) {
   let component;
   switch (mode) {
     case MODES.BASIC_WITH_OVERRIDE: component = <Component />; break;

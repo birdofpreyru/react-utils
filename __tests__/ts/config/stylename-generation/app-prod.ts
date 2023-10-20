@@ -15,7 +15,7 @@ document.write(global.ssrMarkup || '');
 const container = document.querySelector('#react-view');
 
 const fs = global.webpackOutputFs;
-const outputPath = global.webpackConfig.output.path;
+const outputPath = global.webpackConfig!.output!.path;
 
 let jsFile: string | undefined;
 let cssFile: string | undefined;

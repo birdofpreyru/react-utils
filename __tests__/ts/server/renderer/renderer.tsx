@@ -75,7 +75,13 @@ async function coreTest(webpackConfig: Configuration, options = {}) {
   expect(() => {
     renderer = factory(webpackConfig, {
       ...options,
-      logger: { info: noop, log: noop },
+      logger: {
+        debug: noop,
+        error: noop,
+        info: noop,
+        log: noop,
+        warn: noop,
+      },
     });
   }).not.toThrow();
   expect(renderer).toBeInstanceOf(Function);
@@ -227,7 +233,7 @@ it('correctly tests if brotli-encoded responses are acceptable', () => {
   const res = (header: string) => isBrotliAcceptable({
     get: (name: string) => (name.toLowerCase() === 'accept-encoding'
       ? header : undefined),
-  });
+  } as Request);
   expect(res('')).toBe(false);
   expect(res('*')).toBe(true);
   expect(res('br')).toBe(true);

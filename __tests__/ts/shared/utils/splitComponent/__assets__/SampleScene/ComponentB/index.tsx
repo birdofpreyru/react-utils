@@ -11,8 +11,13 @@ import { useGlobalState } from '@dr.pogodin/react-global-state';
 
 import './style.scss';
 
-export default function SampleComponent({ children, prop }) {
-  const [testKey] = useGlobalState('test.key');
+type PropsT = {
+  children?: React.ReactNode;
+  prop?: string;
+};
+
+export default function SampleComponent({ children, prop }: PropsT) {
+  const [testKey] = useGlobalState<1, string>('test.key', '');
   return (
     <Routes>
       <Route

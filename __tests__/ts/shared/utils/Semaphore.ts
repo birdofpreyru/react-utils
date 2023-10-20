@@ -16,7 +16,7 @@ describe('constructor', () => {
   });
 
   it('casts constructor argument to boolean', () => {
-    const sem = new Semaphore('TRUE');
+    const sem = new Semaphore(('TRUE' as unknown) as boolean);
     expect(sem.ready).toBe(true);
   });
 });
@@ -63,10 +63,10 @@ describe('concurrent use', () => {
 
   test('.waitReady() can be used for mutual exclusion', async () => {
     const dT = 30;
-    const signals = [];
+    const signals: string[] = [];
     const sem = new Semaphore();
 
-    const newFlow = async (signal) => {
+    const newFlow = async (signal: string) => {
       for (let i = 1; i <= 2; ++i) {
         await sem.waitReady(true);
         signals.push(`${signal}-${i}`);
@@ -92,10 +92,10 @@ describe('concurrent use', () => {
 
   test('.seize() can be used for mutual exclusion', async () => {
     const dT = 30;
-    const signals = [];
+    const signals: string[] = [];
     const sem = new Semaphore();
 
-    const newFlow = async (signal) => {
+    const newFlow = async (signal: string) => {
       for (let i = 1; i <= 2; ++i) {
         await sem.seize();
         expect(sem.ready).toBe(false);
@@ -123,9 +123,9 @@ describe('concurrent use', () => {
   test(
     '.waitReady() does not skip the drain queue when the semaphore is ready',
     async () => {
-      const signals = [];
+      const signals: string[] = [];
       const sem = new Semaphore();
-      const newFlow = async (signal) => {
+      const newFlow = async (signal: string) => {
         await sem.waitReady();
         signals.push(signal);
       };

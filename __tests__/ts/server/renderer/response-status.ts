@@ -19,11 +19,17 @@ let mockStatus: number;
 
 beforeAll(() => {
   renderer = factory(mockWebpackConfig(), {
-    Application: () => {
+    Application: (): undefined => {
       const context = getSsrContext()!;
       context.status = mockStatus;
     },
-    logger: { info: noop, log: noop },
+    logger: {
+      debug: noop,
+      error: noop,
+      info: noop,
+      log: noop,
+      warn: noop,
+    },
     staticCacheController: cacheController,
   });
 });

@@ -27,6 +27,12 @@ const {
   getLocalIdent,
 } = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
 
+type OptionsT = {
+  context: string;
+  dontUseProgressPlugin?: boolean;
+  fs: typeof nodeFs;
+};
+
 /**
  * Creates a new Webpack config object, and performs some auxiliary operations
  * on the way.
@@ -37,14 +43,14 @@ const {
  * compilation step.
  * @param {object} [ops.babelLoaderOptions] Overrides for default Babel options
  * of JSX and SVG files loader.
- * @param {string} ops.context Base URL for resolution of relative config paths.
+ * @param ops.context Base URL for resolution of relative config paths.
  * @param {string} [ops.cssLocalIdent=hash:base64:6] The template for
  * CSS classnames generation by the Webpack's `css-loader`; it is passed into
  * the `localIdentName` param of the loader. It should match the corresponding
  * setting in the Babel config.
  * @param {boolean} [ops.dontEmitBuildInfo] If set the `.build-info` file won't
  * be created at the disk during the compilation.
- * @param {boolean} [ops.dontUseProgressPlugin] Set to not include progress
+ * @param [ops.dontUseProgressPlugin] Set to not include progress
  *  plugin.
  * @param {string|string[]} ops.entry Entry points for "main" chunk. The config
  * will prepend them by some necessary polyfills, e.g.:
@@ -134,7 +140,7 @@ const {
  *   - **`rndkey`** &mdash; The value set for `BUILD_RNDKEY`;
  *   - **`timestamp`** &mdash; The value set for `BUILD_TIMESTAMP`.
  */
-export default function configFactory(ops) {
+export default function configFactory(ops: OptionsT) {
   const o = defaults(clone(ops), {
     babelLoaderOptions: {},
     cssLocalIdent: '[hash:base64:6]',
@@ -153,9 +159,9 @@ export default function configFactory(ops) {
     if (isFunction(source)) source = source();
     /* eslint-enable global-require, import/no-dynamic-require */
     const sm = new SM.SitemapStream();
-    source.forEach((item) => sm.write(item));
+    source.forEach((item: string) => sm.write(item));
     sm.end();
-    SM.streamToPromise(sm).then((sitemap) => {
+    SM.streamToPromise(sm).then((sitemap: any) => {
       const outUrl = path.resolve(o.context, o.outputPath);
       if (!fs.existsSync(outUrl)) fs.mkdirSync(outUrl);
       fs.writeFileSync(
@@ -177,7 +183,7 @@ export default function configFactory(ops) {
     // If "true" - attempt to load from the filesystem.
     if (o.keepBuildInfo === true) {
       if (fs.existsSync(buildInfoUrl)) {
-        buildInfo = JSON.parse(fs.readFileSync(buildInfoUrl));
+        buildInfo = JSON.parse(fs.readFileSync(buildInfoUrl, 'utf8'));
       }
 
     // Otherwise we assume .keepBuildInfo value itself is the build info object

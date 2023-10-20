@@ -41,6 +41,7 @@ import { EnvironmentContext, JestEnvironmentConfig } from '@jest/environment';
 
 declare global {
   interface Window {
+    webpackConfig: webpack.Configuration | undefined;
     webpackOutputFs: IFs;
     webpackStats?: webpack.StatsCompilation;
   }
@@ -48,6 +49,7 @@ declare global {
 
 export declare module global {
   export const ssrMarkup: string | undefined;
+  export const ssrStatus: number | undefined;
   export const webpackConfig: webpack.Configuration | undefined;
   export const webpackOutputFs: IFs;
   export const webpackStats: webpack.StatsCompilation | undefined;
@@ -158,7 +160,7 @@ export default class E2eSsrEnv extends JsdomEnv {
       options.Application = require(p)[options.entryExportName || 'default'];
     }
 
-    const renderer = ssrFactory(this.global.webpackConfig, options);
+    const renderer = ssrFactory(this.global.webpackConfig!, options);
     let status = 200; // OK
     const markup = await new Promise((done, fail) => {
       renderer(

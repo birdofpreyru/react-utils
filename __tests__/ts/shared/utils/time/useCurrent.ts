@@ -9,19 +9,21 @@
 
 import { act } from 'react-dom/test-utils';
 
-document.write(global.ssrMarkup);
-const container = document.querySelector('#react-view');
-const fs = global.webpackOutputFs;
-const outputPath = global.webpackConfig.output.path;
+import { global } from 'utils/jest/E2eSsrEnv';
 
-let jsFile;
-global.webpackStats.assets.forEach(({ name }) => {
+document.write(global.ssrMarkup!);
+const container = document.querySelector('#react-view')!;
+const fs = global.webpackOutputFs;
+const outputPath = global.webpackConfig!.output!.path;
+
+let jsFile: string;
+global.webpackStats!.assets!.forEach(({ name }) => {
   if (name.endsWith('.js')) jsFile = name;
 });
 
 it('matches SSR render during hydration', async () => {
   const markup = container.innerHTML;
-  const js = fs.readFileSync(`${outputPath}/${jsFile}`, 'utf8');
-  await act(new Function(js)); // eslint-disable-line no-new-func
-  expect(document.querySelector('#react-view').innerHTML).toBe(markup);
+  const js = fs.readFileSync(`${outputPath}/${jsFile}`, 'utf8') as string;
+  await act(() => new Function(js)); // eslint-disable-line no-new-func
+  expect(document.querySelector('#react-view')!.innerHTML).toBe(markup);
 });

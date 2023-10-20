@@ -15,7 +15,7 @@ import { act } from 'react-dom/test-utils';
 
 import { global } from 'utils/jest/E2eSsrEnv';
 
-const { path: outPath, publicPath } = global.webpackConfig.output;
+const { path: outPath, publicPath } = global.webpackConfig!.output!;
 
 const baseUrl = `http://localhost${publicPath}`;
 

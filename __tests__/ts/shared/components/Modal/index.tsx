@@ -4,12 +4,18 @@ import pretty from 'pretty';
 
 import Modal from 'components/Modal';
 
-import { act, mount, simulate } from 'utils/jest';
+import {
+  type MountedSceneT,
+  act,
+  mount,
+  simulate,
+} from 'utils/jest';
 
 jest.useFakeTimers();
 
-let scene;
-let onCancel;
+let scene: MountedSceneT | null;
+let onCancel: () => void;
+
 beforeEach(() => {
   onCancel = jest.fn();
   scene = mount((
@@ -45,7 +51,7 @@ test('onCancel', () => {
   act(() => {
     jest.runAllTimers();
   });
-  const overlay = document.querySelector('div[aria-label=Cancel]');
+  const overlay = document.querySelector('div[aria-label=Cancel]')!;
   simulate.click(overlay);
   expect(onCancel).toHaveBeenCalled();
 });

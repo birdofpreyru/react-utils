@@ -24,14 +24,20 @@ const WEBPACK_CONFIG = {
   },
 };
 
-async function baseTest(Component) {
+async function baseTest(Component: React.ComponentType) {
   const server = supertest(
     await serverFactory(WEBPACK_CONFIG, {
       Application: Component,
       beforeRender: () => ({
         initialState: { domain: 'https://sample.domain' },
       }),
-      logger: { info: noop, log: noop },
+      logger: {
+        debug: noop,
+        error: noop,
+        info: noop,
+        log: noop,
+        warn: noop,
+      },
       maxSsrRounds: 3,
       ssrTimeout: Number.MAX_VALUE,
     }),

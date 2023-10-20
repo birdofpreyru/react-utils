@@ -21,7 +21,7 @@ describe('withRetries(..)', () => {
     });
   }
 
-  function newSyncTestAction(numFailures) {
+  function newSyncTestAction(numFailures: number) {
     let counter = 0;
     return jest.fn(() => {
       if (counter++ < numFailures) throw Error(FAILURE);

@@ -6,7 +6,14 @@ import { setBuildInfo } from 'utils/isomorphy/buildInfo';
 // TODO: It would be nicer to do all these tests with a proper Webpack build.
 
 mockClientSide();
-setBuildInfo({ timestamp: 'Test build timestamp' });
+
+setBuildInfo({
+  key: '',
+  publicPath: '',
+  timestamp: 'Test build timestamp',
+  useServiceWorker: false,
+});
+
 const m = require('utils/isomorphy');
 
 afterEach(() => {

@@ -5,8 +5,11 @@ import { StaticRouter } from 'react-router-dom/server';
 
 const testTheme = {
   active: 'ACTIVE_CLASS',
+  ad: 'AD_TAG',
   button: 'BUTTON_CLASS',
+  context: 'CONTEXT_TAG',
   disabled: 'DISABLED_CLASS',
+  hoc: 'HOC_TAG',
 };
 
 describe('Matches snapshots', () => {

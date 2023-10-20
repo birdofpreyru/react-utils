@@ -2,7 +2,7 @@ import mockdate from 'mockdate';
 
 jest.useFakeTimers();
 
-let time;
+let time: any;
 
 const TEST_TIME_MS = 1601937279000;
 beforeAll(() => {

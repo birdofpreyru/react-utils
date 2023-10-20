@@ -8,13 +8,21 @@ import { BrowserRouter } from 'react-router-dom';
 
 import getInj from './getInj';
 
+type OptionsT = {
+  dontHydrate?: boolean;
+};
+
 /**
  * Prepares and launches the app at client side.
- * @param {object} Application Root application component
- * @param {object} [options={}] Optional. Additional settings.
+ * @param Application Root application component
+ * @param [options={}] Optional. Additional settings.
  */
-export default function Launch(Application, options = {}) {
+export default function Launch(
+  Application: React.ComponentType,
+  options: OptionsT = {},
+) {
   const container = document.getElementById('react-view');
+  if (!container) throw Error('Failed to find container for React app');
   const scene = (
     <GlobalStateProvider initialState={getInj().ISTATE}>
       <BrowserRouter>

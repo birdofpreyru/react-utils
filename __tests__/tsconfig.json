@@ -6,11 +6,7 @@
     "jsx": "react-jsx",
     "noEmit": true,
     "paths": {
-      "client": ["../src/client"],
-      "components/*": ["../src/shared/components/*"],
-      "server/*": ["../src/server/*"],
-      "src/*": ["../src/*"],
-      "utils/*": ["../src/shared/utils/*"]
+      "*": ["../src/shared/*", "../src/*", "../*"]
     },
     "rootDirs": [
       "..",

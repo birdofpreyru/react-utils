@@ -8,6 +8,8 @@
  *  "entry": "./__assets__/EmptyScene/Scene.jsx" }
  */
 
+import { global } from 'utils/jest/E2eSsrEnv';
+
 it('exposes 200 status to the test environment', () => {
   expect(global.ssrStatus).toBe(200);
 });

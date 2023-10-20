@@ -4,11 +4,11 @@ import { useGlobalState } from '@dr.pogodin/react-global-state';
 
 import MetaTags from 'components/MetaTags';
 
-export const MODES = {
-  BASIC_NO_OVERRIDE: 0,
-  BASIC_WITH_OVERRIDE: 1,
-  ALL_TAGS_WITH_OVERRIDE: 2,
-};
+export enum MODES {
+  BASIC_NO_OVERRIDE = 0,
+  BASIC_WITH_OVERRIDE = 1,
+  ALL_TAGS_WITH_OVERRIDE = 2,
+}
 
 function Component() {
   return (
@@ -40,7 +40,11 @@ function AllTagsComponent() {
   );
 }
 
-export default function Application({ mode }) {
+type PropsT = {
+  mode: MODES;
+};
+
+export default function Application({ mode }: PropsT) {
   let component;
   switch (mode) {
     case MODES.BASIC_WITH_OVERRIDE: component = <Component />; break;

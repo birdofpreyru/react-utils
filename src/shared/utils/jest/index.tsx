@@ -67,7 +67,7 @@ export async function mockTimer(time: number) {
   jest.advanceTimersByTime(time);
 }
 
-type MountedSceneT = HTMLElement & {
+export type MountedSceneT = HTMLElement & {
   destroy: () => void;
 };
 

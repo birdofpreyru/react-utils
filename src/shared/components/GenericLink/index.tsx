@@ -9,6 +9,8 @@ import './style.scss';
 
 type ToT = Parameters<typeof Link>[0]['to'];
 
+interface LinkI {}
+
 export type PropsT = {
   children?: React.ReactNode;
   className?: string;
@@ -19,8 +21,9 @@ export type PropsT = {
   onMouseDown?: React.MouseEventHandler<HTMLAnchorElement>;
   openNewTab?: boolean;
   replace?: boolean;
-  routerLinkType: typeof Link | typeof NavLink;
-  to: ToT;
+  routerLinkType: LinkI;
+  styleName?: string;
+  to?: ToT;
 };
 
 /**
@@ -113,7 +116,7 @@ export default function GenericLink({
       // disabled,
       onMouseDown,
       replace,
-      to,
+      to: to!,
       onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
         // Executes the user-provided event handler, if any.
         if (onClick) onClick(e);
@@ -137,6 +140,7 @@ GenericLink.defaultProps = {
   onMouseDown: null,
   openNewTab: false,
   replace: false,
+  styleName: undefined,
   to: '',
 };
 

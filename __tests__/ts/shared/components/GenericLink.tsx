@@ -111,7 +111,7 @@ test('onClick(..) callback in custom <Link>', () => {
       LINK
     </GenericLink>
   ));
-  const link = doc.querySelector('.LINK');
+  const link = doc.querySelector('.LINK')!;
   simulate.click(link);
   expect(clickHandler).toHaveBeenCalled();
   expect(window.scroll).toHaveBeenCalledTimes(1);
