@@ -5,7 +5,9 @@
  * @no-ssr true
  */
 
-import { global } from 'utils/jest';
+import { getGlobal } from 'utils/jest';
+
+const global = getGlobal();
 
 const fs = global.webpackOutputFs;
 const outputPath = global.webpackConfig!.output!.path;

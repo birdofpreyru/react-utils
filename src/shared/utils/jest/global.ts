@@ -14,4 +14,6 @@ declare global {
   }
 }
 
-export default (global as unknown) as Window;
+export default function getGlobal(): Window {
+  return global as any;
+}

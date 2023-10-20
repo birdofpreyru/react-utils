@@ -8,7 +8,9 @@
  *  "entry": "./__assets__/Scene404/Scene.tsx" }
  */
 
-import { global } from 'utils/jest';
+import { getGlobal } from 'utils/jest';
+
+const global = getGlobal();
 
 it('exposes 404 status to the test environment', () => {
   expect(global.ssrStatus).toBe(404);

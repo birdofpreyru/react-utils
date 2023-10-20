@@ -10,26 +10,26 @@ import path from 'path';
 
 import SM from 'sitemap';
 
-import { type Configuration } from 'webpack';
+import { WebpackPluginInstance, type Configuration } from 'webpack';
 
-const {
+import {
   clone,
   defaults,
   isFunction,
   isObject,
-} = require('lodash');
+} from 'lodash';
 
-const autoprefixer = require('autoprefixer');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const forge = require('node-forge');
+import autoprefixer from 'autoprefixer';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import forge from 'node-forge';
 
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const { DefinePlugin, ProgressPlugin } = require('webpack');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import { DefinePlugin, ProgressPlugin } from 'webpack';
+import WorkboxPlugin from 'workbox-webpack-plugin';
 
-const {
+import {
   getLocalIdent,
-} = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
+} from '@dr.pogodin/babel-plugin-react-css-modules/utils';
 
 // TODO: Copy-pasted from 'utils/isomorphy/buildInfo' to avoid including that,
 // (it requires some modifications of TS configs to work).
@@ -254,7 +254,7 @@ export default function configFactory(ops: OptionsT): Configuration {
     ...Array.isArray(o.entry) ? o.entry : [o.entry],
   ];
 
-  const plugins = [
+  const plugins: WebpackPluginInstance[] = [
     new DefinePlugin({ BUILD_INFO: JSON.stringify(buildInfo) }),
   ];
 

@@ -13,7 +13,9 @@
 import pretty from 'pretty';
 import { act } from 'react-dom/test-utils';
 
-import { global } from 'utils/jest';
+import { getGlobal } from 'utils/jest';
+
+const global = getGlobal();
 
 const { path: outPath, publicPath } = global.webpackConfig!.output!;
 
@@ -49,7 +51,7 @@ it('matches SSR markup in hydration', async () => {
   const inj = document.querySelector('meta[itemprop="drpruinj"]')?.outerHTML;
   const ssrMarkup = document.documentElement.innerHTML.replace(inj || '', '');
   const js = fs?.readFileSync(`${outPath}/${jsFileName}`, 'utf8') as string;
-  await act(() => new Function(js)); // eslint-disable-line no-new-func
+  await act(() => new Function(js)()); // eslint-disable-line no-new-func
   expect(document.documentElement.innerHTML).toBe(ssrMarkup);
 });
 

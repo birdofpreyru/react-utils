@@ -18,7 +18,7 @@ import { type ShallowRenderer, createRenderer } from 'react-test-renderer/shallo
  */
 export { act };
 
-export { default as global } from './global';
+export { default as getGlobal } from './global';
 
 declare global {
   // eslint-disable-next-line no-var, vars-on-top

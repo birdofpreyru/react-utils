@@ -11,7 +11,9 @@
 
 import { act } from 'react-dom/test-utils';
 
-import { global } from 'utils/jest';
+import { getGlobal } from 'utils/jest';
+
+const global = getGlobal();
 
 const fs = global.webpackOutputFs;
 const outputPath = global.webpackConfig!.output!.path;
@@ -25,7 +27,9 @@ document.write(global.ssrMarkup || '');
 it('registers service worker with the correct URL', async () => {
   const js = fs?.readFileSync(`${outputPath}/${jsPath}`, 'utf8') as string;
 
-  const registerSpy = jest.spyOn(window.navigator.serviceWorker, 'register');
+  const nav = window.navigator as any;
+  nav.serviceWorker = { register: jest.fn() };
+  window.navigator = nav;
 
   let onLoad: EventListener | undefined;
   const originalWindowAddEventListener = window.addEventListener;
@@ -37,9 +41,9 @@ it('registers service worker with the correct URL', async () => {
 
   const { log } = console;
   console.log = jest.fn();
-  await act(() => new Function(js)); // eslint-disable-line no-new-func
+  await act(() => new Function(js)()); // eslint-disable-line no-new-func
   await act(() => onLoad && onLoad(new Event('load')));
   console.log = log;
 
-  expect(registerSpy.mock.calls[0]).toEqual(['/__service-worker.js']);
+  expect(nav.serviceWorker.register.mock.calls[0]).toEqual(['/__service-worker.js']);
 });

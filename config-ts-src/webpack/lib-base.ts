@@ -12,9 +12,9 @@ import {
   ProgressPlugin,
 } from 'webpack';
 
-const {
+import {
   getLocalIdent,
-} = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
+} from '@dr.pogodin/babel-plugin-react-css-modules/utils';
 
 export type OptionsT = {
   babelEnv: string;

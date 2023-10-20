@@ -14,7 +14,9 @@
 import pretty from 'pretty';
 import { act } from 'react-dom/test-utils';
 
-import global from 'utils/jest/global';
+import { getGlobal } from 'utils/jest';
+
+const global = getGlobal();
 
 const outputPath = global.webpackConfig!.output!.path;
 
@@ -58,8 +60,8 @@ it('hydration works as expected', async () => {
   */
   // console.log(global.testEnv);
 
-  await act(() => new Function(mainJs)); // eslint-disable-line no-new-func
-  await act(() => new Function(splitJs)); // eslint-disable-line no-new-func
+  await act(() => new Function(mainJs)()); // eslint-disable-line no-new-func
+  await act(() => new Function(splitJs)()); // eslint-disable-line no-new-func
 
   expect(document.head.innerHTML).toBe(headMarkupWithoutInj);
   expect(document.querySelector('#react-view')!.innerHTML).toBe(viewMarkup);

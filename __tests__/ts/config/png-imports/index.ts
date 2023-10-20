@@ -7,7 +7,9 @@
 
 import { act } from 'react-dom/test-utils';
 
-import { global } from 'utils/jest';
+import { getGlobal } from 'utils/jest';
+
+const global = getGlobal();
 
 const outputPath = global.webpackConfig!.output!.path;
 
@@ -36,6 +38,6 @@ it('generates expected markup at the client-side', async () => {
   const ssrMarkup = container?.innerHTML;
   let js = global.webpackStats?.entrypoints?.main.assets?.[0].name;
   js = global.webpackOutputFs?.readFileSync(`${outputPath}/${js}`, 'utf8') as string;
-  await act(() => new Function(js || '')); // eslint-disable-line no-new-func
+  await act(() => new Function(js || '')()); // eslint-disable-line no-new-func
   expect(container?.innerHTML).toBe(ssrMarkup);
 });

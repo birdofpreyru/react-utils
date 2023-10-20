@@ -9,7 +9,9 @@
 
 import { act } from 'react-dom/test-utils';
 
-import { global } from 'utils/jest';
+import { getGlobal } from 'utils/jest';
+
+const global = getGlobal();
 
 document.write(global.ssrMarkup!);
 const container = document.querySelector('#react-view')!;
@@ -24,6 +26,6 @@ global.webpackStats!.assets!.forEach(({ name }) => {
 it('matches SSR render during hydration', async () => {
   const markup = container.innerHTML;
   const js = fs.readFileSync(`${outputPath}/${jsFile}`, 'utf8') as string;
-  await act(() => new Function(js)); // eslint-disable-line no-new-func
+  await act(() => new Function(js)()); // eslint-disable-line no-new-func
   expect(document.querySelector('#react-view')!.innerHTML).toBe(markup);
 });

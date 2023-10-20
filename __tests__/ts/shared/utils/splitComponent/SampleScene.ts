@@ -11,7 +11,9 @@
 import pretty from 'pretty';
 import { act } from 'react-dom/test-utils';
 
-import { global } from 'utils/jest';
+import { getGlobal } from 'utils/jest';
+
+const global = getGlobal();
 
 const outputPath = global.webpackConfig!.output!.path;
 
@@ -50,10 +52,10 @@ it('hydration works as expected', async () => {
   const bJs = fs.readFileSync(`${outputPath}/sample-component-b.js`, 'utf8') as string;
   const cJs = fs.readFileSync(`${outputPath}/sample-component-c.js`, 'utf8') as string;
 
-  await act(() => new Function(mainJs)); // eslint-disable-line no-new-func
-  await act(() => new Function(aJs)); // eslint-disable-line no-new-func
-  await act(() => new Function(bJs)); // eslint-disable-line no-new-func
-  await act(() => new Function(cJs)); // eslint-disable-line no-new-func
+  await act(() => new Function(mainJs)()); // eslint-disable-line no-new-func
+  await act(() => new Function(aJs)()); // eslint-disable-line no-new-func
+  await act(() => new Function(bJs)()); // eslint-disable-line no-new-func
+  await act(() => new Function(cJs)()); // eslint-disable-line no-new-func
 
   expect(document.head.innerHTML).toBe(headMarkupWithoutInj);
   expect(document.querySelector('#react-view')!.innerHTML).toBe(viewMarkup);

@@ -28,6 +28,7 @@ exports[`Export at server side 1`] = `
   },
   "JU": {
     "act": [Function],
+    "getGlobal": [Function],
     "getMockUuid": [Function],
     "mockClientSide": [Function],
     "mockTimer": [Function],
