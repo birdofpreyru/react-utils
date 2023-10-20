@@ -1,15 +1,15 @@
 /**
- * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.js
+ * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.ts
  * @webpack-config-factory ./config/webpack/app-production.js
- * @webpack-config-options { "entry": "./__assets__/index.js" }
+ * @webpack-config-options { "entry": "./__assets__/index" }
  * @ssr-options {
  *  "babelEnv": "production",
- *  "entry": "./__assets__/Scene.jsx" }
+ *  "entry": "./__assets__/Scene" }
  */
 
 import { act } from 'react-dom/test-utils';
 
-import { global } from 'utils/jest/E2eSsrEnv';
+import { global } from 'utils/jest';
 
 document.write(global.ssrMarkup!);
 const container = document.querySelector('#react-view')!;

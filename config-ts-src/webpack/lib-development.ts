@@ -1,17 +1,14 @@
-/**
- * @category Configs
- * @module webpack/lib-development
- * @desc
- * Development Webpack config for ReactJS libraries.
- */
+// Development Webpack config for ReactJS libraries.
 
-const path = require('path');
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
+import path from 'path';
+import webpack from 'webpack';
+import { merge } from 'webpack-merge';
 
-const baseFactory = require('./lib-base');
+import baseFactory, { type OptionsT as BaseOptionsT } from './lib-base';
 
-module.exports = function configFactory(ops) {
+type OptionsT = BaseOptionsT;
+
+export default function configFactory(ops: OptionsT): webpack.Configuration {
   return merge(
     baseFactory({
       ...ops,
@@ -42,4 +39,4 @@ module.exports = function configFactory(ops) {
       },
     },
   );
-};
+}

@@ -1,4 +1,6 @@
 import PT from 'prop-types';
+import { type FunctionComponent } from 'react';
+
 import { themedComponent, type ThemeT } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
@@ -40,7 +42,7 @@ Throbber.propTypes = {
 
 export default themedComponent(
   'Throbber',
-  Throbber as React.FunctionComponent<PropsT>,
+  Throbber as FunctionComponent<PropsT>,
   [
     'circle',
     'container',

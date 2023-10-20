@@ -1,6 +1,6 @@
 /**
- * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.js
- * @webpack-config-factory ./config/webpack/app-development.js
+ * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.ts
+ * @webpack-config-factory ./config/webpack/app-development
  * @webpack-config-options {
  *  "entry": "./__assets__/SampleScene",
  *  "dontUseHmr": true,

@@ -1,12 +1,12 @@
 /**
- * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.js
+ * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.ts
  * @webpack-config-factory ./config/webpack/app-development.js
  * @webpack-config-options {
  *  "entry": "./__assets__/RoutingScene",
  *  "dontUseHmr": true,
  *  "dontUseReactGlobalStateDebugging": true }
  * @ssr-options {
- *  "entry": "./__assets__/RoutingScene/RoutingScene.jsx",
+ *  "entry": "./__assets__/RoutingScene/RoutingScene.tsx",
  *  "entryExportName": "RoutingScene1" }
  * @ssr-request { "url": "/base/hello-world" }
  */
@@ -14,7 +14,7 @@
 import pretty from 'pretty';
 import { act } from 'react-dom/test-utils';
 
-import { global } from 'utils/jest/E2eSsrEnv';
+import global from 'utils/jest/global';
 
 const outputPath = global.webpackConfig!.output!.path;
 

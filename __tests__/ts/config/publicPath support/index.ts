@@ -1,19 +1,19 @@
 /**
- * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.js
+ * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.ts
  * @webpack-config-factory ./config/webpack/app-production.js
  * @webpack-config-options {
- *  "entry": "./__assets__/index.js",
+ *  "entry": "./__assets__/index.ts",
  *  "publicPath": "/public/path" }
  * @ssr-options {
  *  "babelEnv": "production",
- *  "entry": "./__assets__/Scene.jsx",
+ *  "entry": "./__assets__/Scene.tsx",
  *  "root": "TEST" }
  */
 
 import pretty from 'pretty';
 import { act } from 'react-dom/test-utils';
 
-import { global } from 'utils/jest/E2eSsrEnv';
+import { global } from 'utils/jest';
 
 const { path: outPath, publicPath } = global.webpackConfig!.output!;
 

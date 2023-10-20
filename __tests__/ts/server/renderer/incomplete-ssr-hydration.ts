@@ -1,18 +1,18 @@
 /**
- * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.js
+ * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.ts
  * @webpack-config-factory ./config/webpack/app-production.js
  * @webpack-config-options {
- *  "entry": "./__assets__/incomplete-ssr-hydration/index.js" }
+ *  "entry": "./__assets__/incomplete-ssr-hydration/index" }
  * @ssr-options {
  *  "babelEnv": "production",
- *  "entry": "./__assets__/incomplete-ssr-hydration/Scene.jsx",
+ *  "entry": "./__assets__/incomplete-ssr-hydration/Scene",
  *  "maxSsrRounds": 1 }
  */
 
 import { noop } from 'lodash';
 import { act } from 'react-dom/test-utils';
 
-import { global } from 'src/shared/utils/jest/E2eSsrEnv';
+import { global } from 'utils/jest';
 
 document.write(global.ssrMarkup || '');
 const markup = document.querySelector('#react-view')?.innerHTML;

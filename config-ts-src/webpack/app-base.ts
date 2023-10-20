@@ -8,6 +8,10 @@
 import nodeFs from 'fs';
 import path from 'path';
 
+import SM from 'sitemap';
+
+import { type Configuration } from 'webpack';
+
 const {
   clone,
   defaults,
@@ -18,7 +22,7 @@ const {
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const forge = require('node-forge');
-const SM = require('sitemap');
+
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { DefinePlugin, ProgressPlugin } = require('webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
@@ -27,10 +31,30 @@ const {
   getLocalIdent,
 } = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
 
-type OptionsT = {
+// TODO: Copy-pasted from 'utils/isomorphy/buildInfo' to avoid including that,
+// (it requires some modifications of TS configs to work).
+export type BuildInfoT = {
+  key: string;
+  publicPath: string;
+  timestamp: string;
+  useServiceWorker: boolean;
+};
+
+export type OptionsT = {
+  babelEnv: string;
+  babelLoaderOptions?: object;
   context: string;
+  cssLocalIdent?: string;
+  dontEmitBuildInfo?: boolean;
   dontUseProgressPlugin?: boolean;
+  entry: string | string[];
   fs: typeof nodeFs;
+  keepBuildInfo?: boolean | BuildInfoT;
+  mode: 'development' | 'none' | 'production';
+  outputPath?: string;
+  publicPath?: string;
+  sitemap?: string;
+  workbox?: boolean | object;
 };
 
 /**
@@ -140,8 +164,10 @@ type OptionsT = {
  *   - **`rndkey`** &mdash; The value set for `BUILD_RNDKEY`;
  *   - **`timestamp`** &mdash; The value set for `BUILD_TIMESTAMP`.
  */
-export default function configFactory(ops: OptionsT) {
-  const o = defaults(clone(ops), {
+export default function configFactory(ops: OptionsT): Configuration {
+  const o: OptionsT & {
+    publicPath: string;
+  } = defaults(clone(ops), {
     babelLoaderOptions: {},
     cssLocalIdent: '[hash:base64:6]',
     outputPath: 'build/web-public',
@@ -162,10 +188,10 @@ export default function configFactory(ops: OptionsT) {
     source.forEach((item: string) => sm.write(item));
     sm.end();
     SM.streamToPromise(sm).then((sitemap: any) => {
-      const outUrl = path.resolve(o.context, o.outputPath);
+      const outUrl = path.resolve(o.context, o.outputPath!);
       if (!fs.existsSync(outUrl)) fs.mkdirSync(outUrl);
       fs.writeFileSync(
-        path.resolve(o.context, o.outputPath, 'sitemap.xml'),
+        path.resolve(o.context, o.outputPath!, 'sitemap.xml'),
         sitemap,
       );
     });
@@ -239,7 +265,7 @@ export default function configFactory(ops: OptionsT) {
     if (!isObject(o.workbox)) o.workbox = {};
     plugins.push(new WorkboxPlugin.InjectManifest({
       swSrc: path.resolve(__dirname, '../workbox/default.js'),
-      ...o.workbox,
+      ...o.workbox as object,
       swDest: '__service-worker.js',
     }));
   }
@@ -254,7 +280,7 @@ export default function configFactory(ops: OptionsT) {
     output: {
       chunkFilename: '[contenthash].js',
       filename: '[contenthash].js',
-      path: path.resolve(__dirname, o.context, o.outputPath),
+      path: path.resolve(__dirname, o.context, o.outputPath!),
       publicPath: `${o.publicPath}/`,
     },
     plugins,
@@ -311,7 +337,14 @@ export default function configFactory(ops: OptionsT) {
             // At the moment the plan is to compile declarations separately with
             // TSC.
             declaration: false,
+
+            noEmit: false,
           },
+
+          // TODO: We want this enabled, but enabling it prevents Webpack
+          // compilation in tests to pick up on /types.d.ts file, which has
+          // a declaration allowing to use styleName prop on React elements.
+          // onlyCompileBundledFiles: true,
         },
       }, {
         /* Loads image assets. */
@@ -357,4 +390,4 @@ export default function configFactory(ops: OptionsT) {
       }],
     },
   };
-};
+}

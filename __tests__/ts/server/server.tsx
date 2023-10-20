@@ -15,7 +15,7 @@ const logger = {
 };
 
 jest.mock('serve-favicon', () => jest.fn(
-  () => (req: Request, res: Response, next: NextFunction) => next()
+  () => (req: Request, res: Response, next: NextFunction) => next(),
 ));
 
 jest.mock('webpack', () => {

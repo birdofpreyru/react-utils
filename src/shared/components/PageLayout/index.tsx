@@ -1,13 +1,14 @@
 import PT from 'prop-types';
+import { type FunctionComponent, type ReactNode } from 'react';
 
 import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
 
 import baseTheme from './base-theme.scss';
 
 type PropsT = {
-  children?: React.ReactNode;
-  leftSidePanelContent?: React.ReactNode;
-  rightSidePanelContent?: React.ReactNode;
+  children?: ReactNode;
+  leftSidePanelContent?: ReactNode;
+  rightSidePanelContent?: ReactNode;
   theme: ThemeT & {
     container?: string;
     mainPanel?: string;
@@ -61,7 +62,7 @@ const ThemedPageLayout = themedComponent('PageLayout', PageLayout, [
   'sidePanel',
 ], baseTheme);
 
-(PageLayout as React.FunctionComponent<PropsT>).propTypes = {
+(PageLayout as FunctionComponent<PropsT>).propTypes = {
   children: PT.node,
   leftSidePanelContent: PT.node,
   rightSidePanelContent: PT.node,

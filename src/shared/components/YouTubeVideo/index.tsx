@@ -1,5 +1,7 @@
 import PT from 'prop-types';
 import qs from 'qs';
+import { type FunctionComponent } from 'react';
+
 import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
 
 import ScalableRect from 'components/ScalableRect';
@@ -80,7 +82,7 @@ const ThemedYouTubeVideo = themedComponent(
   baseTheme,
 );
 
-(YouTubeVideo as React.FunctionComponent<PropsT>).propTypes = {
+(YouTubeVideo as FunctionComponent<PropsT>).propTypes = {
   autoplay: PT.bool,
   src: PT.string.isRequired,
   theme: ThemedYouTubeVideo.themeType.isRequired,

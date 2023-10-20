@@ -1,17 +1,17 @@
 /**
- * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.js
+ * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.ts
  * @webpack-config-factory ./config/webpack/app-development.js
  * @webpack-config-options {
  *  "entry": "./__assets__/SampleScene",
  *  "dontUseHmr": true,
  *  "dontUseReactGlobalStateDebugging": true }
- * @ssr-options { "entry": "./__assets__/SampleScene/SampleScene.jsx" }
+ * @ssr-options { "entry": "./__assets__/SampleScene/SampleScene" }
  */
 
 import pretty from 'pretty';
 import { act } from 'react-dom/test-utils';
 
-import { global } from 'utils/jest/E2eSsrEnv';
+import { global } from 'utils/jest';
 
 const outputPath = global.webpackConfig!.output!.path;
 

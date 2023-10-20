@@ -1,9 +1,10 @@
 import PT from 'prop-types';
+import { type ReactNode } from 'react';
 
 import './style.scss';
 
 type PropsT = {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   ratio: `${number}:${number}`,
 };

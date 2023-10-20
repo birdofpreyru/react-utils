@@ -1,6 +1,7 @@
 // The <Button> component implements a standard button / button-like link.
 
 import PT from 'prop-types';
+import { type FunctionComponent, type ReactNode } from 'react';
 
 import Link from 'components/Link';
 
@@ -10,7 +11,7 @@ import defaultTheme from './style.scss';
 
 type PropsT = {
   active?: boolean;
-  children?: React.ReactNode;
+  children?: ReactNode;
   disabled?: boolean;
   enforceA?: boolean;
   onClick?: React.MouseEventHandler & React.KeyboardEventHandler;
@@ -128,7 +129,7 @@ BaseButton.defaultProps = {
   to: undefined,
 };
 
-(BaseButton as React.FunctionComponent<PropsT>).propTypes = {
+(BaseButton as FunctionComponent<PropsT>).propTypes = {
   active: PT.bool,
   children: PT.node,
   disabled: PT.bool,

@@ -1,7 +1,13 @@
 /* global window */
 
 import PT from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
+import {
+  type FunctionComponent,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
 
@@ -10,9 +16,9 @@ import Tooltip, { PLACEMENTS, type TooltipThemeT } from './Tooltip';
 import defaultTheme from './default-theme.scss';
 
 type PropsT = {
-  children?: React.ReactNode;
+  children?: ReactNode;
   placement?: PLACEMENTS;
-  tip?: React.ReactNode;
+  tip?: ReactNode;
   theme: ThemeT & TooltipThemeT & {
     wrapper?: string;
   };
@@ -183,7 +189,7 @@ const e: ExportT = ThemedWrapper as ExportT;
 
 e.PLACEMENTS = PLACEMENTS;
 
-(Wrapper as React.FunctionComponent<PropsT>).propTypes = {
+(Wrapper as FunctionComponent<PropsT>).propTypes = {
   children: PT.node,
   placement: PT.oneOf(Object.values(PLACEMENTS)),
   theme: ThemedWrapper.themeType.isRequired,

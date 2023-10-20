@@ -6,13 +6,15 @@
  */
 
 import PT from 'prop-types';
+import { type ReactNode } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
 import { useGlobalState } from '@dr.pogodin/react-global-state';
 
 import './style.scss';
 
 type PropsT = {
-  children?: React.ReactNode;
+  children?: ReactNode;
   prop?: string;
 };
 

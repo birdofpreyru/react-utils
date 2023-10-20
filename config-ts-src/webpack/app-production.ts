@@ -4,11 +4,13 @@
  * @desc Production Webpack configuration for applications.
  */
 
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
-const baseFactory = require('./app-base');
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import webpack, { type Configuration } from 'webpack';
+import { merge } from 'webpack-merge';
+import baseFactory, { type OptionsT as BaseOptionsT } from './app-base';
+
+type OptionsT = BaseOptionsT;
 
 /**
  * @param {object} ops
@@ -16,7 +18,7 @@ const baseFactory = require('./app-base');
  * @param {boolean} [ops.dontEmitBuildInfo] If set the `.build-info` file won't
  * be created at the disk during the compilation.
  */
-module.exports = function configFactory(ops) {
+export default function configFactory(ops: OptionsT): Configuration {
   const entry = [
     '@dr.pogodin/react-utils/build/production/client/init',
     ...Array.isArray(ops.entry) ? ops.entry : [ops.entry],
@@ -57,4 +59,4 @@ module.exports = function configFactory(ops) {
   });
 
   return res;
-};
+}

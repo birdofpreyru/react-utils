@@ -1,4 +1,5 @@
 import PT from 'prop-types';
+import { type FunctionComponent } from 'react';
 
 import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
 
@@ -116,7 +117,7 @@ const ThemedDropdown = themedComponent('Dropdown', Dropdown, [
   'select',
 ], defaultTheme);
 
-(Dropdown as React.FunctionComponent<PropsT>).propTypes = {
+(Dropdown as FunctionComponent<PropsT>).propTypes = {
   filter: PT.func,
   label: PT.string,
   onChange: PT.func,

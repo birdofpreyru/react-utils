@@ -31,7 +31,6 @@ exports[`Matches snapshots when disabled 2`] = `
 exports[`Matches snapshots when rendered as link 1`] = `
 <a
   className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT   BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___MAe9O6   ACTIVE_CLASS"
-  disabled={false}
   href="/SOME/TEST/URL"
   onClick={[Function]}
   onMouseDown={null}

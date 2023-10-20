@@ -18,6 +18,8 @@ import { type ShallowRenderer, createRenderer } from 'react-test-renderer/shallo
  */
 export { act };
 
+export { default as global } from './global';
+
 declare global {
   // eslint-disable-next-line no-var, vars-on-top
   var IS_REACT_ACT_ENVIRONMENT: boolean | undefined;
@@ -73,7 +75,7 @@ export type MountedSceneT = HTMLElement & {
 
 /**
  * Mounts `scene` to the DOM, and returns the root scene element.
- * @param {React.ReactNode} scene
+ * @param scene
  * @return Created container DOM element with destroy() function
  *  attached.
  */

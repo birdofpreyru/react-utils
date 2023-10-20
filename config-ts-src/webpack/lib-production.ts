@@ -1,14 +1,16 @@
 // Production Webpack config for ReactJS libraries.
 
-const path = require('path');
+import path from 'path';
 
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import webpack from 'webpack';
+import { merge } from 'webpack-merge';
 
-const baseFactory = require('./lib-base');
+import baseFactory, { type OptionsT as BaseOptionsT } from './lib-base';
 
-module.exports = function configFactory(ops) {
+type OptionsT = BaseOptionsT;
+
+export default function configFactory(ops: OptionsT): webpack.Configuration {
   const baseConfig = baseFactory({
     ...ops,
     babelEnv: 'production',
@@ -41,4 +43,4 @@ module.exports = function configFactory(ops) {
       }),
     ],
   });
-};
+}

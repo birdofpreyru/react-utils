@@ -1,16 +1,16 @@
 /**
- * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.js
+ * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.ts
  * @webpack-config-factory ./config/webpack/app-development.js
  * @webpack-config-options {
- *  "entry": "./__assets__/index.js",
+ *  "entry": "./__assets__/index.ts",
  *  "dontUseHmr": true,
  *  "dontUseReactGlobalStateDebugging": true }
- * @ssr-options { "entry": "./__assets__/Scene.jsx" }
+ * @ssr-options { "entry": "./__assets__/Scene.tsx" }
  */
 
 import { act } from 'react-dom/test-utils';
 
-import { global } from 'src/shared/utils/jest/E2eSsrEnv';
+import { global } from 'utils/jest';
 
 document.write(global.ssrMarkup || '');
 const container = document.querySelector('#react-view');

@@ -165,9 +165,9 @@ const BABEL_EXEC_OPTIONS = {
   env: { ...process.env, BABEL_ENV: buildType },
 };
 
-let BABEL_CMD_JS = `${cwd}/node_modules/.bin/babel`;
-BABEL_CMD_JS += ` ${inDir} --out-dir ${outDir} --source-maps`;
-if (buildType === BUILD_TYPES.PRODUCTION) BABEL_CMD_JS += ' --minified';
+let BABEL_CMD_BASE = `${cwd}/node_modules/.bin/babel`;
+BABEL_CMD_BASE += ` ${inDir} --out-dir ${outDir} --source-maps`;
+if (buildType === BUILD_TYPES.PRODUCTION) BABEL_CMD_BASE += ' --minified';
 
 /* TODO: The watch is deactivated for Babel compilation because of SVG files:
  * currently there is no way to tell Babel that SVG files should be compiled
@@ -180,7 +180,8 @@ if (buildType === BUILD_TYPES.PRODUCTION) BABEL_CMD_JS += ' --minified';
 if (cmdLineArgs.watch) BABEL_CMD_JS += ' --watch';
 */
 
-const BABEL_CMD_SVG = `${BABEL_CMD_JS} --extensions ".svg" --keep-file-extension`;
+const BABEL_CMD_JS = `${BABEL_CMD_BASE} -x .js,.jsx,.ts,.tsx`;
+const BABEL_CMD_SVG = `${BABEL_CMD_BASE} --extensions ".svg" --keep-file-extension`;
 
 async function babelBuild() {
   await exec(BABEL_CMD_JS, BABEL_EXEC_OPTIONS);

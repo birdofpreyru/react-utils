@@ -1,4 +1,5 @@
 import PT from 'prop-types';
+import { type FunctionComponent } from 'react';
 
 import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
 
@@ -56,7 +57,7 @@ const ThemedCheckbox = themedComponent('Checkbox', Checkbox, [
  * @param [props....]
  * [Other properties of themeable components](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties).
  */
-(Checkbox as React.FunctionComponent<PropT>).propTypes = {
+(Checkbox as FunctionComponent<PropT>).propTypes = {
   checked: PT.bool,
   label: PT.string,
   onChange: PT.func,

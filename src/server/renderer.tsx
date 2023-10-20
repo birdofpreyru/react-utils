@@ -6,6 +6,7 @@ import fs from 'fs';
 import path from 'path';
 
 import { type Request, type RequestHandler } from 'express';
+import { type ComponentType } from 'react';
 import { Writable } from 'stream';
 import { brotliCompress, brotliDecompress } from 'zlib';
 import winston from 'winston';
@@ -257,7 +258,7 @@ type CacheRefT = {
 };
 
 export type OptionsT = {
-  Application?: React.ComponentType;
+  Application?: ComponentType;
   beforeRender?: BeforeRenderT;
   buildInfo?: BuildInfoT;
   defaultLoggerLogLevel?: string;
@@ -421,7 +422,7 @@ export default function factory(
       /* Optional server-side rendering. */
       const App = ops.Application;
       let appHtmlMarkup: string = '';
-      const ssrContext = new ServerSsrContext(req, initialState, chunkGroups);
+      const ssrContext = new ServerSsrContext(req, chunkGroups, initialState);
       let stream: PipeableStream;
       if (App) {
         const ssrStart = Date.now();

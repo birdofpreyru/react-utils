@@ -3,22 +3,27 @@
  * @module webpack/app-development
  * @desc development Webpack configuration for applications.
  */
-const { clone, defaults } = require('lodash');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import { clone, defaults } from 'lodash';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
+import webpack from 'webpack';
+import { merge } from 'webpack-merge';
 
-const baseFactory = require('./app-base');
+import baseFactory, { type OptionsT as BaseOptionsT } from './app-base';
+
+type OptionsT = BaseOptionsT & {
+  dontUseHmr?: boolean;
+  dontUseReactGlobalStateDebugging?: boolean;
+};
 
 /**
- * @param {object} ops
- * @param {boolean} [ops.dontUseReactGlobalStateDebugging]
- * @param {boolean} [ops.dontUseHmr]
+ * @param ops
+ * @param [ops.dontUseReactGlobalStateDebugging]
+ * @param [ops.dontUseHmr]
  */
-module.exports = function configFactory(ops) {
+export default function configFactory(ops: OptionsT) {
   const o = defaults(clone(ops), {
     cssLocalIdent: '[package]___[path][name]___[local]___[hash:base64:6]',
   });
@@ -27,7 +32,7 @@ module.exports = function configFactory(ops) {
   if (!o.dontUseHmr) entry.push('webpack-hot-middleware/client?reload=true');
   entry.push(...Array.isArray(o.entry) ? o.entry : [o.entry]);
 
-  const plugins = [
+  const plugins: webpack.WebpackPluginInstance[] = [
     new MiniCssExtractPlugin({
       chunkFilename: '[id].css',
       filename: '[id].css',
@@ -77,4 +82,4 @@ module.exports = function configFactory(ops) {
   });
 
   return res;
-};
+}

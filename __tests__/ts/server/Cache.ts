@@ -8,7 +8,7 @@ import Cache from 'server/Cache';
 mockdate.set('2021-04-05Z');
 
 it('works as expected', () => {
-  const cache = new Cache(9);
+  const cache = new Cache(18);
   expect(cache).toMatchSnapshot();
   cache.add('123', 'A', 2 * 3);
   mockdate.set(Date.now() + 1000);

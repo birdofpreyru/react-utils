@@ -3,6 +3,8 @@
 import { noop } from 'lodash';
 
 import {
+  type FunctionComponent,
+  type ReactNode,
   useEffect,
   useMemo,
   useRef,
@@ -17,7 +19,7 @@ import baseTheme from './base-theme.scss';
 import './styles.scss';
 
 type PropsT = {
-  children?: React.ReactNode;
+  children?: ReactNode;
   onCancel?: () => void;
   theme: ThemeT & {
     container?: string;
@@ -126,7 +128,7 @@ const ThemedModal = themedComponent(
   baseTheme,
 );
 
-(BaseModal as React.FunctionComponent<PropsT>).propTypes = {
+(BaseModal as FunctionComponent<PropsT>).propTypes = {
   onCancel: PT.func,
   children: PT.node,
   theme: ThemedModal.themeType.isRequired,

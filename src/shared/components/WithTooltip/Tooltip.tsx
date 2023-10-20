@@ -6,6 +6,7 @@
 /* global document, window */
 
 import {
+  type ReactNode,
   forwardRef,
   useEffect,
   useImperativeHandle,
@@ -267,7 +268,7 @@ function setComponentPositions(
 
 /* The Tooltip component itself. */
 const Tooltip = forwardRef<unknown, {
-  children?: React.ReactNode;
+  children?: ReactNode;
   theme: any;
 }>(({ children, theme }, ref) => {
   // NOTE: The way it has to be implemented, for clean mounting and unmounting

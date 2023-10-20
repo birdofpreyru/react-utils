@@ -3,6 +3,7 @@
  */
 
 import { noop } from 'lodash';
+import { type ComponentType } from 'react';
 import supertest from 'supertest';
 import { Helmet } from 'react-helmet';
 
@@ -24,7 +25,7 @@ const WEBPACK_CONFIG = {
   },
 };
 
-async function baseTest(Component: React.ComponentType) {
+async function baseTest(Component: ComponentType) {
   const server = supertest(
     await serverFactory(WEBPACK_CONFIG, {
       Application: Component,

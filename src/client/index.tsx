@@ -1,6 +1,8 @@
 // Initialization of client-side code.
 /* global document */
 
+import { type ComponentType } from 'react';
+
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
 
 import { createRoot, hydrateRoot } from 'react-dom/client';
@@ -18,7 +20,7 @@ type OptionsT = {
  * @param [options={}] Optional. Additional settings.
  */
 export default function Launch(
-  Application: React.ComponentType,
+  Application: ComponentType,
   options: OptionsT = {},
 ) {
   const container = document.getElementById('react-view');

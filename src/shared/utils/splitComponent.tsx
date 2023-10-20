@@ -4,6 +4,8 @@
 import PT from 'prop-types';
 
 import {
+  type ComponentType,
+  type ReactNode,
   forwardRef,
   lazy,
   Suspense,
@@ -157,8 +159,8 @@ export function freeStyleSheets(
 // Holds the set of chunk names already used for splitComponent() calls.
 const usedChunkNames = new Set();
 
-type ComponentOrModule<PropsT> = React.ComponentType<PropsT> | {
-  default: React.ComponentType<PropsT>,
+type ComponentOrModule<PropsT> = ComponentType<PropsT> | {
+  default: ComponentType<PropsT>,
 };
 
 /**
@@ -172,7 +174,7 @@ type ComponentOrModule<PropsT> = React.ComponentType<PropsT> | {
  * @return {React.ElementType}
  */
 export default function splitComponent<
-  ComponentPropsT extends { children?: React.ReactNode },
+  ComponentPropsT extends { children?: ReactNode },
 >({
   chunkName,
   getComponent,
@@ -180,7 +182,7 @@ export default function splitComponent<
 }: {
   chunkName: string;
   getComponent: () => Promise<ComponentOrModule<ComponentPropsT>>,
-  placeholder?: React.ReactNode,
+  placeholder?: ReactNode,
 }) {
   // On the client side we can check right away if the chunk name is known.
   if (IS_CLIENT_SIDE) assertChunkName(chunkName, clientChunkGroups);

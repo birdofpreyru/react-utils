@@ -1,13 +1,13 @@
 /**
- * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.js
+ * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.ts
  * @webpack-config-factory ./config/webpack/app-production.js
- * @webpack-config-options { "entry": "./__assets__/client.jsx" }
- * @ssr-options { "entry": "./__assets__/Scene.jsx" }
+ * @webpack-config-options { "entry": "./__assets__/client.tsx" }
+ * @ssr-options { "entry": "./__assets__/Scene.tsx" }
  */
 
 import { act } from 'react-dom/test-utils';
 
-import { global } from 'utils/jest/E2eSsrEnv';
+import { global } from 'utils/jest';
 
 const outputPath = global.webpackConfig!.output!.path;
 

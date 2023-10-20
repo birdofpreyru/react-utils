@@ -2,7 +2,10 @@
 /* eslint-disable import/no-dynamic-require */
 
 module.exports = function buildConfig(env) {
-  const config = require(`./config/webpack/lib-${env}.js`)({
+  let factory = require(`./config/webpack/lib-${env}.js`);
+  factory = 'default' in factory ? factory.default : factory;
+
+  const config = factory({
     context: __dirname,
     entry: './src',
     library: '@dr.pogodin/react-utils',

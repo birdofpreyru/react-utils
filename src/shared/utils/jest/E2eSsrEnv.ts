@@ -34,27 +34,6 @@ import ssrFactory from 'server/renderer';
 
 import { EnvironmentContext, JestEnvironmentConfig } from '@jest/environment';
 
-// TODO: Not sure, whether it is possible to avoid double declaration of
-// "global" here. Now, the first one extends global properties in Jest
-// environment typings, and the second one can be imported from modules
-// relying on E2eSsrEnv to make these global fields available there.
-
-declare global {
-  interface Window {
-    webpackConfig: webpack.Configuration | undefined;
-    webpackOutputFs: IFs;
-    webpackStats?: webpack.StatsCompilation;
-  }
-}
-
-export declare module global {
-  export const ssrMarkup: string | undefined;
-  export const ssrStatus: number | undefined;
-  export const webpackConfig: webpack.Configuration | undefined;
-  export const webpackOutputFs: IFs;
-  export const webpackStats: webpack.StatsCompilation | undefined;
-}
-
 export default class E2eSsrEnv extends JsdomEnv {
   pragmas: Record<string, string | string[]>;
 
@@ -84,7 +63,9 @@ export default class E2eSsrEnv extends JsdomEnv {
     });
 
     const factoryPath = this.pragmas['webpack-config-factory'] as string;
-    const factory = require(path.resolve(this.rootDir, factoryPath));
+    let factory = require(path.resolve(this.rootDir, factoryPath));
+    factory = 'default' in factory ? factory.default : factory;
+
     this.global.webpackConfig = factory(options);
 
     const fs = this.global.webpackOutputFs as IFs;
@@ -138,21 +119,6 @@ export default class E2eSsrEnv extends JsdomEnv {
       };
     }
 
-    let root;
-    switch (options.root) {
-      case 'TEST': root = this.testFolder; break;
-      default: root = process.cwd();
-    }
-
-    // Note: This enables Babel transformation for the code dynamically loaded
-    // below, as the usual Jest Babel setup does not seem to apply to
-    // the environment code, and imports from it.
-    register({
-      envName: options.babelEnv,
-      extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
-      root,
-    });
-
     if (!options.buildInfo) options.buildInfo = this.global.buildInfo;
 
     if (options.entry) {
@@ -162,7 +128,7 @@ export default class E2eSsrEnv extends JsdomEnv {
 
     const renderer = ssrFactory(this.global.webpackConfig!, options);
     let status = 200; // OK
-    const markup = await new Promise((done, fail) => {
+    const markup = await new Promise<string>((done, fail) => {
       renderer(
         this.ssrRequest as Request,
 
@@ -232,6 +198,21 @@ export default class E2eSsrEnv extends JsdomEnv {
     this.withSsr = !pragmas['no-ssr'];
     this.ssrRequest = request;
     this.pragmas = pragmas;
+
+    // The usual "babel-jest" transformation setup does not apply to
+    // the environment code and imports from it, this workaround enables it.
+    const optionsString = this.pragmas['ssr-options'] as string;
+    const options = optionsString ? JSON.parse(optionsString) : {};
+    let root;
+    switch (options.root) {
+      case 'TEST': root = this.testFolder; break;
+      default: root = process.cwd();
+    }
+    register({
+      envName: options.babelEnv,
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
+      root,
+    });
   }
 
   async setup() {

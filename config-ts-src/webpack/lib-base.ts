@@ -1,15 +1,38 @@
 // Base Webpack config for ReactJS libraries.
 
-const path = require('path');
+import path from 'path';
 
-const autoprefixer = require('autoprefixer');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const { ProgressPlugin } = require('webpack');
+import autoprefixer from 'autoprefixer';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+
+import {
+  type Configuration,
+  type WebpackPluginInstance,
+  ProgressPlugin,
+} from 'webpack';
 
 const {
   getLocalIdent,
 } = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
+
+export type OptionsT = {
+  babelEnv: string;
+  babelLoaderOptions?: object;
+  context: string;
+  cssLocalIdent?: string;
+  // dontEmitBuildInfo?: boolean;
+  dontUseProgressPlugin?: boolean;
+  entry: string | string[];
+  // fs: typeof nodeFs;
+  // keepBuildInfo?: boolean | BuildInfoT;
+  library: string;
+  mode: 'development' | 'none' | 'production';
+  outputPath?: string;
+  // publicPath?: string;
+  // sitemap?: string;
+  // workbox?: boolean | object;
+};
 
 /**
  * @param {object} ops
@@ -17,8 +40,8 @@ const {
  *  plugin.
  * @return {object}
  */
-module.exports = function configFactory(ops) {
-  const plugins = [
+export default function configFactory(ops: OptionsT): Configuration {
+  const plugins: WebpackPluginInstance[] = [
     new MiniCssExtractPlugin({ filename: 'style.css' }),
   ];
 
@@ -142,7 +165,13 @@ module.exports = function configFactory(ops) {
             // we are going to compiler those separately with TSC for server-
             // side code.
             declaration: false,
+
+            noEmit: false,
           },
+          // TODO: We want this enabled, but enabling it prevents Webpack
+          // compilation in tests to pick up on /types.d.ts file, which has
+          // a declaration allowing to use styleName prop on React elements.
+          // onlyCompileBundledFiles: true,
         },
       }, {
         /* Loads CSS stylesheets. It is assumed that CSS stylesheets come only
@@ -174,4 +203,4 @@ module.exports = function configFactory(ops) {
       symlinks: false,
     },
   };
-};
+}

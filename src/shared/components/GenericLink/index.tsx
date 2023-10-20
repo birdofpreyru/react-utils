@@ -1,7 +1,7 @@
 /* global window */
 
 import PT from 'prop-types';
-import { createElement } from 'react';
+import { type ReactNode, createElement } from 'react';
 
 import { type Link, type NavLink } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ type ToT = Parameters<typeof Link>[0]['to'];
 interface LinkI {}
 
 export type PropsT = {
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   disabled?: boolean;
   enforceA?: boolean;

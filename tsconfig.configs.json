@@ -2,12 +2,17 @@
 
 {
   "extends": "@tsconfig/recommended",
-  "include": ["config-ts-src"],
+  "include": [
+    "config-ts-src",
+  ],
   "compilerOptions": {
     "declaration": true,
     "jsx": "react-jsx",
     "rootDir": "config-ts-src",
     "outDir": "config",
+    "paths": {
+      "*": ["./src/shared/*", "./src/*", "./*"]
+    },
     "strict": true
   }
 }

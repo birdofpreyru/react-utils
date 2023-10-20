@@ -1,9 +1,9 @@
 import PT from 'prop-types';
-import { createContext, useMemo } from 'react';
+import { type ReactNode, createContext, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 
 type PropsT = {
-  children?: React.ReactNode;
+  children?: ReactNode;
   description: string;
   image?: string;
   siteName?: string;
