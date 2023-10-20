@@ -2,6 +2,12 @@ import PT from 'prop-types';
 
 import './style.scss';
 
+type PropsT = {
+  children?: React.ReactNode;
+  className?: string;
+  ratio: `${number}:${number}`,
+};
+
 /**
  * The `<ScalableRect>` component implements container keeping given aspect
  * ratio, while its width is altered.
@@ -12,9 +18,9 @@ import './style.scss';
  * @param {string} [props.ratio=1:1] Ratio of the rendered rectangle sides,
  * in `W:H` form.
  */
-export default function ScalableRect({ children, className, ratio }) {
+export default function ScalableRect({ children, className, ratio }: PropsT) {
   const aux = ratio.split(':');
-  const paddingBottom = `${(100 * aux[1]) / aux[0]}%`;
+  const paddingBottom = `${(100 * parseFloat(aux[1])) / parseFloat(aux[0])}%`;
 
   /* NOTE: In case the following code looks strange to you, mind that we want to
    * allow the user to set custom styles on this component. If user passes in a

@@ -17,40 +17,78 @@
 
 import path from 'path';
 
+import type { Request, Response } from 'express';
 import { defaults, noop, set } from 'lodash';
 
 // As this environment is a part of the Jest testing utils,
 // we assume development dependencies are available when it is used.
 /* eslint-disable import/no-extraneous-dependencies */
 import register from '@babel/register/experimental-worker';
+
 import JsdomEnv from 'jest-environment-jsdom';
-import { createFsFromVolume, Volume } from 'memfs';
+import { type IFs, createFsFromVolume, Volume } from 'memfs';
 import webpack from 'webpack';
 /* eslint-enable import/no-extraneous-dependencies */
 
 import ssrFactory from 'server/renderer';
 
+import { EnvironmentContext, JestEnvironmentConfig } from '@jest/environment';
+
+// TODO: Not sure, whether it is possible to avoid double declaration of
+// "global" here. Now, the first one extends global properties in Jest
+// environment typings, and the second one can be imported from modules
+// relying on E2eSsrEnv to make these global fields available there.
+
+declare global {
+  interface Window {
+    webpackOutputFs: IFs;
+    webpackStats?: webpack.StatsCompilation;
+  }
+}
+
+export declare module global {
+  export const ssrMarkup: string | undefined;
+  export const webpackConfig: webpack.Configuration | undefined;
+  export const webpackOutputFs: IFs;
+  export const webpackStats: webpack.StatsCompilation | undefined;
+}
+
 export default class E2eSsrEnv extends JsdomEnv {
+  pragmas: Record<string, string | string[]>;
+
+  ssrRequest: object;
+
+  rootDir: string;
+
+  testFolder: string;
+
+  withSsr: boolean;
+
+  webpackStats?: webpack.StatsCompilation;
+
   /**
    * Loads Webpack config, and exposes it to the environment via global
    * webpackConfig object.
    */
   loadWebpackConfig() {
-    let options = this.pragmas['webpack-config-options'];
-    options = options ? JSON.parse(options) : {};
+    const optionsString = this.pragmas['webpack-config-options'] as string;
+
+    const options = (optionsString
+      ? JSON.parse(optionsString) : {}) as webpack.Configuration;
+
     defaults(options, {
       context: this.testFolder,
       fs: this.global.webpackOutputFs,
     });
 
-    let factory = this.pragmas['webpack-config-factory'] || '';
-    factory = require(path.resolve(this.rootDir, factory));
+    const factoryPath = this.pragmas['webpack-config-factory'] as string;
+    const factory = require(path.resolve(this.rootDir, factoryPath));
     this.global.webpackConfig = factory(options);
 
-    const fs = this.global.webpackOutputFs;
+    const fs = this.global.webpackOutputFs as IFs;
     let buildInfo = `${options.context}/.build-info`;
     if (fs.existsSync(buildInfo)) {
-      buildInfo = fs.readFileSync(buildInfo, 'utf8');
+      buildInfo = fs.readFileSync(buildInfo, 'utf8') as string;
       this.global.buildInfo = JSON.parse(buildInfo);
     }
   }
@@ -62,17 +100,17 @@ export default class E2eSsrEnv extends JsdomEnv {
   async runWebpack() {
     this.loadWebpackConfig();
 
-    const compiler = webpack(this.global.webpackConfig);
+    const compiler = webpack(this.global.webpackConfig as webpack.Configuration);
     compiler.outputFileSystem = this.global.webpackOutputFs;
-    return new Promise((done, fail) => {
+    return new Promise<void>((done, fail) => {
       compiler.run((err, stats) => {
         if (err) fail(err);
-        if (stats.hasErrors()) {
+        if (stats?.hasErrors()) {
           console.error(stats.toJson().errors);
           fail(Error('Webpack compilation failed'));
         }
 
-        this.global.webpackStats = stats.toJson();
+        this.global.webpackStats = stats?.toJson();
 
         // Keeps reference to the raw Webpack stats object, which should be
         // explicitly passed to the server-side renderer alongside the request,
@@ -85,8 +123,8 @@ export default class E2eSsrEnv extends JsdomEnv {
   }
 
   async runSsr() {
-    let options = this.pragmas['ssr-options'];
-    options = options ? JSON.parse(options) : {};
+    const optionsString = this.pragmas['ssr-options'] as string;
+    const options = optionsString ? JSON.parse(optionsString) : {};
 
     // TODO: This is temporary to shortcut the logging added to SSR.
     if (options.logger === undefined) {
@@ -124,16 +162,16 @@ export default class E2eSsrEnv extends JsdomEnv {
     let status = 200; // OK
     const markup = await new Promise((done, fail) => {
       renderer(
-        this.ssrRequest,
+        this.ssrRequest as Request,
 
         // TODO: This will do for now, with the current implementation of
         // the renderer, but it will require a rework once the renderer is
         // updated to do streaming.
-        {
+        ({
           cookie: noop,
           send: done,
           set: noop,
-          status: (value) => {
+          status: (value: number) => {
             status = value;
           },
 
@@ -147,7 +185,7 @@ export default class E2eSsrEnv extends JsdomEnv {
               },
             },
           },
-        },
+        } as unknown) as Response,
 
         (error) => {
           if (error) fail(error);
@@ -161,10 +199,15 @@ export default class E2eSsrEnv extends JsdomEnv {
     this.global.ssrStatus = status;
   }
 
-  constructor(config, context) {
+  constructor(
+    config: JestEnvironmentConfig,
+    context: EnvironmentContext,
+  ) {
     const pragmas = context.docblockPragmas;
-    let request = pragmas['ssr-request'];
-    request = request ? JSON.parse(request) : {};
+
+    const requestString = pragmas['ssr-request'] as string;
+    const request = requestString ? JSON.parse(requestString) : {};
+
     if (!request.url) request.url = '/';
     request.csrfToken = noop;
 

@@ -1,7 +1,14 @@
 import PT from 'prop-types';
-import themed from '@dr.pogodin/react-themes';
+import { themedComponent, type ThemeT } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
+
+type PropsT = {
+  theme: ThemeT & {
+    container?: string;
+    circle?: string;
+  };
+};
 
 /**
  * Throbber is an "action in progress" indicator, which renders
@@ -14,7 +21,7 @@ import defaultTheme from './theme.scss';
  */
 function Throbber({
   theme,
-}) {
+}: PropsT) {
   return (
     <span className={theme.container} styleName="container">
       <span className={theme.circle} styleName="circle" />
@@ -24,18 +31,19 @@ function Throbber({
   );
 }
 
-Throbber.defaultProps = {
-  theme: {},
-};
-
 Throbber.propTypes = {
   theme: PT.shape({
     container: PT.string,
     circle: PT.string,
-  }),
+  }).isRequired,
 };
 
-export default themed('Throbber', [
-  'circle',
-  'container',
-], defaultTheme)(Throbber);
+export default themedComponent(
+  'Throbber',
+  Throbber as React.FunctionComponent<PropsT>,
+  [
+    'circle',
+    'container',
+  ],
+  defaultTheme,
+);

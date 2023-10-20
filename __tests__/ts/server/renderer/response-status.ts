@@ -1,8 +1,10 @@
 // Tests how response status is handled by the renderer and its cache.
 
-import { getSsrContext } from '@dr.pogodin/react-global-state';
+import { type Request, type RequestHandler } from 'express';
+
 import { noop } from 'lodash';
 import factory from 'server/renderer';
+import { getSsrContext } from 'utils/globalState';
 
 import {
   mockHttpRequest,
@@ -12,13 +14,13 @@ import {
 
 const cacheController = jest.fn((req) => ({ key: req.url }));
 
-let renderer;
-let mockStatus;
+let renderer: RequestHandler;
+let mockStatus: number;
 
 beforeAll(() => {
   renderer = factory(mockWebpackConfig(), {
     Application: () => {
-      const context = getSsrContext();
+      const context = getSsrContext()!;
       context.status = mockStatus;
     },
     logger: { info: noop, log: noop },
@@ -33,7 +35,11 @@ describe('status 200', () => {
   beforeEach(async () => {
     render.reset();
     mockStatus = 200;
-    await renderer(req, res, console.error);
+    await renderer(
+      (req as unknown) as Request,
+      res,
+      console.error,
+    );
   });
 
   it('is reported by the intitial rendering', async () => {
@@ -52,7 +58,7 @@ describe('status 404', () => {
   beforeEach(async () => {
     render.reset();
     mockStatus = 404;
-    await renderer(req, res, console.error);
+    await renderer((req as unknown) as Request, res, console.error);
   });
 
   it('is reported by the intitial rendering', async () => {
@@ -74,13 +80,17 @@ describe('status 500', () => {
 
   it('is reported by the intitial rendering', async () => {
     mockStatus = 500;
-    await renderer(req, res, console.error);
+    await renderer(
+      (req as unknown) as Request,
+      res,
+      console.error,
+    );
     expect(render.status).toBe(500);
   });
 
   it('is reported by the cache response', async () => {
     mockStatus = 200;
-    await renderer(req, res, console.error);
+    await renderer((req as unknown) as Request, res, console.error);
     expect(render.status).toBe(200);
   });
 });

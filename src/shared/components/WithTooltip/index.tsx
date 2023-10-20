@@ -3,11 +3,36 @@
 import PT from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
-import { themed } from 'utils';
+import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
 
-import Tooltip, { PLACEMENTS } from './Tooltip';
+import Tooltip, { PLACEMENTS, type TooltipThemeT } from './Tooltip';
 
 import defaultTheme from './default-theme.scss';
+
+type PropsT = {
+  children?: React.ReactNode;
+  placement?: PLACEMENTS;
+  tip?: React.ReactNode;
+  theme: ThemeT & TooltipThemeT & {
+    wrapper?: string;
+  };
+};
+
+type TooltipRefT = {
+  pointTo: (
+    x: number,
+    y: number,
+    placement: PLACEMENTS,
+    wrapperRef: HTMLDivElement,
+  ) => void;
+};
+
+type HeapT = {
+  lastCursorX: number;
+  lastCursorY: number;
+  triggeredByTouch: boolean;
+  timerId?: NodeJS.Timeout;
+};
 
 /**
  * Implements a simple to use and themeable tooltip component, _e.g._
@@ -29,18 +54,18 @@ function Wrapper({
   placement,
   tip,
   theme,
-}) {
-  const { current: heap } = useRef({
+}: PropsT) {
+  const { current: heap } = useRef<HeapT>({
     lastCursorX: 0,
     lastCursorY: 0,
     triggeredByTouch: false,
     timerId: undefined,
   });
-  const tooltipRef = useRef();
-  const wrapperRef = useRef();
+  const tooltipRef = useRef<TooltipRefT>();
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const updatePortalPosition = (cursorX, cursorY) => {
+  const updatePortalPosition = (cursorX: number, cursorY: number) => {
     if (!showTooltip) {
       heap.lastCursorX = cursorX;
       heap.lastCursorY = cursorY;
@@ -61,7 +86,7 @@ function Wrapper({
       // Otherwise we can just open the tooltip right away.
       } else setShowTooltip(true);
     } else {
-      const wrapperRect = wrapperRef.current.getBoundingClientRect();
+      const wrapperRect = wrapperRef.current!.getBoundingClientRect();
       if (
         cursorX < wrapperRect.left
         || cursorX > wrapperRect.right
@@ -73,8 +98,8 @@ function Wrapper({
         tooltipRef.current.pointTo(
           cursorX + window.scrollX,
           cursorY + window.scrollY,
-          placement,
-          wrapperRef.current,
+          placement!,
+          wrapperRef.current!,
         );
       }
     }
@@ -91,8 +116,8 @@ function Wrapper({
         tooltipRef.current.pointTo(
           heap.lastCursorX + window.scrollX,
           heap.lastCursorY + window.scrollY,
-          placement,
-          wrapperRef.current,
+          placement!,
+          wrapperRef.current!,
         );
       }
 
@@ -137,8 +162,9 @@ function Wrapper({
   );
 }
 
-const ThemedWrapper = themed(
+const ThemedWrapper = themedComponent(
   'WithTooltip',
+  Wrapper,
   [
     'appearance',
     'arrow',
@@ -147,11 +173,17 @@ const ThemedWrapper = themed(
     'wrapper',
   ],
   defaultTheme,
-)(Wrapper);
+);
 
-ThemedWrapper.PLACEMENTS = PLACEMENTS;
+type ExportT = typeof ThemedWrapper & {
+  PLACEMENTS: typeof PLACEMENTS;
+};
 
-Wrapper.propTypes = {
+const e: ExportT = ThemedWrapper as ExportT;
+
+e.PLACEMENTS = PLACEMENTS;
+
+(Wrapper as React.FunctionComponent<PropsT>).propTypes = {
   children: PT.node,
   placement: PT.oneOf(Object.values(PLACEMENTS)),
   theme: ThemedWrapper.themeType.isRequired,

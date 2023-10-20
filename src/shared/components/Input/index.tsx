@@ -1,24 +1,34 @@
 import PT from 'prop-types';
 import { forwardRef } from 'react';
 
-import { themed } from 'utils';
+import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
+type PropsT = {
+  label?: string;
+  theme: ThemeT & {
+    input?: string;
+  };
+};
+
 /**
  * Themeable input field, based on the standard HTML `<input>` element.
- * @param {object} [props]
- * @param {string} [props.label] Input label.
- * @param {InputTheme} [props.theme] _Ad hoc_ theme.
- * @param {...any} [props...] [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
- * @param {...any} [props...] Any other properties are passed to the underlying
+ * @param [props]
+ * @param [props.label] Input label.
+ * @param [props.theme] _Ad hoc_ theme.
+ * @param [props...] [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
+ * @param [props...] Any other properties are passed to the underlying
  * `<input>` element.
  */
-const Input = forwardRef(({
-  label,
-  theme,
-  ...rest
-}, ref) => (
+const Input = forwardRef<HTMLInputElement, PropsT>((
+  {
+    label,
+    theme,
+    ...rest
+  }: PropsT,
+  ref,
+) => (
   <span className={theme.container}>
     { label === undefined ? null : <p className={theme.label}>{label}</p> }
     <input
@@ -29,11 +39,11 @@ const Input = forwardRef(({
   </span>
 ));
 
-const ThemedInput = themed('Input', [
+const ThemedInput = themedComponent('Input', Input, [
   'container',
   'input',
   'label',
-], defaultTheme)(Input);
+], defaultTheme);
 
 Input.propTypes = {
   label: PT.string,

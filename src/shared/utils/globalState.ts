@@ -17,6 +17,7 @@ export type SsrContextT<StateT> = SsrContext<StateT> & {
   chunkGroups: ChunkGroupsT;
   chunks: string[];
   req: Request,
+  status: number;
 };
 
 const {

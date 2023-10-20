@@ -1,15 +1,25 @@
 import PT from 'prop-types';
 
-import { themed } from 'utils';
+import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
+
+type PropT = {
+  checked?: boolean;
+  label?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  theme: ThemeT & {
+    checkbox?: string;
+    container?: string;
+  };
+};
 
 function Checkbox({
   checked,
   label,
   onChange,
   theme,
-}) {
+}: PropT) {
   return (
     <div className={theme.container}>
       { label === undefined ? null : <p className={theme.label}>{label}</p> }
@@ -26,27 +36,27 @@ function Checkbox({
 /**
  * Checkbox component theme: a map of
  * CSS classes to append to its elements:
- * @prop {string} [checkbox] to the underlying checkbox `<input>` element.
- * @prop {string} [container] to the root checkbox element.
- * @prop {string} [label] to the checkbox label element.
+ * @prop [checkbox] to the underlying checkbox `<input>` element.
+ * @prop [container] to the root checkbox element.
+ * @prop [label] to the checkbox label element.
  */
-const ThemedCheckbox = themed('Checkbox', [
+const ThemedCheckbox = themedComponent('Checkbox', Checkbox, [
   'checkbox',
   'container',
   'label',
-], defaultTheme)(Checkbox);
+], defaultTheme);
 
 /**
  * The `<Checkbox>` component implements themeable checkboxes.
- * @param {object} [props] Component properties.
- * @param {boolean} [props.checked] Checkbox value.
- * @param {string} [props.label] Checkbox label.
- * @param {function} [props.onChange] State change handler.
- * @param {CheckboxTheme} [props.theme] _Ad hoc_ theme.
- * @param {...any} [props....]
+ * @param [props] Component properties.
+ * @param [props.checked] Checkbox value.
+ * @param [props.label] Checkbox label.
+ * @param [props.onChange] State change handler.
+ * @param [props.theme] _Ad hoc_ theme.
+ * @param [props....]
  * [Other properties of themeable components](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties).
  */
-Checkbox.propTypes = {
+(Checkbox as React.FunctionComponent<PropT>).propTypes = {
   checked: PT.bool,
   label: PT.string,
   onChange: PT.func,

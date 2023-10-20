@@ -1,13 +1,16 @@
+import { type Request, type Response, type NextFunction } from 'express';
 import { clone, noop } from 'lodash';
 import supertest from 'supertest';
 
-import serverFactory from 'server/server';
+import serverFactory, { type CspOptionsT } from 'server/server';
 import { setBuildInfo } from 'utils/isomorphy/buildInfo';
 
 // Test logger, which omits regular info message from the console.
 const logger = { info: noop, log: noop };
 
-jest.mock('serve-favicon', () => jest.fn(() => (req, res, next) => next()));
+jest.mock('serve-favicon', () => jest.fn(
+  () => (req: Request, res: Response, next: NextFunction) => next()
+));
 
 jest.mock('webpack', () => {
   const mock = () => ({
@@ -21,7 +24,7 @@ jest.mock('webpack', () => {
 
 jest.mock(
   'webpack-hot-middleware',
-  () => jest.fn(() => (req, res, next) => next()),
+  () => jest.fn(() => (req: Request, res: Response, next: NextFunction) => next()),
 );
 
 const TEST_CONTEXT = `${__dirname}/test_data`;
@@ -52,20 +55,21 @@ test('Favicon support', () => {
 });
 
 test('Launch with dev tools', () => {
-  process.env.DEV_TOOLS = true;
+  process.env.DEV_TOOLS = '1';
   const server = serverFactory(TEST_WEBPACK_CONFIG, { logger });
   return server;
 });
 
 describe('Server is functional', () => {
-  let server;
+  let server: supertest.SuperTest<supertest.Test>;
 
   beforeAll(async () => {
     server = supertest(
       await serverFactory(TEST_WEBPACK_CONFIG, {
         Application: () => <div>Hello World!</div>,
-        cspSettingsHook: (csp) => {
-          csp.directives['default-src'].push('https://sample.url');
+        cspSettingsHook: (csp: CspOptionsT) => {
+          const sources = csp.directives?.['default-src'] as Array<string>;
+          sources.push('https://sample.url');
           return csp;
         },
         logger,

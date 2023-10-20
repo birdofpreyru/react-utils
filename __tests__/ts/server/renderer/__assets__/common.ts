@@ -1,6 +1,15 @@
 // Utilities common for renderer tests in different modules.
 
+import { type Response } from 'express';
+
 import { noop } from 'lodash';
+
+interface ResponseI extends Response {
+  csrfToken: () => string;
+  nonce: string;
+  info: string;
+  url: string;
+}
 
 /**
  * Creates a mock HTTP request.
@@ -10,13 +19,13 @@ import { noop } from 'lodash';
  */
 export function mockHttpRequest({
   url = '/mock/path',
-} = {}) {
-  return {
-    csrfToken: noop,
+} = {}): ResponseI {
+  return ({
+    csrfToken: () => 'dummy-csrf-token',
     nonce: 'abcdef-dummy-nonce',
     info: 'I am a dummy HTTP request! No need for a complex mock here!',
     url,
-  };
+  } as unknown) as ResponseI;
 }
 
 /**
@@ -24,6 +33,10 @@ export function mockHttpRequest({
  * the mock response object defined below.
  */
 class Render {
+  markup: string = '';
+
+  status: number = 200;
+
   constructor() {
     this.reset();
   }
@@ -45,7 +58,10 @@ class Render {
  *  res: Express.Response;
  * }}
  */
-export function mockHttpResponse() {
+export function mockHttpResponse(): {
+  render: Render;
+  res: Response,
+} {
   const render = new Render();
   const res = {
     cookie: noop,
@@ -82,11 +98,14 @@ export function mockHttpResponse() {
         },
       },
     },
-    send: (chunk) => { render.markup += chunk; },
+    send: (chunk: string) => { render.markup += chunk; },
     set: noop,
-    status: (status) => { render.status = status; },
+    status: (status: number) => { render.status = status; },
   };
-  return { render, res };
+  return {
+    render,
+    res: (res as unknown) as Response,
+  };
 }
 
 export function mockWebpackConfig() {

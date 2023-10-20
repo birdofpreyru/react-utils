@@ -19,7 +19,7 @@ declare global {
   const BUILD_INFO: BuildInfoT | undefined;
 }
 
-let buildInfo: BuildInfoT;
+let buildInfo: BuildInfoT | undefined;
 
 // On the client side "BUILD_INFO" should be injected by Webpack. Note, however,
 // that in test environment we may need situations were environment is mocked as
@@ -35,7 +35,7 @@ if (typeof BUILD_INFO !== 'undefined') buildInfo = BUILD_INFO;
  * @param info
  * @param force
  */
-export function setBuildInfo(info: BuildInfoT, force = false) {
+export function setBuildInfo(info?: BuildInfoT, force = false) {
   if (buildInfo !== undefined && !force) {
     throw Error('"Build Info" is already initialized');
   }

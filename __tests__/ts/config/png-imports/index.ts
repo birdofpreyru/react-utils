@@ -7,14 +7,16 @@
 
 import { act } from 'react-dom/test-utils';
 
+import { global } from 'utils/jest/E2eSsrEnv';
+
 const outputPath = global.webpackConfig.output.path;
 
-let container;
+let container: HTMLElement | null;
 
 beforeEach(() => {
   // Resets the document with SSR markup.
   document.open();
-  document.write(global.ssrMarkup);
+  document.write(global.ssrMarkup || '');
   document.close();
 
   // Assigns react container node to "container".
@@ -22,18 +24,18 @@ beforeEach(() => {
 });
 
 it('generates expected markup during SSR', () => {
-  expect(container.innerHTML).toMatchSnapshot();
+  expect(container?.innerHTML).toMatchSnapshot();
 });
 
 it('emits the PNG file to the expected path', () => {
-  const path = container.innerHTML.match(/src="(.*\.png)"/)[1];
-  expect(global.webpackOutputFs.existsSync(`${outputPath}/${path}`)).toBe(true);
+  const path = container?.innerHTML?.match(/src="(.*\.png)"/)?.[1];
+  expect(global.webpackOutputFs?.existsSync(`${outputPath}/${path}`)).toBe(true);
 });
 
 it('generates expected markup at the client-side', async () => {
-  const ssrMarkup = container.innerHTML;
-  let js = global.webpackStats.entrypoints.main.assets[0].name;
-  js = global.webpackOutputFs.readFileSync(`${outputPath}/${js}`, 'utf8');
-  await act(new Function(js)); // eslint-disable-line no-new-func
-  expect(container.innerHTML).toBe(ssrMarkup);
+  const ssrMarkup = container?.innerHTML;
+  let js = global.webpackStats?.entrypoints?.main.assets?.[0].name;
+  js = global.webpackOutputFs?.readFileSync(`${outputPath}/${js}`, 'utf8') as string;
+  await act(() => new Function(js || '')); // eslint-disable-line no-new-func
+  expect(container?.innerHTML).toBe(ssrMarkup);
 });

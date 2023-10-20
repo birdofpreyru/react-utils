@@ -12,12 +12,14 @@
 import { noop } from 'lodash';
 import { act } from 'react-dom/test-utils';
 
-document.write(global.ssrMarkup);
-const markup = document.querySelector('#react-view').innerHTML;
+import { global } from 'src/shared/utils/jest/E2eSsrEnv';
+
+document.write(global.ssrMarkup || '');
+const markup = document.querySelector('#react-view')?.innerHTML;
 
 const fs = global.webpackOutputFs;
 const outputPath = global.webpackConfig.output.path;
-const jsFilename = global.webpackStats.namedChunkGroups.main.assets[0].name;
+const jsFilename = global.webpackStats?.namedChunkGroups?.main?.assets?.[0].name;
 
 it('generates expected SSR markup', () => {
   expect(markup).toMatchSnapshot();
@@ -25,8 +27,8 @@ it('generates expected SSR markup', () => {
 
 it('hydrates successfully', async () => {
   console.error = noop;
-  const js = fs.readFileSync(`${outputPath}/${jsFilename}`, 'utf8');
-  await act(new Function(js)); // eslint-disable-line no-new-func
+  const js = fs?.readFileSync(`${outputPath}/${jsFilename}`, 'utf8') as string;
+  await act(() => new Function(js)); // eslint-disable-line no-new-func
   const container = document.querySelector('#react-view');
-  expect(container.innerHTML).toBe(markup);
+  expect(container?.innerHTML).toBe(markup);
 });

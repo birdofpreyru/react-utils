@@ -5,6 +5,7 @@
 import fs from 'fs';
 import path from 'path';
 
+import { type RequestHandler } from 'express';
 import { Writable } from 'stream';
 import { brotliCompress, brotliDecompress } from 'zlib';
 import winston from 'winston';
@@ -221,7 +222,7 @@ export function newDefaultLogger({
  *   If undefined - infinite age is assumed.
  * @return {function} Created middleware.
  */
-export default function factory(webpackConfig, options) {
+export default function factory(webpackConfig, options): RequestHandler {
   const ops = defaults(clone(options), {
     beforeRender: () => Promise.resolve({}),
     maxSsrRounds: 10,

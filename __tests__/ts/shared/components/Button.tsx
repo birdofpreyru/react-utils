@@ -43,7 +43,7 @@ describe('Matches snapshots', () => {
   });
   test('when rendered as link', () => {
     snapshot((
-      <StaticRouter>
+      <StaticRouter location="">
         <Button
           active
           theme={testTheme}

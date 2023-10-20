@@ -9,8 +9,11 @@
     "jsx": "react-jsx",
     "paths": {
       "client/*": ["./src/client/*"],
+      "components/*": ["./src/shared/components/*"],
+      "server/*": ["./src/server/*"],
       "utils/*": ["./src/shared/utils/*"]
     },
+    "rootDirs": [".", "build/scss-types"],
     "strict": true
   }
 }

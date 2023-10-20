@@ -19,12 +19,12 @@ import PT from 'prop-types';
 
 /* Valid placements of the rendered tooltip. They will be overriden when
  * necessary to fit the tooltip within the viewport. */
-export const PLACEMENTS = {
-  ABOVE_CURSOR: 'ABOVE_CURSOR',
-  ABOVE_ELEMENT: 'ABOVE_ELEMENT',
-  BELOW_CURSOR: 'BELOW_CURSOR',
-  BELOW_ELEMENT: 'BELOW_ELEMENT',
-};
+export enum PLACEMENTS {
+  ABOVE_CURSOR = 'ABOVE_CURSOR',
+  ABOVE_ELEMENT = 'ABOVE_ELEMENT',
+  BELOW_CURSOR = 'BELOW_CURSOR',
+  BELOW_ELEMENT = 'BELOW_ELEMENT',
+}
 
 const ARROW_STYLE_DOWN = [
   'border-bottom-color:transparent',
@@ -38,6 +38,25 @@ const ARROW_STYLE_UP = [
   'border-right-color:transparent',
 ].join(';');
 
+type ComponentsT = {
+  container: HTMLDivElement;
+  arrow: HTMLDivElement;
+  content: HTMLDivElement;
+};
+
+type HeapT = {
+  lastElement?: HTMLElement;
+  lastPageX: number;
+  lastPageY: number;
+  lastPlacement?: PLACEMENTS | undefined;
+};
+
+export interface TooltipThemeT {
+  arrow?: string;
+  content?: string;
+  container?: string;
+}
+
 /**
  * Creates tooltip components.
  * @ignore
@@ -46,7 +65,7 @@ const ARROW_STYLE_UP = [
  * @return {object} Object with DOM references to the container components:
  *  container, arrow, content.
  */
-function createTooltipComponents(theme) {
+function createTooltipComponents(theme: TooltipThemeT): ComponentsT {
   const arrow = document.createElement('div');
   if (theme.arrow) arrow.setAttribute('class', theme.arrow);
 
@@ -63,16 +82,21 @@ function createTooltipComponents(theme) {
   return { container, arrow, content };
 }
 
+type TooltipRectsT = {
+  arrow: DOMRect;
+  container: DOMRect;
+};
+
 /**
  * Generates bounding client rectangles for tooltip components.
  * @ignore
- * @param {object} tooltip DOM references to the tooltip components.
- * @param {object} tooltip.arrow
- * @param {object} tooltip.container
- * @return {{ arrow: object, container}} Object holding tooltip rectangles in
+ * @param tooltip DOM references to the tooltip components.
+ * @param tooltip.arrow
+ * @param tooltip.container
+ * @return Object holding tooltip rectangles in
  *  two fields.
  */
-function calcTooltipRects(tooltip) {
+function calcTooltipRects(tooltip: ComponentsT): TooltipRectsT {
   return {
     arrow: tooltip.arrow.getBoundingClientRect(),
     container: tooltip.container.getBoundingClientRect(),
@@ -111,7 +135,11 @@ function calcViewportRect() {
  *  - {number} containerY
  *  - {string} baseArrowStyle
  */
-function calcPositionAboveXY(x, y, tooltipRects) {
+function calcPositionAboveXY(
+  x: number,
+  y: number,
+  tooltipRects: TooltipRectsT,
+) {
   const { arrow, container } = tooltipRects;
   return {
     arrowX: 0.5 * (container.width - arrow.width),
@@ -183,20 +211,20 @@ function xPageFitCorrection(x, y, pos, pageXOffset, pageXWidth) {
  * Sets positions of tooltip components to point the tooltip to the specified
  * page point.
  * @ignore
- * @param {number} pageX
- * @param {number} pageY
- * @param {PLACEMENTS} placement
- * @param {object} element DOM reference to the element wrapped by the tooltip.
- * @param {object} tooltip
- * @param {object} tooltip.arrow DOM reference to the tooltip arrow.
- * @param {object} tooltip.container DOM reference to the tooltip container.
+ * @param pageX
+ * @param pageY
+ * @param placement
+ * @param element DOM reference to the element wrapped by the tooltip.
+ * @param tooltip
+ * @param tooltip.arrow DOM reference to the tooltip arrow.
+ * @param tooltip.container DOM reference to the tooltip container.
  */
 function setComponentPositions(
-  pageX,
-  pageY,
-  placement,
-  element,
-  tooltip,
+  pageX: number,
+  pageY: number,
+  placement: PLACEMENTS | undefined,
+  element: HTMLElement | undefined,
+  tooltip: ComponentsT,
 ) {
   const tooltipRects = calcTooltipRects(tooltip);
   const viewportRect = calcViewportRect();
@@ -238,23 +266,31 @@ function setComponentPositions(
 }
 
 /* The Tooltip component itself. */
-const Tooltip = forwardRef(({ children, theme }, ref) => {
+const Tooltip = forwardRef<unknown, {
+  children?: React.ReactNode;
+  theme: any;
+}>(({ children, theme }, ref) => {
   // NOTE: The way it has to be implemented, for clean mounting and unmounting
   // at the client side, the <Tooltip> is fully mounted into DOM in the next
   // rendering cycles, and only then it can be correctly measured and positioned.
   // Thus, when we create the <Tooltip> we have to record its target positioning
   // details, and then apply them when it is created.
 
-  const { current: heap } = useRef({
+  const { current: heap } = useRef<HeapT>({
     lastElement: undefined,
     lastPageX: 0,
     lastPageY: 0,
     lastPlacement: undefined,
   });
 
-  const [components, setComponents] = useState(null);
+  const [components, setComponents] = useState<ComponentsT | null>(null);
 
-  const pointTo = (pageX, pageY, placement, element) => {
+  const pointTo = (
+    pageX: number,
+    pageY: number,
+    placement: PLACEMENTS,
+    element: HTMLElement,
+  ) => {
     heap.lastElement = element;
     heap.lastPageX = pageX;
     heap.lastPageY = pageY;
@@ -305,7 +341,7 @@ const Tooltip = forwardRef(({ children, theme }, ref) => {
 
 Tooltip.propTypes = {
   children: PT.node,
-  theme: PT.shape().isRequired,
+  theme: PT.shape({}).isRequired,
 };
 
 Tooltip.defaultProps = {

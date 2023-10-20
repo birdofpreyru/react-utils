@@ -2,7 +2,21 @@ import PT from 'prop-types';
 import { createContext, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 
-const Context = createContext();
+type PropsT = {
+  children?: React.ReactNode;
+  description: string;
+  image?: string;
+  siteName?: string;
+  socialDescription?: string;
+  socialTitle?: string;
+  title: string;
+  url?: string;
+};
+
+const Context = createContext<Exclude<PropsT, 'children'>>({
+  description: '',
+  title: '',
+});
 
 /**
  * The `<MetaTags>` component is an auxiliary wrapper around `react-helmet`,
@@ -30,31 +44,31 @@ const Context = createContext();
  *   );
  * }
  * ```
- * @param {object} [props]
- * @param {string} [props.description] Page description to use in
+ * @param [props]
+ * @param [props.description] Page description to use in
  * the `description` meta tag, and as a default description of Open Graph Tags.
- * @param {string} [props.image] The absolute URL of thumbnail image to use
+ * @param [props.image] The absolute URL of thumbnail image to use
  * in Open Graph Tags (`twitter:image`, and `og:image`). By default these tags
  * are not injected.
  *
  * **BEWARE:** It must be a complete, absolute URL, including the correct
  * website domain and HTTP schema.
  *
- * @param {string} [props.siteName]: The site name to use in `twitter:site`,
+ * @param [props.siteName]: The site name to use in `twitter:site`,
  * and `og:sitename` tags. By default these tags are not injected.
  *
- * @param {string} [props.socialDescription] The site description to use in
+ * @param [props.socialDescription] The site description to use in
  * `twitter:description` and `og:description` meta tags. By default the value of
  * `description` prop is used.
- * @param {string} [props.socialTitle] The page title to use in
+ * @param [props.socialTitle] The page title to use in
  * `twitter:title`, `og:title`, and `og:image:alt` tags. By default the value of
  * `title` prop is used. Also the `og:image:alt` tag is only injected if `image`
  * prop is present.
  *
- * @param {string} props.title: The page name to use in the `<title>` tag.
+ * @param props.title: The page name to use in the `<title>` tag.
  * It is also used as the default value of `socialTitle` prop.
  *
- * @param {string} [props.url] The page URL to use in `og:url` tag.
+ * @param [props.url] The page URL to use in `og:url` tag.
  * By default the tag is not injected.
  */
 export default function MetaTags({
@@ -66,7 +80,7 @@ export default function MetaTags({
   socialTitle,
   title,
   url,
-}) {
+}: PropsT) {
   const socTitle = socialTitle || title;
   const socDesc = socialDescription || description;
 

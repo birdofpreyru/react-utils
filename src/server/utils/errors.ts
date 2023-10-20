@@ -72,6 +72,11 @@ export { getErrorForCode };
  */
 export { joi };
 
+// TODO: It could accept the status code as a constructor argument.
+class ErrorWithStatus extends Error {
+  status: number = CODES.INTERNAL_SERVER_ERROR;
+}
+
 /**
  * ```js
  * import { server } from '@dr.pogodin/react-utils';
@@ -84,8 +89,8 @@ export { joi };
  * Server Error).
  * @return {Error}
  */
-export function newError(message, statusCode = CODES.INTERNAL_SERVER_ERROR) {
-  const error = new Error(message);
+export function newError(message: string, statusCode = CODES.INTERNAL_SERVER_ERROR) {
+  const error = new ErrorWithStatus(message);
   error.status = statusCode;
   return error;
 }
@@ -96,12 +101,11 @@ export function newError(message, statusCode = CODES.INTERNAL_SERVER_ERROR) {
  * const { fail } = server.errors;
  * ```
  * Throws an error with given message and HTTP status code.
- * @param {string} message Error message.
- * @param {number} [statusCode=500] HTTP error code. Defaults to 500 (Internal
+ * @param message Error message.
+ * @param [statusCode=500] HTTP error code. Defaults to 500 (Internal
  * Server Error).
- * @throws {Error}
  */
-export function fail(message, statusCode = CODES.INTERNAL_SERVER_ERROR) {
+export function fail(message: string, statusCode = CODES.INTERNAL_SERVER_ERROR) {
   throw newError(message, statusCode);
 }
 
@@ -112,16 +116,15 @@ export function fail(message, statusCode = CODES.INTERNAL_SERVER_ERROR) {
  * ```
  * Validates a value using given Joi schema, and throws an error with given
  * message and HTTP status code in case of the validation failure.
- * @param {any} value
- * @param {object} schema
- * @param {string} [message] Error message.
- * @param {number} [statusCode=500] HTTP status code. Defaults to 400 (Bad
+ * @param value
+ * @param schema
+ * @param [message] Error message.
+ * @param [statusCode=500] HTTP status code. Defaults to 400 (Bad
  * Request).
- * @throws {Error}
  */
 export function assert(
-  value,
-  schema,
+  value: any,
+  schema: joi.AnySchema,
   message = '',
   statusCode = CODES.BAD_REQUEST,
 ) {

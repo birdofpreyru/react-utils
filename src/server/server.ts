@@ -14,12 +14,21 @@ import {
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import csrf from '@dr.pogodin/csurf';
-import express from 'express';
+
+import express, {
+  type Express,
+  type NextFunction,
+  type Request,
+  type Response,
+} from 'express';
+
 import favicon from 'serve-favicon';
-import helmet from 'helmet';
+import helmet, { type HelmetOptions } from 'helmet';
 import loggerMiddleware from 'morgan';
 import requestIp from 'request-ip';
 import { v4 as uuid } from 'uuid';
+import { type Configuration } from 'webpack';
+import winston from 'winston';
 
 import rendererFactory from './renderer';
 
@@ -29,6 +38,18 @@ import {
   getErrorForCode,
   newError,
 } from './utils/errors';
+
+export type CspOptionsT =
+Exclude<HelmetOptions['contentSecurityPolicy'], boolean | undefined>;
+
+interface RequestT extends Request {
+  cspNonce: string;
+  nonce: string;
+}
+
+type ServerT = Express & {
+  logger: winston.Logger;
+};
 
 /**
  * Default Content Security Policy settings.
@@ -42,7 +63,7 @@ const defaultCspSettings = {
     // is removed to facilitate local development with HTTP server. In cloud
     // deployments we assume Apache or Nginx server in front of out app takes
     // care about such re-writes.
-    (array) => array.filter((item) => item !== 'https:'),
+    (array) => (array as string[]).filter((item: string) => item !== 'https:'),
   ),
 };
 defaultCspSettings.directives['frame-src'] = [
@@ -78,7 +99,25 @@ export function getDefaultCspSettings() {
   return cloneDeep(defaultCspSettings);
 }
 
-export default async function factory(webpackConfig, options) {
+type OptionsT = {
+  beforeExpressJsError?: (server: ServerT) => Promise<boolean>;
+  beforeExpressJsSetup?: (server: ServerT) => Promise<void>;
+  cspSettingsHook?: (
+    defaultOptions: CspOptionsT,
+    req: Request,
+  ) => CspOptionsT;
+  devMode?: boolean;
+  favicon?: string;
+  httpsRedirect?: boolean;
+  logger?: winston.Logger;
+  noCsp?: boolean;
+  onExpressJsSetup?: (server: ServerT) => Promise<void>;
+};
+
+export default async function factory(
+  webpackConfig: Configuration,
+  options: OptionsT,
+) {
   const rendererOps = pick(options, [
     'Application',
     'beforeRender',
@@ -91,15 +130,15 @@ export default async function factory(webpackConfig, options) {
     'staticCacheSize',
   ]);
   const renderer = rendererFactory(webpackConfig, rendererOps);
-  const { publicPath } = webpackConfig.output;
+  const { publicPath } = webpackConfig.output!;
 
-  const server = express();
+  const server = express() as ServerT;
 
   if (options.beforeExpressJsSetup) {
     await options.beforeExpressJsSetup(server);
   }
 
-  server.logger = options.logger;
+  if (options.logger) server.logger = options.logger;
 
   if (options.httpsRedirect) {
     server.use((req, res, next) => {
@@ -124,22 +163,26 @@ export default async function factory(webpackConfig, options) {
   );
 
   if (!options.noCsp) {
-    server.use((req, res, next) => {
-      req.nonce = uuid();
+    server.use(
+      (req: Request, res: Response, next: NextFunction) => {
+        const req2 = req as RequestT;
 
-      // TODO: This is deprecated, but it is kept for now for backward
-      // compatibility. Should be removed sometime later.
-      req.cspNonce = req.nonce;
+        req2.nonce = uuid();
 
-      // The deep clone is necessary here to ensure that default value can't be
-      // mutated during request processing.
-      let cspSettings = cloneDeep(defaultCspSettings);
-      cspSettings.directives['script-src'].push(`'nonce-${req.nonce}'`);
-      if (options.cspSettingsHook) {
-        cspSettings = options.cspSettingsHook(cspSettings, req);
-      }
-      helmet.contentSecurityPolicy(cspSettings)(req, res, next);
-    });
+        // TODO: This is deprecated, but it is kept for now for backward
+        // compatibility. Should be removed sometime later.
+        req2.cspNonce = req2.nonce;
+
+        // The deep clone is necessary here to ensure that default value can't be
+        // mutated during request processing.
+        let cspSettings: CspOptionsT = cloneDeep(defaultCspSettings);
+        (cspSettings.directives?.['script-src'] as string[]).push(`'nonce-${req2.nonce}'`);
+        if (options.cspSettingsHook) {
+          cspSettings = options.cspSettingsHook(cspSettings, req);
+        }
+        helmet.contentSecurityPolicy(cspSettings)(req, res, next);
+      },
+    );
   }
 
   if (options.favicon) {
@@ -155,11 +198,16 @@ export default async function factory(webpackConfig, options) {
 
   server.use(csrf({ cookie: true }));
 
-  loggerMiddleware.token('ip', (req) => req.clientIp);
+  loggerMiddleware.token(
+    'ip',
+    (req: Request & { clientIp: string }) => req.clientIp,
+  );
   const FORMAT = ':ip > :status :method :url :response-time ms :res[content-length] :referrer :user-agent';
   server.use(loggerMiddleware(FORMAT, {
     stream: {
-      write: options.logger.info.bind(options.logger),
+      // TODO: This implies the logger is always set. Is it on a higher level?
+      // then mark it as always present.
+      write: options.logger!.info.bind(options.logger),
     },
   }));
 
@@ -168,7 +216,7 @@ export default async function factory(webpackConfig, options) {
   // Thus, this setup to serve it. Probably, need some more configuration
   // for special cases, but this will do for now.
   server.get('/__service-worker.js', express.static(
-    webpackConfig.output.path,
+    webpackConfig.output?.path || '',
     {
       setHeaders: (res) => res.set('Cache-Control', 'no-cache'),
     },
@@ -188,7 +236,7 @@ export default async function factory(webpackConfig, options) {
     if (!global.location) {
       global.location = {
         href: `${pathToFileURL(process.cwd()).href}${sep}`,
-      };
+      } as Location;
     }
 
     const webpack = require('webpack');
@@ -205,7 +253,7 @@ export default async function factory(webpackConfig, options) {
   /* eslint-enable import/no-extraneous-dependencies */
   /* eslint-enable import/no-unresolved */
 
-  server.use(publicPath, express.static(webpackConfig.output.path));
+  server.use(publicPath as string, express.static(webpackConfig.output!.path!));
 
   if (options.onExpressJsSetup) {
     await options.onExpressJsSetup(server);
@@ -232,7 +280,12 @@ export default async function factory(webpackConfig, options) {
     // to a stand-alone function at top-level, but the use of options.logger
     // prevents to do it without some extra refactoring. Should be done sometime
     // though.
-    server.use((error, req, res, next) => {
+    server.use((
+      error: any,
+      req: Request,
+      res: Response,
+      next: NextFunction,
+    ) => {
       // TODO: This is needed to correctly handled any errors thrown after
       // sending initial response to the client.
       if (res.headersSent) return next(error);
@@ -241,7 +294,7 @@ export default async function factory(webpackConfig, options) {
       const serverSide = status >= CODES.INTERNAL_SERVER_ERROR;
 
       // Log server-side errors always, client-side at debug level only.
-      options.logger.log(serverSide ? 'error' : 'debug', error);
+      options.logger!.log(serverSide ? 'error' : 'debug', error);
 
       let message = error.message || getErrorForCode(status);
       if (serverSide && process.env.NODE_ENV === 'production') {

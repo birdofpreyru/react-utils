@@ -1,3 +1,4 @@
+import { type Request, type RequestHandler } from 'express';
 import { cloneDeep, noop } from 'lodash';
 import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable } from 'server/renderer';
 import fs from 'fs';
@@ -6,11 +7,14 @@ import serializeJs from 'serialize-javascript';
 
 import {
   getGlobalState,
-  getSsrContext,
   useGlobalState,
 } from '@dr.pogodin/react-global-state';
 
 import { Helmet } from 'react-helmet';
+
+import { type Configuration } from 'webpack';
+
+import { getSsrContext } from 'utils/globalState';
 
 import { getBuildInfo, setBuildInfo } from 'utils/isomorphy/buildInfo';
 
@@ -19,6 +23,10 @@ import {
   mockHttpResponse,
   mockWebpackConfig,
 } from './__assets__/common';
+
+declare module global {
+  let mockFailsForgeRandomGetBytesMethod: boolean | undefined;
+}
 
 global.mockFailsForgeRandomGetBytesMethod = false;
 
@@ -32,7 +40,7 @@ const TEST_INITIAL_STATE = {
 };
 
 const testBuildInfo = JSON.parse(
-  fs.readFileSync(`${TEST_CONTEXT}/.build-info`),
+  fs.readFileSync(`${TEST_CONTEXT}/.build-info`, 'utf8'),
 );
 
 beforeAll(() => {
@@ -60,10 +68,10 @@ afterAll(() => {
  * @param {Object} options
  * @return {Promise}
  */
-async function coreTest(webpackConfig, options = {}) {
+async function coreTest(webpackConfig: Configuration, options = {}) {
   expect(getBuildInfo).toThrowErrorMatchingSnapshot();
 
-  let renderer;
+  let renderer: RequestHandler | undefined;
   expect(() => {
     renderer = factory(webpackConfig, {
       ...options,
@@ -75,11 +83,13 @@ async function coreTest(webpackConfig, options = {}) {
 
   try {
     const { render, res } = mockHttpResponse();
-    await renderer(
-      mockHttpRequest(),
-      res,
-      (error) => expect(error).toMatchSnapshot(),
-    );
+    if (renderer) {
+      await renderer(
+        (mockHttpRequest() as unknown) as Request,
+        res,
+        (error) => expect(error).toMatchSnapshot(),
+      );
+    }
     expect(render.markup).toMatchSnapshot();
     expect(render.status).toMatchSnapshot();
   } catch (e) {
@@ -100,7 +110,7 @@ test(
 test(
   'Config overriding for injection',
   () => coreTest(mockWebpackConfig(), {
-    beforeRender: async (res, sanitizedConfig) => {
+    beforeRender: async (req: Request, sanitizedConfig: any) => {
       expect(sanitizedConfig).toBeInstanceOf(Object);
       expect(sanitizedConfig).not.toHaveProperty('SECRET');
       return {
@@ -115,8 +125,9 @@ test(
 
 test('JS constructs in global state', () => {
   function Component() {
-    useGlobalState('test.1', 'defaultValue');
-    useGlobalState('set', new Set([1, 2]));
+    // TODO: Could use State type, but not a big deal for now.
+    useGlobalState<1, string>('test.1', 'defaultValue');
+    useGlobalState<1, Set<number>>('set', new Set([1, 2]));
     const state = getGlobalState().get();
     return <div>{serializeJs(state)}</div>;
   }
@@ -181,7 +192,7 @@ test(
   'Server-side rendering (SSR); injection of CSS chunks & Redux state',
   () => coreTest(mockWebpackConfig(), {
     Application: () => {
-      const context = getSsrContext();
+      const context = getSsrContext()!;
       context.chunks.push('test-chunk-a');
       context.chunks.push('test-chunk-b');
       return <div>Hello Wold!</div>;
@@ -198,7 +209,7 @@ test(
   'Setting of response HTTP status the server-side rendering',
   () => coreTest(mockWebpackConfig(), {
     Application: () => {
-      const context = getSsrContext();
+      const context = getSsrContext()!;
       context.status = 404; // eslint-disable-line no-param-reassign
       return <div>404 Error Test</div>;
     },
@@ -213,8 +224,8 @@ test('Throws in case of forge.random.getBytes(..) failure', () => {
 });
 
 it('correctly tests if brotli-encoded responses are acceptable', () => {
-  const res = (header) => isBrotliAcceptable({
-    get: (name) => (name.toLowerCase() === 'accept-encoding'
+  const res = (header: string) => isBrotliAcceptable({
+    get: (name: string) => (name.toLowerCase() === 'accept-encoding'
       ? header : undefined),
   });
   expect(res('')).toBe(false);

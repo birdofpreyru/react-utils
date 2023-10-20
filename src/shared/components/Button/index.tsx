@@ -4,9 +4,27 @@ import PT from 'prop-types';
 
 import Link from 'components/Link';
 
-import { themed } from 'utils';
+import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './style.scss';
+
+type PropsT = {
+  active?: boolean;
+  children?: React.ReactNode;
+  disabled?: boolean;
+  enforceA?: boolean;
+  onClick?: React.MouseEventHandler & React.KeyboardEventHandler;
+  onMouseDown?: React.MouseEventHandler;
+  openNewTab?: boolean;
+  replace?: boolean;
+  theme: ThemeT & {
+    active?: string;
+    button?: string;
+    disabled?: string;
+  };
+  // TODO: It needs a more precise typing of the object option.
+  to?: object | string;
+};
 
 function BaseButton({
   active,
@@ -19,7 +37,7 @@ function BaseButton({
   replace,
   theme,
   to,
-}) {
+}: PropsT) {
   let className = theme.button;
   if (active && theme.active) className += ` ${theme.active}`;
   if (disabled) {
@@ -66,11 +84,11 @@ function BaseButton({
  * @prop {string} [button] to the root element of any button.
  * @prop {string} [disabled] to the root element of disabled button.
  */
-const ThemedButton = themed('Button', [
+const ThemedButton = themedComponent('Button', BaseButton, [
   'active',
   'button',
   'disabled',
-], defaultTheme)(BaseButton);
+], defaultTheme);
 
 /**
  * Implements themeable buttons, and button-line links (elements which look
@@ -110,7 +128,7 @@ BaseButton.defaultProps = {
   to: undefined,
 };
 
-BaseButton.propTypes = {
+(BaseButton as React.FunctionComponent<PropsT>).propTypes = {
   active: PT.bool,
   children: PT.node,
   disabled: PT.bool,

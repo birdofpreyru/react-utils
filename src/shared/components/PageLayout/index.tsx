@@ -1,8 +1,21 @@
 import PT from 'prop-types';
 
-import { themed } from 'utils';
+import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
 
 import baseTheme from './base-theme.scss';
+
+type PropsT = {
+  children?: React.ReactNode;
+  leftSidePanelContent?: React.ReactNode;
+  rightSidePanelContent?: React.ReactNode;
+  theme: ThemeT & {
+    container?: string;
+    mainPanel?: string;
+    sidePanel?: string;
+    leftSidePanel?: string;
+    rightSidePanel?: string;
+  };
+};
 
 /**
  * Simple and themeable page layout. It keeps the main content centered in
@@ -24,7 +37,7 @@ function PageLayout({
   leftSidePanelContent,
   rightSidePanelContent,
   theme,
-}) {
+}: PropsT) {
   return (
     <div className={theme.container}>
       <div className={[theme.sidePanel, theme.leftSidePanel].join(' ')}>
@@ -40,15 +53,15 @@ function PageLayout({
   );
 }
 
-const ThemedPageLayout = themed('PageLayout', [
+const ThemedPageLayout = themedComponent('PageLayout', PageLayout, [
   'container',
   'leftSidePanel',
   'mainPanel',
   'rightSidePanel',
   'sidePanel',
-], baseTheme)(PageLayout);
+], baseTheme);
 
-PageLayout.propTypes = {
+(PageLayout as React.FunctionComponent<PropsT>).propTypes = {
   children: PT.node,
   leftSidePanelContent: PT.node,
   rightSidePanelContent: PT.node,

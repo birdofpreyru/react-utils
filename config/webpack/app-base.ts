@@ -5,8 +5,8 @@
  * Base [Webpack](https://webpack.js.org/) configuration for apps.
  */
 
-const nodeFs = require('fs');
-const path = require('path');
+import nodeFs from 'fs';
+import path from 'path';
 
 const {
   clone,
@@ -134,7 +134,7 @@ const {
  *   - **`rndkey`** &mdash; The value set for `BUILD_RNDKEY`;
  *   - **`timestamp`** &mdash; The value set for `BUILD_TIMESTAMP`.
  */
-module.exports = function configFactory(ops) {
+export default function configFactory(ops) {
   const o = defaults(clone(ops), {
     babelLoaderOptions: {},
     cssLocalIdent: '[hash:base64:6]',

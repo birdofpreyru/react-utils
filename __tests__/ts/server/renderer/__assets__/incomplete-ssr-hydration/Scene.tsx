@@ -1,6 +1,16 @@
-import { useAsyncData } from '@dr.pogodin/react-global-state';
+import {
+  type AsyncDataEnvelopeT,
+  withGlobalStateType,
+} from '@dr.pogodin/react-global-state';
 
 import time from 'utils/time';
+
+type StateT = {
+  badData: AsyncDataEnvelopeT<string>;
+  goodData: AsyncDataEnvelopeT<string>;
+};
+
+const { useAsyncData } = withGlobalStateType<StateT>();
 
 // The first one never resolves, the second one resolves right away.
 

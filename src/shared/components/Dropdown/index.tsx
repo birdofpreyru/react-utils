@@ -1,44 +1,72 @@
 import PT from 'prop-types';
 
-import { themed } from 'utils';
+import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
+
+type DropdownOptionT = {
+  name?: string | null;
+  value: string;
+};
+
+type PropsT = {
+  filter?: (item: DropdownOptionT | string) => boolean;
+  label?: string;
+  onChange?: React.ChangeEventHandler<HTMLSelectElement>;
+  options?: Array<DropdownOptionT | string>;
+  theme: ThemeT & {
+    arrow?: string;
+    container?: string;
+    hiddenOptions?: string;
+    label?: string;
+    option?: string;
+    select?: string;
+  };
+  value?: string;
+};
 
 /**
  * Implements a themeable dropdown list. Internally it is rendered with help of
  * the standard HTML `<select>` element, thus the styling support is somewhat
  * limited.
- * @param {object} [props] Component properties.
- * @param {function} [props.filter] Options filter function. If provided, only
+ * @param [props] Component properties.
+ * @param [props.filter] Options filter function. If provided, only
  * those elements of `options` list will be used by the dropdown, for which this
  * filter returns `true`.
- * @param {string} [props.label] Dropdown label.
- * @param {string} [props.onChange] Selection event handler.
- * @param {DropdownOption[]|string[]} [props.options=[]] Array of dropdown
+ * @param [props.label] Dropdown label.
+ * @param [props.onChange] Selection event handler.
+ * @param [props.options=[]] Array of dropdown
  * options. For string elements the option value and name will be the same.
  * It is allowed to mix DropdownOption and string elements in the same option
  * list.
- * @param {DropdownTheme} [props.theme] _Ad hoc_ theme.
- * @param {string} [props.value] Currently selected value.
- * @param {...any} [props....]
+ * @param [props.theme] _Ad hoc_ theme.
+ * @param [props.value] Currently selected value.
+ * @param [props....]
  * [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
  */
 function Dropdown({
   filter,
   label,
   onChange,
-  options,
+  options = [],
   theme,
   value,
-}) {
+}: PropsT) {
   let isValidValue = false;
   const optionElements = [];
 
   for (let i = 0; i < options.length; ++i) {
     const option = options[i];
     if (!filter || filter(option)) {
-      const optionValue = typeof option === 'string' ? option : option.value;
-      const optionName = option.name === undefined ? optionValue : option.name;
+      let optionValue: string;
+      let optionName: string;
+      if (typeof option === 'string') {
+        optionName = option;
+        optionValue = option;
+      } else {
+        optionName = option.name || option.value;
+        optionValue = option.value;
+      }
       isValidValue ||= optionValue === value;
       optionElements.push(
         <option className={theme.option} key={optionValue} value={optionValue}>
@@ -79,23 +107,23 @@ function Dropdown({
   );
 }
 
-const ThemedDropdown = themed('Dropdown', [
+const ThemedDropdown = themedComponent('Dropdown', Dropdown, [
   'arrow',
   'container',
   'hiddenOption',
   'label',
   'option',
   'select',
-], defaultTheme)(Dropdown);
+], defaultTheme);
 
-Dropdown.propTypes = {
+(Dropdown as React.FunctionComponent<PropsT>).propTypes = {
   filter: PT.func,
   label: PT.string,
   onChange: PT.func,
   options: PT.arrayOf(
     PT.oneOfType([
       PT.shape({
-        name: PT.node,
+        name: PT.string,
         value: PT.string.isRequired,
       }),
       PT.string,

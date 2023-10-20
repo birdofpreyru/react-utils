@@ -8,9 +8,11 @@
 
 import { Link as RrLink } from 'react-router-dom';
 
-import GenericLink from './GenericLink';
+import GenericLink, { type PropsT as GenericLinkPropsT } from './GenericLink';
 
-export default function Link(props) {
+type PropsT = Omit<GenericLinkPropsT, 'routerLinkType'>;
+
+export default function Link(props: PropsT) {
   /* eslint-disable react/jsx-props-no-spreading */
   return <GenericLink {...props} routerLinkType={RrLink} />;
   /* eslint-enable react/jsx-props-no-spreading */

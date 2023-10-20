@@ -4,7 +4,10 @@ import GenericLink from 'components/GenericLink';
 import PT from 'prop-types';
 import { mount, simulate, snapshot } from 'utils/jest';
 
-function Link(props) {
+function Link(props: {
+  className?: string;
+  onClick: () => void;
+}) {
   const { className, onClick } = props;
   return (
     <button

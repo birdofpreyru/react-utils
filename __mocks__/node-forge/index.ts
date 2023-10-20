@@ -2,7 +2,11 @@
 
 const mock = jest.requireActual('node-forge');
 
-mock.random.getBytes = (numBytes, cb) => {
+declare module global {
+  let mockFailsForgeRandomGetBytesMethod: boolean | undefined;
+}
+
+mock.random.getBytes = (numBytes: number, cb: (e: Error | null, res?: string) => void) => {
   if (global.mockFailsForgeRandomGetBytesMethod) {
     cb(Error('Emulated Failure of forge.random.getBytes(..)'));
   }
@@ -11,4 +15,4 @@ mock.random.getBytes = (numBytes, cb) => {
   cb(null, res);
 };
 
-module.exports = mock;
+export default mock;

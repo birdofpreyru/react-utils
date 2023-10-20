@@ -11,10 +11,19 @@ import {
 
 import ReactDom from 'react-dom';
 import PT from 'prop-types';
-import themed from '@dr.pogodin/react-themes';
+import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
 
 import baseTheme from './base-theme.scss';
 import './styles.scss';
+
+type PropsT = {
+  children?: React.ReactNode;
+  onCancel?: () => void;
+  theme: ThemeT & {
+    container?: string;
+    overlay?: string;
+  };
+};
 
 /**
  * The `<Modal>` component implements a simple themeable modal window, wrapped
@@ -31,10 +40,10 @@ function BaseModal({
   children,
   onCancel,
   theme,
-}) {
-  const containerRef = useRef();
-  const overlayRef = useRef();
-  const [portal, setPortal] = useState();
+}: PropsT) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const overlayRef = useRef<HTMLDivElement | null>(null);
+  const [portal, setPortal] = useState<HTMLDivElement>();
 
   useEffect(() => {
     const p = document.createElement('div');
@@ -50,15 +59,15 @@ function BaseModal({
   const focusLast = useMemo(() => (
     <div
       onFocus={() => {
-        const elems = containerRef.current.querySelectorAll('*');
+        const elems = containerRef.current?.querySelectorAll('*') as NodeListOf<HTMLElement>;
         for (let i = elems.length - 1; i >= 0; --i) {
           elems[i].focus();
           if (document.activeElement === elems[i]) return;
         }
-        overlayRef.current.focus();
+        overlayRef.current?.focus();
       }}
       /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-      tabIndex="0"
+      tabIndex={0}
       /* eslint-enable jsx-a11y/no-noninteractive-tabindex */
     />
   ), []);
@@ -70,9 +79,9 @@ function BaseModal({
         <div
           aria-label="Cancel"
           className={theme.overlay}
-          onClick={() => onCancel()}
+          onClick={() => onCancel && onCancel()}
           onKeyDown={(e) => {
-            if (e.key === 'Escape') onCancel();
+            if (e.key === 'Escape' && onCancel) onCancel();
           }}
           ref={(node) => {
             if (node && node !== overlayRef.current) {
@@ -81,7 +90,7 @@ function BaseModal({
             }
           }}
           role="button"
-          tabIndex="0"
+          tabIndex={0}
         />
         <div
           aria-modal="true"
@@ -94,10 +103,10 @@ function BaseModal({
         </div>
         <div
           onFocus={() => {
-            overlayRef.current.focus();
+            overlayRef.current?.focus();
           }}
           /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-          tabIndex="0"
+          tabIndex={0}
           /* eslint-enable jsx-a11y/no-noninteractive-tabindex */
         />
         {focusLast}
@@ -107,16 +116,17 @@ function BaseModal({
   ) : null;
 }
 
-const ThemedModal = themed(
+const ThemedModal = themedComponent(
   'Modal',
+  BaseModal,
   [
     'container',
     'overlay',
   ],
   baseTheme,
-)(BaseModal);
+);
 
-BaseModal.propTypes = {
+(BaseModal as React.FunctionComponent<PropsT>).propTypes = {
   onCancel: PT.func,
   children: PT.node,
   theme: ThemedModal.themeType.isRequired,
