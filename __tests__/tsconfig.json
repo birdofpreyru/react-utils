@@ -1,6 +1,9 @@
 {
   "extends": "@tsconfig/recommended",
-  "exclude": ["ts-types/"],
+  "exclude": [
+    "../build/types-code",
+    "ts-types",
+  ],
   "include": [".."],
   "compilerOptions": {
     "jsx": "react-jsx",
@@ -17,7 +20,7 @@
     },
     "rootDirs": [
       "..",
-      "../build/scss-types",
+      "../build/types-scss",
     ],
     "strict": true,
 

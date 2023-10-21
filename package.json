@@ -138,6 +138,7 @@
   },
   "main": "./node-entry.js",
   "source": "./src/index.ts",
+  "types": "./build/types-code/index.d.ts",
   "exports": {
     ".": {
       "browser": {
@@ -187,11 +188,12 @@
   "name": "@dr.pogodin/react-utils",
   "repository": "github:birdofpreyru/react-utils",
   "scripts": {
-    "build": "rimraf build && npm run build:configs && npm run build:scss-types && npm run build:dev && npm run build:prod",
+    "build": "rimraf build && npm run build:configs && npm run build:types-scss && npm run build:types-code && npm run build:dev && npm run build:prod",
     "build:configs": "tsc --project tsconfig.configs.json",
     "build:dev": "node bin/build -t development --lib",
     "build:prod": "node bin/build -t production --lib",
-    "build:scss-types": "rimraf build/scss-types && typed-scss-modules .",
+    "build:types-code": "rimraf build/types-code && tsc --project tsconfig.types.json",
+    "build:types-scss": "rimraf build/types-scss && typed-scss-modules .",
     "jest:1": "NODE_CONFIG_ENV=test jest --no-cache -w 1 --config config/jest/default.js --shard=1/4",
     "jest:2": "NODE_CONFIG_ENV=test jest --no-cache -w 1 --config config/jest/default.js --shard=2/4",
     "jest:3": "NODE_CONFIG_ENV=test jest --no-cache -w 1 --config config/jest/default.js --shard=3/4",

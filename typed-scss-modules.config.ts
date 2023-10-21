@@ -5,5 +5,5 @@ export default {
   includePaths: [
     'src',
   ],
-  outputFolder: 'build/scss-types',
+  outputFolder: 'build/types-scss',
 };
