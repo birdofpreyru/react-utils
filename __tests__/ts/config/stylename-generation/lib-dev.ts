@@ -1,7 +1,9 @@
 /**
  * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.ts
  * @webpack-config-factory ./config/webpack/lib-development.js
- * @webpack-config-options { "entry": "./__assets__/index" }
+ * @webpack-config-options {
+ *  "entry": "./__assets__/index",
+ *  "typescript": true }
  * @no-ssr true
  */
 

@@ -7,7 +7,7 @@
 import forge from 'node-forge/lib/forge';
 import 'node-forge/lib/aes';
 
-import { type InjT } from 'utils/globalState';
+import type { InjT } from 'utils/globalState';
 
 import { getBuildInfo } from 'utils/isomorphy/buildInfo';
 

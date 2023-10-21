@@ -2,7 +2,8 @@
  * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.ts
  * @webpack-config-factory ./config/webpack/app-production.js
  * @webpack-config-options {
- *  "entry": "./__assets__/EmptyScene/index.js" }
+ *  "entry": "./__assets__/EmptyScene/index.js",
+ *  "typescript": true }
  * @ssr-options {
  *  "babelEnv": "production",
  *  "entry": "./__assets__/EmptyScene/Scene.jsx" }

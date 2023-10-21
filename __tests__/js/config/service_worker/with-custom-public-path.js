@@ -4,7 +4,8 @@
  * @webpack-config-options {
  *  "entry": "./__assets__/index.js",
  *  "publicPath": "/public-path",
- *  "workbox": true }
+ *  "workbox": true,
+ *  "typescript": true }
  * @ssr-options {
  *  "babelEnv": "production",
  *  "baseAssetsOutputPath": "/public-path",

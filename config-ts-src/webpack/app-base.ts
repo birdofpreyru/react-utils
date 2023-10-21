@@ -10,7 +10,7 @@ import path from 'path';
 
 import SM from 'sitemap';
 
-import { WebpackPluginInstance, type Configuration } from 'webpack';
+import { type Configuration, type WebpackPluginInstance } from 'webpack';
 
 import {
   clone,
@@ -23,7 +23,6 @@ import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import forge from 'node-forge';
 
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { DefinePlugin, ProgressPlugin } from 'webpack';
 import WorkboxPlugin from 'workbox-webpack-plugin';
 
@@ -54,6 +53,7 @@ export type OptionsT = {
   outputPath?: string;
   publicPath?: string;
   sitemap?: string;
+  typescript?: boolean;
   workbox?: boolean | object;
 };
 
@@ -300,7 +300,6 @@ export default function configFactory(ops: OptionsT): Configuration {
         '.json',
         '.scss',
       ],
-      plugins: [new TsconfigPathsPlugin()],
       symlinks: false,
     },
     module: {
@@ -317,34 +316,17 @@ export default function configFactory(ops: OptionsT): Configuration {
         },
       }, {
         /* Loads JS and JSX moudles, and inlines SVG assets. */
-        test: /\.(jsx?|svg)$/,
+        test: ops.typescript ? /\.((j|t)sx?|svg)$/ : /\.(jsx?|svg)$/,
         exclude: [/node_modules/],
         loader: 'babel-loader',
         options: {
           babelrc: false,
           configFile: false,
           envName: o.babelEnv,
-          presets: ['@dr.pogodin/react-utils/config/babel/webpack'],
+          presets: [['@dr.pogodin/react-utils/config/babel/webpack', {
+            typescript: ops.typescript,
+          }]],
           ...o.babelLoaderOptions,
-        },
-      }, {
-        // TypeScript modules.
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        loader: 'ts-loader',
-        options: {
-          compilerOptions: {
-            // At the moment the plan is to compile declarations separately with
-            // TSC.
-            declaration: false,
-
-            noEmit: false,
-          },
-
-          // TODO: We want this enabled, but enabling it prevents Webpack
-          // compilation in tests to pick up on /types.d.ts file, which has
-          // a declaration allowing to use styleName prop on React elements.
-          // onlyCompileBundledFiles: true,
         },
       }, {
         /* Loads image assets. */

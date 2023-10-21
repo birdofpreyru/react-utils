@@ -20,5 +20,9 @@
       "../build/scss-types",
     ],
     "strict": true,
+
+    // This ensures TypeScript does not remove unused imports, which may cause
+    // troubles when we rely on some side-effects from imported modules.
+    "verbatimModuleSyntax": true,
   },
 }

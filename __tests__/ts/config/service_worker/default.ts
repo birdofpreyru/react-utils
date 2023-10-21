@@ -3,7 +3,8 @@
  * @webpack-config-factory ./config/webpack/app-production.js
  * @webpack-config-options {
  *  "entry": "./__assets__/index.ts",
- *  "workbox": true }
+ *  "workbox": true,
+ *  "typescript": true }
  * @ssr-options {
  *  "babelEnv": "production",
  *  "entry": "./__assets__/Scene.tsx" }

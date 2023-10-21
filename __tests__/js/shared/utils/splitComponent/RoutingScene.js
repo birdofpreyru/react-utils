@@ -4,7 +4,8 @@
  * @webpack-config-options {
  *  "entry": "./__assets__/RoutingScene",
  *  "dontUseHmr": true,
- *  "dontUseReactGlobalStateDebugging": true }
+ *  "dontUseReactGlobalStateDebugging": true,
+ *  "typescript": true }
  * @ssr-options {
  *  "entry": "./__assets__/RoutingScene/RoutingScene.jsx",
  *  "entryExportName": "RoutingScene1" }

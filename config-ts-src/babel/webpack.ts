@@ -1,5 +1,3 @@
-import { pick } from 'lodash';
-
 import {
   type PluginOptionsT as ReactCssModulesOptionsT,
 } from '@dr.pogodin/babel-plugin-react-css-modules';
@@ -20,12 +18,6 @@ export interface BabelCompilerI {
   env: () => string;
 }
 
-export type OptionsT = {
-  noRR?: boolean;
-  noStyling?: boolean;
-  targets?: string | string[] | { [key: string]: string };
-};
-
 /**
  * Supported Babel environments.
  */
@@ -44,12 +36,21 @@ export type ConfigT = {
   plugins: PresetOrPluginT[];
 };
 
+export type OptionsT = {
+  noRR?: boolean;
+  noStyling?: boolean;
+  targets?: string | string[] | { [key: string]: string };
+
+  // Set `true` to add into config pieces necessary for TypeScript processing.
+  typescript?: boolean;
+};
+
 /**
  * Creates a new base config.
  * @param [options] Base config options.
  * @return Generated config.
  */
-function newBaseConfig(options: OptionsT = {}): ConfigT {
+function newBaseConfig(options: OptionsT): ConfigT {
   return {
     presets: [
       // Chrome 69 is the browser for Android API 28.
@@ -61,9 +62,6 @@ function newBaseConfig(options: OptionsT = {}): ConfigT {
       ['@babel/react', { runtime: 'automatic' }],
 
       '@dr.pogodin/babel-preset-svgr',
-
-      // TODO: Should we rather optionally include it for TS projects only?
-      '@babel/typescript',
     ],
     plugins: [
       ['module-resolver', {
@@ -124,12 +122,26 @@ function addStyling(config: ConfigT, env: ENVIRONMENTS) {
 export default function getPreset(babel: BabelCompilerI, ops: OptionsT = {}) {
   const env = babel.env();
 
-  const baseOps = pick(ops, ['targets']);
-  const res = newBaseConfig(baseOps);
+  const res = newBaseConfig(ops);
 
   if (!ops.noStyling) addStyling(res, env as ENVIRONMENTS);
   if (env === ENVIRONMENTS.DEV && !ops.noRR) {
     res.plugins.push('react-refresh/babel');
   }
+
+  // Conditional to not require non-TypeScript projects to install TypeScript-
+  // specific dependencies for build process.
+  if (ops.typescript) {
+    res.presets.push(
+      ['@babel/typescript', {
+        // This ensures TypeScript compilation does not remove "unused" imports,
+        // as in most cases it considers assets (e.g. stylesheet) imports as
+        // unused, while other steps of our build process rely on them
+        // (e.g. @dr.pogodin/react-css-modules plugin).
+        onlyRemoveTypeImports: true,
+      }],
+    );
+  }
+
   return res;
 }

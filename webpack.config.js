@@ -9,6 +9,7 @@ module.exports = function buildConfig(env) {
     context: __dirname,
     entry: './src',
     library: '@dr.pogodin/react-utils',
+    typescript: true,
   });
 
   /* The lib config is intended for use outside of this very package,

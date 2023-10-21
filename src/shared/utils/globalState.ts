@@ -1,4 +1,4 @@
-import { type Request } from 'express';
+import type { Request } from 'express';
 
 import { type SsrContext, withGlobalStateType } from '@dr.pogodin/react-global-state';
 

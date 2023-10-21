@@ -2,7 +2,8 @@
  * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.ts
  * @webpack-config-factory ./config/webpack/app-production.js
  * @webpack-config-options {
- *  "entry": "./__assets__/incomplete-ssr-hydration/index" }
+ *  "entry": "./__assets__/incomplete-ssr-hydration/index",
+ *  "typescript": true }
  * @ssr-options {
  *  "babelEnv": "production",
  *  "entry": "./__assets__/incomplete-ssr-hydration/Scene",

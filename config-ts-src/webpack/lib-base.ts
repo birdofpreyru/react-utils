@@ -4,7 +4,6 @@ import path from 'path';
 
 import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 import {
   type Configuration,
@@ -21,17 +20,12 @@ export type OptionsT = {
   babelLoaderOptions?: object;
   context: string;
   cssLocalIdent?: string;
-  // dontEmitBuildInfo?: boolean;
   dontUseProgressPlugin?: boolean;
   entry: string | string[];
-  // fs: typeof nodeFs;
-  // keepBuildInfo?: boolean | BuildInfoT;
   library: string;
   mode: 'development' | 'none' | 'production';
   outputPath?: string;
-  // publicPath?: string;
-  // sitemap?: string;
-  // workbox?: boolean | object;
+  typescript?: boolean;
 };
 
 /**
@@ -104,7 +98,7 @@ export default function configFactory(ops: OptionsT): Configuration {
         },
       }, {
         /* Loads JS and JSX moudles, and inlines SVG assets. */
-        test: /\.(jsx?|svg)$/,
+        test: ops.typescript ? /\.((j|t)sx?|svg)$/ : /\.(jsx?|svg)$/,
         exclude: [
           /node_modules/,
           /src[/\\]assets[/\\]fonts/,
@@ -120,6 +114,7 @@ export default function configFactory(ops: OptionsT): Configuration {
             // the codebase.
             ['@dr.pogodin/react-utils/config/babel/webpack', {
               noRR: true,
+              typescript: ops.typescript,
             }],
           ],
           ...ops.babelLoaderOptions || {},
@@ -155,25 +150,6 @@ export default function configFactory(ops: OptionsT): Configuration {
           },
         ],
       }, {
-        // TypeScript modules.
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        loader: 'ts-loader',
-        options: {
-          compilerOptions: {
-            // If enabled, it outputs declarations to wrong paths, and anyway
-            // we are going to compiler those separately with TSC for server-
-            // side code.
-            declaration: false,
-
-            noEmit: false,
-          },
-          // TODO: We want this enabled, but enabling it prevents Webpack
-          // compilation in tests to pick up on /types.d.ts file, which has
-          // a declaration allowing to use styleName prop on React elements.
-          // onlyCompileBundledFiles: true,
-        },
-      }, {
         /* Loads CSS stylesheets. It is assumed that CSS stylesheets come only
         * from dependencies, as we use SCSS inside our own code. */
         test: /\.css$/,
@@ -199,7 +175,6 @@ export default function configFactory(ops: OptionsT): Configuration {
         '.json',
         '.scss',
       ],
-      plugins: [new TsconfigPathsPlugin()],
       symlinks: false,
     },
   };

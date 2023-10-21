@@ -32,7 +32,10 @@ import webpack from 'webpack';
 
 import ssrFactory from 'server/renderer';
 
-import { EnvironmentContext, JestEnvironmentConfig } from '@jest/environment';
+import type {
+  EnvironmentContext,
+  JestEnvironmentConfig,
+} from '@jest/environment';
 
 export default class E2eSsrEnv extends JsdomEnv {
   pragmas: Record<string, string | string[]>;

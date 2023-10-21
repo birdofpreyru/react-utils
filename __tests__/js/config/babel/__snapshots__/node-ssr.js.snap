@@ -65,7 +65,81 @@ exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
-    "@babel/typescript",
+    [
+      "@babel/typescript",
+      {
+        "onlyRemoveTypeImports": true,
+      },
+    ],
+  ],
+}
+`;
+
+exports[`"development" environment "baseAssetsOutputPath" option 2`] = `
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+        ],
+        "root": [
+          "./src/shared",
+          "./src",
+        ],
+        "transformFunctions": [
+          "requireWeak",
+          "resolveWeak",
+          "webpack.requireWeak",
+          "webpack.resolveWeak",
+        ],
+      },
+    ],
+    "@babel/transform-runtime",
+    [
+      "@dr.pogodin/react-css-modules",
+      {
+        "autoResolveMultipleImports": true,
+        "filetypes": {
+          ".scss": {
+            "syntax": "postcss-scss",
+          },
+        },
+        "generateScopedName": [Function],
+        "replaceImport": true,
+      },
+    ],
+    [
+      "@dr.pogodin/transform-assets",
+      {
+        "extensions": [
+          "gif",
+          "jpeg",
+          "jpg",
+          "png",
+        ],
+        "name": "/test/path/images/[md4:hash:20].[ext]",
+      },
+    ],
+  ],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": "current node",
+      },
+    ],
+    [
+      "@babel/react",
+      {
+        "runtime": "automatic",
+      },
+    ],
+    "@dr.pogodin/babel-preset-svgr",
   ],
 }
 `;
@@ -122,7 +196,68 @@ exports[`"development" environment "noStyling" variation 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
-    "@babel/typescript",
+    [
+      "@babel/typescript",
+      {
+        "onlyRemoveTypeImports": true,
+      },
+    ],
+  ],
+}
+`;
+
+exports[`"development" environment "noStyling" variation 2`] = `
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+        ],
+        "root": [
+          "./src/shared",
+          "./src",
+        ],
+        "transformFunctions": [
+          "requireWeak",
+          "resolveWeak",
+          "webpack.requireWeak",
+          "webpack.resolveWeak",
+        ],
+      },
+    ],
+    "@babel/transform-runtime",
+    [
+      "@dr.pogodin/transform-assets",
+      {
+        "extensions": [
+          "gif",
+          "jpeg",
+          "jpg",
+          "png",
+        ],
+        "name": "/images/[md4:hash:20].[ext]",
+      },
+    ],
+  ],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": "current node",
+      },
+    ],
+    [
+      "@babel/react",
+      {
+        "runtime": "automatic",
+      },
+    ],
+    "@dr.pogodin/babel-preset-svgr",
   ],
 }
 `;
@@ -192,7 +327,81 @@ exports[`"development" environment Default config 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
-    "@babel/typescript",
+    [
+      "@babel/typescript",
+      {
+        "onlyRemoveTypeImports": true,
+      },
+    ],
+  ],
+}
+`;
+
+exports[`"development" environment Default config 2`] = `
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+        ],
+        "root": [
+          "./src/shared",
+          "./src",
+        ],
+        "transformFunctions": [
+          "requireWeak",
+          "resolveWeak",
+          "webpack.requireWeak",
+          "webpack.resolveWeak",
+        ],
+      },
+    ],
+    "@babel/transform-runtime",
+    [
+      "@dr.pogodin/react-css-modules",
+      {
+        "autoResolveMultipleImports": true,
+        "filetypes": {
+          ".scss": {
+            "syntax": "postcss-scss",
+          },
+        },
+        "generateScopedName": [Function],
+        "replaceImport": true,
+      },
+    ],
+    [
+      "@dr.pogodin/transform-assets",
+      {
+        "extensions": [
+          "gif",
+          "jpeg",
+          "jpg",
+          "png",
+        ],
+        "name": "/images/[md4:hash:20].[ext]",
+      },
+    ],
+  ],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": "current node",
+      },
+    ],
+    [
+      "@babel/react",
+      {
+        "runtime": "automatic",
+      },
+    ],
+    "@dr.pogodin/babel-preset-svgr",
   ],
 }
 `;
@@ -262,7 +471,81 @@ exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
-    "@babel/typescript",
+    [
+      "@babel/typescript",
+      {
+        "onlyRemoveTypeImports": true,
+      },
+    ],
+  ],
+}
+`;
+
+exports[`"production" environment "baseAssetsOutputPath" option 2`] = `
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+        ],
+        "root": [
+          "./src/shared",
+          "./src",
+        ],
+        "transformFunctions": [
+          "requireWeak",
+          "resolveWeak",
+          "webpack.requireWeak",
+          "webpack.resolveWeak",
+        ],
+      },
+    ],
+    "@babel/transform-runtime",
+    [
+      "@dr.pogodin/react-css-modules",
+      {
+        "autoResolveMultipleImports": true,
+        "filetypes": {
+          ".scss": {
+            "syntax": "postcss-scss",
+          },
+        },
+        "generateScopedName": [Function],
+        "replaceImport": true,
+      },
+    ],
+    [
+      "@dr.pogodin/transform-assets",
+      {
+        "extensions": [
+          "gif",
+          "jpeg",
+          "jpg",
+          "png",
+        ],
+        "name": "/test/path/images/[md4:hash:20].[ext]",
+      },
+    ],
+  ],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": "current node",
+      },
+    ],
+    [
+      "@babel/react",
+      {
+        "runtime": "automatic",
+      },
+    ],
+    "@dr.pogodin/babel-preset-svgr",
   ],
 }
 `;
@@ -319,7 +602,68 @@ exports[`"production" environment "noStyling" variation 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
-    "@babel/typescript",
+    [
+      "@babel/typescript",
+      {
+        "onlyRemoveTypeImports": true,
+      },
+    ],
+  ],
+}
+`;
+
+exports[`"production" environment "noStyling" variation 2`] = `
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+        ],
+        "root": [
+          "./src/shared",
+          "./src",
+        ],
+        "transformFunctions": [
+          "requireWeak",
+          "resolveWeak",
+          "webpack.requireWeak",
+          "webpack.resolveWeak",
+        ],
+      },
+    ],
+    "@babel/transform-runtime",
+    [
+      "@dr.pogodin/transform-assets",
+      {
+        "extensions": [
+          "gif",
+          "jpeg",
+          "jpg",
+          "png",
+        ],
+        "name": "/images/[md4:hash:20].[ext]",
+      },
+    ],
+  ],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": "current node",
+      },
+    ],
+    [
+      "@babel/react",
+      {
+        "runtime": "automatic",
+      },
+    ],
+    "@dr.pogodin/babel-preset-svgr",
   ],
 }
 `;
@@ -389,7 +733,81 @@ exports[`"production" environment Default config 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
-    "@babel/typescript",
+    [
+      "@babel/typescript",
+      {
+        "onlyRemoveTypeImports": true,
+      },
+    ],
+  ],
+}
+`;
+
+exports[`"production" environment Default config 2`] = `
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+        ],
+        "root": [
+          "./src/shared",
+          "./src",
+        ],
+        "transformFunctions": [
+          "requireWeak",
+          "resolveWeak",
+          "webpack.requireWeak",
+          "webpack.resolveWeak",
+        ],
+      },
+    ],
+    "@babel/transform-runtime",
+    [
+      "@dr.pogodin/react-css-modules",
+      {
+        "autoResolveMultipleImports": true,
+        "filetypes": {
+          ".scss": {
+            "syntax": "postcss-scss",
+          },
+        },
+        "generateScopedName": [Function],
+        "replaceImport": true,
+      },
+    ],
+    [
+      "@dr.pogodin/transform-assets",
+      {
+        "extensions": [
+          "gif",
+          "jpeg",
+          "jpg",
+          "png",
+        ],
+        "name": "/images/[md4:hash:20].[ext]",
+      },
+    ],
+  ],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": "current node",
+      },
+    ],
+    [
+      "@babel/react",
+      {
+        "runtime": "automatic",
+      },
+    ],
+    "@dr.pogodin/babel-preset-svgr",
   ],
 }
 `;

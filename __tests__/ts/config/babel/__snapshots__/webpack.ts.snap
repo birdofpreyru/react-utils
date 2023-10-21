@@ -35,7 +35,51 @@ exports[`"development" environment "noStyling" variation 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
-    "@babel/typescript",
+    [
+      "@babel/typescript",
+      {
+        "onlyRemoveTypeImports": true,
+      },
+    ],
+  ],
+}
+`;
+
+exports[`"development" environment "noStyling" variation 2`] = `
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+        ],
+        "root": [
+          "./src/shared",
+          "./src",
+        ],
+      },
+    ],
+    "@babel/transform-runtime",
+    "react-refresh/babel",
+  ],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": "defaults or chrome >= 69",
+      },
+    ],
+    [
+      "@babel/react",
+      {
+        "runtime": "automatic",
+      },
+    ],
+    "@dr.pogodin/babel-preset-svgr",
   ],
 }
 `;
@@ -87,7 +131,63 @@ exports[`"development" environment Default config 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
-    "@babel/typescript",
+    [
+      "@babel/typescript",
+      {
+        "onlyRemoveTypeImports": true,
+      },
+    ],
+  ],
+}
+`;
+
+exports[`"development" environment Default config 2`] = `
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+        ],
+        "root": [
+          "./src/shared",
+          "./src",
+        ],
+      },
+    ],
+    "@babel/transform-runtime",
+    [
+      "@dr.pogodin/react-css-modules",
+      {
+        "autoResolveMultipleImports": true,
+        "filetypes": {
+          ".scss": {
+            "syntax": "postcss-scss",
+          },
+        },
+        "generateScopedName": [Function],
+      },
+    ],
+    "react-refresh/babel",
+  ],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": "defaults or chrome >= 69",
+      },
+    ],
+    [
+      "@babel/react",
+      {
+        "runtime": "automatic",
+      },
+    ],
+    "@dr.pogodin/babel-preset-svgr",
   ],
 }
 `;
@@ -126,7 +226,50 @@ exports[`"production" environment "noStyling" variation 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
-    "@babel/typescript",
+    [
+      "@babel/typescript",
+      {
+        "onlyRemoveTypeImports": true,
+      },
+    ],
+  ],
+}
+`;
+
+exports[`"production" environment "noStyling" variation 2`] = `
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+        ],
+        "root": [
+          "./src/shared",
+          "./src",
+        ],
+      },
+    ],
+    "@babel/transform-runtime",
+  ],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": "defaults or chrome >= 69",
+      },
+    ],
+    [
+      "@babel/react",
+      {
+        "runtime": "automatic",
+      },
+    ],
+    "@dr.pogodin/babel-preset-svgr",
   ],
 }
 `;
@@ -177,7 +320,62 @@ exports[`"production" environment Default config 1`] = `
       },
     ],
     "@dr.pogodin/babel-preset-svgr",
-    "@babel/typescript",
+    [
+      "@babel/typescript",
+      {
+        "onlyRemoveTypeImports": true,
+      },
+    ],
+  ],
+}
+`;
+
+exports[`"production" environment Default config 2`] = `
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+        ],
+        "root": [
+          "./src/shared",
+          "./src",
+        ],
+      },
+    ],
+    "@babel/transform-runtime",
+    [
+      "@dr.pogodin/react-css-modules",
+      {
+        "autoResolveMultipleImports": true,
+        "filetypes": {
+          ".scss": {
+            "syntax": "postcss-scss",
+          },
+        },
+        "generateScopedName": [Function],
+      },
+    ],
+  ],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": "defaults or chrome >= 69",
+      },
+    ],
+    [
+      "@babel/react",
+      {
+        "runtime": "automatic",
+      },
+    ],
+    "@dr.pogodin/babel-preset-svgr",
   ],
 }
 `;

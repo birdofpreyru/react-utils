@@ -1,7 +1,9 @@
 /**
  * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.ts
  * @webpack-config-factory ./config/webpack/app-production.js
- * @webpack-config-options { "entry": "./__assets__/client.jsx" }
+ * @webpack-config-options {
+ *  "entry": "./__assets__/client.jsx",
+ *  "typescript": true }
  * @ssr-options { "entry": "./__assets__/Scene.jsx" }
  */
 

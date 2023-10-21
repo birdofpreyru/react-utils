@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-import { pick, pull } from 'lodash';
+import { pull } from 'lodash';
 
 import {
   type PluginOptionsT as ReactCssModulesOptionsT,
@@ -35,10 +35,9 @@ type OptionsT = WebpackConfigOptionsT & {
  * @ignore
  */
 function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
-  const baseOps = pick(options, ['noStyling']);
   const config = getWebpackBabelConfig(
     babel,
-    { ...baseOps, targets: 'current node' },
+    { ...options, targets: 'current node' },
   );
 
   const baseAssetsOutputPath = options.baseAssetsOutputPath || '';
