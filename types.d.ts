@@ -29,10 +29,9 @@ declare module '*.png' {
 }
 
 declare namespace React {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface HTMLAttributes<T> {
-    // This allows all JSX elements to have additional "styleName" attribute,
-    // handled by "@dr.pogodin/babel-plugin-react-css-modules".
+  // This allows all JSX elements to have additional "styleName" attribute,
+  // handled by "@dr.pogodin/babel-plugin-react-css-modules".
+  interface Attributes {
     styleName?: string;
   }
 }

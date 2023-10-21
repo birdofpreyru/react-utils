@@ -1,7 +1,7 @@
 /* global window */
 
 import PT from 'prop-types';
-import { type ReactNode, createElement } from 'react';
+import { type ReactNode } from 'react';
 
 import { type Link, type NavLink } from 'react-router-dom';
 
@@ -22,7 +22,6 @@ export type PropsT = {
   openNewTab?: boolean;
   replace?: boolean;
   routerLinkType: LinkI;
-  styleName?: string;
   to?: ToT;
 };
 
@@ -105,28 +104,26 @@ export default function GenericLink({
     );
   }
 
-  /* Otherwise we render the link as React Router's Link or NavLink element. */
-  return createElement(
-    // TODO: This is a fast workaround for typings differences between Link
-    // and NavLink props.
-    routerLinkType as typeof NavLink,
+  const L = routerLinkType as typeof NavLink;
 
-    {
-      className,
-      // disabled,
-      onMouseDown,
-      replace,
-      to: to!,
-      onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
+  return (
+    <L
+      className={className}
+      // disabled
+      onMouseDown={onMouseDown}
+      replace={replace}
+      to={to!}
+      onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
         // Executes the user-provided event handler, if any.
         if (onClick) onClick(e);
 
         // By default, clicking the link scrolls the page to beginning.
         if (!keepScrollPosition) window.scroll(0, 0);
-      },
-      ...rest,
-    },
-    children,
+      }}
+      {...rest} // eslint-disable-line react/jsx-props-no-spreading
+    >
+      {children}
+    </L>
   );
 }
 
@@ -140,7 +137,6 @@ GenericLink.defaultProps = {
   onMouseDown: null,
   openNewTab: false,
   replace: false,
-  styleName: undefined,
   to: '',
 };
 
