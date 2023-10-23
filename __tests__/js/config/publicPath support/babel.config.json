@@ -1,0 +1,8 @@
+{
+  "babelrc": false,
+  "presets": [
+    ["../../../../config/babel/node-ssr", {
+      "baseAssetsOutputPath": "/public/path",
+    }]
+  ]
+}

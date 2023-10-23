@@ -5,7 +5,7 @@ const globalLibDir = path.resolve(process.execPath, '../../lib/node_modules');
 module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
-    'src/**/*.{js,jsx}',
+    'src/**/*.{js,jsx,ts,tsx}',
   ],
   coverageDirectory: '__coverage__',
   moduleDirectories: [
@@ -17,7 +17,7 @@ module.exports = {
   },
   modulePathIgnorePatterns: ['<rootDir>/build/'],
   rootDir: '../..',
-  testMatch: ['**/__tests__/**/*.js?(x)'],
+  testMatch: ['**/__tests__/**/*.(j|t)s?(x)'],
   testPathIgnorePatterns: [
     '/__assets__/',
     '/node_modules/',
@@ -26,7 +26,7 @@ module.exports = {
     url: 'http://localhost',
   },
   transform: {
-    '\\.(jsx?|svg)$': 'babel-jest',
+    '\\.((j|t)sx?|svg)$': 'babel-jest',
   },
   transformIgnorePatterns: [
     '/node_modules/(?!@dr.pogodin/react-utils)',

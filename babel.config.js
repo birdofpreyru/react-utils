@@ -1,5 +1,7 @@
 module.exports = {
   presets: [
-    './config/babel/node-ssr',
+    ['./config/babel/node-ssr', {
+      typescript: true,
+    }],
   ],
 };

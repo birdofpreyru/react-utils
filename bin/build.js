@@ -17,6 +17,9 @@ const { program } = require('commander');
 const { rimraf } = require('rimraf');
 
 /* eslint-disable import/no-extraneous-dependencies */
+// To support TS configs for Webpack.
+const register = require('@babel/register/experimental-worker');
+
 const webpack = require('webpack');
 /* eslint-enable import/no-extraneous-dependencies */
 
@@ -91,7 +94,14 @@ fs.mkdirSync(outDir, { recursive: true });
 /* ************************************************************************** */
 /* Webpack compilation of isomorphic library bundle.                          */
 
+register({
+  envName: 'production',
+  extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
+  root: process.cwd(),
+});
+
 let webpackConfig = require(path.resolve(cwd, cmdLineArgs.webpackConfig));
+if ('default' in webpackConfig) webpackConfig = webpackConfig.default;
 if (isFunction(webpackConfig)) webpackConfig = webpackConfig(buildType);
 
 let webpackOutDir = outDir;
@@ -158,13 +168,16 @@ if (cmdLineArgs.watch) {
 /* ************************************************************************** */
 /* Babel compilation of JS, JSX, and SVG files.                               */
 
+// TODO: It needs an option to build TS project, and use TypeScript in that case
+// to do TypeScript build with "tsc".
+
 const BABEL_EXEC_OPTIONS = {
   env: { ...process.env, BABEL_ENV: buildType },
 };
 
-let BABEL_CMD_JS = `${cwd}/node_modules/.bin/babel`;
-BABEL_CMD_JS += ` ${inDir} --out-dir ${outDir} --source-maps`;
-if (buildType === BUILD_TYPES.PRODUCTION) BABEL_CMD_JS += ' --minified';
+let BABEL_CMD_BASE = `${cwd}/node_modules/.bin/babel`;
+BABEL_CMD_BASE += ` ${inDir} --out-dir ${outDir} --source-maps`;
+if (buildType === BUILD_TYPES.PRODUCTION) BABEL_CMD_BASE += ' --minified';
 
 /* TODO: The watch is deactivated for Babel compilation because of SVG files:
  * currently there is no way to tell Babel that SVG files should be compiled
@@ -177,7 +190,8 @@ if (buildType === BUILD_TYPES.PRODUCTION) BABEL_CMD_JS += ' --minified';
 if (cmdLineArgs.watch) BABEL_CMD_JS += ' --watch';
 */
 
-const BABEL_CMD_SVG = `${BABEL_CMD_JS} --extensions ".svg" --keep-file-extension`;
+const BABEL_CMD_JS = `${BABEL_CMD_BASE} -x .js,.jsx,.ts,.tsx`;
+const BABEL_CMD_SVG = `${BABEL_CMD_BASE} --extensions ".svg" --keep-file-extension`;
 
 async function babelBuild() {
   await exec(BABEL_CMD_JS, BABEL_EXEC_OPTIONS);

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matches snapshots 1`] = `
+<GenericLink
+  className=""
+  disabled={false}
+  enforceA={false}
+  keepScrollPosition={false}
+  openNewTab={false}
+  replace={false}
+  routerLinkType={
+    {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    }
+  }
+  to=""
+/>
+`;
+
+exports[`Matches snapshots 2`] = `
+<GenericLink
+  className="-dr-pogodin-react-utils_____tests__-ts-shared-components-NavLink-styles___navLink___-NlmbU"
+  disabled={false}
+  enforceA={false}
+  keepScrollPosition={false}
+  openNewTab={false}
+  replace={false}
+  routerLinkType={
+    {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    }
+  }
+  to=""
+/>
+`;

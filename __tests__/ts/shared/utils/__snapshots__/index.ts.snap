@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withRetries(..) respects custom "maxRetries" and "interval" arguments 1`] = `
+[
+  [
+    100,
+  ],
+]
+`;
+
+exports[`withRetries(..) respects custom "maxRetries" and "interval" arguments 2`] = `
+[
+  [
+    100,
+  ],
+  [
+    500,
+  ],
+  [
+    100,
+  ],
+]
+`;
+
+exports[`withRetries(..) respects custom "maxRetries" and "interval" arguments 3`] = `"FAILURE"`;
+
+exports[`withRetries(..) respects custom "maxRetries" and "interval" arguments 4`] = `
+[
+  [
+    100,
+  ],
+  [
+    500,
+  ],
+  [
+    100,
+  ],
+]
+`;
+
+exports[`withRetries(..) works correctly with async actions 1`] = `
+[
+  [
+    100,
+  ],
+]
+`;
+
+exports[`withRetries(..) works correctly with async actions 2`] = `
+[
+  [
+    100,
+  ],
+  [
+    1000,
+  ],
+  [
+    100,
+  ],
+]
+`;
+
+exports[`withRetries(..) works correctly with async actions 3`] = `
+[
+  [
+    100,
+  ],
+  [
+    1000,
+  ],
+  [
+    100,
+  ],
+  [
+    1000,
+  ],
+  [
+    100,
+  ],
+]
+`;
+
+exports[`withRetries(..) works correctly with async actions 4`] = `
+[
+  [
+    100,
+  ],
+  [
+    1000,
+  ],
+  [
+    100,
+  ],
+  [
+    1000,
+  ],
+  [
+    100,
+  ],
+  [
+    1000,
+  ],
+  [
+    100,
+  ],
+]
+`;
+
+exports[`withRetries(..) works correctly with async actions 5`] = `"FAILURE"`;
+
+exports[`withRetries(..) works correctly with async actions 6`] = `
+[
+  [
+    100,
+  ],
+  [
+    1000,
+  ],
+  [
+    100,
+  ],
+  [
+    1000,
+  ],
+  [
+    100,
+  ],
+  [
+    1000,
+  ],
+  [
+    100,
+  ],
+  [
+    1000,
+  ],
+  [
+    100,
+  ],
+]
+`;
+
+exports[`withRetries(..) works correctly with sync actions 1`] = `[]`;
+
+exports[`withRetries(..) works correctly with sync actions 2`] = `
+[
+  [
+    1000,
+  ],
+]
+`;
+
+exports[`withRetries(..) works correctly with sync actions 3`] = `
+[
+  [
+    1000,
+  ],
+  [
+    1000,
+  ],
+]
+`;
+
+exports[`withRetries(..) works correctly with sync actions 4`] = `
+[
+  [
+    1000,
+  ],
+  [
+    1000,
+  ],
+  [
+    1000,
+  ],
+]
+`;
+
+exports[`withRetries(..) works correctly with sync actions 5`] = `"FAILURE"`;
+
+exports[`withRetries(..) works correctly with sync actions 6`] = `
+[
+  [
+    1000,
+  ],
+  [
+    1000,
+  ],
+  [
+    1000,
+  ],
+  [
+    1000,
+  ],
+]
+`;

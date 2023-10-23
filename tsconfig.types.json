@@ -1,0 +1,53 @@
+// TS config for ESLint, editor plugins, and other tools that look-up and use
+// the default tsconfig.json file.
+{
+  // Note: Full relative paths, as some tools don't support Node module
+  // resolution mechanics.
+  "extends": "./node_modules/@tsconfig/recommended/tsconfig.json",
+
+  // Keep these in case any mocks / tests are declared within "src" code tree.
+  "exclude": [
+    "**/__mocks__/**",
+    "**/__tests__/**",
+  ],
+
+  "include": [
+    "src",
+    "types.d.ts",
+  ],
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "jsx": "react-jsx",
+
+    // BEWARE: Different settings are likely to transform dynamic import()
+    // statements in the code, thus breaking Webpack's code splitting.
+    // See: https://davidea.st/articles/webpack-typescript-code-split-wont-work
+    "module": "ESNext",
+    "moduleResolution": "Node",
+
+    "outDir": "build/types-code",
+
+    "paths": {
+      // BEWARE: Don't do this, as in other TS config files:
+      //
+      //  "*": ["./src/shared/*", "./src/*", "./*"]
+      //
+      // "ts-alias" does not act on "*" rule, as we need to get correctly
+      // resolved relative paths in the generated .d.ts files, so that they
+      // can work in host projects.
+
+      "components": ["./src/shared/components"],
+      "components/*": ["./src/shared/components/*"],
+      "server/*": ["./src/server/*"],
+      "utils": ["./src/shared/utils"],
+      "utils/*": ["./src/shared/utils/*"],
+    },
+    "rootDirs": [".", "build/types-scss"],
+    "strict": true,
+
+    // This ensures TypeScript does not remove unused imports, which may cause
+    // troubles when we rely on some side-effects from imported modules.
+    "verbatimModuleSyntax": true,
+  },
+}

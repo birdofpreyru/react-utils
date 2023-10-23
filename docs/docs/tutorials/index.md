@@ -9,6 +9,10 @@ slug: /tutorials
 based on this React Utils library. It has most of its advanced features
 configured and demonstrated in a number of example pages.
 
+import Ts from '../../src/pages/_ts.md';
+
+<Ts />
+
 ### Installation
 To get started with it:
 - Clone the [starter pack].

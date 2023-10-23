@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matches snapshots when active 1`] = `
+<div
+  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT   BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___MAe9O6   ACTIVE_CLASS"
+  onClick={[Function]}
+  onKeyDown={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  BUTTON
+</div>
+`;
+
+exports[`Matches snapshots when disabled 1`] = `
+<div
+  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT   BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___disabled___Br9IWV   DISABLED_CLASS"
+>
+  BUTTON
+</div>
+`;
+
+exports[`Matches snapshots when disabled 2`] = `
+<div
+  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT   BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___disabled___Br9IWV"
+>
+  BUTTON
+</div>
+`;
+
+exports[`Matches snapshots when rendered as link 1`] = `
+<a
+  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT   BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___MAe9O6   ACTIVE_CLASS"
+  href="/SOME/TEST/URL"
+  onClick={[Function]}
+>
+  BUTTON
+</a>
+`;

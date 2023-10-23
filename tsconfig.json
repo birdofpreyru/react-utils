@@ -1,0 +1,27 @@
+// TS config for ESLint, editor plugins, and other tools that look-up and use
+// the default tsconfig.json file.
+{
+  // Note: Full relative paths, as some tools don't support Node module
+  // resolution mechanics.
+  "extends": "./node_modules/@tsconfig/recommended/tsconfig.json",
+
+  "compilerOptions": {
+    "jsx": "react-jsx",
+
+    // BEWARE: Different settings are likely to transform dynamic import()
+    // statements in the code, thus breaking Webpack's code splitting.
+    // See: https://davidea.st/articles/webpack-typescript-code-split-wont-work
+    "module": "ESNext",
+    "moduleResolution": "Node",
+
+    "paths": {
+      "*": ["./src/shared/*", "./src/*", "./*"]
+    },
+    "rootDirs": [".", "build/types-scss"],
+    "strict": true,
+
+    // This ensures TypeScript does not remove unused imports, which may cause
+    // troubles when we rely on some side-effects from imported modules.
+    "verbatimModuleSyntax": true,
+  }
+}

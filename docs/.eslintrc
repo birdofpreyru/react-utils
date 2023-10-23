@@ -1,4 +1,6 @@
 {
+  "extends": ["../config/eslint/default.json"],
+  "root": true,
   "rules": {
     "react/jsx-uses-react": 1,
     "react/react-in-jsx-scope":1

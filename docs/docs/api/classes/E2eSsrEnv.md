@@ -36,7 +36,7 @@ in the opening docblock, _e.g._:
 [Real-life examples of using this test environment](https://github.com/birdofpreyru/react-utils/tree/master/__tests__/config/stylename-generation)
 (these examples are within react-utils library codebase, because of this they
 import the environment with the pragma
-`@jest-environment ./src/shared/utils/jest/E2eSsrEnv.js` using a local path).
+`@jest-environment ./src/shared/utils/jest/E2eSsrEnv.ts` using a local path).
 
 ## Configuration
 The following docblock pragma parameters are recognized by the environment:
