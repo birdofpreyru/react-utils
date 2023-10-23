@@ -17,6 +17,9 @@ const { program } = require('commander');
 const { rimraf } = require('rimraf');
 
 /* eslint-disable import/no-extraneous-dependencies */
+// To support TS configs for Webpack.
+const register = require('@babel/register/experimental-worker');
+
 const webpack = require('webpack');
 /* eslint-enable import/no-extraneous-dependencies */
 
@@ -91,7 +94,14 @@ fs.mkdirSync(outDir, { recursive: true });
 /* ************************************************************************** */
 /* Webpack compilation of isomorphic library bundle.                          */
 
+register({
+  envName: 'production',
+  extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
+  root: process.cwd(),
+});
+
 let webpackConfig = require(path.resolve(cwd, cmdLineArgs.webpackConfig));
+if ('default' in webpackConfig) webpackConfig = webpackConfig.default;
 if (isFunction(webpackConfig)) webpackConfig = webpackConfig(buildType);
 
 let webpackOutDir = outDir;

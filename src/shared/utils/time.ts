@@ -2,7 +2,6 @@
 
 import Cookie from 'cookie';
 import dayjs from 'dayjs';
-import { assign } from 'lodash';
 import { useEffect } from 'react';
 
 import {
@@ -14,26 +13,9 @@ import {
   timer,
 } from '@dr.pogodin/js-utils';
 
-import { useGlobalState } from '@dr.pogodin/react-global-state';
+import { type ForceT, useGlobalState } from '@dr.pogodin/react-global-state';
 
 import { getSsrContext } from './globalState';
-
-type TimeT = typeof dayjs & {
-  DAY_MS: typeof DAY_MS;
-  HOUR_MS: typeof HOUR_MS;
-  MIN_MS: typeof MIN_MS;
-  SEC_MS: typeof SEC_MS;
-  YEAR_MS: typeof YEAR_MS;
-  timer: typeof timer;
-};
-
-const time: TimeT = dayjs as TimeT;
-time.DAY_MS = DAY_MS;
-time.HOUR_MS = HOUR_MS;
-time.MIN_MS = MIN_MS;
-time.SEC_MS = SEC_MS;
-time.YEAR_MS = YEAR_MS;
-time.timer = timer;
 
 /**
  * This react hook wraps Date.now() function in a SSR friendly way,
@@ -60,9 +42,9 @@ time.timer = timer;
 export function useCurrent({
   autorefresh = false,
   globalStatePath = 'currentTime',
-  precision = 5 * time.SEC_MS,
+  precision = 5 * SEC_MS,
 } = {}) {
-  const [now, setter] = useGlobalState<1, number>(globalStatePath, Date.now);
+  const [now, setter] = useGlobalState<ForceT, number>(globalStatePath, Date.now);
   useEffect(() => {
     let timerId: NodeJS.Timeout;
     const update = () => {
@@ -106,7 +88,7 @@ export function useTimezoneOffset({
   globalStatePath = 'timezoneOffset',
 } = {}) {
   const ssrContext = getSsrContext(false);
-  const [offset, setOffset] = useGlobalState<1, number>(globalStatePath, () => {
+  const [offset, setOffset] = useGlobalState<ForceT, number>(globalStatePath, () => {
     const value = cookieName && ssrContext?.req?.cookies?.[cookieName];
     return value ? parseInt(value, 10) : 0;
   });
@@ -121,7 +103,7 @@ export function useTimezoneOffset({
   return offset;
 }
 
-assign(dayjs, {
+const time = {
   DAY_MS,
   HOUR_MS,
   MIN_MS,
@@ -131,6 +113,6 @@ assign(dayjs, {
   timer,
   useCurrent,
   useTimezoneOffset,
-});
+};
 
-export default time;
+export default Object.assign(dayjs, time);

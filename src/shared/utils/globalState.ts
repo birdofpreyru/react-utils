@@ -1,6 +1,6 @@
 import type { Request } from 'express';
 
-import { type SsrContext, withGlobalStateType } from '@dr.pogodin/react-global-state';
+import RGS, { type API, type SsrContext } from '@dr.pogodin/react-global-state';
 
 export type ChunkGroupsT = {
   [chunkName: string]: string[];
@@ -22,7 +22,7 @@ export interface SsrContextT<StateT> extends SsrContext<StateT> {
 
 const {
   getSsrContext,
-} = withGlobalStateType<unknown, SsrContextT<unknown>>();
+} = (RGS as unknown) as API<unknown, SsrContextT<unknown>>;
 
 export {
   getSsrContext,

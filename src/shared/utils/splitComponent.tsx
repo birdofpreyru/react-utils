@@ -232,23 +232,24 @@ export default function splitComponent<
     return { default: Wrapper };
   });
 
-  function CodeSplit({ children, ...rest }: ComponentPropsT) {
-    return (
-      <Suspense fallback={placeholder}>
-        <LazyComponent {...rest as Parameters<typeof LazyComponent>[0]}>
-          {children}
-        </LazyComponent>
-      </Suspense>
-    );
-  }
+  const CodeSplit: React.FunctionComponent<ComponentPropsT> = ({
+    children,
+    ...rest
+  }: ComponentPropsT) => (
+    <Suspense fallback={placeholder}>
+      <LazyComponent {...rest as Parameters<typeof LazyComponent>[0]}>
+        {children}
+      </LazyComponent>
+    </Suspense>
+  );
 
   CodeSplit.propTypes = {
     children: PT.node,
-  };
+  } as React.WeakValidationMap<ComponentPropsT>;
 
   CodeSplit.defaultProps = {
     children: undefined,
-  };
+  } as Partial<ComponentPropsT>;
 
   return CodeSplit;
 }

@@ -11,14 +11,10 @@ const Split = splitComponent({
   ),
 });
 
-export function RoutingScene1() {
-  return (
-    <Routes>
-      <Route path="/base/*" element={<Split />} />
-    </Routes>
-  );
-}
+export const RoutingScene1 = () => (
+  <Routes>
+    <Route path="/base/*" element={<Split />} />
+  </Routes>
+);
 
-export function RoutingScene2() {
-  return <Split />;
-}
+export const RoutingScene2 = () => <Split />;

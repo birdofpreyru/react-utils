@@ -1,3 +1,3 @@
-export default function Scene() {
-  return null;
-}
+const Scene = () => null;
+
+export default Scene;

@@ -92,6 +92,7 @@ export default class E2eSsrEnv extends JsdomEnv {
       compiler.run((err, stats) => {
         if (err) fail(err);
         if (stats?.hasErrors()) {
+          // eslint-disable-next-line no-console
           console.error(stats.toJson().errors);
           fail(Error('Webpack compilation failed'));
         }
@@ -124,9 +125,13 @@ export default class E2eSsrEnv extends JsdomEnv {
 
     if (!options.buildInfo) options.buildInfo = this.global.buildInfo;
 
+    let cleanup: (() => void) | undefined;
+
     if (options.entry) {
       const p = path.resolve(this.testFolder, options.entry);
-      options.Application = require(p)[options.entryExportName || 'default'];
+      const module = require(p);
+      cleanup = module.cleanup;
+      options.Application = module[options.entryExportName || 'default'];
     }
 
     const renderer = ssrFactory(this.global.webpackConfig!, options);
@@ -168,6 +173,8 @@ export default class E2eSsrEnv extends JsdomEnv {
     this.global.ssrMarkup = markup;
     this.global.ssrOptions = options;
     this.global.ssrStatus = status;
+
+    if (cleanup) cleanup();
   }
 
   constructor(

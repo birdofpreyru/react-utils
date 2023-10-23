@@ -1,14 +1,16 @@
 import PT from 'prop-types';
 import { forwardRef } from 'react';
 
-import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
+import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
-type PropsT = {
+type PropsT = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
-  theme: ThemeT & {
+  theme: Theme & {
+    container?: string;
     input?: string;
+    label?: string;
   };
 };
 
@@ -39,7 +41,7 @@ const Input = forwardRef<HTMLInputElement, PropsT>((
   </span>
 ));
 
-const ThemedInput = themedComponent('Input', Input, [
+const ThemedInput = themed(Input, 'Input', [
   'container',
   'input',
   'label',

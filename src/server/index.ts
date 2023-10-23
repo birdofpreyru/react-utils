@@ -24,7 +24,7 @@ export {
   getDefaultCspSettings,
 } from './server';
 
-export * from './utils';
+export { errors } from './utils';
 
 /**
  * Normalizes a port into a number, string, or false.
@@ -168,7 +168,7 @@ type OptionsT = ServerOptionsT & {
  * @return {Promise<{ expressServer: object, httpServer: object }>} Resolves to
  * an object with created Express and HTTP servers.
  */
-async function launch(webpackConfig: Configuration, options: OptionsT) {
+export default async function launchServer(webpackConfig: Configuration, options: OptionsT) {
   /* Options normalization. */
   const ops = options ? cloneDeep(options) : {};
   ops.port = normalizePort(ops.port || process.env.PORT || 3000);
@@ -227,6 +227,4 @@ async function launch(webpackConfig: Configuration, options: OptionsT) {
   };
 }
 
-launch.SCRIPT_LOCATIONS = SCRIPT_LOCATIONS;
-
-export default launch;
+launchServer.SCRIPT_LOCATIONS = SCRIPT_LOCATIONS;

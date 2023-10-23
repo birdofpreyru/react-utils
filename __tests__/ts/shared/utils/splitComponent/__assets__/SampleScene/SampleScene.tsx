@@ -2,15 +2,13 @@
  * This is a sample component, doing a code split.
  */
 
-import { useGlobalState } from '@dr.pogodin/react-global-state';
+import { type ForceT, useGlobalState } from '@dr.pogodin/react-global-state';
 
 import splitComponent from 'utils/splitComponent';
 
 import './style.scss';
 
-function Placeholder() {
-  return <div>PLACEHOLDER!</div>;
-}
+const Placeholder: React.FunctionComponent = () => <div>PLACEHOLDER!</div>;
 
 const SampleComponent1 = splitComponent({
   chunkName: 'sample-component-a',
@@ -34,8 +32,8 @@ const SampleComponent3 = splitComponent({
   ),
 });
 
-export default function SampleCodeSplit() {
-  const [testKey] = useGlobalState<1, string>('test.key', 'testValue');
+const SampleCodeSplit: React.FunctionComponent = () => {
+  const [testKey] = useGlobalState<ForceT, string>('test.key', 'testValue');
   return (
     <div styleName="container">
       <h1>SampleCodeSplit</h1>
@@ -50,4 +48,6 @@ export default function SampleCodeSplit() {
       </SampleComponent3>
     </div>
   );
-}
+};
+
+export default SampleCodeSplit;

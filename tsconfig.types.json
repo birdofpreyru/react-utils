@@ -29,7 +29,19 @@
     "outDir": "build/types-code",
 
     "paths": {
-      "*": ["./src/shared/*", "./src/*", "./*"]
+      // BEWARE: Don't do this, as in other TS config files:
+      //
+      //  "*": ["./src/shared/*", "./src/*", "./*"]
+      //
+      // "ts-alias" does not act on "*" rule, as we need to get correctly
+      // resolved relative paths in the generated .d.ts files, so that they
+      // can work in host projects.
+
+      "components": ["./src/shared/components"],
+      "components/*": ["./src/shared/components/*"],
+      "server/*": ["./src/server/*"],
+      "utils": ["./src/shared/utils"],
+      "utils/*": ["./src/shared/utils/*"],
     },
     "rootDirs": [".", "build/types-scss"],
     "strict": true,
@@ -37,5 +49,5 @@
     // This ensures TypeScript does not remove unused imports, which may cause
     // troubles when we rely on some side-effects from imported modules.
     "verbatimModuleSyntax": true,
-  }
+  },
 }

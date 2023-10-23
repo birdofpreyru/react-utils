@@ -50,7 +50,7 @@ describe('.then()', () => {
 
 describe('.catch()', () => {
   it('rejects correctly when chained', async () => {
-    // eslint-disable-next-line no-throw-literal, @typescript-eslint/no-throw-literal
+    // eslint-disable-next-line no-throw-literal
     const barrier = (new Barrier()).catch(() => { throw 'ERROR'; });
     barrier.reject('OGH');
     await expect(barrier).rejects.toBe('ERROR');
@@ -59,14 +59,14 @@ describe('.catch()', () => {
 
 describe('.finally()', () => {
   it('works as expected when chained (I)', async () => {
-    // eslint-disable-next-line no-throw-literal, @typescript-eslint/no-throw-literal
+    // eslint-disable-next-line no-throw-literal
     const barrier = (new Barrier()).finally(() => { throw 'ERROR'; });
     barrier.resolve('OK');
     await expect(barrier).rejects.toBe('ERROR');
   });
 
   it('works as expected when chained (II)', async () => {
-    // eslint-disable-next-line no-throw-literal, @typescript-eslint/no-throw-literal
+    // eslint-disable-next-line no-throw-literal
     const barrier = (new Barrier()).finally(() => { throw 'ERROR'; });
     barrier.reject('OGH');
     await expect(barrier).rejects.toBe('ERROR');

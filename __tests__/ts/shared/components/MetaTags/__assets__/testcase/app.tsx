@@ -10,19 +10,17 @@ export enum MODES {
   ALL_TAGS_WITH_OVERRIDE = 2,
 }
 
-function Component() {
-  return (
-    <div>
-      <p>A dummy internal component.</p>
-      <MetaTags
-        title="Title from Component"
-        description="Component description"
-      />
-    </div>
-  );
-}
+const Component = () => (
+  <div>
+    <p>A dummy internal component.</p>
+    <MetaTags
+      title="Title from Component"
+      description="Component description"
+    />
+  </div>
+);
 
-function AllTagsComponent() {
+const AllTagsComponent = () => {
   const [domain] = useGlobalState('domain');
   return (
     <div>
@@ -38,13 +36,13 @@ function AllTagsComponent() {
       />
     </div>
   );
-}
+};
 
 type PropsT = {
   mode: MODES;
 };
 
-export default function Application({ mode }: PropsT) {
+const Application: React.FunctionComponent<PropsT> = ({ mode }) => {
   let component;
   switch (mode) {
     case MODES.BASIC_WITH_OVERRIDE: component = <Component />; break;
@@ -62,8 +60,10 @@ export default function Application({ mode }: PropsT) {
       {component}
     </div>
   );
-}
+};
 
 Application.propTypes = {
-  mode: PT.oneOf(Object.values(MODES)).isRequired,
+  mode: PT.oneOf(Object.values(MODES) as MODES[]).isRequired,
 };
+
+export default Application;

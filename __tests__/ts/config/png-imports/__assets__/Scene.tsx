@@ -1,5 +1,5 @@
 import logo from './logo.png';
 
-export default function App() {
-  return <img alt="logo" src={logo} />;
-}
+const App: React.FunctionComponent = () => <img alt="logo" src={logo} />;
+
+export default App;

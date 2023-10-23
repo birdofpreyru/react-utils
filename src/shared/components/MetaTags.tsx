@@ -13,7 +13,7 @@ type PropsT = {
   url?: string;
 };
 
-const Context = createContext<Exclude<PropsT, 'children'>>({
+const Context = createContext<PropsT>({
   description: '',
   title: '',
 });
@@ -71,7 +71,9 @@ const Context = createContext<Exclude<PropsT, 'children'>>({
  * @param [props.url] The page URL to use in `og:url` tag.
  * By default the tag is not injected.
  */
-export default function MetaTags({
+const MetaTags: React.FunctionComponent<PropsT> & {
+  Context: React.Context<PropsT>;
+} = ({
   children,
   description,
   image,
@@ -80,7 +82,7 @@ export default function MetaTags({
   socialTitle,
   title,
   url,
-}: PropsT) {
+}) => {
   const socTitle = socialTitle || title;
   const socDesc = socialDescription || description;
 
@@ -141,17 +143,17 @@ export default function MetaTags({
       }
     </>
   );
-}
+};
 
 MetaTags.Context = Context;
 
 MetaTags.defaultProps = {
   children: null,
-  image: null,
-  siteName: null,
-  socialDescription: null,
-  socialTitle: null,
-  url: null,
+  image: '',
+  siteName: '',
+  socialDescription: '',
+  socialTitle: '',
+  url: '',
 };
 
 MetaTags.propTypes = {
@@ -164,3 +166,5 @@ MetaTags.propTypes = {
   title: PT.string.isRequired,
   url: PT.string,
 };
+
+export default MetaTags;

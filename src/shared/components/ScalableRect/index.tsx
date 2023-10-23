@@ -6,7 +6,7 @@ import './style.scss';
 type PropsT = {
   children?: ReactNode;
   className?: string;
-  ratio: `${number}:${number}`,
+  ratio?: `${number}:${number}`,
 };
 
 /**
@@ -19,8 +19,12 @@ type PropsT = {
  * @param {string} [props.ratio=1:1] Ratio of the rendered rectangle sides,
  * in `W:H` form.
  */
-export default function ScalableRect({ children, className, ratio }: PropsT) {
-  const aux = ratio.split(':');
+const ScalableRect: React.FunctionComponent<PropsT> = ({
+  children,
+  className,
+  ratio,
+}) => {
+  const aux = ratio!.split(':');
   const paddingBottom = `${(100 * parseFloat(aux[1])) / parseFloat(aux[0])}%`;
 
   /* NOTE: In case the following code looks strange to you, mind that we want to
@@ -45,16 +49,36 @@ export default function ScalableRect({ children, className, ratio }: PropsT) {
       {rect}
     </div>
   ) : rect;
-}
+};
 
 ScalableRect.defaultProps = {
   children: null,
-  className: null,
+  className: undefined,
   ratio: '1:1',
 };
 
 ScalableRect.propTypes = {
   children: PT.node,
   className: PT.string,
-  ratio: PT.string,
+  ratio: (props, name) => {
+    const ratio = props[name];
+
+    // "ratio" prop is not required (defaults "1:1").
+    if (ratio === undefined) return null;
+
+    // If given, "ratio" must be a string.
+    if (typeof ratio !== 'string') {
+      return Error('"ratio" prop must be a string');
+    }
+
+    // If given, "ratio" must have "H:W" format.
+    if (!ratio.match(/\d\.\d+/)) {
+      return Error('"ratio" prop must have "H:W" format');
+    }
+
+    // Everything looks right.
+    return null;
+  },
 };
+
+export default ScalableRect;

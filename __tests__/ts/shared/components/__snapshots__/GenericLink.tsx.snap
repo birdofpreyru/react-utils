@@ -4,8 +4,6 @@ exports[`Absolute link, starting with http:// 1`] = `
 <a
   className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
   href="http://www.domain.com/test"
-  onClick={null}
-  onMouseDown={null}
   rel="noopener noreferrer"
   target=""
 >
@@ -18,7 +16,6 @@ exports[`Absolute link, starting with https:// 1`] = `
   className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
   href="https://www.domain.com/test"
   onClick={[Function]}
-  onMouseDown={null}
   rel="noopener noreferrer"
   target=""
 >
@@ -30,8 +27,6 @@ exports[`Anchor link 1`] = `
 <a
   className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
   href="#anchor"
-  onClick={null}
-  onMouseDown={null}
   rel="noopener noreferrer"
   target=""
 >
@@ -41,11 +36,11 @@ exports[`Anchor link 1`] = `
 
 exports[`Relative link 1`] = `
 <button
-  className={null}
+  className=""
   onClick={[Function]}
   type="button"
 >
-  {"className":null,"onMouseDown":null,"replace":false,"to":"http/relative/link","children":"RELATIVE LINK"}
+  {"className":"","replace":false,"to":"http/relative/link","children":"RELATIVE LINK"}
 </button>
 `;
 
@@ -53,8 +48,6 @@ exports[`Relative link, with \`enforceA\` 1`] = `
 <a
   className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
   href="/relative/link"
-  onClick={null}
-  onMouseDown={null}
   rel="noopener noreferrer"
   target=""
 >
@@ -66,8 +59,6 @@ exports[`Relative link, with \`openNewTab\` 1`] = `
 <a
   className="-dr-pogodin-react-utils___src-shared-components-GenericLink-style___link___zH52sA"
   href="relative/link"
-  onClick={null}
-  onMouseDown={null}
   rel="noopener noreferrer"
   target="_blank"
 >

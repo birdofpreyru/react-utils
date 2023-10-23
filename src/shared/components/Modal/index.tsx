@@ -3,7 +3,6 @@
 import { noop } from 'lodash';
 
 import {
-  type FunctionComponent,
   type ReactNode,
   useEffect,
   useMemo,
@@ -13,7 +12,7 @@ import {
 
 import ReactDom from 'react-dom';
 import PT from 'prop-types';
-import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
+import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import baseTheme from './base-theme.scss';
 import './styles.scss';
@@ -21,7 +20,7 @@ import './styles.scss';
 type PropsT = {
   children?: ReactNode;
   onCancel?: () => void;
-  theme: ThemeT & {
+  theme: Theme & {
     container?: string;
     overlay?: string;
   };
@@ -38,11 +37,11 @@ type PropsT = {
  * modal.
  * @param {ModalTheme} [props.theme] _Ad hoc_ theme.
  */
-function BaseModal({
+const BaseModal: React.FunctionComponent<PropsT> = ({
   children,
   onCancel,
   theme,
-}: PropsT) {
+}) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const [portal, setPortal] = useState<HTMLDivElement>();
@@ -116,11 +115,11 @@ function BaseModal({
     ),
     portal,
   ) : null;
-}
+};
 
-const ThemedModal = themedComponent(
-  'Modal',
+const ThemedModal = themed(
   BaseModal,
+  'Modal',
   [
     'container',
     'overlay',
@@ -128,7 +127,7 @@ const ThemedModal = themedComponent(
   baseTheme,
 );
 
-(BaseModal as FunctionComponent<PropsT>).propTypes = {
+BaseModal.propTypes = {
   onCancel: PT.func,
   children: PT.node,
   theme: ThemedModal.themeType.isRequired,

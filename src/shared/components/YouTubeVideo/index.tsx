@@ -1,8 +1,7 @@
 import PT from 'prop-types';
 import qs from 'qs';
-import { type FunctionComponent } from 'react';
 
-import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
+import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import ScalableRect from 'components/ScalableRect';
 import Throbber from 'components/Throbber';
@@ -10,7 +9,7 @@ import Throbber from 'components/Throbber';
 import baseTheme from './base.scss';
 import throbberTheme from './throbber.scss';
 
-type ComponentThemeT = ThemeT & {
+type ComponentThemeT = Theme & {
   container?: string;
   video?: string;
 };
@@ -37,12 +36,12 @@ type PropsT = {
  * @param [props.title] The `title` attribute to add to the player
  * IFrame.
  */
-function YouTubeVideo({
+const YouTubeVideo: React.FunctionComponent<PropsT> = ({
   autoplay,
   src,
   theme,
   title,
-}: PropsT) {
+}) => {
   const srcParts = src.split('?');
   let url = srcParts[0];
   const queryString = srcParts[1];
@@ -70,11 +69,11 @@ function YouTubeVideo({
       />
     </ScalableRect>
   );
-}
+};
 
-const ThemedYouTubeVideo = themedComponent(
-  'YouTubeVideo',
+const ThemedYouTubeVideo = themed(
   YouTubeVideo,
+  'YouTubeVideo',
   [
     'container',
     'video',
@@ -82,7 +81,7 @@ const ThemedYouTubeVideo = themedComponent(
   baseTheme,
 );
 
-(YouTubeVideo as FunctionComponent<PropsT>).propTypes = {
+YouTubeVideo.propTypes = {
   autoplay: PT.bool,
   src: PT.string.isRequired,
   theme: ThemedYouTubeVideo.themeType.isRequired,

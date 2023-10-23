@@ -4,8 +4,10 @@ import GenericLink, { type PropsT as GenericLinkPropsT } from './GenericLink';
 
 type PropsT = Omit<GenericLinkPropsT, 'routerLinkType'>;
 
-export default function NavLink(props: PropsT) {
+const NavLink: React.FunctionComponent<PropsT> = (props) => (
   /* eslint-disable react/jsx-props-no-spreading */
-  return <GenericLink {...props} routerLinkType={RrNavLink} />;
+  <GenericLink {...props} routerLinkType={RrNavLink} />
   /* eslint-enable react/jsx-props-no-spreading */
-}
+);
+
+export default NavLink;

@@ -33,7 +33,6 @@ exports[`Matches snapshots when rendered as link 1`] = `
   className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT AD_TAG HOC_TAG BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___MAe9O6 AD_TAG HOC_TAG ACTIVE_CLASS"
   href="/SOME/TEST/URL"
   onClick={[Function]}
-  onMouseDown={null}
 >
   BUTTON
 </a>

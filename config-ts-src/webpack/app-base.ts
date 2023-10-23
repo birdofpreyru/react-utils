@@ -47,7 +47,7 @@ export type OptionsT = {
   dontEmitBuildInfo?: boolean;
   dontUseProgressPlugin?: boolean;
   entry: string | string[];
-  fs: typeof nodeFs;
+  fs?: typeof nodeFs;
   keepBuildInfo?: boolean | BuildInfoT;
   mode: 'development' | 'none' | 'production';
   outputPath?: string;

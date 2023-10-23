@@ -8,7 +8,7 @@ export enum MODES {
   BASIC_WITH_OVERRIDE = 1,
 }
 
-function Component() {
+const Component = () => {
   const { title, description } = useContext(MetaTags.Context);
   return (
     <div>
@@ -19,13 +19,13 @@ function Component() {
       />
     </div>
   );
-}
+};
 
 type PropsT = {
   mode: MODES;
 };
 
-export default function Application({ mode }: PropsT) {
+const Application: React.FunctionComponent<PropsT> = ({ mode }) => {
   let component;
   switch (mode) {
     case MODES.BASIC_WITH_OVERRIDE: component = <Component />; break;
@@ -43,8 +43,10 @@ export default function Application({ mode }: PropsT) {
       </MetaTags>
     </div>
   );
-}
+};
 
 Application.propTypes = {
-  mode: PT.oneOf(Object.values(MODES)).isRequired,
+  mode: PT.oneOf(Object.values(MODES) as MODES[]).isRequired,
 };
+
+export default Application;

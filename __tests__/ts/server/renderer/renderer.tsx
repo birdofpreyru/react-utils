@@ -6,6 +6,7 @@ import fs from 'fs';
 import serializeJs from 'serialize-javascript';
 
 import {
+  type ForceT,
   getGlobalState,
   useGlobalState,
 } from '@dr.pogodin/react-global-state';
@@ -130,13 +131,13 @@ test(
 );
 
 test('JS constructs in global state', () => {
-  function Component() {
+  const Component = () => {
     // TODO: Could use State type, but not a big deal for now.
-    useGlobalState<1, string>('test.1', 'defaultValue');
-    useGlobalState<1, Set<number>>('set', new Set([1, 2]));
+    useGlobalState<ForceT, string>('test.1', 'defaultValue');
+    useGlobalState<ForceT, Set<number>>('set', new Set([1, 2]));
     const state = getGlobalState().get();
     return <div>{serializeJs(state)}</div>;
-  }
+  };
   return coreTest(mockWebpackConfig(), {
     Application: Component,
     maxSsrRounds: 3,

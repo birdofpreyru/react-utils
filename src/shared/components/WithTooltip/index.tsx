@@ -2,14 +2,13 @@
 
 import PT from 'prop-types';
 import {
-  type FunctionComponent,
   type ReactNode,
   useEffect,
   useRef,
   useState,
 } from 'react';
 
-import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
+import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import Tooltip, { PLACEMENTS, type TooltipThemeT } from './Tooltip';
 
@@ -19,7 +18,7 @@ type PropsT = {
   children?: ReactNode;
   placement?: PLACEMENTS;
   tip?: ReactNode;
-  theme: ThemeT & TooltipThemeT & {
+  theme: Theme & TooltipThemeT & {
     wrapper?: string;
   };
 };
@@ -55,12 +54,12 @@ type HeapT = {
  * _e.g._ a tooltip text. This will be the tooltip content.
  * @param {WithTooltipTheme} props.theme _Ad hoc_ theme.
  */
-function Wrapper({
+const Wrapper: React.FunctionComponent<PropsT> = ({
   children,
   placement,
   tip,
   theme,
-}: PropsT) {
+}) => {
   const { current: heap } = useRef<HeapT>({
     lastCursorX: 0,
     lastCursorY: 0,
@@ -166,11 +165,11 @@ function Wrapper({
       {children}
     </div>
   );
-}
+};
 
-const ThemedWrapper = themedComponent(
-  'WithTooltip',
+const ThemedWrapper = themed(
   Wrapper,
+  'WithTooltip',
   [
     'appearance',
     'arrow',
@@ -189,7 +188,7 @@ const e: ExportT = ThemedWrapper as ExportT;
 
 e.PLACEMENTS = PLACEMENTS;
 
-(Wrapper as FunctionComponent<PropsT>).propTypes = {
+Wrapper.propTypes = {
   children: PT.node,
   placement: PT.oneOf(Object.values(PLACEMENTS)),
   theme: ThemedWrapper.themeType.isRequired,
@@ -202,4 +201,4 @@ Wrapper.defaultProps = {
   tip: null,
 };
 
-export default ThemedWrapper;
+export default e;

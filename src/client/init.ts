@@ -17,6 +17,7 @@ declare global {
 }
 
 if (process.env.NODE_ENV !== 'production') {
+  // eslint-disable-next-line no-console
   console.warn('Dev mode: "BUILD_INFO" attached to the global "window"');
   // eslint-disable-next-line no-underscore-dangle
   window.__DEV_BUILD_INFO__ = BUILD_INFO;

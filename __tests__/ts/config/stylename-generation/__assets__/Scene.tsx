@@ -4,6 +4,8 @@ import styles from './style.scss';
 
 const B = require('./MockPackageB/TestComponent').default;
 
-export default function TestApp() {
-  return <><A /><B />{JSON.stringify(styles)}</>;
-}
+const TestApp: React.FunctionComponent = () => (
+  <><A /><B />{JSON.stringify(styles)}</>
+);
+
+export default TestApp;

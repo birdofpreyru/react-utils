@@ -1,7 +1,7 @@
 import PT from 'prop-types';
-import { type FunctionComponent, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
-import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
+import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import baseTheme from './base-theme.scss';
 
@@ -9,7 +9,7 @@ type PropsT = {
   children?: ReactNode;
   leftSidePanelContent?: ReactNode;
   rightSidePanelContent?: ReactNode;
-  theme: ThemeT & {
+  theme: Theme & {
     container?: string;
     mainPanel?: string;
     sidePanel?: string;
@@ -33,28 +33,26 @@ type PropsT = {
  * @param {...any} [props....]
  * [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
  */
-function PageLayout({
+const PageLayout: React.FunctionComponent<PropsT> = ({
   children,
   leftSidePanelContent,
   rightSidePanelContent,
   theme,
-}: PropsT) {
-  return (
-    <div className={theme.container}>
-      <div className={[theme.sidePanel, theme.leftSidePanel].join(' ')}>
-        {leftSidePanelContent}
-      </div>
-      <div className={theme.mainPanel}>
-        {children}
-      </div>
-      <div className={[theme.sidePanel, theme.rightSidePanel].join(' ')}>
-        {rightSidePanelContent}
-      </div>
+}) => (
+  <div className={theme.container}>
+    <div className={[theme.sidePanel, theme.leftSidePanel].join(' ')}>
+      {leftSidePanelContent}
     </div>
-  );
-}
+    <div className={theme.mainPanel}>
+      {children}
+    </div>
+    <div className={[theme.sidePanel, theme.rightSidePanel].join(' ')}>
+      {rightSidePanelContent}
+    </div>
+  </div>
+);
 
-const ThemedPageLayout = themedComponent('PageLayout', PageLayout, [
+const ThemedPageLayout = themed(PageLayout, 'PageLayout', [
   'container',
   'leftSidePanel',
   'mainPanel',
@@ -62,7 +60,7 @@ const ThemedPageLayout = themedComponent('PageLayout', PageLayout, [
   'sidePanel',
 ], baseTheme);
 
-(PageLayout as FunctionComponent<PropsT>).propTypes = {
+PageLayout.propTypes = {
   children: PT.node,
   leftSidePanelContent: PT.node,
   rightSidePanelContent: PT.node,

@@ -1,12 +1,9 @@
-import PT from 'prop-types';
-import { type FunctionComponent } from 'react';
-
-import { themedComponent, type ThemeT } from '@dr.pogodin/react-themes';
+import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
 type PropsT = {
-  theme: ThemeT & {
+  theme: Theme & {
     container?: string;
     circle?: string;
   };
@@ -21,31 +18,26 @@ type PropsT = {
  * @param {...any} [props....]
  * [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
  */
-function Throbber({
-  theme,
-}: PropsT) {
-  return (
-    <span className={theme.container} styleName="container">
-      <span className={theme.circle} styleName="circle" />
-      <span className={theme.circle} styleName="circle" />
-      <span className={theme.circle} styleName="circle" />
-    </span>
-  );
-}
+const Throbber: React.FunctionComponent<PropsT> = ({ theme }) => (
+  <span className={theme.container} styleName="container">
+    <span className={theme.circle} styleName="circle" />
+    <span className={theme.circle} styleName="circle" />
+    <span className={theme.circle} styleName="circle" />
+  </span>
+);
 
-Throbber.propTypes = {
-  theme: PT.shape({
-    container: PT.string,
-    circle: PT.string,
-  }).isRequired,
-};
-
-export default themedComponent(
+const ThemedThrobber = themed(
+  Throbber,
   'Throbber',
-  Throbber as FunctionComponent<PropsT>,
   [
     'circle',
     'container',
   ],
   defaultTheme,
 );
+
+Throbber.propTypes = {
+  theme: ThemedThrobber.themeType.isRequired,
+};
+
+export default ThemedThrobber;

@@ -1,4 +1,5 @@
 import themedImpl, {
+  type Theme,
   COMPOSE,
   PRIORITY,
   ThemeProvider,
@@ -9,8 +10,11 @@ import * as isomorphy from './isomorphy';
 import time from './time';
 import * as webpack from './webpack';
 
+import type * as JuT from './jest';
+
 export { Barrier, Emitter, Semaphore } from '@dr.pogodin/js-utils';
 
+export { getSsrContext } from './globalState';
 export { default as splitComponent } from './splitComponent';
 
 type ThemedT = typeof themedImpl & {
@@ -32,7 +36,10 @@ try {
 } catch { /* noop */ }
 
 const env = NODE_CONFIG_ENV || process.env.NODE_ENV;
-const JU = env !== 'production' && webpack.requireWeak('./jest', __dirname);
+
+const JU: typeof JuT | null = env !== 'production'
+  ? webpack.requireWeak('./jest', __dirname) as typeof JuT | null
+  : null;
 
 /**
  * @category Utilities
@@ -87,6 +94,7 @@ export async function withRetries(
 }
 
 export {
+  type Theme,
   config,
   isomorphy,
   JU,

@@ -8,7 +8,7 @@
 import PT from 'prop-types';
 import { type ReactNode } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useGlobalState } from '@dr.pogodin/react-global-state';
+import { type ForceT, useGlobalState } from '@dr.pogodin/react-global-state';
 
 import './style.scss';
 
@@ -17,8 +17,8 @@ type PropsT = {
   prop?: string;
 };
 
-export default function SampleComponent({ children, prop }: PropsT) {
-  const [testKey] = useGlobalState<1, string>('test.key', '');
+const SampleComponent: React.FunctionComponent<PropsT> = ({ children, prop }) => {
+  const [testKey] = useGlobalState<ForceT, string>('test.key', '');
   return (
     <Routes>
       <Route
@@ -38,7 +38,7 @@ export default function SampleComponent({ children, prop }: PropsT) {
       />
     </Routes>
   );
-}
+};
 
 SampleComponent.propTypes = {
   children: PT.node,
@@ -49,3 +49,5 @@ SampleComponent.defaultProps = {
   children: undefined,
   prop: '',
 };
+
+export default SampleComponent;

@@ -110,7 +110,7 @@ export type OptionsT = RendererOptionsT & {
   ) => CspOptionsT;
   devMode?: boolean;
   httpsRedirect?: boolean;
-  onExpressJsSetup?: (server: ServerT) => Promise<void>;
+  onExpressJsSetup?: (server: ServerT) => Promise<void> | void;
 };
 
 export default async function factory(

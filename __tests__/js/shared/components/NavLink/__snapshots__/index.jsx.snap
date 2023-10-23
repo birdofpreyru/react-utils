@@ -2,12 +2,10 @@
 
 exports[`Matches snapshots 1`] = `
 <GenericLink
-  className={null}
+  className=""
   disabled={false}
   enforceA={false}
   keepScrollPosition={false}
-  onClick={null}
-  onMouseDown={null}
   openNewTab={false}
   replace={false}
   routerLinkType={
@@ -26,8 +24,6 @@ exports[`Matches snapshots 2`] = `
   disabled={false}
   enforceA={false}
   keepScrollPosition={false}
-  onClick={null}
-  onMouseDown={null}
   openNewTab={false}
   replace={false}
   routerLinkType={

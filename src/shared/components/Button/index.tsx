@@ -1,11 +1,11 @@
 // The <Button> component implements a standard button / button-like link.
 
 import PT from 'prop-types';
-import { type FunctionComponent, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 import Link from 'components/Link';
 
-import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
+import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './style.scss';
 
@@ -18,7 +18,7 @@ type PropsT = {
   onMouseDown?: React.MouseEventHandler;
   openNewTab?: boolean;
   replace?: boolean;
-  theme: ThemeT & {
+  theme: Theme & {
     active?: string;
     button?: string;
     disabled?: string;
@@ -27,7 +27,8 @@ type PropsT = {
   to?: object | string;
 };
 
-function BaseButton({
+/* eslint-disable react/function-component-definition */
+const BaseButton: React.FunctionComponent<PropsT> = ({
   active,
   children,
   disabled,
@@ -38,7 +39,7 @@ function BaseButton({
   replace,
   theme,
   to,
-}: PropsT) {
+}) => {
   let className = theme.button;
   if (active && theme.active) className += ` ${theme.active}`;
   if (disabled) {
@@ -76,7 +77,7 @@ function BaseButton({
       {children}
     </div>
   );
-}
+};
 
 /**
  * Button component theme: a map of CSS
@@ -85,7 +86,7 @@ function BaseButton({
  * @prop {string} [button] to the root element of any button.
  * @prop {string} [disabled] to the root element of disabled button.
  */
-const ThemedButton = themedComponent('Button', BaseButton, [
+const ThemedButton = themed(BaseButton, 'Button', [
   'active',
   'button',
   'disabled',
@@ -129,7 +130,7 @@ BaseButton.defaultProps = {
   to: undefined,
 };
 
-(BaseButton as FunctionComponent<PropsT>).propTypes = {
+BaseButton.propTypes = {
   active: PT.bool,
   children: PT.node,
   disabled: PT.bool,

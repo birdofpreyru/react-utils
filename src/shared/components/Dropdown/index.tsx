@@ -1,7 +1,6 @@
 import PT from 'prop-types';
-import { type FunctionComponent } from 'react';
 
-import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
+import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
@@ -15,10 +14,10 @@ type PropsT = {
   label?: string;
   onChange?: React.ChangeEventHandler<HTMLSelectElement>;
   options?: Array<DropdownOptionT | string>;
-  theme: ThemeT & {
+  theme: Theme & {
     arrow?: string;
     container?: string;
-    hiddenOptions?: string;
+    hiddenOption?: string;
     label?: string;
     option?: string;
     select?: string;
@@ -45,14 +44,14 @@ type PropsT = {
  * @param [props....]
  * [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
  */
-function Dropdown({
+const Dropdown: React.FunctionComponent<PropsT> = ({
   filter,
   label,
   onChange,
   options = [],
   theme,
   value,
-}: PropsT) {
+}) => {
   let isValidValue = false;
   const optionElements = [];
 
@@ -106,9 +105,9 @@ function Dropdown({
       <div className={theme.arrow}>▼</div>
     </div>
   );
-}
+};
 
-const ThemedDropdown = themedComponent('Dropdown', Dropdown, [
+const ThemedDropdown = themed(Dropdown, 'Dropdown', [
   'arrow',
   'container',
   'hiddenOption',
@@ -117,7 +116,7 @@ const ThemedDropdown = themedComponent('Dropdown', Dropdown, [
   'select',
 ], defaultTheme);
 
-(Dropdown as FunctionComponent<PropsT>).propTypes = {
+Dropdown.propTypes = {
   filter: PT.func,
   label: PT.string,
   onChange: PT.func,

@@ -1,7 +1,6 @@
 import PT from 'prop-types';
-import { type FunctionComponent } from 'react';
 
-import { type ThemeT, themedComponent } from '@dr.pogodin/react-themes';
+import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
@@ -9,30 +8,29 @@ type PropT = {
   checked?: boolean;
   label?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  theme: ThemeT & {
+  theme: Theme & {
     checkbox?: string;
-    container?: string;
+    container?: string
+    label?: string;
   };
 };
 
-function Checkbox({
+const Checkbox: React.FunctionComponent<PropT> = ({
   checked,
   label,
   onChange,
   theme,
-}: PropT) {
-  return (
-    <div className={theme.container}>
-      { label === undefined ? null : <p className={theme.label}>{label}</p> }
-      <input
-        checked={checked}
-        className={theme.checkbox}
-        onChange={onChange}
-        type="checkbox"
-      />
-    </div>
-  );
-}
+}) => (
+  <div className={theme.container}>
+    { label === undefined ? null : <p className={theme.label}>{label}</p> }
+    <input
+      checked={checked}
+      className={theme.checkbox}
+      onChange={onChange}
+      type="checkbox"
+    />
+  </div>
+);
 
 /**
  * Checkbox component theme: a map of
@@ -41,7 +39,7 @@ function Checkbox({
  * @prop [container] to the root checkbox element.
  * @prop [label] to the checkbox label element.
  */
-const ThemedCheckbox = themedComponent('Checkbox', Checkbox, [
+const ThemedCheckbox = themed(Checkbox, 'Checkbox', [
   'checkbox',
   'container',
   'label',
@@ -57,7 +55,7 @@ const ThemedCheckbox = themedComponent('Checkbox', Checkbox, [
  * @param [props....]
  * [Other properties of themeable components](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties).
  */
-(Checkbox as FunctionComponent<PropT>).propTypes = {
+Checkbox.propTypes = {
   checked: PT.bool,
   label: PT.string,
   onChange: PT.func,

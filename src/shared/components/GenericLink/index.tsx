@@ -65,7 +65,7 @@ export type PropsT = {
  * determining if the location matches the current URL. See the `<Route strict>`
  * documentation for more information.
  */
-export default function GenericLink({
+const GenericLink: React.FunctionComponent<PropsT> = ({
   children,
   className,
   disabled,
@@ -78,7 +78,7 @@ export default function GenericLink({
   routerLinkType,
   to,
   ...rest
-}: PropsT) {
+}) => {
   /* Renders Link as <a> element if:
    * - It is opted explicitely by `enforceA` prop;
    * - It should be opened in a new tab;
@@ -125,16 +125,16 @@ export default function GenericLink({
       {children}
     </L>
   );
-}
+};
 
 GenericLink.defaultProps = {
   children: null,
-  className: null,
+  className: '',
   disabled: false,
   enforceA: false,
   keepScrollPosition: false,
-  onClick: null,
-  onMouseDown: null,
+  onClick: undefined,
+  onMouseDown: undefined,
   openNewTab: false,
   replace: false,
   to: '',
@@ -153,3 +153,5 @@ GenericLink.propTypes = {
   routerLinkType: PT.elementType.isRequired,
   to: PT.oneOfType([PT.object, PT.string]),
 };
+
+export default GenericLink;

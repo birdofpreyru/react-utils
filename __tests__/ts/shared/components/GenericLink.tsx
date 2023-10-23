@@ -4,10 +4,10 @@ import GenericLink from 'components/GenericLink';
 import PT from 'prop-types';
 import { mount, simulate, snapshot } from 'utils/jest';
 
-function Link(props: {
+const Link: React.FunctionComponent<{
   className?: string;
   onClick: () => void;
-}) {
+}> = (props) => {
   const { className, onClick } = props;
   return (
     <button
@@ -18,10 +18,10 @@ function Link(props: {
       {JSON.stringify(props)}
     </button>
   );
-}
+};
 
 Link.defaultProps = {
-  className: null,
+  className: '',
 };
 
 Link.propTypes = {

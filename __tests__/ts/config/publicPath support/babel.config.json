@@ -3,6 +3,7 @@
   "presets": [
     ["../../../../config/babel/node-ssr", {
       "baseAssetsOutputPath": "/public/path",
+      "typescript": true
     }]
   ]
 }
