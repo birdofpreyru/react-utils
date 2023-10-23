@@ -28,6 +28,7 @@ jobs:
           root: .
           paths:
             - build
+            - config
             - docs/build
   release:
     <<: *defaults
