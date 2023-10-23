@@ -13,7 +13,7 @@
     "@dr.pogodin/csurf": "^1.13.0",
     "@dr.pogodin/js-utils": "^0.0.6",
     "@dr.pogodin/react-global-state": "^0.10.0-alpha.4",
-    "@dr.pogodin/react-themes": "^1.5.0",
+    "@dr.pogodin/react-themes": "^1.5.1",
     "@jest/environment": "^29.7.0",
     "axios": "^1.5.1",
     "commander": "^11.1.0",

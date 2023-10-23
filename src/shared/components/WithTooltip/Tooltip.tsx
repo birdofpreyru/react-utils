@@ -53,6 +53,7 @@ type HeapT = {
 };
 
 export interface TooltipThemeT {
+  appearance?: string;
   arrow?: string;
   content?: string;
   container?: string;

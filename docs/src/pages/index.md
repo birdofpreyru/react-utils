@@ -43,6 +43,10 @@ currently a one-man project, used in personal and some commercial projects.
 Thus, the documentation serves as a good reference for a user with deep
 knowledge of the library, but not that good for a newcomer.
 
+import TS from './_ts.md';
+
+<TS />
+
 :::info
 The source code of some non-React-specific functions provided by this library
 is now moved to a separate [JS Utils] sub-library, and corresponding functions
