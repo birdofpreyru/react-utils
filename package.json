@@ -1,5 +1,5 @@
 {
-  "version": "1.26.1",
+  "version": "1.26.2",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -83,8 +83,8 @@
     "@types/supertest": "^2.0.15",
     "@types/uuid": "^9.0.6",
     "@types/webpack": "^5.28.4",
-    "@typescript-eslint/eslint-plugin": "^6.8.0",
-    "@typescript-eslint/parser": "^6.8.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
     "autoprefixer": "^10.4.16",
     "babel-jest": "^29.7.0",
     "babel-loader": "^9.1.3",
