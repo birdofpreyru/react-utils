@@ -4,6 +4,7 @@ import defaultTheme from './theme.scss';
 
 type PropsT = {
   theme: Theme & {
+    bouncing?: string;
     container?: string;
     circle?: string;
   };

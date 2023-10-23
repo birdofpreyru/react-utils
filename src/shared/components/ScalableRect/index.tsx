@@ -72,7 +72,7 @@ ScalableRect.propTypes = {
     }
 
     // If given, "ratio" must have "H:W" format.
-    if (!ratio.match(/\d\.\d+/)) {
+    if (!ratio.match(/\d+:\d+/)) {
       return Error('"ratio" prop must have "H:W" format');
     }
 
