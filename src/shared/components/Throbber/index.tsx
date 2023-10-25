@@ -31,6 +31,7 @@ const ThemedThrobber = themed(
   Throbber,
   'Throbber',
   [
+    'bouncing',
     'circle',
     'container',
   ],

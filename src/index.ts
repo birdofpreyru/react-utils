@@ -12,13 +12,20 @@ export { default as api } from 'axios';
 export * as PT from 'prop-types';
 
 export {
-  default as Rgs,
-  type API as RgsApi,
+  type AsyncCollectionLoaderT,
+  type AsyncDataEnvelopeT,
+  type AsyncDataLoaderT,
+  type ForceT,
+  type UseAsyncDataOptionsT,
+  type UseAsyncDataResT,
+  type UseGlobalStateResT,
+  type ValueOrInitializerT,
   getGlobalState,
   GlobalStateProvider,
   useAsyncCollection,
   useAsyncData,
   useGlobalState,
+  withGlobalStateType,
 } from '@dr.pogodin/react-global-state';
 
 export {

@@ -1,8 +1,8 @@
 import type { Timer } from '@dr.pogodin/js-utils';
 
-import RGS, {
-  type API,
+import {
   type AsyncDataEnvelopeT,
+  withGlobalStateType,
 } from '@dr.pogodin/react-global-state';
 
 import time from 'utils/time';
@@ -12,7 +12,7 @@ type StateT = {
   goodData: AsyncDataEnvelopeT<string>;
 };
 
-const { useAsyncData } = RGS as API<StateT>;
+const { useAsyncData } = withGlobalStateType<StateT>();
 
 // The first one resolves after a long wait only,
 // the second one resolves right away.

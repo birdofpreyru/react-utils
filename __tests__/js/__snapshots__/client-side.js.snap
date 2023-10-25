@@ -111,17 +111,6 @@ exports[`Export at client side 1`] = `
     "render": [Function],
     "themeType": [Function],
   },
-  "Rgs": {
-    "GlobalState": [Function],
-    "GlobalStateProvider": [Function],
-    "SsrContext": [Function],
-    "getGlobalState": [Function],
-    "getSsrContext": [Function],
-    "newAsyncDataEnvelope": [Function],
-    "useAsyncCollection": [Function],
-    "useAsyncData": [Function],
-    "useGlobalState": [Function],
-  },
   "ScalableRect": [Function],
   "Semaphore": [Function],
   "ThemeProvider": [Function],
@@ -173,6 +162,7 @@ exports[`Export at client side 1`] = `
     "requireWeak": [Function],
     "resolveWeak": [Function],
   },
+  "withGlobalStateType": [Function],
   "withRetries": [Function],
 }
 `;
