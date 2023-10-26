@@ -65,11 +65,14 @@ const BaseButton: React.FunctionComponent<PropsT> = ({
       </Link>
     );
   }
+
   return (
     <div
       className={className}
       onClick={onClick}
-      onKeyDown={onClick}
+      onKeyDown={onClick && ((e) => {
+        if (e.key === 'Enter') onClick(e);
+      })}
       onMouseDown={onMouseDown}
       role="button"
       tabIndex={0}

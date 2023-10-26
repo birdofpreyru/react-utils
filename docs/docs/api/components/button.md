@@ -32,7 +32,12 @@ cases.
 - `enforceA` - **boolean** - If the button is rendered as [Link] this flag
   enforces it to be rendered as a simple `<a>` element (external link) rather
   than an internal link. See [Link] documentation for details.
-- `onClick` - **function** - Click event handler.
+
+- `onClick` &mdash; **function** &mdash; Mouse click event handler. It is also
+  triggered when the button is focused and &laquo;Enter&raquo; key is pressed.
+  In both cases it receieve corresponding event (mouse or keyboard) as its
+  argument.
+
 - `onMouseDown` - **function** - Mouse down event handler.
 - `openNewTab` - **boolean** - If the button is rendered as [Link] this flag
   opts to open the link in a new tab.
