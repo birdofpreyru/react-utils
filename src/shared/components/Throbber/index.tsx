@@ -20,10 +20,10 @@ type PropsT = {
  * [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
  */
 const Throbber: React.FunctionComponent<PropsT> = ({ theme }) => (
-  <span className={theme.container} styleName="container">
-    <span className={theme.circle} styleName="circle" />
-    <span className={theme.circle} styleName="circle" />
-    <span className={theme.circle} styleName="circle" />
+  <span className={theme.container}>
+    <span className={theme.circle} />
+    <span className={theme.circle} />
+    <span className={theme.circle} />
   </span>
 );
 
