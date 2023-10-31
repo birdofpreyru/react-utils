@@ -19,6 +19,7 @@ export type OptionsT = {
   babelEnv: string;
   babelLoaderOptions?: object;
   context: string;
+  cssExtractionOptions?: MiniCssExtractPlugin.PluginOptions;
   cssLocalIdent?: string;
   dontUseProgressPlugin?: boolean;
   entry: string | string[];
@@ -36,7 +37,10 @@ export type OptionsT = {
  */
 export default function configFactory(ops: OptionsT): Configuration {
   const plugins: WebpackPluginInstance[] = [
-    new MiniCssExtractPlugin({ filename: 'style.css' }),
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
+      ...ops.cssExtractionOptions,
+    }),
   ];
 
   if (!ops.dontUseProgressPlugin) plugins.push(new ProgressPlugin());

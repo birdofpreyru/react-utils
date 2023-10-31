@@ -16,6 +16,7 @@ import baseFactory, { type OptionsT as BaseOptionsT } from './app-base';
 type OptionsT = BaseOptionsT & {
   dontUseHmr?: boolean;
   dontUseReactGlobalStateDebugging?: boolean;
+  cssExtractionOptions?: MiniCssExtractPlugin.PluginOptions;
 };
 
 /**
@@ -36,6 +37,7 @@ export default function configFactory(ops: OptionsT) {
     new MiniCssExtractPlugin({
       chunkFilename: '[id].css',
       filename: '[id].css',
+      ...ops.cssExtractionOptions,
     }),
     new webpack.DefinePlugin({
       'process.env.BABEL_ENV': JSON.stringify('development'),

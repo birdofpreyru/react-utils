@@ -10,7 +10,9 @@ import webpack, { type Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 import baseFactory, { type OptionsT as BaseOptionsT } from './app-base';
 
-type OptionsT = BaseOptionsT;
+type OptionsT = BaseOptionsT & {
+  cssExtractionOptions?: MiniCssExtractPlugin.PluginOptions;
+};
 
 /**
  * @param {object} ops
@@ -54,6 +56,7 @@ export default function configFactory(ops: OptionsT): Configuration {
       new MiniCssExtractPlugin({
         chunkFilename: '[contenthash].css',
         filename: '[contenthash].css',
+        ...ops.cssExtractionOptions,
       }),
     ],
   });
