@@ -8,8 +8,10 @@ exposed as the **BaseModal** component.
 
 import ModalExample from '../../../src/components/ModalExample';
 
-:::danger Live Example Is Temporarily Removed
-The live example is temporarily removed, until Docusaurus is fully compatible with React v18+.
+:::note Demo
+<ModalExample />
+
+See [the source code below][Example].
 :::
 
 ## Properties
