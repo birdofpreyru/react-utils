@@ -6,9 +6,8 @@ The [YouTubeVideo] component renders an embed [YouTube] video.
 
 import { YouTubeVideo } from '@dr.pogodin/react-utils';
 
-:::danger Demo
-The live example is temporarily removed, until Docusaurus is fully
-compatible with React **v18+**.
+:::note Demo
+<YouTubeVideo src="https://youtu.be/NdF6Rmt6Ado" />
 :::
 
 ## Properties
