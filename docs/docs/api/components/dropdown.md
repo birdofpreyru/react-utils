@@ -26,7 +26,7 @@ option can be modified via the `hiddenOption` theme key.
   function returns **true**.
 - `label` - **string** - Dropdown label.
 - `onChange` - **function** - Selection event handler.
-- `options` - **Array<[DropdownOption] | string>** - An array of dropdown
+- `options` - **Array&lt;[DropdownOption] | string&gt;** - An array of dropdown
   options. It is fine to intermix [DropdownOption] and string items within
   the same option list. For string items the option value and name will be
   the same.
