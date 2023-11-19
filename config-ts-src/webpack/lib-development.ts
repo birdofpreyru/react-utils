@@ -9,13 +9,15 @@ import baseFactory, { type OptionsT as BaseOptionsT } from './lib-base';
 type OptionsT = BaseOptionsT;
 
 export default function configFactory(ops: OptionsT): webpack.Configuration {
+  const { outputPath = 'build/development' } = ops;
+
   return merge(
     baseFactory({
       ...ops,
       babelEnv: 'development',
       cssLocalIdent: '[package]___[path][name]___[local]___[hash:base64:6]',
       mode: 'development',
-      outputPath: path.resolve(__dirname, ops.context, 'build/development'),
+      outputPath: path.resolve(__dirname, ops.context, outputPath),
     }),
     {
       plugins: [

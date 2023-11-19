@@ -11,12 +11,14 @@ import baseFactory, { type OptionsT as BaseOptionsT } from './lib-base';
 type OptionsT = BaseOptionsT;
 
 export default function configFactory(ops: OptionsT): webpack.Configuration {
+  const { outputPath = 'build/production' } = ops;
+
   const baseConfig = baseFactory({
     ...ops,
     babelEnv: 'production',
     cssLocalIdent: '[hash:base64:6]',
     mode: 'production',
-    outputPath: path.resolve(__dirname, ops.context, 'build/production'),
+    outputPath: path.resolve(__dirname, ops.context, outputPath),
   });
   return merge(baseConfig, {
     devtool: 'source-map',
