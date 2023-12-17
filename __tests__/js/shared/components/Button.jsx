@@ -44,7 +44,7 @@ describe('Matches snapshots', () => {
   });
   test('when rendered as link', () => {
     snapshot((
-      <StaticRouter>
+      <StaticRouter future={{ v7_relativeSplatPath: true }}>
         <Button
           active
           theme={testTheme}

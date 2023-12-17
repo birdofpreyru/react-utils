@@ -27,7 +27,7 @@ export default function Launch(
   if (!container) throw Error('Failed to find container for React app');
   const scene = (
     <GlobalStateProvider initialState={getInj().ISTATE}>
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_relativeSplatPath: true }}>
         <Application />
       </BrowserRouter>
     </GlobalStateProvider>

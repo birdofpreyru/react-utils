@@ -439,7 +439,10 @@ export default function factory(
                 initialState={ssrContext.state}
                 ssrContext={ssrContext}
               >
-                <StaticRouter location={req.url}>
+                <StaticRouter
+                  future={{ v7_relativeSplatPath: true }}
+                  location={req.url}
+                >
                   <App2 />
                 </StaticRouter>
               </GlobalStateProvider>,
