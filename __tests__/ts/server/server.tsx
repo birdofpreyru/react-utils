@@ -67,7 +67,7 @@ test('Launch with dev tools', () => {
 });
 
 describe('Server is functional', () => {
-  let server: supertest.SuperTest<supertest.Test>;
+  let server: supertest.Agent;
 
   beforeAll(async () => {
     server = supertest(

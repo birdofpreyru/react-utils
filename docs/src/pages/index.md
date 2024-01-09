@@ -13,7 +13,7 @@ is yet another [ReactJS] development kit. It provides a selection of
 [functions](/docs/api#functions),
 [scripts](/docs/api#scripts),
 [styles](/docs/api#styles),
-and [utilities](/docs/api#utils)
+and [utilities](/docs/api#utilities)
 routinely necessary in most [ReactJS] projects.
 
 [![Sponsor](../../../.README/sponsor.svg)](https://github.com/sponsors/birdofpreyru)
