@@ -1,7 +1,6 @@
 /* global alert */
 /* eslint-disable no-alert */
 
-import React from 'react';
 import { useColorMode } from '@docusaurus/theme-common';
 import { Button, ThemeProvider } from '@dr.pogodin/react-utils';
 

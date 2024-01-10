@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useColorMode } from '@docusaurus/theme-common';
 import { Button, Modal, ThemeProvider } from '@dr.pogodin/react-utils';
 

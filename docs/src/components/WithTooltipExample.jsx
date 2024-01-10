@@ -1,4 +1,3 @@
-import React from 'react';
 import { WithTooltip } from '@dr.pogodin/react-utils';
 
 export default function WithTooltipExample() {

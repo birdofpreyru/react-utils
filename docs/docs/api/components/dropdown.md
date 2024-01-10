@@ -5,8 +5,23 @@ import { Dropdown } from '@dr.pogodin/react-utils';
 ```
 
 The [Dropdown] component implements a dropdown input themed using [React Themes]
-library. Under the hood it is rendered as the standard `<select>` element, thus
-the styling support is somewhat limited.
+library. Under the hood it still relies on the standard `<select>` element, thus
+the styling support is somewhat limited, but on the other hand it is natively
+integrated with browsers.
+
+import CodeBlock from '@theme/CodeBlock';
+import Example from '../../../src/components/DropdownExample';
+import exampleCode from '!!raw-loader!../../../src/components/DropdownExample';
+
+:::note Demo
+<Example />
+:::
+
+<details>
+  <summary>Demo Source Code</summary>
+
+  <CodeBlock className="language-jsx">{exampleCode}</CodeBlock>
+</details>
 
 :::info
 If current `value` does not match any provided (and filtered, if `filter` is set)
@@ -45,13 +60,16 @@ the following properties:
 
 See [React Themes] docs to learn how component theming works. The valid theme
 keys for [Dropdown] are:
-- `arrow` - Dropdown arrow.
-- `container` - The root dropdown element.
-- `hiddenOption` - The "hidden option" element, which is rendered when
-  the current dropdown value is **undefined**.
-- `label` - Dropdown label.
-- `option` - Each option element.
-- `select` - The underlying `<select>` element.
+- `arrow` &mdash; Dropdown arrow.
+- `container` &mdash; The root component container, which wraps both
+  the optional label (if any), and the actual dropdown assembly.
+- `dropdown` &mdash; The dropdown assembly, which holds the `<select>` element,
+  and a&nbsp;custom arrow.
+- `hiddenOption` &mdash; The "hidden option" element, which is rendered when
+  the current dropdown value is _undefined_.
+- `label` &mdash; The optional dropdown label.
+- `option` &mdash; Each option element.
+- `select` &mdash; The underlying `<select>` element.
 
 [Dropdown]: /docs/api/components/dropdown
 [DropdownOption]: #dropdownoption

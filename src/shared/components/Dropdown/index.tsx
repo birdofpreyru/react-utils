@@ -17,6 +17,7 @@ type PropsT = {
   theme: Theme & {
     arrow?: string;
     container?: string;
+    dropdown?: string;
     hiddenOption?: string;
     label?: string;
     option?: string;
@@ -94,15 +95,17 @@ const Dropdown: React.FunctionComponent<PropsT> = ({
   return (
     <div className={theme.container}>
       { label === undefined ? null : <p className={theme.label}>{label}</p> }
-      <select
-        className={theme.select}
-        onChange={onChange}
-        value={value}
-      >
-        {hiddenOption}
-        {optionElements}
-      </select>
-      <div className={theme.arrow}>▼</div>
+      <div className={theme.dropdown}>
+        <select
+          className={theme.select}
+          onChange={onChange}
+          value={value}
+        >
+          {hiddenOption}
+          {optionElements}
+        </select>
+        <div className={theme.arrow}>▼</div>
+      </div>
     </div>
   );
 };
@@ -110,6 +113,7 @@ const Dropdown: React.FunctionComponent<PropsT> = ({
 const ThemedDropdown = themed(Dropdown, 'Dropdown', [
   'arrow',
   'container',
+  'dropdown',
   'hiddenOption',
   'label',
   'option',
