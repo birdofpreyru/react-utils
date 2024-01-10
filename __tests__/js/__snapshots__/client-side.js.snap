@@ -113,6 +113,11 @@ exports[`Export at client side 1`] = `
   },
   "ScalableRect": [Function],
   "Semaphore": [Function],
+  "TextArea": {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+    "themeType": [Function],
+  },
   "ThemeProvider": [Function],
   "Throbber": {
     "$$typeof": Symbol(react.forward_ref),

@@ -1,0 +1,37 @@
+@import "styles/mixins";
+
+*,
+.context,
+.ad.hoc {
+  &.container {
+    margin: 0.1em;
+    position: relative;
+  }
+
+  &.textarea {
+    background: white;
+    border: 1px solid gray;
+    border-radius: 0.3em;
+    box-sizing: border-box;
+    font: inherit;
+    height: 0;
+    outline: none;
+    overflow: hidden;
+    padding: 0.3em 0.3em calc(0.3em + 1px);
+    resize: none;
+
+    &:focus {
+      border-color: blue;
+      box-shadow: 0 0 3px 1px lightblue;
+    }
+
+    &::placeholder {
+      color: gray;
+    }
+  }
+
+  &.hidden {
+    position: absolute;
+    z-index: -1;
+  }
+}

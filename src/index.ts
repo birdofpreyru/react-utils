@@ -28,22 +28,7 @@ export {
   withGlobalStateType,
 } from '@dr.pogodin/react-global-state';
 
-export {
-  BaseModal,
-  Button,
-  Checkbox,
-  Dropdown,
-  Input,
-  Link,
-  PageLayout,
-  MetaTags,
-  Modal,
-  NavLink,
-  ScalableRect,
-  Throbber,
-  WithTooltip,
-  YouTubeVideo,
-} from 'components';
+export * from 'components';
 
 export {
   type Theme,

@@ -15,3 +15,5 @@ export { default as ScalableRect } from 'components/ScalableRect';
 export { default as Throbber } from 'components/Throbber';
 export { default as WithTooltip } from 'components/WithTooltip';
 export { default as YouTubeVideo } from 'components/YouTubeVideo';
+
+export { default as TextArea } from './TextArea';
