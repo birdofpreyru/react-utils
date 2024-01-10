@@ -18,6 +18,8 @@ import { createPortal } from 'react-dom';
 
 import PT from 'prop-types';
 
+import type { Theme } from '@dr.pogodin/react-themes';
+
 /* Valid placements of the rendered tooltip. They will be overriden when
  * necessary to fit the tooltip within the viewport. */
 export enum PLACEMENTS {
@@ -52,12 +54,14 @@ type HeapT = {
   lastPlacement?: PLACEMENTS | undefined;
 };
 
-export interface TooltipThemeT {
-  appearance?: string;
-  arrow?: string;
-  content?: string;
-  container?: string;
-}
+export const validThemeKeys = [
+  'appearance',
+  'arrow',
+  'content',
+  'container',
+] as const;
+
+type TooltipThemeT = Theme<typeof validThemeKeys>;
 
 /**
  * Creates tooltip components.

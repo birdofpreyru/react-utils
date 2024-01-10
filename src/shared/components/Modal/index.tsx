@@ -17,13 +17,12 @@ import themed, { type Theme } from '@dr.pogodin/react-themes';
 import baseTheme from './base-theme.scss';
 import './styles.scss';
 
+const validThemeKeys = ['container', 'overlay'] as const;
+
 type PropsT = {
   children?: ReactNode;
   onCancel?: () => void;
-  theme: Theme & {
-    container?: string;
-    overlay?: string;
-  };
+  theme: Theme<typeof validThemeKeys>;
 };
 
 /**
@@ -120,10 +119,7 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
 const ThemedModal = themed(
   BaseModal,
   'Modal',
-  [
-    'container',
-    'overlay',
-  ],
+  validThemeKeys,
   baseTheme,
 );
 

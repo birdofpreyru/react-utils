@@ -4,15 +4,13 @@ import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
+const validThemeKeys = ['checkbox', 'container', 'label'] as const;
+
 type PropT = {
   checked?: boolean;
   label?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  theme: Theme & {
-    checkbox?: string;
-    container?: string
-    label?: string;
-  };
+  theme: Theme<typeof validThemeKeys>;
 };
 
 const Checkbox: React.FunctionComponent<PropT> = ({
@@ -39,11 +37,12 @@ const Checkbox: React.FunctionComponent<PropT> = ({
  * @prop [container] to the root checkbox element.
  * @prop [label] to the checkbox label element.
  */
-const ThemedCheckbox = themed(Checkbox, 'Checkbox', [
-  'checkbox',
-  'container',
-  'label',
-], defaultTheme);
+const ThemedCheckbox = themed(
+  Checkbox,
+  'Checkbox',
+  validThemeKeys,
+  defaultTheme,
+);
 
 /**
  * The `<Checkbox>` component implements themeable checkboxes.

@@ -9,6 +9,8 @@ import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './style.scss';
 
+const validThemeKeys = ['active', 'button', 'disabled'] as const;
+
 type PropsT = {
   active?: boolean;
   children?: ReactNode;
@@ -18,11 +20,7 @@ type PropsT = {
   onMouseDown?: React.MouseEventHandler;
   openNewTab?: boolean;
   replace?: boolean;
-  theme: Theme & {
-    active?: string;
-    button?: string;
-    disabled?: string;
-  };
+  theme: Theme<typeof validThemeKeys>;
   // TODO: It needs a more precise typing of the object option.
   to?: object | string;
 };
@@ -89,11 +87,7 @@ const BaseButton: React.FunctionComponent<PropsT> = ({
  * @prop {string} [button] to the root element of any button.
  * @prop {string} [disabled] to the root element of disabled button.
  */
-const ThemedButton = themed(BaseButton, 'Button', [
-  'active',
-  'button',
-  'disabled',
-], defaultTheme);
+const ThemedButton = themed(BaseButton, 'Button', validThemeKeys, defaultTheme);
 
 /**
  * Implements themeable buttons, and button-line links (elements which look

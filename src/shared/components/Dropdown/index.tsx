@@ -4,6 +4,16 @@ import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
+const validThemeKeys = [
+  'arrow',
+  'container',
+  'dropdown',
+  'hiddenOption',
+  'label',
+  'option',
+  'select',
+] as const;
+
 type DropdownOptionT = {
   name?: string | null;
   value: string;
@@ -14,15 +24,7 @@ type PropsT = {
   label?: string;
   onChange?: React.ChangeEventHandler<HTMLSelectElement>;
   options?: Array<DropdownOptionT | string>;
-  theme: Theme & {
-    arrow?: string;
-    container?: string;
-    dropdown?: string;
-    hiddenOption?: string;
-    label?: string;
-    option?: string;
-    select?: string;
-  };
+  theme: Theme<typeof validThemeKeys>;
   value?: string;
 };
 
@@ -110,15 +112,12 @@ const Dropdown: React.FunctionComponent<PropsT> = ({
   );
 };
 
-const ThemedDropdown = themed(Dropdown, 'Dropdown', [
-  'arrow',
-  'container',
-  'dropdown',
-  'hiddenOption',
-  'label',
-  'option',
-  'select',
-], defaultTheme);
+const ThemedDropdown = themed(
+  Dropdown,
+  'Dropdown',
+  validThemeKeys,
+  defaultTheme,
+);
 
 Dropdown.propTypes = {
   filter: PT.func,

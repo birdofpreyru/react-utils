@@ -5,13 +5,15 @@ import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
+const validThemeKeys = [
+  'container',
+  'input',
+  'label',
+] as const;
+
 type PropsT = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
-  theme: Theme & {
-    container?: string;
-    input?: string;
-    label?: string;
-  };
+  theme: Theme<typeof validThemeKeys>;
 };
 
 /**
@@ -41,11 +43,7 @@ const Input = forwardRef<HTMLInputElement, PropsT>((
   </span>
 ));
 
-const ThemedInput = themed(Input, 'Input', [
-  'container',
-  'input',
-  'label',
-], defaultTheme);
+const ThemedInput = themed(Input, 'Input', validThemeKeys, defaultTheme);
 
 Input.propTypes = {
   label: PT.string,

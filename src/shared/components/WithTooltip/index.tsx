@@ -10,17 +10,20 @@ import {
 
 import themed, { type Theme } from '@dr.pogodin/react-themes';
 
-import Tooltip, { PLACEMENTS, type TooltipThemeT } from './Tooltip';
+import Tooltip, {
+  PLACEMENTS,
+  validThemeKeys as validTooltipThemeKeys,
+} from './Tooltip';
 
 import defaultTheme from './default-theme.scss';
+
+const validThemeKeys = [...validTooltipThemeKeys, 'wrapper'] as const;
 
 type PropsT = {
   children?: ReactNode;
   placement?: PLACEMENTS;
   tip?: ReactNode;
-  theme: Theme & TooltipThemeT & {
-    wrapper?: string;
-  };
+  theme: Theme<typeof validThemeKeys>;
 };
 
 type TooltipRefT = {

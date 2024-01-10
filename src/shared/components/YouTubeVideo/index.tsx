@@ -9,10 +9,9 @@ import Throbber from 'components/Throbber';
 import baseTheme from './base.scss';
 import throbberTheme from './throbber.scss';
 
-type ComponentThemeT = Theme & {
-  container?: string;
-  video?: string;
-};
+const validThemeKeys = ['container', 'video'] as const;
+
+type ComponentThemeT = Theme<typeof validThemeKeys>;
 
 type PropsT = {
   autoplay?: boolean;
@@ -74,10 +73,7 @@ const YouTubeVideo: React.FunctionComponent<PropsT> = ({
 const ThemedYouTubeVideo = themed(
   YouTubeVideo,
   'YouTubeVideo',
-  [
-    'container',
-    'video',
-  ],
+  validThemeKeys,
   baseTheme,
 );
 
