@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`withRetries(..) respects custom "maxRetries" and "interval" arguments 1`] = `"FAILURE"`;
-
-exports[`withRetries(..) works correctly with async actions 1`] = `"FAILURE"`;
-
-exports[`withRetries(..) works correctly with sync actions 1`] = `"FAILURE"`;
