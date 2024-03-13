@@ -9,8 +9,6 @@
 - [NavLink](/docs/api/components/navlink) &mdash; Navigation links (specially styled
   when match the current location).
 - [PageLayout](/docs/api/components/pagelayout) &mdash; A simple themed page layout.
-- [ScalableRect](/docs/api/components/scalablerect) &mdash; Container that keeps given
-  aspect ratio while its width alters.
 - [TextArea](/docs/api/components/textarea) &mdash; Auto-resizeable text area.
 - [ThemeProvider](/docs/api/components/themeprovider) &mdash; Provides context visual
   themes to its children tree.
@@ -22,8 +20,11 @@
 :::caution Deprecated Components
 - [CodeSplit] &mdash; Removed in **v1.14.0**, use [splitComponent()] instead
   ([migration guidelines][CodeSplit]).
+- [ScalableRect](/docs/api/components/scalablerect) &mdash; Removed in
+  **v1.31.0**, use [aspect-ratio] CSS property instead.
 :::
 
 <!-- links -->
+[aspect-ratio]: https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
 [CodeSplit]: /docs/api/components/codesplit
 [splitComponent()]: /docs/api/functions/splitComponent

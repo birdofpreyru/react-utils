@@ -2,12 +2,14 @@
 .context,
 .ad.hoc {
   .container {
+    aspect-ratio: 16 / 9;
     background: whitesmoke;
+    position: relative;
   }
 
   .video {
     height: 100%;
-    position: relative;
+    position: absolute;
     width: 100%;
   }
 }

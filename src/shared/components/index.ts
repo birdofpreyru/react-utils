@@ -11,7 +11,6 @@ export { default as PageLayout } from 'components/PageLayout';
 export { default as MetaTags } from 'components/MetaTags';
 export { default as Modal, BaseModal } from 'components/Modal';
 export { default as NavLink } from 'components/NavLink';
-export { default as ScalableRect } from 'components/ScalableRect';
 export { default as Throbber } from 'components/Throbber';
 export { default as WithTooltip } from 'components/WithTooltip';
 export { default as YouTubeVideo } from 'components/YouTubeVideo';
