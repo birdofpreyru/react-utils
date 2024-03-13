@@ -69,7 +69,7 @@ const Dropdown: React.FunctionComponent<PropsT> = ({
         optionName = option;
         optionValue = option;
       } else {
-        optionName = option.name || option.value;
+        optionName = option.name ?? option.value;
         optionValue = option.value;
       }
       isValidValue ||= optionValue === value;
