@@ -22,6 +22,7 @@ import exampleCode from '!!raw-loader!../../../src/components/TextAreaExample';
 </details>
 
 ## Properties
+- `disabled` &mdash; **boolean** &mdash; Optional. Disables the text area.
 - `onChange` &mdash; **React.ChangeEventHandler&lt;HTMLTextAreaElemen&gt;** &mdash;
   [Event handler](https://react.dev/reference/react-dom/components/common#event-handler)
   for area content changes. It is optional, and it should be provided for

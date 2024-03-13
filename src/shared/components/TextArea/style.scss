@@ -1,3 +1,4 @@
+@use "sass:color";
 @import "styles/mixins";
 
 *,
@@ -27,6 +28,13 @@
 
     &::placeholder {
       color: gray;
+    }
+
+    &:disabled {
+      border-color: color.adjust($color: gray, $alpha: -0.66);
+      cursor: not-allowed;
+      color: color.adjust($color: gray, $alpha: -0.66);
+      user-select: none;
     }
   }
 
