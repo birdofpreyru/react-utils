@@ -22,6 +22,7 @@ export {
   type ValueOrInitializerT,
   getGlobalState,
   GlobalStateProvider,
+  newAsyncDataEnvelope,
   useAsyncCollection,
   useAsyncData,
   useGlobalState,

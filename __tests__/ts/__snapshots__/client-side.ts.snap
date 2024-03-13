@@ -155,6 +155,7 @@ exports[`Export at client side 1`] = `
     "isDevBuild": [Function],
     "isProdBuild": [Function],
   },
+  "newAsyncDataEnvelope": [Function],
   "server": null,
   "splitComponent": [Function],
   "themed": [Function],
