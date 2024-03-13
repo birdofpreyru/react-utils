@@ -51,10 +51,12 @@ const Dropdown: React.FunctionComponent<PropsT> = ({
   filter,
   label,
   onChange,
-  options = [],
+  options,
   theme,
   value,
 }) => {
+  if (!options) throw Error('Internal error');
+
   let isValidValue = false;
   const optionElements = [];
 
