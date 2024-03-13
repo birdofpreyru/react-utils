@@ -1,6 +1,6 @@
 # ESLint
 The library provides default [ESLint] configurations.
-- [ESLint](#eslint)
+- [ESLint](#)
   - [Default](#default)
   - [Jest](#jest)
 

@@ -78,7 +78,7 @@ argument is an object with the following valid fields:
     of the standard Node's filesystem to output artifacts created during
     the Webpack config generation by the factory (_e.g._ "[build info]", _etc._).
 
-  - `publicPath` - **string** - <a id="app-base-public-path"></a>
+  - `publicPath` - **string** - <Link id="app-base-public-path" />
     Public URL of the output directory when
     referenced in a browser ([see Webpack docs for details](https://webpack.js.org/configuration/output/#outputpublicpath)). The config factory will automatically
     append `/` symbol to the end of given value, thus `publicPath` values should
