@@ -21,7 +21,7 @@ type DropdownOptionT = {
 
 type PropsT = {
   filter?: (item: DropdownOptionT | string) => boolean;
-  label?: string;
+  label?: React.ReactNode;
   onChange?: React.ChangeEventHandler<HTMLSelectElement>;
   options?: Array<DropdownOptionT | string>;
   theme: Theme<typeof validThemeKeys>;
@@ -98,7 +98,7 @@ const Dropdown: React.FunctionComponent<PropsT> = ({
 
   return (
     <div className={theme.container}>
-      { label === undefined ? null : <p className={theme.label}>{label}</p> }
+      { label === undefined ? null : <div className={theme.label}>{label}</div> }
       <div className={theme.dropdown}>
         <select
           className={theme.select}
@@ -123,7 +123,7 @@ const ThemedDropdown = themed(
 
 Dropdown.propTypes = {
   filter: PT.func,
-  label: PT.string,
+  label: PT.node,
   onChange: PT.func,
   options: PT.arrayOf(
     PT.oneOfType([

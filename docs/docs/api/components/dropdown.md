@@ -39,7 +39,7 @@ option can be modified via the `hiddenOption` theme key.
 - `filter` - **function** - Options filter function. When provided, only those
   elements of `options` list will be used by the dropdown, for which this filter
   function returns **true**.
-- `label` - **string** - Dropdown label.
+- `label` &mdash; **React.ReactNode** &mdash; Dropdown label.
 - `onChange` - **function** - Selection event handler.
 - `options` - **Array&lt;[DropdownOption] | string&gt;** - An array of dropdown
   options. It is fine to intermix [DropdownOption] and string items within
