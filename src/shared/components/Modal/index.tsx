@@ -15,12 +15,14 @@ import PT from 'prop-types';
 import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import baseTheme from './base-theme.scss';
-import './styles.scss';
+import S from './styles.scss';
 
 const validThemeKeys = ['container', 'overlay'] as const;
 
 type PropsT = {
   children?: ReactNode;
+  containerStyle?: React.CSSProperties;
+  dontDisableScrolling?: boolean;
   onCancel?: () => void;
   theme: Theme<typeof validThemeKeys>;
 };
@@ -38,6 +40,8 @@ type PropsT = {
  */
 const BaseModal: React.FunctionComponent<PropsT> = ({
   children,
+  containerStyle,
+  dontDisableScrolling,
   onCancel,
   theme,
 }) => {
@@ -47,14 +51,24 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
 
   useEffect(() => {
     const p = document.createElement('div');
-    document.body.classList.add('scrolling-disabled-by-modal');
     document.body.appendChild(p);
     setPortal(p);
     return () => {
-      document.body.classList.remove('scrolling-disabled-by-modal');
       document.body.removeChild(p);
     };
   }, []);
+
+  // Disables window scrolling, if it is not opted-out.
+  useEffect(() => {
+    if (!dontDisableScrolling) {
+      document.body.classList.add(S.scrollingDisabledByModal);
+    }
+    return () => {
+      if (!dontDisableScrolling) {
+        document.body.classList.remove(S.scrollingDisabledByModal);
+      }
+    };
+  }, [dontDisableScrolling]);
 
   const focusLast = useMemo(() => (
     <div
@@ -98,6 +112,7 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
           onWheel={(event) => event.stopPropagation()}
           ref={containerRef}
           role="dialog"
+          style={containerStyle}
         >
           {children}
         </div>
@@ -124,14 +139,18 @@ const ThemedModal = themed(
 );
 
 BaseModal.propTypes = {
-  onCancel: PT.func,
   children: PT.node,
+  containerStyle: PT.shape({}),
+  dontDisableScrolling: PT.bool,
+  onCancel: PT.func,
   theme: ThemedModal.themeType.isRequired,
 };
 
 BaseModal.defaultProps = {
-  onCancel: noop,
   children: null,
+  containerStyle: undefined,
+  dontDisableScrolling: false,
+  onCancel: noop,
 };
 
 export default ThemedModal;

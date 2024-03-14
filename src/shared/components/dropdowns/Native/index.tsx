@@ -1,32 +1,17 @@
+// Implements dropdown based on the native HTML <select> element.
+
 import PT from 'prop-types';
 
-import themed, { type Theme } from '@dr.pogodin/react-themes';
+import themed from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
-const validThemeKeys = [
-  'arrow',
-  'container',
-  'dropdown',
-  'hiddenOption',
-  'label',
-  'option',
-  'select',
-] as const;
-
-type DropdownOptionT = {
-  name?: string | null;
-  value: string;
-};
-
-type PropsT = {
-  filter?: (item: DropdownOptionT | string) => boolean;
-  label?: React.ReactNode;
-  onChange?: React.ChangeEventHandler<HTMLSelectElement>;
-  options?: Array<DropdownOptionT | string>;
-  theme: Theme<typeof validThemeKeys>;
-  value?: string;
-};
+import {
+  type PropsT,
+  optionsValidator,
+  optionValueName,
+  validThemeKeys,
+} from '../common';
 
 /**
  * Implements a themeable dropdown list. Internally it is rendered with help of
@@ -47,7 +32,7 @@ type PropsT = {
  * @param [props....]
  * [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
  */
-const Dropdown: React.FunctionComponent<PropsT> = ({
+const Dropdown: React.FunctionComponent<PropsT<string>> = ({
   filter,
   label,
   onChange,
@@ -63,19 +48,11 @@ const Dropdown: React.FunctionComponent<PropsT> = ({
   for (let i = 0; i < options.length; ++i) {
     const option = options[i];
     if (!filter || filter(option)) {
-      let optionValue: string;
-      let optionName: string;
-      if (typeof option === 'string') {
-        optionName = option;
-        optionValue = option;
-      } else {
-        optionName = option.name ?? option.value;
-        optionValue = option.value;
-      }
-      isValidValue ||= optionValue === value;
+      const [iValue, iName] = optionValueName(option);
+      isValidValue ||= iValue === value;
       optionElements.push(
-        <option className={theme.option} key={optionValue} value={optionValue}>
-          {optionName}
+        <option className={theme.option} key={iValue} value={iValue}>
+          {iName}
         </option>,
       );
     }
@@ -108,7 +85,7 @@ const Dropdown: React.FunctionComponent<PropsT> = ({
           {hiddenOption}
           {optionElements}
         </select>
-        <div className={theme.arrow}>▼</div>
+        <div className={theme.arrow} />
       </div>
     </div>
   );
@@ -125,15 +102,7 @@ Dropdown.propTypes = {
   filter: PT.func,
   label: PT.node,
   onChange: PT.func,
-  options: PT.arrayOf(
-    PT.oneOfType([
-      PT.shape({
-        name: PT.string,
-        value: PT.string.isRequired,
-      }),
-      PT.string,
-    ]).isRequired,
-  ),
+  options: optionsValidator,
   theme: ThemedDropdown.themeType.isRequired,
   value: PT.string,
 };

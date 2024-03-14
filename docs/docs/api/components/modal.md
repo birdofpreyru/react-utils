@@ -15,11 +15,17 @@ See [the source code below][Example].
 :::
 
 ## Properties
-- `children` - **React.Node** - Component children, if any, are rendered as
-  the modal's content.
-- `onCancel` - **function** - The callback to trigger when user clicks outside
-  the modal window, or presses "escape" key. It is expected to close the modal.
-- `theme` - [ModalTheme] - _Ad hoc_ visual theme.
+
+**Optional:**
+- `children` &mdash; **React.ReactNode** &mdash; Modal content.
+- `containerStyle` &mdash; **React.CSSProperties** &mdash; Inline style object
+  to pass to the modal container.
+- `dontDisableScrolling` &mdash; **boolean** &mdash; Opt-out from disabling
+  the scrolling on the window when the modal is open.
+- `onCancel` &mdash; **function** &mdash; The callback to trigger when user
+  clicks outside the modal window, or presses &laquo;escape&raquo; key.
+  It is expected to close the modal.
+- `theme` &mdash; [ModalTheme] &mdash; _Ad hoc_ visual theme.
 - Other [props of themed components](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
 
 ### ModalTheme

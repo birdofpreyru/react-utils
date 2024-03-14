@@ -1,13 +1,20 @@
 # Dropdown
 
 ```jsx
-import { Dropdown } from '@dr.pogodin/react-utils';
+import { CustomDropdown, Dropdown } from '@dr.pogodin/react-utils';
 ```
 
 The [Dropdown] component implements a dropdown input themed using [React Themes]
-library. Under the hood it still relies on the standard `<select>` element, thus
-the styling support is somewhat limited, but on the other hand it is natively
-integrated with browsers.
+library. Under the hood it relies on the native `<select>` element,
+thus the styling support is somewhat limited, but on the other hand it is
+natively integrated with browsers.
+
+For use cases requiring advanced theming (or rendering arbitrary objects
+as dropdown options) the library provides [CustomDropdown] component, which
+implements the dropdown from scratch based on the simple `<div>` elements.
+
+Both dropdown implementation provide similar API, with just slight changes
+documented below.
 
 import CodeBlock from '@theme/CodeBlock';
 import Example from '../../../src/components/DropdownExample';
@@ -40,7 +47,16 @@ option can be modified via the `hiddenOption` theme key.
   elements of `options` list will be used by the dropdown, for which this filter
   function returns **true**.
 - `label` &mdash; **React.ReactNode** &mdash; Dropdown label.
-- `onChange` - **function** - Selection event handler.
+
+- `onChange` &mdash; **function** &mdash; Selection event handler.
+
+  For native [Dropdown] its signature is **React.ChangeEventHandler&lt;HTMLSelectElement&gt;**,
+  _i.e._ you want to pass in something like `(e) => setValue(e.target.value)`.
+
+  For [CustomDropdown] its singature is just **(newValue: string) => void**,
+  _i.e._ you want to pass in something like `(v) => setValue(v)`, or just
+  a `setValue` setter directly.
+
 - `options` - **Array&lt;[DropdownOption] | string&gt;** - An array of dropdown
   options. It is fine to intermix [DropdownOption] and string items within
   the same option list. For string items the option value and name will be
@@ -52,9 +68,14 @@ option can be modified via the `hiddenOption` theme key.
 ### DropdownOption
 Represents a single option inside [Dropdown] component. It is an object with
 the following properties:
-- `name` - **string** - The option name to render in UI. When not given
-  the `value` is used as the name.
-- `value` - **string** - Option value.
+
+- `name`
+  - For native [Dropdown] it should be **string**.
+  - For [CustomDropdown] it can be any **React.ReactNode**.
+
+  In both cases if `name` is omitted, the `value` is used as the name instead.
+
+- `value` &mdash; **string** &mdash; Option value.
 
 ### DropdownTheme
 
@@ -71,6 +92,7 @@ keys for [Dropdown] are:
 - `option` &mdash; Each option element.
 - `select` &mdash; The underlying `<select>` element.
 
+[CustomDropdown]: /docs/api/components/dropdown
 [Dropdown]: /docs/api/components/dropdown
 [DropdownOption]: #dropdownoption
 [DropdownTheme]: #dropdowntheme
