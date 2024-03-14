@@ -216,6 +216,11 @@ exports[`Export at server side 1`] = `
     "themeType": [Function],
   },
   "Semaphore": [Function],
+  "Switch": {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+    "themeType": [Function],
+  },
   "TextArea": {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],

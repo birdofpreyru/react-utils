@@ -92,7 +92,7 @@ keys for [Dropdown] are:
 - `option` &mdash; Each option element.
 - `select` &mdash; The underlying `<select>` element.
 
-[CustomDropdown]: /docs/api/components/dropdown
+[CustomDropdown]: /docs/api/components/customdropdown
 [Dropdown]: /docs/api/components/dropdown
 [DropdownOption]: #dropdownoption
 [DropdownTheme]: #dropdowntheme

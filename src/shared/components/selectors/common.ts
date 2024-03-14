@@ -15,18 +15,18 @@ export const validThemeKeys = [
   'select',
 ] as const;
 
-export type DropdownOptionT<NameT> = {
+export type OptionT<NameT> = {
   name?: NameT | null;
   value: string;
 };
 
-export type OptionsT<NameT> = Array<DropdownOptionT<NameT> | string>;
+export type OptionsT<NameT> = Array<OptionT<NameT> | string>;
 
 export type PropsT<
   NameT,
   OnChangeT = React.ChangeEventHandler<HTMLSelectElement>,
 > = {
-  filter?: (item: DropdownOptionT<NameT> | string) => boolean;
+  filter?: (item: OptionT<NameT> | string) => boolean;
   label?: React.ReactNode;
   onChange?: OnChangeT;
   options?: OptionsT<NameT>;
@@ -46,7 +46,7 @@ export const optionsValidator = PT.arrayOf(optionValidator.isRequired);
 
 /** Returns option value and name as a tuple. */
 export function optionValueName<NameT>(
-  option: DropdownOptionT<NameT> | string,
+  option: OptionT<NameT> | string,
 ): [string, NameT | string] {
   return typeof option === 'string'
     ? [option, option]

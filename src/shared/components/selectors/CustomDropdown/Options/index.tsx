@@ -6,7 +6,7 @@ import { BaseModal } from 'components/Modal';
 import S from './style.scss';
 
 import {
-  type DropdownOptionT,
+  type OptionT,
   type OptionsT,
   optionsValidator,
   optionValueName,
@@ -19,7 +19,7 @@ type PropsT = {
     width: number;
   };
   containerClass: string;
-  filter?: (item: DropdownOptionT<React.ReactNode> | string) => boolean;
+  filter?: (item: OptionT<React.ReactNode> | string) => boolean;
   optionClass: string;
   options: OptionsT<React.ReactNode>;
   onCancel: () => void;

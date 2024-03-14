@@ -1,0 +1,39 @@
+*,
+.context,
+.ad.hoc {
+  &.container {
+    align-items: center;
+    display: flex;
+    gap: 0.6em;
+  }
+
+  &.option {
+    border: 1px solid transparent;
+    border-radius: 0.3em;
+    cursor: pointer;
+    outline: none;
+    padding: 0 0.9em;
+
+    &:focus {
+      border-color: blue;
+      box-shadow: 0 0 3px 1px lightblue;
+    }
+  }
+
+  &.selected {
+    border: 1px solid gray;
+    background: white;
+    cursor: default;
+  }
+
+  &.switch {
+    align-items: center;
+    background: whitesmoke;
+    border: 1px solid gray;
+    border-radius: 0.3em;
+    display: flex;
+    gap: 0.3em;
+    padding: 0.3em;
+    user-select: none;
+  }
+}

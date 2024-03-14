@@ -2,7 +2,7 @@
  * Just an aggregation of all exported components into a single module.
  */
 
-export * from 'components/dropdowns';
+export * from 'components/selectors';
 
 export { default as Button } from 'components/Button';
 export { default as Checkbox } from 'components/Checkbox';
