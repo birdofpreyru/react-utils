@@ -1,0 +1,90 @@
+*,
+.context,
+.ad.hoc {
+  // The outermost dropdown container, holding together the label (if any),
+  // and the select element with arrow. Note, that the dropdown option list,
+  // when opened, exists completely outside the dropdown DOM hierarchy, and
+  // is aligned into the correct position by JS.
+  &.container {
+    align-items: center;
+    display: inline-flex;
+    margin: 0.1em;
+    position: relative;
+  }
+
+  // Styling of default label next to the dropdown (has no effect on custom
+  // non-string label node, if provided).
+  &.label {
+    margin: 0 0.6em 0 1.2em;
+  }
+
+  &.dropdown {
+    border: 1px solid gray;
+    border-radius: 0.3em;
+    cursor: pointer;
+    min-width: 200px;
+    outline: none;
+    padding: 0.3em 3.0em 0.3em 0.6em;
+    position: relative;
+    user-select: none;
+
+    &:focus {
+      border-color: blue;
+      box-shadow: 0 0 3px 1px lightblue;
+    }
+  }
+
+  &.option {
+    cursor: pointer;
+    outline: none ;
+    padding: 0 0.6em;
+
+    &:focus {
+      background: royalblue;
+      color: white;
+    }
+
+    &:hover {
+      background: royalblue;
+      color: white;
+    }
+  }
+
+  &.select {
+    background: white;
+    border: 1px solid gray;
+    border-radius: 0 0 0.3em 0.3em;
+    border-top: none;
+    box-shadow: 0 6px 12px 3px lightgray;
+    position: fixed;
+    top: 20px;
+    left: 10px;
+    z-index: 1001;
+  }
+
+  &.arrow {
+    background-image: linear-gradient(to top, lightgray, white 50%, white);
+    border-left: 1px solid gray;
+    border-radius: 0 0.3em 0.3em 0;
+    bottom: 0;
+    padding: 0.3em 0.6em;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &::after {
+      content: '▼';
+    }
+  }
+
+  &.active {
+    .arrow {
+      border-radius: 0 0.3em 0 0;
+    }
+
+    .dropdown {
+      border-color: blue;
+      border-radius: 0.3em 0.3em 0 0;
+    }
+  }
+}

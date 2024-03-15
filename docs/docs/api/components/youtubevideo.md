@@ -26,12 +26,10 @@ import { YouTubeVideo } from '@dr.pogodin/react-utils';
 ### YouTubeVideoTheme
 See [React Themes] docs to learn how the visual component theming works.
 The valid theme keys for [YouTubeVideo] component are:
-- `container` - The root component element, which is an instance of
-  [ScalableRect].
+- `container` - The root component element.
 - `video` - The YouTube iframe player element.
 
 [React Themes]: https://dr.pogodin.studio/docs/react-themes
-[ScalableRect]: /docs/api/components/scalablerect
 [YouTube]: https://www.youtube.com
 [YouTubeVideo]: /docs/api/components/youtubevideo
 [YouTubeVideoTheme]: #youtubevideotheme

@@ -83,7 +83,7 @@ configurations, and on top of that it:
   plugin to convert GIF, JPEG, JPG, and PNG imports into emitted asset paths,
   like `/images/[FILE_HASH].[FILE_EXTENSION]`.
 
-  The `baseAssetsOutputPath` <a id="server-side-base-assets-output-path"></a>
+  The `baseAssetsOutputPath` <Link id="server-side-base-assets-output-path" />
   preset option allows to add custom prefix to these
   paths. You want it to match the `publicPath` value provided to the Webpack
   config (_e.g_ see [`publicPath` option of the base Webpack config for apps](/docs/api/configs/webpack#app-base-public-path)).

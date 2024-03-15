@@ -75,6 +75,11 @@ const cmdLineArgs = program.opts();
 
 const { buildType } = cmdLineArgs;
 
+if (program.args.length) {
+  const details = program.args.map((x) => `\t${x}`).join('\n');
+  program.error(`Unrecognized arguments:\n${details}`);
+}
+
 /* Validates the build type argument,  */
 if (!VALID_BUILD_TYPES.includes(buildType)) {
   throw new Error('Invalid build type');

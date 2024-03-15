@@ -17,7 +17,7 @@ See [the source code below][Examples]
 ## Properties
 
 - `checked` - **boolean** - Checkbox value.
-- `label` - **string** - Checkbox label.
+- `label` &mdash; **React.ReactNode** &mdash; Checkbox label.
 - `onChange` - **function** - State change handler.
 - `theme` - [CheckboxTheme] - _Ad hoc_ [React Themes] theme.
 - Accepts other [props of themed components](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties).
@@ -27,7 +27,7 @@ See [the source code below][Examples]
 Valid theme keys are:
 - `checkbox` - Applied to the underlying checkbox `<input>` element.
 - `container` - Applied to the root checkbox element.
-- `label` - Applied the checkbox label element.
+- `label` &mdash; Applied to the checkbox label element.
 
 See [React Themes] documentation for details on visual component theming.
 

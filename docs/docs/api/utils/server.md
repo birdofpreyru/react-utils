@@ -164,7 +164,7 @@ dynamically for each request.
 [helmet]: https://github.com/helmetjs/helmet
 [http-status-codes]: https://www.npmjs.com/package/http-status-codes
 [Joi]: https://joi.dev/api/?v=17.4.2
-[Script]: #beforerender-script
+[Script]: /docs/api/functions/server#beforerender-script
 [server]: /docs/api/utils/server
 [SCRIPT_LOCATIONS]: #script_locations
 [server()]: /docs/api/functions/server

@@ -12,6 +12,7 @@ const validThemeKeys = [
 ] as const;
 
 type Props = {
+  disabled?: boolean;
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   onKeyDown?: React.KeyboardEventHandler<HTMLTextAreaElement>;
   placeholder?: string;
@@ -20,6 +21,7 @@ type Props = {
 };
 
 const TextArea: React.FunctionComponent<Props> = ({
+  disabled,
   onChange,
   onKeyDown,
   placeholder,
@@ -66,6 +68,7 @@ const TextArea: React.FunctionComponent<Props> = ({
         value={localValue}
       />
       <textarea
+        disabled={disabled}
         // When value is "undefined" the text area is not-managed, and we should
         // manage it internally for the measurement / resizing functionality
         // to work.
@@ -90,6 +93,7 @@ const ThemedTextArea = themed(
 );
 
 TextArea.propTypes = {
+  disabled: PT.bool,
   onChange: PT.func,
   onKeyDown: PT.func,
   placeholder: PT.string,
@@ -98,6 +102,7 @@ TextArea.propTypes = {
 };
 
 TextArea.defaultProps = {
+  disabled: false,
   onChange: undefined,
   onKeyDown: undefined,
   placeholder: '',

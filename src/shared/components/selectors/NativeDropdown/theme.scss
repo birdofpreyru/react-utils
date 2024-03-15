@@ -17,6 +17,10 @@
     position: absolute;
     right: 0;
     top: 0;
+
+    &::after {
+      content: '▼';
+    }
   }
 
   &.container {
@@ -26,6 +30,7 @@
     position: relative;
   }
 
+  .active + &.arrow,
   :active + &.arrow {
     background-image: linear-gradient(to bottom, lightgray, white 50%, white);
     border-bottom-right-radius: 0;

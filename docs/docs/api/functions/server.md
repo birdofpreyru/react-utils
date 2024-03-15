@@ -55,10 +55,13 @@ server(webpackConfig);
     after [ExpressJS] server creation, before any of its configuration
     is peformed, and it can be used to perform some custom server configuration
     at that point.
-  - [beforeRender][beforeRender()] - **callback** triggered in the beginning of
+
+  - <Link id="arguments-beforerender" />
+    [beforeRender][beforeRender()] - **callback** triggered in the beginning of
     server-side rendering for each incoming request just before the HTML markup
     is generated. It allows to load and provide data necessary for SSR, and also
     to inject additional config and scripts into the rendered HTML code.
+
   - `buildInfo` - **object** - Optional. The "[build info]" object to use.
     Without this option provided it will be loaded from the `.build-info` file
     in the "context" folder of the Webpack build being served.

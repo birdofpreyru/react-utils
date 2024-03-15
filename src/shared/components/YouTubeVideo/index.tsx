@@ -3,7 +3,6 @@ import qs from 'qs';
 
 import themed, { type Theme } from '@dr.pogodin/react-themes';
 
-import ScalableRect from 'components/ScalableRect';
 import Throbber from 'components/Throbber';
 
 import baseTheme from './base.scss';
@@ -57,7 +56,7 @@ const YouTubeVideo: React.FunctionComponent<PropsT> = ({
   // More query parameters can be exposed via the component props.
 
   return (
-    <ScalableRect className={theme.container} ratio="16:9">
+    <div className={theme.container}>
       <Throbber theme={throbberTheme} />
       <iframe
         allow="autoplay"
@@ -66,7 +65,7 @@ const YouTubeVideo: React.FunctionComponent<PropsT> = ({
         src={url}
         title={title}
       />
-    </ScalableRect>
+    </div>
   );
 };
 

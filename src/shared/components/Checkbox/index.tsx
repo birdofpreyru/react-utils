@@ -8,7 +8,7 @@ const validThemeKeys = ['checkbox', 'container', 'label'] as const;
 
 type PropT = {
   checked?: boolean;
-  label?: string;
+  label?: React.ReactNode;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   theme: Theme<typeof validThemeKeys>;
 };
@@ -20,7 +20,7 @@ const Checkbox: React.FunctionComponent<PropT> = ({
   theme,
 }) => (
   <div className={theme.container}>
-    { label === undefined ? null : <p className={theme.label}>{label}</p> }
+    { label === undefined ? null : <div className={theme.label}>{label}</div> }
     <input
       checked={checked}
       className={theme.checkbox}
@@ -56,7 +56,7 @@ const ThemedCheckbox = themed(
  */
 Checkbox.propTypes = {
   checked: PT.bool,
-  label: PT.string,
+  label: PT.node,
   onChange: PT.func,
   theme: ThemedCheckbox.themeType.isRequired,
 };

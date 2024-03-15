@@ -12,6 +12,7 @@ import getInj from './getInj';
 
 type OptionsT = {
   dontHydrate?: boolean;
+  initialState?: any;
 };
 
 /**
@@ -26,7 +27,7 @@ export default function Launch(
   const container = document.getElementById('react-view');
   if (!container) throw Error('Failed to find container for React app');
   const scene = (
-    <GlobalStateProvider initialState={getInj().ISTATE}>
+    <GlobalStateProvider initialState={getInj().ISTATE || options.initialState}>
       <BrowserRouter future={{ v7_relativeSplatPath: true }}>
         <Application />
       </BrowserRouter>

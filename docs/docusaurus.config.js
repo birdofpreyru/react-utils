@@ -20,6 +20,7 @@ const config = {
   tagline: 'ReactJS development kit.',
   url: 'https://dr.pogodin.studio',
   baseUrl: '/docs/react-utils/',
+  onBrokenAnchors: 'throw',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',

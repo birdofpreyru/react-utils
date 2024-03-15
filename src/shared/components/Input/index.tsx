@@ -12,7 +12,7 @@ const validThemeKeys = [
 ] as const;
 
 type PropsT = React.InputHTMLAttributes<HTMLInputElement> & {
-  label?: string;
+  label?: React.ReactNode;
   theme: Theme<typeof validThemeKeys>;
 };
 
@@ -34,7 +34,7 @@ const Input = forwardRef<HTMLInputElement, PropsT>((
   ref,
 ) => (
   <span className={theme.container}>
-    { label === undefined ? null : <p className={theme.label}>{label}</p> }
+    { label === undefined ? null : <div className={theme.label}>{label}</div> }
     <input
       className={theme.input}
       ref={ref}
@@ -46,7 +46,7 @@ const Input = forwardRef<HTMLInputElement, PropsT>((
 const ThemedInput = themed(Input, 'Input', validThemeKeys, defaultTheme);
 
 Input.propTypes = {
-  label: PT.string,
+  label: PT.node,
   theme: ThemedInput.themeType.isRequired,
 };
 
