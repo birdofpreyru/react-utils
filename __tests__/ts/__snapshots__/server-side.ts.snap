@@ -421,7 +421,7 @@ wrap {
     "UseProxy": 305,
     "VariantAlsoNegotiates": 506,
   },
-  "VERSION": "1.6.7",
+  "VERSION": "1.6.8",
   "_request": [Function],
   "all": [Function],
   "constructor": [Function],
