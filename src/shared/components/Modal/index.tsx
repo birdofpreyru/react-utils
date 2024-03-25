@@ -20,6 +20,7 @@ import S from './styles.scss';
 const validThemeKeys = ['container', 'overlay'] as const;
 
 type PropsT = {
+  cancelOnScrolling?: boolean;
   children?: ReactNode;
   containerStyle?: React.CSSProperties;
   dontDisableScrolling?: boolean;
@@ -39,6 +40,7 @@ type PropsT = {
  * @param {ModalTheme} [props.theme] _Ad hoc_ theme.
  */
 const BaseModal: React.FunctionComponent<PropsT> = ({
+  cancelOnScrolling,
   children,
   containerStyle,
   dontDisableScrolling,
@@ -57,6 +59,18 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
       document.body.removeChild(p);
     };
   }, []);
+
+  // Sets up modal cancellation of scrolling, if opted-in.
+  useEffect(() => {
+    if (cancelOnScrolling && onCancel) {
+      window.addEventListener('scroll', onCancel);
+    }
+    return () => {
+      if (cancelOnScrolling && onCancel) {
+        window.removeEventListener('scroll', onCancel);
+      }
+    };
+  }, [cancelOnScrolling, onCancel]);
 
   // Disables window scrolling, if it is not opted-out.
   useEffect(() => {
@@ -139,6 +153,7 @@ const ThemedModal = themed(
 );
 
 BaseModal.propTypes = {
+  cancelOnScrolling: PT.bool,
   children: PT.node,
   containerStyle: PT.shape({}),
   dontDisableScrolling: PT.bool,
@@ -147,6 +162,7 @@ BaseModal.propTypes = {
 };
 
 BaseModal.defaultProps = {
+  cancelOnScrolling: false,
   children: null,
   containerStyle: undefined,
   dontDisableScrolling: false,

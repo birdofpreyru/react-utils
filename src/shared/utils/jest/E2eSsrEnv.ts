@@ -87,7 +87,11 @@ export default class E2eSsrEnv extends JsdomEnv {
     this.loadWebpackConfig();
 
     const compiler = webpack(this.global.webpackConfig as webpack.Configuration);
-    compiler.outputFileSystem = this.global.webpackOutputFs;
+
+    // TODO: The "as typeof compiler.outputFileSystem" piece below is a workaround
+    // for the Webpack regression: https://github.com/webpack/webpack/issues/18242
+    compiler.outputFileSystem = this.global.webpackOutputFs as typeof compiler.outputFileSystem;
+
     return new Promise<void>((done, fail) => {
       compiler.run((err, stats) => {
         if (err) fail(err);

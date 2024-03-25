@@ -6,17 +6,33 @@ The [Modal] component implements a simple modal window, visually themed using
 [React Themes] library. The base non-themed version of the component is also
 exposed as the **BaseModal** component.
 
+import CodeBlock from '@theme/CodeBlock';
 import ModalExample from '../../../src/components/ModalExample';
+import exampleCode from '!!raw-loader!../../../src/components/ModalExample';
 
 :::note Demo
 <ModalExample />
+:::
 
-See [the source code below][Example].
+<details>
+  <summary>Demo Source Code</summary>
+  <CodeBlock className="language-tsx">{exampleCode}</CodeBlock>
+</details>
+
+:::info
+By default, an open modal adds a CSS class with `overflow: hidden` rule
+to the document `<body>`, which disables page scrolling (and hides scrollbars)
+when a modal is open. This can be opted out by `dontDisableScrolling` prop;
+also `cancelOnScrolling` allows to bind `onCancel` callback (if any)
+to the window scrolling events when the modal is displayed,
 :::
 
 ## Properties
 
 **Optional:**
+- `cancelOnScrolling` &mdash; **boolean** &mdash; Opts-in to watch scrolling
+  events on the browser window, and trigger `onCancel` callback (if provided)
+  when the scrolling is detected.
 - `children` &mdash; **React.ReactNode** &mdash; Modal content.
 - `containerStyle` &mdash; **React.CSSProperties** &mdash; Inline style object
   to pass to the modal container.
@@ -35,14 +51,6 @@ The valid theme keys for [Modal] component are:
 - `overlay` - The semi-transparent overlay that shades the background under
   the open modal, and handles clicks outside the modal when that is open.
 
-## Example
-
-import CodeBlock from '@theme/CodeBlock';
-import example from '!!raw-loader!../../../src/components/ModalExample';
-
-<CodeBlock className="language-jsx">{example}</CodeBlock>
-
-[Example]: #example
 [Modal]: /docs/api/components/modal
 [ModalTheme]: #modaltheme
 [React Themes]: https://dr.pogodin.studio/docs/react-themes
