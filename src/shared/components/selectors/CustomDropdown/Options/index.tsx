@@ -1,5 +1,4 @@
 import PT from 'prop-types';
-import { useEffect } from 'react';
 
 import { BaseModal } from 'components/Modal';
 
@@ -35,21 +34,6 @@ const Options: React.FunctionComponent<PropsT> = ({
   optionClass,
   options,
 }) => {
-  // Closes the dropdown (cancels the selection) on any page scrolling attempt.
-  // This is the same native <select> elements do on scrolling, and at least for
-  // now we have no reason to deal with complications needed to support open
-  // dropdowns during the scrolling (that would need to re-position it in
-  // response to the position changes of the root dropdown element).
-  useEffect(() => {
-    const listener = () => {
-      onCancel();
-    };
-    window.addEventListener('scroll', listener);
-    return () => {
-      window.removeEventListener('scroll', listener);
-    };
-  }, [onCancel]);
-
   const optionNodes: React.ReactNode[] = [];
   for (let i = 0; i < options.length; ++i) {
     const option = options[i];
@@ -76,6 +60,12 @@ const Options: React.FunctionComponent<PropsT> = ({
 
   return (
     <BaseModal
+      // Closes the dropdown (cancels the selection) on any page scrolling attempt.
+      // This is the same native <select> elements do on scrolling, and at least for
+      // now we have no reason to deal with complications needed to support open
+      // dropdowns during the scrolling (that would need to re-position it in
+      // response to the position changes of the root dropdown element).
+      cancelOnScrolling
       containerStyle={{
         left: anchorRect.left,
         top: anchorRect.bottom,
