@@ -64,10 +64,12 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
   useEffect(() => {
     if (cancelOnScrolling && onCancel) {
       window.addEventListener('scroll', onCancel);
+      window.addEventListener('wheel', onCancel);
     }
     return () => {
       if (cancelOnScrolling && onCancel) {
         window.removeEventListener('scroll', onCancel);
+        window.removeEventListener('wheel', onCancel);
       }
     };
   }, [cancelOnScrolling, onCancel]);

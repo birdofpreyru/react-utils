@@ -1,3 +1,5 @@
+$border: 1px solid gray;
+
 *,
 .context,
 .ad.hoc {
@@ -19,7 +21,7 @@
   }
 
   &.dropdown {
-    border: 1px solid gray;
+    border: $border;
     border-radius: 0.3em;
     cursor: pointer;
     min-width: 200px;
@@ -52,19 +54,17 @@
 
   &.select {
     background: white;
-    border: 1px solid gray;
+    border: $border;
     border-radius: 0 0 0.3em 0.3em;
     border-top: none;
     box-shadow: 0 6px 12px 3px lightgray;
     position: fixed;
-    top: 20px;
-    left: 10px;
     z-index: 1001;
   }
 
   &.arrow {
     background-image: linear-gradient(to top, lightgray, white 50%, white);
-    border-left: 1px solid gray;
+    border-left: $border;
     border-radius: 0 0.3em 0.3em 0;
     bottom: 0;
     padding: 0.3em 0.6em;
@@ -85,6 +85,34 @@
     .dropdown {
       border-color: blue;
       border-radius: 0.3em 0.3em 0 0;
+    }
+  }
+
+  &.upward {
+    &.active {
+      // NOTE: Here StyleLint complains about order & specifity of selectors in
+      // the compiled CSS, but it should have no effect on the actual styling.
+      // stylelint-disable no-descending-specificity
+      .arrow {
+        border-radius: 0 0 0.3em;
+      }
+
+      .dropdown {
+        border-radius: 0 0 0.3em 0.3em;
+      }
+      // stylelint-enable no-descending-specificity
+    }
+
+    &.select {
+      border-bottom: none;
+      border-top: $border;
+      border-radius: 0.3em 0.3em 0 0;
+
+      // NOTE: Here a normal (downward) shadow would weirdly cast over
+      // the dropdown element, and other ways to cast the shadow result in
+      // "upward" shadow, which is also weird. Thus, better no shadow at all
+      // for the upward-opened dropdown.
+      box-shadow: none;
     }
   }
 }

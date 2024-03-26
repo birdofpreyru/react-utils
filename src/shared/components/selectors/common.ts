@@ -13,6 +13,10 @@ export const validThemeKeys = [
   'label',
   'option',
   'select',
+
+  // TODO: This is only valid for <CustomDropdown>, thus we need to re-factor it
+  // into a separate theme spec for that component.
+  'upward',
 ] as const;
 
 export type OptionT<NameT> = {
