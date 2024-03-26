@@ -1,4 +1,5 @@
 import PT from 'prop-types';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import { BaseModal } from 'components/Modal';
 
@@ -11,13 +12,23 @@ import {
   optionValueName,
 } from '../../common';
 
+export type ContainerPosT = {
+  left: number;
+  top: number;
+  width: number;
+};
+
+export function areEqual(a?: ContainerPosT, b?: ContainerPosT): boolean {
+  return a?.left === b?.left && a?.top === b?.top && a?.width === b?.width;
+}
+
+export type RefT = {
+  measure: () => DOMRect | undefined;
+};
+
 type PropsT = {
-  anchorRect: {
-    bottom: number;
-    left: number;
-    width: number;
-  };
   containerClass: string;
+  containerStyle?: ContainerPosT;
   filter?: (item: OptionT<React.ReactNode> | string) => boolean;
   optionClass: string;
   options: OptionsT<React.ReactNode>;
@@ -25,15 +36,21 @@ type PropsT = {
   onChange: (value: string) => void;
 };
 
-const Options: React.FunctionComponent<PropsT> = ({
-  anchorRect,
+const Options = forwardRef<RefT, PropsT>(({
   containerClass,
+  containerStyle,
   filter,
   onCancel,
   onChange,
   optionClass,
   options,
-}) => {
+}, ref) => {
+  const opsRef = useRef<HTMLDivElement>(null);
+
+  useImperativeHandle(ref, () => ({
+    measure: () => opsRef.current?.getBoundingClientRect(),
+  }), []);
+
   const optionNodes: React.ReactNode[] = [];
   for (let i = 0; i < options.length; ++i) {
     const option = options[i];
@@ -66,11 +83,7 @@ const Options: React.FunctionComponent<PropsT> = ({
       // dropdowns during the scrolling (that would need to re-position it in
       // response to the position changes of the root dropdown element).
       cancelOnScrolling
-      containerStyle={{
-        left: anchorRect.left,
-        top: anchorRect.bottom,
-        width: anchorRect.width,
-      }}
+      containerStyle={containerStyle}
       dontDisableScrolling
       onCancel={onCancel}
       theme={{
@@ -81,18 +94,20 @@ const Options: React.FunctionComponent<PropsT> = ({
         overlay: S.overlay,
       }}
     >
-      {optionNodes}
+      <div ref={opsRef}>{optionNodes}</div>
     </BaseModal>
   );
-};
+});
 
 Options.propTypes = {
-  anchorRect: PT.shape({
-    bottom: PT.number.isRequired,
-    left: PT.number.isRequired,
-    width: PT.number.isRequired,
-  }).isRequired,
   containerClass: PT.string.isRequired,
+
+  containerStyle: PT.shape({
+    left: PT.number.isRequired,
+    top: PT.number.isRequired,
+    width: PT.number.isRequired,
+  }),
+
   filter: PT.func,
   onCancel: PT.func.isRequired,
   onChange: PT.func.isRequired,
@@ -101,6 +116,7 @@ Options.propTypes = {
 };
 
 Options.defaultProps = {
+  containerStyle: undefined,
   filter: undefined,
 };
 

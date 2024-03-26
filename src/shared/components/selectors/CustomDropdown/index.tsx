@@ -1,9 +1,9 @@
 import PT from 'prop-types';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import themed from '@dr.pogodin/react-themes';
 
-import Options from './Options';
+import Options, { type ContainerPosT, type RefT, areEqual } from './Options';
 
 import defaultTheme from './theme.scss';
 
@@ -26,14 +26,66 @@ PropsT<React.ReactNode, (value: string) => void>
 }) => {
   if (!options) throw Error('Internal error');
 
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(false);
 
-  // If "null" the dropdown is closed, otherwise it is displayed
-  // at the specified coordinates.
-  const [anchor, setAnchor] = useState<DOMRect | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const opsRef = useRef<RefT>(null);
+
+  const [opsPos, setOpsPos] = useState<ContainerPosT>();
+  const [upward, setUpward] = useState(false);
+
+  useEffect(() => {
+    if (!active) return undefined;
+
+    let id: number;
+    const cb = () => {
+      const anchor = dropdownRef.current?.getBoundingClientRect();
+      const opsRect = opsRef.current?.measure();
+      if (anchor && opsRect) {
+        const fitsDown = anchor.bottom + opsRect.height
+          < (window.visualViewport?.height ?? 0);
+        const fitsUp = anchor.top - opsRect.height > 0;
+
+        const up = !fitsDown && fitsUp;
+        setUpward(up);
+
+        const pos = up ? {
+          top: anchor.top - opsRect.height - 1,
+          left: anchor.left,
+          width: anchor.width,
+        } : {
+          left: anchor.left,
+          top: anchor.bottom,
+          width: anchor.width,
+        };
+
+        setOpsPos((now) => (areEqual(now, pos) ? now : pos));
+      }
+      id = requestAnimationFrame(cb);
+    };
+    requestAnimationFrame(cb);
+
+    return () => {
+      cancelAnimationFrame(id);
+    };
+  }, [active]);
 
   const openList = () => {
-    setAnchor(dropdownRef.current!.getBoundingClientRect());
+    const view = window.visualViewport;
+    const rect = dropdownRef.current!.getBoundingClientRect();
+    setActive(true);
+
+    // NOTE: This first opens the dropdown off-screen, where it is measured
+    // by an effect declared above, and then positioned below, or above
+    // the original dropdown element, depending where it fits best
+    // (if we first open it downward, it would flick if we immediately
+    // move it above, at least with the current position update via local
+    // react state, and not imperatively).
+    setOpsPos({
+      left: view?.width || 0,
+      top: view?.height || 0,
+      width: rect.width,
+    });
   };
 
   let selected: React.ReactNode = <>&zwnj;</>;
@@ -49,7 +101,13 @@ PropsT<React.ReactNode, (value: string) => void>
   }
 
   let containerClassName = theme.container;
-  if (anchor) containerClassName += ` ${theme.active}`;
+  if (active) containerClassName += ` ${theme.active}`;
+
+  let opsContainerClass = theme.select || '';
+  if (upward) {
+    containerClassName += ` ${theme.upward}`;
+    opsContainerClass += ` ${theme.upward}`;
+  }
 
   return (
     <div className={containerClassName}>
@@ -70,17 +128,20 @@ PropsT<React.ReactNode, (value: string) => void>
         <div className={theme.arrow} />
       </div>
       {
-        anchor ? (
+        active ? (
           <Options
-            anchorRect={anchor}
-            containerClass={theme.select || ''}
-            onCancel={() => setAnchor(null)}
+            containerClass={opsContainerClass}
+            containerStyle={opsPos}
+            onCancel={() => {
+              setActive(false);
+            }}
             onChange={(newValue) => {
-              setAnchor(null);
+              setActive(false);
               if (onChange) onChange(newValue);
             }}
             optionClass={theme.option || ''}
             options={options}
+            ref={opsRef}
           />
         ) : null
       }
