@@ -48,7 +48,19 @@ const Options = forwardRef<RefT, PropsT>(({
   const opsRef = useRef<HTMLDivElement>(null);
 
   useImperativeHandle(ref, () => ({
-    measure: () => opsRef.current?.getBoundingClientRect(),
+    measure: () => {
+      const e = opsRef.current?.parentElement;
+      if (!e) return undefined;
+
+      const rect = opsRef.current?.getBoundingClientRect();
+      const style = window.getComputedStyle(e);
+      const mBottom = parseFloat(style.marginBottom);
+      const mTop = parseFloat(style.marginTop);
+
+      rect.height += mBottom + mTop;
+
+      return rect;
+    },
   }), []);
 
   const optionNodes: React.ReactNode[] = [];
