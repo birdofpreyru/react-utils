@@ -166,6 +166,8 @@ exports[`Export at client side 1`] = `
     "isProdBuild": [Function],
   },
   "newAsyncDataEnvelope": [Function],
+  "optionValidator": [Function],
+  "optionsValidator": [Function],
   "server": null,
   "splitComponent": [Function],
   "themed": [Function],
