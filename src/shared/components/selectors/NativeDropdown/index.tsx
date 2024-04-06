@@ -8,8 +8,8 @@ import defaultTheme from './theme.scss';
 
 import {
   type PropsT,
-  optionsValidator,
   optionValueName,
+  stringOptionsValidator,
   validThemeKeys,
 } from '../common';
 
@@ -102,7 +102,7 @@ Dropdown.propTypes = {
   filter: PT.func,
   label: PT.node,
   onChange: PT.func,
-  options: optionsValidator,
+  options: stringOptionsValidator,
   theme: ThemedDropdown.themeType.isRequired,
   value: PT.string,
 };

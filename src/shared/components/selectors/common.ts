@@ -38,7 +38,19 @@ export type PropsT<
   value?: string;
 };
 
-export const optionValidator = PT.oneOfType([
+export const optionValidator:
+PT.Requireable<OptionT<React.ReactNode> | string> = PT.oneOfType([
+  PT.shape({
+    name: PT.node,
+    value: PT.string.isRequired,
+  }).isRequired,
+  PT.string.isRequired,
+]);
+
+export const optionsValidator = PT.arrayOf(optionValidator.isRequired);
+
+export const stringOptionValidator:
+PT.Requireable<OptionT<string> | string> = PT.oneOfType([
   PT.shape({
     name: PT.string,
     value: PT.string.isRequired,
@@ -46,7 +58,7 @@ export const optionValidator = PT.oneOfType([
   PT.string.isRequired,
 ]);
 
-export const optionsValidator = PT.arrayOf(optionValidator.isRequired);
+export const stringOptionsValidator = PT.arrayOf(stringOptionValidator.isRequired);
 
 /** Returns option value and name as a tuple. */
 export function optionValueName<NameT>(

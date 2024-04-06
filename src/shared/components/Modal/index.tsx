@@ -109,9 +109,17 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
         <div
           aria-label="Cancel"
           className={theme.overlay}
-          onClick={() => onCancel && onCancel()}
+          onClick={(e) => {
+            if (onCancel) {
+              onCancel();
+              e.stopPropagation();
+            }
+          }}
           onKeyDown={(e) => {
-            if (e.key === 'Escape' && onCancel) onCancel();
+            if (e.key === 'Escape' && onCancel) {
+              onCancel();
+              e.stopPropagation();
+            }
           }}
           ref={(node) => {
             if (node && node !== overlayRef.current) {
@@ -122,9 +130,23 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
           role="button"
           tabIndex={0}
         />
+        {
+          // NOTE: These rules are disabled because our intention is to keep
+          // the element non-interactive (thus not on the keyboard focus chain),
+          // and it has `onClick` handler merely to stop propagation of click
+          // events to its parent container. This is needed because, for example
+          // when the modal is wrapped into an interactive element we don't want
+          // any clicks inside the modal to bubble-up to that parent element
+          // (because visually and logically the modal dialog does not belong
+          // to its parent container, where it technically belongs from
+          // the HTML mark-up perpective).
+          /* eslint-disable jsx-a11y/click-events-have-key-events,
+             jsx-a11y/no-noninteractive-element-interactions */
+        }
         <div
           aria-modal="true"
           className={theme.container}
+          onClick={(e) => e.stopPropagation()}
           onWheel={(event) => event.stopPropagation()}
           ref={containerRef}
           role="dialog"
@@ -132,6 +154,8 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
         >
           {children}
         </div>
+        {/* eslint-enable jsx-a11y/click-events-have-key-events,
+            jsx-a11y/no-noninteractive-element-interactions */}
         <div
           onFocus={() => {
             overlayRef.current?.focus();
