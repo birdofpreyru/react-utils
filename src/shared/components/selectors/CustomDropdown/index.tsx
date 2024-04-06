@@ -70,7 +70,9 @@ PropsT<React.ReactNode, (value: string) => void>
     };
   }, [active]);
 
-  const openList = () => {
+  const openList = (
+    e: React.KeyboardEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>,
+  ) => {
     const view = window.visualViewport;
     const rect = dropdownRef.current!.getBoundingClientRect();
     setActive(true);
@@ -86,6 +88,8 @@ PropsT<React.ReactNode, (value: string) => void>
       top: view?.height || 0,
       width: rect.width,
     });
+
+    e.stopPropagation();
   };
 
   let selected: React.ReactNode = <>&zwnj;</>;
@@ -118,7 +122,7 @@ PropsT<React.ReactNode, (value: string) => void>
         className={theme.dropdown}
         onClick={openList}
         onKeyDown={(e) => {
-          if (e.key === 'Enter') openList();
+          if (e.key === 'Enter') openList(e);
         }}
         ref={dropdownRef}
         role="listbox"

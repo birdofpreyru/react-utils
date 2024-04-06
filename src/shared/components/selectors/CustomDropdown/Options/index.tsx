@@ -71,10 +71,14 @@ const Options = forwardRef<RefT, PropsT>(({
       optionNodes.push(
         <div
           className={optionClass}
-          onClick={() => onChange(iValue)}
+          onClick={(e) => {
+            onChange(iValue);
+            e.stopPropagation();
+          }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               onChange(iValue);
+              e.stopPropagation();
             }
           }}
           key={iValue}
