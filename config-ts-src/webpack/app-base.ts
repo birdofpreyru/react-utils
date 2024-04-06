@@ -345,6 +345,16 @@ export default function configFactory(ops: OptionsT): Configuration {
               modules: {
                 getLocalIdent,
                 localIdentName: o.cssLocalIdent,
+
+                // TODO: This flag defaults `true` for ES module builds since
+                // css-loader@7.0.0:
+                // https://github.com/webpack-contrib/css-loader/releases/tag/v7.0.0
+                // For now we'll keep it `false` to avoid a breaking change for
+                // host projects, and also because babel-plugin-react-css-modules
+                // we rely upon is pending an upgrade to support named style
+                // imports:
+                // https://github.com/birdofpreyru/babel-plugin-react-css-modules/issues/44
+                namedExport: false,
               },
             },
           }, {
