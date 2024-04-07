@@ -25,6 +25,7 @@ const Checkbox: React.FunctionComponent<PropT> = ({
       checked={checked}
       className={theme.checkbox}
       onChange={onChange}
+      onClick={(e) => e.stopPropagation()}
       type="checkbox"
     />
   </div>
