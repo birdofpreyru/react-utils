@@ -9,8 +9,8 @@ const validThemeKeys = [
   'container',
   'label',
   'option',
+  'options',
   'selected',
-  'switch',
 ] as const;
 
 type PropsT = {
@@ -62,7 +62,7 @@ const BaseSwitch: React.FunctionComponent<PropsT> = ({
   return (
     <div className={theme.container}>
       {label ? <div className={theme.label}>{label}</div> : null}
-      <div className={theme.switch}>
+      <div className={theme.options}>
         {optionNodes}
       </div>
     </div>

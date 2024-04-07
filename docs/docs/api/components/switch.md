@@ -43,8 +43,8 @@ for [Switch] are:
   both the switch, and its optional label.
 - `label` &mdash; Applied to the label.
 - `option` &mdash; Applied to each option.
+- `options` &mdash; Applied to the switch component (container of all shown options).
 - `selected` &mdash; Applied to the currently selected option.
-- `switch` &mdash; Applied to the switch component (container of all shown options).
 
 [OptionT]: #optiont
 [props of themed components]: https://dr.pogodin.studio/docs/react-themes/docs/api/components#themedcomponent
