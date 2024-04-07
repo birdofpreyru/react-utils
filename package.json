@@ -1,5 +1,5 @@
 {
-  "version": "1.33.1",
+  "version": "1.34.0",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.24.4",
-    "@dr.pogodin/babel-plugin-react-css-modules": "^6.13.0",
+    "@dr.pogodin/babel-plugin-react-css-modules": "^6.13.1",
     "@dr.pogodin/csurf": "^1.13.0",
     "@dr.pogodin/js-utils": "^0.0.9",
     "@dr.pogodin/react-global-state": "^0.14.0",
@@ -95,7 +95,7 @@
     "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-import-resolver-babel-module": "^5.3.2",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jest": "^28.0.0",
+    "eslint-plugin-jest": "^28.2.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
