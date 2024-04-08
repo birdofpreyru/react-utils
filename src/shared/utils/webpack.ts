@@ -23,8 +23,11 @@ export function requireWeak(
     if (!def) return named;
 
     Object.entries(named).forEach(([key, value]) => {
-      if (def[key]) throw Error('Conflict between default and named exports');
-      def[key] = value;
+      if (def[key]) {
+        if (def[key] !== value) {
+          throw Error('Conflict between default and named exports');
+        }
+      } else def[key] = value;
     });
     return def;
   } catch {

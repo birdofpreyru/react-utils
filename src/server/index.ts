@@ -17,14 +17,16 @@ import 'raf/polyfill';
 
 import { type Configuration } from 'webpack';
 
-import serverFactory, { type OptionsT as ServerOptionsT } from './server';
-import { SCRIPT_LOCATIONS, newDefaultLogger } from './renderer';
-
-export {
+import serverFactory, {
+  type OptionsT as ServerOptionsT,
   getDefaultCspSettings,
 } from './server';
 
-export { errors } from './utils';
+import { SCRIPT_LOCATIONS, newDefaultLogger } from './renderer';
+
+import { errors } from './utils';
+
+export { errors, getDefaultCspSettings };
 
 /**
  * Normalizes a port into a number, string, or false.
@@ -228,3 +230,5 @@ export default async function launchServer(webpackConfig: Configuration, options
 }
 
 launchServer.SCRIPT_LOCATIONS = SCRIPT_LOCATIONS;
+launchServer.getDefaultCspSettings = getDefaultCspSettings;
+launchServer.errors = errors;
