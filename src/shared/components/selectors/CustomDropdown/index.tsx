@@ -9,13 +9,15 @@ import defaultTheme from './theme.scss';
 
 import {
   type PropsT,
+  type ValueT,
   optionValidator,
   optionValueName,
   validThemeKeys,
+  valueValidator,
 } from '../common';
 
 const BaseCustomDropdown: React.FunctionComponent<
-PropsT<React.ReactNode, (value: string) => void>
+PropsT<React.ReactNode, (value: ValueT) => void>
 > = ({
   filter,
   label,
@@ -166,7 +168,7 @@ BaseCustomDropdown.propTypes = {
   onChange: PT.func,
   options: PT.arrayOf(optionValidator.isRequired),
   theme: ThemedCustomDropdown.themeType.isRequired,
-  value: PT.string,
+  value: valueValidator,
 };
 
 BaseCustomDropdown.defaultProps = {

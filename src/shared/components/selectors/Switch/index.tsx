@@ -1,7 +1,13 @@
 import PT from 'prop-types';
 import themed, { type Theme } from '@dr.pogodin/react-themes';
 
-import { type OptionsT, optionsValidator, optionValueName } from '../common';
+import {
+  type OptionsT,
+  type ValueT,
+  optionsValidator,
+  optionValueName,
+  valueValidator,
+} from '../common';
 
 import defaultTheme from './theme.scss';
 
@@ -15,10 +21,10 @@ const validThemeKeys = [
 
 type PropsT = {
   label?: React.ReactNode;
-  onChange?: (value: string) => void;
+  onChange?: (value: ValueT) => void;
   options?: Readonly<OptionsT<React.ReactNode>>;
   theme: Theme<typeof validThemeKeys>;
-  value?: string;
+  value?: ValueT;
 };
 
 const BaseSwitch: React.FunctionComponent<PropsT> = ({
@@ -81,7 +87,7 @@ BaseSwitch.propTypes = {
   onChange: PT.func,
   options: optionsValidator,
   theme: ThemedSwitch.themeType.isRequired,
-  value: PT.string,
+  value: valueValidator,
 };
 
 BaseSwitch.defaultProps = {

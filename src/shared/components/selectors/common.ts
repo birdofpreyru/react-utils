@@ -19,52 +19,66 @@ export const validThemeKeys = [
   'upward',
 ] as const;
 
+export type ValueT = number | string;
+
+export const valueValidator: PT.Requireable<ValueT> = PT.oneOfType([
+  PT.number.isRequired,
+  PT.string.isRequired,
+]);
+
 export type OptionT<NameT> = {
   name?: NameT | null;
-  value: string;
+  value: ValueT;
 };
 
-export type OptionsT<NameT> = Array<OptionT<NameT> | string>;
+export type OptionsT<NameT> = Array<OptionT<NameT> | ValueT>;
 
 export type PropsT<
   NameT,
   OnChangeT = React.ChangeEventHandler<HTMLSelectElement>,
 > = {
-  filter?: (item: OptionT<NameT> | string) => boolean;
+  filter?: (item: OptionT<NameT> | ValueT) => boolean;
   label?: React.ReactNode;
   onChange?: OnChangeT;
   options?: OptionsT<NameT>;
   theme: Theme<typeof validThemeKeys>;
-  value?: string;
+  value?: ValueT;
 };
 
 export const optionValidator:
-PT.Requireable<OptionT<React.ReactNode> | string> = PT.oneOfType([
+PT.Requireable<OptionT<React.ReactNode> | ValueT> = PT.oneOfType([
   PT.shape({
     name: PT.node,
-    value: PT.string.isRequired,
+    value: valueValidator.isRequired,
   }).isRequired,
+  PT.number.isRequired,
   PT.string.isRequired,
 ]);
 
 export const optionsValidator = PT.arrayOf(optionValidator.isRequired);
 
 export const stringOptionValidator:
-PT.Requireable<OptionT<string> | string> = PT.oneOfType([
+PT.Requireable<OptionT<string> | ValueT> = PT.oneOfType([
   PT.shape({
     name: PT.string,
-    value: PT.string.isRequired,
+    value: valueValidator.isRequired,
   }).isRequired,
+  PT.number.isRequired,
   PT.string.isRequired,
 ]);
 
 export const stringOptionsValidator = PT.arrayOf(stringOptionValidator.isRequired);
 
+function isValue<T>(x: OptionT<T> | ValueT): x is ValueT {
+  const type = typeof x;
+  return type === 'number' || type === 'string';
+}
+
 /** Returns option value and name as a tuple. */
 export function optionValueName<NameT>(
-  option: OptionT<NameT> | string,
-): [string, NameT | string] {
-  return typeof option === 'string'
+  option: OptionT<NameT> | ValueT,
+): [ValueT, NameT | ValueT] {
+  return isValue(option)
     ? [option, option]
     : [option.value, option.name ?? option.value];
 }

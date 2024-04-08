@@ -53,16 +53,17 @@ option can be modified via the `hiddenOption` theme key.
   For native [Dropdown] its signature is **React.ChangeEventHandler&lt;HTMLSelectElement&gt;**,
   _i.e._ you want to pass in something like `(e) => setValue(e.target.value)`.
 
-  For [CustomDropdown] its singature is just **(newValue: string) => void**,
+  For [CustomDropdown] its singature is just **(newValue: number | string) => void**,
   _i.e._ you want to pass in something like `(v) => setValue(v)`, or just
   a `setValue` setter directly.
 
-- `options` - **Array&lt;[DropdownOption] | string&gt;** - An array of dropdown
+- `options` &mdash; **Array&lt;[DropdownOption] | number | string&gt;** &mdash;
+  An array of dropdown
   options. It is fine to intermix [DropdownOption] and string items within
   the same option list. For string items the option value and name will be
   the same.
 - `theme` - [DropdownTheme] - _Ad hoc_ theme.
-- `value` - **string** - The currently selected value.
+- `value` &mdash; **number** | **string** &mdash; The currently selected value.
 - Other [props of themed components](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties).
 
 ### DropdownOption
@@ -75,7 +76,7 @@ the following properties:
 
   In both cases if `name` is omitted, the `value` is used as the name instead.
 
-- `value` &mdash; **string** &mdash; Option value.
+- `value` &mdash; **number** | **string** &mdash; Option value.
 
 ### DropdownTheme
 

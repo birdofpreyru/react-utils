@@ -22,19 +22,19 @@ import exampleCode from '!!raw-loader!../../../src/components/SwitchExample';
 ## Properties
 **Optional:**
 - `label` &mdash; **React.ReactNode** &mdash; Switch label.
-- `onChange` &mdash; **(value: string) => void** &mdash; Switch handler.
-- `options` &mdash; **Array&lt;[OptionT]|string&gt;** An array of switch options.
+- `onChange` &mdash; **(value: number | string) => void** &mdash; Switch handler.
+- `options` &mdash; **Array&lt;[OptionT] | number | string&gt;** An array of switch options.
   It is fine to inter-mix [OptionT] and string items within this prop; for string
   options its name and value will be the same.
 - `theme` &mdash; [SwitchThemeT] &mdash; _Ad hoc_ theme.
-- `value` &mdash; **string** &mdash; Selected option.
+- `value` &mdash; **number** | **string** &mdash; Selected option.
 - Other [props of themed components].
 
 ### OptionT
 The type of a single option object within [Switch]. It has the following fields:
 - `name` &mdash; **React.ReactNode | undefined** &mdash; The element to render
   to represent the option. If not given, the `value` will be used instead.
-- `value` &mdash; **string** &mdash; Option value.
+- `value` &mdash; **number** | **string** &mdash; Option value.
 
 ### SwitchThemeT
 See [React Themes] docs for details of component theming. The valid theme keys
@@ -50,3 +50,4 @@ for [Switch] are:
 [props of themed components]: https://dr.pogodin.studio/docs/react-themes/docs/api/components#themedcomponent
 [React Themes]: https://dr.pogodin.studio/docs/react-themes
 [Switch]: #
+[SwitchThemeT]: #switchthemet

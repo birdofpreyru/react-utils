@@ -11,6 +11,7 @@ import {
   optionValueName,
   stringOptionsValidator,
   validThemeKeys,
+  valueValidator,
 } from '../common';
 
 /**
@@ -104,7 +105,7 @@ Dropdown.propTypes = {
   onChange: PT.func,
   options: stringOptionsValidator,
   theme: ThemedDropdown.themeType.isRequired,
-  value: PT.string,
+  value: valueValidator,
 };
 
 Dropdown.defaultProps = {

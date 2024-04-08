@@ -8,6 +8,7 @@ import S from './style.scss';
 import {
   type OptionT,
   type OptionsT,
+  type ValueT,
   optionsValidator,
   optionValueName,
 } from '../../common';
@@ -29,11 +30,11 @@ export type RefT = {
 type PropsT = {
   containerClass: string;
   containerStyle?: ContainerPosT;
-  filter?: (item: OptionT<React.ReactNode> | string) => boolean;
+  filter?: (item: OptionT<React.ReactNode> | ValueT) => boolean;
   optionClass: string;
   options: OptionsT<React.ReactNode>;
   onCancel: () => void;
-  onChange: (value: string) => void;
+  onChange: (value: ValueT) => void;
 };
 
 const Options = forwardRef<RefT, PropsT>(({
