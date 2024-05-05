@@ -31,7 +31,6 @@ exports[`Export at client side 1`] = `
     "render": [Function],
     "themeType": [Function],
   },
-  "JU": null,
   "Link": [Function],
   "MetaTags": [Function],
   "Modal": {

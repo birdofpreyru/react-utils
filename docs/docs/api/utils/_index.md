@@ -1,7 +1,7 @@
 - [api](/docs/api/utils/api) - An alias for [axios] library (HTTP(S) client).
 - [config](/docs/api/utils/config) - Isomorphic app config.
 - [isomorphy](/docs/api/utils/isomorphy) - Helpers for isomorphic code logic.
-- [JU (Jest utils)](/docs/api/utils/jest-utils) - Helpers useful in [Jest] tests.
+- [Jest Utils](/docs/api/utils/jest-utils) &mdash; Helpers useful in [Jest] tests.
 - [PT (prop-types)](/docs/api/utils/prop-types) - An alias for [prop-types] lib
   for runtime ReactJS prop type checks.
 - [React Global State](/docs/api/utils/react-global-state) - Aliases for

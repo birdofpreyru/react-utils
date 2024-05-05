@@ -31,16 +31,6 @@ exports[`Export at server side 1`] = `
     "render": [Function],
     "themeType": [Function],
   },
-  "JU": {
-    "act": [Function],
-    "getGlobal": [Function],
-    "getMockUuid": [Function],
-    "mockClientSide": [Function],
-    "mockTimer": [Function],
-    "mount": [Function],
-    "snapshot": [Function],
-    "unmockClientSide": [Function],
-  },
   "Link": [Function],
   "MetaTags": [Function],
   "Modal": {

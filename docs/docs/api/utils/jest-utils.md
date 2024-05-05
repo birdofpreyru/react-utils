@@ -1,13 +1,34 @@
-# JU (Jest Utils)
-```jsx
-import { JU } from '@dr.pogodin/react-utils';
-```
-The [JU] module (short for **[Jest] utilities**) provides helpers useful in
-[Jest] tests.
+# Jest Utils
+Collection of helpers useful in [Jest] tests.
 
-:::caution Beware
-The [JU] module is exported and functional only within the development, [Jest]
-environment.
+:::caution
+Prior to **v1.35.0** these utilities were exported as `JU` module of the main
+package export, now they are exposed via a dedicated secondary export.
+
+<details>
+For example, to use [snapshot()] helper in a test prior to **v1.35.0** you would
+do (and `JU` would be `null` when imported in non-`development` build, or outside
+the server-side environment):
+```tsx
+import { JU } from '@dr.pogodin/react-utils';
+
+test('Example', () => {
+  JU!.snapshot(<div>Hello World</div>);
+});
+```
+Starting with **v1.35.0** you must do:
+```tsx
+/** @jest-environment jsdom */
+
+import { snapshot } from '@dr.pogodin/react-utils/jest';
+
+test('Example', () => {
+  snapshot(<div>Hello World</div>);
+});
+```
+The change was done to avoid module resolution issues when using JSDom
+environment for Jest tests.
+</details>
 :::
 
 ## E2eSsrEnv
@@ -17,7 +38,7 @@ execution of Webpack-built code with Jest, and thus should be considered as
 a very important part of Jest-testing utilities provided by the library.
 
 ## Methods
-- [act()](#act) - An alias for
+- [act()](#act) &mdash; An alias for
   the [act()](https://reactjs.org/docs/test-utils.html#act) function from
   `react` (moved into `react` package since React v18.3).
 - [getMockUuid()](#getmockuuid) - Generates a mock UUID (formats the given `seed`
@@ -47,36 +68,42 @@ a very important part of Jest-testing utilities provided by the library.
 :::
 
 ### act()
-```jsx
-JU.act(action)
+```tsx
+import { act } from '@dr.pogodin/react-utils/jest';
 ```
 This method is just an alias for
 [act()](https://reactjs.org/docs/test-utils.html#act) function from
-`react` ((moved into `react` since v18.3)).
+`react` (moved into `react` since v18.3).
 
 ### getMockUuid()
-```jsx
-JU.getMockUuid(seed) => string
+```tsx
+import { getMockUuid } from '@dr.pogodin/react-utils/jest';
+
+function getMockUuid(seed = 0): string;
 ```
 Generates a mock UUID by determenistically transforming the given `seed` into
 a UUID-formatted string.
 
 **Arguments**
-- `seed` - **number** - Defaults `0`.
+- `seed` &mdash; **number** &mdash; Optional. Defaults `0`.
 
 **Returns**
 - **string** - Mock UUID.
 
 ### mockClientSide()
-```jsx
-JU.mockClientSide()
+```tsx
+import { mockClientSide } from '@dr.pogodin/react-utils/jest';
+
+function mockClientSide();
 ```
 Tricks **react-utils** library into thinking the test is running within
 the client-side (browser) environment.
 
 ### mockTimer()
-```jsx
-JU.mockTimer(time) => Promise<>
+```tsx
+import { mockTimer } from '@dr.pogodin/react-utils/jest';
+
+async function mockTimer(time: number): Promise<void>;
 ```
 Advances mock timers, and mock date by the specified time step.
 
@@ -90,8 +117,10 @@ Advances mock timers, and mock date by the specified time step.
   time advance have completed.
 
 ### mount()
-```jsx
-JU.mount(scene) => HTMLElement
+```tsx
+import { mount } from '@dr.pogodin/react-utils/jest';
+
+function mount(scene: ReactNode): MountedSceneT;
 ```
 Mounts `scene` to the DOM and returns the root scene element (DOM node) with
 **.destroy()** method attached, which unmounts the scene from DOM.
@@ -127,8 +156,11 @@ or the lower-level [fireEvent] from [@testing-library/dom].
 :::
 
 ### snapshot()
-```jsx
-JU.snapshot(element) => object
+[snapshot()]: #snapshot
+```tsx
+import { mount } from '@dr.pogodin/react-utils/jest';
+
+function snapshot(element: React.ReactElement): Node | null;
 ```
 It does a snapshot test of the given ReactJS component.
 
@@ -138,10 +170,10 @@ It does a snapshot test of the given ReactJS component.
 ```tsx
 /** @jest-environment jsdom */
 
-import { JU } from '@dr.pogodin/react-utils/jest-utils';
+import { snapshot } from '@dr.pogodin/react-utils/jest';
 
 test('A snapshot test', () => {
-  JU.snapshot(<div>Example</div>);
+  snapshot(<div>Example</div>);
 });
 ```
 </details>
@@ -169,8 +201,10 @@ test('A snapshot test', () => {
   rendered DOM node.
 
 ### unmockClientSide()
-```jsx
-JU.unmockClientSide()
+```tsx
+import { unmockClientSide } from '@dr.pogodin/react-utils/jest';
+
+function unmockClientSide();
 ```
 Reverts the effect of previous [mockClientSide()] call.
 

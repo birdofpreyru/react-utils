@@ -1,5 +1,5 @@
 {
-  "version": "1.34.1",
+  "version": "1.35.0",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -154,6 +154,7 @@
       "react-native": "./node-entry.js"
     },
     "./config/*": "./config/*.js",
+    "./jest": "./build/production/shared/utils/jest/index.js",
     "./mixins": "./src/styles/mixins.scss",
     "./dev-styles": {
       "node": "./null.js",

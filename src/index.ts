@@ -38,7 +38,6 @@ export {
   Emitter,
   isomorphy,
   getSsrContext,
-  JU,
   Semaphore,
   splitComponent,
   themed,
