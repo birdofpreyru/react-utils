@@ -1,7 +1,5 @@
 /* global document */
 
-import { noop } from 'lodash';
-
 import {
   type ReactNode,
   useEffect,
@@ -185,14 +183,6 @@ BaseModal.propTypes = {
   dontDisableScrolling: PT.bool,
   onCancel: PT.func,
   theme: ThemedModal.themeType.isRequired,
-};
-
-BaseModal.defaultProps = {
-  cancelOnScrolling: false,
-  children: null,
-  containerStyle: undefined,
-  dontDisableScrolling: false,
-  onCancel: noop,
 };
 
 export default ThemedModal;

@@ -25,6 +25,11 @@ module.exports = {
       ignore: ['styleName'],
     }],
     'react/react-in-jsx-scope': 0,
+
+    // TODO: .defaultProps will be deprecated in React@19.
+    // Remove this rule override once AirBnB ESLint config is updated.
+    // (also remove it from sibling .json configs)
+    'react/require-default-props': 0,
   },
   settings: {
     'import/resolver': {

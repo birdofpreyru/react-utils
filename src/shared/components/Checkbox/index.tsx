@@ -62,10 +62,4 @@ Checkbox.propTypes = {
   theme: ThemedCheckbox.themeType.isRequired,
 };
 
-Checkbox.defaultProps = {
-  checked: undefined,
-  label: undefined,
-  onChange: undefined,
-};
-
 export default ThemedCheckbox;

@@ -13,7 +13,7 @@
  */
 
 import pretty from 'pretty';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 import { getGlobal } from 'utils/jest';
 

@@ -171,12 +171,4 @@ BaseCustomDropdown.propTypes = {
   value: valueValidator,
 };
 
-BaseCustomDropdown.defaultProps = {
-  filter: undefined,
-  label: undefined,
-  onChange: undefined,
-  options: [],
-  value: undefined,
-};
-
 export default ThemedCustomDropdown;

@@ -19,7 +19,7 @@ a very important part of Jest-testing utilities provided by the library.
 ## Methods
 - [act()](#act) - An alias for
   the [act()](https://reactjs.org/docs/test-utils.html#act) function from
-  **react-dom/test-utils**.
+  `react` (moved into `react` package since React v18.3).
 - [getMockUuid()](#getmockuuid) - Generates a mock UUID (formats the given `seed`
   into an UUID-formatted string).
 - [mockClientSide()] - Tricks **react-utils** into thinking the test is running
@@ -28,18 +28,23 @@ a very important part of Jest-testing utilities provided by the library.
   the specified time step.
 - [mount()](#mount) - Mounts `scene` to the DOM, and returns the root scene
   element with **.destroy()** method attached.
-- [render()](#render) - Renders ReactJS component into JSON representation of
-  the component tree.
-- [shallowRender()] - Generates a shallow render of ReactJS component.
-- [shallowSnapshot()](#shallowsnapshot) - It does a shallow snapshot test of
-  the given ReactJS component.
-- [simulate](#simulate) - An alias for
-  [Simulate](https://reactjs.org/docs/test-utils.html#simulate)
-  from `react-dom/test-utils`.
 - [snapshot()](#snapshot) - Does does a snapshot test of the give ReactJS
   component, and also returns JSON representation of is render.
 - [unmockClientSide()](#unmockclientside) - Reverts the effect of previous
   [mockClientSide()] call.
+
+:::caution Deprecated Methods
+- [render()](#render) &mdash; Removed in **v1.34.0**. Migrate to
+  [render()] provided by [@testing-library/react].
+- [shallowRender()] &mdash; Removed in **v1.34.0**. Starting with React v19
+  it is recommended to [avoid shallow rendering] in tests.
+- [shallowSnapshot()](#shallowsnapshot) &mdash; Removed in **v1.34.0**.
+  Starting with React v19 it is recommended to [avoid shallow rendering]
+  in tests.
+- [simulate](#simulate) &mdash; Removed in **v1.34.0**. Use instead
+  [@testing-library/user-event], or the lower-level [fireEvent] from
+  [@testing-library/dom].
+:::
 
 ### act()
 ```jsx
@@ -47,7 +52,7 @@ JU.act(action)
 ```
 This method is just an alias for
 [act()](https://reactjs.org/docs/test-utils.html#act) function from
-`react-dom/test-utils`.
+`react` ((moved into `react` since v18.3)).
 
 ### getMockUuid()
 ```jsx
@@ -99,102 +104,69 @@ Mounts `scene` to the DOM and returns the root scene element (DOM node) with
   **.destroy()** method attached.
 
 ### render()
-```jsx
-JU.render(component) => object
-```
-Renders provided ReactJS component into JSON representation of the component
-tree, using [`react-test-renderer`](https://www.npmjs.com/package/react-test-renderer).
-
-**Arguments**
-- `component` - **React.Node** - ReactJS component to render.
-
-**Returns**
-- **object** - JSON representation of the rendered tree.
-
-**Example**
-```jsx
-import { JU } from '@dr.pogodin/react-utils';
-
-const tree = JU.render(<div>Example</div>);
-```
+:::danger Deprecated
+Removed in **v1.34.0**. Migrate to [render()] provided by [@testing-library/react].
+:::
 
 ### shallowRender()
-```jsx
-JU.shallowRender(component) => object
-```
-Generates a shallow render of given ReactJS component, using
-[react-test-renderer/shallow](https://reactjs.org/docs/shallow-renderer.html)
-and returns the result.
-
-**Arguments**
-- `component` - **React.Node** - ReactJS component to render.
-
-**Returns**
-- **object** - JSON representation of the rendered shallow component tree.
-
-**Example**
-```jsx
-import { JU } from '@dr.pogodin/react-utils/jest-utils';
-
-const tree = JU.shallowRender(<div>Example</div>);
-```
+:::danger Deprecated
+Removed in **v1.34.0**. Starting with React v19 it is recommended to
+[avoid shallow rendering] in tests.
+:::
 
 ### shallowSnapshot()
-```jsx
-JU.shallowSnapshot(component) => object
-```
-Does a shallow snapshot test of the given ReactJS component, and also returns
-JSON representation of the rendered shallow component tree. Under the hood it
-uses [shallowRender()] to generate the render, then executes
-`expect(RENDERED_TREE).toMatchSnapshot()`, then returns `RENDERED_TREE`
-as the method result.
+:::danger Deprecated
+Removed in **v1.34.0**. Starting with React v19 it is recommended to
+[avoid shallow rendering] in tests.
+:::
 
-**Arguments**
-- `component` - **React.Node** - ReactJS component to render.
-
-**Returns**
-- **object** - JSON representation of the shallow render.
-
-**Example**
-```jsx
-import { JU } from '@dr.pogodin/react-utils/jest-utils';
-
-test('A snapshot test', () => {
-  JU.shallowSnapshot(<div>Example</div>);
-});
-```
 ### simulate()
-```jsx
-JU.simulate
-```
-This is an alias for
-[Simulate](https://reactjs.org/docs/test-utils.html#simulate) object from
-`react-dom/test-utils`, which helps to emulate DOM events.
+:::danger Deprecated
+Removed in **v1.34.0**. Use instead [@testing-library/user-event],
+or the lower-level [fireEvent] from [@testing-library/dom].
+:::
 
 ### snapshot()
 ```jsx
-JU.snapshot(component) => object
+JU.snapshot(element) => object
 ```
-It does a snapshot test of the given ReactJS component, and also returns JSON
-representation of the rendered component tree. Under the hood it uses
-[render()](#render) to render the component, then executes
-`expect(RENDERED_TREE).toMatchSnapshot()`, then retuns `RENDERED_TREE`
-as the method output.
+It does a snapshot test of the given ReactJS component.
 
-**Arguments**
-- `component` - **React.Node** - ReactJS component to test.
+<details>
+<summary>Example</summary>
 
-**Returns**
-- **object** - JSON render of the componet.
+```tsx
+/** @jest-environment jsdom */
 
-**Examples**
-```jsx
 import { JU } from '@dr.pogodin/react-utils/jest-utils';
 
 test('A snapshot test', () => {
   JU.snapshot(<div>Example</div>);
 });
 ```
+</details>
+
+:::caution Beware
+- It relies on [render()] function provided by [@testing-library/react],
+  thus it renders provided component into DOM (**appends it to the current DOM
+  content**), and snapshots HTML representation of the generated DOM node.
+
+- It requires JSDom test environment, thus a Jest test relying on this method
+  should start with the magic comment `/** @jest-environment jsdom */`, or it
+  should provide a virtual DOM in an alternative way.
+
+- Prior to **v1.34.0** this method relied on now deprecated
+  [react-test-renderer](https://www.npmjs.com/package/react-test-renderer),
+  and thus it was snapshotting and returning a JSON representation of the rendered
+  component tree, without requiring or modifying the virtual DOM.
+:::
+
+**Arguments**
+- `component` &mdash; **React.ReactElement** &mdash; React element to snapshot.
+
+**Returns**
+- [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) &mdash;
+  rendered DOM node.
 
 ### unmockClientSide()
 ```jsx
@@ -202,8 +174,14 @@ JU.unmockClientSide()
 ```
 Reverts the effect of previous [mockClientSide()] call.
 
+[@testing-library/dom]: https://testing-library.com/docs/dom-testing-library/intro
+[@testing-library/react]: https://testing-library.com/docs/react-testing-library/intro/
+[@testing-library/user-event]: https://testing-library.com/docs/user-event/intro
+[avoid shallow rendering]: https://react.dev/blog/2024/04/25/react-19-upgrade-guide#removed-react-test-renderer-shallow
 [E2eSsrEnv]: /docs/api/classes/E2eSsrEnv
+[fireEvent]: https://testing-library.com/docs/dom-testing-library/api-events
 [Jest]: https://jestjs.io
 [JU]: /docs/api/utils/jest-utils
 [mockClientSide()]: #mockclientside
+[render()]: https://testing-library.com/docs/react-testing-library/api#render
 [shallowRender()]: #shallowrender

@@ -108,12 +108,4 @@ Dropdown.propTypes = {
   value: valueValidator,
 };
 
-Dropdown.defaultProps = {
-  filter: undefined,
-  label: undefined,
-  onChange: undefined,
-  options: [],
-  value: '',
-};
-
 export default ThemedDropdown;

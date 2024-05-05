@@ -1,14 +1,11 @@
 import mockdate from 'mockdate';
 
-jest.useFakeTimers();
-
-let time;
-
 const TEST_TIME_MS = 1601937279000;
-beforeAll(() => {
-  mockdate.set(TEST_TIME_MS);
-  time = require('utils/time').default;
-});
+
+jest.useFakeTimers();
+mockdate.set(TEST_TIME_MS);
+
+const time = require('utils/time').default;
 
 test('Misc aliases', () => {
   expect(time.SEC_MS).toBe(1000);

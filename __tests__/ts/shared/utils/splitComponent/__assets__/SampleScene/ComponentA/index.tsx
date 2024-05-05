@@ -17,7 +17,7 @@ type PropsT = {
   prop?: string;
 };
 
-const SampleComponent: React.FunctionComponent<PropsT> = ({ children, prop }) => {
+const SampleComponent: React.FunctionComponent<PropsT> = ({ children, prop = '' }) => {
   const [testKey] = useGlobalState<ForceT, string>('test.key', '');
   return (
     <Routes>
@@ -43,11 +43,6 @@ const SampleComponent: React.FunctionComponent<PropsT> = ({ children, prop }) =>
 SampleComponent.propTypes = {
   children: PT.node,
   prop: PT.string,
-};
-
-SampleComponent.defaultProps = {
-  children: undefined,
-  prop: '',
 };
 
 export default SampleComponent;

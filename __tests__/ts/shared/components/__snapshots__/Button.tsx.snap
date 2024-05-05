@@ -2,11 +2,9 @@
 
 exports[`Matches snapshots when active 1`] = `
 <div
-  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT AD_TAG HOC_TAG BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___MAe9O6 AD_TAG HOC_TAG ACTIVE_CLASS"
-  onClick={[Function]}
-  onKeyDown={[Function]}
+  class="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT AD_TAG HOC_TAG BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___MAe9O6 AD_TAG HOC_TAG ACTIVE_CLASS"
   role="button"
-  tabIndex={0}
+  tabindex="0"
 >
   BUTTON
 </div>
@@ -14,7 +12,7 @@ exports[`Matches snapshots when active 1`] = `
 
 exports[`Matches snapshots when disabled 1`] = `
 <div
-  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT AD_TAG HOC_TAG BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___disabled___Br9IWV AD_TAG HOC_TAG DISABLED_CLASS"
+  class="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT AD_TAG HOC_TAG BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___disabled___Br9IWV AD_TAG HOC_TAG DISABLED_CLASS"
 >
   BUTTON
 </div>
@@ -22,7 +20,7 @@ exports[`Matches snapshots when disabled 1`] = `
 
 exports[`Matches snapshots when disabled 2`] = `
 <div
-  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT AD_TAG HOC_TAG BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___disabled___Br9IWV"
+  class="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT AD_TAG HOC_TAG BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___disabled___Br9IWV"
 >
   BUTTON
 </div>
@@ -30,9 +28,8 @@ exports[`Matches snapshots when disabled 2`] = `
 
 exports[`Matches snapshots when rendered as link 1`] = `
 <a
-  className="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT AD_TAG HOC_TAG BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___MAe9O6 AD_TAG HOC_TAG ACTIVE_CLASS"
+  class="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT AD_TAG HOC_TAG BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___MAe9O6 AD_TAG HOC_TAG ACTIVE_CLASS"
   href="/SOME/TEST/URL"
-  onClick={[Function]}
 >
   BUTTON
 </a>

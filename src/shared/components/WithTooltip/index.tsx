@@ -59,7 +59,7 @@ type HeapT = {
  */
 const Wrapper: React.FunctionComponent<PropsT> = ({
   children,
-  placement,
+  placement = PLACEMENTS.ABOVE_CURSOR,
   tip,
   theme,
 }) => {
@@ -196,12 +196,6 @@ Wrapper.propTypes = {
   placement: PT.oneOf(Object.values(PLACEMENTS)),
   theme: ThemedWrapper.themeType.isRequired,
   tip: PT.node,
-};
-
-Wrapper.defaultProps = {
-  children: null,
-  placement: PLACEMENTS.ABOVE_CURSOR,
-  tip: null,
 };
 
 export default e;

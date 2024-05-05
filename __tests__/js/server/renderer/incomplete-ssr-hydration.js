@@ -11,7 +11,7 @@
  */
 
 import { noop } from 'lodash';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 document.write(global.ssrMarkup);
 const markup = document.querySelector('#react-view').innerHTML;

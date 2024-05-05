@@ -90,11 +90,4 @@ BaseSwitch.propTypes = {
   value: valueValidator,
 };
 
-BaseSwitch.defaultProps = {
-  label: undefined,
-  onChange: undefined,
-  options: [],
-  value: undefined,
-};
-
 export default ThemedSwitch;

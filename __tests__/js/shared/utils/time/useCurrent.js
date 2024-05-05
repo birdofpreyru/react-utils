@@ -9,7 +9,7 @@
  *  "entry": "./__assets__/Scene.jsx" }
  */
 
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 document.write(global.ssrMarkup);
 const container = document.querySelector('#react-view');

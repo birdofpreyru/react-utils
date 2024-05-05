@@ -143,7 +143,7 @@ to test SSR and Webpack-build outcomes.
 // our standard development config for Webpack.
 
 // This is needed to emulate client-side hydration further below.
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 // The path for Webpack outputs within the in-memory filesystem.
 const outputPath = global.webpackConfig.output.path;

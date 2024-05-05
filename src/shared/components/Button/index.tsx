@@ -89,44 +89,6 @@ const BaseButton: React.FunctionComponent<PropsT> = ({
  */
 const ThemedButton = themed(BaseButton, 'Button', validThemeKeys, defaultTheme);
 
-/**
- * Implements themeable buttons, and button-line links (elements which look
- * like buttons, but behave as links) in the same uniform manner.
- * @param {object} [props] Component props.
- * @param {boolean} [props.active] Set `true` to render the button as
- * active, even if it is not active otherwise.
- * @param {boolean} [props.disabled] Set `true` to disable the button.
- * @param {boolean} [props.enforceA] When the button is rendered as `<Link>`
- * component, this prop enforces it to be rendered as a simple `<a>` element
- * (external link), rather than the React router's internal link.
- * See `<Link>` documentation to learn when links are rendered as `<a>`
- * by default.
- * @param {function} [props.onClick] Click event handler.
- * @param {function} [props.onMouseDown] Mouse down event handler.
- * @param {boolean} [props.openNewTab] Set `true` to open link in the new tab.
- * @param {boolean} [props.replace] When the button is rendered as
- * `<Link>`, and the target URL is internal, this property tells that
- * the new route should replace the last record in the browser's history,
- * rather than to be pushed as a new entry into the history stack.
- * @param {ButtonTheme} [props.theme] _Ad hoc_ button theme.
- * @param {object|string} [props.to] If specified, the button will be rendered
- * as `<Link>` (if not disabled), and it will point to the specified location
- * or URL.
- * @param {...any} [props....]
- * [Other properties of themeable components](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
- */
-BaseButton.defaultProps = {
-  active: false,
-  children: undefined,
-  disabled: false,
-  enforceA: false,
-  onClick: undefined,
-  onMouseDown: undefined,
-  openNewTab: false,
-  replace: false,
-  to: undefined,
-};
-
 BaseButton.propTypes = {
   active: PT.bool,
   children: PT.node,

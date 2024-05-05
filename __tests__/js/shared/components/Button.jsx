@@ -1,3 +1,5 @@
+/** @jest-environment jsdom */
+
 import { noop, omit } from 'lodash';
 import { StaticRouter } from 'react-router-dom/server';
 

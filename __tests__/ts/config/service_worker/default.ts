@@ -10,7 +10,7 @@
  *  "entry": "./__assets__/Scene.tsx" }
  */
 
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 import { getGlobal } from 'utils/jest';
 

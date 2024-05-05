@@ -7,7 +7,7 @@
  * @ssr-options { "entry": "./__assets__/Scene.jsx" }
  */
 
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 const outputPath = global.webpackConfig.output.path;
 

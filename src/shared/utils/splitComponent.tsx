@@ -245,11 +245,7 @@ export default function splitComponent<
 
   CodeSplit.propTypes = {
     children: PT.node,
-  } as React.WeakValidationMap<ComponentPropsT>;
-
-  CodeSplit.defaultProps = {
-    children: undefined,
-  } as Partial<ComponentPropsT>;
+  } as PT.WeakValidationMap<ComponentPropsT>;
 
   return CodeSplit;
 }

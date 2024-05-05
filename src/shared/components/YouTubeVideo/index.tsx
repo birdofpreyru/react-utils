@@ -83,9 +83,4 @@ YouTubeVideo.propTypes = {
   title: PT.string,
 };
 
-YouTubeVideo.defaultProps = {
-  autoplay: false,
-  title: '',
-};
-
 export default ThemedYouTubeVideo;

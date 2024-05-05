@@ -1,20 +1,15 @@
-/* global expect, jest, document */
+/* global jest, document */
 /* eslint-disable import/no-extraneous-dependencies */
 
 import mockdate from 'mockdate';
-import { type ReactElement, type ReactNode } from 'react';
+import { type ReactNode, act } from 'react';
 import { type Root, createRoot } from 'react-dom/client';
-import TU, { act } from 'react-dom/test-utils';
 
-/* eslint-disable import/no-extraneous-dependencies */
-import Renderer from 'react-test-renderer';
-import { type ShallowRenderer, createRenderer } from 'react-test-renderer/shallow';
-/* eslint-enable import/no-extraneous-dependencies */
+import { render } from '@testing-library/react';
 
 /**
  * An alias for [act(..)](https://reactjs.org/docs/test-utils.html#act)
- * from `react-dom/test-utils`.
- * @param {function} action
+ * from `react`.
  */
 export { act };
 
@@ -86,9 +81,17 @@ export function mount(scene: ReactNode): MountedSceneT {
 
   const res: MountedSceneT = (element as unknown) as MountedSceneT;
   res.destroy = () => {
+    // NOTE: As it seems @testing-library may reset this flag to false
+    // when it is simulating user events.
+    global.IS_REACT_ACT_ENVIRONMENT = true;
+
     act(() => root.unmount());
     res.remove();
   };
+
+  // NOTE: As it seems @testing-library may reset this flag to false
+  // when it is simulating user events.
+  global.IS_REACT_ACT_ENVIRONMENT = true;
 
   act(() => {
     root = createRoot(res);
@@ -97,61 +100,8 @@ export function mount(scene: ReactNode): MountedSceneT {
   return res;
 }
 
-/* OLD STUFF BELOW THIS MARK */
-
-/**
- * Renders provided ReactJS component into JSON representation of the component
- * tree, using [`react-test-renderer`](https://www.npmjs.com/package/react-test-renderer).
- * @param {object} component ReactJS component to render.
- * @return {object} JSON representation of the rendered tree.
- * @example
- * import { JU } from '@dr.pogodin/react-utils';
- * console.log(JU.render(<div>Example</div>));
- */
-export function render(component: ReactElement) {
-  return Renderer.create(component).toJSON();
-}
-
-/**
- * Generates a shallow render of given ReactJS component, using
- * [react-test-renderer/shallow](https://reactjs.org/docs/shallow-renderer.html)
- * and returns the result.
- * @param {object} component ReactJS component to render.
- * @return {object} JSON representation of the shallow component's render tree.
- */
-export function shallowRender(component: ReactElement) {
-  const renderer: ShallowRenderer = createRenderer();
-  renderer.render(component);
-  return renderer.getRenderOutput();
-}
-
-/**
- * Makes a shallow snapshot test of the given ReactJS component, and also
- * returns JSON representation of the rendered component tree. Under the hood
- * it uses {@link module:JU.shallowRender shallowRender(..)} to generate
- * the render, then executes `expect(RENDER_RESULT).toMatchSnapshot()`,
- * and finally returns the `RENDER_RESULT` to the caller.
- * @param {object} component ReactJS component to render.
- * @return {object} JSON representation of shallow render.
- */
-export function shallowSnapshot(component: ReactElement) {
-  const res = shallowRender(component);
+export function snapshot(element: React.ReactElement) {
+  const res = render(element).asFragment().firstChild;
   expect(res).toMatchSnapshot();
   return res;
 }
-
-/**
- * Makes snapshot test of the given ReactJS component, and also returns JSON
- * representation of the rendered component tree. Under the hood, it uses
- * {@link module:JU.render render(..)} to render it, then executes
- * `expect(RENDER_RESULT).toMatchSnapshot()`, and then returns `RENDER_RESULT`.
- * @param {object} component ReactJS component to render.
- * @return {object} JSON render of the component.
- */
-export function snapshot(component: ReactElement) {
-  const res = render(component);
-  expect(res).toMatchSnapshot();
-  return res;
-}
-
-export const simulate = TU.Simulate;

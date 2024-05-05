@@ -1,3 +1,5 @@
+/** @jest-environment jsdom */
+
 import { noop, omit } from 'lodash';
 import Button from 'components/Button';
 import { snapshot } from 'utils/jest';

@@ -46,9 +46,4 @@ SampleComponent.propTypes = {
   prop: PT.string,
 };
 
-SampleComponent.defaultProps = {
-  children: undefined,
-  prop: '',
-};
-
 export default SampleComponent;

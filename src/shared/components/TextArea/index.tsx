@@ -101,12 +101,4 @@ TextArea.propTypes = {
   value: PT.string,
 };
 
-TextArea.defaultProps = {
-  disabled: false,
-  onChange: undefined,
-  onKeyDown: undefined,
-  placeholder: '',
-  value: undefined,
-};
-
 export default ThemedTextArea;

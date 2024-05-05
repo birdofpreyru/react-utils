@@ -127,19 +127,6 @@ const GenericLink: React.FunctionComponent<PropsT> = ({
   );
 };
 
-GenericLink.defaultProps = {
-  children: null,
-  className: '',
-  disabled: false,
-  enforceA: false,
-  keepScrollPosition: false,
-  onClick: undefined,
-  onMouseDown: undefined,
-  openNewTab: false,
-  replace: false,
-  to: '',
-};
-
 GenericLink.propTypes = {
   children: PT.node,
   className: PT.string,

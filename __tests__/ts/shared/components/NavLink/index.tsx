@@ -1,9 +1,22 @@
+/** @jest-environment jsdom */
+
+import { MemoryRouter } from 'react-router-dom';
+
 import NavLink from 'components/NavLink';
-import { shallowSnapshot } from 'utils/jest';
+
+import { snapshot } from 'utils/jest';
 
 import './styles.scss';
 
 test('Matches snapshots', () => {
-  shallowSnapshot(<NavLink />);
-  shallowSnapshot(<NavLink styleName="navLink" />);
+  snapshot(
+    <MemoryRouter>
+      <NavLink />
+    </MemoryRouter>,
+  );
+  snapshot(
+    <MemoryRouter>
+      <NavLink styleName="navLink" />
+    </MemoryRouter>,
+  );
 });

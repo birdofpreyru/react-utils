@@ -2,8 +2,12 @@
 
 import PT from 'prop-types';
 
+import userEvent from '@testing-library/user-event';
+
 import GenericLink from 'components/GenericLink';
-import { mount, simulate, snapshot } from 'utils/jest';
+import { mount, snapshot } from 'utils/jest';
+
+const user = userEvent.setup();
 
 function Link(props) {
   const { className, onClick } = props;
@@ -17,10 +21,6 @@ function Link(props) {
     </button>
   );
 }
-
-Link.defaultProps = {
-  className: null,
-};
 
 Link.propTypes = {
   className: PT.string,
@@ -96,7 +96,7 @@ test('Anchor link', () => {
   ));
 });
 
-test('onClick(..) callback in custom <Link>', () => {
+test('onClick(..) callback in custom <Link>', async () => {
   window.scroll = jest.fn();
   const clickHandler = jest.fn();
   const doc = mount((
@@ -110,7 +110,7 @@ test('onClick(..) callback in custom <Link>', () => {
     </GenericLink>
   ));
   const link = doc.querySelector('.LINK');
-  simulate.click(link);
+  await user.click(link);
   expect(clickHandler).toHaveBeenCalled();
   expect(window.scroll).toHaveBeenCalledTimes(1);
 });

@@ -50,8 +50,4 @@ Input.propTypes = {
   theme: ThemedInput.themeType.isRequired,
 };
 
-Input.defaultProps = {
-  label: undefined,
-};
-
 export default ThemedInput;

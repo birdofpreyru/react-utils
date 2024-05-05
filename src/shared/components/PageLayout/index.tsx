@@ -68,10 +68,4 @@ PageLayout.propTypes = {
   theme: ThemedPageLayout.themeType.isRequired,
 };
 
-PageLayout.defaultProps = {
-  children: null,
-  leftSidePanelContent: null,
-  rightSidePanelContent: null,
-};
-
 export default ThemedPageLayout;

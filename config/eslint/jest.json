@@ -12,6 +12,7 @@
     "import/no-dynamic-require": 0,
     "import/no-extraneous-dependencies": 0,
     "no-console": 0,
-    "no-new-func": 0
+    "no-new-func": 0,
+    "react/require-default-props": 0
   }
 }

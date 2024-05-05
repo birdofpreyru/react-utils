@@ -350,8 +350,4 @@ Tooltip.propTypes = {
   theme: PT.shape({}).isRequired,
 };
 
-Tooltip.defaultProps = {
-  children: null,
-};
-
 export default Tooltip;

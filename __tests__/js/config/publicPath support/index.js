@@ -12,7 +12,7 @@
  */
 
 import pretty from 'pretty';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 const { path: outPath, publicPath } = global.webpackConfig.output;
 

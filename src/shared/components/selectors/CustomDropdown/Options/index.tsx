@@ -132,9 +132,4 @@ Options.propTypes = {
   options: optionsValidator.isRequired,
 };
 
-Options.defaultProps = {
-  containerStyle: undefined,
-  filter: undefined,
-};
-
 export default Options;

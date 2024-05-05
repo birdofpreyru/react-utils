@@ -11,7 +11,7 @@ import { useGlobalState } from '@dr.pogodin/react-global-state';
 
 import './style.scss';
 
-export default function SampleComponent({ children, prop }) {
+export default function SampleComponent({ children, prop = '' }) {
   const [testKey] = useGlobalState('test.key');
   return (
     <Routes>
@@ -37,9 +37,4 @@ export default function SampleComponent({ children, prop }) {
 SampleComponent.propTypes = {
   children: PT.node,
   prop: PT.string,
-};
-
-SampleComponent.defaultProps = {
-  children: undefined,
-  prop: '',
 };

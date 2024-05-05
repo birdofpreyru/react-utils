@@ -2,8 +2,9 @@ import mockdate from 'mockdate';
 
 mockdate.set('2020-04-19Z');
 
+const lib = require('../../src');
+
 test('Export at server side', () => {
-  const lib = require('../../src');
   expect(lib).toMatchSnapshot();
   expect({ ...lib._ }).toMatchSnapshot();
   expect({ ...lib.api }).toMatchSnapshot();

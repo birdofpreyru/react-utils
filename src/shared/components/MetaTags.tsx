@@ -147,15 +147,6 @@ const MetaTags: React.FunctionComponent<PropsT> & {
 
 MetaTags.Context = Context;
 
-MetaTags.defaultProps = {
-  children: null,
-  image: '',
-  siteName: '',
-  socialDescription: '',
-  socialTitle: '',
-  url: '',
-};
-
 MetaTags.propTypes = {
   children: PT.node,
   description: PT.string.isRequired,

@@ -10,7 +10,7 @@
  *  "entry": "./__assets__/Scene.jsx" }
  */
 
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 const fs = global.webpackOutputFs;
 const outputPath = global.webpackConfig.output.path;
