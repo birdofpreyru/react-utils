@@ -5,7 +5,7 @@ import mockdate from 'mockdate';
 import { type ReactNode, act } from 'react';
 import { type Root, createRoot } from 'react-dom/client';
 
-import { render } from '@testing-library/react';
+import { type RenderResult, render } from '@testing-library/react';
 
 /**
  * An alias for [act(..)](https://reactjs.org/docs/test-utils.html#act)
@@ -101,7 +101,12 @@ export function mount(scene: ReactNode): MountedSceneT {
 }
 
 export function snapshot(element: React.ReactElement) {
-  const res = render(element).asFragment().firstChild;
-  expect(res).toMatchSnapshot();
+  let res: RenderResult | undefined;
+  act(() => {
+    res = render(element);
+  });
+  if (res === undefined) throw Error('Render failed');
+
+  expect(res.asFragment().firstChild).toMatchSnapshot();
   return res;
 }
