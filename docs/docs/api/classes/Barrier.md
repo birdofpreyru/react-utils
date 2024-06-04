@@ -1,19 +1,11 @@
 # Barrier
 ```jsx
-import { Barrier } from '@dr.pogodin/react-utils';
+import { Barrier } from '@dr.pogodin/react-utils'; // or from '@dr.pogodin/js-utils';
 ```
 The [Barrier] class is just an auxiliary wrapper around [Promise] which has
 its resolution and rejection functions attached as methods to the class instances.
 It sometimes comes handy for synchronisation between different asynchronous
 operations.
-
-:::info
-The [Barrier] source code has been moved to [JS Utils] library, and it is
-re-exported from there; thus, it also can be imported as
-```js
-import { Barrier } from '@dr.pogodin/js-utils';
-```
-:::
 
 ## Fields
 - `.resolved` &mdash; **boolean** &mdash; Readonly. **true** once the barrier
@@ -62,17 +54,17 @@ the original `barrier`.
 
 ### resolve()
 ```jsx
-barrier.resolve(value);
+barrier.resolve(value): Barrier;
 ```
 Resolves the barrier with the optional `value`, similar to how the standard
-[Promise] resolves.
+[Promise] resolves. To allow chaining, it returns this barrier instance.
 
 ### reject()
 ```jsx
-barrier.reject(value);
+barrier.reject(value): Barrier;
 ```
 Rejects the barrier with the optional `value`, similar to how the standard
-[Promise] rejects.
+[Promise] rejects. To allow chaining, it returns this barrier instance.
 
 ### then()
 ```jsx

@@ -32,6 +32,7 @@ export {
 export * from 'components';
 
 export {
+  type Listener,
   type Theme,
   config,
   Barrier,

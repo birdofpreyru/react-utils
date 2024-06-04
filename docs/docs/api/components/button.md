@@ -1,19 +1,28 @@
 # Button
 
 ```jsx
-import { Button } from '@dr.pogodin/react-utils';
+import { Button, BaseButton } from '@dr.pogodin/react-utils';
 ```
 
 The [Button] component implements themeable buttons, and button-line links
-(elements that look like buttons, but behave as links) in the same uniform manner.
+(elements that look like buttons, but behave as links) in the same uniform
+manner. The base, non-themed version of the component is also exported under
+the **BaseButton** name.
 
+import CodeBlock from '@theme/CodeBlock';
 import Example from '../../../src/components/ButtonsExample';
+import exampleCode from '!!raw-loader!../../../src/components/ButtonsExample';
 
 :::note Demo
 <Example />
 
 See [the source code below][Examples].
 :::
+<details>
+<summary>Demo Source Code</summary>
+
+<CodeBlock className="language-jsx">{exampleCode}</CodeBlock>
+</details>
 
 A [Button] instance is rendered in different ways:
 1.  As `<div>` element if the button is disabled.
@@ -62,13 +71,6 @@ Valid [Button] theme keys are:
 - `disabled` - Applied to disabled buttons.
 
 See [React Themes] documentation for theming details.
-
-## Examples
-
-import CodeBlock from '@theme/CodeBlock';
-import exampleCode from '!!raw-loader!../../../src/components/ButtonsExample';
-
-<CodeBlock className="language-jsx">{exampleCode}</CodeBlock>
 
 [Button]: /docs/api/components/button
 [Examples]: #examples

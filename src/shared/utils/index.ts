@@ -11,6 +11,7 @@ import time from './time';
 import * as webpack from './webpack';
 
 export {
+  type Listener,
   Barrier,
   Emitter,
   Semaphore,
