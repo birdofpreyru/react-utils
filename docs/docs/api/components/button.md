@@ -13,14 +13,8 @@ import CodeBlock from '@theme/CodeBlock';
 import Example from '../../../src/components/ButtonsExample';
 import exampleCode from '!!raw-loader!../../../src/components/ButtonsExample';
 
-:::note Demo
-<Example />
-
-See [the source code below][Examples].
-:::
 <details>
-<summary>Demo Source Code</summary>
-
+<summary>**Demo** (expand to see the source code)<br /><Example /></summary>
 <CodeBlock className="language-jsx">{exampleCode}</CodeBlock>
 </details>
 
@@ -73,6 +67,5 @@ Valid [Button] theme keys are:
 See [React Themes] documentation for theming details.
 
 [Button]: /docs/api/components/button
-[Examples]: #examples
 [Link]: /docs/api/components/link
 [React Themes]: https://dr.pogodin.studio/docs/react-themes
