@@ -3,6 +3,7 @@
 exports[`Export at client side 1`] = `
 {
   "Barrier": [Function],
+  "BaseButton": [Function],
   "BaseModal": [Function],
   "Button": {
     "$$typeof": Symbol(react.forward_ref),

@@ -26,7 +26,7 @@ type PropsT = {
 };
 
 /* eslint-disable react/function-component-definition */
-const BaseButton: React.FunctionComponent<PropsT> = ({
+export const BaseButton: React.FunctionComponent<PropsT> = ({
   active,
   children,
   disabled,

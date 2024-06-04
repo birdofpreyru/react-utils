@@ -4,7 +4,7 @@
 
 export * from 'components/selectors';
 
-export { default as Button } from 'components/Button';
+export { default as Button, BaseButton } from 'components/Button';
 export { default as Checkbox } from 'components/Checkbox';
 export { default as Input } from 'components/Input';
 export { default as Link } from 'components/Link';
