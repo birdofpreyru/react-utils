@@ -1,9 +1,7 @@
 // TS config for ESLint, editor plugins, and other tools that look-up and use
 // the default tsconfig.json file.
 {
-  // Note: Full relative paths, as some tools don't support Node module
-  // resolution mechanics.
-  "extends": "./node_modules/@tsconfig/recommended/tsconfig.json",
+  "extends": "@tsconfig/recommended",
 
   // Keep these in case any mocks / tests are declared within "src" code tree.
   "exclude": [
