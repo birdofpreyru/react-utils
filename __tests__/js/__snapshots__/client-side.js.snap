@@ -321,7 +321,7 @@ wrap {
     "UseProxy": 305,
     "VariantAlsoNegotiates": 506,
   },
-  "VERSION": "1.6.8",
+  "VERSION": "1.7.2",
   "_request": [Function],
   "all": [Function],
   "constructor": [Function],
@@ -331,6 +331,7 @@ wrap {
     "adapter": [
       "xhr",
       "http",
+      "fetch",
     ],
     "env": {
       "Blob": [Function],
