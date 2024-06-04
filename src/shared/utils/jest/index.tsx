@@ -107,6 +107,7 @@ export function snapshot(element: React.ReactElement) {
   });
   if (res === undefined) throw Error('Render failed');
 
-  expect(res.asFragment().firstChild).toMatchSnapshot();
+  const nodes = res.asFragment().childNodes;
+  expect(nodes.length > 1 ? [...nodes] : nodes[0]).toMatchSnapshot();
   return res;
 }
