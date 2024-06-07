@@ -22,15 +22,23 @@ import {
   getBuildInfo,
 } from './isomorphy';
 
-// Note: At the client side we can get chunk groups immediately when loading
-// the module; at the server-side we only can get them within React render flow.
+// NOTE: At the client-side we get chunk groups the first time they are needed
+// (we used to get them eagerly when this module loaded, but it did not work well
+// alongside custom chunk info injection in server-less scenario);
+// at the server-side we only can get them within React render flow.
 // Thus, we set and use the following variable at the client-side, and then when
 // needed on the server side, we'll fetch it differently.
-let clientChunkGroups: ChunkGroupsT;
+let cachedClientChunkGroups: ChunkGroupsT | undefined;
 
-if (IS_CLIENT_SIDE) {
-  // eslint-disable-next-line global-require
-  clientChunkGroups = require('client/getInj').default().CHUNK_GROUPS || {};
+function getClientChunkGroups(): ChunkGroupsT {
+  if (IS_CLIENT_SIDE && !cachedClientChunkGroups) {
+    // eslint-disable-next-line global-require
+    cachedClientChunkGroups = require('client/getInj').default().CHUNK_GROUPS || {};
+  }
+
+  if (!cachedClientChunkGroups) throw Error('Internal error');
+
+  return cachedClientChunkGroups;
 }
 
 const refCounts: { [path: string]: number } = {};
@@ -185,7 +193,7 @@ export default function splitComponent<
   placeholder?: ReactNode,
 }) {
   // On the client side we can check right away if the chunk name is known.
-  if (IS_CLIENT_SIDE) assertChunkName(chunkName, clientChunkGroups);
+  if (IS_CLIENT_SIDE) assertChunkName(chunkName, getClientChunkGroups());
 
   // The correct usage of splitComponent() assumes a single call per chunk.
   if (usedChunkNames.has(chunkName)) {
@@ -200,7 +208,7 @@ export default function splitComponent<
     // the component (the lazy load function is executed by React one at
     // the frist mount).
     if (IS_CLIENT_SIDE) {
-      await bookStyleSheets(chunkName, clientChunkGroups, false);
+      await bookStyleSheets(chunkName, getClientChunkGroups(), false);
     }
 
     const Wrapper = forwardRef((
@@ -218,8 +226,8 @@ export default function splitComponent<
       // This takes care about stylesheets management every time an instance of
       // this component is mounted / unmounted.
       useInsertionEffect(() => {
-        bookStyleSheets(chunkName, clientChunkGroups, true);
-        return () => freeStyleSheets(chunkName, clientChunkGroups);
+        bookStyleSheets(chunkName, getClientChunkGroups(), true);
+        return () => freeStyleSheets(chunkName, getClientChunkGroups());
       }, []);
 
       return (

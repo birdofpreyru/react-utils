@@ -13,6 +13,17 @@ then hydrates it into DOM element with **react-view** ID, assuming
 The `dontHydrate` option allows to opt for a pure client-side rendering, instead
 of the hydration.
 
+:::note
+Introduced in the library version **v1.35.3**, there is `client.setInj(value)`
+method allowing to set a custom &laquo;server-side injection object&raquo;
+(it is normally generated and used under-the-hood from server-side data injected
+into pages during their server-side rendering, but in the server-less scenario
+it is necessary to manually get and set it, to allow for some features,
+_e.g._ to support the code splitting). `client.setInj(value)` was added as
+a hotfix for an ongoing project, and perhaps the approach to this feature
+will be re-considered, and better documented later.
+:::
+
 ## Arguments
 **Required:**
 - `Application` - **React.Component** - The root applciation component.

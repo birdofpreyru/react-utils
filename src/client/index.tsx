@@ -8,12 +8,14 @@ import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
-import getInj from './getInj';
+import getInj, { setInj } from './getInj';
 
 type OptionsT = {
   dontHydrate?: boolean;
   initialState?: any;
 };
+
+export { setInj };
 
 /**
  * Prepares and launches the app at client side.
