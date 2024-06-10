@@ -31,7 +31,7 @@ if (metaElement) {
 
   data = forge.util.decodeUtf8(d.output.data);
   inj = eval(`(${data})`); // eslint-disable-line no-eval
-} else if (window.REACT_UTILS_INJECTION) {
+} else if (typeof window !== 'undefined' && window.REACT_UTILS_INJECTION) {
   inj = window.REACT_UTILS_INJECTION;
   delete window.REACT_UTILS_INJECTION;
 } else {
