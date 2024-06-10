@@ -31,6 +31,9 @@ if (metaElement) {
 
   data = forge.util.decodeUtf8(d.output.data);
   inj = eval(`(${data})`); // eslint-disable-line no-eval
+} else if (window.REACT_UTILS_INJECTION) {
+  inj = window.REACT_UTILS_INJECTION;
+  delete window.REACT_UTILS_INJECTION;
 } else {
   // Otherwise, a bunch of dependent stuff will easily fail in non-standard
   // environments, where no client-side initialization is performed. Like tests,

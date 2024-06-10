@@ -13,6 +13,12 @@ export type InjT = {
   ISTATE?: unknown;
 };
 
+declare global {
+  interface Window {
+    REACT_UTILS_INJECTION?: InjT;
+  }
+}
+
 export interface SsrContextT<StateT> extends SsrContext<StateT> {
   chunkGroups: ChunkGroupsT;
   chunks: string[];
