@@ -55,20 +55,21 @@ async function exec(command, options = {}) {
 /* Command-line config. */
 program
   .description('Library build script')
-  .option('--lib', 'library build', false)
-  .option('-i, --in-dir <path>', 'input folder for the build', 'src')
-  .option('-o, --out-dir <path>', 'output folder for the build', 'build')
   .option(
     '-t, --build-type <type>',
     `build type: ${VALID_BUILD_TYPES.join(', ')}`,
   )
+  .option('-c, --copy-files <regex>', 'copy files matching the pattern into the build folder')
+  .option('-i, --in-dir <path>', 'input folder for the build', 'src')
+  .option('--lib', 'library build', false)
+  .option('--no-babel', 'opts out the Babel (server-side code) build')
+  .option('-o, --out-dir <path>', 'output folder for the build', 'build')
   .option('-w, --watch', 'build, watch, and rebuild on source changes')
   .option(
     '--webpack-config <path>',
     'path to the webpack config',
     'webpack.config.js',
-  )
-  .option('-c, --copy-files <regex>', 'copy files matching the pattern into the build folder');
+  );
 
 program.parse(process.argv);
 const cmdLineArgs = program.opts();
@@ -203,7 +204,7 @@ async function babelBuild() {
   await exec(BABEL_CMD_SVG, BABEL_EXEC_OPTIONS);
 }
 
-babelBuild();
+if (cmdLineArgs.babel) babelBuild();
 
 // If opted, copy files matching the pattern into the build folder.
 
