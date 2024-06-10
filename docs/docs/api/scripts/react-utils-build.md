@@ -37,13 +37,16 @@ Usage: build [options]
 Library build script
 
 Options:
-  --lib                     library build (default: false)
-  -i, --in-dir <path>       input folder for the build (default: "src")
-  -o, --out-dir <path>      output folder for the build (default: "build")
   -t, --build-type <type>   build type: development, production
+  -c, --copy-files <regex>  copy files matching the pattern into the build
+                            folder
+  -i, --in-dir <path>       input folder for the build (default: "src")
+  --lib                     library build (default: false)
+  --no-babel                opts out the Babel (server-side code) build
+  -o, --out-dir <path>      output folder for the build (default: "build")
   -w, --watch               build, watch, and rebuild on source changes
-  --webpack-config <path>   path to the webpack config (default: "webpack.config.js")
-  -c, --copy-files <regex>  copy files matching the pattern into the build folder
+  --webpack-config <path>   path to the webpack config (default:
+                            "webpack.config.js")
   -h, --help                display help for command
 ```
 

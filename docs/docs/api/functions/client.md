@@ -8,7 +8,21 @@ Initializes and launches ReactJS `Application` at the client-side.
 
 Namely, it wraps the app with [BrowserRouter] and [GlobalStateProvider],
 then hydrates it into DOM element with **react-view** ID, assuming
-[the standard SSR setup][server()] was used to generate the initial HTML markup of the page.
+[the standard SSR setup][server()] was used to generate the initial HTML markup
+of the page.
+
+:::info
+Behind the scenes, when client-side initialization module is loaded, it checks
+the host document for the `<meta>` tag injected by server, carrying app config,
+initial global state value, and information about application code chunks and
+files belonging to them. If such tag is present, it is consumed by the library.
+See [the source code](https://github.com/birdofpreyru/react-utils/blob/a898902751b48fa37b0b4af5f2ba1f4e8743db77/src/shared/utils/globalState.ts#L9-L14)
+for the exact typing of that tag's payload.
+
+For server-less usage the same data object might be bundled into an app,
+and passed to the library by attaching it to `window.REACT_UTILS_INJECTION`
+prior to loading the library.
+:::
 
 The `dontHydrate` option allows to opt for a pure client-side rendering, instead
 of the hydration.
