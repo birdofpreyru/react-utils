@@ -41,12 +41,3 @@ if (metaElement) {
 export default function getInj(): InjT {
   return inj;
 }
-
-/**
- * Allows to set a custom injection object instance,
- * for server-less scenarios, for example, where it is not auto-injected
- * into generated pages from the server side.
- */
-export function setInj(value: InjT) {
-  inj = value;
-}
