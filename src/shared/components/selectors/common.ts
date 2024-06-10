@@ -31,7 +31,7 @@ export type OptionT<NameT> = {
   value: ValueT;
 };
 
-export type OptionsT<NameT> = Array<OptionT<NameT> | ValueT>;
+export type OptionsT<NameT> = Readonly<Array<OptionT<NameT> | ValueT>>;
 
 export type PropsT<
   NameT,
