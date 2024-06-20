@@ -3,7 +3,6 @@
 import UserEvents from '@testing-library/user-event';
 
 import GenericLink from 'components/GenericLink';
-import PT from 'prop-types';
 import { mount, snapshot } from 'utils/jest';
 
 const Link: React.FunctionComponent<{
@@ -20,11 +19,6 @@ const Link: React.FunctionComponent<{
       {JSON.stringify(props)}
     </button>
   );
-};
-
-Link.propTypes = {
-  className: PT.string,
-  onClick: PT.func.isRequired,
 };
 
 test('Absolute link, starting with http://', () => {

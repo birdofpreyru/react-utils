@@ -5,7 +5,6 @@
  * that code splitting has not broke related functionality.
  */
 
-import PT from 'prop-types';
 import { Route, Routes } from 'react-router-dom';
 import { useGlobalState } from '@dr.pogodin/react-global-state';
 
@@ -33,8 +32,3 @@ export default function SampleComponent({ children, prop = '' }) {
     </Routes>
   );
 }
-
-SampleComponent.propTypes = {
-  children: PT.node,
-  prop: PT.string,
-};

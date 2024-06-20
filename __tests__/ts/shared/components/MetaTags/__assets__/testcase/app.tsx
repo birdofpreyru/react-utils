@@ -1,5 +1,3 @@
-import PT from 'prop-types';
-
 import { useGlobalState } from '@dr.pogodin/react-global-state';
 
 import MetaTags from 'components/MetaTags';
@@ -60,10 +58,6 @@ const Application: React.FunctionComponent<PropsT> = ({ mode }) => {
       {component}
     </div>
   );
-};
-
-Application.propTypes = {
-  mode: PT.oneOf(Object.values(MODES) as MODES[]).isRequired,
 };
 
 export default Application;

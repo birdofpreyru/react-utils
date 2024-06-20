@@ -58,7 +58,6 @@ export default function configFactory(ops: OptionsT): Configuration {
       'dayjs',
       'lodash',
       /node-forge/,
-      'prop-types',
       'qs',
       'react',
       /react-dom/,

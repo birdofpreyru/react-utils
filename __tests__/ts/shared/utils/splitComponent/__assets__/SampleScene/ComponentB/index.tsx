@@ -5,7 +5,6 @@
  * that code splitting has not broke related functionality.
  */
 
-import PT from 'prop-types';
 import { type ReactNode } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -39,11 +38,6 @@ const SampleComponent: React.FunctionComponent<PropsT> = ({ children, prop }) =>
       />
     </Routes>
   );
-};
-
-SampleComponent.propTypes = {
-  children: PT.node,
-  prop: PT.string,
 };
 
 export default SampleComponent;

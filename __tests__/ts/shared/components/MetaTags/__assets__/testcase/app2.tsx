@@ -1,4 +1,3 @@
-import PT from 'prop-types';
 import { useContext } from 'react';
 
 import MetaTags from 'components/MetaTags';
@@ -43,10 +42,6 @@ const Application: React.FunctionComponent<PropsT> = ({ mode }) => {
       </MetaTags>
     </div>
   );
-};
-
-Application.propTypes = {
-  mode: PT.oneOf(Object.values(MODES) as MODES[]).isRequired,
 };
 
 export default Application;

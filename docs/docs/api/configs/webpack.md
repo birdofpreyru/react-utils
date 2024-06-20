@@ -366,7 +366,6 @@ The generated config does the following:
   - `axios`
   - `dayjs`
   - `lodash`
-  - `prop-types`
   - `qs`
   - `react`
   - `react-dom`

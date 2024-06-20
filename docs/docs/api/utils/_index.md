@@ -2,8 +2,6 @@
 - [config](/docs/api/utils/config) - Isomorphic app config.
 - [isomorphy](/docs/api/utils/isomorphy) - Helpers for isomorphic code logic.
 - [Jest Utils](/docs/api/utils/jest-utils) &mdash; Helpers useful in [Jest] tests.
-- [PT (prop-types)](/docs/api/utils/prop-types) - An alias for [prop-types] lib
-  for runtime ReactJS prop type checks.
 - [React Global State](/docs/api/utils/react-global-state) - Aliases for
   [react-global-state](https://dr.pogodin.studio/docs/react-global-state/index.html)
   lib.
@@ -12,6 +10,12 @@
   [React Themes](https://dr.pogodin.studio/docs/react-themes) library.
 - [time](/docs/api/utils/time) - Date & time utils.
 - [webpack](/docs/api/utils/webpack) - [Webpack]-related utils.
+
+:::warning Deprecated Utilities
+- [PT (prop-types)](/docs/api/utils/prop-types) &mdash; Deprecated and removed
+  in **v1.36.0**, as `propTypes` checks are ignored by React v19+. Migrate to
+  TypeScript, or alternative type-checking solutions.
+:::
 
 <!-- links -->
 [axios]: https://www.npmjs.com/package/axios
