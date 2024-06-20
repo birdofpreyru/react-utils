@@ -24,6 +24,13 @@ module.exports = {
     'react/no-unknown-property': ['error', {
       ignore: ['styleName'],
     }],
+
+    // TODO: propTypes checks will be silently ignored starting with React v19:
+    // https://react.dev/blog/2024/04/25/react-19-upgrade-guide#removed-proptypes-and-defaultprops
+    // The rule is still enabled in the base ESLint configs, thus for now we
+    // override it here.
+    'react/prop-types': 'off',
+
     'react/react-in-jsx-scope': 0,
 
     // TODO: .defaultProps will be deprecated in React@19.

@@ -1,6 +1,5 @@
 /* global window */
 
-import PT from 'prop-types';
 import { type ReactNode } from 'react';
 
 import { type Link, type NavLink } from 'react-router-dom';
@@ -125,20 +124,6 @@ const GenericLink: React.FunctionComponent<PropsT> = ({
       {children}
     </L>
   );
-};
-
-GenericLink.propTypes = {
-  children: PT.node,
-  className: PT.string,
-  disabled: PT.bool,
-  enforceA: PT.bool,
-  keepScrollPosition: PT.bool,
-  onClick: PT.func,
-  onMouseDown: PT.func,
-  openNewTab: PT.bool,
-  replace: PT.bool,
-  routerLinkType: PT.elementType.isRequired,
-  to: PT.oneOfType([PT.object, PT.string]),
 };
 
 export default GenericLink;

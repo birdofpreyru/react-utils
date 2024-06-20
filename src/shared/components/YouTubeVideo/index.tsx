@@ -1,4 +1,3 @@
-import PT from 'prop-types';
 import qs from 'qs';
 
 import themed, { type Theme } from '@dr.pogodin/react-themes';
@@ -8,9 +7,7 @@ import Throbber from 'components/Throbber';
 import baseTheme from './base.scss';
 import throbberTheme from './throbber.scss';
 
-const validThemeKeys = ['container', 'video'] as const;
-
-type ComponentThemeT = Theme<typeof validThemeKeys>;
+type ComponentThemeT = Theme<'container' | 'video'>;
 
 type PropsT = {
   autoplay?: boolean;
@@ -69,18 +66,4 @@ const YouTubeVideo: React.FunctionComponent<PropsT> = ({
   );
 };
 
-const ThemedYouTubeVideo = themed(
-  YouTubeVideo,
-  'YouTubeVideo',
-  validThemeKeys,
-  baseTheme,
-);
-
-YouTubeVideo.propTypes = {
-  autoplay: PT.bool,
-  src: PT.string.isRequired,
-  theme: ThemedYouTubeVideo.themeType.isRequired,
-  title: PT.string,
-};
-
-export default ThemedYouTubeVideo;
+export default themed(YouTubeVideo, 'YouTubeVideo', baseTheme);

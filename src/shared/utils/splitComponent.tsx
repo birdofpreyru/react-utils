@@ -1,8 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* global document */
 
-import PT from 'prop-types';
-
 import {
   type ComponentType,
   type ReactNode,
@@ -242,10 +240,6 @@ export default function splitComponent<
       </LazyComponent>
     </Suspense>
   );
-
-  CodeSplit.propTypes = {
-    children: PT.node,
-  } as PT.WeakValidationMap<ComponentPropsT>;
 
   return CodeSplit;
 }

@@ -1,7 +1,5 @@
 /** @jest-environment jsdom */
 
-import PT from 'prop-types';
-
 import userEvent from '@testing-library/user-event';
 
 import GenericLink from 'components/GenericLink';
@@ -21,11 +19,6 @@ function Link(props) {
     </button>
   );
 }
-
-Link.propTypes = {
-  className: PT.string,
-  onClick: PT.func.isRequired,
-};
 
 test('Absolute link, starting with http://', () => {
   snapshot((

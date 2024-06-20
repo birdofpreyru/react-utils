@@ -13,6 +13,7 @@
     "import/no-extraneous-dependencies": 0,
     "no-console": 0,
     "no-new-func": 0,
+    "react/prop-types": "off",
     "react/require-default-props": 0
   }
 }

@@ -1,4 +1,3 @@
-import PT from 'prop-types';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import { BaseModal } from 'components/Modal';
@@ -9,7 +8,6 @@ import {
   type OptionT,
   type OptionsT,
   type ValueT,
-  optionsValidator,
   optionValueName,
 } from '../../common';
 
@@ -115,21 +113,5 @@ const Options = forwardRef<RefT, PropsT>(({
     </BaseModal>
   );
 });
-
-Options.propTypes = {
-  containerClass: PT.string.isRequired,
-
-  containerStyle: PT.shape({
-    left: PT.number.isRequired,
-    top: PT.number.isRequired,
-    width: PT.number.isRequired,
-  }),
-
-  filter: PT.func,
-  onCancel: PT.func.isRequired,
-  onChange: PT.func.isRequired,
-  optionClass: PT.string.isRequired,
-  options: optionsValidator.isRequired,
-};
 
 export default Options;

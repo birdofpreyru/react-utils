@@ -1,6 +1,5 @@
 /* global window */
 
-import PT from 'prop-types';
 import {
   type ReactNode,
   useEffect,
@@ -11,19 +10,17 @@ import {
 import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import Tooltip, {
+  type ThemeKeysT as TooltipThemeKeysT,
   PLACEMENTS,
-  validThemeKeys as validTooltipThemeKeys,
 } from './Tooltip';
 
 import defaultTheme from './default-theme.scss';
-
-const validThemeKeys = [...validTooltipThemeKeys, 'wrapper'] as const;
 
 type PropsT = {
   children?: ReactNode;
   placement?: PLACEMENTS;
   tip?: ReactNode;
-  theme: Theme<typeof validThemeKeys>;
+  theme: Theme<'wrapper' | TooltipThemeKeysT>;
 };
 
 type TooltipRefT = {
@@ -170,18 +167,7 @@ const Wrapper: React.FunctionComponent<PropsT> = ({
   );
 };
 
-const ThemedWrapper = themed(
-  Wrapper,
-  'WithTooltip',
-  [
-    'appearance',
-    'arrow',
-    'container',
-    'content',
-    'wrapper',
-  ],
-  defaultTheme,
-);
+const ThemedWrapper = themed(Wrapper, 'WithTooltip', defaultTheme);
 
 type ExportT = typeof ThemedWrapper & {
   PLACEMENTS: typeof PLACEMENTS;
@@ -190,12 +176,5 @@ type ExportT = typeof ThemedWrapper & {
 const e: ExportT = ThemedWrapper as ExportT;
 
 e.PLACEMENTS = PLACEMENTS;
-
-Wrapper.propTypes = {
-  children: PT.node,
-  placement: PT.oneOf(Object.values(PLACEMENTS)),
-  theme: ThemedWrapper.themeType.isRequired,
-  tip: PT.node,
-};
 
 export default e;

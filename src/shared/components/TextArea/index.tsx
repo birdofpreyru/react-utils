@@ -1,22 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
-import PT from 'prop-types';
 
 import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './style.scss';
 
-const validThemeKeys = [
-  'container',
-  'hidden',
-  'textarea',
-] as const;
+type ThemeKeyT =
+  | 'container'
+  | 'hidden'
+  | 'textarea';
 
 type Props = {
   disabled?: boolean;
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   onKeyDown?: React.KeyboardEventHandler<HTMLTextAreaElement>;
   placeholder?: string;
-  theme: Theme<typeof validThemeKeys>;
+  theme: Theme<ThemeKeyT>;
   value?: string;
 };
 
@@ -85,20 +83,4 @@ const TextArea: React.FunctionComponent<Props> = ({
   );
 };
 
-const ThemedTextArea = themed(
-  TextArea,
-  'TextArea',
-  validThemeKeys,
-  defaultTheme,
-);
-
-TextArea.propTypes = {
-  disabled: PT.bool,
-  onChange: PT.func,
-  onKeyDown: PT.func,
-  placeholder: PT.string,
-  theme: ThemedTextArea.themeType.isRequired,
-  value: PT.string,
-};
-
-export default ThemedTextArea;
+export default themed(TextArea, 'TextArea', defaultTheme);

@@ -9,7 +9,6 @@ const server = webpack.requireWeak('./server', __dirname) as (typeof ServerT) | 
 const client = server ? undefined : require('./client').default;
 
 export { default as api } from 'axios';
-export * as PT from 'prop-types';
 
 export {
   type AsyncCollectionLoaderT,

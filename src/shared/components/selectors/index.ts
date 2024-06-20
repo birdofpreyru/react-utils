@@ -5,6 +5,4 @@ export { default as Switch } from './Switch';
 export {
   type OptionT,
   type OptionsT,
-  optionValidator,
-  optionsValidator,
 } from './common';

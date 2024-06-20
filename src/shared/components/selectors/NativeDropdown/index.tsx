@@ -1,18 +1,10 @@
 // Implements dropdown based on the native HTML <select> element.
 
-import PT from 'prop-types';
-
 import themed from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
-import {
-  type PropsT,
-  optionValueName,
-  stringOptionsValidator,
-  validThemeKeys,
-  valueValidator,
-} from '../common';
+import { type PropsT, optionValueName } from '../common';
 
 /**
  * Implements a themeable dropdown list. Internally it is rendered with help of
@@ -92,20 +84,4 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
   );
 };
 
-const ThemedDropdown = themed(
-  Dropdown,
-  'Dropdown',
-  validThemeKeys,
-  defaultTheme,
-);
-
-Dropdown.propTypes = {
-  filter: PT.func,
-  label: PT.node,
-  onChange: PT.func,
-  options: stringOptionsValidator,
-  theme: ThemedDropdown.themeType.isRequired,
-  value: valueValidator,
-};
-
-export default ThemedDropdown;
+export default themed(Dropdown, 'Dropdown', defaultTheme);

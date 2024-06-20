@@ -16,8 +16,6 @@ import {
 
 import { createPortal } from 'react-dom';
 
-import PT from 'prop-types';
-
 import type { Theme } from '@dr.pogodin/react-themes';
 
 /* Valid placements of the rendered tooltip. They will be overriden when
@@ -54,14 +52,13 @@ type HeapT = {
   lastPlacement?: PLACEMENTS | undefined;
 };
 
-export const validThemeKeys = [
-  'appearance',
-  'arrow',
-  'content',
-  'container',
-] as const;
+export type ThemeKeysT =
+  | 'appearance'
+  | 'arrow'
+  | 'content'
+  | 'container';
 
-type TooltipThemeT = Theme<typeof validThemeKeys>;
+type TooltipThemeT = Theme<ThemeKeysT>;
 
 /**
  * Creates tooltip components.
@@ -344,10 +341,5 @@ const Tooltip = forwardRef<unknown, {
 
   return components ? createPortal(children, components.content) : null;
 });
-
-Tooltip.propTypes = {
-  children: PT.node,
-  theme: PT.shape({}).isRequired,
-};
 
 export default Tooltip;

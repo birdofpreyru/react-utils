@@ -1,4 +1,3 @@
-import PT from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
 import themed from '@dr.pogodin/react-themes';
@@ -7,14 +6,7 @@ import Options, { type ContainerPosT, type RefT, areEqual } from './Options';
 
 import defaultTheme from './theme.scss';
 
-import {
-  type PropsT,
-  type ValueT,
-  optionValidator,
-  optionValueName,
-  validThemeKeys,
-  valueValidator,
-} from '../common';
+import { type PropsT, type ValueT, optionValueName } from '../common';
 
 const BaseCustomDropdown: React.FunctionComponent<
 PropsT<React.ReactNode, (value: ValueT) => void>
@@ -155,20 +147,4 @@ PropsT<React.ReactNode, (value: ValueT) => void>
   );
 };
 
-const ThemedCustomDropdown = themed(
-  BaseCustomDropdown,
-  'CustomDropdown',
-  validThemeKeys,
-  defaultTheme,
-);
-
-BaseCustomDropdown.propTypes = {
-  filter: PT.func,
-  label: PT.node,
-  onChange: PT.func,
-  options: PT.arrayOf(optionValidator.isRequired),
-  theme: ThemedCustomDropdown.themeType.isRequired,
-  value: valueValidator,
-};
-
-export default ThemedCustomDropdown;
+export default themed(BaseCustomDropdown, 'CustomDropdown', defaultTheme);

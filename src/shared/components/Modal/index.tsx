@@ -9,13 +9,10 @@ import {
 } from 'react';
 
 import ReactDom from 'react-dom';
-import PT from 'prop-types';
 import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import baseTheme from './base-theme.scss';
 import S from './styles.scss';
-
-const validThemeKeys = ['container', 'overlay'] as const;
 
 type PropsT = {
   cancelOnScrolling?: boolean;
@@ -23,7 +20,7 @@ type PropsT = {
   containerStyle?: React.CSSProperties;
   dontDisableScrolling?: boolean;
   onCancel?: () => void;
-  theme: Theme<typeof validThemeKeys>;
+  theme: Theme<'container' | 'overlay'>;
 };
 
 /**
@@ -169,23 +166,7 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
   ) : null;
 };
 
-const ThemedModal = themed(
-  BaseModal,
-  'Modal',
-  validThemeKeys,
-  baseTheme,
-);
-
-BaseModal.propTypes = {
-  cancelOnScrolling: PT.bool,
-  children: PT.node,
-  containerStyle: PT.shape({}),
-  dontDisableScrolling: PT.bool,
-  onCancel: PT.func,
-  theme: ThemedModal.themeType.isRequired,
-};
-
-export default ThemedModal;
+export default themed(BaseModal, 'Modal', baseTheme);
 
 /* Non-themed version of the Modal. */
 export { BaseModal };

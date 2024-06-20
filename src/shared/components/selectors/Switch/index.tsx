@@ -1,29 +1,25 @@
-import PT from 'prop-types';
 import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import {
   type OptionsT,
   type ValueT,
-  optionsValidator,
   optionValueName,
-  valueValidator,
 } from '../common';
 
 import defaultTheme from './theme.scss';
 
-const validThemeKeys = [
-  'container',
-  'label',
-  'option',
-  'options',
-  'selected',
-] as const;
+type ThemeKeyT =
+  | 'container'
+  | 'label'
+  | 'option'
+  | 'options'
+  | 'selected';
 
 type PropsT = {
   label?: React.ReactNode;
   onChange?: (value: ValueT) => void;
   options?: Readonly<OptionsT<React.ReactNode>>;
-  theme: Theme<typeof validThemeKeys>;
+  theme: Theme<ThemeKeyT>;
   value?: ValueT;
 };
 
@@ -75,19 +71,4 @@ const BaseSwitch: React.FunctionComponent<PropsT> = ({
   );
 };
 
-const ThemedSwitch = themed(
-  BaseSwitch,
-  'Switch',
-  validThemeKeys,
-  defaultTheme,
-);
-
-BaseSwitch.propTypes = {
-  label: PT.node,
-  onChange: PT.func,
-  options: optionsValidator,
-  theme: ThemedSwitch.themeType.isRequired,
-  value: valueValidator,
-};
-
-export default ThemedSwitch;
+export default themed(BaseSwitch, 'Switch', defaultTheme);

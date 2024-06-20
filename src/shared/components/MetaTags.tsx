@@ -1,4 +1,3 @@
-import PT from 'prop-types';
 import { type ReactNode, createContext, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 
@@ -146,16 +145,5 @@ const MetaTags: React.FunctionComponent<PropsT> & {
 };
 
 MetaTags.Context = Context;
-
-MetaTags.propTypes = {
-  children: PT.node,
-  description: PT.string.isRequired,
-  image: PT.string,
-  siteName: PT.string,
-  socialDescription: PT.string,
-  socialTitle: PT.string,
-  title: PT.string.isRequired,
-  url: PT.string,
-};
 
 export default MetaTags;

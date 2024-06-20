@@ -2,14 +2,13 @@ import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
-const validThemeKeys = [
-  'bouncing',
-  'circle',
-  'container',
-] as const;
+type ThemeKeyT =
+  | 'bouncing'
+  | 'circle'
+  | 'container';
 
 type PropsT = {
-  theme: Theme<typeof validThemeKeys>;
+  theme: Theme<ThemeKeyT>;
 };
 
 /**
@@ -29,15 +28,4 @@ const Throbber: React.FunctionComponent<PropsT> = ({ theme }) => (
   </span>
 );
 
-const ThemedThrobber = themed(
-  Throbber,
-  'Throbber',
-  validThemeKeys,
-  defaultTheme,
-);
-
-Throbber.propTypes = {
-  theme: ThemedThrobber.themeType.isRequired,
-};
-
-export default ThemedThrobber;
+export default themed(Throbber, 'Throbber', defaultTheme);
