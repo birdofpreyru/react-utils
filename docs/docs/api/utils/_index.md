@@ -12,9 +12,9 @@
 - [webpack](/docs/api/utils/webpack) - [Webpack]-related utils.
 
 :::warning Deprecated Utilities
-- [PT (prop-types)](/docs/api/utils/prop-types) &mdash; Deprecated and removed
-  in **v1.36.0**, as `propTypes` checks are ignored by React v19+. Migrate to
-  TypeScript, or alternative type-checking solutions.
+- [PT (prop-types)](/docs/api/utils/prop-types) &mdash; Removed in **v1.36.0**,
+  as `propTypes` checks are ignored by React v19+. Migrate to TypeScript,
+  or alternative type-checking solutions.
 :::
 
 <!-- links -->
