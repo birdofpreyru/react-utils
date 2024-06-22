@@ -100,12 +100,23 @@ export function mount(scene: ReactNode): MountedSceneT {
   return res;
 }
 
-export function snapshot(element: React.ReactElement) {
+type SnapshotOptionsT = {
+  await?: Promise<void>;
+};
+
+export async function snapshot(
+  element: React.ReactElement,
+  options?: SnapshotOptionsT,
+) {
   let res: RenderResult | undefined;
-  act(() => {
+
+  const promise = act(() => {
     res = render(element);
+    return options?.await;
   });
+
   if (res === undefined) throw Error('Render failed');
+  if (options?.await) await promise;
 
   const nodes = res.asFragment().childNodes;
   expect(nodes.length > 1 ? [...nodes] : nodes[0]).toMatchSnapshot();

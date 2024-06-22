@@ -160,7 +160,10 @@ or the lower-level [fireEvent] from [@testing-library/dom].
 ```tsx
 import { mount } from '@dr.pogodin/react-utils/jest';
 
-function snapshot(element: React.ReactElement): Node | null;
+function snapshot(
+  element: React.ReactElement,
+  options?: SnapshotOptionsT,
+): Node | null;
 ```
 It does a snapshot test of the given ReactJS component.
 
@@ -195,10 +198,23 @@ test('A snapshot test', () => {
 
 **Arguments**
 - `component` &mdash; **React.ReactElement** &mdash; React element to snapshot.
+- `options` &mdash; [SnapshotOptionsT] | **undefined** &mdash; Optional settings.
 
 **Returns**
 - [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) &mdash;
   rendered DOM node.
+
+#### SnapshotOptionsT
+[SnapshotOptionsT]: #snapshotoptionst
+```ts
+type SnapshotOptionsT = {
+  await?: Promise<void>;
+};
+```
+Optional settings for [snapshot()] method.
+- `await` &mdash; **Promise&lt;void&gt;** | **undefined** &mdash; Optional.
+  If provided, [snapshot()] will await for this promise prior to capturing
+  the result of component render (it is awaited after the render is triggered).
 
 ### unmockClientSide()
 ```tsx
