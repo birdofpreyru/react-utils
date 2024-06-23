@@ -71,7 +71,12 @@ defaultCspSettings.directives['frame-src'] = [
   // out of box.
   'https://*.youtube.com',
 ];
-defaultCspSettings.directives['script-src'].push("'unsafe-eval'");
+
+{
+  const directives = defaultCspSettings.directives['script-src'];
+  if (directives) directives.push("'unsafe-eval'");
+  else defaultCspSettings.directives['script-src'] = ["'unsafe-eval'"];
+}
 
 // No need for automatic re-writes via Content Security Policy settings:
 // the forefront Apache or Nginx server is supposed to take care of this

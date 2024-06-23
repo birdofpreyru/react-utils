@@ -1,7 +1,7 @@
 // TS config for ESLint, editor plugins, and other tools that look-up and use
 // the default tsconfig.json file.
 {
-  "extends": "@tsconfig/recommended",
+  "extends": "./config/typescript/base.json",
 
   // Keep these in case any mocks / tests are declared within "src" code tree.
   "exclude": [
@@ -16,7 +16,6 @@
   "compilerOptions": {
     "declaration": true,
     "emitDeclarationOnly": true,
-    "jsx": "react-jsx",
 
     // BEWARE: Different settings are likely to transform dynamic import()
     // statements in the code, thus breaking Webpack's code splitting.
@@ -42,10 +41,5 @@
       "utils/*": ["./src/shared/utils/*"],
     },
     "rootDirs": [".", "build/types-scss"],
-    "strict": true,
-
-    // This ensures TypeScript does not remove unused imports, which may cause
-    // troubles when we rely on some side-effects from imported modules.
-    "verbatimModuleSyntax": true,
   },
 }

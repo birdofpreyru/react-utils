@@ -86,7 +86,7 @@ function getLoadedStyleSheets(): Set<string> {
   const res = new Set<string>();
   const { styleSheets } = document;
   for (let i = 0; i < styleSheets.length; ++i) {
-    const { href } = styleSheets[i];
+    const href = styleSheets[i]?.href;
     if (href) res.add(href);
   }
   return res;
@@ -116,11 +116,13 @@ export function bookStyleSheets(
 ): Promise<void> {
   const promises = [];
   const assets = chunkGroups[chunkName];
+  if (!assets) return Promise.resolve();
+
   const loadedSheets = getLoadedStyleSheets();
 
   for (let i = 0; i < assets.length; ++i) {
     const asset = assets[i];
-    if (asset.endsWith('.css')) {
+    if (asset?.endsWith('.css')) {
       const promise = bookStyleSheet(asset, loadedSheets, refCount);
       if (promise) promises.push(promise);
     }
@@ -143,12 +145,19 @@ export function freeStyleSheets(
   chunkGroups: ChunkGroupsT,
 ) {
   const assets = chunkGroups[chunkName];
+  if (!assets) return;
+
   for (let i = 0; i < assets.length; ++i) {
     const asset = assets[i];
-    if (asset.endsWith('.css')) {
+    if (asset?.endsWith('.css')) {
       const path = `${getPublicPath()}/${asset}`;
-      if (--refCounts[path] <= 0) {
-        document.head.querySelector(`link[href="${path}"]`)!.remove();
+
+      const pathRefCount = refCounts[path];
+      if (pathRefCount) {
+        if (pathRefCount <= 1) {
+          document.head.querySelector(`link[href="${path}"]`)!.remove();
+          delete refCounts[path];
+        } else refCounts[path] = pathRefCount - 1;
       }
     }
   }

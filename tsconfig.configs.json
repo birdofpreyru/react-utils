@@ -1,18 +1,22 @@
 // TS configuration for configs pre-building from TS sources.
 
 {
-  "extends": "@tsconfig/recommended",
+  "extends": "./config/typescript/base.json",
   "include": [
     "config-ts-src",
   ],
   "compilerOptions": {
     "declaration": true,
-    "jsx": "react-jsx",
     "rootDir": "config-ts-src",
     "outDir": "config",
     "paths": {
       "*": ["./src/shared/*", "./src/*", "./*"]
     },
-    "strict": true
+
+    // TODO: Overriding the base config as configs are compiled into CommonJS
+    // modules, and this flag leads to the following error in that case, if set:
+    // ESM syntax is not allowed in a CommonJS module when 'verbatimModuleSyntax' is enabled.
+    // Perhaps, there is a better workaround?
+    "verbatimModuleSyntax": false
   }
 }

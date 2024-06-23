@@ -1,6 +1,6 @@
 # MIT License
 
-_Copyright &copy; 2019&ndash;2023, Dr. Sergey Pogodin_
+_Copyright &copy; 2019&ndash;2024, Dr. Sergey Pogodin_
   &mdash; <doc@pogodin.studio> (https://dr.pogodin.studio) \
 _Copyright &copy; 2018, Topcoder_
 

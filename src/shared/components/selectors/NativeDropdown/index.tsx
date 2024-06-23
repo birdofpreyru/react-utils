@@ -40,7 +40,7 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
 
   for (let i = 0; i < options.length; ++i) {
     const option = options[i];
-    if (!filter || filter(option)) {
+    if (option !== undefined && (!filter || filter(option))) {
       const [iValue, iName] = optionValueName(option);
       isValidValue ||= iValue === value;
       optionElements.push(

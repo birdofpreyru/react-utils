@@ -65,7 +65,7 @@ const Options = forwardRef<RefT, PropsT>(({
   const optionNodes: React.ReactNode[] = [];
   for (let i = 0; i < options.length; ++i) {
     const option = options[i];
-    if (!filter || filter(option)) {
+    if (option !== undefined && (!filter || filter(option))) {
       const [iValue, iName] = optionValueName(option);
       optionNodes.push(
         <div

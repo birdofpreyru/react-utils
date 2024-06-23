@@ -22,7 +22,7 @@ const markup = document.querySelector('#react-view')?.innerHTML;
 
 const fs = global.webpackOutputFs;
 const outputPath = global.webpackConfig!.output!.path;
-const jsFilename = global.webpackStats?.namedChunkGroups?.main?.assets?.[0].name;
+const jsFilename = global.webpackStats?.namedChunkGroups?.main?.assets?.[0]?.name;
 
 it('generates expected SSR markup', () => {
   expect(markup).toMatchSnapshot();

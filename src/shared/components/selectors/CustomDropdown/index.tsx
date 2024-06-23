@@ -89,7 +89,7 @@ PropsT<React.ReactNode, (value: ValueT) => void>
   let selected: React.ReactNode = <>&zwnj;</>;
   for (let i = 0; i < options.length; ++i) {
     const option = options[i];
-    if (!filter || filter(option)) {
+    if (option !== undefined && (!filter || filter(option))) {
       const [iValue, iName] = optionValueName(option);
       if (iValue === value) {
         selected = iName;

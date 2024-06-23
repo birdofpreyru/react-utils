@@ -18,7 +18,7 @@ const global = getGlobal();
 
 const fs = global.webpackOutputFs;
 const outputPath = global.webpackConfig!.output!.path;
-const jsPath = global.webpackStats?.assetsByChunkName?.main[0];
+const jsPath = global.webpackStats?.assetsByChunkName?.main?.[0];
 
 document.write(global.ssrMarkup || '');
 

@@ -38,7 +38,7 @@ it('emits the PNG file to the expected path', () => {
 
 it('generates expected markup at the client-side', async () => {
   const ssrMarkup = container?.innerHTML;
-  let js = global.webpackStats?.entrypoints?.main.assets?.[0].name;
+  let js = global.webpackStats?.entrypoints?.main?.assets?.[0]?.name;
   js = global.webpackOutputFs?.readFileSync(`${outputPath}/${js}`, 'utf8') as string;
   await act(() => new Function(js || '')()); // eslint-disable-line no-new-func
   expect(container?.innerHTML).toBe(ssrMarkup);

@@ -57,6 +57,9 @@ test.skip('onWheel', () => {
   const container = document.getElementsByClassName('container');
   expect(container.length).toBe(1);
   const stopPropagation = jest.fn();
-  fireEvent.wheel(container[0], { stopPropagation });
+
+  const target = container[0];
+  if (target) fireEvent.wheel(target, { stopPropagation });
+
   expect(stopPropagation).toHaveBeenCalled();
 });

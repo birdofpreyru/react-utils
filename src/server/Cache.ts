@@ -1,25 +1,21 @@
+type CachedItemT<DatumT> = {
+  data: DatumT;
+  size: number;
+  timestamp: number;
+};
+
 /**
  * Implements the static cache.
  */
 export default class Cache<DatumT> {
-  private: {
-    items: {
-      [key: string]: {
-        data: DatumT;
-        size: number;
-        timestamp: number;
-      }
-    };
-    maxSize: number;
-    size: number;
-  };
+  private items: Record<string, CachedItemT<DatumT>> = {};
+
+  private maxSize: number;
+
+  private size = 0;
 
   constructor(maxSize: number) {
-    this.private = {
-      items: {},
-      maxSize,
-      size: 0,
-    };
+    this.maxSize = maxSize;
   }
 
   /**
@@ -37,7 +33,7 @@ export default class Cache<DatumT> {
     key: string;
     maxage?: number;
   }): DatumT | null {
-    const item = this.private.items[key];
+    const item = this.items[key];
     return item && Date.now() - item.timestamp < maxage ? item.data : null;
   }
 
@@ -49,19 +45,24 @@ export default class Cache<DatumT> {
    * @param size Byte size of the item.
    */
   add(data: DatumT, key: string, size: number) {
-    const p = this.private;
-    const old = p.items[key];
-    if (old) p.size -= old.size;
-    p.items[key] = { data, size, timestamp: Date.now() };
-    p.size += size;
-    if (p.size > p.maxSize) {
-      const items = Object.entries(p.items);
-      items.sort((a, b) => a[1].timestamp - b[1].timestamp);
-      for (let i = 0; i < items.length; ++i) {
-        const [itemKey, item] = items[i];
-        delete p.items[itemKey];
-        p.size -= item.size;
-        if (p.size < p.maxSize / 2) break;
+    const cached = this.items[key];
+    if (cached) this.size -= cached.size;
+
+    this.items[key] = { data, size, timestamp: Date.now() };
+    this.size += size;
+
+    if (this.size > this.maxSize) {
+      const entries = Object.entries(this.items);
+      entries.sort((a, b) => a[1].timestamp - b[1].timestamp);
+
+      for (let i = 0; i < entries.length; ++i) {
+        const entry = entries[i];
+        if (entry) {
+          const [itemKey, item] = entry;
+          delete this.items[itemKey];
+          this.size -= item.size;
+          if (this.size < this.maxSize / 2) break;
+        }
       }
     }
   }

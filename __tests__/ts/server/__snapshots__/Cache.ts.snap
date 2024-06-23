@@ -2,73 +2,65 @@
 
 exports[`works as expected 1`] = `
 Cache {
-  "private": {
-    "items": {},
-    "maxSize": 18,
-    "size": 0,
-  },
+  "items": {},
+  "maxSize": 18,
+  "size": 0,
 }
 `;
 
 exports[`works as expected 2`] = `
 Cache {
-  "private": {
-    "items": {
-      "A": {
-        "data": "123",
-        "size": 6,
-        "timestamp": 1617580800000,
-      },
-      "B": {
-        "data": "123456",
-        "size": 12,
-        "timestamp": 1617580801000,
-      },
+  "items": {
+    "A": {
+      "data": "123",
+      "size": 6,
+      "timestamp": 1617580800000,
     },
-    "maxSize": 18,
-    "size": 18,
+    "B": {
+      "data": "123456",
+      "size": 12,
+      "timestamp": 1617580801000,
+    },
   },
+  "maxSize": 18,
+  "size": 18,
 }
 `;
 
 exports[`works as expected 3`] = `
 Cache {
-  "private": {
-    "items": {
-      "A": {
-        "data": "ab",
-        "size": 4,
-        "timestamp": 1617580802000,
-      },
-      "B": {
-        "data": "123456",
-        "size": 12,
-        "timestamp": 1617580801000,
-      },
+  "items": {
+    "A": {
+      "data": "ab",
+      "size": 4,
+      "timestamp": 1617580802000,
     },
-    "maxSize": 18,
-    "size": 16,
+    "B": {
+      "data": "123456",
+      "size": 12,
+      "timestamp": 1617580801000,
+    },
   },
+  "maxSize": 18,
+  "size": 16,
 }
 `;
 
 exports[`works as expected 4`] = `
 Cache {
-  "private": {
-    "items": {
-      "A": {
-        "data": "ab",
-        "size": 4,
-        "timestamp": 1617580802000,
-      },
-      "C": {
-        "data": "21",
-        "size": 4,
-        "timestamp": 1617580803000,
-      },
+  "items": {
+    "A": {
+      "data": "ab",
+      "size": 4,
+      "timestamp": 1617580802000,
     },
-    "maxSize": 18,
-    "size": 8,
+    "C": {
+      "data": "21",
+      "size": 4,
+      "timestamp": 1617580803000,
+    },
   },
+  "maxSize": 18,
+  "size": 8,
 }
 `;

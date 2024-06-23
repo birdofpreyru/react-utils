@@ -21,8 +21,8 @@ const timers: Timer<void>[] = [];
 
 export function cleanup() {
   for (let i = 0; i < timers.length; ++i) {
-    timers[i].abort();
-    timers[i].resolve();
+    timers[i]?.abort();
+    timers[i]?.resolve();
   }
 }
 

@@ -30,7 +30,7 @@ const { assetsByChunkName, errors } = global.webpackStats || {};
 
 let jsFileName: string;
 let cssFileName: string;
-assetsByChunkName?.main.forEach((name) => {
+assetsByChunkName?.main?.forEach((name) => {
   if (name.endsWith('.css')) cssFileName = name;
   else if (name.endsWith('.js')) jsFileName = name;
 });

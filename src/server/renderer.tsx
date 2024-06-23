@@ -159,10 +159,13 @@ export function isBrotliAcceptable(req: Request) {
   if (acceptable) {
     const ops = acceptable.split(',');
     for (let i = 0; i < ops.length; ++i) {
-      const [type, priority] = ops[i].trim().split(';q=');
-      if ((type === '*' || type === 'br')
-      && (!priority || parseFloat(priority) > 0)) {
-        return true;
+      const op = ops[i];
+      if (op) {
+        const [type, priority] = op.trim().split(';q=');
+        if ((type === '*' || type === 'br')
+        && (!priority || parseFloat(priority) > 0)) {
+          return true;
+        }
       }
     }
   }
@@ -193,7 +196,7 @@ function groupExtraScripts(scripts: Array<string | ScriptT> = []) {
     const script = scripts[i];
     if (isString(script)) {
       if (script) res[SCRIPT_LOCATIONS.DEFAULT] += script;
-    } else if (script.code) {
+    } else if (script?.code) {
       if (res[script.location] !== undefined) {
         res[script.location] += script.code;
       } else throw Error(`Invalid location "${script.location}"`);

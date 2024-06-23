@@ -86,7 +86,7 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
       onFocus={() => {
         const elems = containerRef.current?.querySelectorAll('*') as NodeListOf<HTMLElement>;
         for (let i = elems.length - 1; i >= 0; --i) {
-          elems[i].focus();
+          elems[i]?.focus();
           if (document.activeElement === elems[i]) return;
         }
         overlayRef.current?.focus();
