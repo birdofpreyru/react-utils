@@ -1,5 +1,5 @@
 {
-  "version": "1.36.1",
+  "version": "1.36.2",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -59,7 +59,7 @@
     "@dr.pogodin/babel-plugin-transform-assets": "^1.2.2",
     "@dr.pogodin/babel-preset-svgr": "^1.8.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
-    "@testing-library/dom": "^10.1.0",
+    "@testing-library/dom": "^10.2.0",
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.5.2",
     "@tsconfig/recommended": "^1.0.6",
@@ -153,6 +153,7 @@
       "react-native": "./node-entry.js"
     },
     "./config/*": "./config/*.js",
+    "./config/*.json": "./config/*.json",
     "./jest": "./build/production/shared/utils/jest/index.js",
     "./mixins": "./src/styles/mixins.scss",
     "./dev-styles": {
