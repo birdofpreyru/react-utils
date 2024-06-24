@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`generates expected SSR markup 1`] = `"<div><div></div><div>Hello World!</div></div>"`;

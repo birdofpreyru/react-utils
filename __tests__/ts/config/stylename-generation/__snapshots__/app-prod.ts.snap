@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`emits expected CSS 1`] = `".SjBfrO{background:red;height:10px;width:10px}.y4brFZ{color:blue}.MzIKg7{background:green;height:10px;width:10px}"`;
-
-exports[`generates expected markup during SSR 1`] = `"<div class="SjBfrO">{"testClassName":"SjBfrO"}</div><div class="MzIKg7">{"testClassName":"MzIKg7"}</div>{"sampleClassName":"y4brFZ"}"`;
