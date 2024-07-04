@@ -89,6 +89,12 @@ keys for [Dropdown] are:
   and a&nbsp;custom arrow.
 - `hiddenOption` &mdash; The "hidden option" element, which is rendered when
   the current dropdown value is _undefined_.
+
+- `invalid` &mdash; The corresponding classes are added to
+  the underlying `<select>` element (in addition to the classes corresponding
+  to the `select` key below) if the current dropdown's value does not match any
+  of provided options (and, thus, it is invalid).
+
 - `label` &mdash; The optional dropdown label.
 - `option` &mdash; Each option element.
 - `select` &mdash; The underlying `<select>` element.
