@@ -4,6 +4,8 @@
 .context,
 .ad.hoc {
   &.dropdown {
+    display: flex;
+    overflow: hidden;
     position: relative;
   }
 
@@ -56,6 +58,7 @@
     color: inherit;
     cursor: pointer;
     display: inline-block;
+    flex: 1;
     font: inherit;
     outline: none;
     padding: 0.3em 3.3em calc(0.3em + 1px) 1.2em;
