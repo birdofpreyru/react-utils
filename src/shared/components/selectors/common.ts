@@ -12,6 +12,11 @@ type ThemeKeyT =
   | 'option'
   | 'select'
 
+  // TODO: This is currently only valid for (native) <Dropdown>,
+  // other kinds of selectors should be evaluated, and aligned with this
+  // feature, if appropriate.
+  | 'invalid'
+
   // TODO: This is only valid for <CustomDropdown>, thus we need to re-factor it
   // into a separate theme spec for that component.
   | 'upward';
