@@ -47,7 +47,7 @@
     margin: 0 0.6em 0 1.5em;
   }
 
-  &.option { /* Empty style */ }
+  &.option { color: black; }
   &.hiddenOption { display: none; }
 
   &.select {
@@ -73,5 +73,7 @@
       border-color: blue;
       box-shadow: 0 0 3px 1px lightblue;
     }
+
+    &.invalid { color: gray; }
   }
 }

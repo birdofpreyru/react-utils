@@ -66,12 +66,15 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
     </option>
   );
 
+  let selectClassName = theme.select;
+  if (!isValidValue) selectClassName += ` ${theme.invalid}`;
+
   return (
     <div className={theme.container}>
       { label === undefined ? null : <div className={theme.label}>{label}</div> }
       <div className={theme.dropdown}>
         <select
-          className={theme.select}
+          className={selectClassName}
           onChange={onChange}
           value={value}
         >
