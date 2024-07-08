@@ -66,6 +66,7 @@ export async function mockTimer(time: number) {
 
 export type MountedSceneT = HTMLElement & {
   destroy: () => void;
+  snapshot: () => void;
 };
 
 /**
@@ -87,6 +88,10 @@ export function mount(scene: ReactNode): MountedSceneT {
 
     act(() => root.unmount());
     res.remove();
+  };
+
+  res.snapshot = () => {
+    expect(res).toMatchSnapshot();
   };
 
   // NOTE: As it seems @testing-library may reset this flag to false
