@@ -1,5 +1,5 @@
 {
-  "version": "1.38.0",
+  "version": "1.38.1",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -37,7 +37,7 @@
     "react-helmet": "^6.1.0",
     "react-router-dom": "^6.24.1",
     "request-ip": "^3.3.0",
-    "rimraf": "^5.0.7",
+    "rimraf": "^5.0.8",
     "serialize-javascript": "^6.0.2",
     "serve-favicon": "^2.5.0",
     "source-map-support": "^0.5.21",
@@ -59,7 +59,7 @@
     "@dr.pogodin/babel-plugin-transform-assets": "^1.2.2",
     "@dr.pogodin/babel-preset-svgr": "^1.8.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
-    "@testing-library/dom": "^10.3.0",
+    "@testing-library/dom": "^10.3.1",
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.5.2",
     "@tsconfig/recommended": "^1.0.7",
