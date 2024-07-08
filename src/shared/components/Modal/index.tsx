@@ -17,10 +17,14 @@ import S from './styles.scss';
 type PropsT = {
   cancelOnScrolling?: boolean;
   children?: ReactNode;
-  containerStyle?: React.CSSProperties;
   dontDisableScrolling?: boolean;
   onCancel?: () => void;
+  style?: React.CSSProperties;
+  testId?: string;
   theme: Theme<'container' | 'overlay'>;
+
+  /** @deprecated */
+  containerStyle?: React.CSSProperties;
 };
 
 /**
@@ -40,6 +44,8 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
   containerStyle,
   dontDisableScrolling,
   onCancel,
+  style,
+  testId,
   theme,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -141,11 +147,12 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
         <div
           aria-modal="true"
           className={theme.container}
+          data-testid={testId}
           onClick={(e) => e.stopPropagation()}
           onWheel={(event) => event.stopPropagation()}
           ref={containerRef}
           role="dialog"
-          style={containerStyle}
+          style={style ?? containerStyle}
         >
           {children}
         </div>

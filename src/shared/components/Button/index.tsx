@@ -17,6 +17,7 @@ type PropsT = {
   onMouseDown?: React.MouseEventHandler;
   openNewTab?: boolean;
   replace?: boolean;
+  testId?: string;
   theme: Theme<'active' | 'button' | 'disabled'>;
   // TODO: It needs a more precise typing of the object option.
   to?: object | string;
@@ -32,6 +33,7 @@ export const BaseButton: React.FunctionComponent<PropsT> = ({
   onMouseDown,
   openNewTab,
   replace,
+  testId,
   theme,
   to,
 }) => {
@@ -40,7 +42,7 @@ export const BaseButton: React.FunctionComponent<PropsT> = ({
   if (disabled) {
     if (theme.disabled) className += ` ${theme.disabled}`;
     return (
-      <div className={className}>
+      <div className={className} data-testid={testId}>
         {children}
       </div>
     );
@@ -49,6 +51,7 @@ export const BaseButton: React.FunctionComponent<PropsT> = ({
     return (
       <Link
         className={className}
+        data-testid={testId}
         enforceA={enforceA}
         onClick={onClick}
         onMouseDown={onMouseDown}
@@ -64,6 +67,7 @@ export const BaseButton: React.FunctionComponent<PropsT> = ({
   return (
     <div
       className={className}
+      data-testid={testId}
       onClick={onClick}
       onKeyDown={onClick && ((e) => {
         if (e.key === 'Enter') onClick(e);

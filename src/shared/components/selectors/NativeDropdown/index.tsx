@@ -30,6 +30,7 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
   label,
   onChange,
   options,
+  testId,
   theme,
   value,
 }) => {
@@ -75,6 +76,7 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
       <div className={theme.dropdown}>
         <select
           className={selectClassName}
+          data-testid={testId}
           onChange={onChange}
           value={value}
         >
