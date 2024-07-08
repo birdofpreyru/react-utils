@@ -49,6 +49,11 @@ cases.
   URL is internal, this flag opts for the new route to replace the last record
   in the navigation history, instead of being pushed as a new entry into the nav
   history stack.
+
+- `testId` &mdash; **string** &mdash; This value is assigned to
+  the `data-testid` attribute of the underlying button element,
+  to facilitate testing with [testing-library].
+
 - `theme` - [ButtonTheme](#buttontheme) - _Ad hoc_ button theme.
 - `to` - **object | string** - If specified, the button is rendered as [Link]
   (if not disabled), and beside the visual appearance as a button it acts as
@@ -69,3 +74,4 @@ See [React Themes] documentation for theming details.
 [Button]: /docs/api/components/button
 [Link]: /docs/api/components/link
 [React Themes]: https://dr.pogodin.studio/docs/react-themes
+[testing-library]: https://testing-library.com

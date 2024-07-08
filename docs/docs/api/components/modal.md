@@ -34,15 +34,25 @@ to the window scrolling events when the modal is displayed,
   events on the browser window, and trigger `onCancel` callback (if provided)
   when the scrolling is detected.
 - `children` &mdash; **React.ReactNode** &mdash; Modal content.
-- `containerStyle` &mdash; **React.CSSProperties** &mdash; Inline style object
-  to pass to the modal container.
 - `dontDisableScrolling` &mdash; **boolean** &mdash; Opt-out from disabling
   the scrolling on the window when the modal is open.
 - `onCancel` &mdash; **function** &mdash; The callback to trigger when user
   clicks outside the modal window, or presses &laquo;escape&raquo; key.
   It is expected to close the modal.
+- `style` &mdash; **React.CSSProperties** &mdash; Inline style object
+  to pass to the modal container.
+
+- `testId` &mdash; **string** &mdash; This value is assigned to
+  the `data-testid` attribute of the modal's container, to facilitate testing
+  with [testing-library].
+
 - `theme` &mdash; [ModalTheme] &mdash; _Ad hoc_ visual theme.
 - Other [props of themed components](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
+
+:::caution Deprecated Properties
+- `containerStyle` &mdash; **React.CSSProperties** &mdash; Inline style object
+  to pass to the modal container &mdash; Use `style` property instead.
+:::
 
 ### ModalTheme
 See [React Themes] documentation to learn how the visual theming works.
@@ -54,3 +64,4 @@ The valid theme keys for [Modal] component are:
 [Modal]: /docs/api/components/modal
 [ModalTheme]: #modaltheme
 [React Themes]: https://dr.pogodin.studio/docs/react-themes
+[testing-library]: https://testing-library.com

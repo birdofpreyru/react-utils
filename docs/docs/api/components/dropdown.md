@@ -62,6 +62,11 @@ option can be modified via the `hiddenOption` theme key.
   options. It is fine to intermix [DropdownOption] and string items within
   the same option list. For string items the option value and name will be
   the same.
+
+- `testId` &mdash; **string** &mdash; This value is assigned to
+  the `data-testid` attribute of the dropdown's underlying `<select>` element,
+  to facilitate testing with [testing-library].
+
 - `theme` - [DropdownTheme] - _Ad hoc_ theme.
 - `value` &mdash; **number** | **string** &mdash; The currently selected value.
 - Other [props of themed components](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties).
@@ -104,3 +109,4 @@ keys for [Dropdown] are:
 [DropdownOption]: #dropdownoption
 [DropdownTheme]: #dropdowntheme
 [React Themes]: https://dr.pogodin.studio/docs/react-themes
+[testing-library]: https://testing-library.com

@@ -122,15 +122,17 @@ import { mount } from '@dr.pogodin/react-utils/jest';
 
 function mount(scene: ReactNode): MountedSceneT;
 ```
-Mounts `scene` to the DOM and returns the root scene element (DOM node) with
-**.destroy()** method attached, which unmounts the scene from DOM.
+Mounts given `scene` into DOM and returns the root scene element (DOM node) with
+**.destroy()** and **.snapshot()** methods attached. The former of these methods
+unmounts the scene from DOM; and the later snapshots the scene (_i.e._ is is
+an alias for `expect(scene).toMatchSnapshot()`).
 
 **Arguments**
 - `scene` - **React.ReactNode** - The scene.
 
 **Returns**
 - **HTMLElement** - The root DOM element of the mounted scene with
-  **.destroy()** method attached.
+  **.destroy()** and **.snapshot()** methods attached.
 
 ### render()
 :::danger Deprecated
