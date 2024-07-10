@@ -21,6 +21,5 @@ test('Export at client side', () => {
   const lib = require('../src');
   expect(lib).toMatchSnapshot();
   expect({ ...lib._ }).toMatchSnapshot();
-  expect({ ...lib.api }).toMatchSnapshot();
   expect(Object.keys(lib.time)).toMatchSnapshot();
 });

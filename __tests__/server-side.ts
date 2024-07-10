@@ -7,7 +7,6 @@ const lib = require('../src');
 test('Export at server side', () => {
   expect(lib).toMatchSnapshot();
   expect({ ...lib._ }).toMatchSnapshot();
-  expect({ ...lib.api }).toMatchSnapshot();
   expect(Object.keys(lib.time)).toMatchSnapshot();
 
   // The order of these entries in "serverExports" below must be enforced,

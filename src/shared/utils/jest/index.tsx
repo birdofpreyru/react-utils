@@ -1,6 +1,12 @@
 /* global jest, document */
 /* eslint-disable import/no-extraneous-dependencies */
 
+import type {
+  AxiosRequestConfig,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from 'axios';
+
 import mockdate from 'mockdate';
 import { type ReactNode, act } from 'react';
 import { type Root, createRoot } from 'react-dom/client';
@@ -51,6 +57,43 @@ export function unmockClientSide() {
 export function getMockUuid(seed = 0) {
   const x = seed.toString(16).padStart(32, '0');
   return `${x.slice(0, 8)}-${x.slice(8, 12)}-${x.slice(12, 16)}-${x.slice(16, 20)}-${x.slice(20)}`;
+}
+
+export type AxiosRequestHandlerT =
+  (config: AxiosRequestConfig) => Partial<AxiosResponse> | null | undefined;
+
+export function mockAxios(handlers: AxiosRequestHandlerT[]) {
+  const axios = jest.requireActual('axios');
+
+  axios.defaults.adapter = async (config: AxiosRequestConfig): Promise<AxiosResponse> => {
+    for (let i = 0; i < handlers.length; ++i) {
+      const res = handlers[i]?.(config);
+      if (res) {
+        return {
+          config: config as InternalAxiosRequestConfig,
+          data: null,
+          headers: {},
+          status: 200,
+          statusText: 'OK',
+          ...res,
+        };
+      }
+    }
+
+    // Fallback to the regular network request.
+    const res = await axios({ ...config, adapter: ['xhr', 'http', 'fetch'] });
+
+    console.warn(
+      'Network request has not been mocked for a test.\n\nConfig:\n',
+      config,
+      '\n\nResult:\n',
+      JSON.stringify(res, null, 2),
+    );
+
+    return res;
+  };
+
+  return axios;
 }
 
 /**

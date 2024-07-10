@@ -1,3 +1,8 @@
+@keyframes bouncing {
+  from { top: -0.3em; }
+  to { top: 0.3em; }
+}
+
 *,
 .context,
 .ad.hoc {
@@ -6,11 +11,6 @@
   }
 
   &.circle {
-    @keyframes bouncing {
-      from { top: -0.3em; }
-      to { top: 0.3em; }
-    }
-
     animation: bouncing 0.4s ease-in infinite alternate;
     background: black;
     border-radius: 0.3em;

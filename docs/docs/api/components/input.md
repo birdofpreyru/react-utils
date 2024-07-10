@@ -9,6 +9,12 @@ and themed using [React Themes] library.
 
 - `label` &mdash; **React.ReactNode** &mdash; Input component label
   (to be rendered next to the input, if provided).
+
+- `testId` &mdash; **string | undefined** &mdash; Optional. If provided, it is
+  set as the value of the `data-testid` attribute of the underlying `<input>`
+  element, to facilitate its retrieval by [Testing Library]'s [getByTestId()]
+  methods in test evnironments.
+
 - `theme` - [InputTheme] - _Ad hoc_ visual theme.
 - Other [props of themed components](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties).
 - Any other props are passed down to the underlying HTML `<input>` element.
@@ -21,6 +27,8 @@ of [Input] component are:
 - `input` - The underlying HTML `<input>` element.
 - `label` &mdash; The label element.
 
+[getByTestId()]: https://testing-library.com/docs/queries/bytestid
 [Input]: #
 [InputTheme]: #inputtheme
 [React Themes]: https://dr.pogodin.studio/docs/react-themes
+[Testing Library]: https://testing-library.com

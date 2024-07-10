@@ -43,6 +43,8 @@ a very important part of Jest-testing utilities provided by the library.
   `react` (moved into `react` package since React v18.3).
 - [getMockUuid()](#getmockuuid) - Generates a mock UUID (formats the given `seed`
   into an UUID-formatted string).
+- [mockAxios()] &mdash; A helper which simplifies mocking out of [axios]
+  (our selected HTTP(S) client library) in tests.
 - [mockClientSide()] - Tricks **react-utils** into thinking the test is running
   within the client-side (browser) environment.
 - [mockTimer()](#mocktimer) - Advances mock timers, and mock date by
@@ -89,6 +91,50 @@ a UUID-formatted string.
 
 **Returns**
 - **string** - Mock UUID.
+
+### mockAxios()
+[mockAxios()]: #mockaxios
+```ts
+import { mockAxios } from '@dr.pogodin/react-utils/jest';
+
+function mockAxios(handlers: AxiosRequestHandler[]): Axios;
+```
+
+[mockAxios()] is a helper which simplifies mocking out of [axios] (our selected
+HTTP(S) client library) in tests. To use it, you want to create `__mock__/axios.ts`,
+or `__mock__/axios/index.ts` file in the root of the host codebase:
+```tsx
+// Basic __mock__/axios.ts example.
+
+import { type AxiosRequestHandlerT, mockAxios } from '@dr.pogodin/react-utils/jest';
+
+const sampleHandler: AxiosRequestHandlerT = (config) {
+  if (config.url === 'https://dr.pogodin.studio/docs/react-utils') {
+    return { data: 'mock reponse' };
+  }
+};
+
+export default mockAxios([
+  sampleHandler,
+]);
+```
+
+With such setup, every call to [axios] within Jest tests will be run through
+each of provided mock request handlers; if any handler returns an object,
+the corresponding [axios] call will be returned to that result (with any
+omitted fields of [axios] response set to reasonable default values). If all
+handlers return **null** or **undefined** results, the mock will fallback
+to the real network call, and it will print a warning to the console, with
+details of the corresponding request and response (which will help you to
+mock that out).
+
+For further details refer to [axios] documentation for
+[request config](https://www.npmjs.com/package/axios#request-config)
+(the argument of mock request handlers),
+and [response schema](https://www.npmjs.com/package/axios#response-schema)
+(the result of mock request handlers should be a
+[partial](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)
+of it).
 
 ### mockClientSide()
 ```tsx
@@ -230,6 +276,7 @@ Reverts the effect of previous [mockClientSide()] call.
 [@testing-library/react]: https://testing-library.com/docs/react-testing-library/intro/
 [@testing-library/user-event]: https://testing-library.com/docs/user-event/intro
 [avoid shallow rendering]: https://react.dev/blog/2024/04/25/react-19-upgrade-guide#removed-react-test-renderer-shallow
+[axios]: https://www.npmjs.com/package/axios
 [E2eSsrEnv]: /docs/api/classes/E2eSsrEnv
 [fireEvent]: https://testing-library.com/docs/dom-testing-library/api-events
 [Jest]: https://jestjs.io
