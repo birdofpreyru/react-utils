@@ -11,6 +11,7 @@ type ThemeKeyT =
 
 type PropsT = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: React.ReactNode;
+  testId?: string;
   theme: Theme<ThemeKeyT>;
 };
 
@@ -26,6 +27,7 @@ type PropsT = React.InputHTMLAttributes<HTMLInputElement> & {
 const Input = forwardRef<HTMLInputElement, PropsT>((
   {
     label,
+    testId,
     theme,
     ...rest
   }: PropsT,
@@ -35,6 +37,7 @@ const Input = forwardRef<HTMLInputElement, PropsT>((
     { label === undefined ? null : <div className={theme.label}>{label}</div> }
     <input
       className={theme.input}
+      data-testid={testId}
       ref={ref}
       {...rest} // eslint-disable-line react/jsx-props-no-spreading
     />
