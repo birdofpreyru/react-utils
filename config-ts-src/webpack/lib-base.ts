@@ -100,6 +100,11 @@ export default function configFactory(ops: OptionsT): Configuration {
           publicPath: `${ops.library}/build/shared`,
         },
       }, {
+        // Aggregates source maps from dependencies.
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
+      }, {
         /* Loads JS and JSX moudles, and inlines SVG assets. */
         test: ops.typescript ? /\.((j|t)sx?|svg)$/ : /\.(jsx?|svg)$/,
         exclude: [

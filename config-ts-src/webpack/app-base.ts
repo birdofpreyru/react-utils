@@ -315,6 +315,11 @@ export default function configFactory(ops: OptionsT): Configuration {
           filename: 'fonts/[contenthash][ext][query]',
         },
       }, {
+        // Aggregates source maps from dependencies.
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
+      }, {
         /* Loads JS and JSX moudles, and inlines SVG assets. */
         test: ops.typescript ? /\.((j|t)sx?|svg)$/ : /\.(jsx?|svg)$/,
         exclude: [/node_modules/],

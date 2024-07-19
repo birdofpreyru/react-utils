@@ -150,6 +150,9 @@ The config factory returns a config object which
   `[PUBLIC_PATH]/[CHUNK_NAME].css` chunks.
 - Bundles CSS files from any folder of source code. The files are bundled and
   extracted into `[PUBLIC_PATH]/[CHUNK_NAME].css` chunks.
+
+- Aggregates source maps from dependencies, using [source-map-loader].
+
 - Bundles JS, JSX, and SVG files. They are compiled and emitted into
   `[PUBLIC_PATH]/[CHUNK_NAME].js` chunks, using [Babel] environment
   specified in the factory options, and
@@ -346,6 +349,9 @@ The generated config does the following:
 - Bundle SCSS files from any folder of source code, beside `node_modules` and
   its subfolders. The files are compiled, bundled and extracted into
   the `build/{type}/style.css` chunks.
+
+- Aggregates source maps from dependencies, using [source-map-loader].
+
 - Bundles JS, JSX, and SVG files; they are compiled into
   `build/{type}/web.bundle.js` chunks, using the [Babel] environment
   specified in the factory options, and
@@ -396,6 +402,7 @@ environment. This factory function accepts the same options, and does all
 the same stuff, and on top of that slightly modifies the resulting config
 as required for production needs.
 
+[source-map-loader]: https://www.npmjs.com/package/source-map-loader
 [Application Config]: #application-config
 [base app config]: #app-base
 [Babel]: https://babeljs.io/
