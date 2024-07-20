@@ -61,6 +61,15 @@ The valid theme keys for [Modal] component are:
 - `overlay` - The semi-transparent overlay that shades the background under
   the open modal, and handles clicks outside the modal when that is open.
 
+:::tip
+The default `z-index` of modal overlay (998) is exposed from the library as
+`$zIndexOfDefaultModalOverlay` SCSS variable in [SCSS Mixins]. Any UI element
+with lower `z-index` will be effectively blocked when the modal is open.
+By default, the main modal container itself has its `z-index` by 1 larger than
+`$zIndexOfDefaultModalOverlay` (_i.e._ 999).
+:::
+
+[SCSS Mixins]: http://localhost:3000/docs/react-utils/docs/api/styles/mixins
 [Modal]: /docs/api/components/modal
 [ModalTheme]: #modaltheme
 [React Themes]: https://dr.pogodin.studio/docs/react-themes

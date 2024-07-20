@@ -1,4 +1,6 @@
 /* Collection of standard mixins, being used all around. */
 @import "_mixins/fonts";
 @import "_mixins/media";
-@import "_mixins/typography"
+@import "_mixins/typography";
+
+$zIndexOfDefaultModalOverlay: 998;

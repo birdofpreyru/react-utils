@@ -11,7 +11,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 998;
+    z-index: $zIndexOfDefaultModalOverlay;
 
     &:focus { outline: none; }
   }
@@ -29,7 +29,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 999;
+    z-index: $zIndexOfDefaultModalOverlay + 1;
 
     @include xs-to-lg {
       max-width: 95vw;
