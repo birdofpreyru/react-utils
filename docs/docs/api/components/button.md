@@ -52,7 +52,8 @@ cases.
 
 - `testId` &mdash; **string** &mdash; This value is assigned to
   the `data-testid` attribute of the underlying button element,
-  to facilitate testing with [testing-library].
+  to facilitate testing with [testing-library]. It is optimized out from
+  production builds.
 
 - `theme` - [ButtonTheme](#buttontheme) - _Ad hoc_ button theme.
 - `to` - **object | string** - If specified, the button is rendered as [Link]

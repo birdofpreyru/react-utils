@@ -42,7 +42,10 @@ export const BaseButton: React.FunctionComponent<PropsT> = ({
   if (disabled) {
     if (theme.disabled) className += ` ${theme.disabled}`;
     return (
-      <div className={className} data-testid={testId}>
+      <div
+        className={className}
+        data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
+      >
         {children}
       </div>
     );
@@ -51,7 +54,7 @@ export const BaseButton: React.FunctionComponent<PropsT> = ({
     return (
       <Link
         className={className}
-        data-testid={testId}
+        data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
         enforceA={enforceA}
         onClick={onClick}
         onMouseDown={onMouseDown}
@@ -67,7 +70,7 @@ export const BaseButton: React.FunctionComponent<PropsT> = ({
   return (
     <div
       className={className}
-      data-testid={testId}
+      data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
       onClick={onClick}
       onKeyDown={onClick && ((e) => {
         if (e.key === 'Enter') onClick(e);

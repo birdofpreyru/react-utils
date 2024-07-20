@@ -37,7 +37,7 @@ const Input = forwardRef<HTMLInputElement, PropsT>((
     { label === undefined ? null : <div className={theme.label}>{label}</div> }
     <input
       className={theme.input}
-      data-testid={testId}
+      data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
       ref={ref}
       {...rest} // eslint-disable-line react/jsx-props-no-spreading
     />

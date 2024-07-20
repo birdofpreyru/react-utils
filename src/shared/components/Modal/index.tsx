@@ -147,7 +147,7 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
         <div
           aria-modal="true"
           className={theme.container}
-          data-testid={testId}
+          data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
           onClick={(e) => e.stopPropagation()}
           onWheel={(event) => event.stopPropagation()}
           ref={containerRef}

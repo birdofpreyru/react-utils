@@ -76,7 +76,7 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
       <div className={theme.dropdown}>
         <select
           className={selectClassName}
-          data-testid={testId}
+          data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
           onChange={onChange}
           value={value}
         >

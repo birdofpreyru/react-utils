@@ -13,7 +13,7 @@ and themed using [React Themes] library.
 - `testId` &mdash; **string | undefined** &mdash; Optional. If provided, it is
   set as the value of the `data-testid` attribute of the underlying `<input>`
   element, to facilitate its retrieval by [Testing Library]'s [getByTestId()]
-  methods in test evnironments.
+  methods in test evnironments. It is optimized out from production builds.
 
 - `theme` - [InputTheme] - _Ad hoc_ visual theme.
 - Other [props of themed components](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties).

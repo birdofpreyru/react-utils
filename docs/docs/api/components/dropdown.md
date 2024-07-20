@@ -65,7 +65,8 @@ option can be modified via the `hiddenOption` theme key.
 
 - `testId` &mdash; **string** &mdash; This value is assigned to
   the `data-testid` attribute of the dropdown's underlying `<select>` element,
-  to facilitate testing with [testing-library].
+  to facilitate testing with [testing-library]. It is optimized out from
+  production builds.
 
 - `theme` - [DropdownTheme] - _Ad hoc_ theme.
 - `value` &mdash; **number** | **string** &mdash; The currently selected value.
