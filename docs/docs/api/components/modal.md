@@ -69,7 +69,7 @@ By default, the main modal container itself has its `z-index` by 1 larger than
 `$zIndexOfDefaultModalOverlay` (_i.e._ 999).
 :::
 
-[SCSS Mixins]: http://localhost:3000/docs/react-utils/docs/api/styles/mixins
+[SCSS Mixins]: https://dr.pogodin.studio/docs/react-utils/docs/api/styles/mixins
 [Modal]: /docs/api/components/modal
 [ModalTheme]: #modaltheme
 [React Themes]: https://dr.pogodin.studio/docs/react-themes

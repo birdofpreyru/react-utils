@@ -37,7 +37,7 @@ export type PropsT<
   filter?: (item: OptionT<NameT> | ValueT) => boolean;
   label?: React.ReactNode;
   onChange?: OnChangeT;
-  options?: Readonly<OptionsT<NameT>>;
+  options: Readonly<OptionsT<NameT>>;
   testId?: string;
   theme: Theme<ThemeKeyT>;
   value?: ValueT;
