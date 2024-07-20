@@ -81,14 +81,24 @@ export function mockAxios(handlers: AxiosRequestHandlerT[]) {
     }
 
     // Fallback to the regular network request.
-    const res = await axios({ ...config, adapter: ['xhr', 'http', 'fetch'] });
-
-    console.warn(
-      'Network request has not been mocked for a test.\n\nConfig:\n',
-      config,
-      '\n\nResult:\n',
-      JSON.stringify(res, null, 2),
-    );
+    let res: AxiosResponse;
+    try {
+      res = await axios({ ...config, adapter: ['xhr', 'http', 'fetch'] });
+      console.warn(
+        'Network request has not been mocked for a test.\n\nConfig:\n',
+        config,
+        '\n\nResult:\n',
+        JSON.stringify(res, null, 2),
+      );
+    } catch (e) {
+      console.warn(
+        'Network request has not been mocked for a test, and failed.\n\nConfig:\n',
+        config,
+        '\n\nError\n',
+        JSON.stringify(e, null, 2),
+      );
+      throw e;
+    }
 
     return res;
   };
