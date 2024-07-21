@@ -1,10 +1,5 @@
 // Checks for client- vs. server-side environment detection.
 
-declare global {
-  // eslint-disable-next-line no-var, vars-on-top
-  var REACT_UTILS_FORCE_CLIENT_SIDE: boolean | undefined;
-}
-
 /**
  * `true` within client-side environment (browser), `false` at server-side.
  */

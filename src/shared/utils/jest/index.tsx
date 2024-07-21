@@ -21,11 +21,6 @@ export { act };
 
 export { default as getGlobal } from './global';
 
-declare global {
-  // eslint-disable-next-line no-var, vars-on-top
-  var IS_REACT_ACT_ENVIRONMENT: boolean | undefined;
-}
-
 global.IS_REACT_ACT_ENVIRONMENT = true;
 
 const originalProcessVersions = process.versions;

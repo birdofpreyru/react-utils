@@ -1,3 +1,7 @@
+/* eslint-disable no-var */
+
+declare var REACT_UTILS_FORCE_CLIENT_SIDE: boolean | undefined;
+
 declare module '@babel/register/experimental-worker' {
   const register: {
     (args: {

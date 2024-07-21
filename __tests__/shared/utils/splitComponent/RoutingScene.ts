@@ -1,6 +1,6 @@
 /**
  * @jest-environment ./src/shared/utils/jest/E2eSsrEnv.ts
- * @webpack-config-factory ./config/webpack/app-development.js
+ * @webpack-config-factory ./config/webpack/app-production.js
  * @webpack-config-options {
  *  "entry": "./__assets__/RoutingScene",
  *  "dontUseHmr": true,
@@ -51,15 +51,18 @@ it('hydration works as expected', async () => {
   const viewMarkup = document.querySelector('#react-view')!.innerHTML;
 
   const fs = global.webpackOutputFs;
-  const mainJs = fs.readFileSync(`${outputPath}/main.js`, 'utf8') as string;
-  const splitJs = fs.readFileSync(`${outputPath}/split.js`, 'utf8') as string;
 
-  /*
-  global.testEnv.reconfigure({
-    url: '/base',
-  });
-  */
-  // console.log(global.testEnv);
+  const chunks = global.webpackStats!.namedChunkGroups!;
+
+  const mainJs = fs.readFileSync(
+    `${outputPath}/${chunks.main!.assets![0]!.name}`,
+    'utf8',
+  ) as string;
+
+  const splitJs = fs.readFileSync(
+    `${outputPath}/${chunks.split!.assets![0]!.name}`,
+    'utf8',
+  ) as string;
 
   await act(() => new Function(mainJs)()); // eslint-disable-line no-new-func
   await act(() => new Function(splitJs)()); // eslint-disable-line no-new-func
