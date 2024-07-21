@@ -5,6 +5,9 @@
 .ad.hoc {
   &.dropdown {
     display: flex;
+    flex: 1;
+    min-width: 5.5em;
+    overflow: hidden;
     position: relative;
   }
 
@@ -59,6 +62,7 @@
     display: inline-block;
     flex: 1;
     font: inherit;
+    max-width: 100%;
     outline: none;
     padding: 0.3em 3.3em calc(0.3em + 1px) 1.2em;
 
