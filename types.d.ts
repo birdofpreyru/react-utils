@@ -1,5 +1,6 @@
 /* eslint-disable no-var */
 
+declare var IS_REACT_ACT_ENVIRONMENT: boolean | undefined;
 declare var REACT_UTILS_FORCE_CLIENT_SIDE: boolean | undefined;
 
 declare module '@babel/register/experimental-worker' {
