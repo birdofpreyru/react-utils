@@ -16,6 +16,7 @@ module.exports = {
     '\\.(scss|css)$': 'identity-obj-proxy',
   },
   modulePathIgnorePatterns: ['<rootDir>/build/'],
+  resolver: `${__dirname}/resolver.js`,
   rootDir: '../..',
   testMatch: ['**/__tests__/**/*.(j|t)s?(x)'],
   testPathIgnorePatterns: [
