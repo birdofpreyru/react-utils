@@ -30,7 +30,7 @@ const originalProcessVersions = process.versions;
  * (browser) environment.
  */
 export function mockClientSide() {
-  Object.defineProperty(process, 'versions', { value: null });
+  Object.defineProperty(process, 'versions', { value: undefined });
 }
 
 /**
