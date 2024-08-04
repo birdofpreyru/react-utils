@@ -24,20 +24,22 @@ type OptionsT = WebpackConfigOptionsT & {
 
 /**
  * Creates a new base config.
- * @param {object} babel Babel compiler.
- * @param {object} [options] It supports all options of
- *  {@link module:babel/webpack.getPreset babel/webpack's getPreset()},
- *  but it overrides `targets` option with `current node` value, and further
+ * @param babel Babel compiler.
+ * @param [options] It supports all options of our Babel config for Webpack,
+ *  but it overrides `targets` option with "current node" value, and further
  *  accepts the following:
- * @param {string} [options.baseAssetsOutputPath] Path prefix for emitted
+ * @param [options.baseAssetsOutputPath] Path prefix for emitted
  *  image assets.
- * @return {object} Created config object.
- * @ignore
+ * @return Created config object.
  */
 function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
   const config = getWebpackBabelConfig(
     babel,
-    { ...options, targets: 'current node' },
+    {
+      modules: 'cjs',
+      targets: 'current node',
+      ...options,
+    },
   );
 
   const baseAssetsOutputPath = options.baseAssetsOutputPath || '';

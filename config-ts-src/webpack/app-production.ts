@@ -27,8 +27,13 @@ export default function configFactory(ops: OptionsT): Configuration {
   ];
 
   const res = merge(baseFactory({
+    babelLoaderExclude: [],
     ...ops,
     babelEnv: 'production',
+    babelLoaderOptions: {
+      compact: true,
+      ...ops.babelLoaderOptions,
+    },
     entry,
     mode: 'production',
   }), {

@@ -36,7 +36,12 @@ export type ConfigT = {
   plugins: PresetOrPluginT[];
 };
 
+// Valid values for `module` option of @babel/preset-env,
+// as per https://babeljs.io/docs/babel-preset-env#modules
+type ModuleT = 'amd' | 'auto' | 'cjs' | 'commonjs' | 'systemjs' | 'umd' | false;
+
 export type OptionsT = {
+  modules?: ModuleT;
   noRR?: boolean;
   noStyling?: boolean;
   targets?: string | string[] | { [key: string]: string };
@@ -53,8 +58,13 @@ export type OptionsT = {
 function newBaseConfig(options: OptionsT): ConfigT {
   return {
     presets: [
-      // Chrome 69 is the browser for Android API 28.
-      ['@babel/env', { targets: options.targets || 'defaults or chrome >= 69' }],
+      ['@babel/env', {
+        // Leaves it to the Webpack to deal with modules.
+        modules: options.modules ?? false,
+
+        // Chrome 69 is the browser/WebView for Android 9 (API level 28).
+        targets: options.targets || 'defaults or chrome >= 69',
+      }],
 
       // TODO: Starting from Babel 8, "automatic" will be the default runtime,
       // thus once upgraded to Babel 8, runtime should be removed from

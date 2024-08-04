@@ -55,6 +55,7 @@ export default function configFactory(ops: OptionsT): Configuration {
       '@dr.pogodin/react-themes',
       '@dr.pogodin/react-utils',
       'axios',
+      'cookie',
       'dayjs',
       'lodash',
       /node-forge/,

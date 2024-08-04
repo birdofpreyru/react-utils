@@ -10,8 +10,6 @@ import path from 'path';
 
 import SM from 'sitemap';
 
-import { type Configuration, type WebpackPluginInstance } from 'webpack';
-
 import {
   clone,
   defaults,
@@ -23,7 +21,14 @@ import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import forge from 'node-forge';
 
-import { DefinePlugin, ProgressPlugin } from 'webpack';
+import {
+  type Configuration,
+  type RuleSetRule,
+  type WebpackPluginInstance,
+  DefinePlugin,
+  ProgressPlugin,
+} from 'webpack';
+
 import WorkboxPlugin from 'workbox-webpack-plugin';
 
 import {
@@ -41,7 +46,11 @@ export type BuildInfoT = {
 
 export type OptionsT = {
   babelEnv: string;
+  babelLoaderExclude?: RuleSetRule['exclude'];
+
+  // TODO: Find and use the actual type for Babel options object.
   babelLoaderOptions?: object;
+
   context: string;
   cssLocalIdent?: string;
   dontEmitBuildInfo?: boolean;
@@ -65,6 +74,8 @@ export type OptionsT = {
  * directly with the created config object.
  * @param {string} ops.babelEnv Babel environment to use for the Babel
  * compilation step.
+ * @param [ops.babelLoaderExclude] Overrides the default value of `exclude`
+ *  option of babel-loader, which is [/node_modules/].
  * @param {object} [ops.babelLoaderOptions] Overrides for default Babel options
  * of JSX and SVG files loader.
  * @param ops.context Base URL for resolution of relative config paths.
@@ -320,9 +331,10 @@ export default function configFactory(ops: OptionsT): Configuration {
         enforce: 'pre',
         use: ['source-map-loader'],
       }, {
-        /* Loads JS and JSX moudles, and inlines SVG assets. */
-        test: ops.typescript ? /\.((j|t)sx?|svg)$/ : /\.(jsx?|svg)$/,
-        exclude: [/node_modules/],
+        // Loads JS modules (.cjs, .js, .jsx); TS modules (.ts, .tsx);
+        // and SVG assets (.svg).
+        test: ops.typescript ? /\.(cjs|(j|t)sx?|svg)$/ : /\.(cjs|jsx?|svg)$/,
+        exclude: ops.babelLoaderExclude ?? [/node_modules/],
         loader: 'babel-loader',
         options: {
           babelrc: false,
