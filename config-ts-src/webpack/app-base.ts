@@ -343,6 +343,7 @@ export default function configFactory(ops: OptionsT): Configuration {
           presets: [['@dr.pogodin/react-utils/config/babel/webpack', {
             typescript: ops.typescript,
           }]],
+          sourceType: 'unambiguous',
           ...o.babelLoaderOptions,
         },
       }, {
