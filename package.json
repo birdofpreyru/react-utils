@@ -1,5 +1,5 @@
 {
-  "version": "1.40.1",
+  "version": "1.40.2",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -12,7 +12,7 @@
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.13.2",
     "@dr.pogodin/csurf": "^1.13.0",
     "@dr.pogodin/js-utils": "^0.0.12",
-    "@dr.pogodin/react-global-state": "^0.16.1",
+    "@dr.pogodin/react-global-state": "^0.17.0",
     "@dr.pogodin/react-themes": "^1.7.0",
     "@jest/environment": "^29.7.0",
     "axios": "^1.7.3",
@@ -42,7 +42,7 @@
     "serve-favicon": "^2.5.0",
     "source-map-support": "^0.5.21",
     "uuid": "^10.0.0",
-    "winston": "^3.13.1"
+    "winston": "^3.14.1"
   },
   "description": "Collection of generic ReactJS components and utils",
   "devDependencies": {
@@ -95,7 +95,7 @@
     "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-import-resolver-babel-module": "^5.3.2",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jest": "^28.7.0",
+    "eslint-plugin-jest": "^28.8.0",
     "eslint-plugin-jsx-a11y": "^6.9.0",
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
@@ -106,7 +106,7 @@
     "mini-css-extract-plugin": "^2.9.0",
     "mockdate": "^3.0.5",
     "nodelist-foreach-polyfill": "^1.2.0",
-    "postcss": "^8.4.40",
+    "postcss": "^8.4.41",
     "postcss-loader": "^8.1.1",
     "postcss-scss": "^4.0.9",
     "pretty": "^2.0.0",
@@ -124,7 +124,7 @@
     "tstyche": "^2.1.1",
     "typed-scss-modules": "^8.0.1",
     "typescript": "^5.5.4",
-    "typescript-eslint": "^8.0.0",
+    "typescript-eslint": "^8.0.1",
     "webpack": "^5.93.0",
     "webpack-dev-middleware": "^7.3.0",
     "webpack-hot-middleware": "^2.26.1",
