@@ -210,8 +210,8 @@ export default function splitComponent<
       await bookStyleSheets(chunkName, clientChunkGroups, false);
     }
 
-    const Wrapper = forwardRef((
-      { children, ...rest }: ComponentPropsT,
+    const Wrapper = forwardRef<unknown, ComponentPropsT>((
+      { children, ...rest },
       ref,
     ) => {
       // On the server side we'll assert the chunk name here,
@@ -230,7 +230,7 @@ export default function splitComponent<
       }, []);
 
       return (
-        <Component ref={ref} {...rest as ComponentPropsT}>
+        <Component ref={ref} {...(rest as unknown as ComponentPropsT)}>
           {children}
         </Component>
       );
