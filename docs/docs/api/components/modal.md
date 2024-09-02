@@ -42,9 +42,13 @@ to the window scrolling events when the modal is displayed,
 - `style` &mdash; **React.CSSProperties** &mdash; Inline style object
   to pass to the modal container.
 
-- `testId` &mdash; **string** &mdash; This value is assigned to
+- `testId` &mdash; **string** | **undefined** &mdash; This value is assigned to
   the `data-testid` attribute of the modal's container, to facilitate testing
   with [testing-library]. It is optimized out from production builds.
+
+- `testIdForOverlay` &mdash; **string** | **undefined** &mdash; Similar to
+  `testId`, but attaches `data-testid` to the modal overlay over the page
+  content.
 
 - `theme` &mdash; [ModalTheme] &mdash; _Ad hoc_ visual theme.
 - Other [props of themed components](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)

@@ -35,7 +35,7 @@ const Checkbox = <ValueT extends boolean | 'indeterminate' = boolean>({
     <div className={containerClassName}>
       { label === undefined ? null : <div className={theme.label}>{label}</div> }
       <input
-        checked={checked === true}
+        checked={checked === undefined ? undefined : checked === true}
         className={checkboxClassName}
         data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
         disabled={disabled}
