@@ -10,12 +10,10 @@ export type BuildInfoT = {
   useServiceWorker: boolean;
 };
 
-declare global {
-  // Depending on the build mode & environment, BUILD_INFO is either a global
-  // variable defined at the app launch, or it is replaced by the actual value
-  // by the Webpack build.
-  const BUILD_INFO: BuildInfoT | undefined;
-}
+// Depending on the build mode & environment, BUILD_INFO is either a global
+// variable defined at the app launch, or it is replaced by the actual value
+// by the Webpack build.
+declare const BUILD_INFO: BuildInfoT | undefined;
 
 let buildInfo: BuildInfoT | undefined;
 

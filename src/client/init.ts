@@ -2,7 +2,7 @@
  * Initialization of client-side environment.
  */
 
-/* global BUILD_INFO, window */
+/* global window */
 
 import { type BuildInfoT, getBuildInfo } from 'utils/isomorphy/buildInfo';
 
@@ -15,6 +15,8 @@ declare global {
     __DEV_BUILD_INFO__: BuildInfoT | undefined;
   }
 }
+
+declare const BUILD_INFO: BuildInfoT | undefined;
 
 if (process.env.NODE_ENV !== 'production') {
   // eslint-disable-next-line no-console

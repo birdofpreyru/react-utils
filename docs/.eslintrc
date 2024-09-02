@@ -1,4 +1,7 @@
 {
   "extends": ["../config/eslint/default.json"],
-  "root": true
+  "root": true,
+  "rules": {
+    "react/jsx-filename-extension": [2, {"extensions": [".jsx", ".tsx"] }]
+  }
 }
