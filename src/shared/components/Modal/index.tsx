@@ -21,6 +21,7 @@ type PropsT = {
   onCancel?: () => void;
   style?: React.CSSProperties;
   testId?: string;
+  testIdForOverlay?: string;
   theme: Theme<'container' | 'overlay'>;
 
   /** @deprecated */
@@ -46,6 +47,7 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
   onCancel,
   style,
   testId,
+  testIdForOverlay,
   theme,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -110,6 +112,10 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
         <div
           aria-label="Cancel"
           className={theme.overlay}
+          data-testid={
+            process.env.NODE_ENV === 'production'
+              ? undefined : testIdForOverlay
+          }
           onClick={(e) => {
             if (onCancel) {
               onCancel();

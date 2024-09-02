@@ -6,6 +6,7 @@ type PropT<ValueT> = {
   checked?: ValueT;
   label?: React.ReactNode;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  testId?: string;
   theme: Theme<'checkbox' | 'container' | 'indeterminate' | 'label'>;
 };
 
@@ -13,6 +14,7 @@ const Checkbox = <ValueT extends boolean | 'indeterminate' = boolean>({
   checked,
   label,
   onChange,
+  testId,
   theme,
 }: PropT<ValueT>) => {
   let checkboxClassName = theme.checkbox;
@@ -24,6 +26,7 @@ const Checkbox = <ValueT extends boolean | 'indeterminate' = boolean>({
       <input
         checked={checked === true}
         className={checkboxClassName}
+        data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
         onChange={onChange}
         onClick={(e) => e.stopPropagation()}
         type="checkbox"
