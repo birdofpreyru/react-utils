@@ -29,6 +29,18 @@
       border-color: blue;
       box-shadow: 0 0 3px 1px lightblue;
     }
+
+    &.indeterminate {
+      &::after {
+        background: black;
+        border-radius: 0.2em;
+        content: "";
+        display: block;
+        height: 0.2em;
+        margin: 0.6em 0.2em;
+        width: 1em;
+      }
+    }
   }
 
   &.container {
