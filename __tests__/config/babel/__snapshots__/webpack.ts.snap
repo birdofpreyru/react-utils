@@ -26,7 +26,7 @@ exports[`"development" environment "noStyling" variation 1`] = `
       "@babel/env",
       {
         "modules": false,
-        "targets": "defaults or chrome >= 69",
+        "targets": "defaults or chrome >= 44",
       },
     ],
     [
@@ -72,7 +72,7 @@ exports[`"development" environment "noStyling" variation 2`] = `
       "@babel/env",
       {
         "modules": false,
-        "targets": "defaults or chrome >= 69",
+        "targets": "defaults or chrome >= 44",
       },
     ],
     [
@@ -124,7 +124,7 @@ exports[`"development" environment Default config 1`] = `
       "@babel/env",
       {
         "modules": false,
-        "targets": "defaults or chrome >= 69",
+        "targets": "defaults or chrome >= 44",
       },
     ],
     [
@@ -182,7 +182,7 @@ exports[`"development" environment Default config 2`] = `
       "@babel/env",
       {
         "modules": false,
-        "targets": "defaults or chrome >= 69",
+        "targets": "defaults or chrome >= 44",
       },
     ],
     [
@@ -221,7 +221,7 @@ exports[`"production" environment "noStyling" variation 1`] = `
       "@babel/env",
       {
         "modules": false,
-        "targets": "defaults or chrome >= 69",
+        "targets": "defaults or chrome >= 44",
       },
     ],
     [
@@ -266,7 +266,7 @@ exports[`"production" environment "noStyling" variation 2`] = `
       "@babel/env",
       {
         "modules": false,
-        "targets": "defaults or chrome >= 69",
+        "targets": "defaults or chrome >= 44",
       },
     ],
     [
@@ -317,7 +317,7 @@ exports[`"production" environment Default config 1`] = `
       "@babel/env",
       {
         "modules": false,
-        "targets": "defaults or chrome >= 69",
+        "targets": "defaults or chrome >= 44",
       },
     ],
     [
@@ -374,7 +374,7 @@ exports[`"production" environment Default config 2`] = `
       "@babel/env",
       {
         "modules": false,
-        "targets": "defaults or chrome >= 69",
+        "targets": "defaults or chrome >= 44",
       },
     ],
     [
