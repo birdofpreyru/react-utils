@@ -62,8 +62,8 @@ function newBaseConfig(options: OptionsT): ConfigT {
         // Leaves it to the Webpack to deal with modules.
         modules: options.modules ?? false,
 
-        // Chrome 44 is the browser/WebView for Android 6.0 (API level 23).
-        targets: options.targets || 'defaults or chrome >= 44',
+        // Chrome 69 is the browser/WebView for Android 9 (API level 28).
+        targets: options.targets || 'defaults or chrome >= 69',
       }],
 
       // TODO: Starting from Babel 8, "automatic" will be the default runtime,

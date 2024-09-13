@@ -68,11 +68,11 @@ These are client-side preset options:
   styling ((S)CSS processing, CSS Modules).
 
 - `targets` - **object | string | string[]** - Compilation targets to pass into
-  [@babel/preset-env]. Defaults to `defaults or chrome >= 44`, which means
+  [@babel/preset-env]. Defaults to `defaults or chrome >= 69`, which means
   &laquo;Default targets recommended by
-  [Browserslist](https://github.com/browserslist/browserslist) + Chrome v44+
+  [Browserslist](https://github.com/browserslist/browserslist) + Chrome v69+
   (for compatibility with Android devices starting from
-  [Android 6.0 (SDK 23)](https://developer.android.com/tools/releases/platforms#6.0))&raquo;.
+  [Android 9 (SDK 28)](https://developer.android.com/tools/releases/platforms#9.0))&raquo;.
 
 - `typescript` &mdash; **bolean** | **undefined** &mdash; Optional. Enables
   TypeScript support.
