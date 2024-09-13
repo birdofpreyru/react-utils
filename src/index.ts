@@ -9,6 +9,7 @@ const server = webpack.requireWeak('./server', __dirname) as (typeof ServerT) | 
 const client = server ? undefined : require('./client').default;
 
 export {
+  type AsyncCollectionT,
   type AsyncCollectionLoaderT,
   type AsyncDataEnvelopeT,
   type AsyncDataLoaderT,
