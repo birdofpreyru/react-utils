@@ -242,17 +242,17 @@ export function newDefaultLogger({
   });
 }
 
-type ConfigT = {
+export type ConfigT = {
   [key: string]: ConfigT | string;
 };
 
-type BeforeRenderResT = {
+export type BeforeRenderResT = {
   configToInject?: ConfigT;
   extraScripts?: Array<ScriptT | string>;
   initialState?: any;
 };
 
-type BeforeRenderT =
+export type BeforeRenderT =
 (req: Request, config: ConfigT) => BeforeRenderResT | Promise<BeforeRenderResT>;
 
 type CacheRefT = {

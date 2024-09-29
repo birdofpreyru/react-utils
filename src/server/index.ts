@@ -26,6 +26,12 @@ import { SCRIPT_LOCATIONS, newDefaultLogger } from './renderer';
 
 import { errors } from './utils';
 
+export {
+  type BeforeRenderResT,
+  type BeforeRenderT,
+  type ConfigT,
+} from './renderer';
+
 export { errors, getDefaultCspSettings };
 
 /**

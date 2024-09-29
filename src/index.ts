@@ -30,6 +30,12 @@ export {
 export * from 'components';
 
 export {
+  type BeforeRenderResT,
+  type BeforeRenderT,
+  type ConfigT,
+} from './server';
+
+export {
   type Listener,
   type Theme,
   config,

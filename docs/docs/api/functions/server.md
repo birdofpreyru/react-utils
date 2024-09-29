@@ -57,10 +57,11 @@ server(webpackConfig);
     at that point.
 
   - <Link id="arguments-beforerender" />
-    [beforeRender][beforeRender()] - **callback** triggered in the beginning of
-    server-side rendering for each incoming request just before the HTML markup
-    is generated. It allows to load and provide data necessary for SSR, and also
-    to inject additional config and scripts into the rendered HTML code.
+    `beforeRender` &mdash; [BeforeRenderT] &mdash; Callback triggered in
+    the beginning of server-side rendering for each incoming request, just before
+    the HTML markup is generated. It allows to load and provide data necessary
+    for SSR, and also to inject additional config and scripts into the rendered
+    HTML code.
 
   - `buildInfo` - **object** - Optional. The "[build info]" object to use.
     Without this option provided it will be loaded from the `.build-info` file
@@ -137,11 +138,15 @@ The signature for [server()]'s `beforeExpressJsSetup` option is:
 **Arguments**
 - `server` - **object** - The [ExpressJS] server being created.
 
-### beforeRender()
+### BeforeRenderT
+[BeforeRenderT]: #beforerendert
 ```jsx
-function beforeRender(req, config): Promise<object>
+import type { BeforeRenderT } from '@dr.pogodin/react-utils';
+
+type BeforeRenderT =
+(req: Request, config: ConfigT) => BeforeRenderResT | Promise<BeforeRenderResT>;
 ```
-The signature for [server()]'s `beforeRender` option.
+The signature for [server()]'s [beforeRender] option.
 
 **Arguments**
 - `req` - **object** - Incoming [ExpressJS] HTTP reques, with some extra fields
@@ -152,11 +157,26 @@ The signature for [server()]'s `beforeRender` option.
 - `config` - **object** - The application config that server wants to inject
   into the generated HTML template (and thus into the client-side environment).
 
-Returns **Promise**: it should resolve to an object that may have the following
-optional fields:
-- `configToInject` - **object** - The config object to inject into
-  the client-side environment instead of the `config` suggested by the server.
-- `extraScripts` - **Array&lt;[Script] | string&gt;** -
+**Returns** [BeforeRenderResT] object, or a [Promise] resolving to such object.
+
+### BeforeRenderResT
+[BeforeRenderResT]: #beforerenderrest
+```tsx
+import type { BeforeRenderResT } from '@dr.pogodin/react-utils';
+
+type BeforeRenderResT = {
+  configToInject?: ConfigT;
+  extraScripts?: Array<ScriptT | string>;
+  initialState?: any;
+};
+```
+
+The type of [BeforeRenderT] result object.
+
+- `configToInject` &mdash; [ConfigT] &mdash; Optional. The config object
+  to inject into the client-side environment instead of the `config` suggested
+  by the server.
+- `extraScripts` &mdash; **Array&lt;[Script] | string&gt;** &mdash; Optional.
   An array of additional scripts to inject into the generated page. It may
   contain a mix of strings and [Script] objects. For each script given as
   a string that string is injected as is in the end of the generated
@@ -165,7 +185,20 @@ optional fields:
   document location. In either case, the scripts intended for the same
   location are injected in the order they are encountered in the `extraScripts`
   array.
-- `initialState` - **object** - The initial [global state](/docs/api/utils/react-global-state) value.
+- `initialState` &mdash; **any** &mdash; Optional.
+  The initial [global state](/docs/api/utils/react-global-state) value.
+
+### ConfigT
+[ConfigT]: #configt
+```tsx
+import type { ConfigT } from '@dr.pogodin/react-utils';
+
+type ConfigT = {
+  [key: string]: ConfigT | string;
+};
+```
+The type of optional `configToInject` field in the [BeforeRenderResT] type.
+Just a key-to-string mapping, optionally recursive.
 
 ### cspSettingsHook()
 ```jsx
@@ -206,7 +239,7 @@ They match the default [helmet] settings for [CSP] with just a few changes:
 - An unique per-request nonce is added to the `scriptSrc` directive to
   whitelist auxiliary scripts injected by **react-utils**. The actual nonce
   value can be accessed by the host code as `req.nonce` field inside
-  the [server()]'s [beforeRender()](#beforerender) hook (_e.g._ to add it
+  the [server()]'s [beforeRender] hook (_e.g._ to add it
   to custom scripts injected by the host code).
 - `upgradeInsecureRequests` directive is removed in development mode
   to simplify local development without HTTPS setup.
@@ -225,7 +258,8 @@ Returns **Promise**: It will be awaited before [server()] continues with the set
 
 ### Script {#beforerender-script}
 Describes a custom script to inject into the rendered HTML. It is intended for
-[beforeRender()] output. A valid [Script] object has two fields:
+the optional `extraScripts` field of [BeforeRenderResT] type.
+A valid [Script] object has two fields:
 - `code` - **string** - The HTML code to inject into the specified location of
   the generated HTML markup.
 - `location` - [SCRIPT_LOCATIONS] - One of the script location values.
@@ -257,7 +291,7 @@ Returns **object** with the following fields:
   - `maxage` - **number** - Optional. Maximum age [ms] of the cached result.
     Defaults to unlimited maxage.
 
-[beforeRender()]: #beforerender
+[beforeRender]: #arguments-beforerender
 [build info]: /docs/api/configs/webpack#build-info
 [config]: /docs/api/utils/config
 [CSP]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
@@ -267,6 +301,7 @@ Returns **object** with the following fields:
 [getSsrContext()]: https://dr.pogodin.studio/docs/react-global-state/docs/api/hooks/getssrcontext
 [http-status-codes]: https://www.npmjs.com/package/http-status-codes
 [Joi]: https://joi.dev/api/?v=17.4.2
+[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [Script]: #beforerender-script
 [SCRIPT_LOCATIONS]: /docs/api/utils/server#script_locations
 [server()]: /docs/api/functions/server
