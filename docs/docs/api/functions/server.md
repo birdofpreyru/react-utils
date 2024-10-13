@@ -246,16 +246,17 @@ They match the default [helmet] settings for [CSP] with just a few changes:
   to simplify local development without HTTPS setup.
 
 ### onExpressJsSetup()
-```jsx
-function onExpressJsSetup(server): Promise
+```tsx
+function onExpressJsSetup(server): Promise<void> | void;
 ```
 The signature for [server()]'s `onExpressJsSetup` option.
 
 **Arguments**
-- `server` - **object** - The [ExpressJS] server being created. You can access
-  created server-side logger as `server.logger`.
+- `server` &mdash; [ServerT] &mdash; Created server instance.
 
-Returns **Promise**: It will be awaited before [server()] continues with the setup.
+**Returns**
+- Nothing
+- **Promise** &mdash; It will be awaited before [server()] continues with the setup.
 
 ### Script {#beforerender-script}
 Describes a custom script to inject into the rendered HTML. It is intended for
@@ -264,6 +265,18 @@ A valid [Script] object has two fields:
 - `code` - **string** - The HTML code to inject into the specified location of
   the generated HTML markup.
 - `location` - [SCRIPT_LOCATIONS] - One of the script location values.
+
+### ServerT
+[ServerT]: #servert
+```tsx
+import type { ServerT } from '@dr.pogodin/react-utils';
+
+export type ServerT = Express & {
+  logger: LoggerI;
+};
+```
+Type of the created server instance &mdash; **Express** server instance with
+`logger` field attached.
 
 ### staticCacheController()
 ```jsx

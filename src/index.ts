@@ -2,9 +2,9 @@ import 'styles/global.scss';
 
 import { webpack } from 'utils';
 
-import type ServerT from './server';
+import type ServerFactoryT from './server';
 
-const server = webpack.requireWeak('./server', __dirname) as (typeof ServerT) | null;
+const server = webpack.requireWeak('./server', __dirname) as (typeof ServerFactoryT) | null;
 
 const client = server ? undefined : require('./client').default;
 
@@ -33,6 +33,7 @@ export {
   type BeforeRenderResT,
   type BeforeRenderT,
   type ConfigT,
+  type ServerT,
 } from './server';
 
 export {

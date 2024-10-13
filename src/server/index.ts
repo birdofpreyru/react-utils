@@ -19,6 +19,7 @@ import { type Configuration } from 'webpack';
 
 import serverFactory, {
   type OptionsT as ServerOptionsT,
+  type ServerT,
   getDefaultCspSettings,
 } from './server';
 
@@ -32,7 +33,7 @@ export {
   type ConfigT,
 } from './renderer';
 
-export { errors, getDefaultCspSettings };
+export { errors, getDefaultCspSettings, type ServerT };
 
 /**
  * Normalizes a port into a number, string, or false.

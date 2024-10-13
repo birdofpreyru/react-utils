@@ -102,7 +102,7 @@ export function getDefaultCspSettings() {
   return cloneDeep(defaultCspSettings);
 }
 
-type ServerT = Express & {
+export type ServerT = Express & {
   logger: LoggerI;
 };
 
