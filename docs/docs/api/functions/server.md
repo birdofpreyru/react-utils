@@ -131,12 +131,13 @@ Returns **Promise**:
 
 ### beforeExpressJsSetup()
 ```jsx
-function beforeExpressJsSetup(server)
+function beforeExpressJsSetup(server: ServerT): Promise<void> | void;
 ```
 The signature for [server()]'s `beforeExpressJsSetup` option is:
 
 **Arguments**
-- `server` - **object** - The [ExpressJS] server being created.
+- `server` &mdash; **object** &mdash; Created [ExpressJS] server with `logger`
+  field attached.
 
 ### BeforeRenderT
 [BeforeRenderT]: #beforerendert

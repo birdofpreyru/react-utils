@@ -108,7 +108,7 @@ type ServerT = Express & {
 
 export type OptionsT = RendererOptionsT & {
   beforeExpressJsError?: (server: ServerT) => Promise<boolean>;
-  beforeExpressJsSetup?: (server: ServerT) => Promise<void>;
+  beforeExpressJsSetup?: (server: ServerT) => Promise<void> | void;
   cspSettingsHook?: (
     defaultOptions: CspOptionsT,
     req: Request,
