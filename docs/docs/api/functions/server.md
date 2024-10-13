@@ -122,12 +122,11 @@ The signature for [server()]'s `beforeExpressJsError` option.
 **Arguments**
 - `server` - **object** - The [ExpressJS] server being created.
 
-Returns **Promise**:
-- If resolves to a **falsy** value [server()] won't attach the default
-  error handler to the created [ExpressJS] server.
-- If resolves to a **truthy** value [server()] will attach the default
-  error handler to the created [ExpressJS] server right after the callback
-  result resolution.
+**Returns**
+- **true** or a promise that resolves to **true** &mdash; [server()] won't
+  attach the default error handler to the created server instance.
+- otherwise the default error handler will be attached right after this
+  callback returns.
 
 ### beforeExpressJsSetup()
 ```jsx
