@@ -96,16 +96,12 @@ export function newError(message: string, statusCode = CODES.INTERNAL_SERVER_ERR
 }
 
 /**
- * ```js
- * import { server } from '@dr.pogodin/react-utils';
- * const { fail } = server.errors;
- * ```
  * Throws an error with given message and HTTP status code.
- * @param message Error message.
- * @param [statusCode=500] HTTP error code. Defaults to 500 (Internal
- * Server Error).
  */
-export function fail(message: string, statusCode = CODES.INTERNAL_SERVER_ERROR) {
+export function fail(
+  message: string,
+  statusCode: CODES = CODES.INTERNAL_SERVER_ERROR,
+): never {
   throw newError(message, statusCode);
 }
 

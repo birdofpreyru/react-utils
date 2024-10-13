@@ -36,11 +36,18 @@ ReactJS application. See [server()] documentation for further details.
 ## Constants
 
 ### errors.CODES
-```jsx
-server.errors.CODES: object
+[errors.CODES]: #errorscodes
+```tsx
+import { server } from '@dr.pogodin/react-utils';
+
+const { CODES } = server.errors;
+
+enum CODES {
+  // Same as StatusCodes from 'http-status-codes'.
+}
 ```
-A map from HTTP status code names to the corresponding numeric codes. It is an
-alias for **StatusCodes** object from [http-status-codes] library.
+Enum of HTTP status codes &mdash; an alias of  **StatusCodes** enum from
+the [http-status-codes] library.
 
 **Example**
 ```jsx
@@ -99,15 +106,24 @@ the given error `message` and `statusCode` if the validation fails.
   (bad request).
 
 ### errors.fail()
-```jsx
-server.errors.fail(message, statusCode = 500)
+```tsx
+import { server } from '@dr.pogodin/react-utils';
+
+const { fail } = server.errors;
+
+function fail(
+  message: string,
+  statusCode: CODES = CODES.INTERNAL_SERVER_ERROR,
+): never;
 ```
 Throws an error with the given `message` and HTTP `statusCode`.
 
 **Arguments**
-- `message` - **string** - Error message.
-- `statusCode = 500` - **number** - Optional. HTTP status code. Defaults `500`
+- `message` &mdash; **string** &mdash; Error message.
+- `statusCode` - [errors.CODES] - Optional. HTTP status code. Defaults `500`
   (internal server error).
+
+It never **returns** normally.
 
 ### errors.getErrorForCode()
 ```jsx
