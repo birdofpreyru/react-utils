@@ -271,7 +271,7 @@ export type OptionsT = {
   noCsp?: boolean;
   staticCacheSize?: number;
   ssrTimeout?: number;
-  staticCacheController?: (req: Request) => CacheRefT;
+  staticCacheController?: (req: Request) => CacheRefT | null | undefined;
 };
 
 /**
@@ -354,7 +354,7 @@ export default function factory(
 
       res.cookie('csrfToken', req.csrfToken());
 
-      let cacheRef: CacheRefT | undefined;
+      let cacheRef: CacheRefT | null | undefined;
       if (cache) {
         cacheRef = ops.staticCacheController!(req);
         if (cacheRef) {

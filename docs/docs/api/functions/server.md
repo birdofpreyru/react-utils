@@ -286,7 +286,10 @@ cached, no matter the result of [staticCacheController()] call.
 **Arguments**
 - `req` - **object** - The incoming [ExpressJS] HTTP request.
 
-Returns **object** with the following fields:
+**Returns**
+- **null** | **undefined** if the cache should not be used for serving
+  the response to this request.
+- **object** with the following fields, otherwise:
   - `key` - **string** - The cache key for this request/response.
   - `maxage` - **number** - Optional. Maximum age [ms] of the cached result.
     Defaults to unlimited maxage.
