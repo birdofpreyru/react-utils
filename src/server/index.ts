@@ -31,6 +31,7 @@ export {
   type BeforeRenderResT,
   type BeforeRenderT,
   type ConfigT,
+  type ServerSsrContext,
 } from './renderer';
 
 export { errors, getDefaultCspSettings, type ServerT };

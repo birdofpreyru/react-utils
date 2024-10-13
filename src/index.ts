@@ -33,6 +33,7 @@ export {
   type BeforeRenderResT,
   type BeforeRenderT,
   type ConfigT,
+  type ServerSsrContext,
   type ServerT,
 } from './server';
 

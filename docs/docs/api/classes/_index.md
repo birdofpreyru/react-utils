@@ -4,6 +4,8 @@
   execution of Webpack-built code.
 - [Emitter](/docs/api/classes/Emitter) - Simple listeneable data emitter.
 - [Semaphore](/docs/api/classes/Semaphore) - Synchronization primitive.
+- [ServerSsrContext](/docs/api/classes/ServerSsrContext) &mdash;
+  SSR context class being used by the library.
 
 <!-- Link -->
 [Barrier]: /docs/api/classes/Barrier

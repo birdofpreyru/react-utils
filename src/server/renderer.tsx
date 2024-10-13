@@ -66,7 +66,7 @@ export enum SCRIPT_LOCATIONS {
   HEAD_OPEN = 'HEAD_OPEN',
 }
 
-class ServerSsrContext<StateT>
+export class ServerSsrContext<StateT>
   extends SsrContext<StateT>
   implements SsrContextT<StateT> {
   chunkGroups: ChunkGroupsT;
