@@ -17,15 +17,15 @@
     "@docusaurus/core": "^3.5.2",
     "@docusaurus/preset-classic": "^3.5.2",
     "@docusaurus/theme-common": "^3.5.2",
-    "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.40.9.tgz",
-    "@mdx-js/react": "^3.0.1",
+    "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.40.10.tgz",
+    "@mdx-js/react": "^3.1.0",
     "docusaurus-plugin-sass": "^0.2.5",
     "file-loader": "^6.2.0",
     "prism-react-renderer": "^2.4.0",
     "raw-loader": "^4.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sass": "^1.79.5",
+    "sass": "^1.80.6",
     "url-loader": "^4.1.1"
   },
   "browserslist": {
