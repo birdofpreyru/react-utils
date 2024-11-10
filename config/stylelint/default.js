@@ -14,6 +14,7 @@ module.exports = {
         'each',
         'extend',
         'for',
+        'forward',
         'include',
         'mixin',
         'use',

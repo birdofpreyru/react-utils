@@ -4,7 +4,7 @@
  * work well for content-centric websites.
  */
 
-@import "@dr.pogodin/react-utils/mixins";
+@use "@dr.pogodin/react-utils/mixins" as *;
 
 /* You can override the default Infima variables here. */
 :root {
