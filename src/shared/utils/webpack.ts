@@ -7,29 +7,34 @@ import { IS_CLIENT_SIDE } from './isomorphy';
  * @param [basePath]
  * @return Required module.
  */
-export function requireWeak(
+export function requireWeak<Module extends NodeJS.Module>(
   modulePath: string,
   basePath?: string,
-): NodeJS.Module | null {
+): Module | null {
   if (IS_CLIENT_SIDE) return null;
 
   try {
     /* eslint-disable no-eval */
     const { resolve } = eval('require')('path');
     const path = basePath ? resolve(basePath, modulePath) : modulePath;
-    const { default: def, ...named } = eval('require')(path);
+    const module = eval('require')(path) as Module;
     /* eslint-enable no-eval */
 
-    if (!def) return named;
+    if (!('default' in module)) return module;
 
-    Object.entries(named).forEach(([key, value]) => {
-      if (def[key]) {
-        if (def[key] !== value) {
+    const { default: def, ...named } = module;
+
+    const res = def as Module;
+
+    Object.entries(named).forEach(([name, value]) => {
+      const assigned = res[name as keyof Module];
+      if (assigned !== undefined) {
+        if (assigned !== value) {
           throw Error('Conflict between default and named exports');
         }
-      } else def[key] = value;
+      } else res[name as keyof Module] = value;
     });
-    return def;
+    return res;
   } catch {
     return null;
   }
