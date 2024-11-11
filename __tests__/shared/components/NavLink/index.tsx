@@ -16,7 +16,7 @@ test('Matches snapshots', () => {
         v7_startTransition: true,
       }}
     >
-      <NavLink />
+      <NavLink to="" />
     </MemoryRouter>,
   );
   snapshot(
@@ -26,7 +26,7 @@ test('Matches snapshots', () => {
         v7_startTransition: true,
       }}
     >
-      <NavLink styleName="navLink" />
+      <NavLink styleName="navLink" to="" />
     </MemoryRouter>,
   );
 });

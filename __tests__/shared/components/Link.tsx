@@ -13,7 +13,7 @@ test('Matches snapshots', () => {
         v7_startTransition: true,
       }}
     >
-      <Link />
+      <Link to="" />
     </MemoryRouter>,
   );
 });

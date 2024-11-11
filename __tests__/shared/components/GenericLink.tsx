@@ -1,11 +1,15 @@
 /** @jest-environment jsdom */
 
+import { Link } from 'react-router-dom';
+
 import UserEvents from '@testing-library/user-event';
 
 import GenericLink from 'components/GenericLink';
 import { mount, snapshot } from 'utils/jest';
 
-const Link: React.FunctionComponent<{
+type LinkT = typeof Link;
+
+const TestLink: React.FunctionComponent<{
   className?: string;
   onClick: () => void;
 }> = (props) => {
@@ -24,7 +28,7 @@ const Link: React.FunctionComponent<{
 test('Absolute link, starting with http://', () => {
   snapshot((
     <GenericLink
-      routerLinkType={Link}
+      routerLinkType={TestLink as unknown as LinkT}
       to="http://www.domain.com/test"
     >
       ABSOLUTE LINK
@@ -36,7 +40,7 @@ test('Absolute link, starting with https://', () => {
   snapshot((
     <GenericLink
       onClick={() => {}}
-      routerLinkType={Link}
+      routerLinkType={TestLink as unknown as LinkT}
       to="https://www.domain.com/test"
     >
       ABSOLUTE LINK
@@ -47,7 +51,7 @@ test('Absolute link, starting with https://', () => {
 test('Relative link', () => {
   snapshot((
     <GenericLink
-      routerLinkType={Link}
+      routerLinkType={TestLink as unknown as LinkT}
       to="http/relative/link"
     >
       RELATIVE LINK
@@ -59,7 +63,7 @@ test('Relative link, with `enforceA`', () => {
   snapshot((
     <GenericLink
       enforceA
-      routerLinkType={Link}
+      routerLinkType={TestLink as unknown as LinkT}
       to="/relative/link"
     >
       RELATIVE LINK
@@ -71,7 +75,7 @@ test('Relative link, with `openNewTab`', () => {
   snapshot((
     <GenericLink
       openNewTab
-      routerLinkType={Link}
+      routerLinkType={TestLink as unknown as LinkT}
       to="relative/link"
     >
       RELATIVE LINL
@@ -82,7 +86,7 @@ test('Relative link, with `openNewTab`', () => {
 test('Anchor link', () => {
   snapshot((
     <GenericLink
-      routerLinkType={Link}
+      routerLinkType={TestLink as unknown as LinkT}
       to="#anchor"
     >
       ANCHOR LINK
@@ -98,7 +102,7 @@ test('onClick(..) callback in custom <Link>', async () => {
     <GenericLink
       className="LINK"
       onClick={clickHandler}
-      routerLinkType={Link}
+      routerLinkType={TestLink as unknown as LinkT}
       to="SOME/TEST/URL"
     >
       LINK
