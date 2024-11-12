@@ -14,8 +14,13 @@ Encapsulates Webpack-related utilities.
 ## Functions
 
 ### requireWeak()
-```jsx
-webpack.requireWeak(modulePath, basePath): object
+```tsx
+import { webpack } from '@dr.pogodin/react-utils';
+
+webpack.requireWeak<Module extends NodeJS.Module>(
+  modulePath: string,
+  basePath?: string,
+): Module | null;
 ```
 Implements server-side loading of the specified JS module in the way which
 prevents it from being bundled into the client-side code by Webpack.
@@ -31,6 +36,14 @@ prevents it from being bundled into the client-side code by Webpack.
 - **Client-side**: always returns **null**.
 
 :::info Changes across `dr.pogodin/react-utils` versions:
+- **v1.40.11**:
+  - **TypeScript**: Added `Module` generic argument for typing of the result.
+    You want to use it like:
+    ```tsx
+    import type M from 'some-module';
+
+    const m = webpack.requireWeak<typeof M>('some-module');
+    ```
 - **v1.14.0**:
   - Safe to call at the client side, and always returns **null** there.
   - The `modulePath` argument is automatically processed by Babel module resovler.

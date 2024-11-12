@@ -101,7 +101,7 @@ export function newError(message: string, statusCode = CODES.INTERNAL_SERVER_ERR
 export function fail(
   message: string,
   statusCode: CODES = CODES.INTERNAL_SERVER_ERROR,
-): never {
+): Error {
   throw newError(message, statusCode);
 }
 

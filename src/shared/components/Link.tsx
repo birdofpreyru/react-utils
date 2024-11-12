@@ -6,11 +6,11 @@
  * - User explicitely opts to use <a>.
  */
 
-import { Link as RrLink } from 'react-router-dom';
+import { type LinkProps, Link as RrLink } from 'react-router-dom';
 
 import GenericLink, { type PropsT as GenericLinkPropsT } from './GenericLink';
 
-type PropsT = Omit<GenericLinkPropsT, 'routerLinkType'>;
+type PropsT = Omit<GenericLinkPropsT, 'routerLinkType'> & LinkProps;
 
 const Link: React.FunctionComponent<PropsT> = (props) => (
   /* eslint-disable react/jsx-props-no-spreading */

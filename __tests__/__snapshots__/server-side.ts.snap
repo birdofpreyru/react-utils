@@ -67,7 +67,7 @@ exports[`Export at server side 1`] = `
     "render": [Function],
   },
   "client": undefined,
-  "config": {
+  "config": Config {
     "SECRET": {
       "dummySecretKey": "Dummy Secret Value",
     },

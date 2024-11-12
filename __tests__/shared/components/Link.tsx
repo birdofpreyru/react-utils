@@ -7,8 +7,13 @@ import { snapshot } from 'utils/jest';
 
 test('Matches snapshots', () => {
   snapshot(
-    <MemoryRouter>
-      <Link />
+    <MemoryRouter
+      future={{
+        v7_relativeSplatPath: true,
+        v7_startTransition: true,
+      }}
+    >
+      <Link to="" />
     </MemoryRouter>,
   );
 });

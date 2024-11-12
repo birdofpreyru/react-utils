@@ -5,7 +5,7 @@
  * columns on left and right.
  */
 
-@import "styles/mixins";
+@use "styles/mixins" as *;
 
 *,
 .context,

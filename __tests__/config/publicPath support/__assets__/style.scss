@@ -1,4 +1,4 @@
-@import "../../../../src/styles/mixins";
+@use "../../../../src/styles/mixins" as *;
 @include font-family-ttf(Empty, 400, normal, "~empty");
 
 .container {

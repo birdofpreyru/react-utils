@@ -2,7 +2,7 @@ import { fail } from 'server/utils/errors';
 
 test('fail()', () => {
   let error: any;
-  let never: never;
+  let never: any;
   try {
     never = fail('Mock error', 418);
   } catch (e: any) {
@@ -10,7 +10,5 @@ test('fail()', () => {
   }
   expect(error).toMatchSnapshot();
   expect(error.status).toBe(418);
-
-  // @ts-expect-error
   expect(never).toBeUndefined();
 });

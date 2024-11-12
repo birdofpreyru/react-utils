@@ -1,14 +1,18 @@
-/* global window */
+import type { ReactNode } from 'react';
 
-import { type ReactNode } from 'react';
-
-import { type Link, type NavLink } from 'react-router-dom';
+import type {
+  Link,
+  LinkProps,
+  NavLink,
+  NavLinkProps,
+} from 'react-router-dom';
 
 import './style.scss';
 
-type ToT = Parameters<typeof Link>[0]['to'];
+type LinkT = typeof Link;
+type NavLinkT = typeof NavLink;
 
-interface LinkI {}
+type ToT = Parameters<typeof Link>[0]['to'];
 
 export type PropsT = {
   children?: ReactNode;
@@ -20,8 +24,8 @@ export type PropsT = {
   onMouseDown?: React.MouseEventHandler<HTMLAnchorElement>;
   openNewTab?: boolean;
   replace?: boolean;
-  routerLinkType: LinkI;
-  to?: ToT;
+  routerLinkType: LinkT | NavLinkT;
+  to: ToT;
 };
 
 /**
@@ -64,7 +68,7 @@ export type PropsT = {
  * determining if the location matches the current URL. See the `<Route strict>`
  * documentation for more information.
  */
-const GenericLink: React.FunctionComponent<PropsT> = ({
+const GenericLink = ({
   children,
   className,
   disabled,
@@ -77,7 +81,7 @@ const GenericLink: React.FunctionComponent<PropsT> = ({
   routerLinkType,
   to,
   ...rest
-}) => {
+}: (LinkProps | NavLinkProps) & PropsT): ReactNode => {
   /* Renders Link as <a> element if:
    * - It is opted explicitely by `enforceA` prop;
    * - It should be opened in a new tab;
@@ -103,7 +107,7 @@ const GenericLink: React.FunctionComponent<PropsT> = ({
     );
   }
 
-  const L = routerLinkType as typeof NavLink;
+  const L = routerLinkType;
 
   return (
     <L

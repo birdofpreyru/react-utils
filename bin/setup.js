@@ -47,9 +47,12 @@ program
     'Skips library installation, just fixes dependencies.',
     false,
   )
+  .option('--verbose', 'Do verbose logging', false)
   .parse(process.argv);
 
 const cmdLineArgs = program.opts();
+
+const { verbose } = cmdLineArgs;
 
 /**
  * Generates a string containing name and version of the package to be
@@ -77,6 +80,8 @@ function generateTargetPackage(entry) {
  * @param {Object} hostData Host's package JSON data.
  */
 function adoptDevDependencies(donorData, hostData) {
+  if (verbose) console.log('Adopting dev dependencies...');
+
   /* Inits deps as a map of all donor's dev dependencies. */
   let deps = clone(donorData.devDependencies) || {};
 
@@ -94,7 +99,9 @@ function adoptDevDependencies(donorData, hostData) {
 
   deps = Object.entries(deps).map(generateTargetPackage);
   if (deps.length) {
-    spawnSync(NPM_COMMAND, ['install', '--save-dev'].concat(deps), {
+    const args = ['install', '--save-dev'].concat(deps);
+    if (verbose) args.push('--verbose');
+    spawnSync(NPM_COMMAND, args, {
       stdio: 'inherit',
     });
   }
@@ -141,7 +148,14 @@ function getPackageJson(packageName = '@dr.pogodin/react-utils') {
 function install(library) {
   let name = library;
   if (!name.includes('@', 1)) name += '@latest';
-  spawnSync(NPM_COMMAND, ['install', '--save', name], { stdio: 'inherit' });
+  const args = ['install', '--save', name];
+
+  if (verbose) {
+    console.log(`Installing "${library}"...`);
+    args.push('--verbose');
+  }
+
+  spawnSync(NPM_COMMAND, args, { stdio: 'inherit' });
 }
 
 /**
@@ -152,6 +166,7 @@ function install(library) {
  * @param {Object} hostData Data from host's `package.json`.
  */
 function updateProdDependencies(donorData, hostData) {
+  if (verbose) console.log('Updating prod dependencies...');
   let deps = [
     ...Object.entries(donorData.dependencies || {}),
     ...Object.entries(donorData.devDependencies || {}),
@@ -163,11 +178,9 @@ function updateProdDependencies(donorData, hostData) {
   });
   if (deps.length) {
     deps = deps.map(generateTargetPackage);
-    spawnSync(
-      NPM_COMMAND,
-      ['install', '--save'].concat(deps),
-      { stdio: 'inherit' },
-    );
+    const args = ['install', '--save'].concat(deps);
+    if (verbose) args.push('--verbose');
+    spawnSync(NPM_COMMAND, args, { stdio: 'inherit' });
   }
 }
 
@@ -180,6 +193,21 @@ libs.forEach((library) => {
   adoptDevDependencies(libData, hostData);
   updateProdDependencies(libData, hostData);
 });
-spawnSync(NPM_COMMAND, ['install'], { stdio: 'inherit' });
-spawnSync(NPM_COMMAND, ['audit', 'fix'], { stdio: 'inherit' });
-spawnSync(NPM_COMMAND, ['dedupe'], { stdio: 'inherit' });
+
+{
+  const arg = ['install'];
+  if (verbose) arg.push('--verbose');
+  spawnSync(NPM_COMMAND, arg, { stdio: 'inherit' });
+}
+
+{
+  const arg = ['audit', 'fix'];
+  if (verbose) arg.push('--verbose');
+  spawnSync(NPM_COMMAND, arg, { stdio: 'inherit' });
+}
+
+{
+  const arg = ['dedupe'];
+  if (verbose) arg.push('--verbose');
+  spawnSync(NPM_COMMAND, arg, { stdio: 'inherit' });
+}

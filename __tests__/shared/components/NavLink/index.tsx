@@ -10,13 +10,23 @@ import './styles.scss';
 
 test('Matches snapshots', () => {
   snapshot(
-    <MemoryRouter>
-      <NavLink />
+    <MemoryRouter
+      future={{
+        v7_relativeSplatPath: true,
+        v7_startTransition: true,
+      }}
+    >
+      <NavLink to="" />
     </MemoryRouter>,
   );
   snapshot(
-    <MemoryRouter>
-      <NavLink styleName="navLink" />
+    <MemoryRouter
+      future={{
+        v7_relativeSplatPath: true,
+        v7_startTransition: true,
+      }}
+    >
+      <NavLink styleName="navLink" to="" />
     </MemoryRouter>,
   );
 });

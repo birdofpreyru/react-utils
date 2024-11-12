@@ -2,7 +2,7 @@
 The library provides a bunch of SCSS mixins useful in most of host apps. To use
 them in a SCSS file import:
 ```scss
-@import "@dr.pogodin/react-utils/mixins";
+@use "@dr.pogodin/react-utils/mixins" as *;
 ```
 :::info Note
 It might be more convenient to have a local `mixin` file local to the host

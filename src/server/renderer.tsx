@@ -443,7 +443,10 @@ export default function factory(
                 ssrContext={ssrContext}
               >
                 <StaticRouter
-                  future={{ v7_relativeSplatPath: true }}
+                  future={{
+                    v7_relativeSplatPath: true,
+                    v7_startTransition: true,
+                  }}
                   location={req.url}
                 >
                   <App2 />

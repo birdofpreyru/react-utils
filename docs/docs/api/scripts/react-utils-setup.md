@@ -18,19 +18,27 @@ host package:
 If no `[libraries...]` are specified, the latest version of
 `@dr.pogodin/react-utils` is installed by default.
 
-With `--just-fix-deps` option no libraries are installed, but their currently
-installed versions are checked, and their dependencies are installed into
-the host package in the way described above.
+### Options
 
-In other words, the command
-```bash
-./node_modules/.bin/react-utils-setup
-```
-is equivalent to manually executing
-```bash
-npm install --save @dr.pogodin/react-utils@latest
-npm install --save-dev dev-dep-1@version dev-dep-2@version ...
-npm install --save prod-dep-1@version prod-dep-2@version ...
-```
-where the lists of dev and prod dependencies are formed in the way described
-above.
+-   `--help` &mdash; Prints out command description & options details.
+
+-   `--just-fix-deps` &mdash; With this option no libraries are installed,
+    but their currently installed versions are checked, and their dependencies
+    are installed into the host package in the way described above.
+
+    In other words, the command
+    ```bash
+    ./node_modules/.bin/react-utils-setup
+    ```
+    is equivalent to manually executing
+    ```bash
+    npm install --save @dr.pogodin/react-utils@latest
+    npm install --save-dev dev-dep-1@version dev-dep-2@version ...
+    npm install --save prod-dep-1@version prod-dep-2@version ...
+    ```
+    where the lists of dev and prod dependencies are formed in the way described
+    above.
+
+-   `--verbose` &mdash; Opts-in for verbose logging by the script.
+
+-   `--version` or `-V` &mdash; Prints the script version.

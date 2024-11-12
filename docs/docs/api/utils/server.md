@@ -109,12 +109,12 @@ the given error `message` and `statusCode` if the validation fails.
 ```tsx
 import { server } from '@dr.pogodin/react-utils';
 
-const { fail } = server.errors;
+const { CODES, fail } = server.errors;
 
 function fail(
   message: string,
   statusCode: CODES = CODES.INTERNAL_SERVER_ERROR,
-): never;
+): Error;
 ```
 Throws an error with the given `message` and HTTP `statusCode`.
 
@@ -123,7 +123,20 @@ Throws an error with the given `message` and HTTP `statusCode`.
 - `statusCode` - [errors.CODES] - Optional. HTTP status code. Defaults `500`
   (internal server error).
 
-It never **returns** normally.
+It never **returns**; however, its return type is declared as `Error` to allow
+`throw fail(..)`, thus allowing the following TypeScript code:
+```tsx
+const value: number | undefined = someFunction();
+if (value === undefined) throw fail('Some error');
+
+// TypeScript allows this, because `throw fail()` above narrows down
+// the `value` down to just `number`. 
+const nextValue = value + 1;
+
+// NOTE: According to TypeScript documentation it seems that `never` return
+// type would be more appropriate for `fail()`; however, `never` return type
+// does not result in the same value type narrowing in this example.
+```
 
 ### errors.getErrorForCode()
 ```jsx
