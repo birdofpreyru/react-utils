@@ -11,6 +11,17 @@ meta tags content injected by the component instances encountered down the tree
 overrides the content injected by previously encountered [MetaTags] instances.
 
 ## Properties
+
+**Required**:
+
+- `description` - **string** - Page description to use in the `description` meta
+  tag, and as a default description in [Open Graph] tags.
+
+- `title` - **string** - The page name to use in the `<title>` tag.
+  It is also used as the default value of `socialTitle` prop.
+
+**Optional**:
+
 - `children` - **React.Node** - Component children, if any, are rendered at
   the component's place.
   
@@ -18,8 +29,9 @@ overrides the content injected by previously encountered [MetaTags] instances.
   facilitating tags modification by children. See [Using Context] example for
   details.
 
-- `description` - **string** - Page description to use in the `description` meta
-  tag, and as a default description in [Open Graph] tags.
+- `extraMetaTags` &mdash; **Array&lt;\{ content: string; name: string \}&gt;**
+  &mdash; Allows to add additional, arbitrary `<meta>` tags to the page, with
+  the given `content` and `name` strings.
 
 - `image` - **string** - The absolute URL of thumbnail image to use in
   [Open Graph] tags (`twitter:image`, and `og:image`). By default these tags
@@ -39,9 +51,6 @@ overrides the content injected by previously encountered [MetaTags] instances.
   `og:title`, and `og:image:alt` tags. By default the value of `title` prop
   is used. Also the `og:image:alt` tag is only injected if `image` prop
   is present.
-
-- `title` - **string** - The page name to use in the `<title>` tag.
-  It is also used as the default value of `socialTitle` prop.
 
 - `url` - **string** - The page URL to use in `og:url` tag. By default the tag
   is not injected.

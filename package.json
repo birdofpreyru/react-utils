@@ -1,5 +1,5 @@
 {
-  "version": "1.40.11",
+  "version": "1.40.12",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -113,7 +113,7 @@
     "react-refresh": "^0.14.2",
     "regenerator-runtime": "^0.14.1",
     "resolve-url-loader": "^5.0.0",
-    "sass": "^1.80.6",
+    "sass": "^1.80.7",
     "sass-loader": "^16.0.3",
     "sitemap": "^8.0.0",
     "source-map-loader": "^5.0.0",
