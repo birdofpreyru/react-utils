@@ -1,6 +1,4 @@
-/* global document */
-
-import Cookie from 'cookie';
+import { serialize } from 'cookie';
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
 
@@ -24,18 +22,6 @@ import { getSsrContext } from './globalState';
  * then stored in the global state to be reused in all other calls), which
  * is also passed and used in the first client side render, and then updated
  * with a finite precision to avoid infinite re-rendering loops.
- * @param [options] Optional settings.
- * @param [options.globalStatePath="currentTime"] Global state path
- *  to keep the current time value.
- * @param [options.precision= 5 * time.SEC_MS] Current time precision.
- *  The hook won't update the current time stored in the global state unless it
- *  is different from Date.now() result by this number (in milliseconds).
- *  Default to 5 seconds.
- * @param [options.autorefresh=false] Set `true` to automatically
- *  refresh time stored in the global state with the given `precision` (and
- *  thus automatically re-rendering components dependent on this hook, or
- *  the global state with the period equal to the `precision`.
- * @return Unix timestamp in milliseconds.
  */
 // TODO: Should we request the state type as generic parameter, to be able
 // to verify the give globalStatePath is correct?
@@ -43,7 +29,7 @@ export function useCurrent({
   autorefresh = false,
   globalStatePath = 'currentTime',
   precision = 5 * SEC_MS,
-} = {}) {
+} = {}): number {
   const [now, setter] = useGlobalState<ForceT, number>(globalStatePath, Date.now);
   useEffect(() => {
     let timerId: NodeJS.Timeout;
@@ -70,23 +56,13 @@ export function useCurrent({
  * via the global state. Prior to the value being known (in the very first
  * request from the user, when the cookie is still missing), zero value is used
  * as the default value.
- *
- * @param {object} [options] Optional settings.
- * @param {string} [options.cookieName="timezoneOffset"] Optional. The name of
- *  cookie to use to store the timezone offset. Defaults "timezoneOffset". Set
- *  to a falsy value to forbid using cookies altogether (in that case the hook
- *  will always return zero value at the server-side, and in the first render
- *  at the client-side).
- * @param {string} [options.timezoneOffset="timezoneOffset"] Optional.
- *  The global state path to store the offset. Defaults "timezoneOffset".
- * @return {number} Timezone offset.
  */
 // TODO: Should we request the state type as generic parameter, to be able
 // to verify the give globalStatePath is correct?
 export function useTimezoneOffset({
   cookieName = 'timezoneOffset',
   globalStatePath = 'timezoneOffset',
-} = {}) {
+} = {}): number {
   const ssrContext = getSsrContext(false);
   const [offset, setOffset] = useGlobalState<ForceT, number>(globalStatePath, () => {
     const value = cookieName && ssrContext?.req?.cookies?.[cookieName];
@@ -97,7 +73,7 @@ export function useTimezoneOffset({
     const value = date.getTimezoneOffset();
     setOffset(value);
     if (cookieName) {
-      document.cookie = Cookie.serialize(cookieName, value.toString(), { path: '/' });
+      document.cookie = serialize(cookieName, value.toString(), { path: '/' });
     }
   }, [cookieName, setOffset]);
   return offset;
