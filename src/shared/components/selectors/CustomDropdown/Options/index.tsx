@@ -1,4 +1,10 @@
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import {
+  type FunctionComponent,
+  type ReactNode,
+  type RefObject,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 
 import { BaseModal } from 'components/Modal';
 
@@ -28,14 +34,15 @@ export type RefT = {
 type PropsT = {
   containerClass: string;
   containerStyle?: ContainerPosT;
-  filter?: (item: OptionT<React.ReactNode> | ValueT) => boolean;
+  filter?: (item: OptionT<ReactNode> | ValueT) => boolean;
   optionClass: string;
-  options: Readonly<OptionsT<React.ReactNode>>;
+  options: Readonly<OptionsT<ReactNode>>;
   onCancel: () => void;
   onChange: (value: ValueT) => void;
+  ref?: RefObject<RefT | null>;
 };
 
-const Options = forwardRef<RefT, PropsT>(({
+const Options: FunctionComponent<PropsT> = ({
   containerClass,
   containerStyle,
   filter,
@@ -43,7 +50,8 @@ const Options = forwardRef<RefT, PropsT>(({
   onChange,
   optionClass,
   options,
-}, ref) => {
+  ref,
+}) => {
   const opsRef = useRef<HTMLDivElement>(null);
 
   useImperativeHandle(ref, () => ({
@@ -51,7 +59,7 @@ const Options = forwardRef<RefT, PropsT>(({
       const e = opsRef.current?.parentElement;
       if (!e) return undefined;
 
-      const rect = opsRef.current?.getBoundingClientRect();
+      const rect = opsRef.current!.getBoundingClientRect();
       const style = window.getComputedStyle(e);
       const mBottom = parseFloat(style.marginBottom);
       const mTop = parseFloat(style.marginTop);
@@ -62,7 +70,7 @@ const Options = forwardRef<RefT, PropsT>(({
     },
   }), []);
 
-  const optionNodes: React.ReactNode[] = [];
+  const optionNodes: ReactNode[] = [];
   for (let i = 0; i < options.length; ++i) {
     const option = options[i];
     if (option !== undefined && (!filter || filter(option))) {
@@ -98,7 +106,7 @@ const Options = forwardRef<RefT, PropsT>(({
       // dropdowns during the scrolling (that would need to re-position it in
       // response to the position changes of the root dropdown element).
       cancelOnScrolling
-      containerStyle={containerStyle}
+      style={containerStyle}
       dontDisableScrolling
       onCancel={onCancel}
       theme={{
@@ -112,6 +120,6 @@ const Options = forwardRef<RefT, PropsT>(({
       <div ref={opsRef}>{optionNodes}</div>
     </BaseModal>
   );
-});
+};
 
 export default Options;

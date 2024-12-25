@@ -3,11 +3,11 @@
  * hierarchy, and with sub-components managed without React to achieve the best
  * performance during animation.
  */
-/* global document, window */
 
 import {
+  type FunctionComponent,
   type ReactNode,
-  forwardRef,
+  type RefObject,
   useEffect,
   useImperativeHandle,
   useRef,
@@ -269,10 +269,11 @@ function setComponentPositions(
 }
 
 /* The Tooltip component itself. */
-const Tooltip = forwardRef<unknown, {
+const Tooltip: FunctionComponent<{
   children?: ReactNode;
+  ref?: RefObject<unknown>;
   theme: any;
-}>(({ children, theme }, ref) => {
+}> = ({ children, ref, theme }) => {
   // NOTE: The way it has to be implemented, for clean mounting and unmounting
   // at the client side, the <Tooltip> is fully mounted into DOM in the next
   // rendering cycles, and only then it can be correctly measured and positioned.
@@ -340,6 +341,6 @@ const Tooltip = forwardRef<unknown, {
   ]);
 
   return components ? createPortal(children, components.content) : null;
-});
+};
 
 export default Tooltip;

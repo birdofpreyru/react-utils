@@ -2,6 +2,9 @@
 
 exports[`emits correct CSS 1`] = `"@font-face{font-display:block;font-family:Empty;font-style:normal;font-weight:400;src:url(/public/path/31d6cfe0d16ae931b73c.ttf) format("truetype")}.dQLICa{font:12pt Empty,serif}"`;
 
-exports[`generates expected view 1`] = `"<div class="dQLICa"><img src="/public/path/images/31d6cfe0d16ae931b73c.png" alt="Empty PNG"></div>"`;
+exports[`generates expected view 1`] = `
+"<link rel="preload" as="image" href="/public/path/images/31d6cfe0d16ae931b73c.png">
+<div class="dQLICa"><img src="/public/path/images/31d6cfe0d16ae931b73c.png" alt="Empty PNG"></div>"
+`;
 
 exports[`relies on the expected base URL 1`] = `"http://localhost/public/path/"`;
