@@ -1,6 +1,7 @@
 /* global window */
 
 import {
+  type FunctionComponent,
   type ReactNode,
   useEffect,
   useRef,
@@ -49,12 +50,11 @@ type HeapT = {
  * **Children:** Children are rendered in the place of `<WithTooltip>`,
  * and when hovered the tooltip is shown. By default the wrapper itself is
  * `<div>` block with `display: inline-block`.
- * @param {object} props Component properties.
- * @param {React.node} props.tip &ndash; Anything React is able to render,
+ * @param tip &ndash; Anything React is able to render,
  * _e.g._ a tooltip text. This will be the tooltip content.
  * @param {WithTooltipTheme} props.theme _Ad hoc_ theme.
  */
-const Wrapper: React.FunctionComponent<PropsT> = ({
+const Wrapper: FunctionComponent<PropsT> = ({
   children,
   placement = PLACEMENTS.ABOVE_CURSOR,
   tip,
@@ -66,7 +66,7 @@ const Wrapper: React.FunctionComponent<PropsT> = ({
     triggeredByTouch: false,
     timerId: undefined,
   });
-  const tooltipRef = useRef<TooltipRefT>();
+  const tooltipRef = useRef<TooltipRefT>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [showTooltip, setShowTooltip] = useState(false);
 

@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`generates expected markup during SSR 1`] = `"<img alt="logo" src="/images/cd564973d92d0a8a8a17.png">"`;
+exports[`generates expected markup during SSR 1`] = `"<link rel="preload" as="image" href="/images/cd564973d92d0a8a8a17.png"><img alt="logo" src="/images/cd564973d92d0a8a8a17.png">"`;

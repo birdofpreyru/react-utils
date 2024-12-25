@@ -82,11 +82,11 @@ When multiple [MetaTags] are nested within the app's tree the [MetaTags] content
 comes in handy to modify meta tags from the children components.
 
 ```jsx
-import { useContext } from 'react';
+import { use } from 'react';
 import { MetaTags } from '@dr.pogodin/react-utils';
 
 export default function SampleComponent() {
-  const { title, description, ...rest } = useContext(MetaTags.Context);
+  const { title, description, ...rest } = use(MetaTags.Context);
   // Do something with these props here, e.g. prefix the page title with
   // the component name:
   return (

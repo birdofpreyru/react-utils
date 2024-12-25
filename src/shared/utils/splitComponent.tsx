@@ -3,8 +3,9 @@
 
 import {
   type ComponentType,
+  type FunctionComponent,
   type ReactNode,
-  forwardRef,
+  type RefObject,
   lazy,
   Suspense,
   useInsertionEffect,
@@ -181,7 +182,7 @@ type ComponentOrModule<PropsT> = ComponentType<PropsT> | {
  * @return {React.ElementType}
  */
 export default function splitComponent<
-  ComponentPropsT extends { children?: ReactNode },
+  ComponentPropsT extends { children?: ReactNode; ref?: RefObject<unknown> },
 >({
   chunkName,
   getComponent,
@@ -210,10 +211,11 @@ export default function splitComponent<
       await bookStyleSheets(chunkName, clientChunkGroups, false);
     }
 
-    const Wrapper = forwardRef<unknown, ComponentPropsT>((
-      { children, ...rest },
+    const Wrapper: FunctionComponent<ComponentPropsT> = ({
+      children,
       ref,
-    ) => {
+      ...rest
+    }) => {
       // On the server side we'll assert the chunk name here,
       // and also push it to the SSR chunks array.
       if (IS_SERVER_SIDE) {
@@ -230,11 +232,11 @@ export default function splitComponent<
       }, []);
 
       return (
-        <Component ref={ref} {...(rest as unknown as ComponentPropsT)}>
+        <Component {...(rest as unknown as ComponentPropsT)} ref={ref}>
           {children}
         </Component>
       );
-    });
+    };
 
     return { default: Wrapper };
   });

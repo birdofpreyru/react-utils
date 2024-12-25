@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { use } from 'react';
 
 import MetaTags from 'components/MetaTags';
 
@@ -8,7 +8,7 @@ export enum MODES {
 }
 
 const Component = () => {
-  const { title, description } = useContext(MetaTags.Context);
+  const { title, description } = use(MetaTags.Context);
   return (
     <div>
       <p>A dummy internal component.</p>

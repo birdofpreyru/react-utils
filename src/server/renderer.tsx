@@ -437,6 +437,8 @@ export default function factory(
         const renderPass = async () => {
           ssrContext.chunks = [];
           return new Promise<PipeableStream>((resolve, reject) => {
+            // TODO: pipeableStream has .abort() method,
+            // and we should wire it up to the SSR timeout below.
             const pipeableStream = renderToPipeableStream(
               <GlobalStateProvider
                 initialState={ssrContext.state}
