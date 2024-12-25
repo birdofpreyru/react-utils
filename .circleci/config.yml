@@ -12,7 +12,7 @@ jobs:
           key: node-modules-{{ checksum "package-lock.json" }}-{{ checksum "docs/package-lock.json" }}
       - run: npm install && npm run build && npm pack
       - run:
-          command: npm install ../dr.pogodin-react-utils-*.tgz && npm install
+          command: npm install ../dr.pogodin-react-utils-*.tgz --force
           working_directory: docs
       - save_cache:
           key: node-modules-{{ checksum "package-lock.json" }}-{{ checksum "docs/package-lock.json"}}
