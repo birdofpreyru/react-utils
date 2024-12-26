@@ -20,6 +20,10 @@ If no `[libraries...]` are specified, the latest version of
 
 ### Options
 
+-   `--force` &mdash; Adds `--force` argument to the underlying `npm install`
+    and `npm dedupe` commands, to ignore conflicts between dependency versions
+    required by other depedencies.
+
 -   `--help` &mdash; Prints out command description & options details.
 
 -   `--just-fix-deps` &mdash; With this option no libraries are installed,

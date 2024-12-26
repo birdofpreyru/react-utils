@@ -43,6 +43,11 @@ program
   })
   .description(COMMAND_DESCRIPTION)
   .option(
+    '--force',
+    'Uses "--force" option for underlying npm install & dedupe operations',
+    false,
+  )
+  .option(
     '--just-fix-deps',
     'Skips library installation, just fixes dependencies.',
     false,
@@ -52,7 +57,7 @@ program
 
 const cmdLineArgs = program.opts();
 
-const { verbose } = cmdLineArgs;
+const { force, verbose } = cmdLineArgs;
 
 /**
  * Generates a string containing name and version of the package to be
@@ -100,6 +105,7 @@ function adoptDevDependencies(donorData, hostData) {
   deps = Object.entries(deps).map(generateTargetPackage);
   if (deps.length) {
     const args = ['install', '--save-dev'].concat(deps);
+    if (force) args.push('--force');
     if (verbose) args.push('--verbose');
     spawnSync(NPM_COMMAND, args, {
       stdio: 'inherit',
@@ -150,6 +156,7 @@ function install(library) {
   if (!name.includes('@', 1)) name += '@latest';
   const args = ['install', '--save', name];
 
+  if (force) args.push('--force');
   if (verbose) {
     console.log(`Installing "${library}"...`);
     args.push('--verbose');
@@ -179,6 +186,7 @@ function updateProdDependencies(donorData, hostData) {
   if (deps.length) {
     deps = deps.map(generateTargetPackage);
     const args = ['install', '--save'].concat(deps);
+    if (force) args.push('--force');
     if (verbose) args.push('--verbose');
     spawnSync(NPM_COMMAND, args, { stdio: 'inherit' });
   }
@@ -196,6 +204,7 @@ libs.forEach((library) => {
 
 {
   const arg = ['install'];
+  if (force) arg.push('--force');
   if (verbose) arg.push('--verbose');
   spawnSync(NPM_COMMAND, arg, { stdio: 'inherit' });
 }
@@ -208,6 +217,7 @@ libs.forEach((library) => {
 
 {
   const arg = ['dedupe'];
+  if (force) arg.push('--force');
   if (verbose) arg.push('--verbose');
   spawnSync(NPM_COMMAND, arg, { stdio: 'inherit' });
 }
