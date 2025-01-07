@@ -1,4 +1,4 @@
-import type { FunctionComponent, RefObject } from 'react';
+import type { FunctionComponent, Ref } from 'react';
 
 import themed, { type Theme } from '@dr.pogodin/react-themes';
 
@@ -11,7 +11,7 @@ type ThemeKeyT =
 
 type PropsT = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: React.ReactNode;
-  ref?: RefObject<HTMLInputElement>;
+  ref?: Ref<HTMLInputElement>;
   testId?: string;
   theme: Theme<ThemeKeyT>;
 };
