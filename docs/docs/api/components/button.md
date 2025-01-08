@@ -43,6 +43,7 @@ cases.
   argument.
 
 - `onMouseDown` - **function** - Mouse down event handler.
+- `onPointerDown` &mdash; **function** &mdash; Pointer down event handler.
 - `openNewTab` - **boolean** - If the button is rendered as [Link] this flag
   opts to open the link in a new tab.
 - `replace` - **boolean** - If the button is rendered as [Link], and the target

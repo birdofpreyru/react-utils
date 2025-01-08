@@ -1,6 +1,6 @@
 // The <Button> component implements a standard button / button-like link.
 
-import { type ReactNode } from 'react';
+import type { PointerEventHandler, ReactNode } from 'react';
 
 import Link from 'components/Link';
 
@@ -15,6 +15,7 @@ type PropsT = {
   enforceA?: boolean;
   onClick?: React.MouseEventHandler & React.KeyboardEventHandler;
   onMouseDown?: React.MouseEventHandler;
+  onPointerDown?: PointerEventHandler;
   openNewTab?: boolean;
   replace?: boolean;
   testId?: string;
@@ -31,6 +32,7 @@ export const BaseButton: React.FunctionComponent<PropsT> = ({
   enforceA,
   onClick,
   onMouseDown,
+  onPointerDown,
   openNewTab,
   replace,
   testId,
@@ -58,6 +60,7 @@ export const BaseButton: React.FunctionComponent<PropsT> = ({
         enforceA={enforceA}
         onClick={onClick}
         onMouseDown={onMouseDown}
+        onPointerDown={onPointerDown}
         openNewTab={openNewTab}
         replace={replace}
         to={to}
@@ -76,6 +79,7 @@ export const BaseButton: React.FunctionComponent<PropsT> = ({
         if (e.key === 'Enter') onClick(e);
       })}
       onMouseDown={onMouseDown}
+      onPointerDown={onPointerDown}
       role="button"
       tabIndex={0}
     >
