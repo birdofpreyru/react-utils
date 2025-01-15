@@ -27,7 +27,7 @@ import {
 import config from 'config';
 import forge from 'node-forge';
 
-import { type PipeableStream, renderToPipeableStream } from 'react-dom/server';
+import { prerenderToNodeStream } from 'react-dom/static';
 import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom/server';
 import serializeJs from 'serialize-javascript';
@@ -426,7 +426,7 @@ export default function factory(
       const App = ops.Application;
       let appHtmlMarkup: string = '';
       const ssrContext = new ServerSsrContext(req, chunkGroups, initialState);
-      let stream: PipeableStream;
+      let stream: NodeJS.ReadableStream;
       if (App) {
         const ssrStart = Date.now();
 
@@ -436,30 +436,28 @@ export default function factory(
 
         const renderPass = async () => {
           ssrContext.chunks = [];
-          return new Promise<PipeableStream>((resolve, reject) => {
-            // TODO: pipeableStream has .abort() method,
-            // and we should wire it up to the SSR timeout below.
-            const pipeableStream = renderToPipeableStream(
-              <GlobalStateProvider
-                initialState={ssrContext.state}
-                ssrContext={ssrContext}
+
+          // TODO: prerenderToNodeStream has (abort) "signal" option,
+          // and we should wire it up to the SSR timeout below.
+          const { prelude } = await prerenderToNodeStream(
+            <GlobalStateProvider
+              initialState={ssrContext.state}
+              ssrContext={ssrContext}
+            >
+              <StaticRouter
+                future={{
+                  v7_relativeSplatPath: true,
+                  v7_startTransition: true,
+                }}
+                location={req.url}
               >
-                <StaticRouter
-                  future={{
-                    v7_relativeSplatPath: true,
-                    v7_startTransition: true,
-                  }}
-                  location={req.url}
-                >
-                  <App2 />
-                </StaticRouter>
-              </GlobalStateProvider>,
-              {
-                onAllReady: () => resolve(pipeableStream),
-                onError: reject,
-              },
-            );
-          });
+                <App2 />
+              </StaticRouter>
+            </GlobalStateProvider>,
+            { onError: (error) => { throw error; } },
+          );
+
+          return prelude;
         };
 
         let ssrRound = 0;
@@ -492,12 +490,15 @@ export default function factory(
 
         ops.logger!.log(ssrContext.dirty ? 'warn' : 'info', logMsg);
 
-        stream!.pipe(new Writable({
-          write: (chunk, _, done) => {
-            appHtmlMarkup += chunk.toString();
-            done();
-          },
-        }));
+        await new Promise((ready) => {
+          stream!.pipe(new Writable({
+            destroy: ready,
+            write: (chunk, _, done) => {
+              appHtmlMarkup += chunk.toString();
+              done();
+            },
+          }));
+        });
 
         /* This takes care about server-side rendering of page title and meta tags
         * (still demands injection into HTML template, which happens below). */
