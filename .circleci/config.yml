@@ -10,7 +10,8 @@ jobs:
       - checkout
       - restore_cache:
           key: node-modules-{{ checksum "package-lock.json" }}-{{ checksum "docs/package-lock.json" }}
-      - run: npm install && npm run build && npm pack
+        # TODO: --force is temporary.
+      - run: npm install --force && npm run build && npm pack
       - run:
           command: npm install ../dr.pogodin-react-utils-*.tgz --force
           working_directory: docs
