@@ -3,7 +3,7 @@
 import { noop, omit } from 'lodash';
 import Button from 'components/Button';
 import { snapshot } from 'utils/jest';
-import { StaticRouter } from 'react-router-dom/server';
+import { StaticRouter } from 'react-router';
 
 const testTheme = {
   active: 'ACTIVE_CLASS',
@@ -48,13 +48,7 @@ describe('Matches snapshots', () => {
   });
   test('when rendered as link', () => {
     snapshot((
-      <StaticRouter
-        future={{
-          v7_relativeSplatPath: true,
-          v7_startTransition: true,
-        }}
-        location=""
-      >
+      <StaticRouter location="">
         <Button
           active
           theme={testTheme}

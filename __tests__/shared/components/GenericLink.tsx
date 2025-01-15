@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
 
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import UserEvents from '@testing-library/user-event';
 

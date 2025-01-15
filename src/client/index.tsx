@@ -6,7 +6,7 @@ import { type ComponentType } from 'react';
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
 
 import { createRoot, hydrateRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 
 import getInj from './getInj';
 
@@ -28,12 +28,7 @@ export default function Launch(
   if (!container) throw Error('Failed to find container for React app');
   const scene = (
     <GlobalStateProvider initialState={getInj().ISTATE || options.initialState}>
-      <BrowserRouter
-        future={{
-          v7_relativeSplatPath: true,
-          v7_startTransition: true,
-        }}
-      >
+      <BrowserRouter>
         <Application />
       </BrowserRouter>
     </GlobalStateProvider>

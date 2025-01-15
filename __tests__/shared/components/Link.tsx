@@ -1,18 +1,13 @@
 /** @jest-environment jsdom */
 
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 
 import Link from 'components/Link';
 import { snapshot } from 'utils/jest';
 
 test('Matches snapshots', () => {
   snapshot(
-    <MemoryRouter
-      future={{
-        v7_relativeSplatPath: true,
-        v7_startTransition: true,
-      }}
-    >
+    <MemoryRouter>
       <Link to="" />
     </MemoryRouter>,
   );

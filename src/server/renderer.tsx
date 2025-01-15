@@ -29,7 +29,7 @@ import forge from 'node-forge';
 
 import { type PipeableStream, renderToPipeableStream } from 'react-dom/server';
 import { Helmet } from 'react-helmet';
-import { StaticRouter } from 'react-router-dom/server';
+import { StaticRouter } from 'react-router';
 import serializeJs from 'serialize-javascript';
 import { type BuildInfoT, setBuildInfo } from 'utils/isomorphy/buildInfo';
 
@@ -444,13 +444,7 @@ export default function factory(
                 initialState={ssrContext.state}
                 ssrContext={ssrContext}
               >
-                <StaticRouter
-                  future={{
-                    v7_relativeSplatPath: true,
-                    v7_startTransition: true,
-                  }}
-                  location={req.url}
-                >
+                <StaticRouter location={req.url}>
                   <App2 />
                 </StaticRouter>
               </GlobalStateProvider>,
