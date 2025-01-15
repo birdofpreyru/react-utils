@@ -7,7 +7,7 @@ exports[`Server is functional Simple request 2`] = `
         <html lang="en">
           <head>
             
-            <title data-react-helmet="true"></title>
+            <title data-rh="true"></title>
             
             <meta name="theme-color" content="#FFFFFF">
             

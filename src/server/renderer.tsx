@@ -28,7 +28,7 @@ import config from 'config';
 import forge from 'node-forge';
 
 import { prerenderToNodeStream } from 'react-dom/static';
-import { Helmet } from 'react-helmet';
+import { HelmetProvider } from 'react-helmet-async';
 import { StaticRouter } from 'react-router-dom/server';
 import serializeJs from 'serialize-javascript';
 import { type BuildInfoT, setBuildInfo } from 'utils/isomorphy/buildInfo';
@@ -403,7 +403,7 @@ export default function factory(
         prepareCipher(buildInfo.key) as Promise<any>,
       ]);
 
-      let helmet;
+      let helmet: any;
 
       // Gets the mapping between code chunk names and their asset files.
       // These data come from the Webpack compilation, either from the stats
@@ -439,6 +439,7 @@ export default function factory(
 
           // TODO: prerenderToNodeStream has (abort) "signal" option,
           // and we should wire it up to the SSR timeout below.
+          const helmetContext = {};
           const { prelude } = await prerenderToNodeStream(
             <GlobalStateProvider
               initialState={ssrContext.state}
@@ -451,11 +452,14 @@ export default function factory(
                 }}
                 location={req.url}
               >
-                <App2 />
+                <HelmetProvider context={helmetContext}>
+                  <App2 />
+                </HelmetProvider>
               </StaticRouter>
             </GlobalStateProvider>,
             { onError: (error) => { throw error; } },
           );
+          ({ helmet } = helmetContext as any);
 
           return prelude;
         };
@@ -499,10 +503,6 @@ export default function factory(
             },
           }));
         });
-
-        /* This takes care about server-side rendering of page title and meta tags
-        * (still demands injection into HTML template, which happens below). */
-        helmet = Helmet.renderStatic();
       }
 
       /* Encrypts data to be injected into HTML.

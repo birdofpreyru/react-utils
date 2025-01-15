@@ -5,7 +5,7 @@
 import { noop } from 'lodash';
 import { type ComponentType } from 'react';
 import supertest from 'supertest';
-import { Helmet } from 'react-helmet';
+import { HelmetProvider } from 'react-helmet-async';
 
 import serverFactory from 'server/server';
 import { setBuildInfo } from 'utils/isomorphy/buildInfo';
@@ -15,7 +15,7 @@ import Application2, { MODES as MODES2 } from './__assets__/testcase/app2';
 
 // Without this setting the JSDom presence in test environment tricks
 // tricks react-helmet to think it is executed client-side.
-Helmet.canUseDOM = false;
+HelmetProvider.canUseDOM = false;
 
 const WEBPACK_CONFIG = {
   context: `${__dirname}/__assets__/testcase`,
