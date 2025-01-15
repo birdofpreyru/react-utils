@@ -37,6 +37,8 @@ import type {
   JestEnvironmentConfig,
 } from '@jest/environment';
 
+import { setBuildInfo } from '../isomorphy/buildInfo';
+
 export default class E2eSsrEnv extends JsdomEnv {
   pragmas: Record<string, string | string[]>;
 
@@ -232,6 +234,22 @@ export default class E2eSsrEnv extends JsdomEnv {
   async setup() {
     await super.setup();
     await this.runWebpack();
+
+    // NOTE: It is possible that the Webpack run above, and the SSR run below
+    // load different versions of the same module (CommonJS, and ES), and it may
+    // cause very confusing problems (e.g. see:
+    // https://github.com/birdofpreyru/react-utils/issues/413).
+    // It seems we can't reset the cache of ES modules, and Jest's module reset
+    // does not reset modules loaded in this enviroment module, and also only
+    // replacing entire cache object by and empty {} seems to help (in contrast
+    // to deleting all entries by their keys, as it is done within .teardown()
+    // method below). Thus, for now we do this as a hotfix, and we also reset
+    // build info to undefined, because ES module version not beeing reset
+    // triggers an error on the subsequent test using the environment.
+    // TODO: Look for a cleaner solution.
+    require.cache = {};
+    setBuildInfo(undefined, true);
+
     if (this.withSsr) await this.runSsr();
     this.global.REACT_UTILS_FORCE_CLIENT_SIDE = true;
   }

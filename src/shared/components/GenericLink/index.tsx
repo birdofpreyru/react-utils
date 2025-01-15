@@ -5,7 +5,7 @@ import type {
   LinkProps,
   NavLink,
   NavLinkProps,
-} from 'react-router-dom';
+} from 'react-router';
 
 import './style.scss';
 
@@ -112,6 +112,7 @@ const GenericLink = ({
   return (
     <L
       className={className}
+      discover="none"
       // disabled
       onMouseDown={onMouseDown}
       replace={replace}

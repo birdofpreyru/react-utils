@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
 
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 
 import NavLink from 'components/NavLink';
 
@@ -10,22 +10,12 @@ import './styles.scss';
 
 test('Matches snapshots', () => {
   snapshot(
-    <MemoryRouter
-      future={{
-        v7_relativeSplatPath: true,
-        v7_startTransition: true,
-      }}
-    >
+    <MemoryRouter>
       <NavLink to="" />
     </MemoryRouter>,
   );
   snapshot(
-    <MemoryRouter
-      future={{
-        v7_relativeSplatPath: true,
-        v7_startTransition: true,
-      }}
-    >
+    <MemoryRouter>
       <NavLink styleName="navLink" to="" />
     </MemoryRouter>,
   );

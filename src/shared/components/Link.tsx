@@ -6,7 +6,7 @@
  * - User explicitely opts to use <a>.
  */
 
-import { type LinkProps, Link as RrLink } from 'react-router-dom';
+import { type LinkProps, Link as RrLink } from 'react-router';
 
 import GenericLink, { type PropsT as GenericLinkPropsT } from './GenericLink';
 

@@ -29,7 +29,7 @@ import forge from 'node-forge';
 
 import { prerenderToNodeStream } from 'react-dom/static';
 import { HelmetProvider } from 'react-helmet-async';
-import { StaticRouter } from 'react-router-dom/server';
+import { StaticRouter } from 'react-router';
 import serializeJs from 'serialize-javascript';
 import { type BuildInfoT, setBuildInfo } from 'utils/isomorphy/buildInfo';
 
@@ -445,13 +445,7 @@ export default function factory(
               initialState={ssrContext.state}
               ssrContext={ssrContext}
             >
-              <StaticRouter
-                future={{
-                  v7_relativeSplatPath: true,
-                  v7_startTransition: true,
-                }}
-                location={req.url}
-              >
+              <StaticRouter location={req.url}>
                 <HelmetProvider context={helmetContext}>
                   <App2 />
                 </HelmetProvider>

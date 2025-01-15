@@ -3,8 +3,8 @@
 
 import { type ComponentType } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { BrowserRouter } from 'react-router';
 
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
 
@@ -28,12 +28,7 @@ export default function Launch(
   if (!container) throw Error('Failed to find container for React app');
   const scene = (
     <GlobalStateProvider initialState={getInj().ISTATE || options.initialState}>
-      <BrowserRouter
-        future={{
-          v7_relativeSplatPath: true,
-          v7_startTransition: true,
-        }}
-      >
+      <BrowserRouter>
         <HelmetProvider>
           <Application />
         </HelmetProvider>

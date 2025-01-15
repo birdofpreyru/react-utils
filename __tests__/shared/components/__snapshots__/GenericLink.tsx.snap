@@ -37,7 +37,7 @@ exports[`Relative link 1`] = `
 <button
   type="button"
 >
-  {"to":"http/relative/link","children":"RELATIVE LINK"}
+  {"discover":"none","to":"http/relative/link","children":"RELATIVE LINK"}
 </button>
 `;
 

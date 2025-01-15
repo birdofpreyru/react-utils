@@ -1,4 +1,4 @@
-import { type NavLinkProps, NavLink as RrNavLink } from 'react-router-dom';
+import { type NavLinkProps, NavLink as RrNavLink } from 'react-router';
 
 import GenericLink, { type PropsT as GenericLinkPropsT } from './GenericLink';
 
