@@ -27,8 +27,8 @@ import {
 import config from 'config';
 import forge from 'node-forge';
 
-import { type PipeableStream, renderToPipeableStream } from 'react-dom/server';
-import { Helmet } from 'react-helmet';
+import { prerenderToNodeStream } from 'react-dom/static';
+import { HelmetProvider } from 'react-helmet-async';
 import { StaticRouter } from 'react-router';
 import serializeJs from 'serialize-javascript';
 import { type BuildInfoT, setBuildInfo } from 'utils/isomorphy/buildInfo';
@@ -403,7 +403,7 @@ export default function factory(
         prepareCipher(buildInfo.key) as Promise<any>,
       ]);
 
-      let helmet;
+      let helmet: any;
 
       // Gets the mapping between code chunk names and their asset files.
       // These data come from the Webpack compilation, either from the stats
@@ -426,7 +426,7 @@ export default function factory(
       const App = ops.Application;
       let appHtmlMarkup: string = '';
       const ssrContext = new ServerSsrContext(req, chunkGroups, initialState);
-      let stream: PipeableStream;
+      let stream: NodeJS.ReadableStream;
       if (App) {
         const ssrStart = Date.now();
 
@@ -436,24 +436,26 @@ export default function factory(
 
         const renderPass = async () => {
           ssrContext.chunks = [];
-          return new Promise<PipeableStream>((resolve, reject) => {
-            // TODO: pipeableStream has .abort() method,
-            // and we should wire it up to the SSR timeout below.
-            const pipeableStream = renderToPipeableStream(
-              <GlobalStateProvider
-                initialState={ssrContext.state}
-                ssrContext={ssrContext}
-              >
-                <StaticRouter location={req.url}>
+
+          // TODO: prerenderToNodeStream has (abort) "signal" option,
+          // and we should wire it up to the SSR timeout below.
+          const helmetContext = {};
+          const { prelude } = await prerenderToNodeStream(
+            <GlobalStateProvider
+              initialState={ssrContext.state}
+              ssrContext={ssrContext}
+            >
+              <StaticRouter location={req.url}>
+                <HelmetProvider context={helmetContext}>
                   <App2 />
-                </StaticRouter>
-              </GlobalStateProvider>,
-              {
-                onAllReady: () => resolve(pipeableStream),
-                onError: reject,
-              },
-            );
-          });
+                </HelmetProvider>
+              </StaticRouter>
+            </GlobalStateProvider>,
+            { onError: (error) => { throw error; } },
+          );
+          ({ helmet } = helmetContext as any);
+
+          return prelude;
         };
 
         let ssrRound = 0;
@@ -486,16 +488,15 @@ export default function factory(
 
         ops.logger!.log(ssrContext.dirty ? 'warn' : 'info', logMsg);
 
-        stream!.pipe(new Writable({
-          write: (chunk, _, done) => {
-            appHtmlMarkup += chunk.toString();
-            done();
-          },
-        }));
-
-        /* This takes care about server-side rendering of page title and meta tags
-        * (still demands injection into HTML template, which happens below). */
-        helmet = Helmet.renderStatic();
+        await new Promise((ready) => {
+          stream!.pipe(new Writable({
+            destroy: ready,
+            write: (chunk, _, done) => {
+              appHtmlMarkup += chunk.toString();
+              done();
+            },
+          }));
+        });
       }
 
       /* Encrypts data to be injected into HTML.

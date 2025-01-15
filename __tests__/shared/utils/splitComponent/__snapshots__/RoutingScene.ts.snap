@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`generates expected head markup during SSR 1`] = `
-"<title data-react-helmet="true"></title>
+"<title data-rh="true"></title>
 
 <meta name="theme-color" content="#FFFFFF">
 

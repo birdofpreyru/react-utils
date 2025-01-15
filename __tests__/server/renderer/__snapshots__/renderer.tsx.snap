@@ -100,8 +100,8 @@ exports[`Helmet integration works 2`] = `
         <html lang="en">
           <head>
             
-            <title data-react-helmet="true">Test Page Title</title>
-            <meta data-react-helmet="true" property="description" content="Test Page Description"/>
+            <title data-rh="true">Test Page Title</title>
+            <meta data-rh="true" property="description" content="Test Page Description"/>
             <meta name="theme-color" content="#FFFFFF">
             
             <link href="/test/public/path/main-1511941200000.css" rel="stylesheet">
@@ -162,7 +162,7 @@ exports[`JS constructs in global state 2`] = `
         <html lang="en">
           <head>
             
-            <title data-react-helmet="true"></title>
+            <title data-rh="true"></title>
             
             <meta name="theme-color" content="#FFFFFF">
             
@@ -193,7 +193,7 @@ exports[`Server-side rendering (SSR); injection of CSS chunks & Redux state 2`] 
         <html lang="en">
           <head>
             
-            <title data-react-helmet="true"></title>
+            <title data-rh="true"></title>
             
             <meta name="theme-color" content="#FFFFFF">
             
@@ -224,7 +224,7 @@ exports[`Setting of response HTTP status the server-side rendering 2`] = `
         <html lang="en">
           <head>
             
-            <title data-react-helmet="true"></title>
+            <title data-rh="true"></title>
             
             <meta name="theme-color" content="#FFFFFF">
             

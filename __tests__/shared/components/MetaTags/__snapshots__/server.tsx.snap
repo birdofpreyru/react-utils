@@ -5,8 +5,8 @@ exports[`All tags, with override 1`] = `
         <html lang="en">
           <head>
             
-            <title data-react-helmet="true">Title from Component</title>
-            <meta data-react-helmet="true" name="description" content="Component description"/><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"/><meta data-react-helmet="true" name="twitter:title" content="SOCIAL_TITLE"/><meta data-react-helmet="true" name="twitter:description" content="SOCIAL_DESCRIPTION"/><meta data-react-helmet="true" name="twitter:image" content="https://sample.domain/THUMBNAIL_PATH"/><meta data-react-helmet="true" name="twitter:site" content="@SITE_NAME"/><meta data-react-helmet="true" name="og:title" content="SOCIAL_TITLE"/><meta data-react-helmet="true" name="og:image" content="https://sample.domain/THUMBNAIL_PATH"/><meta data-react-helmet="true" name="og:image:alt" content="SOCIAL_TITLE"/><meta data-react-helmet="true" name="og:description" content="SOCIAL_DESCRIPTION"/><meta data-react-helmet="true" name="og:sitename" content="SITE_NAME"/><meta data-react-helmet="true" name="og:url" content="PAGE_URL"/>
+            <title data-rh="true">Title from Component</title>
+            <meta data-rh="true" name="description" content="Component description"/><meta data-rh="true" name="twitter:card" content="summary_large_image"/><meta data-rh="true" name="twitter:title" content="SOCIAL_TITLE"/><meta data-rh="true" name="twitter:description" content="SOCIAL_DESCRIPTION"/><meta data-rh="true" name="twitter:image" content="https://sample.domain/THUMBNAIL_PATH"/><meta data-rh="true" name="twitter:site" content="@SITE_NAME"/><meta data-rh="true" name="og:title" content="SOCIAL_TITLE"/><meta data-rh="true" name="og:image" content="https://sample.domain/THUMBNAIL_PATH"/><meta data-rh="true" name="og:image:alt" content="SOCIAL_TITLE"/><meta data-rh="true" name="og:description" content="SOCIAL_DESCRIPTION"/><meta data-rh="true" name="og:sitename" content="SITE_NAME"/><meta data-rh="true" name="og:url" content="PAGE_URL"/>
             <meta name="theme-color" content="#FFFFFF">
             
             
@@ -32,8 +32,8 @@ exports[`Basic tags, no override 1`] = `
         <html lang="en">
           <head>
             
-            <title data-react-helmet="true">Application Title</title>
-            <meta data-react-helmet="true" name="description" content="Application Description"/><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"/><meta data-react-helmet="true" name="twitter:title" content="Application Title"/><meta data-react-helmet="true" name="twitter:description" content="Application Description"/><meta data-react-helmet="true" name="og:title" content="Application Title"/><meta data-react-helmet="true" name="og:description" content="Application Description"/>
+            <title data-rh="true">Application Title</title>
+            <meta data-rh="true" name="description" content="Application Description"/><meta data-rh="true" name="twitter:card" content="summary_large_image"/><meta data-rh="true" name="twitter:title" content="Application Title"/><meta data-rh="true" name="twitter:description" content="Application Description"/><meta data-rh="true" name="og:title" content="Application Title"/><meta data-rh="true" name="og:description" content="Application Description"/>
             <meta name="theme-color" content="#FFFFFF">
             
             
@@ -59,8 +59,8 @@ exports[`Basic tags, with override 1`] = `
         <html lang="en">
           <head>
             
-            <title data-react-helmet="true">Title from Component</title>
-            <meta data-react-helmet="true" name="description" content="Component description"/><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"/><meta data-react-helmet="true" name="twitter:title" content="Title from Component"/><meta data-react-helmet="true" name="twitter:description" content="Component description"/><meta data-react-helmet="true" name="og:title" content="Title from Component"/><meta data-react-helmet="true" name="og:description" content="Component description"/>
+            <title data-rh="true">Title from Component</title>
+            <meta data-rh="true" name="description" content="Component description"/><meta data-rh="true" name="twitter:card" content="summary_large_image"/><meta data-rh="true" name="twitter:title" content="Title from Component"/><meta data-rh="true" name="twitter:description" content="Component description"/><meta data-rh="true" name="og:title" content="Title from Component"/><meta data-rh="true" name="og:description" content="Component description"/>
             <meta name="theme-color" content="#FFFFFF">
             
             
@@ -86,8 +86,8 @@ exports[`Using <MetaTags> children feature Basic tags, no override 1`] = `
         <html lang="en">
           <head>
             
-            <title data-react-helmet="true">Application Title</title>
-            <meta data-react-helmet="true" name="description" content="Application Description"/><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"/><meta data-react-helmet="true" name="twitter:title" content="Application Title"/><meta data-react-helmet="true" name="twitter:description" content="Application Description"/><meta data-react-helmet="true" name="og:title" content="Application Title"/><meta data-react-helmet="true" name="og:description" content="Application Description"/>
+            <title data-rh="true">Application Title</title>
+            <meta data-rh="true" name="description" content="Application Description"/><meta data-rh="true" name="twitter:card" content="summary_large_image"/><meta data-rh="true" name="twitter:title" content="Application Title"/><meta data-rh="true" name="twitter:description" content="Application Description"/><meta data-rh="true" name="og:title" content="Application Title"/><meta data-rh="true" name="og:description" content="Application Description"/>
             <meta name="theme-color" content="#FFFFFF">
             
             
@@ -113,8 +113,8 @@ exports[`Using <MetaTags> children feature Basic tags, with override 1`] = `
         <html lang="en">
           <head>
             
-            <title data-react-helmet="true">Title from Component - Application Title</title>
-            <meta data-react-helmet="true" name="description" content="Component description - Application Description"/><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"/><meta data-react-helmet="true" name="twitter:title" content="Title from Component - Application Title"/><meta data-react-helmet="true" name="twitter:description" content="Component description - Application Description"/><meta data-react-helmet="true" name="og:title" content="Title from Component - Application Title"/><meta data-react-helmet="true" name="og:description" content="Component description - Application Description"/>
+            <title data-rh="true">Title from Component - Application Title</title>
+            <meta data-rh="true" name="description" content="Component description - Application Description"/><meta data-rh="true" name="twitter:card" content="summary_large_image"/><meta data-rh="true" name="twitter:title" content="Title from Component - Application Title"/><meta data-rh="true" name="twitter:description" content="Component description - Application Description"/><meta data-rh="true" name="og:title" content="Title from Component - Application Title"/><meta data-rh="true" name="og:description" content="Component description - Application Description"/>
             <meta name="theme-color" content="#FFFFFF">
             
             

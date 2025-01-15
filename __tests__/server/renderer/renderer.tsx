@@ -11,7 +11,7 @@ import {
   useGlobalState,
 } from '@dr.pogodin/react-global-state';
 
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import { type Configuration } from 'webpack';
 
@@ -45,7 +45,7 @@ const testBuildInfo = JSON.parse(
 );
 
 beforeAll(() => {
-  Helmet.canUseDOM = false;
+  HelmetProvider.canUseDOM = false;
 });
 
 afterEach(() => {
@@ -57,7 +57,7 @@ afterEach(() => {
 });
 
 afterAll(() => {
-  Helmet.canUseDOM = true;
+  HelmetProvider.canUseDOM = true;
 });
 
 // TODO: Can we update this test to generate the webpack stats and attach

@@ -2,11 +2,11 @@
 /* global document */
 
 import { type ComponentType } from 'react';
+import { createRoot, hydrateRoot } from 'react-dom/client';
+import { HelmetProvider } from 'react-helmet-async';
+import { BrowserRouter } from 'react-router';
 
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
-
-import { createRoot, hydrateRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router';
 
 import getInj from './getInj';
 
@@ -29,7 +29,9 @@ export default function Launch(
   const scene = (
     <GlobalStateProvider initialState={getInj().ISTATE || options.initialState}>
       <BrowserRouter>
-        <Application />
+        <HelmetProvider>
+          <Application />
+        </HelmetProvider>
       </BrowserRouter>
     </GlobalStateProvider>
   );
