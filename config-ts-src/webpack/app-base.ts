@@ -303,6 +303,16 @@ export default function configFactory(ops: OptionsT): Configuration {
         fonts: path.resolve(o.context, 'src/assets/fonts'),
         styles: path.resolve(o.context, 'src/styles'),
       },
+
+      // NOTE: This is primarily motivated by the issue #413
+      // https://github.com/birdofpreyru/react-utils/issues/413
+      // caused by react-router exporting different package builds
+      // for "import" and "default" conditions, resulting in Webpack
+      // picking up different module versions for import() and require()
+      // imports. Adding "import" with the highest priorty below forces
+      // the "import" to be used, working around the problem.
+      conditionNames: ['import', '...'],
+
       extensions: [
         '.ts',
         '.tsx',
