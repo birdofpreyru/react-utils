@@ -297,6 +297,16 @@ export default function configFactory(ops: OptionsT): Configuration {
     plugins,
     resolve: {
       alias: {
+        // NOTE: The "conditionNames" workaround below messes up the loading of
+        // Babel's runtime helper for require of CJS and ES styles of modules
+        // (without this alias it is resolved to
+        // @babel/runtime/helpers/esm/interopRequireDefault, which has
+        // the hepler function attached to "default" export).
+        '@babel/runtime/helpers/interopRequireDefault': path.resolve(
+          o.context,
+          'node_modules/@babel/runtime/helpers/interopRequireDefault',
+        ),
+
         // Aliases to JS an JSX files are handled by Babel.
         assets: path.resolve(o.context, 'src/assets'),
         components: path.resolve(o.context, 'src/shared/components'),
