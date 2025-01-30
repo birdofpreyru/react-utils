@@ -1,4 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import {
+  type FocusEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import themed, { type Theme } from '@dr.pogodin/react-themes';
 
@@ -11,6 +16,7 @@ type ThemeKeyT =
 
 type Props = {
   disabled?: boolean;
+  onBlur?: FocusEventHandler<HTMLTextAreaElement>;
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   onKeyDown?: React.KeyboardEventHandler<HTMLTextAreaElement>;
   placeholder?: string;
@@ -20,6 +26,7 @@ type Props = {
 
 const TextArea: React.FunctionComponent<Props> = ({
   disabled,
+  onBlur,
   onChange,
   onKeyDown,
   placeholder,
@@ -67,6 +74,7 @@ const TextArea: React.FunctionComponent<Props> = ({
       />
       <textarea
         disabled={disabled}
+        onBlur={onBlur}
         // When value is "undefined" the text area is not-managed, and we should
         // manage it internally for the measurement / resizing functionality
         // to work.
