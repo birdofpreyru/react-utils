@@ -39,6 +39,8 @@ to the window scrolling events when the modal is displayed,
 - `onCancel` &mdash; **function** &mdash; The callback to trigger when user
   clicks outside the modal window, or presses &laquo;escape&raquo; key.
   It is expected to close the modal.
+- `overlayStyle` &mdash; **React.CSSProperties** &mdash; Inline style object
+  to pass to the modal overlay.
 - `style` &mdash; **React.CSSProperties** &mdash; Inline style object
   to pass to the modal container.
 

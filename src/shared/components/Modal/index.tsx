@@ -1,6 +1,6 @@
-/* global document */
-
 import {
+  type CSSProperties,
+  type FunctionComponent,
   type ReactNode,
   useEffect,
   useMemo,
@@ -19,13 +19,14 @@ type PropsT = {
   children?: ReactNode;
   dontDisableScrolling?: boolean;
   onCancel?: () => void;
-  style?: React.CSSProperties;
+  overlayStyle?: CSSProperties;
+  style?: CSSProperties;
   testId?: string;
   testIdForOverlay?: string;
   theme: Theme<'container' | 'overlay'>;
 
   /** @deprecated */
-  containerStyle?: React.CSSProperties;
+  containerStyle?: CSSProperties;
 };
 
 /**
@@ -39,12 +40,13 @@ type PropsT = {
  * modal.
  * @param {ModalTheme} [props.theme] _Ad hoc_ theme.
  */
-const BaseModal: React.FunctionComponent<PropsT> = ({
+const BaseModal: FunctionComponent<PropsT> = ({
   cancelOnScrolling,
   children,
   containerStyle,
   dontDisableScrolling,
   onCancel,
+  overlayStyle,
   style,
   testId,
   testIdForOverlay,
@@ -99,9 +101,8 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
         }
         overlayRef.current?.focus();
       }}
-      /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={0}
-      /* eslint-enable jsx-a11y/no-noninteractive-tabindex */
     />
   ), []);
 
@@ -135,6 +136,7 @@ const BaseModal: React.FunctionComponent<PropsT> = ({
             }
           }}
           role="button"
+          style={overlayStyle}
           tabIndex={0}
         />
         {
