@@ -1,5 +1,5 @@
 {
-  "version": "1.42.0",
+  "version": "1.41.12",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -11,7 +11,7 @@
     "@babel/runtime": "^7.26.9",
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.13.3",
     "@dr.pogodin/csurf": "^1.14.1",
-    "@dr.pogodin/js-utils": "^0.0.13",
+    "@dr.pogodin/js-utils": "^0.0.17",
     "@dr.pogodin/react-global-state": "^0.18.1",
     "@dr.pogodin/react-themes": "^1.8.0",
     "@jest/environment": "^29.7.0",
