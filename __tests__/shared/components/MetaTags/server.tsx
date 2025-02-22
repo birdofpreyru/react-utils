@@ -5,7 +5,7 @@
 import { noop } from 'lodash';
 import { type ComponentType } from 'react';
 import supertest from 'supertest';
-import { HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider } from '@dr.pogodin/react-helmet';
 
 import serverFactory from 'server/server';
 import { setBuildInfo } from 'utils/isomorphy/buildInfo';

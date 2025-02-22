@@ -28,7 +28,7 @@ import config from 'config';
 import forge from 'node-forge';
 
 import { prerenderToNodeStream } from 'react-dom/static';
-import { HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider } from '@dr.pogodin/react-helmet';
 import { StaticRouter } from 'react-router';
 import serializeJs from 'serialize-javascript';
 import { type BuildInfoT, setBuildInfo } from 'utils/isomorphy/buildInfo';

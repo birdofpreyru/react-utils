@@ -11,7 +11,7 @@ import {
   useGlobalState,
 } from '@dr.pogodin/react-global-state';
 
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from '@dr.pogodin/react-helmet';
 
 import { type Configuration } from 'webpack';
 
