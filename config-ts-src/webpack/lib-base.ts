@@ -50,8 +50,9 @@ export default function configFactory(ops: OptionsT): Configuration {
     entry: ops.entry,
     externals: [
       /@babel\/runtime/,
-      '@dr.pogodin/react-global-state',
       '@dr.pogodin/js-utils',
+      '@dr.pogodin/react-global-state',
+      '@dr.pogodin/react-helmet',
       '@dr.pogodin/react-themes',
       '@dr.pogodin/react-utils',
       'axios',
@@ -62,7 +63,6 @@ export default function configFactory(ops: OptionsT): Configuration {
       'qs',
       'react',
       /react-dom/,
-      'react-helmet-async',
       'react-router',
       'uuid',
     ],

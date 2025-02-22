@@ -13,31 +13,27 @@ export function requireWeak<Module extends NodeJS.Module>(
 ): Module | null {
   if (IS_CLIENT_SIDE) return null;
 
-  try {
-    /* eslint-disable no-eval */
-    const { resolve } = eval('require')('path');
-    const path = basePath ? resolve(basePath, modulePath) : modulePath;
-    const module = eval('require')(path) as Module;
-    /* eslint-enable no-eval */
+  /* eslint-disable no-eval */
+  const { resolve } = eval('require')('path');
+  const path = basePath ? resolve(basePath, modulePath) : modulePath;
+  const module = eval('require')(path) as Module;
+  /* eslint-enable no-eval */
 
-    if (!('default' in module)) return module;
+  if (!('default' in module) || !module.default) return module;
 
-    const { default: def, ...named } = module;
+  const { default: def, ...named } = module;
 
-    const res = def as Module;
+  const res = def as Module;
 
-    Object.entries(named).forEach(([name, value]) => {
-      const assigned = res[name as keyof Module];
-      if (assigned !== undefined) {
-        if (assigned !== value) {
-          throw Error('Conflict between default and named exports');
-        }
-      } else res[name as keyof Module] = value;
-    });
-    return res;
-  } catch {
-    return null;
-  }
+  Object.entries(named).forEach(([name, value]) => {
+    const assigned = res[name as keyof Module];
+    if (assigned !== undefined) {
+      if (assigned !== value) {
+        throw Error('Conflict between default and named exports');
+      }
+    } else res[name as keyof Module] = value;
+  });
+  return res;
 }
 
 /**
