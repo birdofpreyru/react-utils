@@ -1,4 +1,4 @@
-import { type Request, type RequestHandler } from 'express';
+import type { Request, RequestHandler } from 'express';
 import { cloneDeep, noop } from 'lodash';
 import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable } from 'server/renderer';
 import fs from 'fs';

@@ -1,6 +1,6 @@
 // Utilities common for renderer tests in different modules.
 
-import { type Response } from 'express';
+import type { Response } from 'express';
 
 import { noop } from 'lodash';
 

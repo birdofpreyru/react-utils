@@ -193,7 +193,9 @@ export default async function factory(
     server.use(favicon(options.favicon));
   }
 
-  server.use('/robots.txt', (req, res) => res.send('User-agent: *\nDisallow:'));
+  server.use('/robots.txt', (req, res) => {
+    res.send('User-agent: *\nDisallow:');
+  });
 
   server.use(express.json({ limit: '300kb' }));
   server.use(express.urlencoded({ extended: false }));

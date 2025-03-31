@@ -1,4 +1,4 @@
-import { type Request, type Response, type NextFunction } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import { clone, noop } from 'lodash';
 import supertest from 'supertest';
 

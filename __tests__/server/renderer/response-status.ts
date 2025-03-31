@@ -1,6 +1,6 @@
 // Tests how response status is handled by the renderer and its cache.
 
-import { type Request, type RequestHandler } from 'express';
+import type { Request, RequestHandler } from 'express';
 
 import { noop } from 'lodash';
 import factory from 'server/renderer';

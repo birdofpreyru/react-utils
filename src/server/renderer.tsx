@@ -5,7 +5,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { type Request, type RequestHandler } from 'express';
+import type { Request, RequestHandler } from 'express';
 import { type ComponentType } from 'react';
 import { Writable } from 'stream';
 import { brotliCompress, brotliDecompress } from 'zlib';
