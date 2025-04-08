@@ -10,5 +10,5 @@
  */
 
 it('exposes 200 status to the test environment', () => {
-  expect((global as any).ssrStatus).toBe(200);
+  expect((global as unknown as { ssrStatus: number }).ssrStatus).toBe(200);
 });

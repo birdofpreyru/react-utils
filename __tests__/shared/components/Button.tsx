@@ -15,8 +15,8 @@ const testTheme = {
 };
 
 describe('Matches snapshots', () => {
-  test('when active', () => {
-    snapshot((
+  test('when active', async () => {
+    await snapshot((
       <Button
         active
         onClick={noop}
@@ -26,8 +26,8 @@ describe('Matches snapshots', () => {
       </Button>
     ));
   });
-  test('when disabled', () => {
-    snapshot((
+  test('when disabled', async () => {
+    await snapshot((
       <Button
         disabled
         onClick={noop}
@@ -36,7 +36,7 @@ describe('Matches snapshots', () => {
         BUTTON
       </Button>
     ));
-    snapshot((
+    await snapshot((
       <Button
         disabled
         onClick={noop}
@@ -46,8 +46,8 @@ describe('Matches snapshots', () => {
       </Button>
     ));
   });
-  test('when rendered as link', () => {
-    snapshot((
+  test('when rendered as link', async () => {
+    await snapshot((
       <StaticRouter location="">
         <Button
           active

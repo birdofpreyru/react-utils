@@ -12,7 +12,7 @@ const OPTIONS = [{
   value: 'option3',
 }];
 
-export default function Example() {
+const Example = () => {
   const [value, setValue] = useState('option1');
   return (
     <Switch
@@ -22,4 +22,6 @@ export default function Example() {
       value={value}
     />
   );
-}
+};
+
+export default Example;

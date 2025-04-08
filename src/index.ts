@@ -1,3 +1,5 @@
+import type * as ClientM from 'client';
+
 import 'styles/global.scss';
 
 import { webpack } from 'utils';
@@ -6,7 +8,11 @@ import type ServerFactoryT from './server';
 
 const server = webpack.requireWeak('./server', __dirname) as (typeof ServerFactoryT) | null;
 
-const client = server ? undefined : require('./client').default;
+const client = server
+  ? undefined
+
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  : (require('./client') as typeof ClientM).default;
 
 export {
   type AsyncCollectionT,

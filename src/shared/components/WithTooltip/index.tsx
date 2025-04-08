@@ -80,13 +80,11 @@ const Wrapper: FunctionComponent<PropsT> = ({
       // want to do the click, rather than show the tooltip, and the delay
       // gives click handler a chance to abort the tooltip openning.
       if (heap.triggeredByTouch) {
-        if (!heap.timerId) {
-          heap.timerId = setTimeout(() => {
-            heap.triggeredByTouch = false;
-            heap.timerId = undefined;
-            setShowTooltip(true);
-          }, 300);
-        }
+        heap.timerId ??= setTimeout(() => {
+          heap.triggeredByTouch = false;
+          heap.timerId = undefined;
+          setShowTooltip(true);
+        }, 300);
 
       // Otherwise we can just open the tooltip right away.
       } else setShowTooltip(true);
@@ -103,7 +101,7 @@ const Wrapper: FunctionComponent<PropsT> = ({
         tooltipRef.current.pointTo(
           cursorX + window.scrollX,
           cursorY + window.scrollY,
-          placement!,
+          placement,
           wrapperRef.current!,
         );
       }
@@ -121,7 +119,7 @@ const Wrapper: FunctionComponent<PropsT> = ({
         tooltipRef.current.pointTo(
           heap.lastCursorX + window.scrollX,
           heap.lastCursorY + window.scrollY,
-          placement!,
+          placement,
           wrapperRef.current!,
         );
       }
@@ -158,9 +156,9 @@ const Wrapper: FunctionComponent<PropsT> = ({
       role="presentation"
     >
       {
-        showTooltip && tip !== null ? (
-          <Tooltip ref={tooltipRef} theme={theme}>{tip}</Tooltip>
-        ) : null
+        showTooltip && tip !== null
+          ? <Tooltip ref={tooltipRef} theme={theme}>{tip}</Tooltip>
+          : null
       }
       {children}
     </div>

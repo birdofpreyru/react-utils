@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-/* eslint-disable import/no-dynamic-require, no-console */
-
 const childProcess = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -13,7 +11,6 @@ const { program } = require('commander');
 // in "package.json", and "rimraf" does not declare fallback entrance.
 // See: https://github.com/import-js/eslint-plugin-import/issues/1810
 // and update, once that issue is resolved.
-// eslint-disable-next-line import/no-unresolved
 const { rimraf } = require('rimraf');
 
 /* eslint-disable import/no-extraneous-dependencies */

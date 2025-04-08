@@ -1,6 +1,6 @@
 import { setBuildInfo } from 'utils/isomorphy/buildInfo';
 
-const m = require('utils/isomorphy');
+import * as m from 'utils/isomorphy';
 
 setBuildInfo({
   key: '',

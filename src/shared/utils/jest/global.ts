@@ -5,6 +5,7 @@ import webpack from 'webpack';
 /* eslint-enable import/no-extraneous-dependencies */
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Window {
     ssrMarkup: string | undefined;
     ssrStatus: number | undefined;
@@ -15,5 +16,5 @@ declare global {
 }
 
 export default function getGlobal(): Window {
-  return global as any;
+  return global as unknown as Window;
 }

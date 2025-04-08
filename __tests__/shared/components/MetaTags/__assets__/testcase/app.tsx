@@ -26,7 +26,7 @@ const AllTagsComponent = () => {
       <MetaTags
         title="Title from Component"
         description="Component description"
-        image={`${domain}/THUMBNAIL_PATH`}
+        image={`${domain as unknown as string}/THUMBNAIL_PATH`}
         siteName="SITE_NAME"
         socialDescription="SOCIAL_DESCRIPTION"
         socialTitle="SOCIAL_TITLE"

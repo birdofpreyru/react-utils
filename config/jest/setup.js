@@ -1,4 +1,3 @@
-/* eslint-disable global-require, import/no-extraneous-dependencies */
 /* global globalThis */
 
 import 'raf/polyfill';

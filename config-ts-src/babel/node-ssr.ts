@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 import { pull } from 'lodash';
 
 import {
@@ -14,6 +12,7 @@ import getWebpackBabelConfig, {
   ENVIRONMENTS,
 } from './webpack';
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 interface ModuleResolverOptionsI extends PresetOrPluginOptionsI {
   transformFunctions?: string[];
 }
@@ -42,7 +41,7 @@ function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
     },
   );
 
-  const baseAssetsOutputPath = options.baseAssetsOutputPath || '';
+  const baseAssetsOutputPath = options.baseAssetsOutputPath ?? '';
   config.plugins.push(
     ['@dr.pogodin/transform-assets', {
       extensions: ['gif', 'jpeg', 'jpg', 'png'],
@@ -60,7 +59,7 @@ function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
     'webpack.resolveWeak',
   ];
 
-  if (babel.env() === ENVIRONMENTS.DEV) {
+  if (babel.env() === ENVIRONMENTS.DEV as string) {
     pull(config.plugins, 'react-refresh/babel');
   }
 

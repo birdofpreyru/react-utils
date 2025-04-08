@@ -4,7 +4,7 @@
  * `true` within client-side environment (browser), `false` at server-side.
  */
 export const IS_CLIENT_SIDE: boolean = typeof process !== 'object'
-  || !process.versions || !process.versions.node
+  || !process.versions?.node
   || !!global.REACT_UTILS_FORCE_CLIENT_SIDE;
 
 /**

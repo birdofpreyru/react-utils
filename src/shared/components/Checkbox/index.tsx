@@ -9,11 +9,11 @@ type PropT<ValueT> = {
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   testId?: string;
   theme: Theme<
-  | 'checkbox'
-  | 'container'
-  | 'disabled'
-  | 'indeterminate'
-  | 'label'
+    | 'checkbox'
+    | 'container'
+    | 'disabled'
+    | 'indeterminate'
+    | 'label'
   >;
 };
 
@@ -33,7 +33,8 @@ const Checkbox = <ValueT extends boolean | 'indeterminate' = boolean>({
 
   return (
     <div className={containerClassName}>
-      { label === undefined ? null : <div className={theme.label}>{label}</div> }
+      { label === undefined
+        ? null : <div className={theme.label}>{label}</div> }
       <input
         checked={checked === undefined ? undefined : checked === true}
         className={checkboxClassName}

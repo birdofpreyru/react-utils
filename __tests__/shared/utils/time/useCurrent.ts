@@ -28,6 +28,8 @@ global.webpackStats!.assets!.forEach(({ name }) => {
 it('matches SSR render during hydration', async () => {
   const markup = container.innerHTML;
   const js = fs.readFileSync(`${outputPath}/${jsFile}`, 'utf8') as string;
-  await act(() => new Function(js)()); // eslint-disable-line no-new-func
+
+  // eslint-disable-next-line @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
+  await act(() => new Function(js)());
   expect(document.querySelector('#react-view')!.innerHTML).toBe(markup);
 });

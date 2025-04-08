@@ -20,9 +20,11 @@ const { useAsyncData } = withGlobalStateType<StateT>();
 const timers: Timer<void>[] = [];
 
 export function cleanup() {
-  for (let i = 0; i < timers.length; ++i) {
-    timers[i]?.abort();
-    timers[i]?.resolve();
+  for (const timer of timers) {
+    timer.abort();
+
+    // TODO: Should we wait for it, and make cleanup() itself async?
+    void timer.resolve();
   }
 }
 

@@ -1,9 +1,4 @@
-/**
- * @category Configs
- * @module webpack/app-base
- * @desc
- * Base [Webpack](https://webpack.js.org/) configuration for apps.
- */
+/* eslint-disable import/no-extraneous-dependencies */
 
 import nodeFs from 'fs';
 import path from 'path';
@@ -185,20 +180,23 @@ export default function configFactory(ops: OptionsT): Configuration {
     publicPath: '',
   });
 
-  const fs = ops.fs || nodeFs;
+  const fs = ops.fs ?? nodeFs;
 
+  // TODO: Should it be improved and re-validated? Are we using it in any project
+  // as is?
   /* TODO: This works in practice, but being async and not awaited it is a bad
    * pattern. */
   if (o.sitemap) {
     const sitemapUrl = path.resolve(o.context, o.sitemap);
-    /* eslint-disable global-require, import/no-dynamic-require */
-    let source = require(sitemapUrl);
+
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    let source = require(sitemapUrl) as
+      (string[] | (() => string[]));
     if (isFunction(source)) source = source();
-    /* eslint-enable global-require, import/no-dynamic-require */
     const sm = new SM.SitemapStream();
     source.forEach((item: string) => sm.write(item));
     sm.end();
-    SM.streamToPromise(sm).then((sitemap: any) => {
+    void SM.streamToPromise(sm).then((sitemap) => {
       const outUrl = path.resolve(o.context, o.outputPath!);
       if (!fs.existsSync(outUrl)) fs.mkdirSync(outUrl);
       fs.writeFileSync(
@@ -220,7 +218,7 @@ export default function configFactory(ops: OptionsT): Configuration {
     // If "true" - attempt to load from the filesystem.
     if (o.keepBuildInfo === true) {
       if (fs.existsSync(buildInfoUrl)) {
-        buildInfo = JSON.parse(fs.readFileSync(buildInfoUrl, 'utf8'));
+        buildInfo = JSON.parse(fs.readFileSync(buildInfoUrl, 'utf8')) as BuildInfoT;
       }
 
     // Otherwise we assume .keepBuildInfo value itself is the build info object
@@ -230,21 +228,19 @@ export default function configFactory(ops: OptionsT): Configuration {
 
   // Even if "keepBuildInfo" option was provided, we still generate a new
   // build info object in case nothing could be loaded.
-  if (!buildInfo) {
-    buildInfo = Object.freeze({
-      /* A random 32-bit key, that can be used for encryption. */
-      key: forge.random.getBytesSync(32),
+  buildInfo ??= Object.freeze({
+    /* A random 32-bit key, that can be used for encryption. */
+    key: forge.random.getBytesSync(32),
 
-      /* Public path used during build. */
-      publicPath: o.publicPath,
+    /* Public path used during build. */
+    publicPath: o.publicPath,
 
-      /* `true` if client-side code should setup a service worker. */
-      useServiceWorker: Boolean(o.workbox),
+    /* `true` if client-side code should setup a service worker. */
+    useServiceWorker: Boolean(o.workbox),
 
-      // Build timestamp.
-      timestamp: new Date().toISOString(),
-    });
-  }
+    // Build timestamp.
+    timestamp: new Date().toISOString(),
+  });
 
   // If not opted-out, we write the build info to the filesystem. We also attach
   // it to the factory function itself, so it can be easily accessed right after
@@ -276,7 +272,7 @@ export default function configFactory(ops: OptionsT): Configuration {
     if (!isObject(o.workbox)) o.workbox = {};
     plugins.push(new WorkboxPlugin.InjectManifest({
       swSrc: path.resolve(__dirname, '../workbox/default.js'),
-      ...o.workbox as object,
+      ...o.workbox,
       swDest: '__service-worker.js',
     }));
   }

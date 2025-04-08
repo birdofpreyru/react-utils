@@ -44,22 +44,22 @@ const BaseSwitch: React.FunctionComponent<PropsT> = ({
       else if (onChange) onPress = () => onChange(iValue);
 
       optionNodes.push(
-        onPress ? (
-          <div
-            className={className}
-            onClick={onPress}
-            onKeyDown={(e) => {
-              if (onPress && e.key === 'Enter') onPress();
-            }}
-            key={iValue}
-            role="button"
-            tabIndex={0}
-          >
-            {iName}
-          </div>
-        ) : (
-          <div className={className} key={iValue}>{iName}</div>
-        ),
+        onPress
+          ? (
+            <div
+              className={className}
+              onClick={onPress}
+              onKeyDown={(e) => {
+                if (onPress && e.key === 'Enter') onPress();
+              }}
+              key={iValue}
+              role="button"
+              tabIndex={0}
+            >
+              {iName}
+            </div>
+          )
+          : <div className={className} key={iValue}>{iName}</div>,
       );
     }
   }

@@ -39,9 +39,8 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
   let isValidValue = false;
   const optionElements = [];
 
-  for (let i = 0; i < options.length; ++i) {
-    const option = options[i];
-    if (option !== undefined && (!filter || filter(option))) {
+  for (const option of options) {
+    if (!filter || filter(option)) {
       const [iValue, iName] = optionValueName(option);
       isValidValue ||= iValue === value;
       optionElements.push(
@@ -72,7 +71,8 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
 
   return (
     <div className={theme.container}>
-      { label === undefined ? null : <div className={theme.label}>{label}</div> }
+      { label === undefined
+        ? null : <div className={theme.label}>{label}</div> }
       <div className={theme.dropdown}>
         <select
           className={selectClassName}

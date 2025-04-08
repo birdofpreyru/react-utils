@@ -1,5 +1,7 @@
 // Production Webpack config for ReactJS libraries.
 
+/* eslint-disable import/no-extraneous-dependencies */
+
 import path from 'path';
 
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';

@@ -55,14 +55,11 @@ export default class Cache<DatumT> {
       const entries = Object.entries(this.items);
       entries.sort((a, b) => a[1].timestamp - b[1].timestamp);
 
-      for (let i = 0; i < entries.length; ++i) {
-        const entry = entries[i];
-        if (entry) {
-          const [itemKey, item] = entry;
-          delete this.items[itemKey];
-          this.size -= item.size;
-          if (this.size < this.maxSize / 2) break;
-        }
+      for (const entry of entries) {
+        const [itemKey, item] = entry;
+        delete this.items[itemKey];
+        this.size -= item.size;
+        if (this.size < this.maxSize / 2) break;
       }
     }
   }

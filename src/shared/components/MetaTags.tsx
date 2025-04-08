@@ -46,8 +46,12 @@ const MetaTags: FunctionComponent<PropsT> & {
   title,
   url,
 }) => {
+  // NOTE: I guess, in this very case, we should prefer title and description
+  // also to empty social title and decscription?
+  /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
   const socTitle = socialTitle || title;
   const socDesc = socialDescription || description;
+  /* eslint-enable @typescript-eslint/prefer-nullish-coalescing */
 
   const context = useMemo(() => ({
     description,
@@ -96,9 +100,9 @@ const MetaTags: FunctionComponent<PropsT> & {
         <meta name="twitter:description" content={socDesc} />
         { image ? <meta name="twitter:image" content={image} /> : null }
         {
-          siteName ? (
-            <meta name="twitter:site" content={`@${siteName}`} />
-          ) : null
+          siteName
+            ? <meta name="twitter:site" content={`@${siteName}`} />
+            : null
         }
 
         {/* Open Graph data. */}
@@ -107,9 +111,9 @@ const MetaTags: FunctionComponent<PropsT> & {
         { image ? <meta name="og:image:alt" content={socTitle} /> : null }
         <meta name="og:description" content={socDesc} />
         {
-          siteName ? (<meta name="og:sitename" content={siteName} />) : null
+          siteName ? <meta name="og:sitename" content={siteName} /> : null
         }
-        { url ? (<meta name="og:url" content={url} />) : null }
+        { url ? <meta name="og:url" content={url} /> : null }
         {extra}
       </Helmet>
       {

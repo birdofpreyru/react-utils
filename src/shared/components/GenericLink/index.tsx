@@ -87,7 +87,8 @@ const GenericLink = ({
    * - It should be opened in a new tab;
    * - It is an absolte URL (starts with http:// or https://);
    * - It is anchor link (starts with #). */
-  if (disabled || enforceA || openNewTab || (to as string)?.match(/^(#|(https?|mailto):)/)) {
+  if (disabled || enforceA || openNewTab
+    || (to as string)?.match(/^(#|(https?|mailto):)/)) {
     return (
       <a
         className={className}
@@ -116,7 +117,7 @@ const GenericLink = ({
       // disabled
       onMouseDown={onMouseDown}
       replace={replace}
-      to={to!}
+      to={to}
       onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
         // Executes the user-provided event handler, if any.
         if (onClick) onClick(e);
@@ -124,7 +125,7 @@ const GenericLink = ({
         // By default, clicking the link scrolls the page to beginning.
         if (!keepScrollPosition) window.scroll(0, 0);
       }}
-      {...rest} // eslint-disable-line react/jsx-props-no-spreading
+      {...rest}
     >
       {children}
     </L>

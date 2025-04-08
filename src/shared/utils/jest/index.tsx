@@ -4,6 +4,7 @@
 import type {
   AxiosRequestConfig,
   AxiosResponse,
+  AxiosStatic,
   InternalAxiosRequestConfig,
 } from 'axios';
 
@@ -58,11 +59,13 @@ export type AxiosRequestHandlerT =
   (config: AxiosRequestConfig) => Partial<AxiosResponse> | null | undefined;
 
 export function mockAxios(handlers: AxiosRequestHandlerT[]) {
-  const axios = jest.requireActual('axios');
+  const axios: AxiosStatic = jest.requireActual('axios');
 
-  axios.defaults.adapter = async (config: AxiosRequestConfig): Promise<AxiosResponse> => {
-    for (let i = 0; i < handlers.length; ++i) {
-      const res = handlers[i]?.(config);
+  axios.defaults.adapter = async (
+    config: AxiosRequestConfig,
+  ): Promise<AxiosResponse> => {
+    for (const handler of handlers) {
+      const res = handler(config);
       if (res) {
         return {
           config: config as InternalAxiosRequestConfig,
@@ -109,7 +112,7 @@ export function mockAxios(handlers: AxiosRequestHandlerT[]) {
  */
 export async function mockTimer(time: number) {
   mockdate.set(time + Date.now());
-  jest.advanceTimersByTime(time);
+  await jest.advanceTimersByTimeAsync(time);
 }
 
 export type MountedSceneT = HTMLElement & {

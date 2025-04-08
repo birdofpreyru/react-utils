@@ -1,14 +1,14 @@
 import { fail } from 'server/utils/errors';
 
 test('fail()', () => {
-  let error: any;
-  let never: any;
+  let error: unknown;
+  let never: unknown;
   try {
     never = fail('Mock error', 418);
-  } catch (e: any) {
+  } catch (e: unknown) {
     error = e;
   }
   expect(error).toMatchSnapshot();
-  expect(error.status).toBe(418);
+  expect((error as { status: number }).status).toBe(418);
   expect(never).toBeUndefined();
 });

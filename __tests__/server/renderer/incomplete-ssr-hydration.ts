@@ -17,12 +17,13 @@ import { getGlobal } from 'utils/jest';
 
 const global = getGlobal();
 
-document.write(global.ssrMarkup || '');
+document.write(global.ssrMarkup ?? '');
 const markup = document.querySelector('#react-view')?.innerHTML;
 
 const fs = global.webpackOutputFs;
 const outputPath = global.webpackConfig!.output!.path;
-const jsFilename = global.webpackStats?.namedChunkGroups?.main?.assets?.[0]?.name;
+const jsFilename = global.webpackStats
+  ?.namedChunkGroups?.main?.assets?.[0]?.name;
 
 it('generates expected SSR markup', () => {
   expect(markup).toMatchSnapshot();
@@ -31,7 +32,10 @@ it('generates expected SSR markup', () => {
 it('hydrates successfully', async () => {
   console.error = noop;
   const js = fs?.readFileSync(`${outputPath}/${jsFilename}`, 'utf8') as string;
-  await act(() => new Function(js)()); // eslint-disable-line no-new-func
+
+  // eslint-disable-next-line @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+  await act(() => new Function(js)());
+
   const container = document.querySelector('#react-view');
   expect(container?.innerHTML).toBe(markup);
 });

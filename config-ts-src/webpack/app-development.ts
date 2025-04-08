@@ -1,8 +1,6 @@
-/**
- * @category Configs
- * @module webpack/app-development
- * @desc development Webpack configuration for applications.
- */
+
+/* eslint-disable import/no-extraneous-dependencies */
+
 import { clone, defaults } from 'lodash';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
@@ -53,16 +51,16 @@ export default function configFactory(ops: OptionsT) {
   // "ReferenceError: $RefreshReg$ is not defined" error. For now it seems
   // fine to keep these plugins anyway, thus the shortcut of "if" condition
   // below.
-  if (true || !o.dontUseHmr) {
-    plugins.push(
-      new webpack.HotModuleReplacementPlugin(),
-      new ReactRefreshPlugin({
-        overlay: {
-          sockIntegration: 'whm',
-        },
-      }),
-    );
-  }
+  // if (true ?? !o.dontUseHmr) {
+  plugins.push(
+    new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshPlugin({
+      overlay: {
+        sockIntegration: 'whm',
+      },
+    }),
+  );
+  // }
 
   const res = merge(baseFactory({
     ...o,

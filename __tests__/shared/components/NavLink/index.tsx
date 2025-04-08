@@ -8,13 +8,13 @@ import { snapshot } from 'utils/jest';
 
 import './styles.scss';
 
-test('Matches snapshots', () => {
-  snapshot(
+test('Matches snapshots', async () => {
+  await snapshot(
     <MemoryRouter>
       <NavLink to="" />
     </MemoryRouter>,
   );
-  snapshot(
+  await snapshot(
     <MemoryRouter>
       <NavLink styleName="navLink" to="" />
     </MemoryRouter>,

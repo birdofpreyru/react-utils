@@ -4,6 +4,7 @@ import type { Response } from 'express';
 
 import { noop } from 'lodash';
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 interface ResponseI extends Response {
   csrfToken: () => string;
   nonce: string;
@@ -60,7 +61,7 @@ class Render {
  */
 export function mockHttpResponse(): {
   render: Render;
-  res: Response,
+  res: Response;
 } {
   const render = new Render();
   const res = {
@@ -98,9 +99,13 @@ export function mockHttpResponse(): {
         },
       },
     },
-    send: (chunk: string) => { render.markup += chunk; },
+    send: (chunk: string) => {
+      render.markup += chunk;
+    },
     set: noop,
-    status: (status: number) => { render.status = status; },
+    status: (status: number) => {
+      render.status = status;
+    },
   };
   return {
     render,

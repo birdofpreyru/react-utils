@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 /* global document */
 
 import {
@@ -28,11 +27,19 @@ import {
 let clientChunkGroups: ChunkGroupsT;
 
 if (IS_CLIENT_SIDE) {
-  // eslint-disable-next-line global-require
-  clientChunkGroups = require('client/getInj').default().CHUNK_GROUPS || {};
+  // TODO: Rewrite to avoid these overrides of ESLint rules.
+  /* eslint-disable @typescript-eslint/no-unsafe-assignment,
+    @typescript-eslint/no-require-imports,
+    @typescript-eslint/no-unsafe-call,
+    @typescript-eslint/no-unsafe-member-access */
+  clientChunkGroups = require('client/getInj').default().CHUNK_GROUPS ?? {};
+  /* eslint-enable @typescript-eslint/no-unsafe-assignment,
+    @typescript-eslint/no-require-imports,
+    @typescript-eslint/no-unsafe-call,
+    @typescript-eslint/no-unsafe-member-access */
 }
 
-const refCounts: { [path: string]: number } = {};
+const refCounts: Record<string, number> = {};
 
 function getPublicPath() {
   return getBuildInfo().publicPath;
@@ -67,12 +74,16 @@ function bookStyleSheet(
     }
 
     res = new Barrier<void>();
-    link.addEventListener('load', () => res!.resolve());
-    link.addEventListener('error', () => res!.resolve());
+    link.addEventListener('load', () => {
+      void res!.resolve();
+    });
+    link.addEventListener('error', () => {
+      void res!.resolve();
+    });
   }
 
   if (refCount) {
-    const current = refCounts[path] || 0;
+    const current = refCounts[path] ?? 0;
     refCounts[path] = 1 + current;
   }
 
@@ -86,8 +97,7 @@ function bookStyleSheet(
 function getLoadedStyleSheets(): Set<string> {
   const res = new Set<string>();
   const { styleSheets } = document;
-  for (let i = 0; i < styleSheets.length; ++i) {
-    const href = styleSheets[i]?.href;
+  for (const { href } of styleSheets) {
     if (href) res.add(href);
   }
   return res;
@@ -121,8 +131,7 @@ export function bookStyleSheets(
 
   const loadedSheets = getLoadedStyleSheets();
 
-  for (let i = 0; i < assets.length; ++i) {
-    const asset = assets[i];
+  for (const asset of assets) {
     if (asset?.endsWith('.css')) {
       const promise = bookStyleSheet(asset, loadedSheets, refCount);
       if (promise) promises.push(promise);
@@ -148,8 +157,7 @@ export function freeStyleSheets(
   const assets = chunkGroups[chunkName];
   if (!assets) return;
 
-  for (let i = 0; i < assets.length; ++i) {
-    const asset = assets[i];
+  for (const asset of assets) {
     if (asset?.endsWith('.css')) {
       const path = `${getPublicPath()}/${asset}`;
 
@@ -168,7 +176,7 @@ export function freeStyleSheets(
 const usedChunkNames = new Set();
 
 type ComponentOrModule<PropsT> = ComponentType<PropsT> | {
-  default: ComponentType<PropsT>,
+  default: ComponentType<PropsT>;
 };
 
 /**
@@ -189,8 +197,8 @@ export default function splitComponent<
   placeholder,
 }: {
   chunkName: string;
-  getComponent: () => Promise<ComponentOrModule<ComponentPropsT>>,
-  placeholder?: ReactNode,
+  getComponent: () => Promise<ComponentOrModule<ComponentPropsT>>;
+  placeholder?: ReactNode;
 }) {
   // On the client side we can check right away if the chunk name is known.
   if (IS_CLIENT_SIDE) assertChunkName(chunkName, clientChunkGroups);
@@ -227,7 +235,7 @@ export default function splitComponent<
       // This takes care about stylesheets management every time an instance of
       // this component is mounted / unmounted.
       useInsertionEffect(() => {
-        bookStyleSheets(chunkName, clientChunkGroups, true);
+        void bookStyleSheets(chunkName, clientChunkGroups, true);
         return () => freeStyleSheets(chunkName, clientChunkGroups);
       }, []);
 

@@ -71,9 +71,8 @@ const Options: FunctionComponent<PropsT> = ({
   }), []);
 
   const optionNodes: ReactNode[] = [];
-  for (let i = 0; i < options.length; ++i) {
-    const option = options[i];
-    if (option !== undefined && (!filter || filter(option))) {
+  for (const option of options) {
+    if (!filter || filter(option)) {
       const [iValue, iName] = optionValueName(option);
       optionNodes.push(
         <div

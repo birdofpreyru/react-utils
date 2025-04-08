@@ -20,7 +20,7 @@ let container: HTMLElement | null;
 beforeEach(() => {
   // Resets the document with SSR markup.
   document.open();
-  document.write(global.ssrMarkup || '');
+  document.write(global.ssrMarkup ?? '');
   document.close();
 
   // Assigns react container node to "container".
@@ -40,6 +40,9 @@ it('generates expected markup at the client-side', async () => {
   const ssrMarkup = container?.innerHTML;
   let js = global.webpackStats?.entrypoints?.main?.assets?.[0]?.name;
   js = global.webpackOutputFs?.readFileSync(`${outputPath}/${js}`, 'utf8') as string;
-  await act(() => new Function(js || '')()); // eslint-disable-line no-new-func
+
+  // eslint-disable-next-line @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+  await act(() => new Function(js || '')());
+
   expect(container?.innerHTML).toBe(ssrMarkup);
 });

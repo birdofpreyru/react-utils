@@ -1,11 +1,14 @@
 import mockdate from 'mockdate';
 
+import type * as TimeM from 'utils/time';
+
 const TEST_TIME_MS = 1601937279000;
 
 jest.useFakeTimers();
 mockdate.set(TEST_TIME_MS);
 
-const time = require('utils/time').default;
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const time = (require('utils/time') as typeof TimeM).default;
 
 test('Misc aliases', () => {
   expect(time.SEC_MS).toBe(1000);

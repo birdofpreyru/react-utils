@@ -15,7 +15,7 @@ import { getGlobal } from 'utils/jest';
 
 const global = getGlobal();
 
-document.write(global.ssrMarkup || '');
+document.write(global.ssrMarkup ?? '');
 const container = document.querySelector('#react-view');
 
 const fs = global.webpackOutputFs;
@@ -44,6 +44,9 @@ it('generates expected markup during SSR', () => {
 it('conserves expected markup after hydration', async () => {
   const markup = container?.innerHTML;
   const js = fs?.readFileSync(`${outputPath}/${jsFile}`, 'utf8') as string;
-  await act(() => new Function(js)()); // eslint-disable-line no-new-func
+
+  // eslint-disable-next-line @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
+  await act(() => new Function(js)());
+
   expect(document.querySelector('#react-view')?.innerHTML).toBe(markup);
 });

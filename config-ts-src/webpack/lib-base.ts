@@ -1,5 +1,7 @@
 // Base Webpack config for ReactJS libraries.
 
+/* eslint-disable import/no-extraneous-dependencies */
+
 import path from 'path';
 
 import autoprefixer from 'autoprefixer';
@@ -126,7 +128,7 @@ export default function configFactory(ops: OptionsT): Configuration {
               typescript: ops.typescript,
             }],
           ],
-          ...ops.babelLoaderOptions || {},
+          ...ops.babelLoaderOptions ?? {},
         },
       }, {
         /* Loads SCSS stylesheets. */

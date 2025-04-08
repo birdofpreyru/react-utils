@@ -28,14 +28,14 @@ import config from 'config';
 import forge from 'node-forge';
 
 import { prerenderToNodeStream } from 'react-dom/static';
-import { HelmetProvider } from '@dr.pogodin/react-helmet';
+import { HelmetProvider, type HelmetDataContext } from '@dr.pogodin/react-helmet';
 import { StaticRouter } from 'react-router';
 import serializeJs from 'serialize-javascript';
 import { type BuildInfoT, setBuildInfo } from 'utils/isomorphy/buildInfo';
 
 import { type ChunkGroupsT, type SsrContextT } from 'utils/globalState';
 
-import { type Configuration } from 'webpack';
+import type { Configuration, Stats } from 'webpack';
 
 import Cache from './Cache';
 
@@ -44,13 +44,19 @@ const sanitizedConfig = omit(config, 'SECRET');
 // Note: These type definitions for logger are copied from Winston logger,
 // then simplified to make it easier to fit an alternative logger into this
 // interface.
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 interface LogMethodI {
-  (level: string, message: string, ...meta: any[]): void;
-}
-interface LeveledLogMethodI {
-  (message: string, ...meta: any[]): void;
+  // eslint-disable-next-line @typescript-eslint/prefer-function-type
+  (level: string, message: string, ...meta: unknown[]): void;
 }
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+interface LeveledLogMethodI {
+  // eslint-disable-next-line @typescript-eslint/prefer-function-type
+  (message: string, ...meta: unknown[]): void;
+}
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface LoggerI {
   debug: LeveledLogMethodI;
   error: LeveledLogMethodI;
@@ -59,7 +65,6 @@ export interface LoggerI {
   warn: LeveledLogMethodI;
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export enum SCRIPT_LOCATIONS {
   BODY_OPEN = 'BODY_OPEN',
   DEFAULT = 'DEFAULT',
@@ -82,7 +87,7 @@ export class ServerSsrContext<StateT>
     chunkGroups: ChunkGroupsT,
     initialState?: StateT,
   ) {
-    super(cloneDeep(initialState) || ({} as StateT));
+    super(cloneDeep(initialState) ?? ({} as StateT));
     this.chunkGroups = chunkGroups;
     this.req = req;
   }
@@ -104,7 +109,7 @@ type ScriptT = {
  */
 function getBuildInfo(context: string) {
   const url = path.resolve(context, '.build-info');
-  return JSON.parse(fs.readFileSync(url, 'utf8'));
+  return JSON.parse(fs.readFileSync(url, 'utf8')) as BuildInfoT;
 }
 
 /**
@@ -119,8 +124,9 @@ function readChunkGroupsJson(buildDir: string) {
   const url = path.resolve(buildDir, '__chunk_groups__.json');
   let res;
   try {
-    res = JSON.parse(fs.readFileSync(url, 'utf8'));
-  } catch (err) {
+    res = JSON.parse(fs.readFileSync(url, 'utf8')) as Record<string, string[]>;
+  } catch {
+    // TODO: Should we message the error here somehow?
     res = null;
   }
   return res;
@@ -134,7 +140,10 @@ function readChunkGroupsJson(buildDir: string) {
  *  1. cipher - a new Cipher, ready for encryption;
  *  2. iv - initial vector used by the cipher.
  */
-function prepareCipher(key: string) {
+function prepareCipher(key: string): Promise<{
+  cipher: forge.cipher.BlockCipher;
+  iv: string;
+}> {
   return new Promise((resolve, reject) => {
     forge.random.getBytes(32, (err, iv) => {
       if (err) reject(err);
@@ -158,14 +167,11 @@ export function isBrotliAcceptable(req: Request) {
   const acceptable = req.get('accept-encoding');
   if (acceptable) {
     const ops = acceptable.split(',');
-    for (let i = 0; i < ops.length; ++i) {
-      const op = ops[i];
-      if (op) {
-        const [type, priority] = op.trim().split(';q=');
-        if ((type === '*' || type === 'br')
+    for (const op of ops) {
+      const [type, priority] = op.trim().split(';q=');
+      if ((type === '*' || type === 'br')
         && (!priority || parseFloat(priority) > 0)) {
-          return true;
-        }
+        return true;
       }
     }
   }
@@ -192,8 +198,7 @@ function groupExtraScripts(scripts: Array<string | ScriptT> = []) {
     [SCRIPT_LOCATIONS.DEFAULT]: '',
     [SCRIPT_LOCATIONS.HEAD_OPEN]: '',
   };
-  for (let i = 0; i < scripts.length; ++i) {
-    const script = scripts[i];
+  for (const script of scripts) {
     if (isString(script)) {
       if (script) res[SCRIPT_LOCATIONS.DEFAULT] += script;
     } else if (script?.code) {
@@ -229,11 +234,11 @@ export function newDefaultLogger({
           stack,
           ...rest
         }) => {
-          let res = `${level}\t(at ${timestamp}):\t${message}`;
+          let res = `${level}\t(at ${timestamp as string}):\t${message as string}`;
           if (Object.keys(rest).length) {
             res += `\n${JSON.stringify(rest, null, 2)}`;
           }
-          if (stack) res += `\n${stack}`;
+          if (stack) res += `\n${stack as string}`;
           return res;
         },
       ),
@@ -249,7 +254,7 @@ export type ConfigT = {
 export type BeforeRenderResT = {
   configToInject?: ConfigT;
   extraScripts?: Array<ScriptT | string>;
-  initialState?: any;
+  initialState?: unknown;
 };
 
 export type BeforeRenderT =
@@ -319,21 +324,20 @@ export default function factory(
   // Note: in normal use the default logger is created and set in the root
   // server function, and this initialization is for testing uses, where
   // renderer is imported directly.
-  if (ops.logger === undefined) {
-    ops.logger = newDefaultLogger({
-      defaultLogLevel: ops.defaultLoggerLogLevel,
-    });
-  }
+  ops.logger ??= newDefaultLogger({
+    defaultLogLevel: ops.defaultLoggerLogLevel,
+  });
 
-  const buildInfo = ops.buildInfo || getBuildInfo(webpackConfig.context!);
+  const buildInfo = ops.buildInfo ?? getBuildInfo(webpackConfig.context!);
   setBuildInfo(buildInfo);
 
   // publicPath from webpack.output has a trailing slash at the end.
   const { publicPath, path: outputPath } = webpackConfig.output!;
 
   const manifestLink = fs.existsSync(`${outputPath}/manifest.json`)
-    ? `<link rel="manifest" href="${publicPath}manifest.json">` : '';
+    ? `<link rel="manifest" href="${publicPath as string}manifest.json">` : '';
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface BufferWithNonce extends Buffer {
     nonce: string;
   }
@@ -377,7 +381,11 @@ export default function factory(
                       // .replaceAll() method instead relying on reg. expression for
                       // global matching.
                       const regex = new RegExp(buffer.nonce, 'g');
-                      h = h.replace(regex, (req as any).nonce);
+
+                      // TODO: It should be implemented more careful.
+                      h = h.replace(regex, (req as unknown as {
+                        nonce: string;
+                      }).nonce);
                     }
                     if (status !== 200) res.status(status);
                     res.send(h);
@@ -399,25 +407,26 @@ export default function factory(
         cipher,
         iv,
       }] = await Promise.all([
-        ops.beforeRender!(req, sanitizedConfig as any),
-        prepareCipher(buildInfo.key) as Promise<any>,
+        ops.beforeRender!(req, sanitizedConfig as unknown as ConfigT),
+        prepareCipher(buildInfo.key),
       ]);
 
-      let helmet: any;
+      let helmet: HelmetDataContext['helmet'];
 
       // Gets the mapping between code chunk names and their asset files.
       // These data come from the Webpack compilation, either from the stats
       // attached to the request (in dev mode), or from a file output during
       // the build (in prod mode).
       let chunkGroups: ChunkGroupsT;
-      const webpackStats = get(res.locals, 'webpack.devMiddleware.stats');
+      const webpackStats = get(res.locals, 'webpack.devMiddleware.stats') as Stats | undefined;
       if (webpackStats) {
         chunkGroups = mapValues(
           webpackStats.toJson({
             all: false,
             chunkGroups: true,
           }).namedChunkGroups,
-          (item) => item.assets.map(({ name }: { name: string }) => name),
+          (item) => item.assets?.map(({ name }: { name: string }) => name)
+            ?? [],
         );
       } else if (CHUNK_GROUPS) chunkGroups = CHUNK_GROUPS;
       else chunkGroups = {};
@@ -439,7 +448,7 @@ export default function factory(
 
           // TODO: prerenderToNodeStream has (abort) "signal" option,
           // and we should wire it up to the SSR timeout below.
-          const helmetContext = {};
+          const helmetContext = {} as HelmetDataContext;
           const { prelude } = await prerenderToNodeStream(
             <GlobalStateProvider
               initialState={ssrContext.state}
@@ -451,9 +460,11 @@ export default function factory(
                 </HelmetProvider>
               </StaticRouter>
             </GlobalStateProvider>,
-            { onError: (error) => { throw error; } },
+            { onError: (error) => {
+              throw error;
+            } },
           );
-          ({ helmet } = helmetContext as any);
+          ({ helmet } = helmetContext);
 
           return prelude;
         };
@@ -461,18 +472,16 @@ export default function factory(
         let ssrRound = 0;
         let bailed = false;
         for (; ssrRound < ops.maxSsrRounds!; ++ssrRound) {
-          stream = await renderPass(); // eslint-disable-line no-await-in-loop
+          stream = await renderPass();
 
           if (!ssrContext.dirty) break;
 
-          /* eslint-disable no-await-in-loop */
           const timeout = ops.ssrTimeout! + ssrStart - Date.now();
           bailed = timeout <= 0 || !await Promise.race([
             Promise.allSettled(ssrContext.pending),
             timer(timeout).then(() => false),
           ]);
           if (bailed) break;
-          /* eslint-enable no-await-in-loop */
         }
 
         let logMsg;
@@ -491,7 +500,7 @@ export default function factory(
         await new Promise((ready) => {
           stream!.pipe(new Writable({
             destroy: ready,
-            write: (chunk, _, done) => {
+            write: (chunk: { toString: () => string }, _, done) => {
               appHtmlMarkup += chunk.toString();
               done();
             },
@@ -506,7 +515,7 @@ export default function factory(
        * better than injection of a plain text. */
       const payload = serializeJs({
         CHUNK_GROUPS: chunkGroups,
-        CONFIG: configToInject || sanitizedConfig,
+        CONFIG: configToInject ?? sanitizedConfig,
         ISTATE: ssrContext.state,
       }, {
         ignoreFunction: true,
@@ -538,22 +547,22 @@ export default function factory(
       let scriptChunkString = '';
       chunkSet.forEach((chunk) => {
         if (chunk.endsWith('.css')) {
-          styleChunkString += `<link href="${publicPath}${chunk}" rel="stylesheet">`;
+          styleChunkString += `<link href="${publicPath as string}${chunk}" rel="stylesheet">`;
         } else if (
           chunk.endsWith('.js')
-            // In dev mode HMR adds JS updates into asset arrays,
-            // and they (updates) should be ignored.
-            && !chunk.endsWith('.hot-update.js')
+          // In dev mode HMR adds JS updates into asset arrays,
+          // and they (updates) should be ignored.
+          && !chunk.endsWith('.hot-update.js')
         ) {
-          scriptChunkString += `<script src="${publicPath}${chunk}" type="application/javascript"></script>`;
+          scriptChunkString += `<script src="${publicPath as string}${chunk}" type="application/javascript"></script>`;
         }
       });
 
       const grouppedExtraScripts = groupExtraScripts(extraScripts);
 
-      const faviconLink = ops.favicon ? (
-        '<link rel="shortcut icon" href="/favicon.ico">'
-      ) : '';
+      const faviconLink = ops.favicon
+        ? '<link rel="shortcut icon" href="/favicon.ico">'
+        : '';
 
       const html = `<!DOCTYPE html>
         <html lang="en">
@@ -591,8 +600,10 @@ export default function factory(
             const b = buffer as BufferWithNonce;
             if (error) failed(error);
             else {
-              b.nonce = (req as any).nonce; // eslint-disable-line no-param-reassign
-              cache!.add({ buffer: b, status }, cacheRef!.key, buffer.length);
+              b.nonce = (req as unknown as {
+                nonce: string;
+              }).nonce;
+              cache!.add({ buffer: b, status }, cacheRef.key, buffer.length);
               done();
             }
           });

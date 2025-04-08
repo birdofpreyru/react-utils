@@ -30,7 +30,10 @@ export function useCurrent({
   globalStatePath = 'currentTime',
   precision = 5 * SEC_MS,
 } = {}): number {
-  const [now, setter] = useGlobalState<ForceT, number>(globalStatePath, Date.now);
+  const [now, setter] = useGlobalState<ForceT, number>(
+    globalStatePath,
+    Date.now,
+  );
   useEffect(() => {
     let timerId: NodeJS.Timeout;
     const update = () => {
@@ -64,10 +67,14 @@ export function useTimezoneOffset({
   globalStatePath = 'timezoneOffset',
 } = {}): number {
   const ssrContext = getSsrContext(false);
-  const [offset, setOffset] = useGlobalState<ForceT, number>(globalStatePath, () => {
-    const value = cookieName && ssrContext?.req?.cookies?.[cookieName];
-    return value ? parseInt(value, 10) : 0;
-  });
+  const [offset, setOffset] = useGlobalState<ForceT, number>(
+    globalStatePath,
+    () => {
+      const value = cookieName
+        && ssrContext?.req?.cookies?.[cookieName] as string;
+      return value ? parseInt(value, 10) : 0;
+    },
+  );
   useEffect(() => {
     const date = new Date();
     const value = date.getTimezoneOffset();

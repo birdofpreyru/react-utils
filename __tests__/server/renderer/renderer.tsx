@@ -1,6 +1,6 @@
 import type { Request, RequestHandler } from 'express';
 import { cloneDeep, noop } from 'lodash';
-import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable } from 'server/renderer';
+import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable, type ConfigT } from 'server/renderer';
 import fs from 'fs';
 
 import serializeJs from 'serialize-javascript';
@@ -11,13 +11,13 @@ import {
   useGlobalState,
 } from '@dr.pogodin/react-global-state';
 
-import { Helmet, HelmetProvider } from '@dr.pogodin/react-helmet';
+import { Helmet } from '@dr.pogodin/react-helmet';
 
 import { type Configuration } from 'webpack';
 
 import { getSsrContext } from 'utils/globalState';
 
-import { getBuildInfo, setBuildInfo } from 'utils/isomorphy/buildInfo';
+import { getBuildInfo, setBuildInfo, type BuildInfoT } from 'utils/isomorphy/buildInfo';
 
 import {
   mockHttpRequest,
@@ -25,7 +25,8 @@ import {
   mockWebpackConfig,
 } from './__assets__/common';
 
-declare module global {
+// eslint-disable-next-line @typescript-eslint/no-namespace
+declare namespace global {
   let mockFailsForgeRandomGetBytesMethod: boolean | undefined;
 }
 
@@ -42,11 +43,7 @@ const TEST_INITIAL_STATE = {
 
 const testBuildInfo = JSON.parse(
   fs.readFileSync(`${TEST_CONTEXT}/.build-info`, 'utf8'),
-);
-
-beforeAll(() => {
-  HelmetProvider.canUseDOM = false;
-});
+) as BuildInfoT;
 
 afterEach(() => {
   // TODO: It will be better to completely re-load tested modules, and thus not
@@ -54,10 +51,6 @@ afterEach(() => {
   setBuildInfo(undefined, true);
 
   global.mockFailsForgeRandomGetBytesMethod = false;
-});
-
-afterAll(() => {
-  HelmetProvider.canUseDOM = true;
 });
 
 // TODO: Can we update this test to generate the webpack stats and attach
@@ -117,7 +110,7 @@ test(
 test(
   'Config overriding for injection',
   () => coreTest(mockWebpackConfig(), {
-    beforeRender: async (req: Request, sanitizedConfig: any) => {
+    beforeRender: (req: Request, sanitizedConfig: ConfigT) => {
       expect(sanitizedConfig).toBeInstanceOf(Object);
       expect(sanitizedConfig).not.toHaveProperty('SECRET');
       return {
@@ -171,22 +164,27 @@ test(
 test(
   'Injection of additional JS scripts',
   () => coreTest(mockWebpackConfig(), {
-    beforeRender: async () => ({
+    beforeRender: () => ({
       extraScripts: [
         '<script>Dummy JS Sript</script>',
-        '<script>Another Dummy JS Script</script>', {
+        '<script>Another Dummy JS Script</script>',
+        {
           code: '<script>Yet another Dummy JS Script</script>',
           location: SCRIPT_LOCATIONS.DEFAULT,
-        }, {
+        },
+        {
           code: '<script>1-st script after opening <head></script>',
           location: SCRIPT_LOCATIONS.HEAD_OPEN,
-        }, {
+        },
+        {
           code: '<script>1-st script after opening <body></script>',
           location: SCRIPT_LOCATIONS.BODY_OPEN,
-        }, {
+        },
+        {
           code: '<script>2-nd script after opening <body></script>',
           location: SCRIPT_LOCATIONS.BODY_OPEN,
-        }, {
+        },
+        {
           code: '<script>2-nd script after opening <head></script>',
           location: SCRIPT_LOCATIONS.HEAD_OPEN,
         },
@@ -204,7 +202,7 @@ test(
       context.chunks.push('test-chunk-b');
       return <div>Hello Wold!</div>;
     },
-    beforeRender: async () => ({
+    beforeRender: () => ({
       initialState: cloneDeep(TEST_INITIAL_STATE),
     }),
     maxSsrRounds: 3,
@@ -217,7 +215,7 @@ test(
   () => coreTest(mockWebpackConfig(), {
     Application: () => {
       const context = getSsrContext()!;
-      context.status = 404; // eslint-disable-line no-param-reassign
+      context.status = 404;
       return <div>404 Error Test</div>;
     },
     maxSsrRounds: 3,

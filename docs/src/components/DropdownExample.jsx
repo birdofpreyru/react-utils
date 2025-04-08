@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { CustomDropdown, Dropdown } from '@dr.pogodin/react-utils';
 
-const SAMPLE_OPTIONS = [{
-  name: 'Option #1',
-  value: 'option1',
-}, {
-  name: 'Option #2',
-  value: 'option2',
-}, {
-  value: 'option3',
-},
-'option #4',
+const SAMPLE_OPTIONS = [
+  {
+    name: 'Option #1',
+    value: 'option1',
+  },
+  {
+    name: 'Option #2',
+    value: 'option2',
+  },
+  {
+    value: 'option3',
+  },
+  'option #4',
 ];
 
 const SAMPLE_OPTIONS_2 = [{
@@ -63,7 +66,7 @@ const SAMPLE_OPTIONS_2 = [{
   value: 'option3',
 }];
 
-export default function DropdownExample() {
+const DropdownExample = () => {
   const [value, setValue] = useState();
   const [value2, setValue2] = useState();
   return (
@@ -83,4 +86,6 @@ export default function DropdownExample() {
       />
     </div>
   );
-}
+};
+
+export default DropdownExample;

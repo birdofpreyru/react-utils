@@ -29,8 +29,9 @@ const config = {
   presets: [
     [
       '@docusaurus/preset-classic',
+
       /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: EDIT_BASE,
@@ -41,13 +42,12 @@ const config = {
             require.resolve('./src/css/custom.scss'),
           ],
         },
-      }),
+      },
     ],
   ],
 
-  themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+  themeConfig: /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    {
       navbar: {
         logo: {
           alt: 'Dr. Pogodin Studio',
@@ -114,7 +114,7 @@ const config = {
         theme: themes.github,
         darkTheme: themes.dracula,
       },
-    }),
+    },
 };
 
 module.exports = config;

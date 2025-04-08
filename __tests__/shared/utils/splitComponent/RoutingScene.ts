@@ -64,8 +64,10 @@ it('hydration works as expected', async () => {
     'utf8',
   ) as string;
 
-  await act(() => new Function(mainJs)()); // eslint-disable-line no-new-func
-  await act(() => new Function(splitJs)()); // eslint-disable-line no-new-func
+  /* eslint-disable @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call */
+  await act(() => new Function(mainJs)());
+  await act(() => new Function(splitJs)());
+  /* eslint-enable @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call */
 
   expect(document.head.innerHTML).toBe(headMarkupWithoutInj);
   expect(document.querySelector('#react-view')!.innerHTML).toBe(viewMarkup);

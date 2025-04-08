@@ -272,7 +272,7 @@ function setComponentPositions(
 const Tooltip: FunctionComponent<{
   children?: ReactNode;
   ref?: RefObject<unknown>;
-  theme: any;
+  theme: TooltipThemeT;
 }> = ({ children, ref, theme }) => {
   // NOTE: The way it has to be implemented, for clean mounting and unmounting
   // at the client side, the <Tooltip> is fully mounted into DOM in the next

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Checkbox } from '@dr.pogodin/react-utils';
 
-export default function CheckboxExample() {
+const CheckboxExample = () => {
   const [checkbox2, setCheckbox2] = useState<boolean>(true);
   const [checkbox3a, setCheckbox3a] = useState<boolean | 'indeterminate'>('indeterminate');
   const [checkbox3b, setCheckbox3b] = useState<boolean | 'indeterminate'>('indeterminate');
@@ -38,4 +38,6 @@ export default function CheckboxExample() {
       />
     </>
   );
-}
+};
+
+export default CheckboxExample;

@@ -37,7 +37,7 @@ const Input: FunctionComponent<PropsT> = ({
       className={theme.input}
       data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
       ref={ref}
-      {...rest} // eslint-disable-line react/jsx-props-no-spreading
+      {...rest}
     />
   </span>
 );

@@ -94,14 +94,13 @@ const BaseModal: FunctionComponent<PropsT> = ({
   const focusLast = useMemo(() => (
     <div
       onFocus={() => {
-        const elems = containerRef.current?.querySelectorAll('*') as NodeListOf<HTMLElement>;
+        const elems = containerRef.current!.querySelectorAll('*');
         for (let i = elems.length - 1; i >= 0; --i) {
-          elems[i]?.focus();
+          (elems[i] as HTMLElement)?.focus();
           if (document.activeElement === elems[i]) return;
         }
         overlayRef.current?.focus();
       }}
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={0}
     />
   ), []);
@@ -149,8 +148,6 @@ const BaseModal: FunctionComponent<PropsT> = ({
           // (because visually and logically the modal dialog does not belong
           // to its parent container, where it technically belongs from
           // the HTML mark-up perpective).
-          /* eslint-disable jsx-a11y/click-events-have-key-events,
-             jsx-a11y/no-noninteractive-element-interactions */
         }
         <div
           aria-modal="true"
@@ -164,15 +161,11 @@ const BaseModal: FunctionComponent<PropsT> = ({
         >
           {children}
         </div>
-        {/* eslint-enable jsx-a11y/click-events-have-key-events,
-            jsx-a11y/no-noninteractive-element-interactions */}
         <div
           onFocus={() => {
             overlayRef.current?.focus();
           }}
-          /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
           tabIndex={0}
-          /* eslint-enable jsx-a11y/no-noninteractive-tabindex */
         />
         {focusLast}
       </>

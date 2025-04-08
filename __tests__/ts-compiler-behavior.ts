@@ -8,6 +8,6 @@ test('array element types', () => {
 });
 
 test('object field types', () => {
-  const object: { [key: string]: string } = {};
+  const object: Record<string, string> = {};
   expect(object.field).type.toBe<string | undefined>();
 });

@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 
 import { timer } from '@dr.pogodin/js-utils';
 
@@ -49,7 +48,7 @@ describe('concurrent use', () => {
     let flag = false;
     const sem = new Semaphore();
 
-    (async () => {
+    void (async () => {
       await sem.waitReady();
       flag = true;
     })();
@@ -75,8 +74,8 @@ describe('concurrent use', () => {
       }
     };
 
-    newFlow('A');
-    newFlow('B');
+    void newFlow('A');
+    void newFlow('B');
 
     expect(signals).toEqual([]);
     sem.setReady(true);
@@ -105,8 +104,8 @@ describe('concurrent use', () => {
       }
     };
 
-    newFlow('A');
-    newFlow('B');
+    void newFlow('A');
+    void newFlow('B');
 
     expect(signals).toEqual([]);
     sem.setReady(true);
@@ -129,10 +128,10 @@ describe('concurrent use', () => {
         await sem.waitReady();
         signals.push(signal);
       };
-      newFlow('A');
-      newFlow('B');
+      void newFlow('A');
+      void newFlow('B');
       sem.setReady(true);
-      newFlow('C');
+      void newFlow('C');
       await timer(10);
       expect(signals).toEqual(['A', 'B', 'C']);
     },

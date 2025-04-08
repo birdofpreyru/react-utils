@@ -25,8 +25,8 @@ const TestLink: React.FunctionComponent<{
   );
 };
 
-test('Absolute link, starting with http://', () => {
-  snapshot((
+test('Absolute link, starting with http://', async () => {
+  await snapshot((
     <GenericLink
       routerLinkType={TestLink as unknown as LinkT}
       to="http://www.domain.com/test"
@@ -36,10 +36,10 @@ test('Absolute link, starting with http://', () => {
   ));
 });
 
-test('Absolute link, starting with https://', () => {
-  snapshot((
+test('Absolute link, starting with https://', async () => {
+  await snapshot((
     <GenericLink
-      onClick={() => {}}
+      onClick={() => undefined}
       routerLinkType={TestLink as unknown as LinkT}
       to="https://www.domain.com/test"
     >
@@ -48,8 +48,8 @@ test('Absolute link, starting with https://', () => {
   ));
 });
 
-test('Relative link', () => {
-  snapshot((
+test('Relative link', async () => {
+  await snapshot((
     <GenericLink
       routerLinkType={TestLink as unknown as LinkT}
       to="http/relative/link"
@@ -59,8 +59,8 @@ test('Relative link', () => {
   ));
 });
 
-test('Relative link, with `enforceA`', () => {
-  snapshot((
+test('Relative link, with `enforceA`', async () => {
+  await snapshot((
     <GenericLink
       enforceA
       routerLinkType={TestLink as unknown as LinkT}
@@ -71,8 +71,8 @@ test('Relative link, with `enforceA`', () => {
   ));
 });
 
-test('Relative link, with `openNewTab`', () => {
-  snapshot((
+test('Relative link, with `openNewTab`', async () => {
+  await snapshot((
     <GenericLink
       openNewTab
       routerLinkType={TestLink as unknown as LinkT}
@@ -83,8 +83,8 @@ test('Relative link, with `openNewTab`', () => {
   ));
 });
 
-test('Anchor link', () => {
-  snapshot((
+test('Anchor link', async () => {
+  await snapshot((
     <GenericLink
       routerLinkType={TestLink as unknown as LinkT}
       to="#anchor"

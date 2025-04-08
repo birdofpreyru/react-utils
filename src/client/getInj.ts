@@ -30,7 +30,7 @@ if (metaElement) {
   d.finish();
 
   data = forge.util.decodeUtf8(d.output.data);
-  inj = eval(`(${data})`); // eslint-disable-line no-eval
+  inj = eval(`(${data})`) as InjT;
 } else if (typeof window !== 'undefined' && window.REACT_UTILS_INJECTION) {
   inj = window.REACT_UTILS_INJECTION;
   delete window.REACT_UTILS_INJECTION;

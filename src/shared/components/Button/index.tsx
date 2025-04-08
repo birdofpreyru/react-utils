@@ -1,6 +1,6 @@
 // The <Button> component implements a standard button / button-like link.
 
-import type { PointerEventHandler, ReactNode } from 'react';
+import type { FunctionComponent, PointerEventHandler, ReactNode } from 'react';
 
 import Link from 'components/Link';
 
@@ -24,8 +24,7 @@ type PropsT = {
   to?: object | string;
 };
 
-/* eslint-disable react/function-component-definition */
-export const BaseButton: React.FunctionComponent<PropsT> = ({
+export const BaseButton: FunctionComponent<PropsT> = ({
   active,
   children,
   disabled,

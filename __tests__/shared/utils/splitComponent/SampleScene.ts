@@ -53,10 +53,12 @@ it('hydration works as expected', async () => {
   const bJs = fs.readFileSync(`${outputPath}/sample-component-b.js`, 'utf8') as string;
   const cJs = fs.readFileSync(`${outputPath}/sample-component-c.js`, 'utf8') as string;
 
-  await act(() => new Function(mainJs)()); // eslint-disable-line no-new-func
-  await act(() => new Function(aJs)()); // eslint-disable-line no-new-func
-  await act(() => new Function(bJs)()); // eslint-disable-line no-new-func
-  await act(() => new Function(cJs)()); // eslint-disable-line no-new-func
+  /* eslint-disable @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call */
+  await act(() => new Function(mainJs)());
+  await act(() => new Function(aJs)());
+  await act(() => new Function(bJs)());
+  await act(() => new Function(cJs)());
+  /* eslint-enable @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call */
 
   expect(document.head.innerHTML).toBe(headMarkupWithoutInj);
   expect(document.querySelector('#react-view')!.innerHTML).toBe(viewMarkup);

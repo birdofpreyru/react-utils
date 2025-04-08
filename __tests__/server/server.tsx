@@ -30,7 +30,9 @@ jest.mock('webpack', () => {
 
 jest.mock(
   'webpack-hot-middleware',
-  () => jest.fn(() => (req: Request, res: Response, next: NextFunction) => next()),
+  () => jest.fn(
+    () => (req: Request, res: Response, next: NextFunction) => next(),
+  ),
 );
 
 const TEST_CONTEXT = `${__dirname}/test_data`;
@@ -56,6 +58,7 @@ test('Favicon support', () => {
     favicon: clone(TEST_FAVICON_PATH),
     logger,
   });
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   expect(require('serve-favicon')).toHaveBeenCalledWith(TEST_FAVICON_PATH);
   return server;
 });

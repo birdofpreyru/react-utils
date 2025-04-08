@@ -2,9 +2,9 @@ import {
   type PluginOptionsT as ReactCssModulesOptionsT,
 } from '@dr.pogodin/babel-plugin-react-css-modules';
 
-const {
+import {
   generateScopedNameFactory,
-} = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
+} from '@dr.pogodin/babel-plugin-react-css-modules/utils';
 
 const generateScopedNameDev = generateScopedNameFactory(
   '[package]___[path][name]___[local]___[hash:base64:6]',
@@ -14,6 +14,8 @@ const generateScopedNameProd = generateScopedNameFactory(
   '[hash:base64:6]',
 );
 
+// TODO: Check it.
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface BabelCompilerI {
   env: () => string;
 }
@@ -27,6 +29,8 @@ export enum ENVIRONMENTS {
   TEST = 'test',
 }
 
+// TODO: Check it.
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions, @typescript-eslint/no-empty-object-type
 export interface PresetOrPluginOptionsI {}
 
 type PresetOrPluginT = string | [string, PresetOrPluginOptionsI];
@@ -44,7 +48,7 @@ export type OptionsT = {
   modules?: ModuleT;
   noRR?: boolean;
   noStyling?: boolean;
-  targets?: string | string[] | { [key: string]: string };
+  targets?: string | string[] | Record<string, string>;
 
   // Set `true` to add into config pieces necessary for TypeScript processing.
   typescript?: boolean;
@@ -63,7 +67,7 @@ function newBaseConfig(options: OptionsT): ConfigT {
         modules: options.modules ?? false,
 
         // Chrome 69 is the browser/WebView for Android 9 (API level 28).
-        targets: options.targets || 'defaults or chrome >= 69',
+        targets: options.targets ?? 'defaults or chrome >= 69',
       }],
 
       // TODO: Starting from Babel 8, "automatic" will be the default runtime,
@@ -135,7 +139,7 @@ export default function getPreset(babel: BabelCompilerI, ops: OptionsT = {}) {
   const res = newBaseConfig(ops);
 
   if (!ops.noStyling) addStyling(res, env as ENVIRONMENTS);
-  if (env === ENVIRONMENTS.DEV && !ops.noRR) {
+  if (env === (ENVIRONMENTS.DEV as string) && !ops.noRR) {
     res.plugins.push('react-refresh/babel');
   }
 

@@ -20,7 +20,7 @@ const fs = global.webpackOutputFs;
 const outputPath = global.webpackConfig!.output!.path;
 const jsPath = global.webpackStats?.assetsByChunkName?.main?.[0];
 
-document.write(global.ssrMarkup || '');
+document.write(global.ssrMarkup ?? '');
 
 // Note: the current purpose of this test is to check that custom publicPath
 // given in Webpack config correctly applies to the service worker registration.
@@ -28,7 +28,8 @@ document.write(global.ssrMarkup || '');
 it('registers service worker with the correct URL', async () => {
   const js = fs?.readFileSync(`${outputPath}/${jsPath}`, 'utf8') as string;
 
-  const nav = window.navigator as any;
+  const nav = window.navigator;
+  // @ts-expect-error "that's fine"
   nav.serviceWorker = { register: jest.fn() };
   window.navigator = nav;
 
@@ -42,9 +43,14 @@ it('registers service worker with the correct URL', async () => {
 
   const { log } = console;
   console.log = jest.fn();
-  await act(() => new Function(js)()); // eslint-disable-line no-new-func
-  await act(() => onLoad && onLoad(new Event('load')));
+
+  // eslint-disable-next-line @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
+  await act(() => new Function(js)());
+
+  act(() => onLoad && onLoad(new Event('load')));
   console.log = log;
 
+  // @ts-expect-error "fine"
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   expect(nav.serviceWorker.register.mock.calls[0]).toEqual(['/__service-worker.js']);
 });

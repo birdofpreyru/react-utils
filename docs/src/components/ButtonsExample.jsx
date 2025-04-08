@@ -1,12 +1,9 @@
-/* global alert */
-/* eslint-disable no-alert */
-
 import { useColorMode } from '@docusaurus/theme-common';
 import { Button, ThemeProvider } from '@dr.pogodin/react-utils';
 
 import darkButtonTheme from '../themes/buttons/dark.module.scss';
 
-export default function ButtonsExample() {
+const ButtonsExample = () => {
   const { isDarkTheme } = useColorMode();
   return (
     <ThemeProvider
@@ -20,4 +17,6 @@ export default function ButtonsExample() {
       <Button active>Forced-Active Button</Button>
     </ThemeProvider>
   );
-}
+};
+
+export default ButtonsExample;
