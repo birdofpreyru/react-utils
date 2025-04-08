@@ -1,9 +1,8 @@
-import type * as ClientM from 'client';
-
 import 'styles/global.scss';
 
 import { webpack } from 'utils';
 
+import type * as ClientM from './client';
 import type ServerFactoryT from './server';
 
 const server = webpack.requireWeak('./server', __dirname) as (typeof ServerFactoryT) | null;
