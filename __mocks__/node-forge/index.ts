@@ -1,6 +1,6 @@
 /* global jest */
 
-import NodeForgeM from 'node-forge';
+import type NodeForgeM from 'node-forge';
 
 const mock: typeof NodeForgeM = jest.requireActual('node-forge');
 

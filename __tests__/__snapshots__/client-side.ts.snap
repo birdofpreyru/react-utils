@@ -56,9 +56,7 @@ exports[`Export at client side 1`] = `
 }
 `;
 
-exports[`Export at client side 2`] = `{}`;
-
-exports[`Export at client side 3`] = `
+exports[`Export at client side 2`] = `
 [
   "extend",
   "locale",
