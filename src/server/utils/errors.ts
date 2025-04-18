@@ -92,7 +92,7 @@ class ErrorWithStatus extends Error {
 export function newError(
   message: string,
   statusCode = CODES.INTERNAL_SERVER_ERROR,
-) {
+): ErrorWithStatus {
   const error = new ErrorWithStatus(message);
   error.status = statusCode;
   return error;
@@ -126,7 +126,7 @@ export function assert(
   schema: joi.AnySchema,
   message = '',
   statusCode = CODES.BAD_REQUEST,
-) {
+): void {
   const { error } = schema.validate(value, { abortEarly: false });
   if (error) {
     fail(message.concat(message ? '\n' : '', error.message), statusCode);

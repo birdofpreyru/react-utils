@@ -37,6 +37,7 @@ describe('.then()', () => {
     // eslint-disable-next-line jest/valid-expect
     const test = expect(barrier.then(() => 'OK')).resolves.toBe('OK');
     void barrier.resolve('NO');
+
     await test;
   });
 

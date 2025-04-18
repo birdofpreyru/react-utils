@@ -4,6 +4,8 @@ import type { Response } from 'express';
 
 import { noop } from 'lodash';
 
+import type { Configuration } from 'webpack';
+
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 interface ResponseI extends Response {
   csrfToken: () => string;
@@ -23,8 +25,8 @@ export function mockHttpRequest({
 } = {}): ResponseI {
   return ({
     csrfToken: () => 'dummy-csrf-token',
-    nonce: 'abcdef-dummy-nonce',
     info: 'I am a dummy HTTP request! No need for a complex mock here!',
+    nonce: 'abcdef-dummy-nonce',
     url,
   } as unknown) as ResponseI;
 }
@@ -113,7 +115,7 @@ export function mockHttpResponse(): {
   };
 }
 
-export function mockWebpackConfig() {
+export function mockWebpackConfig(): Configuration {
   return {
     context: __dirname,
     output: {

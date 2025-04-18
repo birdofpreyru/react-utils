@@ -189,7 +189,7 @@ export default function configFactory(ops: OptionsT): Configuration {
   if (o.sitemap) {
     const sitemapUrl = path.resolve(o.context, o.sitemap);
 
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    // eslint-disable-next-line import/no-dynamic-require, @typescript-eslint/no-require-imports
     let source = require(sitemapUrl) as
       (string[] | (() => string[]));
     if (isFunction(source)) source = source();
@@ -280,10 +280,97 @@ export default function configFactory(ops: OptionsT): Configuration {
   return {
     context: o.context,
     entry,
+    mode: o.mode,
+    module: {
+      rules: [{
+        /* Loads font resources from "src/assets/fonts" folder. */
+        test: /\.(eot|otf|svg|ttf|woff2?)$/,
+
+        generator: {
+          filename: 'fonts/[contenthash][ext][query]',
+        },
+        include: [
+          /node_modules/,
+          /src[/\\]assets[/\\]fonts/,
+        ],
+        type: 'asset/resource',
+      }, {
+        // Aggregates source maps from dependencies.
+        test: /\.js$/,
+
+        enforce: 'pre',
+        use: ['source-map-loader'],
+      }, {
+        // Loads JS modules (.cjs, .js, .jsx); TS modules (.ts, .tsx);
+        // and SVG assets (.svg).
+        test: ops.typescript ? /\.(cjs|(j|t)sx?|svg)$/ : /\.(cjs|jsx?|svg)$/,
+
+        exclude: ops.babelLoaderExclude ?? [/node_modules/],
+        loader: 'babel-loader',
+        options: {
+          babelrc: false,
+          configFile: false,
+          envName: o.babelEnv,
+          presets: [['@dr.pogodin/react-utils/config/babel/webpack', {
+            typescript: ops.typescript,
+          }]],
+          sourceType: 'unambiguous',
+          ...o.babelLoaderOptions,
+        },
+      }, {
+        /* Loads image assets. */
+        test: /\.(gif|jpe?g|png)$/,
+
+        generator: {
+          filename: 'images/[contenthash][ext][query]',
+        },
+        type: 'asset/resource',
+      }, {
+        /* Loads SCSS stylesheets. */
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader, {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                getLocalIdent,
+                localIdentName: o.cssLocalIdent,
+
+                // This flag defaults `true` for ES module builds since css-loader@7.0.0:
+                // https://github.com/webpack-contrib/css-loader/releases/tag/v7.0.0
+                // We'll keep it `false` to avoid a breaking change for dependant
+                // projects, and I am also not sure what are the benefits of
+                // named CSS exports anyway.
+                namedExport: false,
+              },
+            },
+          }, {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [autoprefixer],
+              },
+            },
+          }, 'resolve-url-loader', {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      }, {
+        /* Loads CSS stylesheets. It is assumed that CSS stylesheets come only
+        * from dependencies, as we use SCSS inside our own code. */
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+        ],
+      }],
+    },
     node: {
       __dirname: true,
     },
-    mode: o.mode,
     output: {
       chunkFilename: '[contenthash].js',
       filename: '[contenthash].js',
@@ -328,89 +415,6 @@ export default function configFactory(ops: OptionsT): Configuration {
         '.scss',
       ],
       symlinks: false,
-    },
-    module: {
-      rules: [{
-        /* Loads font resources from "src/assets/fonts" folder. */
-        test: /\.(eot|otf|svg|ttf|woff2?)$/,
-        include: [
-          /node_modules/,
-          /src[/\\]assets[/\\]fonts/,
-        ],
-        type: 'asset/resource',
-        generator: {
-          filename: 'fonts/[contenthash][ext][query]',
-        },
-      }, {
-        // Aggregates source maps from dependencies.
-        test: /\.js$/,
-        enforce: 'pre',
-        use: ['source-map-loader'],
-      }, {
-        // Loads JS modules (.cjs, .js, .jsx); TS modules (.ts, .tsx);
-        // and SVG assets (.svg).
-        test: ops.typescript ? /\.(cjs|(j|t)sx?|svg)$/ : /\.(cjs|jsx?|svg)$/,
-        exclude: ops.babelLoaderExclude ?? [/node_modules/],
-        loader: 'babel-loader',
-        options: {
-          babelrc: false,
-          configFile: false,
-          envName: o.babelEnv,
-          presets: [['@dr.pogodin/react-utils/config/babel/webpack', {
-            typescript: ops.typescript,
-          }]],
-          sourceType: 'unambiguous',
-          ...o.babelLoaderOptions,
-        },
-      }, {
-        /* Loads image assets. */
-        test: /\.(gif|jpe?g|png)$/,
-        type: 'asset/resource',
-        generator: {
-          filename: 'images/[contenthash][ext][query]',
-        },
-      }, {
-        /* Loads SCSS stylesheets. */
-        test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader, {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                getLocalIdent,
-                localIdentName: o.cssLocalIdent,
-
-                // This flag defaults `true` for ES module builds since css-loader@7.0.0:
-                // https://github.com/webpack-contrib/css-loader/releases/tag/v7.0.0
-                // We'll keep it `false` to avoid a breaking change for dependant
-                // projects, and I am also not sure what are the benefits of
-                // named CSS exports anyway.
-                namedExport: false,
-              },
-            },
-          }, {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [autoprefixer],
-              },
-            },
-          }, 'resolve-url-loader', {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-        ],
-      }, {
-        /* Loads CSS stylesheets. It is assumed that CSS stylesheets come only
-        * from dependencies, as we use SCSS inside our own code. */
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-        ],
-      }],
     },
   };
 }

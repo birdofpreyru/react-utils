@@ -22,7 +22,7 @@ const fs = global.webpackOutputFs;
 const outputPath = global.webpackConfig!.output!.path;
 
 it('emits expected CSS', () => {
-  const css = fs?.readFileSync(`${outputPath}/main.css`, 'utf8');
+  const css = fs.readFileSync(`${outputPath}/main.css`, 'utf8');
   expect(css).toMatchSnapshot();
 });
 
@@ -32,9 +32,9 @@ it('generates expected markup during SSR', () => {
 
 it('conserves expected markup after hydration', async () => {
   const markup = container?.innerHTML;
-  const js = fs?.readFileSync(`${outputPath}/main.js`, 'utf8') as string;
+  const js = fs.readFileSync(`${outputPath}/main.js`, 'utf8') as string;
 
-  // eslint-disable-next-line @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
+  // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
   await act(() => new Function(js)());
   expect(document.querySelector('#react-view')?.innerHTML).toBe(markup);
 });

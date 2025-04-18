@@ -1,3 +1,5 @@
+// TODO: Move this component to React Helmet library.
+
 import {
   type Context as ContextT,
   type FunctionComponent,
@@ -78,8 +80,8 @@ const MetaTags: FunctionComponent<PropsT> & {
       extra.push(
         <meta
           content={content}
-          name={name}
           key={`extra-meta-tag-${i}`}
+          name={name}
         />,
       );
     }
@@ -92,28 +94,28 @@ const MetaTags: FunctionComponent<PropsT> & {
         <title>
           {title}
         </title>
-        <meta name="description" content={description} />
+        <meta content={description} name="description" />
 
         {/* Twitter cards. */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={socTitle} />
-        <meta name="twitter:description" content={socDesc} />
-        { image ? <meta name="twitter:image" content={image} /> : null }
+        <meta content="summary_large_image" name="twitter:card" />
+        <meta content={socTitle} name="twitter:title" />
+        <meta content={socDesc} name="twitter:description" />
+        { image ? <meta content={image} name="twitter:image" /> : null }
         {
           siteName
-            ? <meta name="twitter:site" content={`@${siteName}`} />
+            ? <meta content={`@${siteName}`} name="twitter:site" />
             : null
         }
 
         {/* Open Graph data. */}
-        <meta name="og:title" content={socTitle} />
-        { image ? <meta name="og:image" content={image} /> : null }
-        { image ? <meta name="og:image:alt" content={socTitle} /> : null }
-        <meta name="og:description" content={socDesc} />
+        <meta content={socTitle} name="og:title" />
+        { image ? <meta content={image} name="og:image" /> : null }
+        { image ? <meta content={socTitle} name="og:image:alt" /> : null }
+        <meta content={socDesc} name="og:description" />
         {
-          siteName ? <meta name="og:sitename" content={siteName} /> : null
+          siteName ? <meta content={siteName} name="og:sitename" /> : null
         }
-        { url ? <meta name="og:url" content={url} /> : null }
+        { url ? <meta content={url} name="og:url" /> : null }
         {extra}
       </Helmet>
       {

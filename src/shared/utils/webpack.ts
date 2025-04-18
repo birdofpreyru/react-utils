@@ -1,4 +1,3 @@
-import type { Module } from 'node:module';
 import type PathT from 'path';
 
 import { IS_CLIENT_SIDE } from './isomorphy';
@@ -10,10 +9,10 @@ import { IS_CLIENT_SIDE } from './isomorphy';
  * @param [basePath]
  * @return Required module.
  */
-export function requireWeak<ModuleT extends typeof Module>(
+export function requireWeak<T extends object>(
   modulePath: string,
   basePath?: string,
-): ModuleT | null {
+): T | null {
   if (IS_CLIENT_SIDE) return null;
 
   // TODO: On one hand, this try/catch wrap silencing errors is bad, as it may
@@ -23,24 +22,27 @@ export function requireWeak<ModuleT extends typeof Module>(
   // like during the static code generation for docs. Perhaps, something should
   // be implemented differently here.
   try {
+    // eslint-disable-next-line no-eval
     const req = eval('require') as (path: string) => unknown;
+
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { resolve } = req('path') as typeof PathT;
+
     const path = basePath ? resolve(basePath, modulePath) : modulePath;
-    const module = req(path) as ModuleT;
+    const module = req(path) as T;
 
     if (!('default' in module) || !module.default) return module;
 
     const { default: def, ...named } = module;
 
-    const res = def as ModuleT;
+    const res = def as T;
 
     Object.entries(named).forEach(([name, value]) => {
-      const assigned = res[name as keyof ModuleT];
-      if (assigned !== undefined) {
-        if (assigned !== value) {
-          throw Error('Conflict between default and named exports');
-        }
-      } else (res[name as keyof ModuleT] as unknown) = value;
+      const assigned = res[name as keyof T];
+      if (assigned) (res[name as keyof T] as unknown) = value;
+      else if (assigned !== value) {
+        throw Error('Conflict between default and named exports');
+      }
     });
     return res;
   } catch {

@@ -75,10 +75,12 @@ function bookStyleSheet(
 
     res = new Barrier<void>();
     link.addEventListener('load', () => {
-      void res!.resolve();
+      if (!res) throw Error('Internal error');
+      void res.resolve();
     });
     link.addEventListener('error', () => {
-      void res!.resolve();
+      if (!res) throw Error('Internal error');
+      void res.resolve();
     });
   }
 
@@ -120,7 +122,7 @@ function assertChunkName(
  * @return Resolves once all pending stylesheets, necessary for
  *  the chunk, are either loaded, or failed to load.
  */
-export function bookStyleSheets(
+export async function bookStyleSheets(
   chunkName: string,
   chunkGroups: ChunkGroupsT,
   refCount: boolean,
@@ -132,7 +134,7 @@ export function bookStyleSheets(
   const loadedSheets = getLoadedStyleSheets();
 
   for (const asset of assets) {
-    if (asset?.endsWith('.css')) {
+    if (asset.endsWith('.css')) {
       const promise = bookStyleSheet(asset, loadedSheets, refCount);
       if (promise) promises.push(promise);
     }
@@ -153,12 +155,12 @@ export function bookStyleSheets(
 export function freeStyleSheets(
   chunkName: string,
   chunkGroups: ChunkGroupsT,
-) {
+): void {
   const assets = chunkGroups[chunkName];
   if (!assets) return;
 
   for (const asset of assets) {
-    if (asset?.endsWith('.css')) {
+    if (asset.endsWith('.css')) {
       const path = `${getPublicPath()}/${asset}`;
 
       const pathRefCount = refCounts[path];
@@ -199,7 +201,7 @@ export default function splitComponent<
   chunkName: string;
   getComponent: () => Promise<ComponentOrModule<ComponentPropsT>>;
   placeholder?: ReactNode;
-}) {
+}): FunctionComponent<ComponentPropsT> {
   // On the client side we can check right away if the chunk name is known.
   if (IS_CLIENT_SIDE) assertChunkName(chunkName, clientChunkGroups);
 
@@ -236,11 +238,17 @@ export default function splitComponent<
       // this component is mounted / unmounted.
       useInsertionEffect(() => {
         void bookStyleSheets(chunkName, clientChunkGroups, true);
-        return () => freeStyleSheets(chunkName, clientChunkGroups);
+        return () => {
+          freeStyleSheets(chunkName, clientChunkGroups);
+        };
       }, []);
 
       return (
-        <Component {...(rest as unknown as ComponentPropsT)} ref={ref}>
+        <Component
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...(rest as unknown as ComponentPropsT)}
+          ref={ref}
+        >
           {children}
         </Component>
       );
@@ -254,7 +262,10 @@ export default function splitComponent<
     ...rest
   }: ComponentPropsT) => (
     <Suspense fallback={placeholder}>
-      <LazyComponent {...rest as Parameters<typeof LazyComponent>[0]}>
+      <LazyComponent
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...rest as Parameters<typeof LazyComponent>[0]}
+      >
         {children}
       </LazyComponent>
     </Suspense>

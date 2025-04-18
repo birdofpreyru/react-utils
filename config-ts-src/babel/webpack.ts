@@ -1,5 +1,7 @@
-import {
-  type PluginOptionsT as ReactCssModulesOptionsT,
+import type { TransformOptions } from '@babel/core';
+
+import type {
+  PluginOptionsT as ReactCssModulesOptionsT,
 } from '@dr.pogodin/babel-plugin-react-css-modules';
 
 import {
@@ -29,17 +31,6 @@ export enum ENVIRONMENTS {
   TEST = 'test',
 }
 
-// TODO: Check it.
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions, @typescript-eslint/no-empty-object-type
-export interface PresetOrPluginOptionsI {}
-
-type PresetOrPluginT = string | [string, PresetOrPluginOptionsI];
-
-export type ConfigT = {
-  presets: PresetOrPluginT[];
-  plugins: PresetOrPluginT[];
-};
-
 // Valid values for `module` option of @babel/preset-env,
 // as per https://babeljs.io/docs/babel-preset-env#modules
 type ModuleT = 'amd' | 'auto' | 'cjs' | 'commonjs' | 'systemjs' | 'umd' | false;
@@ -59,8 +50,18 @@ export type OptionsT = {
  * @param [options] Base config options.
  * @return Generated config.
  */
-function newBaseConfig(options: OptionsT): ConfigT {
+function newBaseConfig(options: OptionsT): TransformOptions {
   return {
+    plugins: [
+      ['module-resolver', {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        root: [
+          './src/shared',
+          './src',
+        ],
+      }],
+      '@babel/transform-runtime',
+    ],
     presets: [
       ['@babel/env', {
         // Leaves it to the Webpack to deal with modules.
@@ -77,16 +78,6 @@ function newBaseConfig(options: OptionsT): ConfigT {
 
       '@dr.pogodin/babel-preset-svgr',
     ],
-    plugins: [
-      ['module-resolver', {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        root: [
-          './src/shared',
-          './src',
-        ],
-      }],
-      '@babel/transform-runtime',
-    ],
   };
 }
 
@@ -100,14 +91,14 @@ function newBaseConfig(options: OptionsT): ConfigT {
  * @return {object} Returns mutated config for chaining.
  * @ignore
  */
-function addStyling(config: ConfigT, env: ENVIRONMENTS) {
+function addStyling(config: TransformOptions, env: ENVIRONMENTS) {
   const cssModulesOps: ReactCssModulesOptionsT = {
     autoResolveMultipleImports: true,
     filetypes: {
       '.scss': { syntax: 'postcss-scss' },
     },
   };
-  config.plugins.push(['@dr.pogodin/react-css-modules', cssModulesOps]);
+  config.plugins!.push(['@dr.pogodin/react-css-modules', cssModulesOps]);
   switch (env) {
     case ENVIRONMENTS.DEV:
     case ENVIRONMENTS.TEST:
@@ -133,20 +124,23 @@ function addStyling(config: ConfigT, env: ENVIRONMENTS) {
  *  `@babel/preset-env`.
  * @return Generated config.
  */
-export default function getPreset(babel: BabelCompilerI, ops: OptionsT = {}) {
+export default function getPreset(
+  babel: BabelCompilerI,
+  ops: OptionsT = {},
+): TransformOptions {
   const env = babel.env();
 
   const res = newBaseConfig(ops);
 
   if (!ops.noStyling) addStyling(res, env as ENVIRONMENTS);
   if (env === (ENVIRONMENTS.DEV as string) && !ops.noRR) {
-    res.plugins.push('react-refresh/babel');
+    res.plugins!.push('react-refresh/babel');
   }
 
   // Conditional to not require non-TypeScript projects to install TypeScript-
   // specific dependencies for build process.
   if (ops.typescript) {
-    res.presets.push(
+    res.presets!.push(
       ['@babel/typescript', {
         // This ensures TypeScript compilation does not remove "unused" imports,
         // as in most cases it considers assets (e.g. stylesheet) imports as

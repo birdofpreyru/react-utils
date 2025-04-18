@@ -4,7 +4,7 @@ exports[`emits correct CSS 1`] = `"@font-face{font-display:block;font-family:Emp
 
 exports[`generates expected view 1`] = `
 "<link rel="preload" as="image" href="/public/path/images/31d6cfe0d16ae931b73c.png">
-<div class="dQLICa"><img src="/public/path/images/31d6cfe0d16ae931b73c.png" alt="Empty PNG"></div>"
+<div class="dQLICa"><img alt="Empty PNG" src="/public/path/images/31d6cfe0d16ae931b73c.png"></div>"
 `;
 
 exports[`relies on the expected base URL 1`] = `"http://localhost/public/path/"`;

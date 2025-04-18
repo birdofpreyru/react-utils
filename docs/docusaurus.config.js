@@ -1,6 +1,10 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+/* global module, process, require */
+
+// TODO: Actually, double-check, if Docusaurus already supports ES modules for config?
+// eslint-disable-next-line import/no-commonjs
 const { themes } = require('prism-react-renderer');
 
 const CODE_REPO = 'https://github.com/birdofpreyru/react-utils';
@@ -16,16 +20,12 @@ const REACT_UTILS_STYLES = process.env.NODE_ENV === 'development'
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'React Utils',
-  tagline: 'ReactJS development kit.',
-  url: 'https://dr.pogodin.studio',
   baseUrl: '/docs/react-utils/',
+  favicon: 'img/favicon.ico',
   onBrokenAnchors: 'throw',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
-  favicon: 'img/favicon.ico',
   plugins: ['docusaurus-plugin-sass'],
-
   presets: [
     [
       '@docusaurus/preset-classic',
@@ -33,8 +33,8 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       {
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
           editUrl: EDIT_BASE,
+          sidebarPath: require.resolve('./sidebars.js'),
         },
         theme: {
           customCss: [
@@ -45,32 +45,56 @@ const config = {
       },
     ],
   ],
+  tagline: 'ReactJS development kit.',
+  title: 'React Utils',
 
   themeConfig: /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     {
+      footer: {
+        copyright: `Copyright © 2019&ndash;${new Date().getFullYear()}, Dr. Sergey Pogodin`,
+        links: [
+          {
+
+            items: [
+              { label: 'API', to: '/docs/api' },
+              { label: 'Getting Started', to: '/docs/tutorials' },
+            ],
+            title: 'Docs',
+          },
+          {
+            items: [
+              {
+                href: CODE_REPO,
+                label: 'GitHub',
+              },
+              {
+                href: NPM_URL,
+                label: 'NPM',
+              },
+            ],
+            title: 'More',
+          },
+        ],
+        style: 'dark',
+      },
       navbar: {
-        logo: {
-          alt: 'Dr. Pogodin Studio',
-          src: 'img/logo-verbose.svg',
-          href: 'https://dr.pogodin.studio',
-        },
         items: [
           {
-            to: '/',
-            label: 'React Utils',
             activeBaseRegex: '^/docs/react-utils/$',
+            label: 'React Utils',
+            to: '/',
           },
           {
-            type: 'doc',
             docId: 'tutorials/index',
-            position: 'left',
             label: 'Getting Started',
+            position: 'left',
+            type: 'doc',
           },
           {
-            type: 'doc',
             docId: 'api/index',
-            position: 'left',
             label: 'API',
+            position: 'left',
+            type: 'doc',
           },
           {
             href: CODE_REPO,
@@ -83,38 +107,19 @@ const config = {
             position: 'right',
           },
         ],
-      },
-      footer: {
-        style: 'dark',
-        links: [
-          {
-            title: 'Docs',
-            items: [
-              { label: 'API', to: '/docs/api' },
-              { label: 'Getting Started', to: '/docs/tutorials' },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'GitHub',
-                href: CODE_REPO,
-              },
-              {
-                label: 'NPM',
-                href: NPM_URL,
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © 2019&ndash;${new Date().getFullYear()}, Dr. Sergey Pogodin`,
+        logo: {
+          alt: 'Dr. Pogodin Studio',
+          href: 'https://dr.pogodin.studio',
+          src: 'img/logo-verbose.svg',
+        },
       },
       prism: {
-        theme: themes.github,
         darkTheme: themes.dracula,
+        theme: themes.github,
       },
     },
+  url: 'https://dr.pogodin.studio',
 };
 
+// eslint-disable-next-line import/no-commonjs
 module.exports = config;

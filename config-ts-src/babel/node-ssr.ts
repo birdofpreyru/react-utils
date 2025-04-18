@@ -1,19 +1,22 @@
 import { pull } from 'lodash';
 
-import {
-  type PluginOptionsT as ReactCssModulesOptionsT,
+import type { PluginOptions, PluginTarget, TransformOptions } from '@babel/core';
+
+import type {
+  PluginOptionsT as ReactCssModulesOptionsT,
 } from '@dr.pogodin/babel-plugin-react-css-modules';
 
 import getWebpackBabelConfig, {
   type BabelCompilerI,
-  type ConfigT,
   type OptionsT as WebpackConfigOptionsT,
-  type PresetOrPluginOptionsI,
   ENVIRONMENTS,
 } from './webpack';
 
+// TODO: Double-check why .transformFunction is not present in TransformOptions?
+// should we do some correction of the typing?
+//
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-interface ModuleResolverOptionsI extends PresetOrPluginOptionsI {
+interface ModuleResolverOptionsI extends TransformOptions {
   transformFunctions?: string[];
 }
 
@@ -42,16 +45,16 @@ function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
   );
 
   const baseAssetsOutputPath = options.baseAssetsOutputPath ?? '';
-  config.plugins.push(
+  config.plugins!.push(
     ['@dr.pogodin/transform-assets', {
       extensions: ['gif', 'jpeg', 'jpg', 'png'],
       name: `${baseAssetsOutputPath}/images/[md4:hash:20].[ext]`,
     }],
   );
 
-  const moduleResolverPluginOps = (config.plugins.find(
-    (x) => x[0] === 'module-resolver',
-  ))![1] as ModuleResolverOptionsI;
+  const moduleResolverPluginOps = (config.plugins!.find(
+    (x) => Array.isArray(x) && x[0] === 'module-resolver',
+  ) as [PluginTarget, PluginOptions])[1] as ModuleResolverOptionsI;
   moduleResolverPluginOps.transformFunctions = [
     'requireWeak',
     'resolveWeak',
@@ -60,7 +63,7 @@ function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
   ];
 
   if (babel.env() === ENVIRONMENTS.DEV as string) {
-    pull(config.plugins, 'react-refresh/babel');
+    pull(config.plugins!, 'react-refresh/babel');
   }
 
   return config;
@@ -71,14 +74,12 @@ function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
  *
  * **Beware:** It mutates `config`.
  *
- * @param {object} config
- * @return {object} Returns mutated config for chaining.
- * @ignore
+ * @param config
  */
-function addStyling(config: ConfigT) {
-  const cssModulesOps = config.plugins.find(
-    ([name]) => name === '@dr.pogodin/react-css-modules',
-  )![1] as ReactCssModulesOptionsT;
+function addStyling(config: TransformOptions): TransformOptions {
+  const cssModulesOps = (config.plugins!.find(
+    (item) => Array.isArray(item) && item[0] === '@dr.pogodin/react-css-modules',
+  ) as [PluginTarget, PluginOptions])[1] as ReactCssModulesOptionsT;
   cssModulesOps.replaceImport = true;
   return config;
 }
@@ -94,7 +95,10 @@ function addStyling(config: ConfigT) {
  *  assets.
  * @return Generated config.
  */
-export default function getConfig(babel: BabelCompilerI, ops: OptionsT = {}) {
+export default function getConfig(
+  babel: BabelCompilerI,
+  ops: OptionsT = {},
+): TransformOptions {
   const config = newBase(babel, ops);
   if (!ops.noStyling) addStyling(config);
   return config;

@@ -41,7 +41,9 @@ const Checkbox = <ValueT extends boolean | 'indeterminate' = boolean>({
         data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
         disabled={disabled}
         onChange={onChange}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
         type="checkbox"
       />
     </div>

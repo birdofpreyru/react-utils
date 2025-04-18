@@ -24,7 +24,7 @@ const INJ_REGEX = /<meta itemprop="drpruinj" content="[a-zA-Z0-9+/=]+">/;
 
 let headMarkupWithoutInj: string;
 
-it('generates expected head markup during SSR', () => {
+test('generates expected head markup during SSR', () => {
   // TODO: Should be improved, to ensure the injection part is the same between
   // test invocations, and thus entire header can be snapshotted.
   const headMarkup = document.head.innerHTML;
@@ -34,7 +34,7 @@ it('generates expected head markup during SSR', () => {
   expect(pretty(headMarkupWithoutInj)).toMatchSnapshot();
 });
 
-it('generates expected markup during SSR', () => {
+test('generates expected markup during SSR', () => {
   // TODO: It was done this way when document body contained server-side
   // injected data, which changed between test invocations. Now they are moved
   // to the header (see a comment above), thus this can be simplified:
@@ -44,7 +44,7 @@ it('generates expected markup during SSR', () => {
   expect(pretty(container.innerHTML)).toMatchSnapshot();
 });
 
-it('hydration works as expected', async () => {
+test('hydration works as expected', async () => {
   const viewMarkup = document.querySelector('#react-view')!.innerHTML;
 
   const fs = global.webpackOutputFs;
@@ -53,12 +53,12 @@ it('hydration works as expected', async () => {
   const bJs = fs.readFileSync(`${outputPath}/sample-component-b.js`, 'utf8') as string;
   const cJs = fs.readFileSync(`${outputPath}/sample-component-c.js`, 'utf8') as string;
 
-  /* eslint-disable @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call */
+  /* eslint-disable no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call */
   await act(() => new Function(mainJs)());
   await act(() => new Function(aJs)());
   await act(() => new Function(bJs)());
   await act(() => new Function(cJs)());
-  /* eslint-enable @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call */
+  /* eslint-enable no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call */
 
   expect(document.head.innerHTML).toBe(headMarkupWithoutInj);
   expect(document.querySelector('#react-view')!.innerHTML).toBe(viewMarkup);

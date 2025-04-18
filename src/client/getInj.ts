@@ -5,6 +5,8 @@
 // Note: this way, only required part of "node-forge": AES, and some utils,
 // is bundled into client-side code.
 import forge from 'node-forge/lib/forge';
+
+// eslint-disable-next-line import/no-unassigned-import
 import 'node-forge/lib/aes';
 
 import type { InjT } from 'utils/globalState';
@@ -16,8 +18,8 @@ import { getBuildInfo } from 'utils/isomorphy/buildInfo';
 // environment, but there is no document.
 let inj: InjT = {};
 
-const metaElement: HTMLMetaElement | null = typeof document !== 'undefined'
-  ? document.querySelector('meta[itemprop="drpruinj"]') : null;
+const metaElement: HTMLMetaElement | null = typeof document === 'undefined'
+  ? null : document.querySelector('meta[itemprop="drpruinj"]');
 
 if (metaElement) {
   metaElement.remove();
@@ -30,6 +32,9 @@ if (metaElement) {
   d.finish();
 
   data = forge.util.decodeUtf8(d.output.data);
+
+  // TODO: Double-check, if there is a safer alternative to parse it?
+  // eslint-disable-next-line no-eval
   inj = eval(`(${data})`) as InjT;
 } else if (typeof window !== 'undefined' && window.REACT_UTILS_INJECTION) {
   inj = window.REACT_UTILS_INJECTION;

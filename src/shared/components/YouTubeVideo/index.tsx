@@ -38,8 +38,8 @@ const YouTubeVideo: React.FunctionComponent<PropsT> = ({
   title,
 }) => {
   const srcParts = src.split('?');
-  let url = srcParts[0];
-  const queryString = srcParts[1];
+  let [url] = srcParts;
+  const [, queryString] = srcParts;
   const query = queryString ? qs.parse(queryString) : {};
 
   const videoId = query.v ?? url?.match(/\/([a-zA-Z0-9-_]*)$/)?.[1];
@@ -55,7 +55,11 @@ const YouTubeVideo: React.FunctionComponent<PropsT> = ({
   return (
     <div className={theme.container}>
       <Throbber theme={throbberTheme} />
-      <iframe
+      {/* TODO: I guess, we better add the sanbox, but right now I don't have
+          time to carefully explore which restrictions should be lifted to allow
+          embed YouTube player to work... sometime later we'll take care of it */
+      }
+      <iframe // eslint-disable-line react/iframe-missing-sandbox
         allow="autoplay"
         allowFullScreen
         className={theme.video}

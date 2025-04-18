@@ -1,5 +1,5 @@
 import { createFsFromVolume, Volume } from 'memfs';
-import nodeFs from 'fs';
+import type nodeFs from 'fs';
 
 import configFactory from '../../../config/webpack/app-base';
 

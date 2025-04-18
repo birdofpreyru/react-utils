@@ -58,7 +58,7 @@ export default class E2eSsrEnv extends JsdomEnv {
    * Loads Webpack config, and exposes it to the environment via global
    * webpackConfig object.
    */
-  loadWebpackConfig() {
+  private loadWebpackConfig() {
     const optionsString = this.pragmas['webpack-config-options'] as string;
 
     const options = (optionsString ? JSON.parse(optionsString) : {}) as
@@ -70,7 +70,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     });
 
     const factoryPath = this.pragmas['webpack-config-factory'] as string;
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    // eslint-disable-next-line import/no-dynamic-require, @typescript-eslint/no-require-imports
     let factory = require(path.resolve(this.rootDir, factoryPath)) as
       (((ops: Configuration) => Configuration) | {
         default: (ops: Configuration) => Configuration;
@@ -91,7 +91,7 @@ export default class E2eSsrEnv extends JsdomEnv {
    * Executes Webpack build.
    * @return {Promise}
    */
-  async runWebpack() {
+  async runWebpack(): Promise<void> {
     this.loadWebpackConfig();
 
     if (!this.global.webpackConfig) throw Error('Failed to load Webpack config');
@@ -107,6 +107,7 @@ export default class E2eSsrEnv extends JsdomEnv {
       compiler.run((err, stats) => {
         if (err) fail(err);
         if (stats?.hasErrors()) {
+          // eslint-disable-next-line no-console
           console.error(stats.toJson().errors);
           fail(Error('Webpack compilation failed'));
         }
@@ -123,7 +124,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     });
   }
 
-  async runSsr() {
+  async runSsr(): Promise<void> {
     const optionsString = this.pragmas['ssr-options'] as string;
     const options = optionsString
       ? JSON.parse(optionsString) as Record<string, unknown>
@@ -144,7 +145,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     if (options.entry) {
       const p = path.resolve(this.testFolder, options.entry as string);
       // TODO: This sure can be replaced by a dynamic import().
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      // eslint-disable-next-line import/no-dynamic-require, @typescript-eslint/no-require-imports
       const module = require(p) as NodeJS.Module;
       if ('cleanup' in module) cleanup = module.cleanup as () => void;
 
@@ -243,7 +244,9 @@ export default class E2eSsrEnv extends JsdomEnv {
       : {};
     let root;
     switch (options.root) {
-      case 'TEST': root = this.testFolder; break;
+      case 'TEST':
+        root = this.testFolder;
+        break;
       default: root = process.cwd();
     }
     register({
@@ -253,7 +256,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     });
   }
 
-  async setup() {
+  async setup(): Promise<void> {
     await super.setup();
     await this.runWebpack();
 
@@ -276,7 +279,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     this.global.REACT_UTILS_FORCE_CLIENT_SIDE = true;
   }
 
-  async teardown() {
+  async teardown(): Promise<void> {
     delete this.global.REACT_UTILS_FORCE_CLIENT_SIDE;
 
     // Resets module cache and @babel/register. Effectively this ensures that

@@ -6,7 +6,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
-import webpack from 'webpack';
+import webpack, { type Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 
 import baseFactory, { type OptionsT as BaseOptionsT } from './app-base';
@@ -22,7 +22,7 @@ type OptionsT = BaseOptionsT & {
  * @param [ops.dontUseReactGlobalStateDebugging]
  * @param [ops.dontUseHmr]
  */
-export default function configFactory(ops: OptionsT) {
+export default function configFactory(ops: OptionsT): Configuration {
   const o = defaults(clone(ops), {
     cssLocalIdent: '[package]___[path][name]___[local]___[hash:base64:6]',
   });

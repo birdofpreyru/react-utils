@@ -31,13 +31,15 @@ describe('Isomorphy behavior tests', () => {
     // window.CONFIG = clone(CLIENT_SIDE_CONFIG);
   });
 
-  afterEach(() => unmockClientSide());
+  afterEach(() => {
+    unmockClientSide();
+  });
 
   // TODO: This test does not work now, as the client-side handles injection
   // of data by server differently, and simply assigning window.CONFIG does not
   // mock it in any way (one of the reason for the change affecting this test
   // was to get rid of objects attached to window by library).
-  test.skip('Serves injected config at the client side', () => {
+  it.skip('Serves injected config at the client side', () => {
     mockClientSide();
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { IS_CLIENT_SIDE } = require('utils/isomorphy') as typeof IT;
@@ -46,10 +48,10 @@ describe('Isomorphy behavior tests', () => {
     expect((require('utils/config') as {
       default: typeof ConfigM;
     }).default)
-      .toEqual(CLIENT_SIDE_CONFIG);
+      .toStrictEqual(CLIENT_SIDE_CONFIG);
   });
 
-  test('Serves node-config at the server side', () => {
+  it('Serves node-config at the server side', () => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { IS_SERVER_SIDE } = require('utils/isomorphy') as typeof IT;
     expect(IS_SERVER_SIDE).toBe(true);
@@ -57,6 +59,6 @@ describe('Isomorphy behavior tests', () => {
     expect((require('utils/config') as {
       default: typeof ConfigM;
     }).default)
-      .toEqual(SERVER_SIDE_CONFIG);
+      .toStrictEqual(SERVER_SIDE_CONFIG);
   });
 });

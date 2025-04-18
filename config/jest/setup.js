@@ -1,5 +1,6 @@
-/* global globalThis */
+/* global globalThis, require */
 
+// eslint-disable-next-line import/no-unassigned-import
 import 'raf/polyfill';
 
 // TODO: This is a temporary polyfill necessary for react-router,

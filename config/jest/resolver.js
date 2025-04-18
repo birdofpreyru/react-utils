@@ -1,3 +1,5 @@
+/* global module */
+
 module.exports = (path, options) => {
   const ops = { ...options };
 

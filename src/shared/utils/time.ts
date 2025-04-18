@@ -1,6 +1,6 @@
 import { serialize } from 'cookie';
-import dayjs from 'dayjs';
 import { useEffect } from 'react';
+import dayjs from 'dayjs';
 
 import {
   DAY_MS,
@@ -35,8 +35,8 @@ export function useCurrent({
     Date.now,
   );
   useEffect(() => {
-    let timerId: NodeJS.Timeout;
-    const update = () => {
+    let timerId: NodeJS.Timeout | undefined;
+    const update = (): void => {
       setter((old) => {
         const neu = Date.now();
         return Math.abs(neu - old) > precision ? neu : old;
@@ -44,7 +44,7 @@ export function useCurrent({
       if (autorefresh) timerId = setTimeout(update, precision);
     };
     update();
-    return () => {
+    return (): void => {
       if (timerId) clearTimeout(timerId);
     };
   }, [autorefresh, precision, setter]);
@@ -71,8 +71,8 @@ export function useTimezoneOffset({
     globalStatePath,
     () => {
       const value = cookieName
-        && ssrContext?.req?.cookies?.[cookieName] as string;
-      return value ? parseInt(value, 10) : 0;
+        && ssrContext?.req.cookies[cookieName] as string;
+      return value ? parseInt(value) : 0;
     },
   );
   useEffect(() => {

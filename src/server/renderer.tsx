@@ -6,7 +6,7 @@ import fs from 'fs';
 import path from 'path';
 
 import type { Request, RequestHandler } from 'express';
-import { type ComponentType } from 'react';
+import type { ComponentType } from 'react';
 import { Writable } from 'stream';
 import { brotliCompress, brotliDecompress } from 'zlib';
 import winston from 'winston';
@@ -33,7 +33,7 @@ import { StaticRouter } from 'react-router';
 import serializeJs from 'serialize-javascript';
 import { type BuildInfoT, setBuildInfo } from 'utils/isomorphy/buildInfo';
 
-import { type ChunkGroupsT, type SsrContextT } from 'utils/globalState';
+import type { ChunkGroupsT, SsrContextT } from 'utils/globalState';
 
 import type { Configuration, Stats } from 'webpack';
 
@@ -140,7 +140,7 @@ function readChunkGroupsJson(buildDir: string) {
  *  1. cipher - a new Cipher, ready for encryption;
  *  2. iv - initial vector used by the cipher.
  */
-function prepareCipher(key: string): Promise<{
+async function prepareCipher(key: string): Promise<{
   cipher: forge.cipher.BlockCipher;
   iv: string;
 }> {
@@ -159,11 +159,9 @@ function prepareCipher(key: string): Promise<{
 /**
  * Given an incoming HTTP requests, it deduces whether Brotli-encoded responses
  * are acceptable to the caller.
- * @param {object} req
- * @return {boolean}
- * @ignore
+ * @param req
  */
-export function isBrotliAcceptable(req: Request) {
+export function isBrotliAcceptable(req: Request): boolean {
   const acceptable = req.get('accept-encoding');
   if (acceptable) {
     const ops = acceptable.split(',');
@@ -201,10 +199,9 @@ function groupExtraScripts(scripts: Array<string | ScriptT> = []) {
   for (const script of scripts) {
     if (isString(script)) {
       if (script) res[SCRIPT_LOCATIONS.DEFAULT] += script;
-    } else if (script?.code) {
-      if (res[script.location] !== undefined) {
-        res[script.location] += script.code;
-      } else throw Error(`Invalid location "${script.location}"`);
+    } else if (script.code) {
+      if (script.location in res) res[script.location] += script.code;
+      else throw Error(`Invalid location "${script.location}"`);
     }
   }
   return res;
@@ -218,10 +215,9 @@ function groupExtraScripts(scripts: Array<string | ScriptT> = []) {
  */
 export function newDefaultLogger({
   defaultLogLevel = 'info',
-} = {}) {
+} = {}): winston.Logger {
   const { format, transports } = winston;
   return winston.createLogger({
-    level: defaultLogLevel,
     format: format.combine(
       format.splat(),
       format.timestamp(),
@@ -243,6 +239,7 @@ export function newDefaultLogger({
         },
       ),
     ),
+    level: defaultLogLevel,
     transports: [new transports.Console()],
   });
 }
@@ -315,7 +312,7 @@ export default function factory(
   options: OptionsT,
 ): RequestHandler {
   const ops: OptionsT = defaults(clone(options), {
-    beforeRender: () => Promise.resolve({}),
+    beforeRender: async () => Promise.resolve({}),
     maxSsrRounds: 10,
     ssrTimeout: 1000,
     staticCacheSize: 1.e7,
@@ -351,6 +348,8 @@ export default function factory(
 
   const CHUNK_GROUPS = readChunkGroupsJson(outputPath!);
 
+  // TODO: Look at it later.
+  // eslint-disable-next-line complexity
   return async (req, res, next) => {
     try {
       // Ensures any caches always revalidate HTML markup before reuse.

@@ -10,13 +10,9 @@ type CachedItemT<DatumT> = {
 export default class Cache<DatumT> {
   private items: Record<string, CachedItemT<DatumT>> = {};
 
-  private maxSize: number;
-
   private size = 0;
 
-  constructor(maxSize: number) {
-    this.maxSize = maxSize;
-  }
+  constructor(private maxSize: number) { }
 
   /**
    * Cache lookup.
@@ -39,12 +35,11 @@ export default class Cache<DatumT> {
 
   /**
    * Adds item to cache.
-   * @ignore
    * @param data Item to add.
    * @param key Key to store the item at.
    * @param size Byte size of the item.
    */
-  add(data: DatumT, key: string, size: number) {
+  add(data: DatumT, key: string, size: number): void {
     const cached = this.items[key];
     if (cached) this.size -= cached.size;
 

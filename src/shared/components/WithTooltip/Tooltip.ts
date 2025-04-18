@@ -18,8 +18,10 @@ import { createPortal } from 'react-dom';
 
 import type { Theme } from '@dr.pogodin/react-themes';
 
-/* Valid placements of the rendered tooltip. They will be overriden when
- * necessary to fit the tooltip within the viewport. */
+/**
+ * Valid placements of the rendered tooltip. They will be overriden when
+ * necessary to fit the tooltip within the viewport.
+ */
 export enum PLACEMENTS {
   ABOVE_CURSOR = 'ABOVE_CURSOR',
   ABOVE_ELEMENT = 'ABOVE_ELEMENT',
@@ -82,7 +84,7 @@ function createTooltipComponents(theme: TooltipThemeT): ComponentsT {
   container.appendChild(content);
   document.body.appendChild(container);
 
-  return { container, arrow, content };
+  return { arrow, container, content };
 }
 
 type TooltipRectsT = {
@@ -115,10 +117,10 @@ function calcViewportRect() {
   const { scrollX, scrollY } = window;
   const { documentElement: { clientHeight, clientWidth } } = document;
   return {
+    bottom: scrollY + clientHeight,
     left: scrollX,
     right: scrollX + clientWidth,
     top: scrollY,
-    bottom: scrollY + clientHeight,
   };
 }
 
@@ -157,15 +159,13 @@ function calcPositionAboveXY(
   };
 }
 
-/*
-const HIT = {
-  NONE: false,
-  LEFT: 'LEFT',
-  RIGHT: 'RIGHT',
-  TOP: 'TOP',
-  BOTTOM: 'BOTTOM',
-};
-*/
+// const HIT = {
+//   NONE: false,
+//   LEFT: 'LEFT',
+//   RIGHT: 'RIGHT',
+//   TOP: 'TOP',
+//   BOTTOM: 'BOTTOM',
+// };
 
 /**
  * Checks whether
@@ -174,14 +174,12 @@ const HIT = {
  * @param {object} viewportRect
  * @return {HIT}
  */
-/*
-function checkViewportFit(pos, tooltipRects, viewportRect) {
-  const { containerX, containerY } = pos;
-  if (containerX < viewportRect.left + 6) return HIT.LEFT;
-  if (containerX > viewportRect.right - 6) return HIT.RIGHT;
-  return HIT.NONE;
-}
-*/
+// function checkViewportFit(pos, tooltipRects, viewportRect) {
+//   const { containerX, containerY } = pos;
+//   if (containerX < viewportRect.left + 6) return HIT.LEFT;
+//   if (containerX > viewportRect.right - 6) return HIT.RIGHT;
+//   return HIT.NONE;
+// }
 
 /**
  * Shifts tooltip horizontally to fit into the viewport, while keeping
@@ -192,23 +190,21 @@ function checkViewportFit(pos, tooltipRects, viewportRect) {
  * @param {number} pageXOffset
  * @param {number} pageXWidth
  */
-/*
-function xPageFitCorrection(x, y, pos, pageXOffset, pageXWidth) {
-  if (pos.containerX < pageXOffset + 6) {
-    pos.containerX = pageXOffset + 6;
-    pos.arrowX = Math.max(6, pageX - containerX - arrowRect.width / 2);
-  } else {
-    const maxX = pageXOffset + docRect.width - containerRect.width - 6;
-    if (containerX > maxX) {
-      containerX = maxX;
-      arrowX = Math.min(
-        containerRect.width - 6,
-        pageX - containerX - arrowRect.width / 2,
-      );
-    }
-  }
-}
-*/
+// function xPageFitCorrection(x, y, pos, pageXOffset, pageXWidth) {
+//   if (pos.containerX < pageXOffset + 6) {
+//     pos.containerX = pageXOffset + 6;
+//     pos.arrowX = Math.max(6, pageX - containerX - arrowRect.width / 2);
+//   } else {
+//     const maxX = pageXOffset + docRect.width - containerRect.width - 6;
+//     if (containerX > maxX) {
+//       containerX = maxX;
+//       arrowX = Math.min(
+//         containerRect.width - 6,
+//         pageX - containerX - arrowRect.width / 2,
+//       );
+//     }
+//   }
+// }
 
 /**
  * Sets positions of tooltip components to point the tooltip to the specified

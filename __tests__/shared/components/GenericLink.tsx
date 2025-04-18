@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
 
-import { Link } from 'react-router';
+import type { Link } from 'react-router';
 
 import UserEvents from '@testing-library/user-event';
 
@@ -16,8 +16,8 @@ const TestLink: React.FunctionComponent<{
   const { className, onClick } = props;
   return (
     <button
-      onClick={onClick}
       className={className}
+      onClick={onClick}
       type="button"
     >
       {JSON.stringify(props)}
@@ -96,7 +96,12 @@ test('Anchor link', async () => {
 
 test('onClick(..) callback in custom <Link>', async () => {
   const user = UserEvents.setup();
+
+  // TODO: Can't be just spyOn(), as JSDom does not provide .scroll() function
+  // on `window` interface... check, if we also can mock it by .spyOn()?
+  // eslint-disable-next-line jest/prefer-spy-on
   window.scroll = jest.fn();
+
   const clickHandler = jest.fn();
   const doc = mount((
     <GenericLink
@@ -112,6 +117,6 @@ test('onClick(..) callback in custom <Link>', async () => {
   const link = doc.querySelector('.LINK')!;
   await user.click(link);
 
-  expect(clickHandler).toHaveBeenCalled();
+  expect(clickHandler).toHaveBeenCalledTimes(1);
   expect(window.scroll).toHaveBeenCalledTimes(1);
 });

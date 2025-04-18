@@ -1,3 +1,4 @@
+import type { FunctionComponent } from 'react';
 import { Route, Routes } from 'react-router';
 import splitComponent from 'utils/splitComponent';
 
@@ -6,15 +7,15 @@ import splitComponent from 'utils/splitComponent';
 // to test its behavior alongside React Router use.
 const Split = splitComponent({
   chunkName: 'split',
-  getComponent: () => import(
+  getComponent: async () => import(
     /* webpackChunkName: 'split' */'./InnerRouter'
   ),
 });
 
-export const RoutingScene1 = () => (
+export const RoutingScene1: FunctionComponent = () => (
   <Routes>
-    <Route path="/base/*" element={<Split />} />
+    <Route element={<Split />} path="/base/*" />
   </Routes>
 );
 
-export const RoutingScene2 = () => <Split />;
+export const RoutingScene2: FunctionComponent = () => <Split />;

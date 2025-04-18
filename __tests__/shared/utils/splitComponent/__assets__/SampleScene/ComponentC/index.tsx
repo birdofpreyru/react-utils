@@ -22,7 +22,6 @@ const SampleComponent: FunctionComponent<PropsT> = ({ children, prop }) => {
   return (
     <Routes>
       <Route
-        path=""
         element={(
           <div>
             <h1>Sample Component</h1>
@@ -35,6 +34,7 @@ const SampleComponent: FunctionComponent<PropsT> = ({ children, prop }) => {
             </div>
           </div>
         )}
+        path=""
       />
     </Routes>
   );

@@ -18,8 +18,6 @@ const BaseCustomDropdown: React.FunctionComponent<
   theme,
   value,
 }) => {
-  if (!options) throw Error('Internal error');
-
   const [active, setActive] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -44,8 +42,8 @@ const BaseCustomDropdown: React.FunctionComponent<
         setUpward(up);
 
         const pos = up ? {
-          top: anchor.top - opsRect.height - 1,
           left: anchor.left,
+          top: anchor.top - opsRect.height - 1,
           width: anchor.width,
         } : {
           left: anchor.left,

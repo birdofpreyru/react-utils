@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+/* eslint-disable import/no-commonjs, no-console */
+/* global console, process, require */
+
 const { spawnSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');

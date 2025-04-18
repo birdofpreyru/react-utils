@@ -74,9 +74,9 @@ export const BaseButton: FunctionComponent<PropsT> = ({
       className={className}
       data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
       onClick={onClick}
-      onKeyDown={onClick && ((e) => {
+      onKeyDown={onClick ? (e) => {
         if (e.key === 'Enter') onClick(e);
-      })}
+      } : undefined}
       onMouseDown={onMouseDown}
       onPointerDown={onPointerDown}
       role="button"

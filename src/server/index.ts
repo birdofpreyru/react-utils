@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unassigned-import
 import 'source-map-support/register';
 
 import http from 'http';
@@ -12,10 +13,12 @@ import {
   toNumber,
 } from 'lodash';
 
-/* Polyfill required by ReactJS. */
+// Polyfill required by ReactJS.
+// TODO: Double-check, if it is still required by React v19?
+// eslint-disable-next-line import/no-unassigned-import
 import 'raf/polyfill';
 
-import { type Configuration } from 'webpack';
+import type { Configuration } from 'webpack';
 
 import serverFactory, {
   type OptionsT as ServerOptionsT,
@@ -27,11 +30,11 @@ import { SCRIPT_LOCATIONS, newDefaultLogger } from './renderer';
 
 import { errors } from './utils';
 
-export {
-  type BeforeRenderResT,
-  type BeforeRenderT,
-  type ConfigT,
-  type ServerSsrContext,
+export type {
+  BeforeRenderResT,
+  BeforeRenderT,
+  ConfigT,
+  ServerSsrContext,
 } from './renderer';
 
 export { errors, getDefaultCspSettings, type ServerT };
@@ -175,15 +178,17 @@ type OptionsT = ServerOptionsT & {
  * @param {number} [options.maxSsrRounds=10] Maximum number of SSR rounds.
  * @param {number} [options.ssrTimeout=1000] SSR timeout in milliseconds,
  * defaults to 1 second.
- * @return {Promise<{ expressServer: object, httpServer: object }>} Resolves to
- * an object with created Express and HTTP servers.
+ * @return Resolves to an object with created Express and HTTP servers.
  */
 export default async function launchServer(
   webpackConfig: Configuration,
-  options: OptionsT,
-) {
+  options: OptionsT = {},
+): Promise<{
+    expressServer: ServerT;
+    httpServer: http.Server;
+  }> {
   /* Options normalization. */
-  const ops = options ? cloneDeep(options) : {};
+  const ops = cloneDeep(options);
 
   // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   ops.port = normalizePort(ops.port || process.env.PORT || 3000);
@@ -219,6 +224,7 @@ export default async function launchServer(
       case 'EADDRINUSE':
         ops.logger!.error(`${bind} is already in use`);
         return process.exit(1);
+      case undefined:
       default:
         throw error;
     }

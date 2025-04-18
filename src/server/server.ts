@@ -101,7 +101,9 @@ delete defaultCspSettings.directives['upgrade-insecure-requests'];
  * with the exception of `nonce-xxx` clause in `script-src` directive,
  * which is added dynamically for each request.
  */
-export function getDefaultCspSettings() {
+export function getDefaultCspSettings(): {
+  directives: Record<string, string[]>;
+} {
   return cloneDeep(defaultCspSettings);
 }
 
@@ -111,7 +113,7 @@ export type ServerT = Express & {
 
 export type OptionsT = RendererOptionsT & {
   beforeExpressJsError?:
-  (server: ServerT) => boolean | Promise<boolean | void> | void;
+  (server: ServerT) => boolean | Promise<boolean>;
 
   beforeExpressJsSetup?: (server: ServerT) => Promise<void> | void;
   cspSettingsHook?: (
@@ -155,9 +157,10 @@ export default async function factory(
       if (schema === 'http') {
         let url = `https://${req.headers.host}`;
         if (req.originalUrl !== '/') url += req.originalUrl;
-        return res.redirect(url);
+        res.redirect(url);
+        return;
       }
-      return next();
+      next();
     });
   }
 
@@ -242,6 +245,8 @@ export default async function factory(
     // https://github.com/dart-lang/sdk/issues/27979
     // which manifests itself sometimes when webpack dev middleware is used
     // (in dev mode), and app modules are imported in some unfortunate ways.
+    // TODO: Double-check, what is going on here.
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!global.location) {
       global.location = {
         href: `${pathToFileURL(process.cwd()).href}${sep}`,
@@ -305,7 +310,10 @@ export default async function factory(
     ) => {
       // TODO: This is needed to correctly handled any errors thrown after
       // sending initial response to the client.
-      if (res.headersSent) return next(error);
+      if (res.headersSent) {
+        next(error);
+        return;
+      }
 
       const status = error.status ?? CODES.INTERNAL_SERVER_ERROR;
       const serverSide = status >= (CODES.INTERNAL_SERVER_ERROR as number);
@@ -319,7 +327,6 @@ export default async function factory(
       }
 
       res.status(status).send(message);
-      return undefined;
     });
   }
 

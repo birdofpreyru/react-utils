@@ -1,3 +1,4 @@
+/* eslint-disable import/no-relative-packages */
 import A from './MockPackageA/TestComponent';
 
 import type * as BT from './MockPackageB/TestComponent';

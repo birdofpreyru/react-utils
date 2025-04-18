@@ -1,10 +1,11 @@
+import type { FunctionComponent } from 'react';
 import { Route, Routes } from 'react-router';
 
 const Component = () => <div>Hello World!</div>;
 
-const InnerRouter = () => (
+const InnerRouter: FunctionComponent = () => (
   <Routes>
-    <Route path="hello-world" element={<Component />} />
+    <Route element={<Component />} path="hello-world" />
   </Routes>
 );
 

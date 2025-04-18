@@ -26,6 +26,7 @@ describe('Matches snapshots', () => {
       </Button>
     ));
   });
+
   test('when disabled', async () => {
     await snapshot((
       <Button
@@ -46,6 +47,7 @@ describe('Matches snapshots', () => {
       </Button>
     ));
   });
+
   test('when rendered as link', async () => {
     await snapshot((
       <StaticRouter location="">

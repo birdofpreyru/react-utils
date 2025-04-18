@@ -67,17 +67,20 @@ const TextArea: FunctionComponent<Props> = ({
   return (
     <div className={theme.container}>
       <textarea
+        className={`${theme.textarea} ${theme.hidden}`}
+
         // This text area is hidden underneath the primary one below,
         // and it is used for text measurements, to implement auto-scaling
         // of the primary textarea's height.
         readOnly
         ref={hiddenAreaRef}
-        className={`${theme.textarea} ${theme.hidden}`}
         value={localValue}
       />
       <textarea
+        className={theme.textarea}
         disabled={disabled}
         onBlur={onBlur}
+
         // When value is "undefined" the text area is not-managed, and we should
         // manage it internally for the measurement / resizing functionality
         // to work.
@@ -90,7 +93,6 @@ const TextArea: FunctionComponent<Props> = ({
         onKeyDown={onKeyDown}
         placeholder={placeholder}
         style={{ height }}
-        className={theme.textarea}
         value={localValue}
       />
     </div>

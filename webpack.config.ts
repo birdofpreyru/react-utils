@@ -1,3 +1,5 @@
+/* global __dirname */
+
 import type { Configuration } from 'webpack';
 
 import devConfigFactory from './config/webpack/lib-development';
@@ -27,16 +29,15 @@ export default function buildConfig(env: EnvT): Configuration {
     typescript: true,
   });
 
-  /* The lib config is intended for use outside of this very package,
-   * so we need some tweaks here to make it work for this package itself. */
-  const babelLoader = config.module?.rules?.find((x) => {
-    return typeof x === 'object' && x?.loader === 'babel-loader';
-  });
+  // The lib config is intended for use outside of this very package,
+  // so we need some tweaks here to make it work for this package itself.
+  const babelLoader = config.module?.rules?.find(
+    (x) => typeof x === 'object' && x?.loader === 'babel-loader',
+  );
 
   if (
-    !babelLoader
-    || typeof babelLoader !== 'object'
-    || !babelLoader.options
+    typeof babelLoader !== 'object'
+    || !babelLoader
     || typeof babelLoader.options !== 'object'
     || !Array.isArray(babelLoader.options.presets)
     || !Array.isArray(babelLoader.options.presets[0])

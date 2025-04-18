@@ -6,9 +6,9 @@
  *  "typescript": true }
  * @ssr-options {
  *  "babelEnv": "production",
- *  "entry": "./__assets__/EmptyScene/Scene.tsx" }
+ *  "entry": "./__assets__/EmptyScene/Scene.ts" }
  */
 
-it('exposes 200 status to the test environment', () => {
+test('exposes 200 status to the test environment', () => {
   expect((global as unknown as { ssrStatus: number }).ssrStatus).toBe(200);
 });

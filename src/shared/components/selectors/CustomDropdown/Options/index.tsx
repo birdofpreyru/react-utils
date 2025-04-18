@@ -77,6 +77,7 @@ const Options: FunctionComponent<PropsT> = ({
       optionNodes.push(
         <div
           className={optionClass}
+          key={iValue}
           onClick={(e) => {
             onChange(iValue);
             e.stopPropagation();
@@ -87,7 +88,6 @@ const Options: FunctionComponent<PropsT> = ({
               e.stopPropagation();
             }
           }}
-          key={iValue}
           role="button"
           tabIndex={0}
         >
@@ -105,14 +105,14 @@ const Options: FunctionComponent<PropsT> = ({
       // dropdowns during the scrolling (that would need to re-position it in
       // response to the position changes of the root dropdown element).
       cancelOnScrolling
-      style={containerStyle}
       dontDisableScrolling
       onCancel={onCancel}
+      style={containerStyle}
       theme={{
         ad: '',
-        hoc: '',
         container: containerClass,
         context: '',
+        hoc: '',
         overlay: S.overlay,
       }}
     >

@@ -4,7 +4,7 @@ import './style.scss';
 const Scene: React.FunctionComponent = () => (
   <div styleName="container">
     {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
-    <img src={EmptyPng} alt="Empty PNG" />
+    <img alt="Empty PNG" src={EmptyPng} />
   </div>
 );
 

@@ -77,16 +77,16 @@ describe('concurrent use', () => {
     void newFlow('A');
     void newFlow('B');
 
-    expect(signals).toEqual([]);
+    expect(signals).toStrictEqual([]);
     sem.setReady(true);
     await timer(dT / 2);
-    expect(signals).toEqual(['A-1']);
+    expect(signals).toStrictEqual(['A-1']);
     await timer(dT);
-    expect(signals).toEqual(['A-1', 'B-1']);
+    expect(signals).toStrictEqual(['A-1', 'B-1']);
     await timer(dT);
-    expect(signals).toEqual(['A-1', 'B-1', 'A-2']);
+    expect(signals).toStrictEqual(['A-1', 'B-1', 'A-2']);
     await timer(dT);
-    expect(signals).toEqual(['A-1', 'B-1', 'A-2', 'B-2']);
+    expect(signals).toStrictEqual(['A-1', 'B-1', 'A-2', 'B-2']);
   });
 
   test('.seize() can be used for mutual exclusion', async () => {
@@ -107,16 +107,16 @@ describe('concurrent use', () => {
     void newFlow('A');
     void newFlow('B');
 
-    expect(signals).toEqual([]);
+    expect(signals).toStrictEqual([]);
     sem.setReady(true);
     await timer(dT / 2);
-    expect(signals).toEqual(['A-1']);
+    expect(signals).toStrictEqual(['A-1']);
     await timer(dT);
-    expect(signals).toEqual(['A-1', 'B-1']);
+    expect(signals).toStrictEqual(['A-1', 'B-1']);
     await timer(dT);
-    expect(signals).toEqual(['A-1', 'B-1', 'A-2']);
+    expect(signals).toStrictEqual(['A-1', 'B-1', 'A-2']);
     await timer(dT);
-    expect(signals).toEqual(['A-1', 'B-1', 'A-2', 'B-2']);
+    expect(signals).toStrictEqual(['A-1', 'B-1', 'A-2', 'B-2']);
   });
 
   test(
@@ -133,7 +133,7 @@ describe('concurrent use', () => {
       sem.setReady(true);
       void newFlow('C');
       await timer(10);
-      expect(signals).toEqual(['A', 'B', 'C']);
+      expect(signals).toStrictEqual(['A', 'B', 'C']);
     },
   );
 });

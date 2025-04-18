@@ -34,8 +34,6 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
   theme,
   value,
 }) => {
-  if (!options) throw Error('Internal error');
-
   let isValidValue = false;
   const optionElements = [];
 
@@ -57,8 +55,8 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
   // to show it as disabled.
   const hiddenOption = isValidValue ? null : (
     <option
-      disabled
       className={theme.hiddenOption}
+      disabled
       key="__reactUtilsHiddenOption"
       value={value}
     >

@@ -33,40 +33,42 @@ const BaseSwitch: React.FunctionComponent<PropsT> = ({
   if (!options || !theme.option) throw Error('Internal error');
 
   const optionNodes: React.ReactNode[] = [];
-  for (let i = 0; i < options?.length; ++i) {
-    const option = options[i];
-    if (option !== undefined) {
-      const [iValue, iName] = optionValueName(option);
+  for (const option of options) {
+    const [iValue, iName] = optionValueName(option);
 
-      let className: string = theme.option;
-      let onPress: (() => void) | undefined;
-      if (iValue === value) className += ` ${theme.selected}`;
-      else if (onChange) onPress = () => onChange(iValue);
-
-      optionNodes.push(
-        onPress
-          ? (
-            <div
-              className={className}
-              onClick={onPress}
-              onKeyDown={(e) => {
-                if (onPress && e.key === 'Enter') onPress();
-              }}
-              key={iValue}
-              role="button"
-              tabIndex={0}
-            >
-              {iName}
-            </div>
-          )
-          : <div className={className} key={iValue}>{iName}</div>,
-      );
+    let className: string = theme.option;
+    let onPress: (() => void) | undefined;
+    if (iValue === value) className += ` ${theme.selected}`;
+    else if (onChange) {
+      onPress = () => {
+        onChange(iValue);
+      };
     }
+
+    optionNodes.push(
+      onPress
+        ? (
+          <div
+            className={className}
+            key={iValue}
+            onClick={onPress}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') onPress();
+            }}
+            role="button"
+            tabIndex={0}
+          >
+            {iName}
+          </div>
+        )
+        : <div className={className} key={iValue}>{iName}</div>,
+    );
   }
 
   return (
     <div className={theme.container}>
       {label ? <div className={theme.label}>{label}</div> : null}
+
       <div className={theme.options}>
         {optionNodes}
       </div>

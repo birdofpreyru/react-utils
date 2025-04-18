@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+/* eslint-disable import/no-commonjs, no-console */
+/* global console, process, require */
+
 const childProcess = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -38,7 +41,7 @@ const VALID_BUILD_TYPES = Object.values(BUILD_TYPES);
  * @return {Promise} Resolves to { error, stdout, stderr }.
  */
 async function exec(command, options = {}) {
-  return new Promise((resolve) => {
+  return await new Promise((resolve) => {
     const child = childProcess.exec(
       command,
       options,
@@ -103,6 +106,7 @@ register({
   root: process.cwd(),
 });
 
+// eslint-disable-next-line import/no-dynamic-require
 let webpackConfig = require(path.resolve(cwd, cmdLineArgs.webpackConfig));
 if ('default' in webpackConfig) webpackConfig = webpackConfig.default;
 if (isFunction(webpackConfig)) webpackConfig = webpackConfig(buildType);
@@ -207,14 +211,10 @@ if (cmdLineArgs.babel) babelBuild();
 
 function copyFromFolder(from, to, regex) {
   fs.readdirSync(from, { withFileTypes: true }).forEach((item) => {
-    let toCreated = false;
     if (item.isDirectory()) {
       copyFromFolder(`${from}/${item.name}`, `${to}/${item.name}`, regex);
     } else if (item.isFile() && item.name.match(regex)) {
-      if (!toCreated) {
-        toCreated = true;
-        fs.mkdirSync(to, { recursive: true });
-      }
+      fs.mkdirSync(to, { recursive: true });
       fs.copyFileSync(`${from}/${item.name}`, `${to}/${item.name}`);
     }
   });

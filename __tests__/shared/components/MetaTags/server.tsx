@@ -3,7 +3,7 @@
  */
 
 import { noop } from 'lodash';
-import { type ComponentType } from 'react';
+import type { ComponentType } from 'react';
 import supertest from 'supertest';
 
 import serverFactory from 'server/server';
@@ -39,28 +39,33 @@ async function baseTest(Component: ComponentType) {
     }),
   );
   await server.get('/').expect(200)
-    .expect((res) => expect(res.text).toMatchSnapshot());
+    .expect((res) => {
+      expect(res.text).toMatchSnapshot();
+    });
 }
 
 afterEach(() => {
   setBuildInfo(undefined, true);
 });
 
-test('Basic tags, no override', () => baseTest(
+test('Basic tags, no override', async () => baseTest(
   () => <Application mode={MODES.BASIC_NO_OVERRIDE} />,
 ));
-test('Basic tags, with override', () => baseTest(
+
+test('Basic tags, with override', async () => baseTest(
   () => <Application mode={MODES.BASIC_WITH_OVERRIDE} />,
 ));
-test('All tags, with override', () => baseTest(
+
+test('All tags, with override', async () => baseTest(
   () => <Application mode={MODES.ALL_TAGS_WITH_OVERRIDE} />,
 ));
 
 describe('Using <MetaTags> children feature', () => {
-  test('Basic tags, no override', () => baseTest(
+  test('Basic tags, no override', async () => baseTest(
     () => <Application2 mode={MODES2.BASIC_NO_OVERRIDE} />,
   ));
-  test('Basic tags, with override', () => baseTest(
+
+  test('Basic tags, with override', async () => baseTest(
     () => <Application2 mode={MODES2.BASIC_WITH_OVERRIDE} />,
   ));
 });

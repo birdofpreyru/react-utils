@@ -37,6 +37,9 @@ const Input: FunctionComponent<PropsT> = ({
       className={theme.input}
       data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
       ref={ref}
+
+      // TODO: Avoid the spreading later.
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
     />
   </span>

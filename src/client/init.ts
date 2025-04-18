@@ -19,7 +19,10 @@ declare global {
 declare const BUILD_INFO: BuildInfoT | undefined;
 
 if (process.env.NODE_ENV !== 'production') {
+  // eslint-disable-next-line no-console
   console.warn('Dev mode: "BUILD_INFO" attached to the global "window"');
+
+  // eslint-disable-next-line no-underscore-dangle
   window.__DEV_BUILD_INFO__ = BUILD_INFO;
 }
 
@@ -37,8 +40,10 @@ if (useServiceWorker) {
           // The server takes it into account.
           const reg = await navigator
             .serviceWorker.register('/__service-worker.js');
+          // eslint-disable-next-line no-console
           console.log('SW registered:', reg);
         } catch (err) {
+          // eslint-disable-next-line no-console
           console.log('SW registration failed:', err);
         }
       })();

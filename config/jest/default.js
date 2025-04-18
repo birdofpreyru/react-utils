@@ -1,3 +1,6 @@
+/* eslint-disable import/no-commonjs */
+/* global __dirname, module, process, require */
+
 const path = require('path');
 
 const globalLibDir = path.resolve(process.execPath, '../../lib/node_modules');
@@ -18,21 +21,22 @@ module.exports = {
   modulePathIgnorePatterns: ['<rootDir>/build/'],
   resolver: `${__dirname}/resolver.js`,
   rootDir: '../..',
+  setupFilesAfterEnv: [
+    '<rootDir>/config/jest/setup.js',
+  ],
+  testEnvironmentOptions: {
+    url: 'http://localhost',
+  },
   testMatch: ['**/__tests__/**/*.(j|t)s?(x)'],
   testPathIgnorePatterns: [
     '/__assets__/',
     '/node_modules/',
   ],
-  testEnvironmentOptions: {
-    url: 'http://localhost',
-  },
   transform: {
     '\\.((j|t)sx?|svg)$': 'babel-jest',
   },
   transformIgnorePatterns: [
     '/node_modules/(?!@dr.pogodin/react-utils)',
   ],
-  setupFilesAfterEnv: [
-    '<rootDir>/config/jest/setup.js',
-  ],
+
 };
