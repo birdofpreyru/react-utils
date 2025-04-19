@@ -63,34 +63,15 @@ const Wrapper: FunctionComponent<PropsT> = ({
   const { current: heap } = useRef<HeapT>({
     lastCursorX: 0,
     lastCursorY: 0,
-    triggeredByTouch: false,
     timerId: undefined,
+    triggeredByTouch: false,
   });
   const tooltipRef = useRef<TooltipRefT>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [showTooltip, setShowTooltip] = useState(false);
 
   const updatePortalPosition = (cursorX: number, cursorY: number) => {
-    if (!showTooltip) {
-      heap.lastCursorX = cursorX;
-      heap.lastCursorY = cursorY;
-
-      // If tooltip was triggered by a touch, we delay its opening by a bit,
-      // to ensure it was not a touch-click - in the case of touch click we
-      // want to do the click, rather than show the tooltip, and the delay
-      // gives click handler a chance to abort the tooltip openning.
-      if (heap.triggeredByTouch) {
-        if (!heap.timerId) {
-          heap.timerId = setTimeout(() => {
-            heap.triggeredByTouch = false;
-            heap.timerId = undefined;
-            setShowTooltip(true);
-          }, 300);
-        }
-
-      // Otherwise we can just open the tooltip right away.
-      } else setShowTooltip(true);
-    } else {
+    if (showTooltip) {
       const wrapperRect = wrapperRef.current!.getBoundingClientRect();
       if (
         cursorX < wrapperRect.left
@@ -103,10 +84,27 @@ const Wrapper: FunctionComponent<PropsT> = ({
         tooltipRef.current.pointTo(
           cursorX + window.scrollX,
           cursorY + window.scrollY,
-          placement!,
+          placement,
           wrapperRef.current!,
         );
       }
+    } else {
+      heap.lastCursorX = cursorX;
+      heap.lastCursorY = cursorY;
+
+      // If tooltip was triggered by a touch, we delay its opening by a bit,
+      // to ensure it was not a touch-click - in the case of touch click we
+      // want to do the click, rather than show the tooltip, and the delay
+      // gives click handler a chance to abort the tooltip openning.
+      if (heap.triggeredByTouch) {
+        heap.timerId ??= setTimeout(() => {
+          heap.triggeredByTouch = false;
+          heap.timerId = undefined;
+          setShowTooltip(true);
+        }, 300);
+
+      // Otherwise we can just open the tooltip right away.
+      } else setShowTooltip(true);
     }
   };
 
@@ -121,14 +119,18 @@ const Wrapper: FunctionComponent<PropsT> = ({
         tooltipRef.current.pointTo(
           heap.lastCursorX + window.scrollX,
           heap.lastCursorY + window.scrollY,
-          placement!,
+          placement,
           wrapperRef.current!,
         );
       }
 
-      const listener = () => setShowTooltip(false);
+      const listener = () => {
+        setShowTooltip(false);
+      };
       window.addEventListener('scroll', listener);
-      return () => window.removeEventListener('scroll', listener);
+      return () => {
+        window.removeEventListener('scroll', listener);
+      };
     }
     return undefined;
   }, [
@@ -142,14 +144,18 @@ const Wrapper: FunctionComponent<PropsT> = ({
   return (
     <div
       className={theme.wrapper}
-      onMouseLeave={() => setShowTooltip(false)}
-      onMouseMove={(e) => updatePortalPosition(e.clientX, e.clientY)}
       onClick={() => {
         if (heap.timerId) {
           clearTimeout(heap.timerId);
           heap.timerId = undefined;
           heap.triggeredByTouch = false;
         }
+      }}
+      onMouseLeave={() => {
+        setShowTooltip(false);
+      }}
+      onMouseMove={(e) => {
+        updatePortalPosition(e.clientX, e.clientY);
       }}
       onTouchStart={() => {
         heap.triggeredByTouch = true;
@@ -158,9 +164,9 @@ const Wrapper: FunctionComponent<PropsT> = ({
       role="presentation"
     >
       {
-        showTooltip && tip !== null ? (
-          <Tooltip ref={tooltipRef} theme={theme}>{tip}</Tooltip>
-        ) : null
+        showTooltip && tip !== null
+          ? <Tooltip ref={tooltipRef} theme={theme}>{tip}</Tooltip>
+          : null
       }
       {children}
     </div>

@@ -12,14 +12,14 @@ const Placeholder: React.FunctionComponent = () => <div>PLACEHOLDER!</div>;
 
 const SampleComponent1 = splitComponent({
   chunkName: 'sample-component-a',
-  getComponent: () => import(
+  getComponent: async () => import(
     /* webpackChunkName: 'sample-component-a' */'./ComponentA'
   ),
 });
 
 const SampleComponent2 = splitComponent({
   chunkName: 'sample-component-b',
-  getComponent: () => import(
+  getComponent: async () => import(
     /* webpackChunkName: 'sample-component-b' */ './ComponentB'
   ),
   placeholder: <Placeholder />,
@@ -27,7 +27,7 @@ const SampleComponent2 = splitComponent({
 
 const SampleComponent3 = splitComponent({
   chunkName: 'sample-component-c',
-  getComponent: () => import(
+  getComponent: async () => import(
     /* webpackChunkName: 'sample-component-c' */ './ComponentC'
   ),
 });

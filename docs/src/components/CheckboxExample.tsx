@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { type FunctionComponent, useState } from 'react';
 
 import { Checkbox } from '@dr.pogodin/react-utils';
 
-export default function CheckboxExample() {
+const CheckboxExample: FunctionComponent = () => {
   const [checkbox2, setCheckbox2] = useState<boolean>(true);
   const [checkbox3a, setCheckbox3a] = useState<boolean | 'indeterminate'>('indeterminate');
   const [checkbox3b, setCheckbox3b] = useState<boolean | 'indeterminate'>('indeterminate');
@@ -11,16 +11,24 @@ export default function CheckboxExample() {
       <Checkbox
         checked={checkbox2}
         label="Managed two-states checkbox"
-        onChange={(e) => setCheckbox2(e.target.checked)}
+        onChange={(e) => {
+          setCheckbox2(e.target.checked);
+        }}
       />
       <Checkbox
         checked={checkbox3a}
         label="Managed three-states checkbox"
         onChange={() => {
           switch (checkbox3a) {
-            case true: return setCheckbox3a(false);
-            case 'indeterminate': return setCheckbox3a(true);
-            default: return setCheckbox3a('indeterminate');
+            case true:
+              setCheckbox3a(false);
+              break;
+            case 'indeterminate':
+              setCheckbox3a(true);
+              break;
+            case false:
+            default:
+              setCheckbox3a('indeterminate');
           }
         }}
       />
@@ -30,12 +38,20 @@ export default function CheckboxExample() {
         label="Managed three-states checkbox"
         onChange={() => {
           switch (checkbox3b) {
-            case true: return setCheckbox3b(false);
-            case 'indeterminate': return setCheckbox3b(true);
-            default: return setCheckbox3b('indeterminate');
+            case true:
+              setCheckbox3b(false);
+              break;
+            case 'indeterminate':
+              setCheckbox3b(true);
+              break;
+            case false:
+            default:
+              setCheckbox3b('indeterminate');
           }
         }}
       />
     </>
   );
-}
+};
+
+export default CheckboxExample;

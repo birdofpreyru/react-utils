@@ -71,13 +71,13 @@ const Options: FunctionComponent<PropsT> = ({
   }), []);
 
   const optionNodes: ReactNode[] = [];
-  for (let i = 0; i < options.length; ++i) {
-    const option = options[i];
-    if (option !== undefined && (!filter || filter(option))) {
+  for (const option of options) {
+    if (!filter || filter(option)) {
       const [iValue, iName] = optionValueName(option);
       optionNodes.push(
         <div
           className={optionClass}
+          key={iValue}
           onClick={(e) => {
             onChange(iValue);
             e.stopPropagation();
@@ -88,7 +88,6 @@ const Options: FunctionComponent<PropsT> = ({
               e.stopPropagation();
             }
           }}
-          key={iValue}
           role="button"
           tabIndex={0}
         >
@@ -106,14 +105,14 @@ const Options: FunctionComponent<PropsT> = ({
       // dropdowns during the scrolling (that would need to re-position it in
       // response to the position changes of the root dropdown element).
       cancelOnScrolling
-      style={containerStyle}
       dontDisableScrolling
       onCancel={onCancel}
+      style={containerStyle}
       theme={{
         ad: '',
-        hoc: '',
         container: containerClass,
         context: '',
+        hoc: '',
         overlay: S.overlay,
       }}
     >

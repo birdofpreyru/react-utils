@@ -4,7 +4,6 @@
  * Webpack build of the code for client-side execution, it further exposes
  * Jsdom environment for the client-side testing of the outcomes.
  */
-/* eslint-disable global-require, import/no-dynamic-require */
 
 // BEWARE: The module is not imported into the JU module / the main assembly of
 // the library, because doing so easily breaks stuff:
@@ -15,10 +14,13 @@
 //      probably some sort of a require-loop, or some issues with weak
 //      require in that scenario.
 
+// TODO: We need to add correct typing for environment options.
+
 import path from 'path';
 
 import type { Request, Response } from 'express';
 import { defaults, noop, set } from 'lodash';
+import type { ReactNode } from 'react';
 
 // As this environment is a part of the Jest testing utils,
 // we assume development dependencies are available when it is used.
@@ -26,8 +28,8 @@ import { defaults, noop, set } from 'lodash';
 import register from '@babel/register/experimental-worker';
 
 import JsdomEnv from 'jest-environment-jsdom';
-import { type IFs, createFsFromVolume, Volume } from 'memfs';
-import webpack from 'webpack';
+import { createFsFromVolume, Volume } from 'memfs';
+import webpack, { type Configuration } from 'webpack';
 /* eslint-enable import/no-extraneous-dependencies */
 
 import ssrFactory from 'server/renderer';
@@ -56,11 +58,11 @@ export default class E2eSsrEnv extends JsdomEnv {
    * Loads Webpack config, and exposes it to the environment via global
    * webpackConfig object.
    */
-  loadWebpackConfig() {
+  private loadWebpackConfig() {
     const optionsString = this.pragmas['webpack-config-options'] as string;
 
-    const options = (optionsString
-      ? JSON.parse(optionsString) : {}) as webpack.Configuration;
+    const options = (optionsString ? JSON.parse(optionsString) : {}) as
+      webpack.Configuration;
 
     defaults(options, {
       context: this.testFolder,
@@ -68,12 +70,16 @@ export default class E2eSsrEnv extends JsdomEnv {
     });
 
     const factoryPath = this.pragmas['webpack-config-factory'] as string;
-    let factory = require(path.resolve(this.rootDir, factoryPath));
+    // eslint-disable-next-line import/no-dynamic-require, @typescript-eslint/no-require-imports
+    let factory = require(path.resolve(this.rootDir, factoryPath)) as
+      (((ops: Configuration) => Configuration) | {
+        default: (ops: Configuration) => Configuration;
+      });
     factory = 'default' in factory ? factory.default : factory;
 
     this.global.webpackConfig = factory(options);
 
-    const fs = this.global.webpackOutputFs as IFs;
+    const fs = this.global.webpackOutputFs;
     let buildInfo = `${options.context}/.build-info`;
     if (fs.existsSync(buildInfo)) {
       buildInfo = fs.readFileSync(buildInfo, 'utf8') as string;
@@ -85,14 +91,17 @@ export default class E2eSsrEnv extends JsdomEnv {
    * Executes Webpack build.
    * @return {Promise}
    */
-  async runWebpack() {
+  async runWebpack(): Promise<void> {
     this.loadWebpackConfig();
 
-    const compiler = webpack(this.global.webpackConfig as webpack.Configuration);
+    if (!this.global.webpackConfig) throw Error('Failed to load Webpack config');
+    const compiler = webpack(this.global.webpackConfig);
 
-    // TODO: The "as typeof compiler.outputFileSystem" piece below is a workaround
-    // for the Webpack regression: https://github.com/webpack/webpack/issues/18242
-    compiler.outputFileSystem = this.global.webpackOutputFs as typeof compiler.outputFileSystem;
+    // TODO: The "as typeof compiler.outputFileSystem" piece below is
+    // a workaround for the Webpack regression:
+    // https://github.com/webpack/webpack/issues/18242
+    compiler.outputFileSystem = this.global.webpackOutputFs as
+      typeof compiler.outputFileSystem;
 
     return new Promise<void>((done, fail) => {
       compiler.run((err, stats) => {
@@ -115,35 +124,43 @@ export default class E2eSsrEnv extends JsdomEnv {
     });
   }
 
-  async runSsr() {
+  async runSsr(): Promise<void> {
     const optionsString = this.pragmas['ssr-options'] as string;
-    const options = optionsString ? JSON.parse(optionsString) : {};
+    const options = optionsString
+      ? JSON.parse(optionsString) as Record<string, unknown>
+      : {};
 
     // TODO: This is temporary to shortcut the logging added to SSR.
-    if (options.logger === undefined) {
-      options.logger = {
-        debug: noop,
-        info: noop,
-        log: noop,
-        warn: noop,
-      };
-    }
+    options.logger ??= {
+      debug: noop,
+      info: noop,
+      log: noop,
+      warn: noop,
+    };
 
-    if (!options.buildInfo) options.buildInfo = this.global.buildInfo;
+    options.buildInfo ??= this.global.buildInfo;
 
     let cleanup: (() => void) | undefined;
 
     if (options.entry) {
-      const p = path.resolve(this.testFolder, options.entry);
-      const module = require(p);
-      cleanup = module.cleanup;
-      options.Application = module[options.entryExportName || 'default'];
+      const p = path.resolve(this.testFolder, options.entry as string);
+      // TODO: This sure can be replaced by a dynamic import().
+      // eslint-disable-next-line import/no-dynamic-require, @typescript-eslint/no-require-imports
+      const module = require(p) as NodeJS.Module;
+      if ('cleanup' in module) cleanup = module.cleanup as () => void;
+
+      const exportName = (options.entryExportName as string) || 'default';
+      if (exportName in module) {
+        options.Application = (
+          module as unknown as Record<string, unknown>
+        )[exportName] as ReactNode;
+      }
     }
 
     const renderer = ssrFactory(this.global.webpackConfig!, options);
     let status = 200; // OK
     const markup = await new Promise<string>((done, fail) => {
-      renderer(
+      void renderer(
         this.ssrRequest as Request,
 
         // TODO: This will do for now, with the current implementation of
@@ -170,7 +187,9 @@ export default class E2eSsrEnv extends JsdomEnv {
         } as unknown) as Response,
 
         (error) => {
-          if (error) fail(error);
+          // TODO: Strictly speaking, that error as Error casting is not all
+          // correct, but it works, so no need to spend time on it right now.
+          if (error) fail(error as Error);
           else done('');
         },
       );
@@ -190,16 +209,18 @@ export default class E2eSsrEnv extends JsdomEnv {
     const pragmas = context.docblockPragmas;
 
     const requestString = pragmas['ssr-request'] as string;
-    const request = requestString ? JSON.parse(requestString) : {};
+    const request = requestString
+      ? JSON.parse(requestString) as Record<string, unknown>
+      : {};
 
-    if (!request.url) request.url = '/';
+    request.url ??= '/';
     request.csrfToken = noop;
 
     // This ensures the initial JsDom URL matches the value we use for SSR.
     set(
       config.projectConfig,
       'testEnvironmentOptions.url',
-      `http://localhost${request.url}`,
+      `http://localhost${request.url as string}`,
     );
 
     super(config, context);
@@ -218,20 +239,24 @@ export default class E2eSsrEnv extends JsdomEnv {
     // The usual "babel-jest" transformation setup does not apply to
     // the environment code and imports from it, this workaround enables it.
     const optionsString = this.pragmas['ssr-options'] as string;
-    const options = optionsString ? JSON.parse(optionsString) : {};
+    const options = optionsString
+      ? JSON.parse(optionsString) as Record<string, unknown>
+      : {};
     let root;
     switch (options.root) {
-      case 'TEST': root = this.testFolder; break;
+      case 'TEST':
+        root = this.testFolder;
+        break;
       default: root = process.cwd();
     }
     register({
-      envName: options.babelEnv,
+      envName: options.babelEnv as string,
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
       root,
     });
   }
 
-  async setup() {
+  async setup(): Promise<void> {
     await super.setup();
     await this.runWebpack();
 
@@ -254,7 +279,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     this.global.REACT_UTILS_FORCE_CLIENT_SIDE = true;
   }
 
-  async teardown() {
+  async teardown(): Promise<void> {
     delete this.global.REACT_UTILS_FORCE_CLIENT_SIDE;
 
     // Resets module cache and @babel/register. Effectively this ensures that
@@ -267,6 +292,6 @@ export default class E2eSsrEnv extends JsdomEnv {
       delete require.cache[key];
     });
     register.revert();
-    super.teardown();
+    await super.teardown();
   }
 }

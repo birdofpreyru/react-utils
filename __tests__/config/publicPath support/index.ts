@@ -20,13 +20,13 @@ const global = getGlobal();
 
 const { path: outPath, publicPath } = global.webpackConfig!.output!;
 
-const baseUrl = `http://localhost${publicPath}`;
+const baseUrl = `http://localhost${publicPath as string}`;
 
 const fs = global.webpackOutputFs;
 
-document.write(global.ssrMarkup || '');
+document.write(global.ssrMarkup ?? '');
 
-const { assetsByChunkName, errors } = global.webpackStats || {};
+const { assetsByChunkName, errors } = global.webpackStats ?? {};
 
 let jsFileName: string;
 let cssFileName: string;
@@ -36,7 +36,7 @@ assetsByChunkName?.main?.forEach((name) => {
 });
 
 it('completes Webpack build without errors', () => {
-  expect(errors).toEqual([]);
+  expect(errors).toStrictEqual([]);
 });
 
 it('relies on the expected base URL', () => {
@@ -45,44 +45,47 @@ it('relies on the expected base URL', () => {
 
 it('generates expected view', () => {
   const markup = document.querySelector('#react-view')?.innerHTML;
-  expect(pretty(markup || '')).toMatchSnapshot();
+  expect(pretty(markup!)).toMatchSnapshot();
 });
 
 it('matches SSR markup in hydration', async () => {
   const inj = document.querySelector('meta[itemprop="drpruinj"]')?.outerHTML;
-  const ssrMarkup = document.documentElement.innerHTML.replace(inj || '', '');
-  const js = fs?.readFileSync(`${outPath}/${jsFileName}`, 'utf8') as string;
-  await act(() => new Function(js)()); // eslint-disable-line no-new-func
+  const ssrMarkup = document.documentElement.innerHTML.replace(inj!, '');
+  const js = fs.readFileSync(`${outPath}/${jsFileName}`, 'utf8') as string;
+
+  // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+  await act(() => new Function(js)());
+
   expect(document.documentElement.innerHTML).toBe(ssrMarkup);
 });
 
 it('uses the correct JS bundle URL', () => {
-  const element = document.querySelector(
+  const element = document.querySelector<HTMLScriptElement>(
     '[type="application/javascript"]',
-  ) as HTMLScriptElement;
-  expect(element.src).toBe(`${baseUrl}${jsFileName}`);
+  );
+  expect(element?.src).toBe(`${baseUrl}${jsFileName}`);
 });
 
 it('uses the correct CSS URL', () => {
-  const element = document.querySelector(
+  const element = document.querySelector<HTMLLinkElement>(
     '[rel="stylesheet"]',
-  ) as HTMLLinkElement;
-  expect(element.href).toBe(`${baseUrl}${cssFileName}`);
+  );
+  expect(element?.href).toBe(`${baseUrl}${cssFileName}`);
 });
 
 it('uses the correct PNG URL', () => {
-  const element = document.querySelector('[alt="Empty PNG"]') as HTMLImageElement;
-  expect(element.src.startsWith(baseUrl)).toBe(true);
-  const path = `${outPath}/${element.src.slice(baseUrl.length)}`;
-  expect(fs?.existsSync(path)).toBe(true);
+  const element = document.querySelector<HTMLImageElement>('[alt="Empty PNG"]');
+  expect(element?.src.startsWith(baseUrl)).toBe(true);
+  const path = `${outPath}/${element?.src.slice(baseUrl.length)}`;
+  expect(fs.existsSync(path)).toBe(true);
 });
 
 it('emits correct CSS', () => {
-  const css = fs?.readFileSync(`${outPath}/${cssFileName}`, 'utf8') as string;
+  const css = fs.readFileSync(`${outPath}/${cssFileName}`, 'utf8') as string;
   expect(css).toMatchSnapshot();
   let ttfUrl = css.match(/src:url\((.*)\.ttf\)/)?.[1];
   ttfUrl = `http://localhost${ttfUrl}.ttf`;
   expect(ttfUrl.startsWith(baseUrl)).toBe(true);
   const path = `${outPath}/${ttfUrl.slice(baseUrl.length)}`;
-  expect(fs?.existsSync(path)).toBe(true);
+  expect(fs.existsSync(path)).toBe(true);
 });

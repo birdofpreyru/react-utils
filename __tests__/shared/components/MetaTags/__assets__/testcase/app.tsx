@@ -12,8 +12,8 @@ const Component = () => (
   <div>
     <p>A dummy internal component.</p>
     <MetaTags
-      title="Title from Component"
       description="Component description"
+      title="Title from Component"
     />
   </div>
 );
@@ -24,12 +24,12 @@ const AllTagsComponent = () => {
     <div>
       <p>A dummy internal component.</p>
       <MetaTags
-        title="Title from Component"
         description="Component description"
-        image={`${domain}/THUMBNAIL_PATH`}
+        image={`${domain as unknown as string}/THUMBNAIL_PATH`}
         siteName="SITE_NAME"
         socialDescription="SOCIAL_DESCRIPTION"
         socialTitle="SOCIAL_TITLE"
+        title="Title from Component"
         url="PAGE_URL"
       />
     </div>
@@ -43,8 +43,13 @@ type PropsT = {
 const Application: React.FunctionComponent<PropsT> = ({ mode }) => {
   let component;
   switch (mode) {
-    case MODES.BASIC_WITH_OVERRIDE: component = <Component />; break;
-    case MODES.ALL_TAGS_WITH_OVERRIDE: component = <AllTagsComponent />; break;
+    case MODES.BASIC_WITH_OVERRIDE:
+      component = <Component />;
+      break;
+    case MODES.ALL_TAGS_WITH_OVERRIDE:
+      component = <AllTagsComponent />;
+      break;
+    case MODES.BASIC_NO_OVERRIDE:
     default: component = null;
   }
 
@@ -52,8 +57,8 @@ const Application: React.FunctionComponent<PropsT> = ({ mode }) => {
     <div>
       <p>Hello World!</p>
       <MetaTags
-        title="Application Title"
         description="Application Description"
+        title="Application Title"
       />
       {component}
     </div>

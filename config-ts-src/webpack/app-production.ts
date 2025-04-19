@@ -4,6 +4,8 @@
  * @desc Production Webpack configuration for applications.
  */
 
+/* eslint-disable import/no-extraneous-dependencies */
+
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpack, { type Configuration } from 'webpack';

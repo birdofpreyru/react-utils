@@ -1,5 +1,7 @@
 // Base Webpack config for ReactJS libraries.
 
+/* eslint-disable import/no-extraneous-dependencies */
+
 import path from 'path';
 
 import autoprefixer from 'autoprefixer';
@@ -67,20 +69,6 @@ export default function configFactory(ops: OptionsT): Configuration {
       'uuid',
     ],
     mode: ops.mode,
-    output: {
-      filename: 'web.bundle.js',
-
-      // TODO: Check, whether this fix can be dropped.
-      // Workaround to fix umd build, restore webpack v3 behaviour
-      // https://github.com/webpack/webpack/issues/6677
-      // https://github.com/webpack/webpack/issues/6642
-      globalObject: "typeof self !== 'undefined' ? self : this",
-
-      library: ops.library,
-      path: ops.outputPath,
-      libraryTarget: 'umd',
-    },
-    plugins,
     module: {
       rules: [{
         /* Handles font imports in url(..) instructions in CSS. Effectively,
@@ -88,11 +76,7 @@ export default function configFactory(ops: OptionsT): Configuration {
          * the original location of the font assets in
          * the library being build. */
         test: /\.(eot|otf|svg|ttf|woff2?)$/,
-        include: [
-          /node_modules/,
-          /src[/\\]assets[/\\]fonts/,
-        ],
-        type: 'asset/resource',
+
         generator: {
           // TODO: This comes from the older config version which relied on
           // file-loader. It might require some correction to correctly join
@@ -100,14 +84,21 @@ export default function configFactory(ops: OptionsT): Configuration {
           filename: '../shared/[path][name][ext]',
           publicPath: `${ops.library}/build/shared`,
         },
+        include: [
+          /node_modules/,
+          /src[/\\]assets[/\\]fonts/,
+        ],
+        type: 'asset/resource',
       }, {
         // Aggregates source maps from dependencies.
         test: /\.js$/,
+
         enforce: 'pre',
         use: ['source-map-loader'],
       }, {
         /* Loads JS and JSX moudles, and inlines SVG assets. */
         test: ops.typescript ? /\.((j|t)sx?|svg)$/ : /\.(jsx?|svg)$/,
+
         exclude: [
           /node_modules/,
           /src[/\\]assets[/\\]fonts/,
@@ -126,11 +117,12 @@ export default function configFactory(ops: OptionsT): Configuration {
               typescript: ops.typescript,
             }],
           ],
-          ...ops.babelLoaderOptions || {},
+          ...ops.babelLoaderOptions ?? {},
         },
       }, {
         /* Loads SCSS stylesheets. */
         test: /\.scss/,
+
         exclude: /node_modules/,
         use: [
           MiniCssExtractPlugin.loader, {
@@ -175,6 +167,20 @@ export default function configFactory(ops: OptionsT): Configuration {
         ],
       }],
     },
+    output: {
+      filename: 'web.bundle.js',
+
+      // TODO: Check, whether this fix can be dropped.
+      // Workaround to fix umd build, restore webpack v3 behaviour
+      // https://github.com/webpack/webpack/issues/6677
+      // https://github.com/webpack/webpack/issues/6642
+      globalObject: "typeof self !== 'undefined' ? self : this",
+
+      library: ops.library,
+      libraryTarget: 'umd',
+      path: ops.outputPath,
+    },
+    plugins,
     resolve: {
       alias: {
         /* Aliases to JS an JSX files are handled by Babel. */

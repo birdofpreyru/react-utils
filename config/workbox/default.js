@@ -1,10 +1,8 @@
 /**
  * Default Workbox config.
  */
-/* global self */
 
-// This is to whitelist self usage beloew.
-/* eslint-disable no-restricted-globals */
+/* global self */
 
 /* eslint-disable import/no-extraneous-dependencies */
 import { clientsClaim } from 'workbox-core';
@@ -14,6 +12,5 @@ import { precacheAndRoute } from 'workbox-precaching';
 self.skipWaiting();
 clientsClaim();
 
-/* eslint-disable no-underscore-dangle */
+// eslint-disable-next-line no-underscore-dangle
 precacheAndRoute(self.__WB_MANIFEST);
-/* eslint-enable no-underscore-dangle */

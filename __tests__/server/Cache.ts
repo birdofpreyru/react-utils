@@ -18,9 +18,9 @@ it('works as expected', () => {
   cache.add('ab', 'A', 2 * 2);
   mockdate.set(Date.now() + 1000);
   expect(cache).toMatchSnapshot();
-  expect(cache.get({ key: 'C' })).toBe(null);
+  expect(cache.get({ key: 'C' })).toBeNull();
   expect(cache.get({ key: 'A' })).toBe('ab');
-  expect(cache.get({ key: 'A', maxage: 0 })).toBe(null);
+  expect(cache.get({ key: 'A', maxage: 0 })).toBeNull();
   cache.add('21', 'C', 2 * 2);
   expect(cache).toMatchSnapshot();
 });

@@ -23,9 +23,9 @@ beforeEach(() => {
         onCancel={onCancel}
         theme={{
           ad: 'ad',
-          hoc: 'hoc',
-          context: 'context',
           container: 'container',
+          context: 'context',
+          hoc: 'hoc',
         }}
       >
         Modal Content
@@ -48,18 +48,18 @@ test('Snapshot match', () => {
 test('onCancel', async () => {
   const overlay = document.querySelector('div[aria-label=Cancel]')!;
   await user.click(overlay);
-  expect(onCancel).toHaveBeenCalled();
+  expect(onCancel).toHaveBeenCalledWith();
 });
 
 // TODO: Not sure why it fails after updating the test to use fireEvent,
 // the underlying code has not changed. It should be investigated & fixed later.
 test.skip('onWheel', () => {
   const container = document.getElementsByClassName('container');
-  expect(container.length).toBe(1);
+  expect(container).toHaveLength(1);
   const stopPropagation = jest.fn();
 
-  const target = container[0];
-  if (target) fireEvent.wheel(target, { stopPropagation });
+  const target = container[0]!;
+  fireEvent.wheel(target, { stopPropagation });
 
-  expect(stopPropagation).toHaveBeenCalled();
+  expect(stopPropagation).toHaveBeenCalledWith();
 });

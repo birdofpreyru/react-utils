@@ -1,6 +1,6 @@
 import type { Request, RequestHandler } from 'express';
 import { cloneDeep, noop } from 'lodash';
-import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable } from 'server/renderer';
+import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable, type ConfigT } from 'server/renderer';
 import fs from 'fs';
 
 import serializeJs from 'serialize-javascript';
@@ -11,13 +11,13 @@ import {
   useGlobalState,
 } from '@dr.pogodin/react-global-state';
 
-import { Helmet, HelmetProvider } from '@dr.pogodin/react-helmet';
+import { Helmet } from '@dr.pogodin/react-helmet';
 
-import { type Configuration } from 'webpack';
+import type { Configuration } from 'webpack';
 
 import { getSsrContext } from 'utils/globalState';
 
-import { getBuildInfo, setBuildInfo } from 'utils/isomorphy/buildInfo';
+import { getBuildInfo, setBuildInfo, type BuildInfoT } from 'utils/isomorphy/buildInfo';
 
 import {
   mockHttpRequest,
@@ -25,7 +25,8 @@ import {
   mockWebpackConfig,
 } from './__assets__/common';
 
-declare module global {
+// eslint-disable-next-line @typescript-eslint/no-namespace
+declare namespace global {
   let mockFailsForgeRandomGetBytesMethod: boolean | undefined;
 }
 
@@ -42,11 +43,7 @@ const TEST_INITIAL_STATE = {
 
 const testBuildInfo = JSON.parse(
   fs.readFileSync(`${TEST_CONTEXT}/.build-info`, 'utf8'),
-);
-
-beforeAll(() => {
-  HelmetProvider.canUseDOM = false;
-});
+) as BuildInfoT;
 
 afterEach(() => {
   // TODO: It will be better to completely re-load tested modules, and thus not
@@ -54,10 +51,6 @@ afterEach(() => {
   setBuildInfo(undefined, true);
 
   global.mockFailsForgeRandomGetBytesMethod = false;
-});
-
-afterAll(() => {
-  HelmetProvider.canUseDOM = true;
 });
 
 // TODO: Can we update this test to generate the webpack stats and attach
@@ -86,7 +79,7 @@ async function coreTest(webpackConfig: Configuration, options = {}) {
     });
   }).not.toThrow();
   expect(renderer).toBeInstanceOf(Function);
-  expect(getBuildInfo()).toEqual(testBuildInfo);
+  expect(getBuildInfo()).toStrictEqual(testBuildInfo);
 
   try {
     const { render, res } = mockHttpResponse();
@@ -94,7 +87,9 @@ async function coreTest(webpackConfig: Configuration, options = {}) {
       await renderer(
         (mockHttpRequest() as unknown) as Request,
         res,
-        (error) => expect(error).toMatchSnapshot(),
+        (error) => {
+          expect(error).toMatchSnapshot();
+        },
       );
     }
     expect(render.markup).toMatchSnapshot();
@@ -106,31 +101,37 @@ async function coreTest(webpackConfig: Configuration, options = {}) {
 
 test(
   'Base rendering of HTML template',
-  () => coreTest(mockWebpackConfig(), {}),
+  async () => {
+    await coreTest(mockWebpackConfig(), {});
+  },
 );
 
 test(
   '"favicon" option',
-  () => coreTest(mockWebpackConfig(), { favicon: '/path/to/favicon.ico' }),
+  async () => {
+    await coreTest(mockWebpackConfig(), { favicon: '/path/to/favicon.ico' });
+  },
 );
 
 test(
   'Config overriding for injection',
-  () => coreTest(mockWebpackConfig(), {
-    beforeRender: async (req: Request, sanitizedConfig: any) => {
-      expect(sanitizedConfig).toBeInstanceOf(Object);
-      expect(sanitizedConfig).not.toHaveProperty('SECRET');
-      return {
-        configToInject: {
-          ...sanitizedConfig,
-          additionalKey: 'Additional Value',
-        },
-      };
-    },
-  }),
+  async () => {
+    await coreTest(mockWebpackConfig(), {
+      beforeRender: (req: Request, sanitizedConfig: ConfigT) => {
+        expect(sanitizedConfig).toBeInstanceOf(Object);
+        expect(sanitizedConfig).not.toHaveProperty('SECRET');
+        return {
+          configToInject: {
+            ...sanitizedConfig,
+            additionalKey: 'Additional Value',
+          },
+        };
+      },
+    });
+  },
 );
 
-test('JS constructs in global state', () => {
+test('JS constructs in global state', async () => {
   const Component = () => {
     // TODO: Could use State type, but not a big deal for now.
     useGlobalState<ForceT, string>('test.1', 'defaultValue');
@@ -138,7 +139,7 @@ test('JS constructs in global state', () => {
     const state = getGlobalState().get();
     return <div>{serializeJs(state)}</div>;
   };
-  return coreTest(mockWebpackConfig(), {
+  await coreTest(mockWebpackConfig(), {
     Application: Component,
     maxSsrRounds: 3,
   });
@@ -146,7 +147,7 @@ test('JS constructs in global state', () => {
 
 test(
   'Helmet integration works',
-  () => coreTest(mockWebpackConfig(), {
+  async () => coreTest(mockWebpackConfig(), {
     Application: () => (
       <div>
         <p>
@@ -156,7 +157,7 @@ test(
           <title>
             Test Page Title
           </title>
-          <meta property="description" content="Test Page Description" />
+          <meta content="Test Page Description" property="description" />
         </Helmet>
         <p>
           Goodbye World!
@@ -170,23 +171,28 @@ test(
 
 test(
   'Injection of additional JS scripts',
-  () => coreTest(mockWebpackConfig(), {
-    beforeRender: async () => ({
+  async () => coreTest(mockWebpackConfig(), {
+    beforeRender: () => ({
       extraScripts: [
         '<script>Dummy JS Sript</script>',
-        '<script>Another Dummy JS Script</script>', {
+        '<script>Another Dummy JS Script</script>',
+        {
           code: '<script>Yet another Dummy JS Script</script>',
           location: SCRIPT_LOCATIONS.DEFAULT,
-        }, {
+        },
+        {
           code: '<script>1-st script after opening <head></script>',
           location: SCRIPT_LOCATIONS.HEAD_OPEN,
-        }, {
+        },
+        {
           code: '<script>1-st script after opening <body></script>',
           location: SCRIPT_LOCATIONS.BODY_OPEN,
-        }, {
+        },
+        {
           code: '<script>2-nd script after opening <body></script>',
           location: SCRIPT_LOCATIONS.BODY_OPEN,
-        }, {
+        },
+        {
           code: '<script>2-nd script after opening <head></script>',
           location: SCRIPT_LOCATIONS.HEAD_OPEN,
         },
@@ -197,14 +203,14 @@ test(
 
 test(
   'Server-side rendering (SSR); injection of CSS chunks & Redux state',
-  () => coreTest(mockWebpackConfig(), {
+  async () => coreTest(mockWebpackConfig(), {
     Application: () => {
       const context = getSsrContext()!;
       context.chunks.push('test-chunk-a');
       context.chunks.push('test-chunk-b');
       return <div>Hello Wold!</div>;
     },
-    beforeRender: async () => ({
+    beforeRender: () => ({
       initialState: cloneDeep(TEST_INITIAL_STATE),
     }),
     maxSsrRounds: 3,
@@ -214,10 +220,10 @@ test(
 
 test(
   'Setting of response HTTP status the server-side rendering',
-  () => coreTest(mockWebpackConfig(), {
+  async () => coreTest(mockWebpackConfig(), {
     Application: () => {
       const context = getSsrContext()!;
-      context.status = 404; // eslint-disable-line no-param-reassign
+      context.status = 404;
       return <div>404 Error Test</div>;
     },
     maxSsrRounds: 3,
@@ -225,16 +231,19 @@ test(
   }),
 );
 
-test('Throws in case of forge.random.getBytes(..) failure', () => {
+test('Throws in case of forge.random.getBytes(..) failure', async () => {
   global.mockFailsForgeRandomGetBytesMethod = true;
-  return coreTest(mockWebpackConfig(), {});
+  await coreTest(mockWebpackConfig(), {});
 });
 
 it('correctly tests if brotli-encoded responses are acceptable', () => {
   const res = (header: string) => isBrotliAcceptable({
+    // TODO: It is fine to use for sure... should we declare it outside the test?
+    // eslint-disable-next-line jest/no-conditional-in-test
     get: (name: string) => (name.toLowerCase() === 'accept-encoding'
       ? header : undefined),
   } as Request);
+
   expect(res('')).toBe(false);
   expect(res('*')).toBe(true);
   expect(res('br')).toBe(true);

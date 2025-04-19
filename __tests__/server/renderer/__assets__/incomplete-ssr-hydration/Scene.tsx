@@ -17,12 +17,14 @@ const { useAsyncData } = withGlobalStateType<StateT>();
 // The first one resolves after a long wait only,
 // the second one resolves right away.
 
-const timers: Timer<void>[] = [];
+const timers: Array<Timer<void>> = [];
 
-export function cleanup() {
-  for (let i = 0; i < timers.length; ++i) {
-    timers[i]?.abort();
-    timers[i]?.resolve();
+export function cleanup(): void {
+  for (const timer of timers) {
+    timer.abort();
+
+    // TODO: Should we wait for it, and make cleanup() itself async?
+    void timer.resolve();
   }
 }
 
@@ -41,7 +43,7 @@ const badLoader = async () => {
   return 'SOMETHING IS WRONG IF YOU READ THIS';
 };
 
-const goodLoader = () => Promise.resolve('Hello World!');
+const goodLoader = async () => Promise.resolve('Hello World!');
 
 const Scene: React.FunctionComponent = () => {
   const { data: badData } = useAsyncData('badData', badLoader);

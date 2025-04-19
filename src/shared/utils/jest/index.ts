@@ -4,6 +4,7 @@
 import type {
   AxiosRequestConfig,
   AxiosResponse,
+  AxiosStatic,
   InternalAxiosRequestConfig,
 } from 'axios';
 
@@ -29,14 +30,14 @@ const originalProcessVersions = process.versions;
  * Tricks **react-utils** into thinking the test is running within client-side
  * (browser) environment.
  */
-export function mockClientSide() {
+export function mockClientSide(): void {
   Object.defineProperty(process, 'versions', { value: undefined });
 }
 
 /**
  * Reverts the effect of {@link module:JU.mockClientSide mockClientSide(..)}.
  */
-export function unmockClientSide() {
+export function unmockClientSide(): void {
   Object.defineProperty(process, 'versions', {
     value: originalProcessVersions,
     writable: false,
@@ -49,7 +50,7 @@ export function unmockClientSide() {
  * @param {number} seed
  * @return {string}
  */
-export function getMockUuid(seed = 0) {
+export function getMockUuid(seed = 0): string {
   const x = seed.toString(16).padStart(32, '0');
   return `${x.slice(0, 8)}-${x.slice(8, 12)}-${x.slice(12, 16)}-${x.slice(16, 20)}-${x.slice(20)}`;
 }
@@ -57,12 +58,14 @@ export function getMockUuid(seed = 0) {
 export type AxiosRequestHandlerT =
   (config: AxiosRequestConfig) => Partial<AxiosResponse> | null | undefined;
 
-export function mockAxios(handlers: AxiosRequestHandlerT[]) {
-  const axios = jest.requireActual('axios');
+export function mockAxios(handlers: AxiosRequestHandlerT[]): AxiosStatic {
+  const axios: AxiosStatic = jest.requireActual('axios');
 
-  axios.defaults.adapter = async (config: AxiosRequestConfig): Promise<AxiosResponse> => {
-    for (let i = 0; i < handlers.length; ++i) {
-      const res = handlers[i]?.(config);
+  axios.defaults.adapter = async (
+    config: AxiosRequestConfig,
+  ): Promise<AxiosResponse> => {
+    for (const handler of handlers) {
+      const res = handler(config);
       if (res) {
         return {
           config: config as InternalAxiosRequestConfig,
@@ -79,6 +82,7 @@ export function mockAxios(handlers: AxiosRequestHandlerT[]) {
     let res: AxiosResponse;
     try {
       res = await axios({ ...config, adapter: ['xhr', 'http', 'fetch'] });
+      // eslint-disable-next-line no-console
       console.warn(
         'Network request has not been mocked for a test.\n\nConfig:\n',
         config,
@@ -86,6 +90,7 @@ export function mockAxios(handlers: AxiosRequestHandlerT[]) {
         JSON.stringify(res, null, 2),
       );
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.warn(
         'Network request has not been mocked for a test, and failed.\n\nConfig:\n',
         config,
@@ -107,9 +112,9 @@ export function mockAxios(handlers: AxiosRequestHandlerT[]) {
  * @returns {Promise} Wait for this to "jump after" any async code which should
  * be executed because of the mock time movement.
  */
-export async function mockTimer(time: number) {
+export async function mockTimer(time: number): Promise<void> {
   mockdate.set(time + Date.now());
-  jest.advanceTimersByTime(time);
+  await jest.advanceTimersByTimeAsync(time);
 }
 
 export type MountedSceneT = HTMLElement & {
@@ -134,7 +139,9 @@ export function mount(scene: ReactNode): MountedSceneT {
     // when it is simulating user events.
     global.IS_REACT_ACT_ENVIRONMENT = true;
 
-    act(() => root.unmount());
+    act(() => {
+      root.unmount();
+    });
     res.remove();
   };
 
@@ -160,9 +167,15 @@ type SnapshotOptionsT = {
 export async function snapshot(
   element: React.ReactElement,
   options?: SnapshotOptionsT,
-) {
+): Promise<RenderResult> {
   let res: RenderResult | undefined;
 
+  // TODO: Just adding async to the actor function breaks stuff, as it makes
+  // act() asynchronous no matter the `options.await` value, thus breaking all
+  // calls that do not await for snapshot() result... thus... perhaps we need
+  // to have a more complex typing to ensure it all works as intended in all
+  // cases, and while being correctly enforced by TypeScript.
+  // eslint-disable-next-line @typescript-eslint/promise-function-async
   const promise = act(() => {
     res = render(element);
     return options?.await;

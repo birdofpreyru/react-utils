@@ -13,8 +13,8 @@ const Component = () => {
     <div>
       <p>A dummy internal component.</p>
       <MetaTags
-        title={`Title from Component - ${title}`}
         description={`Component description - ${description}`}
+        title={`Title from Component - ${title}`}
       />
     </div>
   );
@@ -27,7 +27,10 @@ type PropsT = {
 const Application: React.FunctionComponent<PropsT> = ({ mode }) => {
   let component;
   switch (mode) {
-    case MODES.BASIC_WITH_OVERRIDE: component = <Component />; break;
+    case MODES.BASIC_WITH_OVERRIDE:
+      component = <Component />;
+      break;
+    case MODES.BASIC_NO_OVERRIDE:
     default: component = null;
   }
 
@@ -35,8 +38,8 @@ const Application: React.FunctionComponent<PropsT> = ({ mode }) => {
     <div>
       <p>Hello World!</p>
       <MetaTags
-        title="Application Title"
         description="Application Description"
+        title="Application Title"
       >
         {component}
       </MetaTags>

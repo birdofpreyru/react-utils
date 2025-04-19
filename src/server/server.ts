@@ -18,6 +18,7 @@ import csrf from '@dr.pogodin/csurf';
 import express, {
   type Express,
   type NextFunction,
+  type RequestHandler,
   type Request,
   type Response,
 } from 'express';
@@ -27,7 +28,8 @@ import helmet, { type HelmetOptions } from 'helmet';
 import loggerMiddleware from 'morgan';
 import requestIp from 'request-ip';
 import { v4 as uuid } from 'uuid';
-import { type Configuration } from 'webpack';
+
+import type { Compiler, Configuration } from 'webpack';
 
 import rendererFactory, {
   type LoggerI,
@@ -44,6 +46,7 @@ import {
 export type CspOptionsT =
 Exclude<HelmetOptions['contentSecurityPolicy'], boolean | undefined>;
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 interface RequestT extends Request {
   cspNonce: string;
   nonce: string;
@@ -98,7 +101,9 @@ delete defaultCspSettings.directives['upgrade-insecure-requests'];
  * with the exception of `nonce-xxx` clause in `script-src` directive,
  * which is added dynamically for each request.
  */
-export function getDefaultCspSettings() {
+export function getDefaultCspSettings(): {
+  directives: Record<string, string[]>;
+} {
   return cloneDeep(defaultCspSettings);
 }
 
@@ -107,7 +112,9 @@ export type ServerT = Express & {
 };
 
 export type OptionsT = RendererOptionsT & {
-  beforeExpressJsError?: (server: ServerT) => boolean | Promise<boolean | void> | void;
+  beforeExpressJsError?:
+  (server: ServerT) => boolean | Promise<boolean>;
+
   beforeExpressJsSetup?: (server: ServerT) => Promise<void> | void;
   cspSettingsHook?: (
     defaultOptions: CspOptionsT,
@@ -121,7 +128,7 @@ export type OptionsT = RendererOptionsT & {
 export default async function factory(
   webpackConfig: Configuration,
   options: OptionsT,
-) {
+): Promise<ServerT> {
   const rendererOps: RendererOptionsT = pick(options, [
     'Application',
     'beforeRender',
@@ -150,9 +157,10 @@ export default async function factory(
       if (schema === 'http') {
         let url = `https://${req.headers.host}`;
         if (req.originalUrl !== '/') url += req.originalUrl;
-        return res.redirect(url);
+        res.redirect(url);
+        return;
       }
-      return next();
+      next();
     });
   }
 
@@ -222,7 +230,7 @@ export default async function factory(
   // Thus, this setup to serve it. Probably, need some more configuration
   // for special cases, but this will do for now.
   server.get('/__service-worker.js', express.static(
-    webpackConfig.output?.path || '',
+    webpackConfig.output?.path ?? '',
     {
       setHeaders: (res) => res.set('Cache-Control', 'no-cache'),
     },
@@ -231,23 +239,31 @@ export default async function factory(
   /* Setup of Hot Module Reloading for development environment.
    * These dependencies are not used, nor installed for production use,
    * hence we should violate some import-related lint rules. */
-  /* eslint-disable global-require */
   /* eslint-disable import/no-extraneous-dependencies */
-  /* eslint-disable import/no-unresolved */
   if (options.devMode) {
     // This is a workaround for SASS bug:
     // https://github.com/dart-lang/sdk/issues/27979
     // which manifests itself sometimes when webpack dev middleware is used
     // (in dev mode), and app modules are imported in some unfortunate ways.
+    // TODO: Double-check, what is going on here.
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!global.location) {
       global.location = {
         href: `${pathToFileURL(process.cwd()).href}${sep}`,
       } as Location;
     }
 
-    const webpack = require('webpack');
-    const webpackDevMiddleware = require('webpack-dev-middleware');
-    const webpackHotMiddleware = require('webpack-hot-middleware');
+    /* eslint-disable @typescript-eslint/no-require-imports */
+    const webpack = require('webpack') as (ops: Configuration) => Compiler;
+
+    // TODO: Figure out the exact type for options, don't wanna waste time on it
+    // right now.
+    const webpackDevMiddleware = require('webpack-dev-middleware') as
+      (c: Compiler, ops: unknown) => RequestHandler;
+
+    const webpackHotMiddleware = require('webpack-hot-middleware') as
+      (c: Compiler) => RequestHandler;
+
     const compiler = webpack(webpackConfig);
     server.use(webpackDevMiddleware(compiler, {
       publicPath,
@@ -255,9 +271,7 @@ export default async function factory(
     }));
     server.use(webpackHotMiddleware(compiler));
   }
-  /* eslint-enable global-require */
   /* eslint-enable import/no-extraneous-dependencies */
-  /* eslint-enable import/no-unresolved */
 
   server.use(publicPath as string, express.static(webpackConfig.output!.path!));
 
@@ -287,20 +301,25 @@ export default async function factory(
     // prevents to do it without some extra refactoring. Should be done sometime
     // though.
     server.use((
-      error: any,
+      error: Error & {
+        status?: number;
+      },
       req: Request,
       res: Response,
       next: NextFunction,
     ) => {
       // TODO: This is needed to correctly handled any errors thrown after
       // sending initial response to the client.
-      if (res.headersSent) return next(error);
+      if (res.headersSent) {
+        next(error);
+        return;
+      }
 
-      const status = error.status || CODES.INTERNAL_SERVER_ERROR;
-      const serverSide = status >= CODES.INTERNAL_SERVER_ERROR;
+      const status = error.status ?? CODES.INTERNAL_SERVER_ERROR;
+      const serverSide = status >= (CODES.INTERNAL_SERVER_ERROR as number);
 
       // Log server-side errors always, client-side at debug level only.
-      options.logger!.log(serverSide ? 'error' : 'debug', error);
+      options.logger!.log(serverSide ? 'error' : 'debug', error.toString());
 
       let message = error.message || getErrorForCode(status);
       if (serverSide && process.env.NODE_ENV === 'production') {
@@ -308,7 +327,6 @@ export default async function factory(
       }
 
       res.status(status).send(message);
-      return undefined;
     });
   }
 

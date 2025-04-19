@@ -1,1 +1,1 @@
-it.todo('Behaves as expected when at client side we enter a route where a split component appears. It should test the placeholder is rendered correctly, and the component is rendered correctly once loaded.');
+test.todo('Behaves as expected when at client side we enter a route where a split component appears. It should test the placeholder is rendered correctly, and the component is rendered correctly once loaded.');

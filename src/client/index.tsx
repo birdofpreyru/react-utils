@@ -1,7 +1,7 @@
 // Initialization of client-side code.
 /* global document */
 
-import { type ComponentType } from 'react';
+import type { ComponentType } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { HelmetProvider } from '@dr.pogodin/react-helmet';
 import { BrowserRouter } from 'react-router';
@@ -12,7 +12,7 @@ import getInj from './getInj';
 
 type OptionsT = {
   dontHydrate?: boolean;
-  initialState?: any;
+  initialState?: unknown;
 };
 
 /**
@@ -23,11 +23,11 @@ type OptionsT = {
 export default function Launch(
   Application: ComponentType,
   options: OptionsT = {},
-) {
+): void {
   const container = document.getElementById('react-view');
   if (!container) throw Error('Failed to find container for React app');
   const scene = (
-    <GlobalStateProvider initialState={getInj().ISTATE || options.initialState}>
+    <GlobalStateProvider initialState={getInj().ISTATE ?? options.initialState}>
       <BrowserRouter>
         <HelmetProvider>
           <Application />

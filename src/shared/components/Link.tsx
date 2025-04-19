@@ -12,10 +12,14 @@ import GenericLink, { type PropsT as GenericLinkPropsT } from './GenericLink';
 
 type PropsT = Omit<GenericLinkPropsT, 'routerLinkType'> & LinkProps;
 
-const Link: React.FunctionComponent<PropsT> = (props) => (
-  /* eslint-disable react/jsx-props-no-spreading */
-  <GenericLink {...props} routerLinkType={RrLink} />
-  /* eslint-enable react/jsx-props-no-spreading */
-);
+const Link: React.FunctionComponent<PropsT>
+  = (props) => (
+    <GenericLink
+      // TODO: Avoid the spreading later.
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+      routerLinkType={RrLink}
+    />
+  );
 
 export default Link;

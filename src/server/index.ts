@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unassigned-import
 import 'source-map-support/register';
 
 import http from 'http';
@@ -12,10 +13,12 @@ import {
   toNumber,
 } from 'lodash';
 
-/* Polyfill required by ReactJS. */
+// Polyfill required by ReactJS.
+// TODO: Double-check, if it is still required by React v19?
+// eslint-disable-next-line import/no-unassigned-import
 import 'raf/polyfill';
 
-import { type Configuration } from 'webpack';
+import type { Configuration } from 'webpack';
 
 import serverFactory, {
   type OptionsT as ServerOptionsT,
@@ -27,11 +30,11 @@ import { SCRIPT_LOCATIONS, newDefaultLogger } from './renderer';
 
 import { errors } from './utils';
 
-export {
-  type BeforeRenderResT,
-  type BeforeRenderT,
-  type ConfigT,
-  type ServerSsrContext,
+export type {
+  BeforeRenderResT,
+  BeforeRenderT,
+  ConfigT,
+  ServerSsrContext,
 } from './renderer';
 
 export { errors, getDefaultCspSettings, type ServerT };
@@ -53,7 +56,7 @@ type OptionsT = ServerOptionsT & {
   https?: {
     cert: string;
     key: string;
-  },
+  };
 
   // TODO: Should we limit it to number | string, and throw if it is different value?
   port?: false | number | string;
@@ -175,22 +178,27 @@ type OptionsT = ServerOptionsT & {
  * @param {number} [options.maxSsrRounds=10] Maximum number of SSR rounds.
  * @param {number} [options.ssrTimeout=1000] SSR timeout in milliseconds,
  * defaults to 1 second.
- * @return {Promise<{ expressServer: object, httpServer: object }>} Resolves to
- * an object with created Express and HTTP servers.
+ * @return Resolves to an object with created Express and HTTP servers.
  */
-export default async function launchServer(webpackConfig: Configuration, options: OptionsT) {
+export default async function launchServer(
+  webpackConfig: Configuration,
+  options: OptionsT = {},
+): Promise<{
+    expressServer: ServerT;
+    httpServer: http.Server;
+  }> {
   /* Options normalization. */
-  const ops = options ? cloneDeep(options) : {};
+  const ops = cloneDeep(options);
+
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   ops.port = normalizePort(ops.port || process.env.PORT || 3000);
   defaults(ops, { httpsRedirect: true });
 
   // TODO: Need a separate type for normalized options, which guarantees
   // the logger is set!
-  if (ops.logger === undefined) {
-    ops.logger = newDefaultLogger({
-      defaultLogLevel: ops.defaultLoggerLogLevel,
-    });
-  }
+  ops.logger ??= newDefaultLogger({
+    defaultLogLevel: ops.defaultLoggerLogLevel,
+  });
 
   /* Creates servers, resolves and sets the port. */
   const expressServer = await serverFactory(webpackConfig, ops);
@@ -200,22 +208,23 @@ export default async function launchServer(webpackConfig: Configuration, options
     httpServer = https.createServer({
       cert: ops.https.cert,
       key: ops.https.key,
-    }, expressServer);
-  } else httpServer = http.createServer(expressServer);
+    }, expressServer as unknown as () => void);
+  } else httpServer = http.createServer(expressServer as unknown as () => void);
 
   /* Sets error handler for HTTP(S) server. */
   httpServer.on('error', (error: Error) => {
-    if ((error as any).syscall !== 'listen') throw error;
+    if ((error as { syscall?: string }).syscall !== 'listen') throw error;
     const bind = isString(ops.port) ? `Pipe ${ops.port}` : `Port ${ops.port}`;
 
     /* Human-readable message for some specific listen errors. */
-    switch ((error as any).code) {
+    switch ((error as { code?: string }).code) {
       case 'EACCES':
         ops.logger!.error(`${bind} requires elevated privileges`);
         return process.exit(1);
       case 'EADDRINUSE':
         ops.logger!.error(`${bind} is already in use`);
         return process.exit(1);
+      case undefined:
       default:
         throw error;
     }

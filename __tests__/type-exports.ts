@@ -1,11 +1,11 @@
 import { expect } from 'tstyche';
 
-import {
-  type BeforeRenderResT,
-  type BeforeRenderT,
-  type ConfigT,
-  type ServerSsrContext,
-  type ServerT,
+import type {
+  BeforeRenderResT,
+  BeforeRenderT,
+  ConfigT,
+  ServerSsrContext,
+  ServerT,
 } from '../src';
 
 test('type exports', () => {

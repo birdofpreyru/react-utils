@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 
 import { timer } from '@dr.pogodin/js-utils';
 
@@ -49,7 +48,7 @@ describe('concurrent use', () => {
     let flag = false;
     const sem = new Semaphore();
 
-    (async () => {
+    void (async () => {
       await sem.waitReady();
       flag = true;
     })();
@@ -75,19 +74,19 @@ describe('concurrent use', () => {
       }
     };
 
-    newFlow('A');
-    newFlow('B');
+    void newFlow('A');
+    void newFlow('B');
 
-    expect(signals).toEqual([]);
+    expect(signals).toStrictEqual([]);
     sem.setReady(true);
     await timer(dT / 2);
-    expect(signals).toEqual(['A-1']);
+    expect(signals).toStrictEqual(['A-1']);
     await timer(dT);
-    expect(signals).toEqual(['A-1', 'B-1']);
+    expect(signals).toStrictEqual(['A-1', 'B-1']);
     await timer(dT);
-    expect(signals).toEqual(['A-1', 'B-1', 'A-2']);
+    expect(signals).toStrictEqual(['A-1', 'B-1', 'A-2']);
     await timer(dT);
-    expect(signals).toEqual(['A-1', 'B-1', 'A-2', 'B-2']);
+    expect(signals).toStrictEqual(['A-1', 'B-1', 'A-2', 'B-2']);
   });
 
   test('.seize() can be used for mutual exclusion', async () => {
@@ -105,19 +104,19 @@ describe('concurrent use', () => {
       }
     };
 
-    newFlow('A');
-    newFlow('B');
+    void newFlow('A');
+    void newFlow('B');
 
-    expect(signals).toEqual([]);
+    expect(signals).toStrictEqual([]);
     sem.setReady(true);
     await timer(dT / 2);
-    expect(signals).toEqual(['A-1']);
+    expect(signals).toStrictEqual(['A-1']);
     await timer(dT);
-    expect(signals).toEqual(['A-1', 'B-1']);
+    expect(signals).toStrictEqual(['A-1', 'B-1']);
     await timer(dT);
-    expect(signals).toEqual(['A-1', 'B-1', 'A-2']);
+    expect(signals).toStrictEqual(['A-1', 'B-1', 'A-2']);
     await timer(dT);
-    expect(signals).toEqual(['A-1', 'B-1', 'A-2', 'B-2']);
+    expect(signals).toStrictEqual(['A-1', 'B-1', 'A-2', 'B-2']);
   });
 
   test(
@@ -129,12 +128,12 @@ describe('concurrent use', () => {
         await sem.waitReady();
         signals.push(signal);
       };
-      newFlow('A');
-      newFlow('B');
+      void newFlow('A');
+      void newFlow('B');
       sem.setReady(true);
-      newFlow('C');
+      void newFlow('C');
       await timer(10);
-      expect(signals).toEqual(['A', 'B', 'C']);
+      expect(signals).toStrictEqual(['A', 'B', 'C']);
     },
   );
 });

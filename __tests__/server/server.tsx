@@ -1,6 +1,9 @@
 import type { NextFunction, Request, Response } from 'express';
 import { clone, noop } from 'lodash';
+import type ServeFaviconM from 'serve-favicon';
 import supertest from 'supertest';
+import type WebpackM from 'webpack';
+import type WebpackHotM from 'webpack-hot-middleware';
 
 import serverFactory, { type CspOptionsT } from 'server/server';
 import { setBuildInfo } from 'utils/isomorphy/buildInfo';
@@ -14,23 +17,29 @@ const logger = {
   warn: noop,
 };
 
-jest.mock('serve-favicon', () => jest.fn(
-  () => (req: Request, res: Response, next: NextFunction) => next(),
+jest.mock<typeof ServeFaviconM>('serve-favicon', () => jest.fn(
+  () => (req: Request, res: Response, next: NextFunction) => {
+    next();
+  },
 ));
 
-jest.mock('webpack', () => {
+jest.mock<typeof WebpackM>('webpack', () => {
   const mock = () => ({
     apply: jest.fn(),
     plugin: jest.fn(),
     watch: jest.fn(),
   });
   mock.ProgressPlugin = Object;
-  return mock;
+  return mock as unknown as typeof WebpackM;
 });
 
-jest.mock(
+jest.mock<typeof WebpackHotM>(
   'webpack-hot-middleware',
-  () => jest.fn(() => (req: Request, res: Response, next: NextFunction) => next()),
+  () => jest.fn(
+    () => (req: Request, res: Response, next: NextFunction) => {
+      next();
+    },
+  ) as unknown as typeof WebpackHotM,
 );
 
 const TEST_CONTEXT = `${__dirname}/test_data`;
@@ -51,19 +60,20 @@ afterEach(() => {
   jest.resetAllMocks();
 });
 
-test('Favicon support', () => {
+test('Favicon support', async () => {
   const server = serverFactory(TEST_WEBPACK_CONFIG, {
     favicon: clone(TEST_FAVICON_PATH),
     logger,
   });
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   expect(require('serve-favicon')).toHaveBeenCalledWith(TEST_FAVICON_PATH);
-  return server;
+  await server;
 });
 
-test('Launch with dev tools', () => {
+test('Launch with dev tools', async () => {
   process.env.DEV_TOOLS = '1';
   const server = serverFactory(TEST_WEBPACK_CONFIG, { logger });
-  return server;
+  await server;
 });
 
 describe('Server is functional', () => {
@@ -74,7 +84,7 @@ describe('Server is functional', () => {
       await serverFactory(TEST_WEBPACK_CONFIG, {
         Application: () => <div>Hello World!</div>,
         cspSettingsHook: (csp: CspOptionsT) => {
-          const sources = csp.directives?.['default-src'] as Array<string>;
+          const sources = csp.directives?.['default-src'] as string[];
           sources.push('https://sample.url');
           return csp;
         },

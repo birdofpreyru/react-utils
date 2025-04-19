@@ -3,11 +3,15 @@
 
 // TODO: Split client- and server-side tests into two separate test modules.
 
+import type ConfigM from 'config';
 import { clone } from 'lodash';
 import { mockClientSide, unmockClientSide } from 'utils/jest';
 
+import type * as IT from 'utils/isomorphy';
+
 test('Base test', () => {
-  const config = require('config');
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const config = require('config') as typeof ConfigM;
   expect(config).toMatchSnapshot();
 });
 
@@ -27,22 +31,34 @@ describe('Isomorphy behavior tests', () => {
     // window.CONFIG = clone(CLIENT_SIDE_CONFIG);
   });
 
-  afterEach(() => unmockClientSide());
+  afterEach(() => {
+    unmockClientSide();
+  });
 
   // TODO: This test does not work now, as the client-side handles injection
   // of data by server differently, and simply assigning window.CONFIG does not
   // mock it in any way (one of the reason for the change affecting this test
   // was to get rid of objects attached to window by library).
-  test.skip('Serves injected config at the client side', () => {
+  it.skip('Serves injected config at the client side', () => {
     mockClientSide();
-    const { IS_CLIENT_SIDE } = require('utils/isomorphy');
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { IS_CLIENT_SIDE } = require('utils/isomorphy') as typeof IT;
     expect(IS_CLIENT_SIDE).toBe(true);
-    expect(require('utils/config').default).toEqual(CLIENT_SIDE_CONFIG);
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    expect((require('utils/config') as {
+      default: typeof ConfigM;
+    }).default)
+      .toStrictEqual(CLIENT_SIDE_CONFIG);
   });
 
-  test('Serves node-config at the server side', () => {
-    const { IS_SERVER_SIDE } = require('utils/isomorphy');
+  it('Serves node-config at the server side', () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { IS_SERVER_SIDE } = require('utils/isomorphy') as typeof IT;
     expect(IS_SERVER_SIDE).toBe(true);
-    expect(require('utils/config').default).toEqual(SERVER_SIDE_CONFIG);
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    expect((require('utils/config') as {
+      default: typeof ConfigM;
+    }).default)
+      .toStrictEqual(SERVER_SIDE_CONFIG);
   });
 });

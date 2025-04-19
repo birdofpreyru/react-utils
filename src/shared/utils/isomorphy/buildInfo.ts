@@ -31,7 +31,7 @@ if (typeof BUILD_INFO !== 'undefined') buildInfo = BUILD_INFO;
  * @param info
  * @param force
  */
-export function setBuildInfo(info?: BuildInfoT, force = false) {
+export function setBuildInfo(info?: BuildInfoT, force = false): void {
   if (buildInfo !== undefined && !force) {
     throw Error('"Build Info" is already initialized');
   }

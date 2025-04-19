@@ -5,6 +5,8 @@
 // we need it.
 // TODO: Can we improve this behavior, so it works out of the box within
 // this library tests?
+
+// eslint-disable-next-line import/no-unassigned-import
 import 'client/init';
 
 import client from 'client';

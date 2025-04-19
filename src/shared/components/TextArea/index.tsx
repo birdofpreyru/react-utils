@@ -1,5 +1,8 @@
 import {
+  type ChangeEventHandler,
   type FocusEventHandler,
+  type FunctionComponent,
+  type KeyboardEventHandler,
   useEffect,
   useRef,
   useState,
@@ -17,14 +20,14 @@ type ThemeKeyT =
 type Props = {
   disabled?: boolean;
   onBlur?: FocusEventHandler<HTMLTextAreaElement>;
-  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
-  onKeyDown?: React.KeyboardEventHandler<HTMLTextAreaElement>;
+  onChange?: ChangeEventHandler<HTMLTextAreaElement>;
+  onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
   placeholder?: string;
   theme: Theme<ThemeKeyT>;
   value?: string;
 };
 
-const TextArea: React.FunctionComponent<Props> = ({
+const TextArea: FunctionComponent<Props> = ({
   disabled,
   onBlur,
   onChange,
@@ -36,7 +39,7 @@ const TextArea: React.FunctionComponent<Props> = ({
   const hiddenAreaRef = useRef<HTMLTextAreaElement>(null);
   const [height, setHeight] = useState<number | undefined>();
 
-  const [localValue, setLocalValue] = useState(value || '');
+  const [localValue, setLocalValue] = useState(value ?? '');
   if (value !== undefined && localValue !== value) setLocalValue(value);
 
   // This resizes text area's height when its width is changed for any reason.
@@ -64,27 +67,32 @@ const TextArea: React.FunctionComponent<Props> = ({
   return (
     <div className={theme.container}>
       <textarea
+        className={`${theme.textarea} ${theme.hidden}`}
+
         // This text area is hidden underneath the primary one below,
         // and it is used for text measurements, to implement auto-scaling
         // of the primary textarea's height.
         readOnly
         ref={hiddenAreaRef}
-        className={`${theme.textarea} ${theme.hidden}`}
         value={localValue}
       />
       <textarea
+        className={theme.textarea}
         disabled={disabled}
         onBlur={onBlur}
+
         // When value is "undefined" the text area is not-managed, and we should
         // manage it internally for the measurement / resizing functionality
         // to work.
-        onChange={value === undefined ? ((e) => {
-          setLocalValue(e.target.value);
-        }) : onChange}
+        onChange={
+          value === undefined
+            ? (e) => {
+              setLocalValue(e.target.value);
+            } : onChange
+        }
         onKeyDown={onKeyDown}
         placeholder={placeholder}
         style={{ height }}
-        className={theme.textarea}
         value={localValue}
       />
     </div>

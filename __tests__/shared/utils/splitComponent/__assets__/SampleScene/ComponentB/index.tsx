@@ -5,7 +5,7 @@
  * that code splitting has not broke related functionality.
  */
 
-import { type ReactNode } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
 import { Route, Routes } from 'react-router';
 
 import { type ForceT, useGlobalState } from '@dr.pogodin/react-global-state';
@@ -17,12 +17,11 @@ type PropsT = {
   prop?: string;
 };
 
-const SampleComponent: React.FunctionComponent<PropsT> = ({ children, prop }) => {
+const SampleComponent: FunctionComponent<PropsT> = ({ children, prop }) => {
   const [testKey] = useGlobalState<ForceT, string>('test.key', '');
   return (
     <Routes>
       <Route
-        path=""
         element={(
           <div>
             <h1>Sample Component</h1>
@@ -35,6 +34,7 @@ const SampleComponent: React.FunctionComponent<PropsT> = ({ children, prop }) =>
             </div>
           </div>
         )}
+        path=""
       />
     </Routes>
   );

@@ -58,9 +58,7 @@ exports[`Export at server side 1`] = `
 }
 `;
 
-exports[`Export at server side 2`] = `{}`;
-
-exports[`Export at server side 3`] = `
+exports[`Export at server side 2`] = `
 [
   "extend",
   "locale",
@@ -81,7 +79,7 @@ exports[`Export at server side 3`] = `
 ]
 `;
 
-exports[`Export at server side 4`] = `
+exports[`Export at server side 3`] = `
 [
   "SCRIPT_LOCATIONS",
   {
@@ -92,14 +90,14 @@ exports[`Export at server side 4`] = `
 ]
 `;
 
-exports[`Export at server side 5`] = `
+exports[`Export at server side 4`] = `
 [
   "getDefaultCspSettings",
   [Function],
 ]
 `;
 
-exports[`Export at server side 6`] = `
+exports[`Export at server side 5`] = `
 [
   "errors",
   {

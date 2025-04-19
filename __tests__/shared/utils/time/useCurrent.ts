@@ -25,9 +25,12 @@ global.webpackStats!.assets!.forEach(({ name }) => {
   if (name.endsWith('.js')) jsFile = name;
 });
 
-it('matches SSR render during hydration', async () => {
+test('matches SSR render during hydration', async () => {
   const markup = container.innerHTML;
   const js = fs.readFileSync(`${outputPath}/${jsFile}`, 'utf8') as string;
-  await act(() => new Function(js)()); // eslint-disable-line no-new-func
+
+  // TODO: Rewise, if this can be simplified.
+  // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
+  await act(() => new Function(js)());
   expect(document.querySelector('#react-view')!.innerHTML).toBe(markup);
 });

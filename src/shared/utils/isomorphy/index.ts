@@ -12,26 +12,24 @@ function getMode() {
 /**
  * Returns `true` if development version of the code is running;
  * `false` otherwise.
- * @return {boolean}
  */
-export function isDevBuild() {
+export function isDevBuild(): boolean {
   return getMode() === 'development';
 }
 
 /**
  * Returns `true` if production build of the code is running;
  * `false` otherwise.
- * @return {boolean}
  */
-export function isProdBuild() {
+export function isProdBuild(): boolean {
   return getMode() === 'production';
 }
 
 /**
  * Returns build timestamp of the front-end JS bundle.
- * @return {string} ISO date/time string.
+ * @return ISO date/time string.
  */
-export function buildTimestamp() {
+export function buildTimestamp(): string {
   return getBuildInfo().timestamp;
 }
 

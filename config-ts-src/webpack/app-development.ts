@@ -1,14 +1,12 @@
-/**
- * @category Configs
- * @module webpack/app-development
- * @desc development Webpack configuration for applications.
- */
+
+/* eslint-disable import/no-extraneous-dependencies */
+
 import { clone, defaults } from 'lodash';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
-import webpack from 'webpack';
+import webpack, { type Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 
 import baseFactory, { type OptionsT as BaseOptionsT } from './app-base';
@@ -24,7 +22,7 @@ type OptionsT = BaseOptionsT & {
  * @param [ops.dontUseReactGlobalStateDebugging]
  * @param [ops.dontUseHmr]
  */
-export default function configFactory(ops: OptionsT) {
+export default function configFactory(ops: OptionsT): Configuration {
   const o = defaults(clone(ops), {
     cssLocalIdent: '[package]___[path][name]___[local]___[hash:base64:6]',
   });
@@ -53,16 +51,16 @@ export default function configFactory(ops: OptionsT) {
   // "ReferenceError: $RefreshReg$ is not defined" error. For now it seems
   // fine to keep these plugins anyway, thus the shortcut of "if" condition
   // below.
-  if (true || !o.dontUseHmr) {
-    plugins.push(
-      new webpack.HotModuleReplacementPlugin(),
-      new ReactRefreshPlugin({
-        overlay: {
-          sockIntegration: 'whm',
-        },
-      }),
-    );
-  }
+  // if (true ?? !o.dontUseHmr) {
+  plugins.push(
+    new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshPlugin({
+      overlay: {
+        sockIntegration: 'whm',
+      },
+    }),
+  );
+  // }
 
   const res = merge(baseFactory({
     ...o,

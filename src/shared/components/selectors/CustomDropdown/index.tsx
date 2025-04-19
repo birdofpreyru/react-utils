@@ -9,7 +9,7 @@ import defaultTheme from './theme.scss';
 import { type PropsT, type ValueT, optionValueName } from '../common';
 
 const BaseCustomDropdown: React.FunctionComponent<
-PropsT<React.ReactNode, (value: ValueT) => void>
+  PropsT<React.ReactNode, (value: ValueT) => void>
 > = ({
   filter,
   label,
@@ -18,8 +18,6 @@ PropsT<React.ReactNode, (value: ValueT) => void>
   theme,
   value,
 }) => {
-  if (!options) throw Error('Internal error');
-
   const [active, setActive] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -44,8 +42,8 @@ PropsT<React.ReactNode, (value: ValueT) => void>
         setUpward(up);
 
         const pos = up ? {
-          top: anchor.top - opsRect.height - 1,
           left: anchor.left,
+          top: anchor.top - opsRect.height - 1,
           width: anchor.width,
         } : {
           left: anchor.left,
@@ -78,8 +76,8 @@ PropsT<React.ReactNode, (value: ValueT) => void>
     // move it above, at least with the current position update via local
     // react state, and not imperatively).
     setOpsPos({
-      left: view?.width || 0,
-      top: view?.height || 0,
+      left: view?.width ?? 0,
+      top: view?.height ?? 0,
       width: rect.width,
     });
 
@@ -87,9 +85,8 @@ PropsT<React.ReactNode, (value: ValueT) => void>
   };
 
   let selected: React.ReactNode = <>&zwnj;</>;
-  for (let i = 0; i < options.length; ++i) {
-    const option = options[i];
-    if (option !== undefined && (!filter || filter(option))) {
+  for (const option of options) {
+    if (!filter || filter(option)) {
       const [iValue, iName] = optionValueName(option);
       if (iValue === value) {
         selected = iName;
@@ -101,7 +98,7 @@ PropsT<React.ReactNode, (value: ValueT) => void>
   let containerClassName = theme.container;
   if (active) containerClassName += ` ${theme.active}`;
 
-  let opsContainerClass = theme.select || '';
+  let opsContainerClass = theme.select ?? '';
   if (upward) {
     containerClassName += ` ${theme.upward}`;
     opsContainerClass += ` ${theme.upward}`;
@@ -109,9 +106,8 @@ PropsT<React.ReactNode, (value: ValueT) => void>
 
   return (
     <div className={containerClassName}>
-      {label === undefined ? null : (
-        <div className={theme.label}>{label}</div>
-      )}
+      {label === undefined ? null
+        : <div className={theme.label}>{label}</div>}
       <div
         className={theme.dropdown}
         onClick={openList}
@@ -137,7 +133,7 @@ PropsT<React.ReactNode, (value: ValueT) => void>
               setActive(false);
               if (onChange) onChange(newValue);
             }}
-            optionClass={theme.option || ''}
+            optionClass={theme.option ?? ''}
             options={options}
             ref={opsRef}
           />

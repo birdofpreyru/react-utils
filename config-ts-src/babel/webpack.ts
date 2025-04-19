@@ -1,10 +1,12 @@
-import {
-  type PluginOptionsT as ReactCssModulesOptionsT,
+import type { TransformOptions } from '@babel/core';
+
+import type {
+  PluginOptionsT as ReactCssModulesOptionsT,
 } from '@dr.pogodin/babel-plugin-react-css-modules';
 
-const {
+import {
   generateScopedNameFactory,
-} = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
+} from '@dr.pogodin/babel-plugin-react-css-modules/utils';
 
 const generateScopedNameDev = generateScopedNameFactory(
   '[package]___[path][name]___[local]___[hash:base64:6]',
@@ -14,6 +16,8 @@ const generateScopedNameProd = generateScopedNameFactory(
   '[hash:base64:6]',
 );
 
+// TODO: Check it.
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface BabelCompilerI {
   env: () => string;
 }
@@ -27,15 +31,6 @@ export enum ENVIRONMENTS {
   TEST = 'test',
 }
 
-export interface PresetOrPluginOptionsI {}
-
-type PresetOrPluginT = string | [string, PresetOrPluginOptionsI];
-
-export type ConfigT = {
-  presets: PresetOrPluginT[];
-  plugins: PresetOrPluginT[];
-};
-
 // Valid values for `module` option of @babel/preset-env,
 // as per https://babeljs.io/docs/babel-preset-env#modules
 type ModuleT = 'amd' | 'auto' | 'cjs' | 'commonjs' | 'systemjs' | 'umd' | false;
@@ -44,7 +39,7 @@ export type OptionsT = {
   modules?: ModuleT;
   noRR?: boolean;
   noStyling?: boolean;
-  targets?: string | string[] | { [key: string]: string };
+  targets?: string | string[] | Record<string, string>;
 
   // Set `true` to add into config pieces necessary for TypeScript processing.
   typescript?: boolean;
@@ -55,24 +50,8 @@ export type OptionsT = {
  * @param [options] Base config options.
  * @return Generated config.
  */
-function newBaseConfig(options: OptionsT): ConfigT {
+function newBaseConfig(options: OptionsT): TransformOptions {
   return {
-    presets: [
-      ['@babel/env', {
-        // Leaves it to the Webpack to deal with modules.
-        modules: options.modules ?? false,
-
-        // Chrome 69 is the browser/WebView for Android 9 (API level 28).
-        targets: options.targets || 'defaults or chrome >= 69',
-      }],
-
-      // TODO: Starting from Babel 8, "automatic" will be the default runtime,
-      // thus once upgraded to Babel 8, runtime should be removed from
-      // @babel/react options below.
-      ['@babel/react', { runtime: 'automatic' }],
-
-      '@dr.pogodin/babel-preset-svgr',
-    ],
     plugins: [
       ['module-resolver', {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -82,6 +61,22 @@ function newBaseConfig(options: OptionsT): ConfigT {
         ],
       }],
       '@babel/transform-runtime',
+    ],
+    presets: [
+      ['@babel/env', {
+        // Leaves it to the Webpack to deal with modules.
+        modules: options.modules ?? false,
+
+        // Chrome 69 is the browser/WebView for Android 9 (API level 28).
+        targets: options.targets ?? 'defaults or chrome >= 69',
+      }],
+
+      // TODO: Starting from Babel 8, "automatic" will be the default runtime,
+      // thus once upgraded to Babel 8, runtime should be removed from
+      // @babel/react options below.
+      ['@babel/react', { runtime: 'automatic' }],
+
+      '@dr.pogodin/babel-preset-svgr',
     ],
   };
 }
@@ -96,14 +91,14 @@ function newBaseConfig(options: OptionsT): ConfigT {
  * @return {object} Returns mutated config for chaining.
  * @ignore
  */
-function addStyling(config: ConfigT, env: ENVIRONMENTS) {
+function addStyling(config: TransformOptions, env: ENVIRONMENTS) {
   const cssModulesOps: ReactCssModulesOptionsT = {
     autoResolveMultipleImports: true,
     filetypes: {
       '.scss': { syntax: 'postcss-scss' },
     },
   };
-  config.plugins.push(['@dr.pogodin/react-css-modules', cssModulesOps]);
+  config.plugins!.push(['@dr.pogodin/react-css-modules', cssModulesOps]);
   switch (env) {
     case ENVIRONMENTS.DEV:
     case ENVIRONMENTS.TEST:
@@ -129,20 +124,23 @@ function addStyling(config: ConfigT, env: ENVIRONMENTS) {
  *  `@babel/preset-env`.
  * @return Generated config.
  */
-export default function getPreset(babel: BabelCompilerI, ops: OptionsT = {}) {
+export default function getPreset(
+  babel: BabelCompilerI,
+  ops: OptionsT = {},
+): TransformOptions {
   const env = babel.env();
 
   const res = newBaseConfig(ops);
 
   if (!ops.noStyling) addStyling(res, env as ENVIRONMENTS);
-  if (env === ENVIRONMENTS.DEV && !ops.noRR) {
-    res.plugins.push('react-refresh/babel');
+  if (env === (ENVIRONMENTS.DEV as string) && !ops.noRR) {
+    res.plugins!.push('react-refresh/babel');
   }
 
   // Conditional to not require non-TypeScript projects to install TypeScript-
   // specific dependencies for build process.
   if (ops.typescript) {
-    res.presets.push(
+    res.presets!.push(
       ['@babel/typescript', {
         // This ensures TypeScript compilation does not remove "unused" imports,
         // as in most cases it considers assets (e.g. stylesheet) imports as

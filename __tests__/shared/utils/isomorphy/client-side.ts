@@ -3,6 +3,8 @@
 import { mockClientSide } from 'utils/jest';
 import { setBuildInfo } from 'utils/isomorphy/buildInfo';
 
+import type * as IT from 'utils/isomorphy';
+
 // TODO: It would be nicer to do all these tests with a proper Webpack build.
 
 mockClientSide();
@@ -14,7 +16,8 @@ setBuildInfo({
   useServiceWorker: false,
 });
 
-const m = require('utils/isomorphy');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const m = require('utils/isomorphy') as typeof IT;
 
 afterEach(() => {
   process.env.NODE_ENV = 'test';

@@ -3,7 +3,7 @@ import { Emitter } from 'index';
 describe('constructor()', () => {
   it('creates a new emitter with empty listeners array', () => {
     const e = new Emitter();
-    expect(e.listeners).toEqual([]);
+    expect(e.listeners).toStrictEqual([]);
   });
 });
 
