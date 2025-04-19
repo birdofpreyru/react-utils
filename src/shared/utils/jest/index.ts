@@ -9,7 +9,7 @@ import type {
 } from 'axios';
 
 import mockdate from 'mockdate';
-import { type ReactNode, act } from 'react';
+import { type ReactElement, type ReactNode, act } from 'react';
 import { type Root, createRoot } from 'react-dom/client';
 
 import { type RenderResult, render } from '@testing-library/react';
@@ -160,14 +160,24 @@ export function mount(scene: ReactNode): MountedSceneT {
   return res;
 }
 
-type SnapshotOptionsT = {
+// NOTE: If in future we have additional options here, they should be distributed
+// across two objects, depending whether they are applicable to the sync, or async
+// versions of snapshot(), or both.
+type AsyncSnapshotOptionsT = {
   await?: Promise<void>;
 };
 
+export function snapshot(element: ReactElement): RenderResult;
+
 export async function snapshot(
+  element: ReactElement,
+  options: AsyncSnapshotOptionsT,
+): Promise<RenderResult>;
+
+export function snapshot(
   element: React.ReactElement,
-  options?: SnapshotOptionsT,
-): Promise<RenderResult> {
+  options?: AsyncSnapshotOptionsT,
+): Promise<RenderResult> | RenderResult {
   let res: RenderResult | undefined;
 
   // TODO: Just adding async to the actor function breaks stuff, as it makes
@@ -182,7 +192,15 @@ export async function snapshot(
   });
 
   if (res === undefined) throw Error('Render failed');
-  if (options?.await) await promise;
+  if (options?.await) {
+    // TODO: Then body of .then() is the same as the last three lines in this
+    // function, executed for the non-async variant. We should re-use that.
+    return promise.then(() => {
+      const nodes = res!.asFragment().childNodes;
+      expect(nodes.length > 1 ? [...nodes] : nodes[0]).toMatchSnapshot();
+      return res!;
+    });
+  }
 
   const nodes = res.asFragment().childNodes;
   expect(nodes.length > 1 ? [...nodes] : nodes[0]).toMatchSnapshot();

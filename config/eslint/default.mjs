@@ -29,4 +29,9 @@ export default defineConfig([{
     eslintConfigs.configs.jest,
   ],
   files: ['__tests__/**'],
+  rules: {
+    'jest/expect-expect': ['warn', {
+      assertFunctionNames: ['expect', 'snapshot'],
+    }],
+  },
 }]);

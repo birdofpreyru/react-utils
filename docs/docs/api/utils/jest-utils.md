@@ -206,14 +206,18 @@ or the lower-level [fireEvent] from [@testing-library/dom].
 ### snapshot()
 [snapshot()]: #snapshot
 ```tsx
-import { mount } from '@dr.pogodin/react-utils/jest';
+import { snapshot } from '@dr.pogodin/react-utils/jest';
 
-function snapshot(
-  element: React.ReactElement,
-  options?: SnapshotOptionsT,
-): Node | null;
+// 1st overload (synchronous):
+function snapshot(element: ReactElement): RenderResult;
+
+// 2nd overload (asynchronous):
+async function snapshot(
+  element: ReactElement,
+  options: SnapshotOptionsT,
+): Promise<RenderResult>;
 ```
-It does a snapshot test of the given ReactJS component.
+It does the snapshot test of given React component.
 
 <details>
 <summary>Example</summary>
@@ -245,12 +249,13 @@ test('A snapshot test', () => {
 :::
 
 **Arguments**
-- `component` &mdash; **React.ReactElement** &mdash; React element to snapshot.
+- `component` &mdash; **ReactElement** &mdash; React element to snapshot.
 - `options` &mdash; [SnapshotOptionsT] | **undefined** &mdash; Optional settings.
+  If provided, the function will be considered asynchronous, otherwise synchronous.
 
 **Returns**
-- [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) &mdash;
-  rendered DOM node.
+- [RenderResult](https://testing-library.com/docs/angular-testing-library/api/#renderresult) &mdash;
+  render result from [@testing-library/react].
 
 #### SnapshotOptionsT
 [SnapshotOptionsT]: #snapshotoptionst
