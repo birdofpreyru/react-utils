@@ -1,5 +1,5 @@
 {
-  "version": "1.43.1",
+  "version": "1.43.2",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -56,7 +56,7 @@
     "@babel/register": "^7.25.9",
     "@dr.pogodin/babel-plugin-transform-assets": "^1.2.4",
     "@dr.pogodin/babel-preset-svgr": "^1.9.0",
-    "@dr.pogodin/eslint-configs": "^0.0.2",
+    "@dr.pogodin/eslint-configs": "^0.0.3",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.16",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.3.0",

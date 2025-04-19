@@ -2,6 +2,8 @@ import type PathT from 'path';
 
 import { IS_CLIENT_SIDE } from './isomorphy';
 
+type RequireWeakResT<T> = T extends { default: infer D } ? D & Omit<T, 'default'> : T;
+
 /**
  * Requires the specified module without including it into the bundle during
  * Webpack build.
@@ -12,7 +14,7 @@ import { IS_CLIENT_SIDE } from './isomorphy';
 export function requireWeak<T extends object>(
   modulePath: string,
   basePath?: string,
-): T | null {
+): RequireWeakResT<T> | null {
   if (IS_CLIENT_SIDE) return null;
 
   // TODO: On one hand, this try/catch wrap silencing errors is bad, as it may
@@ -31,15 +33,15 @@ export function requireWeak<T extends object>(
     const path = basePath ? resolve(basePath, modulePath) : modulePath;
     const module = req(path) as T;
 
-    if (!('default' in module) || !module.default) return module;
+    if (!('default' in module) || !module.default) return module as RequireWeakResT<T>;
 
     const { default: def, ...named } = module;
 
-    const res = def as T;
+    const res = def as RequireWeakResT<T>;
 
     Object.entries(named).forEach(([name, value]) => {
-      const assigned = res[name as keyof T];
-      if (assigned) (res[name as keyof T] as unknown) = value;
+      const assigned = res[name as keyof RequireWeakResT<T>];
+      if (assigned) (res[name as keyof RequireWeakResT<T>] as unknown) = value;
       else if (assigned !== value) {
         throw Error('Conflict between default and named exports');
       }
