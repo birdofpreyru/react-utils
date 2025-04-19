@@ -1,5 +1,5 @@
 {
-  "version": "1.43.0",
+  "version": "1.43.1",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -110,7 +110,7 @@
     "stylelint": "^16.18.0",
     "stylelint-config-standard-scss": "^14.0.0",
     "supertest": "^7.1.0",
-    "tsc-alias": "^1.8.15",
+    "tsc-alias": "^1.8.13",
     "tstyche": "^3.5.0",
     "typed-scss-modules": "^8.1.1",
     "typescript": "^5.8.3",
