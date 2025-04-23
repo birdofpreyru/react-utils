@@ -5,7 +5,6 @@ import eslintConfigs from '@dr.pogodin/eslint-configs';
 
 export default defineConfig([{
   ignores: [
-    '*.d.ts',
     '__coverage__',
     'build/',
     'docs/build/',
