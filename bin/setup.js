@@ -105,7 +105,7 @@ function adoptDevDependencies(donorData, hostData) {
 
   deps = Object.entries(deps).map(generateTargetPackage);
   if (deps.length) {
-    const args = ['install', '--save-dev'].concat(deps);
+    const args = ['install', '--save-dev', '--save-exact'].concat(deps);
     if (force) args.push('--force');
     if (verbose) args.push('--verbose');
     spawnSync(NPM_COMMAND, args, {
@@ -155,7 +155,7 @@ function getPackageJson(packageName = '@dr.pogodin/react-utils') {
 function install(library) {
   let name = library;
   if (!name.includes('@', 1)) name += '@latest';
-  const args = ['install', '--save', name];
+  const args = ['install', '--save', '--save-exact', name];
 
   if (force) args.push('--force');
   if (verbose) {
@@ -186,7 +186,7 @@ function updateProdDependencies(donorData, hostData) {
   });
   if (deps.length) {
     deps = deps.map(generateTargetPackage);
-    const args = ['install', '--save'].concat(deps);
+    const args = ['install', '--save', '--save-exact'].concat(deps);
     if (force) args.push('--force');
     if (verbose) args.push('--verbose');
     spawnSync(NPM_COMMAND, args, { stdio: 'inherit' });
