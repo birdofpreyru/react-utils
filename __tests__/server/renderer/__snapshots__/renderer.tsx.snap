@@ -104,7 +104,7 @@ exports[`Helmet integration works 2`] = `
             <meta data-rh="true" content="Test Page Description" property="description"/>
             <meta name="theme-color" content="#FFFFFF">
             
-            <link href="/test/public/path/main-1511941200000.css" rel="stylesheet">
+            <link data-rh="true" href="https://github.com/birdofpreyru/react-utils" rel="canonical"/><link href="/test/public/path/main-1511941200000.css" rel="stylesheet">
             
             <meta charset="utf-8">
             <meta

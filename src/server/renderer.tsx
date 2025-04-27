@@ -567,11 +567,11 @@ export default function factory(
         <html lang="en">
           <head>
             ${grouppedExtraScripts[SCRIPT_LOCATIONS.HEAD_OPEN]}
-            ${helmet ? helmet.title.toString() : ''}
-            ${helmet ? helmet.meta.toString() : ''}
+            ${helmet?.title.toString() ?? ''}
+            ${helmet?.meta.toString() ?? ''}
             <meta name="theme-color" content="#FFFFFF">
             ${manifestLink}
-            ${styleChunkString}
+            ${helmet?.link.toString() ?? ''}${styleChunkString}
             ${faviconLink}
             <meta charset="utf-8">
             <meta

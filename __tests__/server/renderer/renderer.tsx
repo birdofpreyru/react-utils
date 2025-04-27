@@ -158,6 +158,7 @@ test(
             Test Page Title
           </title>
           <meta content="Test Page Description" property="description" />
+          <link href="https://github.com/birdofpreyru/react-utils" rel="canonical" />
         </Helmet>
         <p>
           Goodbye World!
