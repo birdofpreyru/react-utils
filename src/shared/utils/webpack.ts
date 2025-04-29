@@ -2,7 +2,9 @@ import type PathT from 'path';
 
 import { IS_CLIENT_SIDE } from './isomorphy';
 
-type RequireWeakResT<T> = T extends { default: infer D } ? D & Omit<T, 'default'> : T;
+type RequireWeakResT<T> = T extends { default: infer D }
+  ? (D extends null | undefined ? T : D & Omit<T, 'default'>)
+  : T;
 
 /**
  * Requires the specified module without including it into the bundle during
