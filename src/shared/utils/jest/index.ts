@@ -193,12 +193,18 @@ export function snapshot(
 
   if (res === undefined) throw Error('Render failed');
   if (options?.await) {
-    // TODO: Then body of .then() is the same as the last three lines in this
-    // function, executed for the non-async variant. We should re-use that.
-    return promise.then(() => {
-      const nodes = res!.asFragment().childNodes;
-      expect(nodes.length > 1 ? [...nodes] : nodes[0]).toMatchSnapshot();
-      return res!;
+    // BEWARE: Although `promise` is thenable (i.e. it has .then() method),
+    // it is not an instance of proper Promise class, and returning it directly
+    // breaks some async logic in Jest test or React test functions... thus, we
+    // wrap it into Promise instance here.
+    return new Promise((resolve) => {
+      void promise.then(() => {
+        // TODO: These lines are the same as the lines below for sync variant of
+        // the function. We should split and reuse them in both places.
+        const nodes = res!.asFragment().childNodes;
+        expect(nodes.length > 1 ? [...nodes] : nodes[0]).toMatchSnapshot();
+        resolve(res!);
+      });
     });
   }
 
