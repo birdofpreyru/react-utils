@@ -1,6 +1,6 @@
 import { use } from 'react';
 
-import MetaTags from 'components/MetaTags';
+import { MetaTags } from 'components';
 
 export enum MODES {
   BASIC_NO_OVERRIDE = 0,
