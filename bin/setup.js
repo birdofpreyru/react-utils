@@ -44,6 +44,11 @@ program
   })
   .description(COMMAND_DESCRIPTION)
   .option(
+    '-E, --save-exact',
+    'Pin the exact library version, rather than using npm\'s default semver range operator',
+    false,
+  )
+  .option(
     '--force',
     'Uses "--force" option for underlying npm install & dedupe operations',
     false,
@@ -66,13 +71,29 @@ const { force, verbose } = cmdLineArgs;
  * @ignore
  * @param {Array} entry Array with package name as the first element, and
  *  corresponding version or URI given in a `package.json`.
- * @return {String} Package name and version as a string that can be passed
+ * @return {{
+ *  exact: boolean;
+ *  target: string;
+ * }} Package name and version as a string that can be passed
  *  into NPM's install command.
  */
 function generateTargetPackage(entry) {
-  if (entry[1].match(/^(git\+)?(file|https)?:\/\//)) return entry[1];
-  if (entry[1].match(/^[\^~]/)) return `${entry[0]}@${entry[1].slice(1)}`;
-  return `${entry[0]}@${entry[1]}`;
+  if (entry[1].match(/^(git\+)?(file|https)?:\/\//)) {
+    return {
+      exact: true,
+      target: entry[1],
+    };
+  }
+  if (entry[1].match(/^[\^~]/)) {
+    return {
+      exact: false,
+      target: `${entry[0]}@${entry[1].slice(1)}`,
+    };
+  }
+  return {
+    exact: true,
+    target: `${entry[0]}@${entry[1]}`,
+  };
 }
 
 /**
@@ -89,7 +110,7 @@ function adoptDevDependencies(donorData, hostData) {
   if (verbose) console.log('Adopting dev dependencies...');
 
   /* Inits deps as a map of all donor's dev dependencies. */
-  let deps = clone(donorData.devDependencies) || {};
+  const deps = clone(donorData.devDependencies) || {};
 
   /* Removes from the map any prod dependencies of host. */
   Object.entries(hostData.dependencies || {})
@@ -103,9 +124,28 @@ function adoptDevDependencies(donorData, hostData) {
       if (libVersion === deps[libName]) delete deps[libName];
     });
 
-  deps = Object.entries(deps).map(generateTargetPackage);
-  if (deps.length) {
-    const args = ['install', '--save-dev', '--save-exact'].concat(deps);
+  const exactDeps = [];
+  const laxDeps = [];
+
+  for (const dep of Object.entries(deps)) {
+    const { exact, target } = generateTargetPackage(dep);
+    if (exact) exactDeps.push(target);
+    else laxDeps.push(target);
+  }
+
+  // TODO: The following two if blocks are very similar, we should split them
+  // out and reuse.
+  if (exactDeps.length) {
+    const args = ['install', '--save-dev', '--save-exact'].concat(exactDeps);
+    if (force) args.push('--force');
+    if (verbose) args.push('--verbose');
+    spawnSync(NPM_COMMAND, args, {
+      stdio: 'inherit',
+    });
+  }
+
+  if (laxDeps.length) {
+    const args = ['install', '--save-dev'].concat(laxDeps);
     if (force) args.push('--force');
     if (verbose) args.push('--verbose');
     spawnSync(NPM_COMMAND, args, {
@@ -149,14 +189,15 @@ function getPackageJson(packageName = '@dr.pogodin/react-utils') {
 
 /**
  * Installs specified library.
- * @ignore
- * @param {String} library Library name.
+ * @param {string} library Library name.
+ * @param {object} [ops={}] Additional options.
+ * @param {boolean} [ops.exact=false] Pin the exact library version.
  */
-function install(library) {
+function install(library, ops = {}) {
   let name = library;
   if (!name.includes('@', 1)) name += '@latest';
-  const args = ['install', '--save', '--save-exact', name];
-
+  const args = ['install', '--save', name];
+  if (ops.exact) args.push('--save-exact');
   if (force) args.push('--force');
   if (verbose) {
     console.log(`Installing "${library}"...`);
@@ -185,11 +226,27 @@ function updateProdDependencies(donorData, hostData) {
     return hostLibVersion && hostLibVersion !== libVersion;
   });
   if (deps.length) {
-    deps = deps.map(generateTargetPackage);
-    const args = ['install', '--save', '--save-exact'].concat(deps);
-    if (force) args.push('--force');
-    if (verbose) args.push('--verbose');
-    spawnSync(NPM_COMMAND, args, { stdio: 'inherit' });
+    const exactDeps = [];
+    const laxDeps = [];
+    for (const dep of deps) {
+      const { exact, target } = generateTargetPackage(dep);
+      if (exact) exactDeps.push(target);
+      else laxDeps.push(target);
+    }
+
+    if (exactDeps.length) {
+      const args = ['install', '--save', '--save-exact'].concat(exactDeps);
+      if (force) args.push('--force');
+      if (verbose) args.push('--verbose');
+      spawnSync(NPM_COMMAND, args, { stdio: 'inherit' });
+    }
+
+    if (laxDeps.length) {
+      const args = ['install', '--save'].concat(laxDeps);
+      if (force) args.push('--force');
+      if (verbose) args.push('--verbose');
+      spawnSync(NPM_COMMAND, args, { stdio: 'inherit' });
+    }
   }
 }
 
@@ -197,7 +254,11 @@ function updateProdDependencies(donorData, hostData) {
 
 const hostData = getHostPackageJson();
 libs.forEach((library) => {
-  if (!cmdLineArgs.justFixDeps) install(library);
+  if (!cmdLineArgs.justFixDeps) {
+    install(library, {
+      exact: cmdLineArgs.saveExact,
+    });
+  }
   const libData = getPackageJson(library);
   adoptDevDependencies(libData, hostData);
   updateProdDependencies(libData, hostData);

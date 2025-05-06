@@ -1,11 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 // TODO: Double-check that let does not work?
-// eslint-disable-next-line no-var
+/* eslint-disable no-var */
 declare var IS_REACT_ACT_ENVIRONMENT: boolean | undefined;
-
-// eslint-disable-next-line no-var
+declare var REACT_UTILS_LIBRARY_LOADED: boolean | undefined;
 declare var REACT_UTILS_FORCE_CLIENT_SIDE: boolean | undefined;
+/* eslint-enable no-var */
 
 declare module '@babel/register/experimental-worker' {
   const register: {

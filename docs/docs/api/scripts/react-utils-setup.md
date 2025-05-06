@@ -43,6 +43,9 @@ If no `[libraries...]` are specified, the latest version of
     where the lists of dev and prod dependencies are formed in the way described
     above.
 
+-   `--save-exact` or `-E` &mdash; pin the exact versions of libraries,
+    rather than allow compatible SemVer versions (according to NPM defaults).
+
 -   `--verbose` &mdash; Opts-in for verbose logging by the script.
 
 -   `--version` or `-V` &mdash; Prints the script version.

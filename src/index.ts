@@ -5,6 +5,14 @@ import { webpack } from 'utils';
 import type * as ClientM from './client';
 import type * as ServerFactoryM from './server';
 
+// It is a safeguard against multiple instances / versions of the library
+// being loaded into environment by mistake (e.g. because of different
+// packages pinning down different exact versions of the lib, thus preventing
+// a proper dedupe and using a single common library version).
+if (global.REACT_UTILS_LIBRARY_LOADED) {
+  throw Error('React utils library is already loaded');
+} else global.REACT_UTILS_LIBRARY_LOADED = true;
+
 const server = webpack.requireWeak<typeof ServerFactoryM>('./server', __dirname);
 
 const client = server
