@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TextArea } from '@dr.pogodin/react-utils';
 
-const TextAreaExample = () => {
+function TextAreaExample() {
   const [value, setValue] = useState('');
   const [value2, setValue2] = useState('Disabled text area');
   return (
@@ -18,6 +18,6 @@ const TextAreaExample = () => {
       />
     </div>
   );
-};
+}
 
 export default TextAreaExample;

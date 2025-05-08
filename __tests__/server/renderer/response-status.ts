@@ -1,7 +1,6 @@
 // Tests how response status is handled by the renderer and its cache.
 
 // TODO: Perhaps, we indeed should not use the console like we use it below.
-/* eslint-disable no-console */
 
 import type { Request, RequestHandler } from 'express';
 

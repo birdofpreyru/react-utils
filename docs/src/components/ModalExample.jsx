@@ -5,7 +5,7 @@ import { Button, Modal, ThemeProvider } from '@dr.pogodin/react-utils';
 import darkButtonTheme from '../themes/buttons/dark.module.scss';
 import darkModalTheme from '../themes/modals/dark.module.scss';
 
-const ModalExample = () => {
+function ModalExample() {
   const [open, setOpen] = useState(false);
   const { isDarkTheme } = useColorMode();
   return (
@@ -30,6 +30,6 @@ const ModalExample = () => {
       <Button onClick={() => setOpen(true)}>Click to open the Modal</Button>
     </ThemeProvider>
   );
-};
+}
 
 export default ModalExample;

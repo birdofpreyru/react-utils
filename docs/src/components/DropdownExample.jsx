@@ -66,7 +66,7 @@ const SAMPLE_OPTIONS_2 = [{
   value: 'option3',
 }];
 
-const DropdownExample = () => {
+function DropdownExample() {
   const [value, setValue] = useState();
   const [value2, setValue2] = useState();
   return (
@@ -86,6 +86,6 @@ const DropdownExample = () => {
       />
     </div>
   );
-};
+}
 
 export default DropdownExample;

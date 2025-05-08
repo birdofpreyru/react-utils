@@ -5,7 +5,7 @@ import { Button, ThemeProvider } from '@dr.pogodin/react-utils';
 
 import darkButtonTheme from '../themes/buttons/dark.module.scss';
 
-const ButtonsExample = () => {
+function ButtonsExample() {
   const { isDarkTheme } = useColorMode();
   return (
     <ThemeProvider
@@ -26,6 +26,6 @@ const ButtonsExample = () => {
       <Button active>Forced-Active Button</Button>
     </ThemeProvider>
   );
-};
+}
 
 export default ButtonsExample;

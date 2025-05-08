@@ -30,7 +30,7 @@ it('generates expected SSR markup', () => {
 });
 
 it('hydrates successfully', async () => {
-  console.error = noop; // eslint-disable-line no-console
+  console.error = noop;
   const js = fs.readFileSync(`${outputPath}/${jsFilename}`, 'utf8') as string;
 
   // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call

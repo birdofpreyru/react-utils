@@ -47,7 +47,7 @@ it('registers service worker with the correct URL', async () => {
 
   const { log } = console;
   // TODO: Can we just override original implementation by spyOn() as well?
-  // eslint-disable-next-line jest/prefer-spy-on, no-console
+  // eslint-disable-next-line jest/prefer-spy-on
   console.log = jest.fn();
 
   // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
@@ -57,7 +57,6 @@ it('registers service worker with the correct URL', async () => {
     // eslint-disable-next-line jest/no-conditional-in-test
     if (onLoad) onLoad(new Event('load'));
   });
-  // eslint-disable-next-line no-console
   console.log = log;
 
   // @ts-expect-error "fine"
