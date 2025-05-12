@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 // TODO: Double-check that let does not work?
 /* eslint-disable no-var */
 declare var IS_REACT_ACT_ENVIRONMENT: boolean | undefined;
@@ -18,13 +16,6 @@ declare module '@babel/register/experimental-worker' {
   };
 
   export default register;
-}
-
-// TODO: This should be done inside my CSURF fork itself.
-declare module '@dr.pogodin/csurf' {
-  import F from 'csurf';
-
-  export default F;
 }
 
 declare module 'node-forge/lib/forge' {
