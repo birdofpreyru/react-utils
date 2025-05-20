@@ -66,6 +66,12 @@ server(webpackConfig);
   - `buildInfo` - **object** - Optional. The "[build info]" object to use.
     Without this option provided it will be loaded from the `.build-info` file
     in the "context" folder of the Webpack build being served.
+
+  - `cookieSignatureSecret` &mdash; **string** &mdash; If provided, it is passed
+    into the `secret` argument of [cookie-parser](https://www.npmjs.com/package/cookie-parser),
+    to enable support of signed cookies. When not provided signed cookies are not
+    supported, and attempt to use them will cause a server error.
+
   - `noCsp` - **boolean** - Disables [CSP] altogether.
   - [cspSettingsHook](#cspsettingshook) - **callback** allowing to customize
     [CSP] headers managed by the [helmet]'s `contentSecurityPolicy`

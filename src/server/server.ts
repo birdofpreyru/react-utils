@@ -116,6 +116,7 @@ export type OptionsT = RendererOptionsT & {
   (server: ServerT) => boolean | Promise<boolean>;
 
   beforeExpressJsSetup?: (server: ServerT) => Promise<void> | void;
+  cookieSignatureSecret?: string;
   cspSettingsHook?: (
     defaultOptions: CspOptionsT,
     req: Request,
@@ -207,7 +208,7 @@ export default async function factory(
 
   server.use(express.json({ limit: '300kb' }));
   server.use(express.urlencoded({ extended: false }));
-  server.use(cookieParser());
+  server.use(cookieParser(options.cookieSignatureSecret));
   server.use(requestIp.mw());
 
   server.use(csrf({ cookie: true }));

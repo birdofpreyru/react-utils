@@ -1,51 +1,71 @@
-defaults: &defaults
-  docker:
-    - image: cimg/node:lts
+install-and-test: &install-and-test
+  - checkout
+  - restore_cache:
+      key: node-modules-{{ checksum "package-lock.json" }}-{{ checksum "docs/package-lock.json" }}
+  - run: npm install && npm run build && npm pack
+  - run:
+      command: npm install ../dr.pogodin-react-utils-*.tgz --force
+      working_directory: docs
+  - save_cache:
+      key: node-modules-{{ checksum "package-lock.json" }}-{{ checksum "docs/package-lock.json" }}
+      paths:
+        - docs/node_modules
+        - node_modules
+  - run: npm test
+  - run:
+      name: Documentation build
+      command: npm run build
+      working_directory: docs
 
 version: 2.1
 jobs:
-  test:
-    <<: *defaults
+  test-node-20: # Maintenance, EOL 2026.04.30
+    docker:
+      - image: cimg/node:20.19
     steps:
-      - checkout
-      - restore_cache:
-          key: node-modules-{{ checksum "package-lock.json" }}-{{ checksum "docs/package-lock.json" }}
-      - run: npm install && npm run build && npm pack
-      - run:
-          command: npm install ../dr.pogodin-react-utils-*.tgz --force
-          working_directory: docs
-      - save_cache:
-          key: node-modules-{{ checksum "package-lock.json" }}-{{ checksum "docs/package-lock.json"}}
-          paths:
-            - node_modules
-            - docs/node_modules
-      - run: npm test
-      - run:
-          name: Documentation build
-          command: npm run build
-          working_directory: docs
-      - persist_to_workspace:
-          root: .
-          paths:
-            - build
-            - config
-            - docs/build
+      *install-and-test
+  test-node-22: # LTS, EOL 2027.04.30
+    docker:
+      - image: cimg/node:22.15
+    steps:
+      *install-and-test
+  test-node-23: # Maintenance, EOL 2025.06.01
+    docker:
+      - image: cimg/node:23.11
+    steps:
+      *install-and-test
+  test-node-24: # Current, EOL 2028.04.30
+    docker:
+      - image: cimg/node:24.0
+    steps:
+      *install-and-test
   release:
-    <<: *defaults
+    docker:
+      - image: cimg/node:lts
     steps:
-      - checkout
-      - attach_workspace:
-          at: .
+      - when:
+          condition: true
+          steps:
+            *install-and-test
       - run: ./bin/release.sh
+
+test-filters: &test-filters
+  filters:
+    tags:
+      only: /.*/
 
 workflows:
   version: 2
   build:
     jobs:
-      - test:
-          filters:
-            tags:
-              only: /.*/
+      - test-node-20:
+          <<: *test-filters
+      - test-node-22:
+          <<: *test-filters
+      - test-node-23:
+          <<: *test-filters
+      - test-node-24:
+          <<: *test-filters
       - release:
           filters:
             branches:
@@ -53,4 +73,7 @@ workflows:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
           requires:
-            - test
+            - test-node-20
+            - test-node-22
+            - test-node-23
+            - test-node-24
