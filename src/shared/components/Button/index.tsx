@@ -1,10 +1,16 @@
 // The <Button> component implements a standard button / button-like link.
 
-import type { FunctionComponent, PointerEventHandler, ReactNode } from 'react';
-
-import Link from 'components/Link';
+import type {
+  FunctionComponent,
+  KeyboardEventHandler,
+  MouseEventHandler,
+  PointerEventHandler,
+  ReactNode,
+} from 'react';
 
 import themed, { type Theme } from '@dr.pogodin/react-themes';
+
+import Link from 'components/Link';
 
 import defaultTheme from './style.scss';
 
@@ -13,8 +19,9 @@ type PropsT = {
   children?: ReactNode;
   disabled?: boolean;
   enforceA?: boolean;
-  onClick?: React.MouseEventHandler & React.KeyboardEventHandler;
-  onMouseDown?: React.MouseEventHandler;
+  onClick?: MouseEventHandler & KeyboardEventHandler;
+  onMouseDown?: MouseEventHandler;
+  onMouseUp?: MouseEventHandler;
   onPointerDown?: PointerEventHandler;
   openNewTab?: boolean;
   replace?: boolean;
@@ -31,6 +38,7 @@ export const BaseButton: FunctionComponent<PropsT> = ({
   enforceA,
   onClick,
   onMouseDown,
+  onMouseUp,
   onPointerDown,
   openNewTab,
   replace,
@@ -59,6 +67,7 @@ export const BaseButton: FunctionComponent<PropsT> = ({
         enforceA={enforceA}
         onClick={onClick}
         onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
         onPointerDown={onPointerDown}
         openNewTab={openNewTab}
         replace={replace}
@@ -78,6 +87,7 @@ export const BaseButton: FunctionComponent<PropsT> = ({
         if (e.key === 'Enter') onClick(e);
       } : undefined}
       onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
       onPointerDown={onPointerDown}
       role="button"
       tabIndex={0}

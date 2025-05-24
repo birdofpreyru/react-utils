@@ -8,14 +8,14 @@ import {
 
 import { BaseModal } from 'components/Modal';
 
-import S from './style.scss';
-
 import {
   type OptionT,
   type OptionsT,
   type ValueT,
   optionValueName,
 } from '../../common';
+
+import S from './style.scss';
 
 export type ContainerPosT = {
   left: number;

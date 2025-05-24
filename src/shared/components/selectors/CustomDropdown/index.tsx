@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 
 import themed from '@dr.pogodin/react-themes';
 
+import { type PropsT, type ValueT, optionValueName } from '../common';
+
 import Options, { type ContainerPosT, type RefT, areEqual } from './Options';
 
 import defaultTheme from './theme.scss';
-
-import { type PropsT, type ValueT, optionValueName } from '../common';
 
 const BaseCustomDropdown: React.FunctionComponent<
   PropsT<React.ReactNode, (value: ValueT) => void>

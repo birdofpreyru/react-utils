@@ -1,9 +1,10 @@
 /** @jest-environment jsdom */
 
 import { noop, omit } from 'lodash';
+import { StaticRouter } from 'react-router';
+
 import Button from 'components/Button';
 import { snapshot } from 'utils/jest';
-import { StaticRouter } from 'react-router';
 
 const testTheme = {
   active: 'ACTIVE_CLASS',

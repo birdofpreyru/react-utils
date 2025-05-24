@@ -1,7 +1,7 @@
 import themedImpl, {
-  type Theme,
   COMPOSE,
   PRIORITY,
+  type Theme,
   ThemeProvider,
 } from '@dr.pogodin/react-themes';
 

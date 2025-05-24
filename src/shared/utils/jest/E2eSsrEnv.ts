@@ -28,16 +28,16 @@ import type { ReactNode } from 'react';
 import register from '@babel/register/experimental-worker';
 
 import JsdomEnv from 'jest-environment-jsdom';
-import { createFsFromVolume, Volume } from 'memfs';
+import { Volume, createFsFromVolume } from 'memfs';
 import webpack, { type Configuration } from 'webpack';
 /* eslint-enable import/no-extraneous-dependencies */
-
-import ssrFactory from 'server/renderer';
 
 import type {
   EnvironmentContext,
   JestEnvironmentConfig,
 } from '@jest/environment';
+
+import ssrFactory from 'server/renderer';
 
 import { setBuildInfo } from '../isomorphy/buildInfo';
 

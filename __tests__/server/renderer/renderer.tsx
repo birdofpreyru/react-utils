@@ -1,8 +1,7 @@
-import type { Request, RequestHandler } from 'express';
-import { cloneDeep, noop } from 'lodash';
-import factory, { SCRIPT_LOCATIONS, isBrotliAcceptable, type ConfigT } from 'server/renderer';
 import fs from 'fs';
 
+import type { Request, RequestHandler } from 'express';
+import { cloneDeep, noop } from 'lodash';
 import serializeJs from 'serialize-javascript';
 
 import {
@@ -15,9 +14,15 @@ import { Helmet } from '@dr.pogodin/react-helmet';
 
 import type { Configuration } from 'webpack';
 
+import factory, {
+  type ConfigT,
+  SCRIPT_LOCATIONS,
+  isBrotliAcceptable,
+} from 'server/renderer';
+
 import { getSsrContext } from 'utils/globalState';
 
-import { getBuildInfo, setBuildInfo, type BuildInfoT } from 'utils/isomorphy/buildInfo';
+import { type BuildInfoT, getBuildInfo, setBuildInfo } from 'utils/isomorphy/buildInfo';
 
 import {
   mockHttpRequest,

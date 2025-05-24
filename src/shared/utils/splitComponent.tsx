@@ -5,8 +5,8 @@ import {
   type FunctionComponent,
   type ReactNode,
   type RefObject,
-  lazy,
   Suspense,
+  lazy,
   useInsertionEffect,
 } from 'react';
 

@@ -2,9 +2,9 @@
 
 import themed from '@dr.pogodin/react-themes';
 
-import defaultTheme from './theme.scss';
-
 import { type PropsT, optionValueName } from '../common';
+
+import defaultTheme from './theme.scss';
 
 /**
  * Implements a themeable dropdown list. Internally it is rendered with help of
