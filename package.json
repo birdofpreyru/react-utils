@@ -178,7 +178,10 @@
   ],
   "license": "MIT",
   "name": "@dr.pogodin/react-utils",
-  "repository": "github:birdofpreyru/react-utils",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/birdofpreyru/react-utils.git"
+  },
   "scripts": {
     "build": "rimraf build && npm run build:configs && npm run build:types-scss && npm run build:types-code && npm run build:dev && npm run build:prod",
     "build:configs": "tsc --project tsconfig.configs.json",
