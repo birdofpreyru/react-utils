@@ -1,10 +1,10 @@
-install-and-test: &install-and-test
+install-build-test: &install-build-test
   - checkout
   - restore_cache:
       key: node-modules-{{ checksum "package-lock.json" }}-{{ checksum "docs/package-lock.json" }}
   - run: npm install && npm run build && npm pack
   - run:
-      command: npm install ../dr.pogodin-react-utils-*.tgz --force
+      command: npm install ../dr.pogodin-react-utils-*.tgz
       working_directory: docs
   - save_cache:
       key: node-modules-{{ checksum "package-lock.json" }}-{{ checksum "docs/package-lock.json" }}
@@ -23,30 +23,38 @@ jobs:
     docker:
       - image: cimg/node:20.19
     steps:
-      *install-and-test
+      *install-build-test
   test-node-22: # LTS, EOL 2027.04.30
     docker:
       - image: cimg/node:22.16
     steps:
-      *install-and-test
+      - when:
+          condition: true
+          steps:
+            *install-build-test
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+            - config
+            - docs/build
   test-node-23: # Maintenance, EOL 2025.06.01
     docker:
       - image: cimg/node:23.11
     steps:
-      *install-and-test
+      *install-build-test
   test-node-24: # Current, EOL 2028.04.30
     docker:
       - image: cimg/node:24.1
     steps:
-      *install-and-test
+      *install-build-test
   release:
     docker:
       - image: cimg/node:lts
     steps:
-      - when:
-          condition: true
-          steps:
-            *install-and-test
+      - checkout
+      - attach_workspace:
+          at: .
       - run: ./bin/release.sh
 
 test-filters: &test-filters

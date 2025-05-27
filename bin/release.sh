@@ -18,7 +18,7 @@ echo $GCLOUD_KEY > ${HOME}/gcloud-key.json
 gcloud auth activate-service-account --key-file ${HOME}/gcloud-key.json
 gcloud config set disable_prompts true
 gcloud config set project dr-pogodin-studio-website
-gsutil rsync -d -r docs/build gs://docs.pogodin.studio/react-utils
+gsutil -m rsync -d -r docs/build gs://docs.pogodin.studio/react-utils
 
 # Library package release.
 echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
