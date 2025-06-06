@@ -441,31 +441,31 @@ export default function factory(
         // App has been checked to exist.
         const App2 = App;
 
-        const renderPass = async () => {
-          ssrContext.chunks = [];
+        const renderPass = async () => new Promise<NodeJS.ReadableStream>(
+          (resolve, reject) => {
+            ssrContext.chunks = [];
 
-          // TODO: prerenderToNodeStream has (abort) "signal" option,
-          // and we should wire it up to the SSR timeout below.
-          const helmetContext = {} as HelmetDataContext;
-          const { prelude } = await prerenderToNodeStream(
-            <GlobalStateProvider
-              initialState={ssrContext.state}
-              ssrContext={ssrContext}
-            >
-              <StaticRouter location={req.url}>
-                <HelmetProvider context={helmetContext}>
-                  <App2 />
-                </HelmetProvider>
-              </StaticRouter>
-            </GlobalStateProvider>,
-            { onError: (error) => {
-              throw error;
-            } },
-          );
-          ({ helmet } = helmetContext);
-
-          return prelude;
-        };
+            // TODO: prerenderToNodeStream has (abort) "signal" option,
+            // and we should wire it up to the SSR timeout below.
+            const helmetContext = {} as HelmetDataContext;
+            void prerenderToNodeStream(
+              <GlobalStateProvider
+                initialState={ssrContext.state}
+                ssrContext={ssrContext}
+              >
+                <StaticRouter location={req.url}>
+                  <HelmetProvider context={helmetContext}>
+                    <App2 />
+                  </HelmetProvider>
+                </StaticRouter>
+              </GlobalStateProvider>,
+              { onError: reject },
+            ).then((result) => {
+              ({ helmet } = helmetContext);
+              resolve(result.prelude);
+            });
+          },
+        );
 
         let ssrRound = 0;
         let bailed = false;
