@@ -13,7 +13,7 @@ import type { Configuration, Stats } from 'webpack';
 import winston from 'winston';
 
 import { GlobalStateProvider, SsrContext } from '@dr.pogodin/react-global-state';
-import { Barrier, timer } from '@dr.pogodin/js-utils';
+import { timer } from '@dr.pogodin/js-utils';
 
 import {
   clone,
