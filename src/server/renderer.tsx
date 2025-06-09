@@ -13,7 +13,7 @@ import type { Configuration, Stats } from 'webpack';
 import winston from 'winston';
 
 import { GlobalStateProvider, SsrContext } from '@dr.pogodin/react-global-state';
-import { timer } from '@dr.pogodin/js-utils';
+import { Barrier, timer } from '@dr.pogodin/js-utils';
 
 import {
   clone,
@@ -442,8 +442,30 @@ export default function factory(
         const App2 = App;
 
         const renderPass = async () => new Promise<NodeJS.ReadableStream>(
-          (resolve, reject) => {
+          (resolveArg, rejectArg) => {
             ssrContext.chunks = [];
+
+            // NOTE: JS does not have problems if resolve() and reject() methods
+            // of a Promise are called multiple times, with different arguments;
+            // it only respects the first call, and ignores subsequent ones.
+            // We, however, really want to assert that here, to safeguard against
+            // any future problems due to unexpected internal changes in React,
+            // if any.
+            let error: unknown;
+
+            const resolve = (arg: NodeJS.ReadableStream) => {
+              if (error !== undefined) throw Error('Internal error');
+              error = null;
+              resolveArg(arg);
+            };
+
+            const reject = (arg: unknown) => {
+              if (error !== undefined && error !== arg) {
+                throw Error('Internal error');
+              }
+              error = arg;
+              rejectArg(arg as Error);
+            };
 
             // TODO: prerenderToNodeStream has (abort) "signal" option,
             // and we should wire it up to the SSR timeout below.
@@ -463,7 +485,7 @@ export default function factory(
             ).then((result) => {
               ({ helmet } = helmetContext);
               resolve(result.prelude);
-            });
+            }).catch(reject);
           },
         );
 
