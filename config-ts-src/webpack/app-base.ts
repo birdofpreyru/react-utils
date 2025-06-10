@@ -201,7 +201,7 @@ export default function configFactory(ops: OptionsT): Configuration {
       if (!fs.existsSync(outUrl)) fs.mkdirSync(outUrl);
       fs.writeFileSync(
         path.resolve(o.context, o.outputPath!, 'sitemap.xml'),
-        sitemap,
+        new DataView(sitemap.buffer),
       );
     });
   }
