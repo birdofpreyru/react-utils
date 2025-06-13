@@ -28,25 +28,33 @@ ensuring consistent visual appearance of the button in all different rendering
 cases.
 
 ## Properties
-- `active` - **boolean** - Enforces active button state (even when the button is
+- `active` &mdash; **boolean** &mdash; Enforces active button state (even when the button is
   not active by the regular criteria).
-- `children` - **React Node** - Component children, if any, are rendered as
+- `children` &mdash; **ReactNode** &mdash; Component children, if any, are rendered as
   the button's content.
-- `disabled` - **boolean** - Disables the button.
-- `enforceA` - **boolean** - If the button is rendered as [Link] this flag
+- `disabled` &mdash; **boolean** &mdash; Disables the button.
+- `enforceA` &mdash; **boolean** &mdash; If the button is rendered as [Link] this flag
   enforces it to be rendered as a simple `<a>` element (external link) rather
   than an internal link. See [Link] documentation for details.
 
-- `onClick` &mdash; **function** &mdash; Mouse click event handler. It is also
-  triggered when the button is focused and &laquo;Enter&raquo; key is pressed.
-  In both cases it receieve corresponding event (mouse or keyboard) as its
-  argument.
+- `onClick` &mdash; [KeyboardEventHandler] & [MouseEventHandler] &mdash;
+  Click event handler. It is triggered both when the button is clicked by mouse,
+  and when it is focused, and &laquo;Enter&raquo; key is pressed on the keyboard.
+  In either case it receives the corresponding event (keyboard, or mouse), as its
+  only argument.
 
-- `onMouseDown` - **function** - Mouse down event handler.
-- `onPointerDown` &mdash; **function** &mdash; Pointer down event handler.
-- `openNewTab` - **boolean** - If the button is rendered as [Link] this flag
+- `onMouseDown` &mdash; [MouseEventHandler] &mdash; Mouse down event handler.
+
+- `onMouseUp` &mdash; [MouseEventHandler] &mdash; Mouse up event handler.
+
+- `onPointerDown` &mdash; [PointerEventHandler] &mdash; Pointer down event
+  handler.
+
+- `onPointerUp` &mdash; [PointerEventHandler] &mdash; Pointer up event handler.
+
+- `openNewTab` &mdash; **boolean** &mdash; If the button is rendered as [Link] this flag
   opts to open the link in a new tab.
-- `replace` - **boolean** - If the button is rendered as [Link], and the target
+- `replace` &mdash; **boolean** &mdash; If the button is rendered as [Link], and the target
   URL is internal, this flag opts for the new route to replace the last record
   in the navigation history, instead of being pushed as a new entry into the nav
   history stack.
@@ -56,8 +64,8 @@ cases.
   to facilitate testing with [testing-library]. It is optimized out from
   production builds.
 
-- `theme` - [ButtonTheme](#buttontheme) - _Ad hoc_ button theme.
-- `to` - **object | string** - If specified, the button is rendered as [Link]
+- `theme` &mdash; [ButtonTheme](#buttontheme) &mdash; _Ad hoc_ button theme.
+- `to` &mdash; **object | string** &mdash; If specified, the button is rendered as [Link]
   (if not disabled), and beside the visual appearance as a button it acts as
   a link pointing the target URL.
 - Accepts other
@@ -67,13 +75,16 @@ cases.
 
 Valid [Button] theme keys are:
 
-- `active` - Applied to buttons in active state.
-- `button` - Applied to all button instaces.
-- `disabled` - Applied to disabled buttons.
+- `active` &mdash; Applied to buttons in active state.
+- `button` &mdash; Applied to all button instaces.
+- `disabled` &mdash; Applied to disabled buttons.
 
 See [React Themes] documentation for theming details.
 
 [Button]: /docs/api/components/button
+[KeyboardEventHandler]: https://react.dev/reference/react-dom/components/common#keyboardevent-handler
 [Link]: /docs/api/components/link
+[MouseEventHandler]: https://react.dev/reference/react-dom/components/common#mouseevent-handler
+[PointerEventHandler]: https://react.dev/reference/react-dom/components/common#pointerevent-handler
 [React Themes]: https://dr.pogodin.studio/docs/react-themes
 [testing-library]: https://testing-library.com
