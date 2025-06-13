@@ -23,6 +23,7 @@ type PropsT = {
   onMouseDown?: MouseEventHandler;
   onMouseUp?: MouseEventHandler;
   onPointerDown?: PointerEventHandler;
+  onPointerUp?: PointerEventHandler;
   openNewTab?: boolean;
   replace?: boolean;
   testId?: string;
@@ -40,6 +41,7 @@ export const BaseButton: FunctionComponent<PropsT> = ({
   onMouseDown,
   onMouseUp,
   onPointerDown,
+  onPointerUp,
   openNewTab,
   replace,
   testId,
@@ -69,6 +71,7 @@ export const BaseButton: FunctionComponent<PropsT> = ({
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}
         onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
         openNewTab={openNewTab}
         replace={replace}
         to={to}
@@ -89,6 +92,7 @@ export const BaseButton: FunctionComponent<PropsT> = ({
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
       role="button"
       tabIndex={0}
     >
