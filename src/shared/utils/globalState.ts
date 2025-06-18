@@ -25,6 +25,12 @@ declare global {
 export interface SsrContextT<StateT> extends SsrContext<StateT> {
   chunkGroups: ChunkGroupsT;
   chunks: string[];
+
+  /** If set at the end of SSR, the rendered will trigger
+   *  server-side redirect to this URL (and use the status
+   *  code). */
+  redirectTo?: string;
+
   req: Request;
   status: number;
 }

@@ -17,6 +17,13 @@ factory as a part of SSR setup.
 ## Properties
 - `chunkGroups` &mdash; **ChunkGroupsT**
 - `chunks` &mdash; **string[]** &mdash; Defaults empty array.
+
+- `redirectTo` &mdash; **string** | **undefined** &mdash; Undefined by default;
+  if it is set by the app during SSR, the server will trigger redirect to this
+  URL, instead of serving the generated HTML markup. Note, it will use `status`
+  property (below) to set the redirect code, thus it also should be set to
+  appropriate code to perform a redirect.
+
 - `req` &mdash; **Request** &mdash; ExpressJS request being handled.
 - `status` &mdash; **number** &mdash; HTTP status for the response.
   Defaults 200 (OK).

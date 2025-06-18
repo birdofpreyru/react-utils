@@ -77,6 +77,8 @@ export class ServerSsrContext<StateT>
 
   chunks: string[] = [];
 
+  redirectTo?: string;
+
   req: Request;
 
   status: number = 200;
@@ -516,6 +518,11 @@ export default function factory(
         } else logMsg = `SSR completed in ${ssrRound + 1} round(s)`;
 
         ops.logger!.log(ssrContext.dirty ? 'warn' : 'info', logMsg);
+
+        if (ssrContext.redirectTo) {
+          res.redirect(ssrContext.status, ssrContext.redirectTo);
+          return;
+        }
 
         await new Promise((ready) => {
           stream!.pipe(new Writable({
