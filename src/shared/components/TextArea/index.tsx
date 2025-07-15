@@ -4,6 +4,7 @@ import {
   type FunctionComponent,
   type KeyboardEventHandler,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
@@ -23,6 +24,7 @@ type Props = {
   onChange?: ChangeEventHandler<HTMLTextAreaElement>;
   onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
   placeholder?: string;
+  testId?: string;
   theme: Theme<ThemeKeyT>;
   value?: string;
 };
@@ -33,6 +35,7 @@ const TextArea: FunctionComponent<Props> = ({
   onChange,
   onKeyDown,
   placeholder,
+  testId,
   theme,
   value,
 }) => {
@@ -58,8 +61,14 @@ const TextArea: FunctionComponent<Props> = ({
     };
   }, []);
 
-  // This resizes the text area when its content is modified.
-  useEffect(() => {
+  // Resizes the text area when its content is modified.
+  //
+  // NOTE: useLayoutEffect() instead of useEffect() makes difference here,
+  // as it helps to avoid visible "content/height" jumps (i.e. with just
+  // useEffect() it becomes visible how the content is modified first,
+  // and then input height is incremented, if necessary).
+  // See: https://github.com/birdofpreyru/react-utils/issues/313
+  useLayoutEffect(() => {
     const el = hiddenAreaRef.current;
     if (el) setHeight(el.scrollHeight);
   }, [localValue]);
@@ -75,6 +84,10 @@ const TextArea: FunctionComponent<Props> = ({
         readOnly
         ref={hiddenAreaRef}
 
+        // The "-1" value of "tabIndex" removes this hidden text area from
+        // the tab-focus-chain.
+        tabIndex={-1}
+
         // NOTE: With empty string value ("") the scrolling height of this text
         // area is zero, thus collapsing <TextArea> height below the single line
         // input height. To avoid it we fallback to whitespace (" ") character
@@ -83,6 +96,7 @@ const TextArea: FunctionComponent<Props> = ({
       />
       <textarea
         className={theme.textarea}
+        data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
         disabled={disabled}
         onBlur={onBlur}
 
