@@ -27,6 +27,8 @@ import exampleCode from '!!raw-loader!../../../src/components/TextAreaExample';
 
 - `disabled` &mdash; **boolean** &mdash; Disables the text area.
 
+- `label` &mdash; **string** &mdash; Text area label.
+
 - `onBlur` &mdash; **React.FocusEventHandler&lt;HTMLTextAreaElement&gt;**
   &mdash; [FocusEvent handler](https://react.dev/reference/react-dom/components/common#focusevent-handler).
 
@@ -55,6 +57,9 @@ themed. The valid theme keys for [TextArea] are:
 - `hidden` &mdash; The hidden `<textarea>` element, which is used internally
   for measurement purposes. This style is applied to that element in addition
   to the `textarea` style below.
+
+- `label` &mdash; The optional `div` element with the label.
+
 - `textarea` &mdash; The underlying `<textarea>` element, and this style is also
   applied to the second, hidden `<textarea>` element, which is used internally
   for measurement purposes.

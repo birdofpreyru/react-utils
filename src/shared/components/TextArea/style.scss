@@ -8,6 +8,10 @@
     position: relative;
   }
 
+  &.label {
+    margin: 0 0.3em;
+  }
+
   &.textarea {
     background: white;
     border: 1px solid gray;
@@ -39,7 +43,9 @@
   }
 
   &.hidden {
+    // NOTE: We hide it this way, as setting "display: none" will interfere
+    // with measurements, making the hidden input height zero.
+    opacity: 0;
     position: absolute;
-    z-index: -1;
   }
 }

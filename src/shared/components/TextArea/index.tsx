@@ -16,10 +16,12 @@ import defaultTheme from './style.scss';
 type ThemeKeyT =
   | 'container'
   | 'hidden'
+  | 'label'
   | 'textarea';
 
 type Props = {
   disabled?: boolean;
+  label?: string;
   onBlur?: FocusEventHandler<HTMLTextAreaElement>;
   onChange?: ChangeEventHandler<HTMLTextAreaElement>;
   onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
@@ -31,6 +33,7 @@ type Props = {
 
 const TextArea: FunctionComponent<Props> = ({
   disabled,
+  label,
   onBlur,
   onChange,
   onKeyDown,
@@ -75,6 +78,7 @@ const TextArea: FunctionComponent<Props> = ({
 
   return (
     <div className={theme.container}>
+      {label === undefined ? null : <div className={theme.label}>{label}</div>}
       <textarea
         className={`${theme.textarea} ${theme.hidden}`}
 
