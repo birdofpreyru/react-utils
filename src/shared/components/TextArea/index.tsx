@@ -74,7 +74,12 @@ const TextArea: FunctionComponent<Props> = ({
         // of the primary textarea's height.
         readOnly
         ref={hiddenAreaRef}
-        value={localValue}
+
+        // NOTE: With empty string value ("") the scrolling height of this text
+        // area is zero, thus collapsing <TextArea> height below the single line
+        // input height. To avoid it we fallback to whitespace (" ") character
+        // here.
+        value={localValue || ' '}
       />
       <textarea
         className={theme.textarea}

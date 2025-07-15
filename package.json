@@ -1,5 +1,5 @@
 {
-  "version": "1.43.22",
+  "version": "1.43.23",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
