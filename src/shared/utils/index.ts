@@ -13,6 +13,7 @@ import * as webpack from './webpack';
 export {
   type Listener,
   Barrier,
+  Cached,
   Emitter,
   Semaphore,
   withRetries,

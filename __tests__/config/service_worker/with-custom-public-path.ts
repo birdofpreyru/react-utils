@@ -31,7 +31,7 @@ it('registers service worker with the correct URL', async () => {
   const js = fs.readFileSync(`${outputPath}/${jsPath}`, 'utf8') as string;
 
   const nav = window.navigator;
-  // @ts-expect-error "fine"
+  // @ts-expect-error Cannot assign to 'serviceWorker' because it is a read-only property.
   nav.serviceWorker = { register: jest.fn() };
   window.navigator = nav;
 
@@ -59,7 +59,7 @@ it('registers service worker with the correct URL', async () => {
   });
   console.log = log;
 
-  // @ts-expect-error "fine"
+  // @ts-expect-error Property 'mock' does not exist on type '(scriptURL: string | URL, options?: RegistrationOptions | undefined) => Promise<ServiceWorkerRegistration>'.
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   expect(nav.serviceWorker.register.mock.calls[0]).toStrictEqual(['/__service-worker.js']);
 
