@@ -13,11 +13,7 @@ import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './style.scss';
 
-type ThemeKeyT =
-  | 'container'
-  | 'hidden'
-  | 'label'
-  | 'textarea';
+type ThemeKeyT = 'container' | 'hidden' | 'label' | 'textarea';
 
 type Props = {
   disabled?: boolean;

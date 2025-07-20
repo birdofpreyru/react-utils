@@ -1,4 +1,4 @@
-import type nodeFs from 'fs';
+import type nodeFs from 'node:fs';
 
 import { createFsFromVolume, Volume } from 'memfs';
 

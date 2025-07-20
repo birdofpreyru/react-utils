@@ -54,11 +54,7 @@ type HeapT = {
   lastPlacement?: PLACEMENTS | undefined;
 };
 
-export type ThemeKeysT =
-  | 'appearance'
-  | 'arrow'
-  | 'content'
-  | 'container';
+export type ThemeKeysT = 'appearance' | 'arrow' | 'content' | 'container';
 
 type TooltipThemeT = Theme<ThemeKeysT>;
 

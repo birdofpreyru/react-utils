@@ -2,7 +2,7 @@
 
 /* eslint-disable import/no-extraneous-dependencies */
 
-import path from 'path';
+import path from 'node:path';
 
 import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';

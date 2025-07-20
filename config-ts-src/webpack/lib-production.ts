@@ -2,7 +2,7 @@
 
 /* eslint-disable import/no-extraneous-dependencies */
 
-import path from 'path';
+import path from 'node:path';
 
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import webpack from 'webpack';

@@ -2,8 +2,8 @@
  * Creation of standard ExpressJS server for ReactJS apps.
  */
 
-import { sep } from 'path';
-import { pathToFileURL } from 'url';
+import { sep } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import {
   cloneDeep,
@@ -43,8 +43,7 @@ import {
   newError,
 } from './utils/errors';
 
-export type CspOptionsT =
-Exclude<HelmetOptions['contentSecurityPolicy'], boolean | undefined>;
+export type CspOptionsT = Exclude<HelmetOptions['contentSecurityPolicy'], boolean | undefined>;
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 interface RequestT extends Request {

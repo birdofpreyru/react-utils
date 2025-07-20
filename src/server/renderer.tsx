@@ -2,10 +2,10 @@
  * ExpressJS middleware for server-side rendering of a ReactJS app.
  */
 
-import fs from 'fs';
-import path from 'path';
-import { Writable } from 'stream';
-import { brotliCompress, brotliDecompress } from 'zlib';
+import fs from 'node:fs';
+import path from 'node:path';
+import { Writable } from 'node:stream';
+import { brotliCompress, brotliDecompress } from 'node:zlib';
 
 import type { Request, RequestHandler } from 'express';
 import type { ComponentType } from 'react';
@@ -255,8 +255,10 @@ export type BeforeRenderResT = {
   initialState?: unknown;
 };
 
-export type BeforeRenderT =
-(req: Request, config: ConfigT) => BeforeRenderResT | Promise<BeforeRenderResT>;
+export type BeforeRenderT = (
+  req: Request,
+  config: ConfigT,
+) => BeforeRenderResT | Promise<BeforeRenderResT>;
 
 type CacheRefT = {
   key: string;

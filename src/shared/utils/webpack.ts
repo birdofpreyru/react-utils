@@ -1,4 +1,4 @@
-import type PathT from 'path';
+import type PathNS from 'node:path';
 
 import { IS_CLIENT_SIDE } from './isomorphy';
 
@@ -30,7 +30,7 @@ export function requireWeak<T extends object>(
     const req = eval('require') as (path: string) => unknown;
 
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    const { resolve } = req('path') as typeof PathT;
+    const { resolve } = req('path') as typeof PathNS;
 
     const path = basePath ? resolve(basePath, modulePath) : modulePath;
     const module = req(path) as T;

@@ -4,10 +4,7 @@ import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
-type ThemeKeyT =
-  | 'container'
-  | 'input'
-  | 'label';
+type ThemeKeyT = 'container' | 'input' | 'label';
 
 type PropsT = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: React.ReactNode;

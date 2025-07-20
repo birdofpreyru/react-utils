@@ -55,8 +55,9 @@ export function getMockUuid(seed = 0): string {
   return `${x.slice(0, 8)}-${x.slice(8, 12)}-${x.slice(12, 16)}-${x.slice(16, 20)}-${x.slice(20)}`;
 }
 
-export type AxiosRequestHandlerT =
-  (config: AxiosRequestConfig) => Partial<AxiosResponse> | null | undefined;
+export type AxiosRequestHandlerT = (
+  config: AxiosRequestConfig,
+) => Partial<AxiosResponse> | null | undefined;
 
 export function mockAxios(handlers: AxiosRequestHandlerT[]): AxiosStatic {
   const axios: AxiosStatic = jest.requireActual('axios');

@@ -4,11 +4,7 @@ import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import baseTheme from './base-theme.scss';
 
-type ThemeKeyT =
-  | 'container'
-  | 'leftSidePanel'
-  | 'mainPanel'
-  | 'rightSidePanel'
+type ThemeKeyT = 'container' | 'leftSidePanel' | 'mainPanel' | 'rightSidePanel'
   | 'sidePanel';
 
 type PropsT = {

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-commonjs */
 /* global __dirname, module, process, require */
 
-const path = require('path');
+const path = require('node:path');
 
 const globalLibDir = path.resolve(process.execPath, '../../lib/node_modules');
 

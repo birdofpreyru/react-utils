@@ -2,10 +2,7 @@ import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
-type ThemeKeyT =
-  | 'bouncing'
-  | 'circle'
-  | 'container';
+type ThemeKeyT = 'bouncing' | 'circle' | 'container';
 
 type PropsT = {
   theme: Theme<ThemeKeyT>;

@@ -3,9 +3,9 @@
 /* eslint-disable import/no-commonjs, no-console */
 /* global console, process, require */
 
-const childProcess = require('child_process');
-const fs = require('fs');
-const path = require('path');
+const childProcess = require('node:child_process');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const { isFunction, mapValues, merge } = require('lodash');
 const { program } = require('commander');

@@ -3,9 +3,9 @@
 /* eslint-disable import/no-commonjs, no-console */
 /* global console, process, require */
 
-const { spawnSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+const { spawnSync } = require('node:child_process');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const { clone } = require('lodash');
 const { program } = require('commander');

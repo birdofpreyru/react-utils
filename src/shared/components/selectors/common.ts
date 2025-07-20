@@ -2,8 +2,7 @@
 
 import type { Theme } from '@dr.pogodin/react-themes';
 
-type ThemeKeyT =
-  | 'active'
+type ThemeKeyT = 'active'
   | 'arrow'
   | 'container'
   | 'dropdown'

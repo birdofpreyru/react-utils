@@ -16,7 +16,7 @@
 
 // TODO: We need to add correct typing for environment options.
 
-import path from 'path';
+import path from 'node:path';
 
 import type { Request, Response } from 'express';
 import { defaults, noop, set } from 'lodash';

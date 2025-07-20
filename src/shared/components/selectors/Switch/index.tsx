@@ -8,12 +8,7 @@ import {
 
 import defaultTheme from './theme.scss';
 
-type ThemeKeyT =
-  | 'container'
-  | 'label'
-  | 'option'
-  | 'options'
-  | 'selected';
+type ThemeKeyT = 'container' | 'label' | 'option' | 'options' | 'selected';
 
 type PropsT = {
   label?: React.ReactNode;

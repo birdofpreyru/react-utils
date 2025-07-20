@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-unassigned-import
 import 'source-map-support/register';
 
-import http from 'http';
-import https from 'https';
+import http from 'node:http';
+import https from 'node:https';
 
 import {
   cloneDeep,
@@ -184,9 +184,9 @@ export default async function launchServer(
   webpackConfig: Configuration,
   options: OptionsT = {},
 ): Promise<{
-    expressServer: ServerT;
-    httpServer: http.Server;
-  }> {
+  expressServer: ServerT;
+  httpServer: http.Server;
+}> {
   /* Options normalization. */
   const ops = cloneDeep(options);
 

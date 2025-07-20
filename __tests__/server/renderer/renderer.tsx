@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 
 import type { Request, RequestHandler } from 'express';
 import { cloneDeep, noop } from 'lodash';

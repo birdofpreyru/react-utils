@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-import nodeFs from 'fs';
-import path from 'path';
+import nodeFs from 'node:fs';
+import path from 'node:path';
 
 import SM from 'sitemap';
 

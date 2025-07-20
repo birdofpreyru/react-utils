@@ -2,7 +2,8 @@
 
 /* eslint-disable import/no-extraneous-dependencies */
 
-import path from 'path';
+import path from 'node:path';
+
 import webpack from 'webpack';
 import { merge } from 'webpack-merge';
 
