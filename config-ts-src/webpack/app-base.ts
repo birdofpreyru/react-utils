@@ -277,7 +277,7 @@ export default function configFactory(ops: OptionsT): Configuration {
     }));
   }
 
-  return {
+  const res: Configuration = {
     context: o.context,
     entry,
     mode: o.mode,
@@ -380,16 +380,6 @@ export default function configFactory(ops: OptionsT): Configuration {
     plugins,
     resolve: {
       alias: {
-        // NOTE: The "conditionNames" workaround below messes up the loading of
-        // Babel's runtime helper for require of CJS and ES styles of modules
-        // (without this alias it is resolved to
-        // @babel/runtime/helpers/esm/interopRequireDefault, which has
-        // the hepler function attached to "default" export).
-        '@babel/runtime/helpers/interopRequireDefault': path.resolve(
-          o.context,
-          'node_modules/@babel/runtime/helpers/interopRequireDefault',
-        ),
-
         // Aliases to JS an JSX files are handled by Babel.
         assets: path.resolve(o.context, 'src/assets'),
         components: path.resolve(o.context, 'src/shared/components'),
@@ -417,4 +407,34 @@ export default function configFactory(ops: OptionsT): Configuration {
       symlinks: false,
     },
   };
+
+  // TODO: Can we do anything better about it? Otherwise, we potentially
+  // have to alias all Babel's runtime helpers, otherwise if it tries to
+  // use a new helper it breaks (probably only production) build in a very
+  // confusing, hard to debug way. Not sure what to do, as the problem with
+  // RR exports is still there, and we still can't fully move to ES modules
+  // because Jest and other tools. Also such aliases easily break E2E tests
+  // with Jest (with our setup), that's why they are avoided when NODE_ENV
+  // is test (but it might be not the solution that always helps).
+  //
+  // NOTE: The "conditionNames" workaround below messes up the loading of
+  // Babel's runtime helper for require of CJS and ES styles of modules
+  // (without this alias it is resolved to
+  // @babel/runtime/helpers/esm/interopRequireDefault, which has
+  // the hepler function attached to "default" export).
+  if (process.env.NODE_ENV !== 'test') {
+    const aliases = res.resolve?.alias as Record<string, string>;
+    aliases['@babel/runtime/helpers/defineProperty']
+      = path.resolve(
+        o.context,
+        'node_modules/@babel/runtime/helpers/defineProperty',
+      );
+    aliases['@babel/runtime/helpers/interopRequireDefault']
+      = path.resolve(
+        o.context,
+        'node_modules/@babel/runtime/helpers/interopRequireDefault',
+      );
+  }
+
+  return res;
 }
