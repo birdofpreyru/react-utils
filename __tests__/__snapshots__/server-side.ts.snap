@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Export at server side 1`] = `
 {
@@ -6,6 +6,7 @@ exports[`Export at server side 1`] = `
   "BaseButton": [Function],
   "BaseModal": [Function],
   "Button": [Function],
+  "Cached": [Function],
   "Checkbox": [Function],
   "CustomDropdown": [Function],
   "Dropdown": [Function],
@@ -24,6 +25,7 @@ exports[`Export at server side 1`] = `
   "Throbber": [Function],
   "WithTooltip": [Function],
   "YouTubeVideo": [Function],
+  "assertEmptyObject": [Function],
   "client": undefined,
   "config": Config {
     "SECRET": {

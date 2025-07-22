@@ -47,13 +47,13 @@ async function example() {
   with its only generic parameter `T` specifying the type of cached items.
 
 ## Fields
-- `._data` &mdash; **Readonly&lt;Record&lt;string, EntryT&lt;T&gt;&gt;&gt;**
+- `.data` &mdash; **Readonly&lt;Record&lt;string, EntryT&lt;T&gt;&gt;&gt;**
   &mdash; Readonly view of the cache content, exposed for test purposes.
   See [the source code](https://github.com/birdofpreyru/js-utils/blob/master/src/Cached.ts)
   for the exact definition of **EntryT** &mdash; it is either an envelope of
   a cached item, or a timestamped promise of such envelope.
 
-- `._oldestTimestamp` &mdash; **number** &mdash; Timestamp of the oldest item
+- `.oldestTimestamp` &mdash; **number** &mdash; Timestamp of the oldest item
   stored in the cache. Exposed for test purposes.
 
 ## Methods
@@ -78,7 +78,7 @@ const cached = new Cached<T>(
 ### get()
 [get()]: #get
 ```tsx
-cached.get(id: string): T | Promise<T>;
+cached.get(id: string, forceRefresh?: boolean): T | Promise<T>;
 ```
 Retrieves the item (or a promise of the item) for the given string key (id).
 
@@ -105,3 +105,9 @@ to retrieve and cache the item, and it returns the result of the operation.
 and promises, as needed.
 
 - `id` &mdash; **string** &mdash; Key (id) of the item to retrieve.
+- `forceRefresh` &mdash; **boolean** | **undefined** &mdash; Optional.
+  If _true_ the requested item is explicitly retreived with the getter
+  (and cached), no matter whether it was present in the cache already.
+
+- Returns **T** | **Promise&lt;T&gt;** &mdash; the requested item,
+  or a promise of that item.

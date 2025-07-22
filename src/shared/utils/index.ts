@@ -11,7 +11,9 @@ import time from './time';
 import * as webpack from './webpack';
 
 export {
+  assertEmptyObject,
   type Listener,
+  type ObjectKey,
   Barrier,
   Cached,
   Emitter,

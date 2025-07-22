@@ -11,6 +11,7 @@ import ConfigIndex from './configs/_index.md';
 import FunctionIndex from './functions/_index.md';
 import ScriptIndex from './scripts/_index.md';
 import StyleIndex from './styles/_index.md';
+import TypesIndex from './types/_index.md';
 import UtilsIndex from './utils/_index.md';
 
 ## Classes
@@ -30,6 +31,9 @@ import UtilsIndex from './utils/_index.md';
 
 ## Styles
 <StyleIndex />
+
+## Types
+<TypesIndex />
 
 ## Utilities
 <UtilsIndex />
