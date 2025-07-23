@@ -1,4 +1,4 @@
-import type { FunctionComponent, Ref } from 'react';
+import { type FunctionComponent, type Ref, useRef } from 'react';
 
 import themed, { type Theme } from '@dr.pogodin/react-themes';
 
@@ -27,19 +27,31 @@ const Input: FunctionComponent<PropsT> = ({
   testId,
   theme,
   ...rest
-}) => (
-  <span className={theme.container}>
-    { label === undefined ? null : <div className={theme.label}>{label}</div> }
-    <input
-      className={theme.input}
-      data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
-      ref={ref}
+}) => {
+  const localRef = useRef<HTMLInputElement>(null);
+  return (
+    <span
+      className={theme.container}
+      onFocus={() => {
+        // TODO: It does not really work if a callback-style `ref` is passed in,
+        // we need a more complex logic to cover that case, but for now this serves
+        // the case we need it for.
+        if (typeof ref === 'object') ref?.current?.focus();
+        else localRef.current?.focus();
+      }}
+    >
+      {label === undefined ? null : <div className={theme.label}>{label}</div>}
+      <input
+        className={theme.input}
+        data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
+        ref={ref ?? localRef}
 
-      // TODO: Avoid the spreading later.
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...rest}
-    />
-  </span>
-);
+        // TODO: Avoid the spreading later.
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...rest}
+      />
+    </span>
+  );
+};
 
 export default themed(Input, 'Input', defaultTheme);

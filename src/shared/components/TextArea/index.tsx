@@ -41,6 +41,8 @@ const TextArea: FunctionComponent<Props> = ({
   const hiddenAreaRef = useRef<HTMLTextAreaElement>(null);
   const [height, setHeight] = useState<number | undefined>();
 
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
   const [localValue, setLocalValue] = useState(value ?? '');
   if (value !== undefined && localValue !== value) setLocalValue(value);
 
@@ -73,7 +75,12 @@ const TextArea: FunctionComponent<Props> = ({
   }, [localValue]);
 
   return (
-    <div className={theme.container}>
+    <div
+      className={theme.container}
+      onFocus={() => {
+        textAreaRef.current?.focus();
+      }}
+    >
       {label === undefined ? null : <div className={theme.label}>{label}</div>}
       <textarea
         className={`${theme.textarea} ${theme.hidden}`}
@@ -111,6 +118,7 @@ const TextArea: FunctionComponent<Props> = ({
         }
         onKeyDown={onKeyDown}
         placeholder={placeholder}
+        ref={textAreaRef}
         style={{ height }}
         value={localValue}
       />
