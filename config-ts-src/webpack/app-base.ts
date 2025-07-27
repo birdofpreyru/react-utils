@@ -301,9 +301,9 @@ export default function configFactory(ops: OptionsT): Configuration {
         enforce: 'pre',
         use: ['source-map-loader'],
       }, {
-        // Loads JS modules (.cjs, .js, .jsx); TS modules (.ts, .tsx);
+        // Loads JS modules (.cjs, .js, .jsx, .mjs); TS modules (.ts, .tsx);
         // and SVG assets (.svg).
-        test: ops.typescript ? /\.(cjs|(j|t)sx?|svg)$/ : /\.(cjs|jsx?|svg)$/,
+        test: /\.(cjs|js|jsx|mjs|svg|ts|tsx)$/,
 
         exclude: ops.babelLoaderExclude ?? [/node_modules/],
         loader: 'babel-loader',

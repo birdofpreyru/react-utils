@@ -97,7 +97,7 @@ export default function configFactory(ops: OptionsT): Configuration {
         use: ['source-map-loader'],
       }, {
         /* Loads JS and JSX moudles, and inlines SVG assets. */
-        test: ops.typescript ? /\.((j|t)sx?|svg)$/ : /\.(jsx?|svg)$/,
+        test: /\.(cjs|js|jsx|mjs|svg|ts|tsx)$/,
 
         exclude: [
           /node_modules/,
