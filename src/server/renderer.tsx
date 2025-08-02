@@ -338,7 +338,7 @@ export default function factory(
     ? `<link rel="manifest" href="${publicPath as string}manifest.json">` : '';
 
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-  interface BufferWithNonce extends Buffer {
+  interface BufferWithNonce extends ArrayBuffer {
     nonce: string;
   }
 
@@ -626,9 +626,9 @@ export default function factory(
         // but it greately simplifies testing, and error reporting.
         await new Promise<void>((done, failed) => {
           brotliCompress(html, (error, buffer) => {
-            const b = buffer as BufferWithNonce;
             if (error) failed(error);
             else {
+              const b = buffer as unknown as BufferWithNonce;
               b.nonce = (req as unknown as {
                 nonce: string;
               }).nonce;
