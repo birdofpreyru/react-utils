@@ -20,6 +20,8 @@ type PropsT = {
   disabled?: boolean;
   enforceA?: boolean;
   onClick?: MouseEventHandler & KeyboardEventHandler;
+  onKeyDown?: KeyboardEventHandler;
+  onKeyUp?: KeyboardEventHandler;
   onMouseDown?: MouseEventHandler;
   onMouseUp?: MouseEventHandler;
   onPointerDown?: PointerEventHandler;
@@ -38,6 +40,8 @@ export const BaseButton: FunctionComponent<PropsT> = ({
   disabled,
   enforceA,
   onClick,
+  onKeyDown: onKeyDownProp,
+  onKeyUp,
   onMouseDown,
   onMouseUp,
   onPointerDown,
@@ -61,6 +65,14 @@ export const BaseButton: FunctionComponent<PropsT> = ({
       </div>
     );
   }
+
+  let onKeyDown = onKeyDownProp;
+  if (!onKeyDown && onClick) {
+    onKeyDown = (e) => {
+      if (e.key === 'Enter') onClick(e);
+    };
+  }
+
   if (to) {
     return (
       <Link
@@ -68,6 +80,14 @@ export const BaseButton: FunctionComponent<PropsT> = ({
         data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
         enforceA={enforceA}
         onClick={onClick}
+
+        // TODO: For now, the `onKeyDown` handler is not passed to the <Link>,
+        // as <Link> component does not call it anyway, presumably due to
+        // the inner implementation details. We should look into supporting it:
+        // https://github.com/birdofpreyru/react-utils/issues/444
+        // onKeyDown={onKeyDown}
+
+        onKeyUp={onKeyUp}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}
         onPointerDown={onPointerDown}
@@ -86,9 +106,8 @@ export const BaseButton: FunctionComponent<PropsT> = ({
       className={className}
       data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
       onClick={onClick}
-      onKeyDown={onClick ? (e) => {
-        if (e.key === 'Enter') onClick(e);
-      } : undefined}
+      onKeyDown={onKeyDown}
+      onKeyUp={onKeyUp}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onPointerDown={onPointerDown}

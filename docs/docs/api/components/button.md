@@ -43,6 +43,23 @@ cases.
   In either case it receives the corresponding event (keyboard, or mouse), as its
   only argument.
 
+- `onKeyDown` &mdash; [KeyboardEventHandler] &mdash; &laquo;Key down&raquo;
+  event handler.
+
+  :::caution
+  At the moment `onKeyDown` prop is only supported by proper button components,
+  and not by &laquo;button-like&raquo; links (instances of [Button] using `to`
+  prop). For &laquo;button-like&raquo; links `onKeyDown` event handler is not
+  called.
+  :::
+
+  :::tip
+  If no `onKeyDown` prop is provided, but `onClick` is, the `onKeyDown` defaults
+  to trigger `onClick` when `"Enter"` key is pressed.
+  :::
+
+- `onKeyDown` &mdash; [KeyboardEventHandler] &mdash; &laquo;Key up&raquo; event handler.
+
 - `onMouseDown` &mdash; [MouseEventHandler] &mdash; Mouse down event handler.
 
 - `onMouseUp` &mdash; [MouseEventHandler] &mdash; Mouse up event handler.
