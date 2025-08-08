@@ -4,7 +4,7 @@ import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
-type ThemeKeyT = 'container' | 'input' | 'label';
+type ThemeKeyT = 'container' | 'empty' | 'input' | 'label';
 
 type PropsT = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: React.ReactNode;
@@ -29,9 +29,13 @@ const Input: FunctionComponent<PropsT> = ({
   ...rest
 }) => {
   const localRef = useRef<HTMLInputElement>(null);
+
+  let containerClassName = theme.container;
+  if (!rest.value && theme.empty) containerClassName += ` ${theme.empty}`;
+
   return (
     <span
-      className={theme.container}
+      className={containerClassName}
       onFocus={() => {
         // TODO: It does not really work if a callback-style `ref` is passed in,
         // we need a more complex logic to cover that case, but for now this serves

@@ -23,8 +23,15 @@ and themed using [React Themes] library.
 
 See [React Themes] docs to learn about component theming. The valid theme keys
 of [Input] component are:
-- `container` - The root component element.
-- `input` - The underlying HTML `<input>` element.
+- `container` &mdash; The root component element.
+
+- `empty` &mdash; Added to the root component element when `value` prop
+  is falsy.
+  :::caution
+  At the moment, it is always added to non-managed inputs.
+  :::
+
+- `input` &mdash; The underlying HTML `<input>` element.
 - `label` &mdash; The label element.
 
 [getByTestId()]: https://testing-library.com/docs/queries/bytestid
