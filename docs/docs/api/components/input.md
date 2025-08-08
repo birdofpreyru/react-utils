@@ -31,6 +31,9 @@ of [Input] component are:
   At the moment, it is always added to non-managed inputs.
   :::
 
+- `focused` &mdash; Added to the component's root element when the underlying
+  HTML `<input>` element is focused.
+
 - `input` &mdash; The underlying HTML `<input>` element.
 - `label` &mdash; The label element.
 

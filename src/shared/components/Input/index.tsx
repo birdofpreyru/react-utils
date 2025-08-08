@@ -1,10 +1,15 @@
-import { type FunctionComponent, type Ref, useRef } from 'react';
+import {
+  type FunctionComponent,
+  type Ref,
+  useRef,
+  useState,
+} from 'react';
 
 import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
-type ThemeKeyT = 'container' | 'empty' | 'input' | 'label';
+type ThemeKeyT = 'container' | 'empty' | 'focused' | 'input' | 'label';
 
 type PropsT = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: React.ReactNode;
@@ -28,9 +33,18 @@ const Input: FunctionComponent<PropsT> = ({
   theme,
   ...rest
 }) => {
+  // NOTE: As of now, it is only updated when "theme.focused" is defined,
+  // as otherwise its value is not used.
+  const [focused, setFocused] = useState(false);
+
   const localRef = useRef<HTMLInputElement>(null);
 
   let containerClassName = theme.container;
+
+  // NOTE: As of now, "focused" can be true only when "theme.focused"
+  // is provided.
+  if (focused /* && theme.focused */) containerClassName += ` ${theme.focused}`;
+
   if (!rest.value && theme.empty) containerClassName += ` ${theme.empty}`;
 
   return (
@@ -53,6 +67,15 @@ const Input: FunctionComponent<PropsT> = ({
         // TODO: Avoid the spreading later.
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...rest}
+
+        onBlur={theme.focused ? (e) => {
+          setFocused(false);
+          rest.onBlur?.(e);
+        } : rest.onBlur}
+        onFocus={theme.focused ? (e) => {
+          setFocused(true);
+          rest.onFocus?.(e);
+        } : rest.onFocus}
       />
     </span>
   );
