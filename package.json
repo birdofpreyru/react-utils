@@ -1,5 +1,5 @@
 {
-  "version": "1.43.35",
+  "version": "1.44.0",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -72,7 +72,7 @@
     "@types/morgan": "^1.9.10",
     "@types/node-forge": "^1.3.13",
     "@types/pretty": "^2.0.3",
-    "@types/react": "^19.1.9",
+    "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@types/request-ip": "^0.0.41",
     "@types/serialize-javascript": "^5.0.4",
@@ -91,7 +91,7 @@
     "jest": "^30.0.5",
     "jest-environment-jsdom": "^30.0.5",
     "memfs": "^4.36.0",
-    "mini-css-extract-plugin": "^2.9.3",
+    "mini-css-extract-plugin": "^2.9.4",
     "mockdate": "^3.0.5",
     "nodelist-foreach-polyfill": "^1.2.0",
     "postcss": "^8.5.6",
@@ -112,7 +112,7 @@
     "tstyche": "^4.3.0",
     "typed-scss-modules": "^8.1.1",
     "typescript": "^5.9.2",
-    "webpack": "^5.101.0",
+    "webpack": "^5.101.1",
     "webpack-dev-middleware": "^7.4.2",
     "webpack-hot-middleware": "^2.26.1",
     "webpack-merge": "^6.0.1",
