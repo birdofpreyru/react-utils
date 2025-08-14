@@ -20,18 +20,23 @@ ReactJS application. See [server()] documentation for further details.
 - [SCRIPT_LOCATIONS] - The map of valid `location` values in [Script] objects.
 
 **Functions**
-- [errors.assert()](#errorsassert) - Validates a value against the given [Joi]
-  schema.
+- [errors.assert()](#errorsassert) &mdash; Validates a value against the given
+  validation schema compliant to the [Standard Schema Specs], _e.g._ [Zod]
+  (recommended), or [Joi], _etc._
 - [errors.fail()](#errorsfail) - Throws an error with the given message and
   HTTP status code.
 - [errors.getErrorForCode()](#errorsgeterrorforcode) - Given HTTP status code
   returns the corresponding error text.
-- [errors.joi](#errorsjoi) - An alias for [Joi] library, which provides methods
-  for HTTP request validation.
+
 - [errors.newError()](#errorsnewerror) - Creates a new `Error` object with
   the given error message and attached HTTP status.
 - [getDefaultCspSettings()](#getdefaultcspsettings) - Returns a deep copy of
   default [CSP] settings object used by **react-utils**.
+
+:::caution Deprecated
+- [errors.joi](#errorsjoi) &mdash; Removed in **v1.44.0**; an alias for [Joi]
+  library, which provides methods for HTTP request validation.
+:::
 
 ## Constants
 
@@ -90,20 +95,34 @@ This object provides the map of valid [Script]'s `location` values:
 ## Functions
 
 ### errors.assert()
-```jsx
-server.errors.assert(value, schema, message = '', statusCode = 400)
+```tsx
+import { server } from '@dr.pogodin/react-utils';
+
+const { assert } = server.errors;
+
+async function assert<T extends StandardSchemaV1>(
+  value: StandardSchemaV1.InferInput<T>,
+  schema: T,
+  message = '',
+  statusCode = CODES.BAD_REQUEST, // 400
+): Promise<StandardSchemaV1.InferOutput<T>>;
 ```
-Validates `value` against the given [Joi] `schema`. Throws an error with
-the given error `message` and `statusCode` if the validation fails.
+Validates the `value` against the given validation schema, compliant to the
+[Standard Schema Specs], _e.g._ [Zod] (recommended), or [Joi], _etc._. Throws
+an error with the given error `message` and `statusCode` if the validation fails,
+otherwise resolves to the validated value.
 
 **Arguments**
-- `value` - **any** value to validate.
-- `schema` - **object** - [Joi] schema.
-- `message = ''` - **string** - Optional. Error message. If given, the error
-  message from [Joi] will be appended to it, otherwise the error message
-  from [Joi] is used as is.
-- `statusCode = 400` - **number** - Optional. Error status code. Defaults `400`
-  (bad request).
+- `value` &mdash; **unknown** &mdash; The value to validate.
+- `schema` &mdash; **StandardSchemaV1** &mdash; The validation schema, compliant
+  to the [Standard Schema Specs].
+- `message = ''` &mdash; **string** &mdash; Optional. Error message. If given,
+  the error message from the validator will be appended to it, otherwise the
+  error message from the validator is used as is.
+- `statusCode = 400` &mdash; **number** &mdash; Optional. Error status code.
+  Defaults `400` (bad request).
+
+**Resolves** the validated value, with correctly inferred type.
 
 ### errors.fail()
 ```tsx
@@ -149,24 +168,6 @@ for **getReasonPhrase()** function from [http-status-codes] library.
 - `code` - **number** - HTTP status code.
 - Returns **string** - Error message.
 
-### errors.joi
-```jsx
-server.errors.joi: object
-```
-An alias for [Joi] library, which provides methods useful for HTTP request
-validation.
-
-**Example**: [Joi] methods are used to create validation schema for the body of
-a sample HTTP request.
-```jsx
-import { server } from '@dr.pogodin/react-utils';
-
-const { joi } = server.errors;
-const requestBodySchema = joi.object({
-  sampleKey: joi.string().max(16).required(),
-});
-```
-
 ### errors.newError()
 ```jsx
 server.errors.newError(message, statusCode = 500): Error
@@ -188,13 +189,41 @@ Returns a deep copy of default [CSP] settings object used by **react-utils**,
 with exception of `nonce-xxx` clause in `script-src` directive, which is added
 dynamically for each request.
 
+### errors.joi
+:::danger Deprecated
+Removed in **v1.44.0**. The original documentation below is kept for reference.
+
+---
+
+```tsx
+server.errors.joi: object
+```
+
+An alias for [Joi] library, which provides methods useful for HTTP request
+validation.
+
+**Example**: [Joi] methods are used to create validation schema for the body of
+a sample HTTP request.
+```jsx
+import { server } from '@dr.pogodin/react-utils';
+
+const { joi } = server.errors;
+const requestBodySchema = joi.object({
+  sampleKey: joi.string().max(16).required(),
+});
+```
+
+:::
+
 [CSP]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 [ExpressJS]: https://expressjs.com
 [helmet]: https://github.com/helmetjs/helmet
 [http-status-codes]: https://www.npmjs.com/package/http-status-codes
-[Joi]: https://joi.dev/api/?v=17.4.2
+[Joi]: https://joi.dev/api
 [Script]: /docs/api/functions/server#beforerender-script
 [server]: /docs/api/utils/server
 [SCRIPT_LOCATIONS]: #script_locations
 [server()]: /docs/api/functions/server
+[Standard Schema Specs]: https://standardschema.dev
 [Webpack]: https://webpack.js.org
+[Zod]: https://zod.dev

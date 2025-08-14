@@ -15,7 +15,7 @@ import {
   getReasonPhrase as getErrorForCode,
 } from 'http-status-codes';
 
-import joi from 'joi';
+import type { StandardSchemaV1 } from '@standard-schema/spec';
 
 /**
  * @static
@@ -56,21 +56,6 @@ export { ERRORS };
  * console.log(server.errors.getErrorForCode(400)); // Prints: Bad Request
  */
 export { getErrorForCode };
-
-/**
- * @static
- * @const joi
- * @desc An alias for [Joi library](https://joi.dev/api/?v=17.4.0),
- * which provides tooling for HTTP request validation. You can use it in any
- * way you would use that library import.
- * @example
- * import { server } from '@dr.pogodin/react-utils';
- * const { joi } = server.errors;
- * const requestBodySchema = joi.object({
- *   sampleKey: joi.string().max(16).required(),
- * });
- */
-export { joi };
 
 // TODO: It could accept the status code as a constructor argument.
 class ErrorWithStatus extends Error {
@@ -121,14 +106,20 @@ export function fail(
  * @param [statusCode=500] HTTP status code. Defaults to 400 (Bad
  * Request).
  */
-export function assert(
-  value: unknown,
-  schema: joi.AnySchema,
+export async function assert<T extends StandardSchemaV1>(
+  value: StandardSchemaV1.InferInput<T>,
+  schema: T,
   message = '',
   statusCode = CODES.BAD_REQUEST,
-): void {
-  const { error } = schema.validate(value, { abortEarly: false });
-  if (error) {
-    fail(message.concat(message ? '\n' : '', error.message), statusCode);
+): Promise<StandardSchemaV1.InferOutput<T>> {
+  let result = schema['~standard'].validate(value);
+  if (result instanceof Promise) result = await result;
+
+  if (result.issues) {
+    let error = JSON.stringify(result.issues, null, 2);
+    if (message) error = `${message}\n\n${error}`;
+    throw fail(error, statusCode);
   }
+
+  return result.value;
 }
