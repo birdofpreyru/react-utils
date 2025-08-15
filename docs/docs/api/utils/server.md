@@ -101,7 +101,7 @@ import { server } from '@dr.pogodin/react-utils';
 const { assert } = server.errors;
 
 async function assert<T extends StandardSchemaV1>(
-  value: StandardSchemaV1.InferInput<T>,
+  value: unknown,
   schema: T,
   message = '',
   statusCode = CODES.BAD_REQUEST, // 400

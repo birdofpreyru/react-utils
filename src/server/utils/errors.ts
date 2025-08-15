@@ -94,20 +94,17 @@ export function fail(
 }
 
 /**
- * ```js
- * import { server } from '@dr.pogodin/react-utils';
- * const { assert } = server.errors;
- * ```
- * Validates a value using given Joi schema, and throws an error with given
- * message and HTTP status code in case of the validation failure.
- * @param value
- * @param schema
- * @param [message] Error message.
- * @param [statusCode=500] HTTP status code. Defaults to 400 (Bad
- * Request).
+ * Validates the `value` against the given "standard" validation `schema`.
+ * Resolves to the correctly typed `value`, if it has passed the validation;
+ * otherwise throws an error.
+ * @param value The value to validate.
+ * @param schema The "standard" validation schema to use.
+ * @param [message] Optional error message, to prepend the validation error
+ *  message.
+ * @param [statusCode=400] HTTP status code. Defaults to 400 (Bad Request).
  */
 export async function assert<T extends StandardSchemaV1>(
-  value: StandardSchemaV1.InferInput<T>,
+  value: unknown,
   schema: T,
   message = '',
   statusCode = CODES.BAD_REQUEST,

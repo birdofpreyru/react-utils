@@ -1,5 +1,5 @@
 {
-  "version": "1.44.0",
+  "version": "1.44.1",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -8,7 +8,7 @@
     "url": "https://github.com/birdofpreyru/react-utils/issues"
   },
   "dependencies": {
-    "@babel/runtime": "^7.28.2",
+    "@babel/runtime": "^7.28.3",
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.13.7",
     "@dr.pogodin/csurf": "^1.16.5",
     "@dr.pogodin/js-utils": "^0.1.3",
@@ -45,14 +45,14 @@
   },
   "description": "Collection of generic ReactJS components and utils",
   "devDependencies": {
-    "@babel/cli": "^7.28.0",
-    "@babel/core": "^7.28.0",
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.3",
     "@babel/node": "^7.28.0",
-    "@babel/plugin-transform-runtime": "^7.28.0",
-    "@babel/preset-env": "^7.28.0",
+    "@babel/plugin-transform-runtime": "^7.28.3",
+    "@babel/preset-env": "^7.28.3",
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
-    "@babel/register": "^7.27.1",
+    "@babel/register": "^7.27.3",
     "@dr.pogodin/babel-plugin-transform-assets": "^1.2.5",
     "@dr.pogodin/babel-preset-svgr": "^1.9.2",
     "@dr.pogodin/eslint-configs": "^0.0.11",
@@ -112,7 +112,7 @@
     "tstyche": "^4.3.0",
     "typed-scss-modules": "^8.1.1",
     "typescript": "^5.9.2",
-    "webpack": "^5.101.1",
+    "webpack": "^5.101.2",
     "webpack-dev-middleware": "^7.4.2",
     "webpack-hot-middleware": "^2.26.1",
     "webpack-merge": "^6.0.1",
