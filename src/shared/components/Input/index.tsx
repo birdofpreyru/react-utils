@@ -1,5 +1,6 @@
 import {
   type FunctionComponent,
+  type ReactNode,
   type Ref,
   useRef,
   useState,
@@ -9,9 +10,12 @@ import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
-type ThemeKeyT = 'container' | 'empty' | 'focused' | 'input' | 'label';
+type ThemeKeyT = 'children' | 'container' | 'empty' | 'error' | 'errorMessage'
+  | 'focused' | 'input' | 'label';
 
 type PropsT = React.InputHTMLAttributes<HTMLInputElement> & {
+  children?: ReactNode;
+  error?: ReactNode;
   label?: React.ReactNode;
   ref?: Ref<HTMLInputElement>;
   testId?: string;
@@ -27,6 +31,8 @@ type PropsT = React.InputHTMLAttributes<HTMLInputElement> & {
  * `<input>` element.
  */
 const Input: FunctionComponent<PropsT> = ({
+  children,
+  error,
   label,
   ref,
   testId,
@@ -47,8 +53,10 @@ const Input: FunctionComponent<PropsT> = ({
 
   if (!rest.value && theme.empty) containerClassName += ` ${theme.empty}`;
 
+  if (error) containerClassName += ` ${theme.error}`;
+
   return (
-    <span
+    <div
       className={containerClassName}
       onFocus={() => {
         // TODO: It does not really work if a callback-style `ref` is passed in,
@@ -77,7 +85,11 @@ const Input: FunctionComponent<PropsT> = ({
           rest.onFocus?.(e);
         } : rest.onFocus}
       />
-    </span>
+      {error && error !== true
+        ? <div className={theme.errorMessage}>{error}</div>
+        : null}
+      {children ? <div className={theme.children}>{children}</div> : null}
+    </div>
   );
 };
 
