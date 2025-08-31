@@ -147,7 +147,7 @@ argument is an object with the following valid fields:
     via `workbox` object.
 
 The config factory returns a config object which
-- Bundles font assets (EOF, OTF, SVG, TTF, WOFF, WOFF2 files)
+- Bundles font assets (EOF, OTF, TTF, WOFF, WOFF2 files)
   from the `src/assets/fonts` folder of source code and emits them into
   the `[PUBLIC_PATH]/fonts` folder.
 - Bundles image assets (GIF, JPEG, JPG, PNG files) from any folder of
@@ -361,7 +361,7 @@ The `options` argument is an object with the following valid fields:
   - `outputPath` - **string** - Build output path. Defaults `build`.
 
 The generated config does the following:
-- References to font asset (EOF, OTF, SVG, TTF, WOFF, WOFF2) files located in
+- References to font asset (EOF, OTF, TTF, WOFF, WOFF2) files located in
   the `src/assets/fonts` folder of the library's source code are rewritten to
   to `LIBRARY_NAME/src/assets/fonts/FILENAME.FILE_EXTENSION` so that the host
   package of the library is able to find and bundle them.

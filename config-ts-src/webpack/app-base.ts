@@ -123,7 +123,7 @@ export type OptionsT = {
  * provided the Webpack config factory will use it to gererate `sitemap.xml`
  * file in the output folder, and then serve it from the app root.
  * @return The generated config will opt to:
- * - Bundle the font assets (EOF, OTF, SVG, TTF, WOFF, WOFF2 files from
+ * - Bundle the font assets (EOF, OTF, TTF, WOFF, WOFF2 files from
  *   the `src/assets/fonts` folder of your source code will be bundled
  *   and output into the `[PUBLIC_PATH]/fonts` folder);
  * - Bundle image assets (GIF, JPEG, JPG, PNG files from any folder of
@@ -284,15 +284,11 @@ export default function configFactory(ops: OptionsT): Configuration {
     module: {
       rules: [{
         /* Loads font resources from "src/assets/fonts" folder. */
-        test: /\.(eot|otf|svg|ttf|woff2?)$/,
+        test: /\.(eot|otf|ttf|woff2?)$/,
 
         generator: {
           filename: 'fonts/[contenthash][ext][query]',
         },
-        include: [
-          /node_modules/,
-          /src[/\\]assets[/\\]fonts/,
-        ],
         type: 'asset/resource',
       }, {
         // Aggregates source maps from dependencies.

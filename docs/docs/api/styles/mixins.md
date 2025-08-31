@@ -19,7 +19,7 @@ mixin file can be imported whenever mixins are needed, and then both local and
 ```
 Generates a a `@font-face` declaration for inclusion of the specified font into
 the app. The font is assumed to be provided in the following formats: EOT, WOFF,
-TTF, SVG.
+TTF.
 
 **Arguments**
 - `$name` - Font name (to reference the loaded font inside SCSS).

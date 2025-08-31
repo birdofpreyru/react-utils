@@ -75,7 +75,7 @@ export default function configFactory(ops: OptionsT): Configuration {
          * with such configuration it just rewrites those URLs to point to
          * the original location of the font assets in
          * the library being build. */
-        test: /\.(eot|otf|svg|ttf|woff2?)$/,
+        test: /\.(eot|otf|ttf|woff2?)$/,
 
         generator: {
           // TODO: This comes from the older config version which relied on
@@ -84,10 +84,6 @@ export default function configFactory(ops: OptionsT): Configuration {
           filename: '../shared/[path][name][ext]',
           publicPath: `${ops.library}/build/shared`,
         },
-        include: [
-          /node_modules/,
-          /src[/\\]assets[/\\]fonts/,
-        ],
         type: 'asset/resource',
       }, {
         // Aggregates source maps from dependencies.
