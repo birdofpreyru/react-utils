@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`emits correct CSS 1`] = `"@font-face{font-display:block;font-family:Empty;font-style:normal;font-weight:400;src:url(/public/path/31d6cfe0d16ae931b73c.ttf) format("truetype")}.dQLICa{font:12pt Empty,serif}"`;
 

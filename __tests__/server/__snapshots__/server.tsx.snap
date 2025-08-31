@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Server is functional Simple request 1`] = `"default-src 'self' https://sample.url;base-uri 'self';font-src 'self' data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self' 'unsafe-eval' 'nonce-00000000-0000-0000-0000-000000000001';script-src-attr 'none';style-src 'self' 'unsafe-inline';frame-src 'self' https://*.youtube.com;upgrade-insecure-requests"`;
 

@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`emits expected CSS 1`] = `
 ".SjBfrO{background:red;height:10px;width:10px}.QXUpkv{color:blue}.MzIKg7{background:green;height:10px;width:10px}
