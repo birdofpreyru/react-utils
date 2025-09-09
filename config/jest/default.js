@@ -36,7 +36,7 @@ module.exports = {
     '\\.((j|t)sx?|svg)$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    '/node_modules/(?!@dr.pogodin/react-utils)',
+    '/node_modules/(?!@dr.pogodin/react-utils|uuid)',
   ],
 
 };
