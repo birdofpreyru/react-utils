@@ -401,6 +401,8 @@ export default function factory(
         }
       }
 
+      const brr = ops.beforeRender!(req, sanitizedConfig as unknown as ConfigT);
+
       const [{
         configToInject,
         extraScripts,
@@ -409,7 +411,10 @@ export default function factory(
         cipher,
         iv,
       }] = await Promise.all([
-        ops.beforeRender!(req, sanitizedConfig as unknown as ConfigT),
+        // NOTE: Written this way to avoid triggering the "await-thenable"
+        // ESLint rule.
+        brr instanceof Promise ? brr : Promise.resolve(brr),
+
         prepareCipher(buildInfo.key),
       ]);
 
