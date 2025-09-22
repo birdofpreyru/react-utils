@@ -27,6 +27,13 @@ import exampleCode from '!!raw-loader!../../../src/components/TextAreaExample';
 
 - `disabled` &mdash; **boolean** &mdash; Disables the text area.
 
+- `error` &mdash; **ReactNode** &mdash; Optional. If a truthy value the `error`
+  theme key is added to the root element of the component, and unless the value
+  is _true_ it is also rendered right after the inner `<textarea>`element,
+  wrapped into a `<div>` with `errorMessage` theme key (thus, setting it equal
+  _true_ allows to apply `error` theme key to the root element, without adding
+  the error message `<div>`).
+
 - `label` &mdash; **string** &mdash; Text area label.
 
 - `onBlur` &mdash; **React.FocusEventHandler&lt;HTMLTextAreaElement&gt;**
@@ -53,7 +60,14 @@ import exampleCode from '!!raw-loader!../../../src/components/TextAreaExample';
 [TextAreaTheme]: #textareatheme
 See [React Themes] docs to learn how themed components work, and how they can be
 themed. The valid theme keys for [TextArea] are:
+
 - `container` &mdash; The root container of the component.
+
+- `error` &mdash; Added to the root element when `error` prop value is thruthy.
+
+- `errorMessage` &mdash; Applied to the `<div>` wrapper of the error message,
+  when it is rendered (see `error` prop documentation for details).
+
 - `hidden` &mdash; The hidden `<textarea>` element, which is used internally
   for measurement purposes. This style is applied to that element in addition
   to the `textarea` style below.

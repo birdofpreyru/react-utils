@@ -4,6 +4,8 @@
 .context,
 .ad.hoc {
   &.container {
+    display: inline-flex;
+    flex-wrap: wrap;
     margin: 0.1em;
     position: relative;
   }
@@ -40,6 +42,21 @@
       color: color.adjust($color: gray, $alpha: -0.66);
       user-select: none;
     }
+  }
+
+  &.error &.textarea {
+    border-color: red;
+
+    &:focus { box-shadow: 0 0 3px 1px orangered }
+  }
+
+  &.errorMessage {
+    color: red;
+    font-size: 0.8em;
+    font-style: italic;
+    padding-right: 0.6em;
+    text-align: right;
+    width: 100%;
   }
 
   &.hidden {

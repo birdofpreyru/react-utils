@@ -3,6 +3,7 @@ import {
   type FocusEventHandler,
   type FunctionComponent,
   type KeyboardEventHandler,
+  type ReactNode,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -13,10 +14,12 @@ import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './style.scss';
 
-type ThemeKeyT = 'container' | 'hidden' | 'label' | 'textarea';
+type ThemeKeyT = 'container' | 'error' | 'errorMessage' | 'hidden' | 'label'
+  | 'textarea';
 
 type Props = {
   disabled?: boolean;
+  error?: ReactNode;
   label?: string;
   onBlur?: FocusEventHandler<HTMLTextAreaElement>;
   onChange?: ChangeEventHandler<HTMLTextAreaElement>;
@@ -29,6 +32,7 @@ type Props = {
 
 const TextArea: FunctionComponent<Props> = ({
   disabled,
+  error,
   label,
   onBlur,
   onChange,
@@ -74,9 +78,12 @@ const TextArea: FunctionComponent<Props> = ({
     if (el) setHeight(el.scrollHeight);
   }, [localValue]);
 
+  let containerClassName = theme.container;
+  if (error) containerClassName += ` ${theme.error}`;
+
   return (
     <div
-      className={theme.container}
+      className={containerClassName}
       onFocus={() => {
         textAreaRef.current?.focus();
       }}
@@ -122,6 +129,9 @@ const TextArea: FunctionComponent<Props> = ({
         style={{ height }}
         value={localValue}
       />
+      {error && error !== true
+        ? <div className={theme.errorMessage}>{error}</div>
+        : null}
     </div>
   );
 };
