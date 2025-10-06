@@ -17,9 +17,14 @@ Encapsulates Webpack-related utilities.
 ```tsx
 import { webpack } from '@dr.pogodin/react-utils';
 
+type RequireWeakOptionsT = {
+  basePath?: string;
+  throwOnError?: boolean;
+};
+
 webpack.requireWeak<Module extends NodeJS.Module>(
   modulePath: string,
-  basePath?: string,
+  basePathOrOptions?: RequireWeakOptionsT | string,
 ): Module | null;
 ```
 Implements server-side loading of the specified JS module in the way which
@@ -36,6 +41,12 @@ prevents it from being bundled into the client-side code by Webpack.
 - **Client-side**: always returns **null**.
 
 :::info Changes across `dr.pogodin/react-utils` versions:
+- **v1.44.10**:
+  Turns the second, optional argument into an object with `basePath` and
+  `throwOnError` options. In past versions this optional argument was just
+  `basePath` string, which still works but will be deprecated in future
+  version.
+
 - **v1.40.11**:
   - **TypeScript**: Added `Module` generic argument for typing of the result.
     You want to use it like:

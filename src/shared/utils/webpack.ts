@@ -2,6 +2,11 @@ import type PathNS from 'node:path';
 
 import { IS_CLIENT_SIDE } from './isomorphy';
 
+type RequireWeakOptionsT = {
+  basePath?: string;
+  throwOnError?: boolean;
+};
+
 type RequireWeakResT<T> = T extends { default: infer D }
   ? (D extends null | undefined ? T : D & Omit<T, 'default'>)
   : T;
@@ -15,9 +20,23 @@ type RequireWeakResT<T> = T extends { default: infer D }
  */
 export function requireWeak<T extends object>(
   modulePath: string,
-  basePath?: string,
+
+  // TODO: For now `basePath` can be provided directly as a string here,
+  // for backward compatibility. Deprecate it in future, if any other
+  // breaking changes are done for requireWeak().
+  basePathOrOptions?: string | RequireWeakOptionsT,
 ): RequireWeakResT<T> | null {
   if (IS_CLIENT_SIDE) return null;
+
+  let basePath: string | undefined;
+  let ops: RequireWeakOptionsT;
+  if (typeof basePathOrOptions === 'string') {
+    basePath = basePathOrOptions;
+    ops = {};
+  } else {
+    ops = basePathOrOptions ?? {};
+    ({ basePath } = ops);
+  }
 
   // TODO: On one hand, this try/catch wrap silencing errors is bad, as it may
   // hide legit errors, in a way difficult to notice and understand; but on the
@@ -49,7 +68,8 @@ export function requireWeak<T extends object>(
       }
     });
     return res;
-  } catch {
+  } catch (error) {
+    if (ops.throwOnError) throw error;
     return null;
   }
 }
