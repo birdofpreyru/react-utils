@@ -22,9 +22,13 @@ const REACT_UTILS_STYLES = process.env.NODE_ENV === 'development'
 const config = {
   baseUrl: '/docs/react-utils/',
   favicon: 'img/favicon.ico',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
+  },
   onBrokenAnchors: 'throw',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'throw',
   plugins: ['docusaurus-plugin-sass'],
   presets: [
     [
