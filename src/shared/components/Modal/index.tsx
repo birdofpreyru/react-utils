@@ -5,7 +5,6 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState,
 } from 'react';
 
 import ReactDom from 'react-dom';
@@ -54,16 +53,6 @@ const BaseModal: FunctionComponent<PropsT> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
-  const [portal, setPortal] = useState<HTMLDivElement>();
-
-  useEffect(() => {
-    const p = document.createElement('div');
-    document.body.appendChild(p);
-    setPortal(p);
-    return () => {
-      document.body.removeChild(p);
-    };
-  }, []);
 
   // Sets up modal cancellation of scrolling, if opted-in.
   useEffect(() => {
@@ -107,9 +96,9 @@ const BaseModal: FunctionComponent<PropsT> = ({
     />
   ), []);
 
-  return portal ? ReactDom.createPortal(
+  return ReactDom.createPortal(
     (
-      <>
+      <div>
         {focusLast}
         <div
           aria-label="Cancel"
@@ -176,10 +165,10 @@ const BaseModal: FunctionComponent<PropsT> = ({
           tabIndex={0}
         />
         {focusLast}
-      </>
+      </div>
     ),
-    portal,
-  ) : null;
+    document.body,
+  );
 };
 
 export default themed(BaseModal, 'Modal', baseTheme);

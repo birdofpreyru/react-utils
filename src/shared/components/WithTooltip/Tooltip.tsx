@@ -8,10 +8,8 @@ import {
   type FunctionComponent,
   type ReactNode,
   type RefObject,
-  useEffect,
   useImperativeHandle,
   useRef,
-  useState,
 } from 'react';
 
 import { createPortal } from 'react-dom';
@@ -47,41 +45,9 @@ type ComponentsT = {
   content: HTMLDivElement;
 };
 
-type HeapT = {
-  lastElement?: HTMLElement;
-  lastPageX: number;
-  lastPageY: number;
-  lastPlacement?: PLACEMENTS | undefined;
-};
-
 export type ThemeKeysT = 'appearance' | 'arrow' | 'content' | 'container';
 
 type TooltipThemeT = Theme<ThemeKeysT>;
-
-/**
- * Creates tooltip components.
- * @ignore
- * @param {object} theme Themes to use for tooltip container, arrow,
- *  and content.
- * @return {object} Object with DOM references to the container components:
- *  container, arrow, content.
- */
-function createTooltipComponents(theme: TooltipThemeT): ComponentsT {
-  const arrow = document.createElement('div');
-  if (theme.arrow) arrow.setAttribute('class', theme.arrow);
-
-  const content = document.createElement('div');
-  if (theme.content) content.setAttribute('class', theme.content);
-
-  const container = document.createElement('div');
-  if (theme.container) container.setAttribute('class', theme.container);
-
-  container.appendChild(arrow);
-  container.appendChild(content);
-  document.body.appendChild(container);
-
-  return { arrow, container, content };
-}
 
 type TooltipRectsT = {
   arrow: DOMRect;
@@ -272,14 +238,9 @@ const Tooltip: FunctionComponent<{
   // Thus, when we create the <Tooltip> we have to record its target positioning
   // details, and then apply them when it is created.
 
-  const { current: heap } = useRef<HeapT>({
-    lastElement: undefined,
-    lastPageX: 0,
-    lastPageY: 0,
-    lastPlacement: undefined,
-  });
-
-  const [components, setComponents] = useState<ComponentsT | null>(null);
+  const arrowRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const pointTo = (
     pageX: number,
@@ -287,52 +248,27 @@ const Tooltip: FunctionComponent<{
     placement: PLACEMENTS,
     element: HTMLElement,
   ) => {
-    heap.lastElement = element;
-    heap.lastPageX = pageX;
-    heap.lastPageY = pageY;
-    heap.lastPlacement = placement;
-
-    if (components) {
-      setComponentPositions(pageX, pageY, placement, element, components);
+    if (!arrowRef.current || !containerRef.current || !contentRef.current) {
+      throw Error('Internal error');
     }
+
+    setComponentPositions(pageX, pageY, placement, element, {
+      arrow: arrowRef.current,
+      container: containerRef.current,
+      content: contentRef.current,
+    });
   };
   useImperativeHandle(ref, () => ({ pointTo }));
 
-  /* Inits and destroys tooltip components. */
-  useEffect(() => {
-    const x = createTooltipComponents(theme);
-    setComponents(x);
-    return () => {
-      document.body.removeChild(x.container);
-      setComponents(null);
-    };
-  }, [theme]);
-
-  useEffect(() => {
-    if (components) {
-      setComponentPositions(
-        heap.lastPageX,
-        heap.lastPageY,
-        heap.lastPlacement,
-        heap.lastElement,
-        components,
-      );
-    }
-  }, [
-    components,
-    // BEWARE: Careful about these dependencies - they are updated when mouse
-    // is moved over the tool-tipped element, thus potentially may cause
-    // unnecessary firing of this effect on each mouse event. It does not
-    // happen now just because the mouse movements themselves are not causing
-    // the component re-rendering, thus dependencies of this effect are not
-    // really re-evaluated.
-    heap.lastPageX,
-    heap.lastPageY,
-    heap.lastPlacement,
-    heap.lastElement,
-  ]);
-
-  return components ? createPortal(children, components.content) : null;
+  return createPortal(
+    (
+      <div className={theme.container} ref={containerRef}>
+        <div className={theme.arrow} ref={arrowRef} />
+        <div className={theme.content} ref={contentRef}>{children}</div>
+      </div>
+    ),
+    document.body,
+  );
 };
 
 export default Tooltip;
