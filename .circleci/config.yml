@@ -40,7 +40,7 @@ jobs:
             - docs/build
   test-node-24: # Current, EOL 2028.04.30
     docker:
-      - image: cimg/node:24.9
+      - image: cimg/node:24.10
     steps:
       *install-build-test
   release:
