@@ -9,8 +9,9 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import {
   type Configuration,
-  type WebpackPluginInstance,
+  DefinePlugin,
   ProgressPlugin,
+  type WebpackPluginInstance,
 } from 'webpack';
 
 import {
@@ -46,6 +47,14 @@ export default function configFactory(ops: OptionsT): Configuration {
   ];
 
   if (!ops.dontUseProgressPlugin) plugins.push(new ProgressPlugin());
+
+  plugins.push(
+    new DefinePlugin({
+      // TODO: This is a hotfix - when Webpack build of the library is loaded
+      // it should consider itself running at the client side.
+      REACT_UTILS_WEBPACK_BUNDLE: 'true',
+    }),
+  );
 
   return {
     context: ops.context,

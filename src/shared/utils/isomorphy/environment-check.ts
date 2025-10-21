@@ -9,7 +9,8 @@ export const IS_CLIENT_SIDE: boolean = typeof process !== 'object'
   // object, but without `versions` sub-object inside it.
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   || !process.versions?.node
-  || !!global.REACT_UTILS_FORCE_CLIENT_SIDE;
+  || !!global.REACT_UTILS_FORCE_CLIENT_SIDE
+  || typeof REACT_UTILS_WEBPACK_BUNDLE !== 'undefined';
 
 /**
  * `true` within the server-side environment (node), `false` at client-side.
