@@ -1,7 +1,10 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-/* global module, process, require */
+/* global global, module, process, require */
+
+// @ts-ignore
+global.REACT_UTILS_FORCE_CLIENT_SIDE = true;
 
 // TODO: Actually, double-check, if Docusaurus already supports ES modules for config?
 // eslint-disable-next-line import/no-commonjs

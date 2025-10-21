@@ -19,7 +19,6 @@ import { webpack } from '@dr.pogodin/react-utils';
 
 type RequireWeakOptionsT = {
   basePath?: string;
-  throwOnError?: boolean;
 };
 
 webpack.requireWeak<Module extends NodeJS.Module>(
@@ -35,12 +34,16 @@ prevents it from being bundled into the client-side code by Webpack.
   resolved from the base path using [path.resolve()]; the module is then loaded
   from the resulting path, and returned, similar to the regular `require()`, but
   invisible to Webpack, hence the module required this way is not bundled into
-  the client side code. If the module could not be resolved, or the loading
-  failed for other reason, [requireWeak()] returns **null**.
+  the client side code.
 
 - **Client-side**: always returns **null**.
 
 :::info Changes across `dr.pogodin/react-utils` versions:
+- **v1.46.0**: On server side it now always throws an error in case of
+  the module loading failure. Environments where it causes problems should
+  set the global `REACT_UTILS_FORCE_CLIENT_SIDE` flag to _true_.
+  Removes `throwOnError` option.
+
 - **v1.44.10**:
   Turns the second, optional argument into an object with `basePath` and
   `throwOnError` options. In past versions this optional argument was just

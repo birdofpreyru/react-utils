@@ -4,7 +4,6 @@ import { IS_CLIENT_SIDE } from './isomorphy';
 
 type RequireWeakOptionsT = {
   basePath?: string;
-  throwOnError?: boolean;
 };
 
 type RequireWeakResT<T> = T extends { default: infer D }
@@ -32,46 +31,34 @@ export function requireWeak<T extends object>(
   let ops: RequireWeakOptionsT;
   if (typeof basePathOrOptions === 'string') {
     basePath = basePathOrOptions;
-    ops = {};
   } else {
     ops = basePathOrOptions ?? {};
     ({ basePath } = ops);
   }
 
-  // TODO: On one hand, this try/catch wrap silencing errors is bad, as it may
-  // hide legit errors, in a way difficult to notice and understand; but on the
-  // other hand it fails for some (unclear, but legit?) reasons in some
-  // environments,
-  // like during the static code generation for docs. Perhaps, something should
-  // be implemented differently here.
-  try {
-    // eslint-disable-next-line no-eval
-    const req = eval('require') as (path: string) => unknown;
+  // eslint-disable-next-line no-eval
+  const req = eval('require') as (path: string) => unknown;
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    const { resolve } = req('path') as typeof PathNS;
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const { resolve } = req('path') as typeof PathNS;
 
-    const path = basePath ? resolve(basePath, modulePath) : modulePath;
-    const module = req(path) as T;
+  const path = basePath ? resolve(basePath, modulePath) : modulePath;
+  const module = req(path) as T;
 
-    if (!('default' in module) || !module.default) return module as RequireWeakResT<T>;
+  if (!('default' in module) || !module.default) return module as RequireWeakResT<T>;
 
-    const { default: def, ...named } = module;
+  const { default: def, ...named } = module;
 
-    const res = def as RequireWeakResT<T>;
+  const res = def as RequireWeakResT<T>;
 
-    Object.entries(named).forEach(([name, value]) => {
-      const assigned = res[name as keyof RequireWeakResT<T>];
-      if (assigned) (res[name as keyof RequireWeakResT<T>] as unknown) = value;
-      else if (assigned !== value) {
-        throw Error('Conflict between default and named exports');
-      }
-    });
-    return res;
-  } catch (error) {
-    if (ops.throwOnError) throw error;
-    return null;
-  }
+  Object.entries(named).forEach(([name, value]) => {
+    const assigned = res[name as keyof RequireWeakResT<T>];
+    if (assigned) (res[name as keyof RequireWeakResT<T>] as unknown) = value;
+    else if (assigned !== value) {
+      throw Error('Conflict between default and named exports');
+    }
+  });
+  return res;
 }
 
 /**
