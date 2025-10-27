@@ -43,6 +43,7 @@ Options:
   -i, --in-dir <path>       input folder for the build (default: "src")
   --lib                     library build (default: false)
   --no-babel                opts out the Babel (server-side code) build
+  --no-webpack              opts out the Webpack (client-side code) build
   -o, --out-dir <path>      output folder for the build (default: "build")
   -w, --watch               build, watch, and rebuild on source changes
   --webpack-config <path>   path to the webpack config (default:
