@@ -63,6 +63,7 @@ program
   .option('-i, --in-dir <path>', 'input folder for the build', 'src')
   .option('--lib', 'library build', false)
   .option('--no-babel', 'opts out the Babel (server-side code) build')
+  .option('--no-webpack', 'opts out the Webpack (client-side code) build')
   .option('-o, --out-dir <path>', 'output folder for the build', 'build')
   .option('-w, --watch', 'build, watch, and rebuild on source changes')
   .option(
@@ -165,11 +166,13 @@ function handleWebpackCompilationResults(error, stats) {
   );
 }
 
-if (cmdLineArgs.watch) {
-  webpackCompiler.watch({}, handleWebpackCompilationResults);
-} else {
-  webpackCompiler.run(handleWebpackCompilationResults);
-  webpackCompiler.close(() => null);
+if (cmdLineArgs.webpack) {
+  if (cmdLineArgs.watch) {
+    webpackCompiler.watch({}, handleWebpackCompilationResults);
+  } else {
+    webpackCompiler.run(handleWebpackCompilationResults);
+    webpackCompiler.close(() => null);
+  }
 }
 
 /* ************************************************************************** */
