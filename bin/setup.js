@@ -173,7 +173,10 @@ function getHostPackageJson() {
  */
 function getPackageJson(packageName = '@dr.pogodin/react-utils') {
   let url = packageName === '@dr.pogodin/react-utils' ? '..' : packageName;
-  url = path.dirname(require.resolve(url));
+
+  // TODO: .slice(5) cuts out file:// schema in front of the URL.
+  url = path.dirname(import.meta.resolve(url).slice(5));
+
   for (;;) {
     const files = fs.readdirSync(url);
     if (files.includes('package.json')) {

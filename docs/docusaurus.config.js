@@ -1,7 +1,16 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-/* global global, module, process, require */
+/* eslint-disable import/no-extraneous-dependencies */
+
+/* global global, module, require */
+
+const autoprefixer = require('autoprefixer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const {
+  getLocalIdent,
+} = require('@dr.pogodin/babel-plugin-react-css-modules/utils');
 
 // @ts-ignore
 global.REACT_UTILS_FORCE_CLIENT_SIDE = true;
@@ -15,11 +24,7 @@ const EDIT_BASE = `${CODE_REPO}/edit/master/docs`;
 
 const NPM_URL = 'https://www.npmjs.com/package/@dr.pogodin/react-utils';
 
-const REACT_UTILS_STYLES = process.env.NODE_ENV === 'development'
-  // Note: "-forced" version of these style imports does not fallback to null
-  // imports on Node, unlike these imports without "-forced" syffixes.
-  ? '@dr.pogodin/react-utils/dev-styles-forced'
-  : '@dr.pogodin/react-utils/prod-styles-forced';
+const REACT_UTILS_STYLES = require.resolve('@dr.pogodin/react-utils/global-styles');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -32,7 +37,49 @@ const config = {
   },
   onBrokenAnchors: 'throw',
   onBrokenLinks: 'throw',
-  plugins: ['docusaurus-plugin-sass'],
+  plugins: [() => ({
+    // NOTE: There is "docusaurus-plugin-sass" to handle SASS imports in
+    // Docusaurus projects, but it is not set up to perform all necessary
+    // code transformations for our react utils source code, thus we have
+    // to configure SCSS loader from scratch.
+    configureWebpack: (cfg) => {
+      cfg.module?.rules?.push({
+        /* Loads SCSS stylesheets. */
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader, {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                getLocalIdent,
+                localIdentName: '[hash:base64:6]',
+
+                // This flag defaults `true` for ES module builds since css-loader@7.0.0:
+                // https://github.com/webpack-contrib/css-loader/releases/tag/v7.0.0
+                // We'll keep it `false` to avoid a breaking change for dependant
+                // projects, and I am also not sure what are the benefits of
+                // named CSS exports anyway.
+                namedExport: false,
+              },
+            },
+          }, {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [autoprefixer],
+              },
+            },
+          }, 'resolve-url-loader', {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      });
+    },
+    name: 'sass',
+  })],
   presets: [
     [
       '@docusaurus/preset-classic',

@@ -299,7 +299,7 @@ export default function configFactory(ops: OptionsT): Configuration {
         // and SVG assets (.svg).
         test: /\.(cjs|js|jsx|mjs|svg|ts|tsx)$/,
 
-        exclude: ops.babelLoaderExclude ?? [/node_modules/],
+        exclude: ops.babelLoaderExclude,
         loader: 'babel-loader',
         options: {
           babelrc: false,
