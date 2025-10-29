@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
-/* eslint-disable import/no-commonjs, no-console */
+/* eslint-disable no-console */
 /* global console, process, require */
 
-const { spawnSync } = require('node:child_process');
-const fs = require('node:fs');
-const path = require('node:path');
+import { spawnSync } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
 
-const { clone } = require('lodash');
-const { program } = require('commander');
+import clone from 'lodash/clone.js';
+import { program } from 'commander';
 
 const NPM_COMMAND = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 

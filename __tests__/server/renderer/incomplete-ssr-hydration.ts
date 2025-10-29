@@ -10,10 +10,13 @@
  *  "maxSsrRounds": 1 }
  */
 
-import { noop } from 'lodash';
 import { act } from 'react';
 
 import { getGlobal } from 'utils/jest';
+
+function noop() {
+  // NOOP
+}
 
 const global = getGlobal();
 

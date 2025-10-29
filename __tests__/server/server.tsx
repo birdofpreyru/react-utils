@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
-import { clone, noop } from 'lodash';
+
 import type ServeFaviconM from 'serve-favicon';
 import supertest from 'supertest';
 import type WebpackM from 'webpack';
@@ -7,6 +7,10 @@ import type WebpackHotM from 'webpack-hot-middleware';
 
 import serverFactory, { type CspOptionsT } from 'server/server';
 import { setBuildInfo } from 'utils/isomorphy/buildInfo';
+
+function noop() {
+  // NOOP
+}
 
 // Test logger, which omits regular info message from the console.
 const logger = {
@@ -62,7 +66,7 @@ afterEach(() => {
 
 test('Favicon support', async () => {
   const server = serverFactory(TEST_WEBPACK_CONFIG, {
-    favicon: clone(TEST_FAVICON_PATH),
+    favicon: TEST_FAVICON_PATH,
     logger,
   });
   // eslint-disable-next-line @typescript-eslint/no-require-imports

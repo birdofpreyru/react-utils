@@ -1,4 +1,4 @@
-import { pull } from 'lodash';
+import pull from 'lodash/pull';
 
 import type { PluginOptions, PluginTarget, TransformOptions } from '@babel/core';
 

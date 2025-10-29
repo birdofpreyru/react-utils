@@ -5,12 +5,10 @@ import path from 'node:path';
 
 import SM from 'sitemap';
 
-import {
-  clone,
-  defaults,
-  isFunction,
-  isObject,
-} from 'lodash';
+import clone from 'lodash/clone';
+import defaults from 'lodash/defaults';
+import isFunction from 'lodash/isFunction';
+import isObject from 'lodash/isObject';
 
 import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';

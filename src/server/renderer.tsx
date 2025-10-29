@@ -15,15 +15,13 @@ import winston from 'winston';
 import { GlobalStateProvider, SsrContext } from '@dr.pogodin/react-global-state';
 import { timer } from '@dr.pogodin/js-utils';
 
-import {
-  clone,
-  cloneDeep,
-  defaults,
-  get,
-  isString,
-  mapValues,
-  omit,
-} from 'lodash';
+import clone from 'lodash/clone';
+import cloneDeep from 'lodash/cloneDeep';
+import defaults from 'lodash/defaults';
+import get from 'lodash/get';
+import isString from 'lodash/isString';
+import mapValues from 'lodash/mapValues';
+import omit from 'lodash/omit';
 
 import config from 'config';
 import forge from 'node-forge';

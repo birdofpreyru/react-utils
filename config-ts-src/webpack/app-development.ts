@@ -1,7 +1,9 @@
 
 /* eslint-disable import/no-extraneous-dependencies */
 
-import { clone, defaults } from 'lodash';
+import clone from 'lodash/clone';
+import defaults from 'lodash/defaults';
+
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';

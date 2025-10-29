@@ -19,7 +19,10 @@
 import path from 'node:path';
 
 import type { Request, Response } from 'express';
-import { defaults, noop, set } from 'lodash';
+
+import defaults from 'lodash/defaults';
+import set from 'lodash/set';
+
 import type { ReactNode } from 'react';
 
 // As this environment is a part of the Jest testing utils,
@@ -40,6 +43,10 @@ import type {
 import ssrFactory from 'server/renderer';
 
 import { setBuildInfo } from '../isomorphy/buildInfo';
+
+function noop() {
+  // NOOP
+}
 
 export default class E2eSsrEnv extends JsdomEnv {
   pragmas: Record<string, string | string[]>;

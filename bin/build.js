@@ -1,26 +1,30 @@
 #!/usr/bin/env node
 
-/* eslint-disable import/no-commonjs, no-console */
-/* global console, process, require */
+/* eslint-disable no-console */
+/* global console, process */
 
-const childProcess = require('node:child_process');
-const fs = require('node:fs');
-const path = require('node:path');
+import childProcess from 'node:child_process';
+import fs from 'node:fs';
+import { createRequire } from 'node:module';
+import path from 'node:path';
 
-const { isFunction, mapValues, merge } = require('lodash');
-const { program } = require('commander');
+import isFunction from 'lodash/isFunction.js';
+import mapValues from 'lodash/mapValues.js';
+import merge from 'lodash/merge.js';
+
+import { program } from 'commander';
 
 // TODO: Disabled, because ESLint still does not support "exports" declarations
 // in "package.json", and "rimraf" does not declare fallback entrance.
 // See: https://github.com/import-js/eslint-plugin-import/issues/1810
 // and update, once that issue is resolved.
-const { rimraf } = require('rimraf');
+import { rimraf } from 'rimraf';
 
 /* eslint-disable import/no-extraneous-dependencies */
 // To support TS configs for Webpack.
-const register = require('@babel/register/experimental-worker');
+import register from '@babel/register/experimental-worker.js';
 
-const webpack = require('webpack');
+import webpack from 'webpack';
 /* eslint-enable import/no-extraneous-dependencies */
 
 const BUILD_TYPES = {
@@ -106,6 +110,8 @@ register({
   extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
   root: process.cwd(),
 });
+
+const require = createRequire(import.meta.url);
 
 // eslint-disable-next-line import/no-dynamic-require
 let webpackConfig = require(path.resolve(cwd, cmdLineArgs.webpackConfig));
