@@ -2,7 +2,6 @@
  * Tests for the server-side MetaTags integration.
  */
 
-import { noop } from 'lodash';
 import type { ComponentType } from 'react';
 import supertest from 'supertest';
 
@@ -19,6 +18,10 @@ const WEBPACK_CONFIG = {
     publicPath: '/test/public/path',
   },
 };
+
+function noop() {
+  // NOOP
+}
 
 async function baseTest(Component: ComponentType) {
   const server = supertest(

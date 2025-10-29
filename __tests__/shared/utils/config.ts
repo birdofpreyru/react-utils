@@ -4,7 +4,7 @@
 // TODO: Split client- and server-side tests into two separate test modules.
 
 import type ConfigM from 'config';
-import { clone } from 'lodash';
+import clone from 'lodash/clone';
 import { mockClientSide, unmockClientSide } from 'utils/jest';
 
 import type * as IT from 'utils/isomorphy';

@@ -13,7 +13,13 @@ if (global.REACT_UTILS_LIBRARY_LOADED) {
   throw Error('React utils library is already loaded');
 } else global.REACT_UTILS_LIBRARY_LOADED = true;
 
-const server = webpack.requireWeak<typeof ServerFactoryM>('./server', __dirname);
+// TODO: This is a rapid workaround to get rid of __dirname. I guess, later
+// we'll re-implement requireWeak() to accept import.meta.url directly, and
+// this workaround won't be needed.
+let dirname = import.meta.url;
+dirname = dirname.slice(5, dirname.lastIndexOf('/'));
+
+const server = webpack.requireWeak<typeof ServerFactoryM>('./server', dirname);
 
 const client = server
   ? undefined

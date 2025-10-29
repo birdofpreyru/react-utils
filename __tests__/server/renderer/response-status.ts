@@ -4,7 +4,6 @@
 
 import type { Request, RequestHandler } from 'express';
 
-import { noop } from 'lodash';
 import factory from 'server/renderer';
 import { getSsrContext } from 'utils/globalState';
 
@@ -18,6 +17,10 @@ const cacheController = jest.fn((req: Request) => ({ key: req.url }));
 
 let renderer: RequestHandler;
 let mockStatus: number;
+
+function noop() {
+  // NOOP
+}
 
 beforeAll(() => {
   renderer = factory(mockWebpackConfig(), {

@@ -1,9 +1,6 @@
 // Utilities common for renderer tests in different modules.
 
 import type { Response } from 'express';
-
-import { noop } from 'lodash';
-
 import type { Configuration } from 'webpack';
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
@@ -12,6 +9,10 @@ interface ResponseI extends Response {
   nonce: string;
   info: string;
   url: string;
+}
+
+function noop() {
+  // NOOP
 }
 
 /**

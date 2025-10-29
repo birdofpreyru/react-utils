@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
-/* eslint-disable import/no-commonjs, no-console */
+/* eslint-disable no-console */
 /* global console, process, require */
 
-const { spawnSync } = require('node:child_process');
-const fs = require('node:fs');
-const path = require('node:path');
+import { spawnSync } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
 
-const { clone } = require('lodash');
-const { program } = require('commander');
+import clone from 'lodash/clone.js';
+import { program } from 'commander';
 
 const NPM_COMMAND = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 
@@ -173,7 +173,10 @@ function getHostPackageJson() {
  */
 function getPackageJson(packageName = '@dr.pogodin/react-utils') {
   let url = packageName === '@dr.pogodin/react-utils' ? '..' : packageName;
-  url = path.dirname(require.resolve(url));
+
+  // TODO: .slice(5) cuts out file:// schema in front of the URL.
+  url = path.dirname(import.meta.resolve(url).slice(5));
+
   for (;;) {
     const files = fs.readdirSync(url);
     if (files.includes('package.json')) {

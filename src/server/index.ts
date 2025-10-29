@@ -4,14 +4,12 @@ import 'source-map-support/register';
 import http from 'node:http';
 import https from 'node:https';
 
-import {
-  cloneDeep,
-  defaults,
-  isFinite,
-  isNumber,
-  isString,
-  toNumber,
-} from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import defaults from 'lodash/defaults';
+import isFinite from 'lodash/isFinite';
+import isNumber from 'lodash/isNumber';
+import isString from 'lodash/isString';
+import toNumber from 'lodash/toNumber';
 
 // Polyfill required by ReactJS.
 // TODO: Double-check, if it is still required by React v19?

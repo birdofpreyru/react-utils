@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 
 import type { Request, RequestHandler } from 'express';
-import { cloneDeep, noop } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import serializeJs from 'serialize-javascript';
 
 import {
@@ -29,6 +29,10 @@ import {
   mockHttpResponse,
   mockWebpackConfig,
 } from './__assets__/common';
+
+function noop() {
+  // NOOP
+}
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 declare namespace global {
