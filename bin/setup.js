@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /* eslint-disable no-console */
-/* global console, process, require */
+/* global console, process */
 
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
