@@ -9,16 +9,18 @@ import type * as SrcM from '../src';
 
 mockdate.set('2020-04-19Z');
 
-// Mocking getInj() is necessary to successfully load utils/config in
-// the mocked client-side environment, without proper server-side data
-// injections set up.
-jest.mock<typeof GetInJM>('client/getInj', () => ({
-  default: () => ({
+function mockGetInj() {
+  return {
     CONFIG: {
       MOCK_CONFIG_KEY: 'Mock Config Value',
     },
-  }),
-}) as unknown as typeof GetInJM);
+  };
+}
+
+// Mocking getInj() is necessary to successfully load utils/config in
+// the mocked client-side environment, without proper server-side data
+// injections set up.
+jest.mock<typeof GetInJM>('client/getInj', () => mockGetInj);
 
 test('Export at client side', () => {
   mockClientSide();

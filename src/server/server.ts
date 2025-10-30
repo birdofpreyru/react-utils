@@ -16,7 +16,6 @@ import csrf from '@dr.pogodin/csurf';
 import express, {
   type Express,
   type NextFunction,
-  type RequestHandler,
   type Request,
   type Response,
 } from 'express';
@@ -27,7 +26,7 @@ import loggerMiddleware from 'morgan';
 import requestIp from 'request-ip';
 import { v4 as uuid } from 'uuid';
 
-import type { Compiler, Configuration } from 'webpack';
+import type { Configuration } from 'webpack';
 
 import rendererFactory, {
   type LoggerI,
@@ -251,18 +250,19 @@ export default async function factory(
       } as Location;
     }
 
-    /* eslint-disable @typescript-eslint/no-require-imports */
-    const webpack = require('webpack') as (ops: Configuration) => Compiler;
+    const { webpack } = await import(/* webpackChunkName: "server-side-code" */ 'webpack');
 
-    // TODO: Figure out the exact type for options, don't wanna waste time on it
-    // right now.
-    const webpackDevMiddleware = require('webpack-dev-middleware') as
-      (c: Compiler, ops: unknown) => RequestHandler;
+    const { default: webpackDevMiddleware } = await import(
+      /* webpackChunkName: "server-side-code" */ 'webpack-dev-middleware'
+    );
 
-    const webpackHotMiddleware = require('webpack-hot-middleware') as
-      (c: Compiler) => RequestHandler;
+    const { default: webpackHotMiddleware } = await import(
+      /* webpackChunkName: "server-side-code" */ 'webpack-hot-middleware'
+    );
 
     const compiler = webpack(webpackConfig);
+    if (!compiler) throw Error('Internal error');
+
     server.use(webpackDevMiddleware(compiler, {
       publicPath,
       serverSideRender: true,

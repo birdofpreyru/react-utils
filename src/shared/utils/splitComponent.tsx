@@ -20,23 +20,13 @@ import {
   getBuildInfo,
 } from './isomorphy';
 
-// Note: At the client side we can get chunk groups immediately when loading
-// the module; at the server-side we only can get them within React render flow.
-// Thus, we set and use the following variable at the client-side, and then when
-// needed on the server side, we'll fetch it differently.
-let clientChunkGroups: ChunkGroupsT;
+function getClientChunkGroups(): Promise<ChunkGroupsT> | undefined {
+  if (!IS_CLIENT_SIDE) return undefined;
 
-if (IS_CLIENT_SIDE) {
-  // TODO: Rewrite to avoid these overrides of ESLint rules.
-  /* eslint-disable @typescript-eslint/no-unsafe-assignment,
-    @typescript-eslint/no-require-imports,
-    @typescript-eslint/no-unsafe-call,
-    @typescript-eslint/no-unsafe-member-access */
-  clientChunkGroups = require('client/getInj').default().CHUNK_GROUPS ?? {};
-  /* eslint-enable @typescript-eslint/no-unsafe-assignment,
-    @typescript-eslint/no-require-imports,
-    @typescript-eslint/no-unsafe-call,
-    @typescript-eslint/no-unsafe-member-access */
+  return (async () => {
+    const { default: getInj } = await import(/* webpackChunkName: "react-utils-client-side-code" */ '../../client/getInj');
+    return getInj().CHUNK_GROUPS ?? {};
+  })();
 }
 
 const refCounts: Record<string, number> = {};
@@ -202,15 +192,20 @@ export default function splitComponent<
   getComponent: () => Promise<ComponentOrModule<ComponentPropsT>>;
   placeholder?: ReactNode;
 }): FunctionComponent<ComponentPropsT> {
-  // On the client side we can check right away if the chunk name is known.
-  if (IS_CLIENT_SIDE) assertChunkName(chunkName, clientChunkGroups);
-
   // The correct usage of splitComponent() assumes a single call per chunk.
   if (usedChunkNames.has(chunkName)) {
     throw Error(`Repeated splitComponent() call for the chunk "${chunkName}"`);
   } else usedChunkNames.add(chunkName);
 
   const LazyComponent = lazy(async () => {
+    const clientChunkGroups = await getClientChunkGroups();
+
+    // On the client side we can check right away if the chunk name is known.
+    if (IS_CLIENT_SIDE) {
+      if (!clientChunkGroups) throw Error('Internal error');
+      assertChunkName(chunkName, clientChunkGroups);
+    }
+
     const resolved = await getComponent();
     const Component = 'default' in resolved ? resolved.default : resolved;
 
@@ -218,6 +213,7 @@ export default function splitComponent<
     // the component (the lazy load function is executed by React one at
     // the frist mount).
     if (IS_CLIENT_SIDE) {
+      if (!clientChunkGroups) throw Error('Internal error');
       await bookStyleSheets(chunkName, clientChunkGroups, false);
     }
 
@@ -237,6 +233,7 @@ export default function splitComponent<
       // This takes care about stylesheets management every time an instance of
       // this component is mounted / unmounted.
       useInsertionEffect(() => {
+        if (!clientChunkGroups) throw Error('Internal error');
         void bookStyleSheets(chunkName, clientChunkGroups, true);
         return () => {
           freeStyleSheets(chunkName, clientChunkGroups);

@@ -5,6 +5,12 @@ const path = require('node:path');
 
 const globalLibDir = path.resolve(process.execPath, '../../lib/node_modules');
 
+const modulesToTransform = [
+  '@dr.pogodin/react-global-state',
+  '@dr.pogodin/react-utils',
+  'uuid',
+];
+
 module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
@@ -36,7 +42,6 @@ module.exports = {
     '\\.((j|t)sx?|svg)$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    '/node_modules/(?!@dr.pogodin/react-utils|uuid)',
+    `/node_modules/(?!${modulesToTransform.join('|')})`,
   ],
-
 };

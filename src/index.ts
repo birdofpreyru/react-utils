@@ -1,8 +1,8 @@
 import 'styles/global.scss';
 
-import { webpack } from 'utils';
+import clientModule from './client';
+import { webpack } from './shared/utils';
 
-import type * as ClientM from './client';
 import type * as ServerFactoryM from './server';
 
 // It is a safeguard against multiple instances / versions of the library
@@ -21,11 +21,7 @@ dirname = dirname.slice(5, dirname.lastIndexOf('/'));
 
 const server = webpack.requireWeak<typeof ServerFactoryM>('./server', dirname);
 
-const client = server
-  ? undefined
-
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  : (require('./client') as typeof ClientM).default;
+const client = server ? undefined : clientModule;
 
 export {
   type AsyncCollectionT,
