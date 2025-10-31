@@ -24,7 +24,7 @@
     "raw-loader": "^4.0.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "sass": "^1.93.2",
+    "sass": "^1.93.3",
     "url-loader": "^4.1.1"
   },
   "browserslist": {

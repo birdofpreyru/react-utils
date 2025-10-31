@@ -23,7 +23,7 @@
     "cookie": "^1.0.2",
     "cookie-parser": "^1.4.7",
     "cross-env": "^10.1.0",
-    "dayjs": "^1.11.18",
+    "dayjs": "^1.11.19",
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "http-status-codes": "^2.3.0",
@@ -102,7 +102,7 @@
     "react-refresh": "^0.18.0",
     "regenerator-runtime": "^0.14.1",
     "resolve-url-loader": "^5.0.0",
-    "sass": "^1.93.2",
+    "sass": "^1.93.3",
     "sass-loader": "^16.0.6",
     "sitemap": "^8.0.2",
     "source-map-loader": "^5.0.0",
@@ -125,7 +125,7 @@
     "node": ">=20",
     "npm": ">=10"
   },
-  "main": "./node-entry.js",
+  "main": "./build/production/index.js",
   "source": "./src/index.ts",
   "types": "./build/types-code/index.d.ts",
   "exports": {
@@ -133,10 +133,11 @@
       "browser": "./build/web/index.js",
       "node": {
         "webpack": "./build/web/index.js",
-        "default": "./node-entry.js"
+        "development": "./build/development/index.js",
+        "default": "./build/production/index.js"
       },
       "react-native": {
-        "default": "./node-entry.js",
+        "default": "./build/production/index.js",
         "types": "./build/types-code/index.d.ts"
       }
     },
