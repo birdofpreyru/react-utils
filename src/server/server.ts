@@ -248,7 +248,7 @@ export default async function factory(
       } as Location;
     }
 
-    const { webpack } = await import(/* webpackChunkName: "server-side-code" */ 'webpack');
+    const { default: webpack } = await import(/* webpackChunkName: "server-side-code" */ 'webpack');
 
     const { default: webpackDevMiddleware } = await import(
       /* webpackChunkName: "server-side-code" */ 'webpack-dev-middleware'
