@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2"
+    "@types/react-dom": "^19.2.2",
+    "babel-plugin-transform-import-meta": "^2.3.3"
   }
 }

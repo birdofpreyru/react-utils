@@ -43,6 +43,16 @@ const config = {
     // code transformations for our react utils source code, thus we have
     // to configure SCSS loader from scratch.
     configureWebpack: (cfg) => {
+      /* eslint-disable no-param-reassign */
+      cfg.resolve ??= {};
+      cfg.resolve.fallback ??= {};
+
+      // @ts-expect-error "Property 'module' does not exist on type '{ alias: string | false | string[]; name: string; onlyModule?: boolean | undefined; }[]'"
+      cfg.resolve.fallback.module = false;
+      // @ts-expect-error "Property 'module' does not exist on type '{ alias: string | false | string[]; name: string; onlyModule?: boolean | undefined; }[]'"
+      cfg.resolve.fallback.url = false;
+      /* eslint-enable no-param-reassign */
+
       cfg.module?.rules?.push({
         /* Loads SCSS stylesheets. */
         test: /\.scss$/,
@@ -77,6 +87,15 @@ const config = {
           },
         ],
       });
+
+      // eslint-disable-next-line prefer-destructuring
+      const babelRule = cfg.module.rules[5];
+
+      if (!babelRule.use[0].loader.includes('babel-loader')) {
+        throw Error('Internal error');
+      }
+
+      babelRule.exclude = [];
     },
     name: 'sass',
   })],

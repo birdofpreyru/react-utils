@@ -3,7 +3,7 @@
 import nodeFs from 'node:fs';
 import path from 'node:path';
 
-import SM from 'sitemap';
+import { SitemapStream, streamToPromise } from 'sitemap';
 
 import clone from 'lodash/clone.js';
 import defaults from 'lodash/defaults.js';
@@ -191,10 +191,10 @@ export default function configFactory(ops: OptionsT): Configuration {
     let source = require(sitemapUrl) as
       (string[] | (() => string[]));
     if (isFunction(source)) source = source();
-    const sm = new SM.SitemapStream();
+    const sm = new SitemapStream();
     source.forEach((item: string) => sm.write(item));
     sm.end();
-    void SM.streamToPromise(sm).then((sitemap) => {
+    void streamToPromise(sm).then((sitemap) => {
       const outUrl = path.resolve(o.context, o.outputPath!);
       if (!fs.existsSync(outUrl)) fs.mkdirSync(outUrl);
       fs.writeFileSync(
