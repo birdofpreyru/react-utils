@@ -20,8 +20,7 @@ import path from 'node:path';
 
 import type { Request, Response } from 'express';
 
-import defaults from 'lodash/defaults';
-import set from 'lodash/set';
+import { defaults, set } from 'lodash-es';
 
 import type { ReactNode } from 'react';
 

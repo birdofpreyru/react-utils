@@ -7,7 +7,6 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 
-import clone from 'lodash/clone.js';
 import { program } from 'commander';
 
 const NPM_COMMAND = process.platform === 'win32' ? 'npm.cmd' : 'npm';
@@ -110,7 +109,7 @@ function adoptDevDependencies(donorData, hostData) {
   if (verbose) console.log('Adopting dev dependencies...');
 
   /* Inits deps as a map of all donor's dev dependencies. */
-  const deps = clone(donorData.devDependencies) || {};
+  const deps = { ...donorData.devDependencies };
 
   /* Removes from the map any prod dependencies of host. */
   Object.entries(hostData.dependencies || {})
@@ -175,7 +174,7 @@ function getPackageJson(packageName = '@dr.pogodin/react-utils') {
   let url = packageName === '@dr.pogodin/react-utils' ? '..' : packageName;
 
   // TODO: .slice(5) cuts out file:// schema in front of the URL.
-  url = path.dirname(import.meta.resolve(url).slice(5));
+  url = import.meta.resolve(url).slice(5);
 
   for (;;) {
     const files = fs.readdirSync(url);

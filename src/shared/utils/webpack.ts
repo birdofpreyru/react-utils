@@ -1,6 +1,9 @@
 import type PathNS from 'node:path';
 
-import { IS_CLIENT_SIDE } from './isomorphy';
+// eslint-disable-next-line import/enforce-node-protocol-usage
+import { createRequire } from 'module';
+
+import { IS_CLIENT_SIDE, IS_SERVER_SIDE } from './isomorphy';
 
 type RequireWeakOptionsT = {
   basePath?: string;
@@ -9,6 +12,10 @@ type RequireWeakOptionsT = {
 type RequireWeakResT<T> = T extends { default: infer D }
   ? (D extends null | undefined ? T : D & Omit<T, 'default'>)
   : T;
+
+let require: ((url: string) => unknown) | undefined;
+
+if (IS_SERVER_SIDE) require = createRequire(import.meta.url);
 
 /**
  * Requires the specified module without including it into the bundle during
@@ -36,14 +43,12 @@ export function requireWeak<T extends object>(
     ({ basePath } = ops);
   }
 
-  // eslint-disable-next-line no-eval
-  const req = eval('require') as (path: string) => unknown;
-
   // eslint-disable-next-line @typescript-eslint/unbound-method
-  const { resolve } = req('path') as typeof PathNS;
+  const { resolve } = require!('node:path') as typeof PathNS;
 
   const path = basePath ? resolve(basePath, modulePath) : modulePath;
-  const module = req(path) as T;
+
+  const module = require!(path) as T;
 
   if (!('default' in module) || !module.default) return module as RequireWeakResT<T>;
 
@@ -53,8 +58,9 @@ export function requireWeak<T extends object>(
 
   Object.entries(named).forEach(([name, value]) => {
     const assigned = res[name as keyof RequireWeakResT<T>];
-    if (assigned) (res[name as keyof RequireWeakResT<T>] as unknown) = value;
-    else if (assigned !== value) {
+    if (assigned === undefined) {
+      (res[name as keyof RequireWeakResT<T>] as unknown) = value;
+    } else if (assigned !== value) {
       throw Error('Conflict between default and named exports');
     }
   });

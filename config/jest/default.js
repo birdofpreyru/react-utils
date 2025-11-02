@@ -8,6 +8,7 @@ const globalLibDir = path.resolve(process.execPath, '../../lib/node_modules');
 const modulesToTransform = [
   '@dr.pogodin/react-global-state',
   '@dr.pogodin/react-utils',
+  'lodash-es',
   'uuid',
 ];
 

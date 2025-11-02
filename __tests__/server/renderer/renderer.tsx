@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 
 import type { Request, RequestHandler } from 'express';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from 'lodash-es';
 import serializeJs from 'serialize-javascript';
 
 import {

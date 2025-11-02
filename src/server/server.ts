@@ -5,9 +5,7 @@
 import { sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import cloneDeep from 'lodash/cloneDeep';
-import mapValues from 'lodash/mapValues';
-import pick from 'lodash/pick';
+import { cloneDeep, mapValues, pick } from 'lodash-es';
 
 import compression from 'compression';
 import cookieParser from 'cookie-parser';

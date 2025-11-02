@@ -4,10 +4,10 @@
 
 // Note: this way, only required part of "node-forge": AES, and some utils,
 // is bundled into client-side code.
-import forge from 'node-forge/lib/forge';
+import forge from 'node-forge/lib/forge.js';
 
 // eslint-disable-next-line import/no-unassigned-import
-import 'node-forge/lib/aes';
+import 'node-forge/lib/aes.js';
 
 import type { InjT } from 'utils/globalState';
 

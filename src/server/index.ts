@@ -1,20 +1,15 @@
 // eslint-disable-next-line import/no-unassigned-import
-import 'source-map-support/register';
+import 'source-map-support/register.js';
 
 import http from 'node:http';
 import https from 'node:https';
 
-import cloneDeep from 'lodash/cloneDeep';
-import defaults from 'lodash/defaults';
-import isFinite from 'lodash/isFinite';
-import isNumber from 'lodash/isNumber';
-import isString from 'lodash/isString';
-import toNumber from 'lodash/toNumber';
+import { cloneDeep, defaults } from 'lodash-es';
 
 // Polyfill required by ReactJS.
 // TODO: Double-check, if it is still required by React v19?
 // eslint-disable-next-line import/no-unassigned-import
-import 'raf/polyfill';
+import 'raf/polyfill.js';
 
 import type { Configuration } from 'webpack';
 
@@ -41,13 +36,12 @@ export { errors, getDefaultCspSettings, type ServerT };
  * Normalizes a port into a number, string, or false.
  * TODO: Drop this function?
  * @param value Port name or number.
- * @return Port number (Number), name (String), or false.
+ * @return Port number (Number), name (String).
  */
 function normalizePort(value: number | string) {
-  const port = toNumber(value);
-  if (isFinite(port)) return port; /* port number */
-  if (!isNumber(port)) return value; /* named pipe */
-  return false;
+  const port = typeof value === 'string' ? parseInt(value) : value;
+  if (Number.isFinite(port)) return port; /* port number */
+  return value; /* named pipe */
 }
 
 type OptionsT = ServerOptionsT & {
@@ -212,7 +206,7 @@ export default async function launchServer(
   /* Sets error handler for HTTP(S) server. */
   httpServer.on('error', (error: Error) => {
     if ((error as { syscall?: string }).syscall !== 'listen') throw error;
-    const bind = isString(ops.port) ? `Pipe ${ops.port}` : `Port ${ops.port}`;
+    const bind = typeof ops.port === 'string' ? `Pipe ${ops.port}` : `Port ${ops.port}`;
 
     /* Human-readable message for some specific listen errors. */
     switch ((error as { code?: string }).code) {
@@ -231,7 +225,7 @@ export default async function launchServer(
   /* Listening event handler for HTTP(S) server. */
   httpServer.on('listening', () => {
     const addr = httpServer.address()!;
-    const bind = isString(addr) ? `pipe ${addr}` : `port ${addr.port}`;
+    const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
     ops.logger!.info(`Server listening on ${bind} in ${
       process.env.NODE_ENV} mode`);
   });

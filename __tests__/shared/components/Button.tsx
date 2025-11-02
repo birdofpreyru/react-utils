@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
 
-import omit from 'lodash/omit';
+import { omit } from 'lodash-es';
 import { StaticRouter } from 'react-router';
 
 import Button from 'components/Button';

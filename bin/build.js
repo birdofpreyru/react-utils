@@ -8,9 +8,7 @@ import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
-import isFunction from 'lodash/isFunction.js';
-import mapValues from 'lodash/mapValues.js';
-import merge from 'lodash/merge.js';
+import { mapValues, merge } from 'lodash-es';
 
 import { program } from 'commander';
 
@@ -70,6 +68,7 @@ program
   .option('--no-webpack', 'opts out the Webpack (client-side code) build')
   .option('-o, --out-dir <path>', 'output folder for the build', 'build')
   .option('-w, --watch', 'build, watch, and rebuild on source changes')
+  .option('--babel-config <path>', 'path to the Babel config')
   .option(
     '--webpack-config <path>',
     'path to the webpack config',
@@ -116,7 +115,7 @@ const require = createRequire(import.meta.url);
 // eslint-disable-next-line import/no-dynamic-require
 let webpackConfig = require(path.resolve(cwd, cmdLineArgs.webpackConfig));
 if ('default' in webpackConfig) webpackConfig = webpackConfig.default;
-if (isFunction(webpackConfig)) webpackConfig = webpackConfig(buildType);
+if (typeof webpackConfig === 'function') webpackConfig = webpackConfig(buildType);
 
 let webpackOutDir = outDir;
 if (!cmdLineArgs.lib) webpackOutDir += '/web-public';
@@ -194,6 +193,11 @@ const BABEL_EXEC_OPTIONS = {
 let BABEL_CMD_BASE = `${cwd}/node_modules/.bin/babel`;
 BABEL_CMD_BASE += ` ${inDir} --out-dir ${outDir} --source-maps`;
 if (buildType === BUILD_TYPES.PRODUCTION) BABEL_CMD_BASE += ' --minified';
+
+if (cmdLineArgs.babelConfig) {
+  const url = path.resolve(cwd, cmdLineArgs.babelConfig);
+  BABEL_CMD_BASE += ` --config-file ${url}`;
+}
 
 /* TODO: The watch is deactivated for Babel compilation because of SVG files:
  * currently there is no way to tell Babel that SVG files should be compiled

@@ -1,8 +1,8 @@
 
 /* eslint-disable import/no-extraneous-dependencies */
 
-import clone from 'lodash/clone';
-import defaults from 'lodash/defaults';
+import clone from 'lodash/clone.js';
+import defaults from 'lodash/defaults.js';
 
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 

@@ -5,10 +5,10 @@ import path from 'node:path';
 
 import SM from 'sitemap';
 
-import clone from 'lodash/clone';
-import defaults from 'lodash/defaults';
-import isFunction from 'lodash/isFunction';
-import isObject from 'lodash/isObject';
+import clone from 'lodash/clone.js';
+import defaults from 'lodash/defaults.js';
+import isFunction from 'lodash/isFunction.js';
+import isObject from 'lodash/isObject.js';
 
 import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -398,6 +398,7 @@ export default function configFactory(ops: OptionsT): Configuration {
         '.json',
         '.scss',
       ],
+      fallback: { module: false },
       symlinks: false,
     },
   };

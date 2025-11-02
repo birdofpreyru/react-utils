@@ -1,4 +1,4 @@
-import pull from 'lodash/pull';
+import { pull } from 'lodash-es';
 
 import type { PluginOptions, PluginTarget, TransformOptions } from '@babel/core';
 
@@ -51,6 +51,10 @@ function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
       name: `${baseAssetsOutputPath}/images/[md4:hash:20].[ext]`,
     }],
   );
+
+  if (options.modules === false) {
+    config.plugins!.push('babel-plugin-add-import-extension');
+  }
 
   const moduleResolverPluginOps = (config.plugins!.find(
     (x) => Array.isArray(x) && x[0] === 'module-resolver',

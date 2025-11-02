@@ -69,7 +69,7 @@ export default function configFactory(ops: OptionsT): Configuration {
       'axios',
       'cookie',
       'dayjs',
-      'lodash',
+      'lodash-es',
       /node-forge/,
       'qs',
       'react',

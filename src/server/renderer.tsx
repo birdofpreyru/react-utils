@@ -15,13 +15,12 @@ import winston from 'winston';
 import { GlobalStateProvider, SsrContext } from '@dr.pogodin/react-global-state';
 import { timer } from '@dr.pogodin/js-utils';
 
-import clone from 'lodash/clone';
-import cloneDeep from 'lodash/cloneDeep';
-import defaults from 'lodash/defaults';
-import get from 'lodash/get';
-import isString from 'lodash/isString';
-import mapValues from 'lodash/mapValues';
-import omit from 'lodash/omit';
+import {
+  cloneDeep,
+  defaults,
+  get,
+  mapValues,
+} from 'lodash-es';
 
 import config from 'config';
 import forge from 'node-forge';
@@ -36,7 +35,9 @@ import type { ChunkGroupsT, SsrContextT } from 'utils/globalState';
 
 import Cache from './Cache';
 
-const sanitizedConfig = omit(config, 'SECRET');
+// @ts-expect-error "Property 'SECRET' does not exist on type 'IConfig'."
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const { SECRET, ...sanitizedConfig } = config;
 
 // Note: These type definitions for logger are copied from Winston logger,
 // then simplified to make it easier to fit an alternative logger into this
@@ -196,7 +197,7 @@ function groupExtraScripts(scripts: Array<string | ScriptT> = []) {
     [SCRIPT_LOCATIONS.HEAD_OPEN]: '',
   };
   for (const script of scripts) {
-    if (isString(script)) {
+    if (typeof script === 'string') {
       if (script) res[SCRIPT_LOCATIONS.DEFAULT] += script;
     } else if (script.code) {
       if (script.location in res) res[script.location] += script.code;
@@ -312,7 +313,7 @@ export default function factory(
   webpackConfig: Configuration,
   options: OptionsT,
 ): RequestHandler {
-  const ops: OptionsT = defaults(clone(options), {
+  const ops: OptionsT = defaults({ ...options }, {
     beforeRender: async () => Promise.resolve({}),
     maxSsrRounds: 10,
     ssrTimeout: 1000,

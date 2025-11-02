@@ -19,7 +19,7 @@ declare module '@babel/register/experimental-worker' {
   export default register;
 }
 
-declare module 'node-forge/lib/forge' {
+declare module 'node-forge/lib/forge.js' {
   import F from 'node-forge';
 
   export default F;
