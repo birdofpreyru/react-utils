@@ -171,6 +171,16 @@ type ComponentOrModule<PropsT> = ComponentType<PropsT> | {
   default: ComponentType<PropsT>;
 };
 
+type GenericComponentPropsT = {
+  children?: ReactNode;
+  ref?: RefObject<unknown>;
+
+  // NOTE: This is necessary, as without it this type (with only optional
+  // fields) will be conisdered as "weak" by TypeScript, and it will be
+  // a error to assign to it any type that does not use "children", or "ref".
+  [propName: string]: unknown;
+};
+
 /**
  * Given an async component retrieval function `getComponent()` it creates
  * a special "code split" component, which uses <Suspense> to asynchronously
@@ -182,7 +192,7 @@ type ComponentOrModule<PropsT> = ComponentType<PropsT> | {
  * @return {React.ElementType}
  */
 export default function splitComponent<
-  ComponentPropsT extends { children?: ReactNode; ref?: RefObject<unknown> },
+  ComponentPropsT extends GenericComponentPropsT,
 >({
   chunkName,
   getComponent,
