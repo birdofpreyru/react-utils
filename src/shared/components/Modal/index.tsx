@@ -7,7 +7,7 @@ import {
   useRef,
 } from 'react';
 
-import ReactDom from 'react-dom';
+import { createPortal } from 'react-dom';
 import themed, { type Theme } from '@dr.pogodin/react-themes';
 
 import baseTheme from './base-theme.scss';
@@ -96,7 +96,7 @@ const BaseModal: FunctionComponent<PropsT> = ({
     />
   ), []);
 
-  return ReactDom.createPortal(
+  return createPortal(
     (
       <div>
         {focusLast}
