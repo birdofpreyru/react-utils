@@ -60,7 +60,10 @@ function newBaseConfig(options: OptionsT): TransformOptions {
           './src',
         ],
       }],
-      '@babel/transform-runtime',
+      ['@babel/transform-runtime', {
+        corejs: 3,
+        useESModules: true,
+      }],
     ],
     presets: [
       ['@babel/env', {

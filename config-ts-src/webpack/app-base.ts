@@ -253,8 +253,6 @@ export default function configFactory(ops: OptionsT): Configuration {
 
   /* Entry points normalization. */
   const entry = [
-    'core-js/stable',
-    'regenerator-runtime/runtime',
     'nodelist-foreach-polyfill',
     ...Array.isArray(o.entry) ? o.entry : [o.entry],
   ];
