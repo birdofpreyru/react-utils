@@ -18,7 +18,13 @@ exports[`"development" environment "noStyling" variation 1`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     "react-refresh/babel",
   ],
   "presets": [
@@ -64,7 +70,13 @@ exports[`"development" environment "noStyling" variation 2`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     "react-refresh/babel",
   ],
   "presets": [
@@ -104,7 +116,13 @@ exports[`"development" environment Default config 1`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/react-css-modules",
       {
@@ -162,7 +180,13 @@ exports[`"development" environment Default config 2`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/react-css-modules",
       {
@@ -214,7 +238,13 @@ exports[`"production" environment "noStyling" variation 1`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
   ],
   "presets": [
     [
@@ -259,7 +289,13 @@ exports[`"production" environment "noStyling" variation 2`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
   ],
   "presets": [
     [
@@ -298,7 +334,13 @@ exports[`"production" environment Default config 1`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/react-css-modules",
       {
@@ -355,7 +397,13 @@ exports[`"production" environment Default config 2`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/react-css-modules",
       {

@@ -24,7 +24,13 @@ exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/react-css-modules",
       {
@@ -100,7 +106,13 @@ exports[`"development" environment "baseAssetsOutputPath" option 2`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/react-css-modules",
       {
@@ -170,7 +182,13 @@ exports[`"development" environment "noStyling" variation 1`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/transform-assets",
       {
@@ -233,7 +251,13 @@ exports[`"development" environment "noStyling" variation 2`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/transform-assets",
       {
@@ -290,7 +314,13 @@ exports[`"development" environment Default config 1`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/react-css-modules",
       {
@@ -366,7 +396,13 @@ exports[`"development" environment Default config 2`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/react-css-modules",
       {
@@ -436,7 +472,13 @@ exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/react-css-modules",
       {
@@ -512,7 +554,13 @@ exports[`"production" environment "baseAssetsOutputPath" option 2`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/react-css-modules",
       {
@@ -582,7 +630,13 @@ exports[`"production" environment "noStyling" variation 1`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/transform-assets",
       {
@@ -645,7 +699,13 @@ exports[`"production" environment "noStyling" variation 2`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/transform-assets",
       {
@@ -702,7 +762,13 @@ exports[`"production" environment Default config 1`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/react-css-modules",
       {
@@ -778,7 +844,13 @@ exports[`"production" environment Default config 2`] = `
         ],
       },
     ],
-    "@babel/transform-runtime",
+    [
+      "@babel/transform-runtime",
+      {
+        "corejs": 3,
+        "useESModules": true,
+      },
+    ],
     [
       "@dr.pogodin/react-css-modules",
       {

@@ -59,6 +59,8 @@ export type OptionsT = {
   workbox?: boolean | object;
 };
 
+const COREJS_REGEX = /\/core-js/;
+
 /**
  * Creates a new Webpack config object, and performs some auxiliary operations
  * on the way.
@@ -273,6 +275,17 @@ export default function configFactory(ops: OptionsT): Configuration {
     }));
   }
 
+  let { babelLoaderExclude } = ops;
+  if (babelLoaderExclude) {
+    if (!Array.isArray(babelLoaderExclude)) throw Error('Not supported');
+
+    // BEWARE: This ensures Babel loader does not process CoreJS library,
+    // which would break it creating circular references in its code.
+    babelLoaderExclude = [...babelLoaderExclude, COREJS_REGEX];
+  } else {
+    babelLoaderExclude = [COREJS_REGEX];
+  }
+
   const res: Configuration = {
     context: o.context,
     entry,
@@ -297,7 +310,7 @@ export default function configFactory(ops: OptionsT): Configuration {
         // and SVG assets (.svg).
         test: /\.(cjs|js|jsx|mjs|svg|ts|tsx)$/,
 
-        exclude: ops.babelLoaderExclude,
+        exclude: babelLoaderExclude,
         loader: 'babel-loader',
         options: {
           babelrc: false,
