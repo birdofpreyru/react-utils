@@ -6,7 +6,7 @@ import { Button, ThemeProvider } from '@dr.pogodin/react-utils';
 import darkButtonTheme from '../themes/buttons/dark.module.scss';
 
 function ButtonsExample() {
-  const { isDarkTheme } = useColorMode();
+  const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
     <ThemeProvider
       themes={{ Button: isDarkTheme ? darkButtonTheme : undefined }}

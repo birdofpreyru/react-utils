@@ -7,7 +7,7 @@ import darkModalTheme from '../themes/modals/dark.module.scss';
 
 function ModalExample() {
   const [open, setOpen] = useState(false);
-  const { isDarkTheme } = useColorMode();
+  const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
     <ThemeProvider
       themes={

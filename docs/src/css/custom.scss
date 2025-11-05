@@ -4,6 +4,11 @@
  * work well for content-centric websites.
  */
 
+// BEWARE: This file is now also processed by our CSS modules setup from
+// react-utils, thus :global() use is necessary for all class names that
+// are not intended to be transformed (like all class names in this very
+// module).
+
 @use "@dr.pogodin/react-utils/mixins" as *;
 
 /* You can override the default Infima variables here. */
@@ -22,14 +27,14 @@ body {
   @include typography;
 }
 
-.deprecated {
+:global(.deprecated) {
   color: lightgray;
   text-decoration: line-through;
 
   a { color: lightgray; }
 }
 
-.admonition-heading {
+:global(.admonition-heading) {
   h5 {
     font-size: 1em;
     font-weight: bold;
@@ -38,13 +43,13 @@ body {
   }
 }
 
-.docusaurus-highlight-code-line {
+:global(.docusaurus-highlight-code-line) {
   background-color: rgba(0, 0, 0, 0.1);
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
 }
 
-html[data-theme='dark'] .docusaurus-highlight-code-line {
+html[data-theme='dark'] :global(.docusaurus-highlight-code-line) {
   background-color: rgba(0, 0, 0, 0.3);
 }
