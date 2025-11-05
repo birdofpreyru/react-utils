@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
+import { randomBytes } from 'node:crypto';
 import nodeFs from 'node:fs';
 import path from 'node:path';
 
@@ -12,7 +13,6 @@ import isObject from 'lodash/isObject.js';
 
 import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import forge from 'node-forge';
 
 import {
   type Configuration,
@@ -228,7 +228,7 @@ export default function configFactory(ops: OptionsT): Configuration {
   // build info object in case nothing could be loaded.
   buildInfo ??= Object.freeze({
     /* A random 32-bit key, that can be used for encryption. */
-    key: forge.random.getBytesSync(32),
+    key: randomBytes(32).toString('base64'),
 
     /* Public path used during build. */
     publicPath: o.publicPath,

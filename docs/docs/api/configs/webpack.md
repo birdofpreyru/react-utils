@@ -392,8 +392,7 @@ The generated config does the following:
   - `axios`
   - `cookie`
   - `dayjs`
-  - `lodash`
-  - `node-forge`
+  - `lodash-es`
   - `qs`
   - `react`
   - `react-dom`

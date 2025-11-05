@@ -28,7 +28,7 @@ const barrier2 = new Barrier()
 ```
 :::
 
-# Oiginal Documentation
+# Original Documentation
 _Valid for **dr.pogodin/react-utils** versions from **v0.25.0** up to **v1.23.13**._
 
 ```jsx

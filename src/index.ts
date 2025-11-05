@@ -54,10 +54,11 @@ export {
 
 export {
   assertEmptyObject,
-  config,
   Barrier,
   Cached,
   Emitter,
+  getConfig,
+  getConfigSync,
   isomorphy,
   getSsrContext,
   type Listener,

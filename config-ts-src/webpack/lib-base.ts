@@ -70,7 +70,6 @@ export default function configFactory(ops: OptionsT): Configuration {
       'cookie',
       'dayjs',
       'lodash-es',
-      /node-forge/,
       'qs',
       'react',
       /react-dom/,

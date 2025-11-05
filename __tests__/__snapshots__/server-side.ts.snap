@@ -27,12 +27,8 @@ exports[`Export at server side 1`] = `
   "YouTubeVideo": [Function],
   "assertEmptyObject": [Function],
   "client": undefined,
-  "config": Config {
-    "SECRET": {
-      "dummySecretKey": "Dummy Secret Value",
-    },
-    "dummyKey": "Dummy Value",
-  },
+  "getConfig": [Function],
+  "getConfigSync": [Function],
   "getGlobalState": [Function],
   "getSsrContext": [Function],
   "isomorphy": {

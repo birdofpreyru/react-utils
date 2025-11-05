@@ -5,8 +5,14 @@ import supertest from 'supertest';
 import type WebpackM from 'webpack';
 import type WebpackHotM from 'webpack-hot-middleware';
 
-import serverFactory, { type CspOptionsT } from 'server/server';
-import { setBuildInfo } from 'utils/isomorphy/buildInfo';
+import type * as ServerNS from 'server/server';
+import type * as BuildInfoNS from 'utils/isomorphy/buildInfo';
+
+jest.mock('node:crypto');
+
+/* eslint-disable @typescript-eslint/no-require-imports */
+const { default: serverFactory } = require('server/server') as typeof ServerNS;
+const { setBuildInfo } = require('utils/isomorphy/buildInfo') as typeof BuildInfoNS;
 
 function noop() {
   // NOOP
@@ -69,7 +75,6 @@ test('Favicon support', async () => {
     favicon: TEST_FAVICON_PATH,
     logger,
   });
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
   expect(require('serve-favicon')).toHaveBeenCalledWith(TEST_FAVICON_PATH);
   await server;
 });
@@ -87,7 +92,7 @@ describe('Server is functional', () => {
     server = supertest(
       await serverFactory(TEST_WEBPACK_CONFIG, {
         Application: () => <div>Hello World!</div>,
-        cspSettingsHook: (csp: CspOptionsT) => {
+        cspSettingsHook: (csp: ServerNS.CspOptionsT) => {
           const sources = csp.directives?.['default-src'] as string[];
           sources.push('https://sample.url');
           return csp;

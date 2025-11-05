@@ -20,14 +20,16 @@ type OptionsT = {
  * @param Application Root application component
  * @param [options={}] Optional. Additional settings.
  */
-export default function Launch(
+export default async function Launch(
   Application: ComponentType,
   options: OptionsT = {},
-): void {
+): Promise<void> {
+  const inj = await getInj();
+
   const container = document.getElementById('react-view');
   if (!container) throw Error('Failed to find container for React app');
   const scene = (
-    <GlobalStateProvider initialState={getInj().ISTATE ?? options.initialState}>
+    <GlobalStateProvider initialState={inj.ISTATE ?? options.initialState}>
       <BrowserRouter>
         <HelmetProvider>
           <Application />

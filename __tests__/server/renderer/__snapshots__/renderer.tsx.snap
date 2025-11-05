@@ -18,7 +18,7 @@ exports[`"favicon" option 2`] = `
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
-            <meta itemprop="drpruinj" content="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8To+QTop6//Vkb27IfQRs5qXUUDpOl9QIAYeR/7o2raXUQ==">
+            <meta itemprop="drpruinj" content="AAECAwQFBgcICQABAgMEBYrGXlTTXYBVlkFd0kmziYxUWjqAD1tzQPKdrKVdDqCjwaVAKt+8DxnCAqRHs730O7P1Ec2l3We2hAyNeLsw0SCtL9X3fqnaxUuuUBnWbmpOJXhE5FHm1e08Zf4Yzqz6RmhVsRuL7ckzWAB0pGcil6aLdYsYcrWdE4vCSr6R8kKxs/U6dqZ9qpbbdz6I1Me+blbiyICtjrz3EMOIMAytaaM4ad6VYYFuFb46DM8DovbIzATGZ24cREwC1hCF/nndHsI/Sh39110v9PmUzeyfST1ARG4taD7LMT4AgkTLvM7axA9j7x6EYV2DnowpT01j1wy9ya/3kqXW8o2cvXBY/j6C1R+tJRXMdM2nkA3Zct2B">
           </head>
           <body>
             
@@ -49,7 +49,7 @@ exports[`Base rendering of HTML template 2`] = `
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
-            <meta itemprop="drpruinj" content="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8To+QTop6//Vkb27IfQRs5qXUUDpOl9QIAYeR/7o2raXUQ==">
+            <meta itemprop="drpruinj" content="AAECAwQFBgcICQABAgMEBYrGXlTTXYBVlkFd0kmziYxUWjqAD1tzQPKdrKVdDqCjwaVAKt+8DxnCAqRHs730O7P1Ec2l3We2hAyNeLsw0SCtL9X3fqnaxUuuUBnWbmpOJXhE5FHm1e08Zf4Yzqz6RmhVsRuL7ckzWAB0pGcil6aLdYsYcrWdE4vCSr6R8kKxs/U6dqZ9qpbbdz6I1Me+blbiyICtjrz3EMOIMAytaaM4ad6VYYFuFb46DM8DovbIzATGZ24cREwC1hCF/nndHsI/Sh39110v9PmUzeyfST1ARG4taD7LMT4AgkTLvM7axA9j7x6EYV2DnowpT01j1wy9ya/3kqXW8o2cvXBY/j6C1R+tJRXMdM2nkA3Zct2B">
           </head>
           <body>
             
@@ -80,7 +80,7 @@ exports[`Config overriding for injection 2`] = `
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
-            <meta itemprop="drpruinj" content="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8Toleya/2D9eiR6ItYfGU/13TZ6LvSSaWuNfjodFbPd8BHnTQvNYJv1XfU8ebPRS1svcbb3Nv5ksgK29ZRZwQeA/">
+            <meta itemprop="drpruinj" content="AAECAwQFBgcICQABAgMEBYrGXlTTXYBVlkFd0kmziYxUWjqAD1tzQPKdrKVdDqCjwaVAKt+8DxnCAqRHs730O7P1Ec2l3We2hAyNeLsw0SCtL9X3fqnaxUuuUBnWbmpOJXhE5FHm1e08Zf4Yzqz6RmhVsRuL7ckzWAB0pGcil6aLdYsYcrWdE4vCSr6R8kKxs/U6dqZ9qpbbdz6I1Me+blbiyICtjrz3EMOIMAytaaM4ad6VYYFuFb46DM8DovbIzATGZ24cREwC1hCF/nndHsI/Sh39110v9PmUzeyfST1ARG4taD7LMT4AgkTLvM7axA9j7x6EYV2DnowpT01j19w2yd70UBconyNW7KrVq+rYeZGETta5kdIwbAo5GTq4JSXhasx2q8uiuo75QpeEAEUFoUZxnvLNKPzlmsBTnUc=">
           </head>
           <body>
             
@@ -111,7 +111,7 @@ exports[`Helmet integration works 2`] = `
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
-            <meta itemprop="drpruinj" content="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8To+QTop6//Vkb27IfQRs5qXUUDpOl9QIAYeR/7o2raXUQ==">
+            <meta itemprop="drpruinj" content="AAECAwQFBgcICQABAgMEBYrGXlTTXYBVlkFd0kmziYxUWjqAD1tzQPKdrKVdDqCjwaVAKt+8DxnCAqRHs730O7P1Ec2l3We2hAyNeLsw0SCtL9X3fqnaxUuuUBnWbmpOJXhE5FHm1e08Zf4Yzqz6RmhVsRuL7ckzWAB0pGcil6aLdYsYcrWdE4vCSr6R8kKxs/U6dqZ9qpbbdz6I1Me+blbiyICtjrz3EMOIMAytaaM4ad6VYYFuFb46DM8DovbIzATGZ24cREwC1hCF/nndHsI/Sh39110v9PmUzeyfST1ARG4taD7LMT4AgkTLvM7axA9j7x6EYV2DnowpT01j1wy9ya/3kqXW8o2cvXBY/j6C1R+tJRXMdM2nkA3Zct2B">
           </head>
           <body>
             
@@ -142,7 +142,7 @@ exports[`Injection of additional JS scripts 2`] = `
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
-            <meta itemprop="drpruinj" content="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8To+QTop6//Vkb27IfQRs5qXUUDpOl9QIAYeR/7o2raXUQ==">
+            <meta itemprop="drpruinj" content="AAECAwQFBgcICQABAgMEBYrGXlTTXYBVlkFd0kmziYxUWjqAD1tzQPKdrKVdDqCjwaVAKt+8DxnCAqRHs730O7P1Ec2l3We2hAyNeLsw0SCtL9X3fqnaxUuuUBnWbmpOJXhE5FHm1e08Zf4Yzqz6RmhVsRuL7ckzWAB0pGcil6aLdYsYcrWdE4vCSr6R8kKxs/U6dqZ9qpbbdz6I1Me+blbiyICtjrz3EMOIMAytaaM4ad6VYYFuFb46DM8DovbIzATGZ24cREwC1hCF/nndHsI/Sh39110v9PmUzeyfST1ARG4taD7LMT4AgkTLvM7axA9j7x6EYV2DnowpT01j1wy9ya/3kqXW8o2cvXBY/j6C1R+tJRXMdM2nkA3Zct2B">
           </head>
           <body>
             <script>1-st script after opening <body></script><script>2-nd script after opening <body></script>
@@ -173,7 +173,7 @@ exports[`JS constructs in global state 2`] = `
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
-            <meta itemprop="drpruinj" content="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8Tqq10f7lErRnBESs0h12i02gDganouv6M6IfBtg8n74l3DbPPOMopUHMfdKRYfL+58VyNVVtheb7dn+AZGjDd6+a1XW7HLSDn6XdMN8i0YcNSy4xtYgbQddl6hmSXkV39lDE+blAfxW1YVk0irHJZ57">
+            <meta itemprop="drpruinj" content="AAECAwQFBgcICQABAgMEBYrGXlTTXYBVlkFd0kmziYxUWjqAD1tzQPKdrKVdDqCjwaVAKt+8DxnCAqRHs730O7P1Ec2l3We2hAyNeLsw0SCtL9X3fqnaxUuuUBnWbmpOJXhE5FHm1e08Zf4Yzqz6RmhVsRuL7ckzWAB0pGcil6aLdYsYcrWdE4vCSr6R8kKxs/U6dqZ9qpbbdz6I1Me+blbiyICtjrz3EMOIMAytaaM4ad6VYYFuFb46DM8DovbIzATGZ24cREwC1hCF/nndHsI/Sh39110v9PmUzeyfST1ARG4taD7LMT4AgkTLvM7axA9j7x6EYV2DnowpT01j12ygmrdm5mNve9FOLO1zabk41ouAjMH9zGehA0pb0v1xBqFIVaMYCBrL/Ongr1RaORnkWq5GKcNeSlqEvTqY8+5RvS52TY1yKJoGk2XIpRo1XCeo1wiX2EY8kKRv/mis3eb+um/Kjp7H2u1d4ddmrtc=">
           </head>
           <body>
             
@@ -204,7 +204,7 @@ exports[`Server-side rendering (SSR); injection of CSS chunks & Redux state 2`] 
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
-            <meta itemprop="drpruinj" content="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8TpNf8laRViqoxRNKquYCI/EsGNTVybE2N/Iyevp1l3bOrAZipnfd6hR0/Et+AxThYRbf7mqq9FEXz2YMS81P8aFZ1NrQcQfwpRidDpnABIVCw==">
+            <meta itemprop="drpruinj" content="AAECAwQFBgcICQABAgMEBYrGXlTTXYBVlkFd0kmziYxUWjqAD1tzQPKdrKVdDqCjwaVAKt+8DxnCAqRHs730O7P1Ec2l3We2hAyNeLsw0SCtL9X3fqnaxUuuUBnWbmpOJXhE5FHm1e08Zf4Yzqz6RmhVsRuL7ckzWAB0pGcil6aLdYsYcrWdE4vCSr6R8kKxs/U6dqZ9qpbbdz6I1Me+blbiyICtjrz3EMOIMAytaaM4ad6VYYFuFb46DM8DovbIzATGZ24cREwC1hCF/nndHsI/Sh39110v9PmUzeyfST1ARG4taD7LMT4AgkTLvM7axA9j7x6EYV2DnowpT01j1zebb7szNNYxFI57U1DKgUwnDN/DpaBWq7DJfBTohs4kb0PnSQQdYzyg69/S6gNLRPxSY32DgHOjtl+Yk3Ef87Yas7wA7/ehMTj8Q+0otQxu">
           </head>
           <body>
             
@@ -235,7 +235,7 @@ exports[`Setting of response HTTP status the server-side rendering 2`] = `
               content="width=device-width,initial-scale=1.0"
               name="viewport"
             >
-            <meta itemprop="drpruinj" content="MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEMKtsRsLh8R6HHpitZ/eghsfwaFoaus6qLoke9MlgqF39wUyiJOuxKmqjECLiFel3AfVxBlTkA2sj6FNYLq9mBpmFzyzzR1PBUaiLsgpu2NHD6qIeBy+8m9Uwh2qPhPl5dqraHvdasjvg4ljMsqyIAJsUcHuR3mSbcwfxAlIGLmWpQJ3zsX7zkwbR5B44BoZQNVCKVnjAI5SVP4sA20EKLosR2pTrPD/VgFYw7v8C/11sJ/+t3Xfv2bKv3Jw5/dX3Iah0MfS/YXrbxQ3dY9Z2wCNOUY7JC+u76UM1C0X8pFdBMfQQMYO1+KECIxoUo8To+QTop6//Vkb27IfQRs5qXUUDpOl9QIAYeR/7o2raXUQ==">
+            <meta itemprop="drpruinj" content="AAECAwQFBgcICQABAgMEBYrGXlTTXYBVlkFd0kmziYxUWjqAD1tzQPKdrKVdDqCjwaVAKt+8DxnCAqRHs730O7P1Ec2l3We2hAyNeLsw0SCtL9X3fqnaxUuuUBnWbmpOJXhE5FHm1e08Zf4Yzqz6RmhVsRuL7ckzWAB0pGcil6aLdYsYcrWdE4vCSr6R8kKxs/U6dqZ9qpbbdz6I1Me+blbiyICtjrz3EMOIMAytaaM4ad6VYYFuFb46DM8DovbIzATGZ24cREwC1hCF/nndHsI/Sh39110v9PmUzeyfST1ARG4taD7LMT4AgkTLvM7axA9j7x6EYV2DnowpT01j1wy9ya/3kqXW8o2cvXBY/j6C1R+tJRXMdM2nkA3Zct2B">
           </head>
           <body>
             

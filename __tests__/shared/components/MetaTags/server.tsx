@@ -11,6 +11,8 @@ import { setBuildInfo } from 'utils/isomorphy/buildInfo';
 import Application, { MODES } from './__assets__/testcase/app';
 import Application2, { MODES as MODES2 } from './__assets__/testcase/app2';
 
+jest.mock('node:crypto');
+
 const WEBPACK_CONFIG = {
   context: `${__dirname}/__assets__/testcase`,
   output: {

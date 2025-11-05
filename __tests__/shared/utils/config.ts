@@ -6,6 +6,8 @@
 import type ConfigM from 'config';
 import { mockClientSide, unmockClientSide } from 'utils/jest';
 
+import type * as ConfigUtilsNS from 'utils/config';
+
 import type * as IT from 'utils/isomorphy';
 
 test('Base test', () => {
@@ -55,9 +57,8 @@ describe('Isomorphy behavior tests', () => {
     const { IS_SERVER_SIDE } = require('utils/isomorphy') as typeof IT;
     expect(IS_SERVER_SIDE).toBe(true);
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    expect((require('utils/config') as {
-      default: typeof ConfigM;
-    }).default)
-      .toStrictEqual(SERVER_SIDE_CONFIG);
+    const { getConfigSync } = require('utils/config') as typeof ConfigUtilsNS;
+
+    expect(getConfigSync()).toStrictEqual(SERVER_SIDE_CONFIG);
   });
 });

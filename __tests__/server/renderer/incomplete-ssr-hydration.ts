@@ -12,6 +12,8 @@
 
 import { act } from 'react';
 
+import { timer } from '@dr.pogodin/js-utils';
+
 import { getGlobal } from 'utils/jest';
 
 function noop() {
@@ -36,8 +38,11 @@ it('hydrates successfully', async () => {
   console.error = noop;
   const js = fs.readFileSync(`${outputPath}/${jsFilename}`, 'utf8') as string;
 
-  // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
-  await act(() => new Function(js)());
+  await act(async () => {
+    // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call
+    new Function(js)();
+    await timer(100);
+  });
 
   const container = document.querySelector('#react-view');
   expect(container?.innerHTML).toBe(markup);

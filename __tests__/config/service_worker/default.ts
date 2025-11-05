@@ -12,6 +12,8 @@
 
 import { act } from 'react';
 
+import { timer } from '@dr.pogodin/js-utils';
+
 import { getGlobal } from 'utils/jest';
 
 const global = getGlobal();
@@ -46,8 +48,11 @@ it('registers service worker with the correct URL', async () => {
   // eslint-disable-next-line jest/prefer-spy-on
   console.log = jest.fn();
 
-  // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
-  await act(() => new Function(js)());
+  await act(async () => {
+    // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call
+    new Function(js)();
+    await timer(100);
+  });
 
   act(() => {
     // eslint-disable-next-line jest/no-conditional-in-test

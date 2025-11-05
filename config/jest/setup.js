@@ -1,4 +1,6 @@
-/* global globalThis, require */
+/* global globalThis, require, window */
+
+import { subtle } from 'node:crypto';
 
 // eslint-disable-next-line import/no-unassigned-import
 import 'raf/polyfill';
@@ -10,4 +12,9 @@ if (!globalThis.TextEncoder || !globalThis.TextDecoder) {
   const { TextDecoder, TextEncoder } = require('node:util');
   globalThis.TextEncoder = TextEncoder;
   globalThis.TextDecoder = TextDecoder;
+}
+
+// Polyfill of crypto.subtle in JSDOM environments.
+if (typeof window !== 'undefined') {
+  window.crypto.subtle = subtle;
 }

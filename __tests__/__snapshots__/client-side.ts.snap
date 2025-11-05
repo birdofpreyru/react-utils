@@ -27,10 +27,8 @@ exports[`Export at client side 1`] = `
   "YouTubeVideo": [Function],
   "assertEmptyObject": [Function],
   "client": [Function],
-  "config": {
-    "CSRF": undefined,
-    "MOCK_CONFIG_KEY": "Mock Config Value",
-  },
+  "getConfig": [Function],
+  "getConfigSync": [Function],
   "getGlobalState": [Function],
   "getSsrContext": [Function],
   "isomorphy": {

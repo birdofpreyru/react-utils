@@ -11,6 +11,8 @@
 
 import { act } from 'react';
 
+import { timer } from '@dr.pogodin/js-utils';
+
 import { getGlobal } from 'utils/jest';
 
 const global = getGlobal();
@@ -34,7 +36,10 @@ it('conserves expected markup after hydration', async () => {
   const markup = container?.innerHTML;
   const js = fs.readFileSync(`${outputPath}/main.js`, 'utf8') as string;
 
-  // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
-  await act(() => new Function(js)());
+  await act(async () => {
+    // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call
+    new Function(js)();
+    await timer(100);
+  });
   expect(document.querySelector('#react-view')?.innerHTML).toBe(markup);
 });

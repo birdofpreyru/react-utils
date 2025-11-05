@@ -5,7 +5,7 @@ import themedImpl, {
   ThemeProvider,
 } from '@dr.pogodin/react-themes';
 
-import config from './config';
+import { getConfig, getConfigSync } from './config';
 import * as isomorphy from './isomorphy';
 import time from './time';
 import * as webpack from './webpack';
@@ -36,7 +36,8 @@ themed.PRIORITY = PRIORITY;
 
 export {
   type Theme,
-  config,
+  getConfig,
+  getConfigSync,
   isomorphy,
   themed,
   ThemeProvider,

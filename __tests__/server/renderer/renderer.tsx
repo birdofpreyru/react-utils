@@ -30,6 +30,8 @@ import {
   mockWebpackConfig,
 } from './__assets__/common';
 
+jest.mock('node:crypto');
+
 function noop() {
   // NOOP
 }
@@ -40,8 +42,6 @@ declare namespace global {
 }
 
 global.mockFailsForgeRandomGetBytesMethod = false;
-
-jest.mock('node-forge');
 
 const TEST_CONTEXT = `${__dirname}/__assets__`;
 

@@ -25,7 +25,9 @@ function getClientChunkGroups(): Promise<ChunkGroupsT> | undefined {
 
   return (async () => {
     const { default: getInj } = await import(/* webpackChunkName: "react-utils-client-side-code" */ '../../client/getInj');
-    return getInj().CHUNK_GROUPS ?? {};
+
+    const inj = await getInj();
+    return inj.CHUNK_GROUPS ?? {};
   })();
 }
 

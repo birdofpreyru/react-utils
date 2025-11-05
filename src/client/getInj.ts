@@ -2,50 +2,70 @@
 
 /* global document */
 
-// Note: this way, only required part of "node-forge": AES, and some utils,
-// is bundled into client-side code.
-import forge from 'node-forge/lib/forge.js';
-
-// eslint-disable-next-line import/no-unassigned-import
-import 'node-forge/lib/aes.js';
-
 import type { InjT } from 'utils/globalState';
 
 import { getBuildInfo } from 'utils/isomorphy/buildInfo';
 
-// Safeguard is needed here, because the server-side version of Docusaurus docs
-// is compiled (at least now) with settings suggesting it is a client-side
-// environment, but there is no document.
-let inj: InjT = {};
+let inj: InjT | Promise<InjT> | undefined;
 
-const metaElement: HTMLMetaElement | null = typeof document === 'undefined'
-  ? null : document.querySelector('meta[itemprop="drpruinj"]');
+export default function getInj(): InjT | Promise<InjT> {
+  inj ??= (async () => {
+    const metaElement: HTMLMetaElement | null = typeof document === 'undefined'
+      ? null : document.querySelector('meta[itemprop="drpruinj"]');
 
-if (metaElement) {
-  metaElement.remove();
-  let data = forge.util.decode64(metaElement.content);
+    if (metaElement) {
+      metaElement.remove();
 
-  const { key } = getBuildInfo();
-  const d = forge.cipher.createDecipher('AES-CBC', key);
-  d.start({ iv: data.slice(0, key.length) });
-  d.update(forge.util.createBuffer(data.slice(key.length)));
-  d.finish();
+      // NOTE: Since 2025 there is Uint8Array.fromBase64(), which should be
+      // preferred, but it is not supported by older environments yet.
+      const data = atob(metaElement.content);
 
-  data = forge.util.decodeUtf8(d.output.data);
+      // TODO: Our current handling of this encryption / decryption follows
+      // a legacy approach, and can be enhanced by using Crypto features.
+      // Though, this is not strictly intended to be secure (it is more
+      // to obfurscate injected data, rather than really keeping them
+      // secure), thus it is fine like this for now.
+      const { key } = getBuildInfo();
 
-  // TODO: Double-check, if there is a safer alternative to parse it?
-  // eslint-disable-next-line no-eval
-  inj = eval(`(${data})`) as InjT;
-} else if (typeof window !== 'undefined' && window.REACT_UTILS_INJECTION) {
-  inj = window.REACT_UTILS_INJECTION;
-  delete window.REACT_UTILS_INJECTION;
-} else {
-  // Otherwise, a bunch of dependent stuff will easily fail in non-standard
-  // environments, where no client-side initialization is performed. Like tests,
-  // Docusaurus examples, etc.
-  inj = {};
-}
+      const code = (x: string) => x.charCodeAt(0);
+      const dataBuffer = Uint8Array.from(data.slice(16), code);
+      const ivBuffer = Uint8Array.from(data.slice(0, 16), code);
+      const keyBuffer = Uint8Array.from(atob(key), code);
 
-export default function getInj(): InjT {
+      const cKey = await window.crypto.subtle.importKey(
+        'raw',
+        keyBuffer,
+        { name: 'AES-CBC' },
+        false,
+        ['decrypt'],
+      );
+
+      const buffer = await window.crypto.subtle.decrypt({
+        iv: ivBuffer,
+        name: 'AES-CBC',
+      }, cKey, dataBuffer);
+
+      const decoder = new TextDecoder();
+
+      // eslint-disable-next-line no-eval
+      const res = eval(`(${decoder.decode(buffer)})`) as InjT;
+
+      // NOTE: This is important, to be able to return the injection
+      // synchronously once it is initialized.
+      inj = res;
+
+      return res;
+    } else if (typeof window !== 'undefined' && window.REACT_UTILS_INJECTION) {
+      const res = window.REACT_UTILS_INJECTION;
+      delete window.REACT_UTILS_INJECTION;
+      return res;
+    }
+
+    // Otherwise, a bunch of dependent stuff will easily fail in non-standard
+    // environments, where no client-side initialization is performed. Like tests,
+    // Docusaurus examples, etc.
+    return {};
+  })();
+
   return inj;
 }

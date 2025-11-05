@@ -2,6 +2,7 @@
   both at compile- and runtime.
 - [client()](/docs/api/functions/client) &mdash; Client-side initialization and
   launch of ReactJS apps.
+- [getConfig()] &mdash; returns the application configuration object.
 - [server()](/docs/api/functions/server) &mdash; Creates and starts ReactJS server.
 - [splitComponent()] &mdash; Wraps a React component for code splitting.
 - [withRetries()](/docs/api/functions/withretries) &mdash; Attempts an operation
@@ -16,4 +17,5 @@
 <!-- links -->
 [assertEmptyObject()]: /docs/api/functions/assertEmptyObject
 [Barrier]: /docs/api/classes/Barrier
+[getConfig()]: /docs/api/functions/getConfig
 [splitComponent()]: /docs/api/functions/splitComponent

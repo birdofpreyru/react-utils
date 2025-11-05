@@ -2,7 +2,7 @@
 ```jsx
 import { client } from '@dr.pogodin/react-utils';
 
-client(Application, options);
+async client(Application, options): Promise<void>;
 ```
 Initializes and launches ReactJS `Application` at the client-side.
 
@@ -27,9 +27,18 @@ prior to loading the library.
 The `dontHydrate` option allows to opt for a pure client-side rendering, instead
 of the hydration.
 
+:::caution History
+- [v1.47.0](https://github.com/birdofpreyru/react-utils/releases/tag/v1.47.0) &mdash;
+  The previously synchronous [client()] function was turned into an asynchronous
+  one in this version. It requires minor adjustments in the host code using it,
+  in particular in E2E tests using [E2eSsrEnv] (see the updated
+  [example](http://localhost:3000/docs/react-utils/docs/api/classes/E2eSsrEnv#hints)
+  in its documentation).
+:::
+
 ## Arguments
 **Required:**
-- `Application` - **React.Component** - The root applciation component.
+- `Application` - **React.ComponentType** - The root applciation component.
 
 **Optional:**
 - `options` - **object** - Additional settings:
@@ -58,3 +67,4 @@ of the hydration.
 [server()]: /docs/api/functions/server
 [createRoot()]: https://reactjs.org/docs/react-dom-client.html#createroot
 [hydrateRoot()]: https://reactjs.org/docs/react-dom-client.html#hydrateroot
+[E2eSsrEnv]: /docs/api/classes/E2eSsrEnv

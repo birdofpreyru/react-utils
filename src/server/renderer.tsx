@@ -2,6 +2,8 @@
  * ExpressJS middleware for server-side rendering of a ReactJS app.
  */
 
+import { Buffer } from 'node:buffer';
+import { type Cipheriv, createCipheriv, randomBytes } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { Writable } from 'node:stream';
@@ -23,7 +25,6 @@ import {
 } from 'lodash-es';
 
 import config from 'config';
-import forge from 'node-forge';
 
 import { prerenderToNodeStream } from 'react-dom/static';
 import { type HelmetDataContext, HelmetProvider } from '@dr.pogodin/react-helmet';
@@ -134,26 +135,15 @@ function readChunkGroupsJson(buildDir: string) {
 
 /**
  * Prepares a new Cipher for data encryption.
- * @param key Encryption key (32-bit random key is expected, see
- *  node-forge documentation, in case of doubts).
- * @return Resolves to the object with two fields:
+ * @param key Encryption key (32-bit random, Base64-encoded key is expected).
+ * @return Returns a tuple of:
  *  1. cipher - a new Cipher, ready for encryption;
  *  2. iv - initial vector used by the cipher.
  */
-async function prepareCipher(key: string): Promise<{
-  cipher: forge.cipher.BlockCipher;
-  iv: string;
-}> {
-  return new Promise((resolve, reject) => {
-    forge.random.getBytes(32, (err, iv) => {
-      if (err) reject(err);
-      else {
-        const cipher = forge.cipher.createCipher('AES-CBC', key);
-        cipher.start({ iv });
-        resolve({ cipher, iv });
-      }
-    });
-  });
+function prepareCipher(key: string): [cipher: Cipheriv, iv: Buffer] {
+  const iv = randomBytes(16);
+  const cipher = createCipheriv('AES-256-CBC', Buffer.from(key, 'base64'), iv);
+  return [cipher, iv];
 }
 
 /**
@@ -401,21 +391,9 @@ export default function factory(
       }
 
       const brr = ops.beforeRender!(req, sanitizedConfig as unknown as ConfigT);
+      const { configToInject, extraScripts, initialState } = await brr;
 
-      const [{
-        configToInject,
-        extraScripts,
-        initialState,
-      }, {
-        cipher,
-        iv,
-      }] = await Promise.all([
-        // NOTE: Written this way to avoid triggering the "await-thenable"
-        // ESLint rule.
-        brr instanceof Promise ? brr : Promise.resolve(brr),
-
-        prepareCipher(buildInfo.key),
-      ]);
+      const [cipher, iv] = prepareCipher(buildInfo.key);
 
       let helmet: HelmetDataContext['helmet'];
 
@@ -554,9 +532,12 @@ export default function factory(
         ignoreFunction: true,
         unsafe: true,
       });
-      cipher.update(forge.util.createBuffer(payload, 'utf8'));
-      cipher.finish();
-      const INJ = forge.util.encode64(`${iv}${cipher.output.data}`);
+
+      const INJ = Buffer.concat([
+        iv,
+        cipher.update(payload, 'utf8'),
+        cipher.final(),
+      ]).toString('base64');
 
       const chunkSet = new Set<string>();
 
