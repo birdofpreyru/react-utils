@@ -5,17 +5,11 @@ import { getConfig } from '@dr.pogodin/react-utils';
 
 type ConfigT = Record<string, unknown>;
 
-function getConfig(): ConfigT | Promise<ConfigT>;
-```
+// There are two signature overloads provided:
+function getConfig(sync?: boolean): ConfigT | Promise<ConfigT>;
 
-:::tip
-In the next update will add optional `sync` flag to this function,
-which will guarantee that the function either returns `ConfigT` object
-synchronously, or throws if it is not available yet. This function will
-help to synchronously get the configuration inside component rendering
-code (where usage of a possibly asynchronous function may otherwise
-be cumbersome).
-:::
+function getConfg(sync: true): ConfigT;
+```
 
 The [getConfig()] function returns the isomorphic (available both at the server-
 and the client-side) application configuration object, or a promise that resovles
@@ -64,6 +58,16 @@ module.exports = {
 Also, our library may add some extra fields to the config loaded by [node-config];
 for example it automatically adds `CSRF` token field to the configuration injected
 into the client-side code.
+
+### Arguments
+- `sync` &mdash; **boolean** &mdash; Optional. If `true`, the function returns
+  config object synchronously, if it is possible at the moment of the call, or
+  it throws an error otherwise.
+
+### Result
+This function returns either the configuration object, or a promise that resolves
+to that object, one it becomes available (see details in the function description
+above).
 
 [client()]: /docs/api/functions/client
 [node-config]: https://github.com/lorenwest/node-config

@@ -16,8 +16,8 @@ if (global.REACT_UTILS_LIBRARY_LOADED) {
 // TODO: This is a rapid workaround to get rid of __dirname. I guess, later
 // we'll re-implement requireWeak() to accept import.meta.url directly, and
 // this workaround won't be needed.
-let dirname = import.meta.url;
-dirname = dirname.slice(5, dirname.lastIndexOf('/'));
+// eslint-disable-next-line @typescript-eslint/prefer-destructuring
+const dirname = import.meta.dirname;
 
 const server = webpack.requireWeak<typeof ServerFactoryM>('./server', dirname);
 
@@ -58,7 +58,6 @@ export {
   Cached,
   Emitter,
   getConfig,
-  getConfigSync,
   isomorphy,
   getSsrContext,
   type Listener,

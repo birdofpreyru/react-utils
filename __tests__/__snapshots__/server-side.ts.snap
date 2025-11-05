@@ -28,7 +28,6 @@ exports[`Export at server side 1`] = `
   "assertEmptyObject": [Function],
   "client": undefined,
   "getConfig": [Function],
-  "getConfigSync": [Function],
   "getGlobalState": [Function],
   "getSsrContext": [Function],
   "isomorphy": {

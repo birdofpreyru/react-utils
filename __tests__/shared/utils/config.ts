@@ -57,8 +57,8 @@ describe('Isomorphy behavior tests', () => {
     const { IS_SERVER_SIDE } = require('utils/isomorphy') as typeof IT;
     expect(IS_SERVER_SIDE).toBe(true);
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { getConfigSync } = require('utils/config') as typeof ConfigUtilsNS;
+    const { getConfig } = require('utils/config') as typeof ConfigUtilsNS;
 
-    expect(getConfigSync()).toStrictEqual(SERVER_SIDE_CONFIG);
+    expect(getConfig(true)).toStrictEqual(SERVER_SIDE_CONFIG);
   });
 });

@@ -29,7 +29,11 @@ function injectCsrfToken(cfg: ConfigT): ConfigT {
   return cfg;
 }
 
-export function getConfig(): ConfigT | Promise<ConfigT> {
+export function getConfig(sync: true): ConfigT;
+
+export function getConfig(sync?: boolean): ConfigT | Promise<ConfigT>;
+
+export function getConfig(sync?: boolean): ConfigT | Promise<ConfigT> {
   if (!config) {
     if (IS_CLIENT_SIDE) {
       const inj = clientGetInj();
@@ -47,23 +51,9 @@ export function getConfig(): ConfigT | Promise<ConfigT> {
     }
   }
 
-  return config;
-}
-
-/**
- * Returns the config object synchronously, if it has been initialized already,
- * or throws an error otherwise. On server side this method is always safe to
- * call; and on the client side it is safe to call within components (as the
- * frontend client initialization sequence guarantees that the async injections
- * the config initialization depends upon are resolved before anything is
- * rendered).
- */
-export function getConfigSync(): ConfigT {
-  const res = getConfig();
-
-  if (res instanceof Promise) {
-    throw Error('Config has not been initialized yet.');
+  if (sync && (config instanceof Promise)) {
+    throw Error('The config is not available yet');
   }
 
-  return res;
+  return config;
 }

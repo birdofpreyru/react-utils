@@ -49,9 +49,6 @@ const config = {
 
       // @ts-expect-error "Property 'module' does not exist on type '{ alias: string | false | string[]; name: string; onlyModule?: boolean | undefined; }[]'"
       cfg.resolve.fallback.module = false;
-      // @ts-expect-error "Property 'module' does not exist on type '{ alias: string | false | string[]; name: string; onlyModule?: boolean | undefined; }[]'"
-      cfg.resolve.fallback.url = false;
-      /* eslint-enable no-param-reassign */
 
       cfg.module?.rules?.push({
         /* Loads SCSS stylesheets. */
@@ -96,6 +93,12 @@ const config = {
       }
 
       babelRule.exclude = [];
+
+      cfg.node ??= {};
+
+      // eslint-disable-next-line no-underscore-dangle
+      cfg.node.__dirname = true;
+      /* eslint-enable no-param-reassign */
     },
     name: 'sass',
   })],
