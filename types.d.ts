@@ -4,6 +4,7 @@ declare var IS_REACT_ACT_ENVIRONMENT: boolean | undefined;
 declare var REACT_UTILS_WEBPACK_BUNDLE: boolean | undefined;
 declare var REACT_UTILS_LIBRARY_LOADED: boolean | undefined;
 declare var REACT_UTILS_FORCE_CLIENT_SIDE: boolean | undefined;
+declare var SCENE_INIT_PROMISE: Promise<void> | undefined;
 /* eslint-enable no-var */
 
 declare module '@babel/register/experimental-worker' {

@@ -145,8 +145,6 @@ to test SSR and Webpack-build outcomes.
 // This is needed to emulate client-side hydration further below.
 import { act } from 'react';
 
-import { time } from '@dr.pogodin/react-utils';
-
 // The path for Webpack outputs within the in-memory filesystem.
 const outputPath = global.webpackConfig.output.path;
 
@@ -183,10 +181,11 @@ it('sample test', async ()= > {
     // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call
     new Function(js)();
 
-    // NOTE: This is definitely not the best pattern, we will think about
-    // a better way to synchronize the test with the async app initialization
-    // inside the JS code bundle executed above.
-    await time.timer(100);
+    // As the client-side initialization is asynchronous, to wait in the test
+    // until it is completed, inside your Scene you want to do smth like this:
+    // global.SCENE_INIT_PROMISE = client(Scene);
+    // and then you can wait for this promise in the test:
+    await SCENE_INIT_PROMISE;
   });
 
   // This checks the outcome of the client-side hydration matches the original

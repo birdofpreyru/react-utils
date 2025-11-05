@@ -14,8 +14,6 @@
 import pretty from 'pretty';
 import { act } from 'react';
 
-import { timer } from '@dr.pogodin/js-utils';
-
 import { getGlobal } from 'utils/jest';
 
 const global = getGlobal();
@@ -58,7 +56,7 @@ it('matches SSR markup in hydration', async () => {
   await act(async () => {
     // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call
     new Function(js)();
-    await timer(100);
+    await SCENE_INIT_PROMISE;
   });
 
   expect(document.documentElement.innerHTML).toBe(ssrMarkup);

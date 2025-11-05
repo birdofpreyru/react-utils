@@ -1,4 +1,4 @@
 import launch from 'client';
 import { RoutingScene1 } from './RoutingScene';
 
-void launch(RoutingScene1);
+global.SCENE_INIT_PROMISE = launch(RoutingScene1);

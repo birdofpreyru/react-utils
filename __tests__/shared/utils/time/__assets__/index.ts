@@ -3,4 +3,4 @@
 import client from 'client';
 import Scene from './Scene';
 
-void client(Scene);
+global.SCENE_INIT_PROMISE = client(Scene);
