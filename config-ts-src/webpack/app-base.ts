@@ -6,10 +6,12 @@ import path from 'node:path';
 
 import { SitemapStream, streamToPromise } from 'sitemap';
 
-import clone from 'lodash/clone.js';
-import defaults from 'lodash/defaults.js';
-import isFunction from 'lodash/isFunction.js';
-import isObject from 'lodash/isObject.js';
+import {
+  clone,
+  defaults,
+  isFunction,
+  isObject,
+} from 'lodash-es';
 
 import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
