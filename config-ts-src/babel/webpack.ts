@@ -61,16 +61,19 @@ function newBaseConfig(options: OptionsT): TransformOptions {
         ],
       }],
       ['@babel/transform-runtime', {
-        corejs: 3,
         useESModules: true,
       }],
     ],
     presets: [
       ['@babel/env', {
+        bugfixes: true,
+        corejs: '3.46',
+
         // Leaves it to the Webpack to deal with modules.
         modules: options.modules ?? false,
 
         targets: options.targets ?? 'defaults',
+        useBuiltIns: 'usage',
       }],
 
       // TODO: Starting from Babel 8, "automatic" will be the default runtime,

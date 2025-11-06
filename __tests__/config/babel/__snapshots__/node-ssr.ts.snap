@@ -27,7 +27,6 @@ exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
     [
       "@babel/transform-runtime",
       {
-        "corejs": 3,
         "useESModules": true,
       },
     ],
@@ -61,8 +60,11 @@ exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
     [
       "@babel/env",
       {
+        "bugfixes": true,
+        "corejs": "3.46",
         "modules": "cjs",
         "targets": "current node",
+        "useBuiltIns": "usage",
       },
     ],
     [
@@ -109,7 +111,6 @@ exports[`"development" environment "baseAssetsOutputPath" option 2`] = `
     [
       "@babel/transform-runtime",
       {
-        "corejs": 3,
         "useESModules": true,
       },
     ],
@@ -143,8 +144,11 @@ exports[`"development" environment "baseAssetsOutputPath" option 2`] = `
     [
       "@babel/env",
       {
+        "bugfixes": true,
+        "corejs": "3.46",
         "modules": "cjs",
         "targets": "current node",
+        "useBuiltIns": "usage",
       },
     ],
     [
@@ -185,7 +189,6 @@ exports[`"development" environment "noStyling" variation 1`] = `
     [
       "@babel/transform-runtime",
       {
-        "corejs": 3,
         "useESModules": true,
       },
     ],
@@ -206,8 +209,11 @@ exports[`"development" environment "noStyling" variation 1`] = `
     [
       "@babel/env",
       {
+        "bugfixes": true,
+        "corejs": "3.46",
         "modules": "cjs",
         "targets": "current node",
+        "useBuiltIns": "usage",
       },
     ],
     [
@@ -254,7 +260,6 @@ exports[`"development" environment "noStyling" variation 2`] = `
     [
       "@babel/transform-runtime",
       {
-        "corejs": 3,
         "useESModules": true,
       },
     ],
@@ -275,8 +280,11 @@ exports[`"development" environment "noStyling" variation 2`] = `
     [
       "@babel/env",
       {
+        "bugfixes": true,
+        "corejs": "3.46",
         "modules": "cjs",
         "targets": "current node",
+        "useBuiltIns": "usage",
       },
     ],
     [
@@ -317,7 +325,6 @@ exports[`"development" environment Default config 1`] = `
     [
       "@babel/transform-runtime",
       {
-        "corejs": 3,
         "useESModules": true,
       },
     ],
@@ -351,8 +358,11 @@ exports[`"development" environment Default config 1`] = `
     [
       "@babel/env",
       {
+        "bugfixes": true,
+        "corejs": "3.46",
         "modules": "cjs",
         "targets": "current node",
+        "useBuiltIns": "usage",
       },
     ],
     [
@@ -399,7 +409,6 @@ exports[`"development" environment Default config 2`] = `
     [
       "@babel/transform-runtime",
       {
-        "corejs": 3,
         "useESModules": true,
       },
     ],
@@ -433,8 +442,11 @@ exports[`"development" environment Default config 2`] = `
     [
       "@babel/env",
       {
+        "bugfixes": true,
+        "corejs": "3.46",
         "modules": "cjs",
         "targets": "current node",
+        "useBuiltIns": "usage",
       },
     ],
     [
@@ -475,7 +487,6 @@ exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
     [
       "@babel/transform-runtime",
       {
-        "corejs": 3,
         "useESModules": true,
       },
     ],
@@ -509,8 +520,11 @@ exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
     [
       "@babel/env",
       {
+        "bugfixes": true,
+        "corejs": "3.46",
         "modules": "cjs",
         "targets": "current node",
+        "useBuiltIns": "usage",
       },
     ],
     [
@@ -557,7 +571,6 @@ exports[`"production" environment "baseAssetsOutputPath" option 2`] = `
     [
       "@babel/transform-runtime",
       {
-        "corejs": 3,
         "useESModules": true,
       },
     ],
@@ -591,8 +604,11 @@ exports[`"production" environment "baseAssetsOutputPath" option 2`] = `
     [
       "@babel/env",
       {
+        "bugfixes": true,
+        "corejs": "3.46",
         "modules": "cjs",
         "targets": "current node",
+        "useBuiltIns": "usage",
       },
     ],
     [
@@ -633,7 +649,6 @@ exports[`"production" environment "noStyling" variation 1`] = `
     [
       "@babel/transform-runtime",
       {
-        "corejs": 3,
         "useESModules": true,
       },
     ],
@@ -654,8 +669,11 @@ exports[`"production" environment "noStyling" variation 1`] = `
     [
       "@babel/env",
       {
+        "bugfixes": true,
+        "corejs": "3.46",
         "modules": "cjs",
         "targets": "current node",
+        "useBuiltIns": "usage",
       },
     ],
     [
@@ -702,7 +720,6 @@ exports[`"production" environment "noStyling" variation 2`] = `
     [
       "@babel/transform-runtime",
       {
-        "corejs": 3,
         "useESModules": true,
       },
     ],
@@ -723,8 +740,11 @@ exports[`"production" environment "noStyling" variation 2`] = `
     [
       "@babel/env",
       {
+        "bugfixes": true,
+        "corejs": "3.46",
         "modules": "cjs",
         "targets": "current node",
+        "useBuiltIns": "usage",
       },
     ],
     [
@@ -765,7 +785,6 @@ exports[`"production" environment Default config 1`] = `
     [
       "@babel/transform-runtime",
       {
-        "corejs": 3,
         "useESModules": true,
       },
     ],
@@ -799,8 +818,11 @@ exports[`"production" environment Default config 1`] = `
     [
       "@babel/env",
       {
+        "bugfixes": true,
+        "corejs": "3.46",
         "modules": "cjs",
         "targets": "current node",
+        "useBuiltIns": "usage",
       },
     ],
     [
@@ -847,7 +869,6 @@ exports[`"production" environment Default config 2`] = `
     [
       "@babel/transform-runtime",
       {
-        "corejs": 3,
         "useESModules": true,
       },
     ],
@@ -881,8 +902,11 @@ exports[`"production" environment Default config 2`] = `
     [
       "@babel/env",
       {
+        "bugfixes": true,
+        "corejs": "3.46",
         "modules": "cjs",
         "targets": "current node",
+        "useBuiltIns": "usage",
       },
     ],
     [

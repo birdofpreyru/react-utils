@@ -38,6 +38,11 @@ function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
   const config = getWebpackBabelConfig(
     babel,
     {
+      // NOTE: It make sense to have "modules": false here,
+      // but it needs a bunch of build configuration updates,
+      // and ends-up with conflict of Jest with ES modules (as now
+      // Jest relies on babel.config.js, which transpiles everything
+      // into CJS).
       modules: 'cjs',
       targets: 'current node',
       ...options,
