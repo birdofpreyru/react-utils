@@ -44,7 +44,7 @@ function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
       // Jest relies on babel.config.js, which transpiles everything
       // into CJS).
       modules: 'cjs',
-      targets: 'current node',
+      targets: 'maintained node versions',
       ...options,
     },
   );

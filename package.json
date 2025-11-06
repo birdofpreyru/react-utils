@@ -1,5 +1,5 @@
 {
-  "version": "1.47.0-alpha.6",
+  "version": "1.47.0-alpha.7",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -120,8 +120,8 @@
     "workbox-webpack-plugin": "^7.3.0"
   },
   "engines": {
-    "node": ">=20",
-    "npm": ">=10"
+    "node": ">=22.21",
+    "npm": ">=10.9"
   },
   "main": "./build/production/index.js",
   "source": "./src/index.ts",
