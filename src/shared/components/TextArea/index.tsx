@@ -136,4 +136,4 @@ const TextArea: FunctionComponent<Props> = ({
   );
 };
 
-export default themed(TextArea, 'TextArea', defaultTheme);
+export default /* #__PURE__ */ themed(TextArea, 'TextArea', defaultTheme);

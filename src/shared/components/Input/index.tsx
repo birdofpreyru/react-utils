@@ -93,4 +93,4 @@ const Input: FunctionComponent<PropsT> = ({
   );
 };
 
-export default themed(Input, 'Input', defaultTheme);
+export default /* #__PURE__ */ themed(Input, 'Input', defaultTheme);

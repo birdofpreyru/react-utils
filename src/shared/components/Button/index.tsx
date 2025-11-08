@@ -127,4 +127,4 @@ export const BaseButton: FunctionComponent<PropsT> = ({
  * @prop {string} [button] to the root element of any button.
  * @prop {string} [disabled] to the root element of disabled button.
  */
-export default themed(BaseButton, 'Button', defaultTheme);
+export default /* #__PURE__ */ themed(BaseButton, 'Button', defaultTheme);

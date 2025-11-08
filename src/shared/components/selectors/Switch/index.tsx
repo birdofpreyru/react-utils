@@ -71,4 +71,4 @@ const BaseSwitch: React.FunctionComponent<PropsT> = ({
   );
 };
 
-export default themed(BaseSwitch, 'Switch', defaultTheme);
+export default /* #__PURE__ */ themed(BaseSwitch, 'Switch', defaultTheme);

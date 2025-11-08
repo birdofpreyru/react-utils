@@ -173,7 +173,7 @@ const Wrapper: FunctionComponent<PropsT> = ({
   );
 };
 
-const ThemedWrapper = themed(Wrapper, 'WithTooltip', defaultTheme);
+const ThemedWrapper = /* #__PURE__ */ themed(Wrapper, 'WithTooltip', defaultTheme);
 
 type ExportT = typeof ThemedWrapper & {
   PLACEMENTS: typeof PLACEMENTS;

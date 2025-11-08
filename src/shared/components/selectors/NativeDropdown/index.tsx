@@ -87,4 +87,4 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
   );
 };
 
-export default themed(Dropdown, 'Dropdown', defaultTheme);
+export default /* #__PURE__ */ themed(Dropdown, 'Dropdown', defaultTheme);

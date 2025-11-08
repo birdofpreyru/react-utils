@@ -25,4 +25,4 @@ const Throbber: React.FunctionComponent<PropsT> = ({ theme }) => (
   </span>
 );
 
-export default themed(Throbber, 'Throbber', defaultTheme);
+export default /* #__PURE__ */ themed(Throbber, 'Throbber', defaultTheme);

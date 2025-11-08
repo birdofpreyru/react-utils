@@ -50,4 +50,4 @@ const Checkbox = <ValueT extends boolean | 'indeterminate' = boolean>({
   );
 };
 
-export default themed(Checkbox, 'Checkbox', defaultTheme);
+export default /* #__PURE__ */ themed(Checkbox, 'Checkbox', defaultTheme);

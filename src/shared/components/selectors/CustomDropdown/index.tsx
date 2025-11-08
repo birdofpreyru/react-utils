@@ -143,4 +143,4 @@ const BaseCustomDropdown: React.FunctionComponent<
   );
 };
 
-export default themed(BaseCustomDropdown, 'CustomDropdown', defaultTheme);
+export default /* #__PURE__ */ themed(BaseCustomDropdown, 'CustomDropdown', defaultTheme);

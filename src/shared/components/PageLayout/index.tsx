@@ -48,4 +48,4 @@ const PageLayout: React.FunctionComponent<PropsT> = ({
   </div>
 );
 
-export default themed(PageLayout, 'PageLayout', baseTheme);
+export default /* #__PURE__ */ themed(PageLayout, 'PageLayout', baseTheme);

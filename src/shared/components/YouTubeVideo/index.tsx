@@ -70,4 +70,4 @@ const YouTubeVideo: React.FunctionComponent<PropsT> = ({
   );
 };
 
-export default themed(YouTubeVideo, 'YouTubeVideo', baseTheme);
+export default /* #__PURE__ */ themed(YouTubeVideo, 'YouTubeVideo', baseTheme);

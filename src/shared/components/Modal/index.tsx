@@ -171,7 +171,7 @@ const BaseModal: FunctionComponent<PropsT> = ({
   );
 };
 
-export default themed(BaseModal, 'Modal', baseTheme);
+export default /* #__PURE__ */ themed(BaseModal, 'Modal', baseTheme);
 
 /* Non-themed version of the Modal. */
 export { BaseModal };
