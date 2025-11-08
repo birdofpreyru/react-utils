@@ -1,22 +1,9 @@
----
-sidebar_class_name: deprecated
----
+# launchServer()
+[launchServer()]: /docs/api/functions/launchServer
+```tsx
+import { launchServer } from '@dr.pogodin/react-utils/server';
 
-# server()
-[server()]: /docs/api/functions/server
-:::danger Deprecated
-In the library release [v1.47.0-alpha.8] the function [server()] was renamed
-into [launchServer()], and it was also moved to the dedicated server-side package
-export `@dr.pogodin/react-utils/server`.
-:::
-
-# Original Documentation
-_Valid for the library versions prior to [v1.47.0-alpha.8]._
-
-```jsx
-import { server } from '@dr.pogodin/react-utils';
-
-server(webpackConfig, options): Promise<object>
+async launchServer(webpackConfig, options): Promise<object>
 ```
 Creates and launches a web-server for ReactJS application. With correct
 configuration it support the server-side rendering (SSR), in-memory caching of
@@ -39,16 +26,22 @@ supposed to be used during SSR, as doing so would complicate
 [server-side caching of rendered pages][staticCacheController()].
 :::
 
+:::info
+- Prior to the library version [v1.47.0-alpha.8] this function was named just
+  [server()], it was also exported from the main package export, and had a bunch
+  of constants attached to it (they are now exported separately).
+:::
+
 ## Examples
 
 ### Simple server
-```jsx title="Starting a simple ReactJS server (without SSR)."
-import { server } from '@dr.pogodin/react-utils';
+```tsx title="Starting a simple ReactJS server (without SSR)."
+import { launchServer } from '@dr.pogodin/react-utils/server';
 import webpackConfig from '/path/to/the/project/webpack.config';
 
 // This creates and launches a simple ReactJS server,
 // which serves the app defined by the provided "webpackConfig".
-server(webpackConfig);
+launchServer(webpackConfig);
 ```
 
 ## Arguments
@@ -134,16 +127,16 @@ Returns a **Promise** which resolves to an object with two fields:
 ## Definitions
 
 ### beforeExpressJsError()
-```jsx
+```tsx
 function beforeExpressJsError(server): Promise<boolean>
 ```
-The signature for [server()]'s `beforeExpressJsError` option.
+The signature for [launchServer()]'s `beforeExpressJsError` option.
 
 **Arguments**
 - `server` - **object** - The [ExpressJS] server being created.
 
 **Returns**
-- **true** or a promise that resolves to **true** &mdash; [server()] won't
+- **true** or a promise that resolves to **true** &mdash; [launchServer()] won't
   attach the default error handler to the created server instance.
 - otherwise the default error handler will be attached right after this
   callback returns.
@@ -152,7 +145,7 @@ The signature for [server()]'s `beforeExpressJsError` option.
 ```jsx
 function beforeExpressJsSetup(server: ServerT): Promise<void> | void;
 ```
-The signature for [server()]'s `beforeExpressJsSetup` option is:
+The signature for [launchServer()]'s `beforeExpressJsSetup` option is:
 
 **Arguments**
 - `server` &mdash; **object** &mdash; Created [ExpressJS] server with `logger`
@@ -166,7 +159,7 @@ import type { BeforeRenderT } from '@dr.pogodin/react-utils';
 type BeforeRenderT =
 (req: Request, config: ConfigT) => BeforeRenderResT | Promise<BeforeRenderResT>;
 ```
-The signature for [server()]'s [beforeRender] option.
+The signature for [launchServer()]'s [beforeRender] option.
 
 **Arguments**
 - `req` - **object** - Incoming [ExpressJS] HTTP reques, with some extra fields
@@ -224,7 +217,7 @@ Just a key-to-string mapping, optionally recursive.
 ```jsx
 function cspSettingsHook(defaultSettings, req): object
 ```
-The signature for [server()]'s `cspSettingsHook` option.
+The signature for [launchServer()]'s `cspSettingsHook` option.
 
 **Arguments**
 - `defaultSettings` - **object** - Default [CSP] settings (see below) that would
@@ -259,7 +252,7 @@ They match the default [helmet] settings for [CSP] with just a few changes:
 - An unique per-request nonce is added to the `scriptSrc` directive to
   whitelist auxiliary scripts injected by **react-utils**. The actual nonce
   value can be accessed by the host code as `req.nonce` field inside
-  the [server()]'s [beforeRender] hook (_e.g._ to add it
+  the [launchServer()]'s [beforeRender] hook (_e.g._ to add it
   to custom scripts injected by the host code).
 - `upgradeInsecureRequests` directive is removed in development mode
   to simplify local development without HTTPS setup.
@@ -268,14 +261,14 @@ They match the default [helmet] settings for [CSP] with just a few changes:
 ```tsx
 function onExpressJsSetup(server): Promise<void> | void;
 ```
-The signature for [server()]'s `onExpressJsSetup` option.
+The signature for [launchServer()]'s `onExpressJsSetup` option.
 
 **Arguments**
 - `server` &mdash; [ServerT] &mdash; Created server instance.
 
 **Returns**
 - Nothing
-- **Promise** &mdash; It will be awaited before [server()] continues with the setup.
+- **Promise** &mdash; It will be awaited before [launchServer()] continues with the setup.
 
 ### Script {#beforerender-script}
 Describes a custom script to inject into the rendered HTML. It is intended for
@@ -301,7 +294,7 @@ Type of the created server instance &mdash; **Express** server instance with
 ```jsx
 function staticCacheController(req): object
 ```
-The signature for [server()]'s `staticCacheController` option.
+The signature for [launchServer()]'s `staticCacheController` option.
 
 When provided this function is called for each incoming request, and server
 attempts to find in its internal cache a record stored under the `key` returned
@@ -337,7 +330,6 @@ cached, no matter the result of [staticCacheController()] call.
 [getSsrContext()]: https://dr.pogodin.studio/docs/react-global-state/docs/api/hooks/getssrcontext
 [http-status-codes]: https://www.npmjs.com/package/http-status-codes
 [Joi]: https://joi.dev/api/?v=17.4.2
-[launchServer()]: /docs/api/functions/launchServer
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [Script]: #beforerender-script
 [SCRIPT_LOCATIONS]: /docs/api/utils/server#script_locations

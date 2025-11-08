@@ -1,6 +1,6 @@
 // This is Scene for testing useCurrent() hook.
 
-import client from 'client';
+import { launchClient } from 'client';
 import Scene from './Scene';
 
-global.SCENE_INIT_PROMISE = client(Scene);
+global.SCENE_INIT_PROMISE = launchClient(Scene);

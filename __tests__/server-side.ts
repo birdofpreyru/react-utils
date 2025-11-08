@@ -1,11 +1,15 @@
 import mockdate from 'mockdate';
 
 import type * as SrcM from '../src';
+import type * as ServerM from '../src/server';
 
 mockdate.set('2020-04-19Z');
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const lib = require('../src') as typeof SrcM;
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const server = require('../src/server') as typeof ServerM;
 
 test('Export at server side', () => {
   expect(lib).toMatchSnapshot();
@@ -19,7 +23,7 @@ test('Export at server side', () => {
     getDefaultCspSettings: 2,
   };
 
-  const serverExports = Object.entries(lib.server!);
+  const serverExports = Object.entries(server);
   serverExports.sort((a, b) => {
     const oA = ORDER[a[0]];
     const oB = ORDER[b[0]];

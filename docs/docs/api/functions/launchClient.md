@@ -1,21 +1,9 @@
----
-sidebar_class_name: deprecated
----
-# client()
+# launchClient()
+[launchClient()]: /docs/api/functions/launchClient
+```tsx
+import { launchClient } from '@dr.pogodin/react-utils/client';
 
-:::danger Deprecated
-The [client()] function was renamed into [launchClient()] in the library
-[v1.47.0-alpha.8], and it was also moved to the dedicated package export
-`@dr.pogodin/react-utils/client`.
-:::
-
-# Original Documentation
-_Valid for library versions before [v1.47.0-alpha.8]._
-
-```jsx
-import { client } from '@dr.pogodin/react-utils';
-
-async client(Application, options): Promise<void>;
+async launchClient(Application, options): Promise<void>;
 ```
 Initializes and launches ReactJS `Application` at the client-side.
 
@@ -41,7 +29,10 @@ The `dontHydrate` option allows to opt for a pure client-side rendering, instead
 of the hydration.
 
 :::caution History
-- [v1.47.0](https://github.com/birdofpreyru/react-utils/releases/tag/v1.47.0) &mdash;
+- [v1.47.0-alpha.8] &mdash; This function was renamed into [launchClient()] from
+  the previous [client()] name, and it was also moved to the dedicated client-side
+  package export `@dr.pogodin/react-utils/client`.
+- [v1.47.0-alpha.4] &mdash;
   The previously synchronous [client()] function was turned into an asynchronous
   one in this version. It requires minor adjustments in the host code using it,
   in particular in E2E tests using [E2eSsrEnv] (see the updated
@@ -57,7 +48,7 @@ of the hydration.
 - `options` - **object** - Additional settings:
   - `dontHydrate` - **boolean** - By default, the app is hydrated into DOM
     element found by **react-view** ID, using React's [hydrateRoot()] functionality,
-    and  assuming [the standard SSR setup][server()] was used to generate 
+    and  assuming [the standard SSR setup][launchServer()] was used to generate 
     he initial HTML markup of the page.
 
     With `dontHydrate` flag set **true** React's [createRoot()] function is used
@@ -67,19 +58,19 @@ of the hydration.
   - `initialState` &mdash; **object** &mdash; By default the initial global
     state for the app is injected into the front-end from the server-side,
     where it can be customised during each render using the [beforeRender]
-    argument of the [server()] initialization function. This `initialState`
-    option of [client()] function provides a fallback value for the initial
+    argument of the [launchServer()] initialization function. This `initialState`
+    option of [launchClient()] function provides a fallback value for the initial
     global state on the client-side, which is intended for server-less library
     use.
 
 <!-- links -->
-[beforeRender]: /docs/api/functions/server#arguments-beforerender
+[beforeRender]: /docs/api/functions/launchServer#arguments-beforerender
 [client()]: /docs/api/functions/client
 [BrowserRouter]: https://reactrouter.com/docs/en/v6/api#browserrouter
 [GlobalStateProvider]: https://dr.pogodin.studio/docs/react-global-state/docs/api/components/globalstateprovider
-[server()]: /docs/api/functions/server
+[launchServer()]: /docs/api/functions/launchServer
 [createRoot()]: https://reactjs.org/docs/react-dom-client.html#createroot
 [hydrateRoot()]: https://reactjs.org/docs/react-dom-client.html#hydrateroot
 [E2eSsrEnv]: /docs/api/classes/E2eSsrEnv
-[launchClient()]: /docs/api/functions/launchClient
+[v1.47.0-alpha.4]: https://github.com/birdofpreyru/react-utils/releases/tag/v1.47.0-alpha.4
 [v1.47.0-alpha.8]: https://github.com/birdofpreyru/react-utils/releases/tag/v1.47.0-alpha.8

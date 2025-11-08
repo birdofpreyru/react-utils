@@ -4,7 +4,7 @@
 - [React Global State](/docs/api/utils/react-global-state) - Aliases for
   [react-global-state](https://dr.pogodin.studio/docs/react-global-state/index.html)
   lib.
-- [server](/docs/api/utils/server) - Server-side constants and functions.
+- [Server-side utilities](/docs/api/utils/server) &mdash; Server-side constants and functions.
 - [themed](/docs/api/utils/themed) - Aliases for
   [React Themes](https://dr.pogodin.studio/docs/react-themes) library.
 - [time](/docs/api/utils/time) - Date & time utils.

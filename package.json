@@ -1,5 +1,5 @@
 {
-  "version": "1.47.0-alpha.7",
+  "version": "1.47.0-alpha.8",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -14,7 +14,7 @@
     "@dr.pogodin/js-utils": "^0.1.4",
     "@dr.pogodin/react-global-state": "^0.21.1",
     "@dr.pogodin/react-helmet": "^3.0.4",
-    "@dr.pogodin/react-themes": "^1.9.3",
+    "@dr.pogodin/react-themes": "^1.9.4",
     "@jest/environment": "^30.2.0",
     "axios": "^1.13.2",
     "commander": "^14.0.2",
@@ -124,13 +124,12 @@
     "npm": ">=10.9"
   },
   "main": "./build/production/index.js",
-  "source": "./src/index.ts",
   "types": "./build/types-code/index.d.ts",
   "exports": {
     ".": {
-      "browser": "./build/web/index.js",
+      "types": "./build/types-code/index.d.ts",
+      "webpack": "./build/web/index.js",
       "node": {
-        "webpack": "./build/web/index.js",
         "development": "./build/development/index.js",
         "default": "./build/production/index.js"
       },
@@ -139,12 +138,24 @@
         "types": "./build/types-code/index.d.ts"
       }
     },
+    "./client": {
+      "types": "./build/types-code/client/index.d.ts",
+      "default": "./build/web/client/index.js"
+    },
     "./config/*": "./config/*.js",
     "./config/eslint/*": "./config/eslint/*.mjs",
     "./config/*.json": "./config/*.json",
     "./global-styles": "./build/web/styles/global.scss",
-    "./jest": "./build/production/shared/utils/jest/index.js",
+    "./jest": {
+      "types": "./build/types-code/shared/utils/jest/index.d.ts",
+      "default": "./build/production/shared/utils/jest/index.js"
+    },
     "./mixins": "./build/web/styles/mixins.scss",
+    "./server": {
+      "types": "./build/types-code/server/index.d.ts",
+      "development": "./build/development/server/index.js",
+      "default": "./build/production/server/index.js"
+    },
     "./build/development/client/init": "./build/development/client/init.js",
     "./build/production/client/init": "./build/production/client/init.js",
     "./jest-e2e-ssr-env": "./build/production/shared/utils/jest/E2eSsrEnv.js"

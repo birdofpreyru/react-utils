@@ -28,6 +28,11 @@ body {
 }
 
 :global(.deprecated) {
+  // This just hides deprecated stuff from the left-side menu... not sure, if we
+  // want to keep some links in the menu for some time, or just hide them all at
+  // the moment of deprecation?
+  display: none;
+
   color: lightgray;
   text-decoration: line-through;
 

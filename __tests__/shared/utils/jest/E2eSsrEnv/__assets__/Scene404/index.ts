@@ -1,4 +1,4 @@
-import client from 'client';
+import { launchClient } from 'client';
 import Scene from './Scene';
 
-void client(Scene);
+void launchClient(Scene);

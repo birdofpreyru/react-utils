@@ -20,7 +20,7 @@ type OptionsT = {
  * @param Application Root application component
  * @param [options={}] Optional. Additional settings.
  */
-export default async function Launch(
+export async function launchClient(
   Application: ComponentType,
   options: OptionsT = {},
 ): Promise<void> {

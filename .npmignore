@@ -14,3 +14,6 @@ dr.pogodin-react-utils-*
 
 # Config TS sources
 /config-ts-src
+
+# No need for source now?
+/src

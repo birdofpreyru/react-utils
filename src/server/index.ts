@@ -21,7 +21,7 @@ import serverFactory, {
 
 import { SCRIPT_LOCATIONS, newDefaultLogger } from './renderer';
 
-import { errors } from './utils';
+export * from './utils';
 
 export type {
   BeforeRenderResT,
@@ -30,7 +30,11 @@ export type {
   ServerSsrContext,
 } from './renderer';
 
-export { errors, getDefaultCspSettings, type ServerT };
+export {
+  getDefaultCspSettings,
+  SCRIPT_LOCATIONS,
+  type ServerT,
+};
 
 /**
  * Normalizes a port into a number, string, or false.
@@ -172,7 +176,7 @@ type OptionsT = ServerOptionsT & {
  * defaults to 1 second.
  * @return Resolves to an object with created Express and HTTP servers.
  */
-export default async function launchServer(
+export async function launchServer(
   webpackConfig: Configuration,
   options: OptionsT = {},
 ): Promise<{
@@ -237,7 +241,3 @@ export default async function launchServer(
     httpServer,
   };
 }
-
-launchServer.SCRIPT_LOCATIONS = SCRIPT_LOCATIONS;
-launchServer.getDefaultCspSettings = getDefaultCspSettings;
-launchServer.errors = errors;
