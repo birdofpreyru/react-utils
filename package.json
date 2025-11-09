@@ -1,5 +1,5 @@
 {
-  "version": "1.47.0-alpha.9",
+  "version": "1.47.0-alpha.10",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -145,7 +145,7 @@
     "./config/*": "./config/*.js",
     "./config/eslint/*": "./config/eslint/*.mjs",
     "./config/*.json": "./config/*.json",
-    "./global-styles": "./build/web/styles/global.scss",
+    "./global-styles.scss": "./build/web/styles/global.scss",
     "./jest": {
       "types": "./build/types-code/shared/utils/jest/index.d.ts",
       "default": "./build/production/shared/utils/jest/index.js"
