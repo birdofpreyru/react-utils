@@ -1,5 +1,3 @@
-import 'styles/global.scss';
-
 // It is a safeguard against multiple instances / versions of the library
 // being loaded into environment by mistake (e.g. because of different
 // packages pinning down different exact versions of the lib, thus preventing
