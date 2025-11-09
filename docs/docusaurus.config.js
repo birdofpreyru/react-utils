@@ -24,7 +24,7 @@ const EDIT_BASE = `${CODE_REPO}/edit/master/docs`;
 
 const NPM_URL = 'https://www.npmjs.com/package/@dr.pogodin/react-utils';
 
-const REACT_UTILS_STYLES = require.resolve('@dr.pogodin/react-utils/global-styles');
+const REACT_UTILS_STYLES = require.resolve('@dr.pogodin/react-utils/global-styles.scss');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
