@@ -1,5 +1,5 @@
 {
-  "version": "1.47.0-alpha.11",
+  "version": "1.47.0",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -12,7 +12,7 @@
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.13.8",
     "@dr.pogodin/csurf": "^1.16.6",
     "@dr.pogodin/js-utils": "^0.1.4",
-    "@dr.pogodin/react-global-state": "^0.21.1",
+    "@dr.pogodin/react-global-state": "^0.21.2",
     "@dr.pogodin/react-helmet": "^3.0.4",
     "@dr.pogodin/react-themes": "^1.9.4",
     "@jest/environment": "^30.2.0",
