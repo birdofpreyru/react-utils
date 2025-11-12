@@ -29,11 +29,11 @@ function injectCsrfToken(cfg: ConfigT): ConfigT {
   return cfg;
 }
 
-export function getConfig(sync: true): ConfigT;
+export function getConfig<T extends ConfigT>(sync: true): T;
 
-export function getConfig(sync?: boolean): ConfigT | Promise<ConfigT>;
+export function getConfig<T extends ConfigT>(sync?: boolean): T | Promise<T>;
 
-export function getConfig(sync?: boolean): ConfigT | Promise<ConfigT> {
+export function getConfig<T extends ConfigT>(sync?: boolean): T | Promise<T> {
   if (!config) {
     if (IS_CLIENT_SIDE) {
       const inj = clientGetInj();
@@ -55,5 +55,5 @@ export function getConfig(sync?: boolean): ConfigT | Promise<ConfigT> {
     throw Error('The config is not available yet');
   }
 
-  return config;
+  return config as T;
 }

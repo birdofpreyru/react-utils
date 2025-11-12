@@ -6,9 +6,9 @@ import { getConfig } from '@dr.pogodin/react-utils';
 type ConfigT = Record<string, unknown>;
 
 // There are two signature overloads provided:
-function getConfig(sync?: boolean): ConfigT | Promise<ConfigT>;
+function getConfig<T extends ConfigT>(sync?: boolean): T | Promise<T>;
 
-function getConfg(sync: true): ConfigT;
+function getConfig<T extends ConfigT>(sync: true): T;
 ```
 
 The [getConfig()] function returns the isomorphic (available both at the server-
@@ -58,6 +58,10 @@ module.exports = {
 Also, our library may add some extra fields to the config loaded by [node-config];
 for example it automatically adds `CSRF` token field to the configuration injected
 into the client-side code.
+
+### Generic Parameters
+- `T` &mdash; The type of returned config object, it should extends `ConfigT`,
+  defined as `Record<string, unknown>`.
 
 ### Arguments
 - `sync` &mdash; **boolean** &mdash; Optional. If `true`, the function returns
