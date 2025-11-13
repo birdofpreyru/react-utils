@@ -39,10 +39,6 @@ import type {
   JestEnvironmentConfig,
 } from '@jest/environment';
 
-import ssrFactory from 'server/renderer';
-
-import { setBuildInfo } from '../isomorphy/buildInfo';
-
 function noop() {
   // NOOP
 }
@@ -64,7 +60,7 @@ export default class E2eSsrEnv extends JsdomEnv {
    * Loads Webpack config, and exposes it to the environment via global
    * webpackConfig object.
    */
-  private loadWebpackConfig() {
+  private async loadWebpackConfig() {
     const optionsString = this.pragmas['webpack-config-options'] as string;
 
     const options = (optionsString ? JSON.parse(optionsString) : {}) as
@@ -76,11 +72,13 @@ export default class E2eSsrEnv extends JsdomEnv {
     });
 
     const factoryPath = this.pragmas['webpack-config-factory'] as string;
-    // eslint-disable-next-line import/no-dynamic-require, @typescript-eslint/no-require-imports
-    let factory = require(path.resolve(this.rootDir, factoryPath)) as
-      (((ops: Configuration) => Configuration) | {
-        default: (ops: Configuration) => Configuration;
-      });
+
+    let factory = await import(/* webpackChunkName: "not-a-valid-chunk" */
+      path.resolve(this.rootDir, factoryPath)
+    ) as (((ops: Configuration) => Configuration) | {
+      default: (ops: Configuration) => Configuration;
+    });
+
     factory = 'default' in factory ? factory.default : factory;
 
     this.global.webpackConfig = factory(options);
@@ -98,7 +96,7 @@ export default class E2eSsrEnv extends JsdomEnv {
    * @return {Promise}
    */
   async runWebpack(): Promise<void> {
-    this.loadWebpackConfig();
+    await this.loadWebpackConfig();
 
     if (!this.global.webpackConfig) throw Error('Failed to load Webpack config');
     const compiler = webpack(this.global.webpackConfig);
@@ -151,9 +149,10 @@ export default class E2eSsrEnv extends JsdomEnv {
 
     if (options.entry) {
       const p = path.resolve(this.testFolder, options.entry as string);
-      // TODO: This sure can be replaced by a dynamic import().
-      // eslint-disable-next-line import/no-dynamic-require, @typescript-eslint/no-require-imports
-      const module = require(p) as NodeJS.Module;
+      const module = await import(/* webpackChunkName: "not-a-valid-chunk" */
+        p
+      ) as NodeJS.Module;
+
       if ('cleanup' in module) cleanup = module.cleanup as () => void;
 
       const exportName = (options.entryExportName as string) || 'default';
@@ -164,6 +163,7 @@ export default class E2eSsrEnv extends JsdomEnv {
       }
     }
 
+    const { default: ssrFactory } = await import(/* webpackChunkName: "not-a-valid-chunk" */ 'server/renderer');
     const renderer = ssrFactory(this.global.webpackConfig!, options);
     let status = 200; // OK
     const markup = await new Promise<string>((done, fail) => {
@@ -256,6 +256,13 @@ export default class E2eSsrEnv extends JsdomEnv {
         break;
       default: root = process.cwd();
     }
+
+    // BEWARE: Anything imported prior to this register() call seems to be
+    // transpiled again by Babel if loaded after this call. This causes very
+    // confusing errors when testing the code dependent on some sort of contexts
+    // (because loading a module again effectively creates a new context object,
+    // which is not recognized by the code expecting another context instance).
+    // That's why below we prefer dynamic imports for some React Utils methods.
     register({
       envName: options.babelEnv as string,
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
@@ -280,6 +287,8 @@ export default class E2eSsrEnv extends JsdomEnv {
     // triggers an error on the subsequent test using the environment.
     // TODO: Look for a cleaner solution.
     require.cache = {};
+
+    const { setBuildInfo } = await import(/* webpackChunkName: "not-a-valid-chunk" */'../isomorphy/buildInfo');
     setBuildInfo(undefined, true);
 
     if (this.withSsr) await this.runSsr();
