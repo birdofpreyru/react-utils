@@ -2,6 +2,8 @@
 
 /* global document */
 
+import { SEC_MS, timer } from '@dr.pogodin/js-utils';
+
 import type { InjT } from 'utils/globalState';
 
 import { getBuildInfo } from 'utils/isomorphy/buildInfo';
@@ -29,6 +31,9 @@ export default function getInj(): InjT | Promise<InjT> {
 
         const target = window.location.href.replace(/^http:/, 'https:');
         window.location.replace(target);
+
+        await timer(3 * SEC_MS);
+        throw Error('Failed to move into secure context');
       }
 
       const { key } = getBuildInfo();
