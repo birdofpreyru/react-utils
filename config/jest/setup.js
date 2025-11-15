@@ -17,4 +17,5 @@ if (!globalThis.TextEncoder || !globalThis.TextDecoder) {
 // Polyfill of crypto.subtle in JSDOM environments.
 if (typeof window !== 'undefined') {
   window.crypto.subtle = subtle;
+  window.isSecureContext = true;
 }

@@ -20,11 +20,17 @@ export default function getInj(): InjT | Promise<InjT> {
       // preferred, but it is not supported by older environments yet.
       const data = atob(metaElement.content);
 
-      // TODO: Our current handling of this encryption / decryption follows
-      // a legacy approach, and can be enhanced by using Crypto features.
-      // Though, this is not strictly intended to be secure (it is more
-      // to obfurscate injected data, rather than really keeping them
-      // secure), thus it is fine like this for now.
+      if (!window.isSecureContext) {
+        if (window.location.protocol === 'https:') {
+          throw Error('Loaded via HTTPS, but it is not considered a secure context');
+        } else if (window.location.protocol !== 'http:') {
+          throw Error('Unexpected protocol');
+        }
+
+        const target = window.location.href.replace(/^http:/, 'https:');
+        window.location.replace(target);
+      }
+
       const { key } = getBuildInfo();
 
       const code = (x: string) => x.charCodeAt(0);
