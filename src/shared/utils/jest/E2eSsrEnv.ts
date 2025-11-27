@@ -100,7 +100,6 @@ export default class E2eSsrEnv extends JsdomEnv {
 
     if (!this.global.webpackConfig) throw Error('Failed to load Webpack config');
     const compiler = webpack(this.global.webpackConfig);
-    if (!compiler) throw Error('Failed to construct Webpack compiler');
 
     // TODO: The "as typeof compiler.outputFileSystem" piece below is
     // a workaround for the Webpack regression:

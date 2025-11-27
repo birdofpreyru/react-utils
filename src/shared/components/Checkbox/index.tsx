@@ -1,4 +1,6 @@
-import themed, { type Theme } from '@dr.pogodin/react-themes';
+import type { ReactNode } from 'react';
+
+import { type Theme, useTheme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
@@ -8,7 +10,7 @@ type PropT<ValueT> = {
   label?: React.ReactNode;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   testId?: string;
-  theme: Theme<
+  theme?: Theme<
     | 'checkbox'
     | 'container'
     | 'disabled'
@@ -24,17 +26,19 @@ const Checkbox = <ValueT extends boolean | 'indeterminate' = boolean>({
   onChange,
   testId,
   theme,
-}: PropT<ValueT>) => {
-  let containerClassName = theme.container;
-  if (disabled) containerClassName += ` ${theme.disabled}`;
+}: PropT<ValueT>): ReactNode => {
+  const composed = useTheme('Checkbox', defaultTheme, theme);
 
-  let checkboxClassName = theme.checkbox;
-  if (checked === 'indeterminate') checkboxClassName += ` ${theme.indeterminate}`;
+  let containerClassName = composed.container;
+  if (disabled) containerClassName += ` ${composed.disabled}`;
+
+  let checkboxClassName = composed.checkbox;
+  if (checked === 'indeterminate') checkboxClassName += ` ${composed.indeterminate}`;
 
   return (
     <div className={containerClassName}>
       { label === undefined
-        ? null : <div className={theme.label}>{label}</div> }
+        ? null : <div className={composed.label}>{label}</div> }
       <input
         checked={checked === undefined ? undefined : checked === true}
         className={checkboxClassName}
@@ -50,4 +54,4 @@ const Checkbox = <ValueT extends boolean | 'indeterminate' = boolean>({
   );
 };
 
-export default /* #__PURE__ */ themed(Checkbox, 'Checkbox', defaultTheme);
+export default Checkbox;

@@ -10,7 +10,7 @@ import {
   useState,
 } from 'react';
 
-import themed, { type Theme } from '@dr.pogodin/react-themes';
+import { type Theme, useTheme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './style.scss';
 
@@ -26,7 +26,7 @@ type Props = {
   onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
   placeholder?: string;
   testId?: string;
-  theme: Theme<ThemeKeyT>;
+  theme?: Theme<ThemeKeyT>;
   value?: string;
 };
 
@@ -42,6 +42,8 @@ const TextArea: FunctionComponent<Props> = ({
   theme,
   value,
 }) => {
+  const custom = useTheme('TextArea', defaultTheme, theme);
+
   const hiddenAreaRef = useRef<HTMLTextAreaElement>(null);
   const [height, setHeight] = useState<number | undefined>();
 
@@ -78,8 +80,8 @@ const TextArea: FunctionComponent<Props> = ({
     if (el) setHeight(el.scrollHeight);
   }, [localValue]);
 
-  let containerClassName = theme.container;
-  if (error) containerClassName += ` ${theme.error}`;
+  let containerClassName = custom.container;
+  if (error) containerClassName += ` ${custom.error}`;
 
   return (
     <div
@@ -88,9 +90,9 @@ const TextArea: FunctionComponent<Props> = ({
         textAreaRef.current?.focus();
       }}
     >
-      {label === undefined ? null : <div className={theme.label}>{label}</div>}
+      {label === undefined ? null : <div className={custom.label}>{label}</div>}
       <textarea
-        className={`${theme.textarea} ${theme.hidden}`}
+        className={`${custom.textarea} ${custom.hidden}`}
 
         // This text area is hidden underneath the primary one below,
         // and it is used for text measurements, to implement auto-scaling
@@ -109,7 +111,7 @@ const TextArea: FunctionComponent<Props> = ({
         value={localValue || ' '}
       />
       <textarea
-        className={theme.textarea}
+        className={custom.textarea}
         data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
         disabled={disabled}
         onBlur={onBlur}
@@ -130,10 +132,10 @@ const TextArea: FunctionComponent<Props> = ({
         value={localValue}
       />
       {error && error !== true
-        ? <div className={theme.errorMessage}>{error}</div>
+        ? <div className={custom.errorMessage}>{error}</div>
         : null}
     </div>
   );
 };
 
-export default /* #__PURE__ */ themed(TextArea, 'TextArea', defaultTheme);
+export default TextArea;

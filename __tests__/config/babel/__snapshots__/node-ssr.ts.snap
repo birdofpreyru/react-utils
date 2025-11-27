@@ -61,7 +61,7 @@ exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
       "@babel/env",
       {
         "bugfixes": true,
-        "corejs": "3.46",
+        "corejs": "3.47",
         "modules": "cjs",
         "targets": "node >= 22",
         "useBuiltIns": "usage",
@@ -145,7 +145,7 @@ exports[`"development" environment "baseAssetsOutputPath" option 2`] = `
       "@babel/env",
       {
         "bugfixes": true,
-        "corejs": "3.46",
+        "corejs": "3.47",
         "modules": "cjs",
         "targets": "node >= 22",
         "useBuiltIns": "usage",
@@ -210,7 +210,7 @@ exports[`"development" environment "noStyling" variation 1`] = `
       "@babel/env",
       {
         "bugfixes": true,
-        "corejs": "3.46",
+        "corejs": "3.47",
         "modules": "cjs",
         "targets": "node >= 22",
         "useBuiltIns": "usage",
@@ -281,7 +281,7 @@ exports[`"development" environment "noStyling" variation 2`] = `
       "@babel/env",
       {
         "bugfixes": true,
-        "corejs": "3.46",
+        "corejs": "3.47",
         "modules": "cjs",
         "targets": "node >= 22",
         "useBuiltIns": "usage",
@@ -359,7 +359,7 @@ exports[`"development" environment Default config 1`] = `
       "@babel/env",
       {
         "bugfixes": true,
-        "corejs": "3.46",
+        "corejs": "3.47",
         "modules": "cjs",
         "targets": "node >= 22",
         "useBuiltIns": "usage",
@@ -443,7 +443,7 @@ exports[`"development" environment Default config 2`] = `
       "@babel/env",
       {
         "bugfixes": true,
-        "corejs": "3.46",
+        "corejs": "3.47",
         "modules": "cjs",
         "targets": "node >= 22",
         "useBuiltIns": "usage",
@@ -521,7 +521,7 @@ exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
       "@babel/env",
       {
         "bugfixes": true,
-        "corejs": "3.46",
+        "corejs": "3.47",
         "modules": "cjs",
         "targets": "node >= 22",
         "useBuiltIns": "usage",
@@ -605,7 +605,7 @@ exports[`"production" environment "baseAssetsOutputPath" option 2`] = `
       "@babel/env",
       {
         "bugfixes": true,
-        "corejs": "3.46",
+        "corejs": "3.47",
         "modules": "cjs",
         "targets": "node >= 22",
         "useBuiltIns": "usage",
@@ -670,7 +670,7 @@ exports[`"production" environment "noStyling" variation 1`] = `
       "@babel/env",
       {
         "bugfixes": true,
-        "corejs": "3.46",
+        "corejs": "3.47",
         "modules": "cjs",
         "targets": "node >= 22",
         "useBuiltIns": "usage",
@@ -741,7 +741,7 @@ exports[`"production" environment "noStyling" variation 2`] = `
       "@babel/env",
       {
         "bugfixes": true,
-        "corejs": "3.46",
+        "corejs": "3.47",
         "modules": "cjs",
         "targets": "node >= 22",
         "useBuiltIns": "usage",
@@ -819,7 +819,7 @@ exports[`"production" environment Default config 1`] = `
       "@babel/env",
       {
         "bugfixes": true,
-        "corejs": "3.46",
+        "corejs": "3.47",
         "modules": "cjs",
         "targets": "node >= 22",
         "useBuiltIns": "usage",
@@ -903,7 +903,7 @@ exports[`"production" environment Default config 2`] = `
       "@babel/env",
       {
         "bugfixes": true,
-        "corejs": "3.46",
+        "corejs": "3.47",
         "modules": "cjs",
         "targets": "node >= 22",
         "useBuiltIns": "usage",

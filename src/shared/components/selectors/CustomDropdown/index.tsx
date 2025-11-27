@@ -1,6 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import {
+  type FunctionComponent,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
-import themed from '@dr.pogodin/react-themes';
+import { useTheme } from '@dr.pogodin/react-themes';
 
 import { type PropsT, type ValueT, optionValueName } from '../common';
 
@@ -8,8 +14,8 @@ import Options, { type ContainerPosT, type RefT, areEqual } from './Options';
 
 import defaultTheme from './theme.scss';
 
-const BaseCustomDropdown: React.FunctionComponent<
-  PropsT<React.ReactNode, (value: ValueT) => void>
+const CustomDropdown: FunctionComponent<
+  PropsT<ReactNode, (value: ValueT) => void>
 > = ({
   filter,
   label,
@@ -18,6 +24,8 @@ const BaseCustomDropdown: React.FunctionComponent<
   theme,
   value,
 }) => {
+  const custom = useTheme('CustomDropdown', defaultTheme, theme);
+
   const [active, setActive] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -95,21 +103,21 @@ const BaseCustomDropdown: React.FunctionComponent<
     }
   }
 
-  let containerClassName = theme.container;
-  if (active) containerClassName += ` ${theme.active}`;
+  let containerClassName = custom.container;
+  if (active) containerClassName += ` ${custom.active}`;
 
-  let opsContainerClass = theme.select ?? '';
+  let opsContainerClass = custom.select ?? '';
   if (upward) {
-    containerClassName += ` ${theme.upward}`;
-    opsContainerClass += ` ${theme.upward}`;
+    containerClassName += ` ${custom.upward}`;
+    opsContainerClass += ` ${custom.upward}`;
   }
 
   return (
     <div className={containerClassName}>
       {label === undefined ? null
-        : <div className={theme.label}>{label}</div>}
+        : <div className={custom.label}>{label}</div>}
       <div
-        className={theme.dropdown}
+        className={custom.dropdown}
         onClick={openList}
         onKeyDown={(e) => {
           if (e.key === 'Enter') openList(e);
@@ -119,7 +127,7 @@ const BaseCustomDropdown: React.FunctionComponent<
         tabIndex={0}
       >
         {selected}
-        <div className={theme.arrow} />
+        <div className={custom.arrow} />
       </div>
       {
         active ? (
@@ -133,7 +141,7 @@ const BaseCustomDropdown: React.FunctionComponent<
               setActive(false);
               if (onChange) onChange(newValue);
             }}
-            optionClass={theme.option ?? ''}
+            optionClass={custom.option ?? ''}
             options={options}
             ref={opsRef}
           />
@@ -143,4 +151,4 @@ const BaseCustomDropdown: React.FunctionComponent<
   );
 };
 
-export default /* #__PURE__ */ themed(BaseCustomDropdown, 'CustomDropdown', defaultTheme);
+export default CustomDropdown;

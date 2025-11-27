@@ -20,7 +20,7 @@ function mockGetInj() {
 // Mocking getInj() is necessary to successfully load utils/config in
 // the mocked client-side environment, without proper server-side data
 // injections set up.
-jest.mock<typeof GetInJM>('client/getInj', () => mockGetInj);
+jest.mock<typeof GetInJM>('../src/client/getInj', () => mockGetInj);
 
 test('Export at client side', () => {
   mockClientSide();

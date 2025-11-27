@@ -1,11 +1,13 @@
-import themed, { type Theme } from '@dr.pogodin/react-themes';
+import type { FunctionComponent } from 'react';
+
+import { type Theme, useTheme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
 type ThemeKeyT = 'bouncing' | 'circle' | 'container';
 
 type PropsT = {
-  theme: Theme<ThemeKeyT>;
+  theme?: Theme<ThemeKeyT>;
 };
 
 /**
@@ -17,12 +19,16 @@ type PropsT = {
  * @param {...any} [props....]
  * [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
  */
-const Throbber: React.FunctionComponent<PropsT> = ({ theme }) => (
-  <span className={theme.container}>
-    <span className={theme.circle} />
-    <span className={theme.circle} />
-    <span className={theme.circle} />
-  </span>
-);
+const Throbber: FunctionComponent<PropsT> = ({ theme }) => {
+  const custom = useTheme('Throbber', defaultTheme, theme);
 
-export default /* #__PURE__ */ themed(Throbber, 'Throbber', defaultTheme);
+  return (
+    <span className={custom.container}>
+      <span className={custom.circle} />
+      <span className={custom.circle} />
+      <span className={custom.circle} />
+    </span>
+  );
+};
+
+export default Throbber;

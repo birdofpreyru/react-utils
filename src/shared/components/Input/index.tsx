@@ -6,7 +6,7 @@ import {
   useState,
 } from 'react';
 
-import themed, { type Theme } from '@dr.pogodin/react-themes';
+import { type Theme, useTheme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
@@ -19,7 +19,7 @@ type PropsT = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: React.ReactNode;
   ref?: Ref<HTMLInputElement>;
   testId?: string;
-  theme: Theme<ThemeKeyT>;
+  theme?: Theme<ThemeKeyT>;
 };
 
 /**
@@ -39,21 +39,23 @@ const Input: FunctionComponent<PropsT> = ({
   theme,
   ...rest
 }) => {
+  const composed = useTheme('Input', defaultTheme, theme);
+
   // NOTE: As of now, it is only updated when "theme.focused" is defined,
   // as otherwise its value is not used.
   const [focused, setFocused] = useState(false);
 
   const localRef = useRef<HTMLInputElement>(null);
 
-  let containerClassName = theme.container;
+  let containerClassName = composed.container;
 
   // NOTE: As of now, "focused" can be true only when "theme.focused"
   // is provided.
-  if (focused /* && theme.focused */) containerClassName += ` ${theme.focused}`;
+  if (focused /* && theme.focused */) containerClassName += ` ${composed.focused}`;
 
-  if (!rest.value && theme.empty) containerClassName += ` ${theme.empty}`;
+  if (!rest.value && composed.empty) containerClassName += ` ${composed.empty}`;
 
-  if (error) containerClassName += ` ${theme.error}`;
+  if (error) containerClassName += ` ${composed.error}`;
 
   return (
     <div
@@ -66,9 +68,10 @@ const Input: FunctionComponent<PropsT> = ({
         else localRef.current?.focus();
       }}
     >
-      {label === undefined ? null : <div className={theme.label}>{label}</div>}
+      {label === undefined
+        ? null : <div className={composed.label}>{label}</div>}
       <input
-        className={theme.input}
+        className={composed.input}
         data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
         ref={ref ?? localRef}
 
@@ -76,21 +79,21 @@ const Input: FunctionComponent<PropsT> = ({
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...rest}
 
-        onBlur={theme.focused ? (e) => {
+        onBlur={composed.focused ? (e) => {
           setFocused(false);
           rest.onBlur?.(e);
         } : rest.onBlur}
-        onFocus={theme.focused ? (e) => {
+        onFocus={composed.focused ? (e) => {
           setFocused(true);
           rest.onFocus?.(e);
         } : rest.onFocus}
       />
       {error && error !== true
-        ? <div className={theme.errorMessage}>{error}</div>
+        ? <div className={composed.errorMessage}>{error}</div>
         : null}
-      {children ? <div className={theme.children}>{children}</div> : null}
+      {children ? <div className={composed.children}>{children}</div> : null}
     </div>
   );
 };
 
-export default /* #__PURE__ */ themed(Input, 'Input', defaultTheme);
+export default Input;

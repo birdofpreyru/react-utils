@@ -259,7 +259,6 @@ export default async function factory(
     );
 
     const compiler = webpack(webpackConfig);
-    if (!compiler) throw Error('Internal error');
 
     server.use(webpackDevMiddleware(compiler, {
       publicPath,

@@ -2,7 +2,8 @@
 
 import type { Theme } from '@dr.pogodin/react-themes';
 
-type ThemeKeyT = 'active'
+export type ThemeT = Theme<
+  | 'active'
   | 'arrow'
   | 'container'
   | 'dropdown'
@@ -18,7 +19,8 @@ type ThemeKeyT = 'active'
 
   // TODO: This is only valid for <CustomDropdown>, thus we need to re-factor it
   // into a separate theme spec for that component.
-  | 'upward';
+  | 'upward'
+>;
 
 export type ValueT = number | string;
 
@@ -38,7 +40,7 @@ export type PropsT<
   onChange?: OnChangeT;
   options: Readonly<OptionsT<NameT>>;
   testId?: string;
-  theme: Theme<ThemeKeyT>;
+  theme: ThemeT;
   value?: ValueT;
 };
 

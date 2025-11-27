@@ -1,10 +1,3 @@
-import themedImpl, {
-  COMPOSE,
-  PRIORITY,
-  type Theme,
-  ThemeProvider,
-} from '@dr.pogodin/react-themes';
-
 import { getConfig } from './config';
 import * as isomorphy from './isomorphy';
 import time from './time';
@@ -21,25 +14,20 @@ export {
   withRetries,
 } from '@dr.pogodin/js-utils';
 
+export {
+  COMPOSE as THEME_COMPOSE,
+  PRIORITY as THEME_PRIORITY,
+  type Theme,
+  ThemeProvider,
+  useTheme,
+} from '@dr.pogodin/react-themes';
+
 export { getSsrContext } from './globalState';
 export { default as splitComponent } from './splitComponent';
 
-type ThemedT = typeof themedImpl & {
-  COMPOSE: typeof COMPOSE;
-  PRIORITY: typeof PRIORITY;
-};
-
-const themed: ThemedT = themedImpl as ThemedT;
-
-themed.COMPOSE = COMPOSE;
-themed.PRIORITY = PRIORITY;
-
 export {
-  type Theme,
   getConfig,
   isomorphy,
-  themed,
-  ThemeProvider,
   time,
   webpack,
 };

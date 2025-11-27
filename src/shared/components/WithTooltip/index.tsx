@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 
-import themed, { type Theme } from '@dr.pogodin/react-themes';
+import { type Theme, useTheme } from '@dr.pogodin/react-themes';
 
 import Tooltip, {
   type ThemeKeysT as TooltipThemeKeysT,
@@ -21,7 +21,7 @@ type PropsT = {
   children?: ReactNode;
   placement?: PLACEMENTS;
   tip?: ReactNode;
-  theme: Theme<'wrapper' | TooltipThemeKeysT>;
+  theme?: Theme<'wrapper' | TooltipThemeKeysT>;
 };
 
 type TooltipRefT = {
@@ -54,12 +54,14 @@ type HeapT = {
  * _e.g._ a tooltip text. This will be the tooltip content.
  * @param {WithTooltipTheme} props.theme _Ad hoc_ theme.
  */
-const Wrapper: FunctionComponent<PropsT> = ({
+const WithTooltip: FunctionComponent<PropsT> = ({
   children,
   placement = PLACEMENTS.ABOVE_CURSOR,
   tip,
   theme,
 }) => {
+  const custom = useTheme('WithTooltip', defaultTheme, theme);
+
   const { current: heap } = useRef<HeapT>({
     lastCursorX: 0,
     lastCursorY: 0,
@@ -143,7 +145,7 @@ const Wrapper: FunctionComponent<PropsT> = ({
 
   return (
     <div
-      className={theme.wrapper}
+      className={custom.wrapper}
       onClick={() => {
         if (heap.timerId) {
           clearTimeout(heap.timerId);
@@ -165,7 +167,7 @@ const Wrapper: FunctionComponent<PropsT> = ({
     >
       {
         showTooltip && tip !== null
-          ? <Tooltip ref={tooltipRef} theme={theme}>{tip}</Tooltip>
+          ? <Tooltip ref={tooltipRef} theme={custom}>{tip}</Tooltip>
           : null
       }
       {children}
@@ -173,13 +175,11 @@ const Wrapper: FunctionComponent<PropsT> = ({
   );
 };
 
-const ThemedWrapper = /* #__PURE__ */ themed(Wrapper, 'WithTooltip', defaultTheme);
-
-type ExportT = typeof ThemedWrapper & {
+type ExportT = typeof WithTooltip & {
   PLACEMENTS: typeof PLACEMENTS;
 };
 
-const e: ExportT = ThemedWrapper as ExportT;
+const e: ExportT = WithTooltip as ExportT;
 
 e.PLACEMENTS = PLACEMENTS;
 

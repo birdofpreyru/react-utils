@@ -1,18 +1,19 @@
 import qs from 'qs';
+import type { FunctionComponent } from 'react';
 
-import themed, { type Theme } from '@dr.pogodin/react-themes';
+import { type Theme, useTheme } from '@dr.pogodin/react-themes';
 
 import Throbber from 'components/Throbber';
 
-import baseTheme from './base.scss';
+import defaultTheme from './base.scss';
 import throbberTheme from './throbber.scss';
 
-type ComponentThemeT = Theme<'container' | 'video'>;
+type ThemeT = Theme<'container' | 'video'>;
 
 type PropsT = {
   autoplay?: boolean;
   src: string;
-  theme: ComponentThemeT;
+  theme?: ThemeT;
   title?: string;
 };
 
@@ -31,12 +32,14 @@ type PropsT = {
  * @param [props.title] The `title` attribute to add to the player
  * IFrame.
  */
-const YouTubeVideo: React.FunctionComponent<PropsT> = ({
+const YouTubeVideo: FunctionComponent<PropsT> = ({
   autoplay,
   src,
   theme,
   title,
 }) => {
+  const custom = useTheme('YouTubeVideo', defaultTheme, theme);
+
   const srcParts = src.split('?');
   let [url] = srcParts;
   const [, queryString] = srcParts;
@@ -53,7 +56,7 @@ const YouTubeVideo: React.FunctionComponent<PropsT> = ({
   // More query parameters can be exposed via the component props.
 
   return (
-    <div className={theme.container}>
+    <div className={custom.container}>
       <Throbber theme={throbberTheme} />
       {/* TODO: I guess, we better add the sanbox, but right now I don't have
           time to carefully explore which restrictions should be lifted to allow
@@ -62,7 +65,7 @@ const YouTubeVideo: React.FunctionComponent<PropsT> = ({
       <iframe // eslint-disable-line react/iframe-missing-sandbox
         allow="autoplay"
         allowFullScreen
-        className={theme.video}
+        className={custom.video}
         src={url}
         title={title}
       />
@@ -70,4 +73,4 @@ const YouTubeVideo: React.FunctionComponent<PropsT> = ({
   );
 };
 
-export default /* #__PURE__ */ themed(YouTubeVideo, 'YouTubeVideo', baseTheme);
+export default YouTubeVideo;

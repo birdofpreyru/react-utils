@@ -20,6 +20,15 @@ exports[`Export at client side 1`] = `
   "PageLayout": [Function],
   "Semaphore": [Function],
   "Switch": [Function],
+  "THEME_COMPOSE": {
+    "DEEP": "DEEP",
+    "SOFT": "SOFT",
+    "SWAP": "SWAP",
+  },
+  "THEME_PRIORITY": {
+    "ADHOC_CONTEXT_DEFAULT": "ADHOC_CONTEXT_DEFAULT",
+    "ADHOC_DEFAULT_CONTEXT": "ADHOC_DEFAULT_CONTEXT",
+  },
   "TextArea": [Function],
   "ThemeProvider": [Function],
   "Throbber": [Function],
@@ -39,11 +48,11 @@ exports[`Export at client side 1`] = `
   },
   "newAsyncDataEnvelope": [Function],
   "splitComponent": [Function],
-  "themed": [Function],
   "time": [Function],
   "useAsyncCollection": [Function],
   "useAsyncData": [Function],
   "useGlobalState": [Function],
+  "useTheme": [Function],
   "webpack": {
     "requireWeak": [Function],
     "resolveWeak": [Function],

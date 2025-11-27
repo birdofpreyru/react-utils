@@ -48,9 +48,11 @@ export {
   Semaphore,
   splitComponent,
   type Theme,
-  themed,
+  THEME_COMPOSE,
+  THEME_PRIORITY,
   ThemeProvider,
   time,
+  useTheme,
   webpack,
   withRetries,
 } from 'utils';

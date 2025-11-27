@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
 
-import themed, { type Theme } from '@dr.pogodin/react-themes';
+import { type Theme, useTheme } from '@dr.pogodin/react-themes';
 
 import baseTheme from './base-theme.scss';
 
@@ -11,7 +11,7 @@ type PropsT = {
   children?: ReactNode;
   leftSidePanelContent?: ReactNode;
   rightSidePanelContent?: ReactNode;
-  theme: Theme<ThemeKeyT>;
+  theme?: Theme<ThemeKeyT>;
 };
 
 /**
@@ -29,23 +29,26 @@ type PropsT = {
  * @param {...any} [props....]
  * [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
  */
-const PageLayout: React.FunctionComponent<PropsT> = ({
+const PageLayout: FunctionComponent<PropsT> = ({
   children,
   leftSidePanelContent,
   rightSidePanelContent,
   theme,
-}) => (
-  <div className={theme.container}>
-    <div className={[theme.sidePanel, theme.leftSidePanel].join(' ')}>
-      {leftSidePanelContent}
+}) => {
+  const composed = useTheme('PageLayout', baseTheme, theme);
+  return (
+    <div className={composed.container}>
+      <div className={[composed.sidePanel, composed.leftSidePanel].join(' ')}>
+        {leftSidePanelContent}
+      </div>
+      <div className={composed.mainPanel}>
+        {children}
+      </div>
+      <div className={[composed.sidePanel, composed.rightSidePanel].join(' ')}>
+        {rightSidePanelContent}
+      </div>
     </div>
-    <div className={theme.mainPanel}>
-      {children}
-    </div>
-    <div className={[theme.sidePanel, theme.rightSidePanel].join(' ')}>
-      {rightSidePanelContent}
-    </div>
-  </div>
-);
+  );
+};
 
-export default /* #__PURE__ */ themed(PageLayout, 'PageLayout', baseTheme);
+export default PageLayout;

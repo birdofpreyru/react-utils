@@ -8,10 +8,12 @@ import {
 } from 'react';
 
 import { createPortal } from 'react-dom';
-import themed, { type Theme } from '@dr.pogodin/react-themes';
+import { type Theme, useTheme } from '@dr.pogodin/react-themes';
 
-import baseTheme from './base-theme.scss';
+import defaultTheme from './base-theme.scss';
 import S from './styles.scss';
+
+type ThemeT = Theme<'container' | 'overlay'>;
 
 type PropsT = {
   cancelOnScrolling?: boolean;
@@ -22,7 +24,7 @@ type PropsT = {
   style?: CSSProperties;
   testId?: string;
   testIdForOverlay?: string;
-  theme: Theme<'container' | 'overlay'>;
+  theme: ThemeT;
 
   /** @deprecated */
   containerStyle?: CSSProperties;
@@ -171,7 +173,16 @@ const BaseModal: FunctionComponent<PropsT> = ({
   );
 };
 
-export default /* #__PURE__ */ themed(BaseModal, 'Modal', baseTheme);
-
 /* Non-themed version of the Modal. */
 export { BaseModal };
+
+const Modal: FunctionComponent<
+  Omit<PropsT, 'theme'> & { theme: ThemeT | undefined }
+> = ({ theme, ...rest }) => {
+  const composed = useTheme('Modal', defaultTheme, theme);
+
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <BaseModal {...rest} theme={composed} />;
+};
+
+export default Modal;

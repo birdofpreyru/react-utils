@@ -1,8 +1,10 @@
 // Implements dropdown based on the native HTML <select> element.
 
-import themed from '@dr.pogodin/react-themes';
+import type { FunctionComponent } from 'react';
 
-import { type PropsT, optionValueName } from '../common';
+import { useTheme } from '@dr.pogodin/react-themes';
+
+import { optionValueName, type PropsT } from '../common';
 
 import defaultTheme from './theme.scss';
 
@@ -25,7 +27,7 @@ import defaultTheme from './theme.scss';
  * @param [props....]
  * [Other theming properties](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
  */
-const Dropdown: React.FunctionComponent<PropsT<string>> = ({
+const Dropdown: FunctionComponent<PropsT<string>> = ({
   filter,
   label,
   onChange,
@@ -37,12 +39,14 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
   let isValidValue = false;
   const optionElements = [];
 
+  const composed = useTheme('Dropdown', defaultTheme, theme);
+
   for (const option of options) {
     if (!filter || filter(option)) {
       const [iValue, iName] = optionValueName(option);
       isValidValue ||= iValue === value;
       optionElements.push(
-        <option className={theme.option} key={iValue} value={iValue}>
+        <option className={composed.option} key={iValue} value={iValue}>
           {iName}
         </option>,
       );
@@ -55,7 +59,7 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
   // to show it as disabled.
   const hiddenOption = isValidValue ? null : (
     <option
-      className={theme.hiddenOption}
+      className={composed.hiddenOption}
       disabled
       key="__reactUtilsHiddenOption"
       value={value}
@@ -64,14 +68,14 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
     </option>
   );
 
-  let selectClassName = theme.select;
-  if (!isValidValue) selectClassName += ` ${theme.invalid}`;
+  let selectClassName = composed.select;
+  if (!isValidValue) selectClassName += ` ${composed.invalid}`;
 
   return (
-    <div className={theme.container}>
+    <div className={composed.container}>
       { label === undefined
-        ? null : <div className={theme.label}>{label}</div> }
-      <div className={theme.dropdown}>
+        ? null : <div className={composed.label}>{label}</div> }
+      <div className={composed.dropdown}>
         <select
           className={selectClassName}
           data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
@@ -81,10 +85,10 @@ const Dropdown: React.FunctionComponent<PropsT<string>> = ({
           {hiddenOption}
           {optionElements}
         </select>
-        <div className={theme.arrow} />
+        <div className={composed.arrow} />
       </div>
     </div>
   );
 };
 
-export default /* #__PURE__ */ themed(Dropdown, 'Dropdown', defaultTheme);
+export default Dropdown;

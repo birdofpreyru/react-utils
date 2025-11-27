@@ -67,7 +67,7 @@ function newBaseConfig(options: OptionsT): TransformOptions {
     presets: [
       ['@babel/env', {
         bugfixes: true,
-        corejs: '3.46',
+        corejs: '3.47',
 
         // Leaves it to the Webpack to deal with modules.
         modules: options.modules ?? false,

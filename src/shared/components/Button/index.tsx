@@ -8,11 +8,13 @@ import type {
   ReactNode,
 } from 'react';
 
-import themed, { type Theme } from '@dr.pogodin/react-themes';
+import { type Theme, useTheme } from '@dr.pogodin/react-themes';
 
 import Link from 'components/Link';
 
 import defaultTheme from './style.scss';
+
+type ThemeT = Theme<'active' | 'button' | 'disabled'>;
 
 type PropsT = {
   active?: boolean;
@@ -29,7 +31,8 @@ type PropsT = {
   openNewTab?: boolean;
   replace?: boolean;
   testId?: string;
-  theme: Theme<'active' | 'button' | 'disabled'>;
+  theme: ThemeT;
+
   // TODO: It needs a more precise typing of the object option.
   to?: object | string;
 };
@@ -120,11 +123,13 @@ export const BaseButton: FunctionComponent<PropsT> = ({
   );
 };
 
-/**
- * Button component theme: a map of CSS
- * class names to append to button elements:
- * @prop {string} [active] to the root element of active button.
- * @prop {string} [button] to the root element of any button.
- * @prop {string} [disabled] to the root element of disabled button.
- */
-export default /* #__PURE__ */ themed(BaseButton, 'Button', defaultTheme);
+const Button: FunctionComponent<
+  Omit<PropsT, 'theme'> & { theme?: ThemeT }
+> = ({ theme, ...rest }) => {
+  const composed = useTheme('Button', defaultTheme, theme);
+
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <BaseButton {...rest} theme={composed} />;
+};
+
+export default Button;
