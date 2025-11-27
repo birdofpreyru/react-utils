@@ -21,6 +21,7 @@ type PropsT = {
   children?: ReactNode;
   disabled?: boolean;
   enforceA?: boolean;
+  keepScrollPosition?: boolean;
   onClick?: MouseEventHandler & KeyboardEventHandler;
   onKeyDown?: KeyboardEventHandler;
   onKeyUp?: KeyboardEventHandler;
@@ -42,6 +43,7 @@ export const BaseButton: FunctionComponent<PropsT> = ({
   children,
   disabled,
   enforceA,
+  keepScrollPosition,
   onClick,
   onKeyDown: onKeyDownProp,
   onKeyUp,
@@ -82,6 +84,14 @@ export const BaseButton: FunctionComponent<PropsT> = ({
         className={className}
         data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
         enforceA={enforceA}
+
+        // TODO: This was exposed as a hotifx... however, I guess we better want
+        // to check if the `to` URL contains an anchor (#), and if it does we should
+        // automatically opt to keep the position here; and enforce <a> (as
+        // react-router link does not seem to respect the hash tag either,
+        // at least not without some additional settings).
+        keepScrollPosition={keepScrollPosition}
+
         onClick={onClick}
 
         // TODO: For now, the `onKeyDown` handler is not passed to the <Link>,
