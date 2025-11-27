@@ -177,7 +177,7 @@ const BaseModal: FunctionComponent<PropsT> = ({
 export { BaseModal };
 
 const Modal: FunctionComponent<
-  Omit<PropsT, 'theme'> & { theme: ThemeT | undefined }
+  Omit<PropsT, 'theme'> & { theme?: ThemeT }
 > = ({ theme, ...rest }) => {
   const composed = useTheme('Modal', defaultTheme, theme);
 

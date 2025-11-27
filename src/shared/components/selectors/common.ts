@@ -40,7 +40,7 @@ export type PropsT<
   onChange?: OnChangeT;
   options: Readonly<OptionsT<NameT>>;
   testId?: string;
-  theme: ThemeT;
+  theme?: ThemeT;
   value?: ValueT;
 };
 
