@@ -33,6 +33,12 @@ cases.
 - `children` &mdash; **ReactNode** &mdash; Component children, if any, are rendered as
   the button's content.
 - `disabled` &mdash; **boolean** &mdash; Disables the button.
+
+- `keepScrollPosition` &mdash; **boolean** &mdash; Optional. When _true_, and
+  the button is rendered as the [Link] component, this flag is passed down to
+  the [Link], opting out of the page auto-scroll to the top when the button is
+  clicked.
+
 - `enforceA` &mdash; **boolean** &mdash; If the button is rendered as [Link] this flag
   enforces it to be rendered as a simple `<a>` element (external link) rather
   than an internal link. See [Link] documentation for details.
@@ -85,8 +91,6 @@ cases.
 - `to` &mdash; **object | string** &mdash; If specified, the button is rendered as [Link]
   (if not disabled), and beside the visual appearance as a button it acts as
   a link pointing the target URL.
-- Accepts other
-  [props of themed components](https://dr.pogodin.studio/docs/react-themes/docs/api/components#themedcomponent).
 
 ## ButtonTheme
 

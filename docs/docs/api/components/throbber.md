@@ -15,15 +15,18 @@ which can be further styled to a certain degree using [React Themes] mechanics.
 
 ## Properties
 
-- `theme` - [ThrobberTheme] - _Ad hoc_ [React Themes] theme.
-- Other [props of a themed component](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties).
+- `theme` &mdash; [ThrobberTheme] &mdash; _Ad hoc_ [React Themes] theme.
+
+- `themePriority` &mdash; [PRIORITY] &mdash; Optional. Allows to override
+  themes priority for the component. Defaults `PRIORITY.ADHOC_CONTEXT_DEFAULT`.
 
 ## ThrobberTheme
 See [React Themes] docs to learn how themed components work and how they can be
 themed. The valid theme keys for [Throbber] are:
-- `container` - The root component element.
-- `circle` - Applied to each of the bouncing circles.
+- `container` &mdash; The root component element.
+- `circle` &mdash; Applied to each of the bouncing circles.
 
+[PRIORITY]: https://dr.pogodin.studio/docs/react-themes/docs/api/enums/priority
 [React Themes]: https://dr.pogodin.studio/docs/react-themes
 [Throbber]: /docs/api/components/throbber
 [ThrobberTheme]: #throbbertheme
