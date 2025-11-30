@@ -1,5 +1,5 @@
 {
-  "version": "1.48.1",
+  "version": "1.48.2",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -37,7 +37,7 @@
     "react-router": "^7.9.6",
     "request-ip": "^3.3.0",
     "rimraf": "^6.1.2",
-    "serialize-javascript": "^7.0.0",
+    "serialize-javascript": "^7.0.1",
     "serve-favicon": "^2.5.1",
     "source-map-support": "^0.5.21",
     "uuid": "^13.0.0",
@@ -105,7 +105,7 @@
     "sass-loader": "^16.0.6",
     "sitemap": "^9.0.0",
     "source-map-loader": "^5.0.0",
-    "stylelint": "^16.26.0",
+    "stylelint": "^16.26.1",
     "stylelint-config-standard-scss": "^16.0.0",
     "supertest": "^7.1.4",
     "tsc-alias": "1.8.16",
