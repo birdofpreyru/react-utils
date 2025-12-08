@@ -17,14 +17,14 @@
     "@docusaurus/core": "^3.9.2",
     "@docusaurus/preset-classic": "^3.9.2",
     "@docusaurus/theme-common": "^3.9.2",
-    "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.48.3.tgz",
+    "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.48.4.tgz",
     "@mdx-js/react": "^3.1.1",
     "file-loader": "^6.2.0",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "sass": "^1.94.2",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "sass": "^1.95.0",
     "url-loader": "^4.1.1"
   },
   "browserslist": {
