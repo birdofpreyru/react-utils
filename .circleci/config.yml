@@ -26,7 +26,7 @@ jobs:
       *install-build-test
   test-node-24: # Active LTS, EOL 2028.04.30
     docker:
-      - image: cimg/node:24.11
+      - image: cimg/node:24.12
     steps:
       - when:
           condition: true
