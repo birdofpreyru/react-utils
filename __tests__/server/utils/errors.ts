@@ -2,7 +2,7 @@ import { fail } from 'server/utils/errors';
 
 test('fail()', () => {
   let error: unknown;
-  let never: unknown;
+  let never: Error | undefined;
   try {
     never = fail('Mock error', 418);
   } catch (e: unknown) {
