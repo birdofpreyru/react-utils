@@ -79,10 +79,16 @@ launchServer(webpackConfig);
     to enable support of signed cookies. When not provided signed cookies are not
     supported, and attempt to use them will cause a server error.
 
-  - `noCsp` - **boolean** - Disables [CSP] altogether.
   - [cspSettingsHook](#cspsettingshook) - **callback** allowing to customize
     [CSP] headers managed by the [helmet]'s `contentSecurityPolicy`
     middleware on per-request basis.
+
+  - [csrfIgnoreRequest][csrfIgnoreRequest()] &mdash; Callback that allows
+    to disable CSRF protection for selected requests, based on a custom
+    criteria.
+
+  - `noCsp` - **boolean** - Disables [CSP] altogether.
+
   - `defaultLoggerLogLevel` - **string** - Log level for the default logger,
     which is created and used if no `logger` option is provided. Defaults to
     `info`.
@@ -256,6 +262,21 @@ They match the default [helmet] settings for [CSP] with just a few changes:
   to custom scripts injected by the host code).
 - `upgradeInsecureRequests` directive is removed in development mode
   to simplify local development without HTTPS setup.
+
+### csrfIgnoreRequest()
+[csrfIgnoreRequest()]: #csrfignorerequest
+```ts
+function csrfIgnoreRequest(req: Request): boolean;
+```
+
+Callback that allows to disable CSRF protection for selected requests, based on
+a custom criteria.
+
+**Arguments**
+- `req` &mdash; **Express.Request** &mdash; Incoming [ExpressJS] request.
+
+Returns **boolean** value; if it is _true_ the CSRF token check will be skipped
+for this request.
 
 ### onExpressJsSetup()
 ```tsx

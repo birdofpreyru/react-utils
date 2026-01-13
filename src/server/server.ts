@@ -115,6 +115,7 @@ export type OptionsT = RendererOptionsT & {
     defaultOptions: CspOptionsT,
     req: Request,
   ) => CspOptionsT;
+  csrfIgnoreRequest?: (req: Request) => boolean;
   devMode?: boolean;
   httpsRedirect?: boolean;
   onExpressJsSetup?: (server: ServerT) => Promise<void> | void;
@@ -205,7 +206,10 @@ export default async function factory(
   server.use(cookieParser(options.cookieSignatureSecret));
   server.use(requestIp.mw());
 
-  server.use(csrf({ cookie: true }));
+  server.use(csrf({
+    cookie: true,
+    ignoreRequest: options.csrfIgnoreRequest,
+  }));
 
   loggerMiddleware.token(
     'ip',
