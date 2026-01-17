@@ -6,7 +6,7 @@ import {
   useState,
 } from 'react';
 
-import { type Theme, useTheme } from '@dr.pogodin/react-themes';
+import { type COMPOSE, type Theme, useTheme } from '@dr.pogodin/react-themes';
 
 import defaultTheme from './theme.scss';
 
@@ -15,6 +15,7 @@ type ThemeKeyT = 'children' | 'container' | 'empty' | 'error' | 'errorMessage'
 
 type PropsT = React.InputHTMLAttributes<HTMLInputElement> & {
   children?: ReactNode;
+  composeAdhocTheme?: COMPOSE;
   error?: ReactNode;
   label?: React.ReactNode;
   ref?: Ref<HTMLInputElement>;
@@ -32,6 +33,7 @@ type PropsT = React.InputHTMLAttributes<HTMLInputElement> & {
  */
 const Input: FunctionComponent<PropsT> = ({
   children,
+  composeAdhocTheme,
   error,
   label,
   ref,
@@ -39,7 +41,9 @@ const Input: FunctionComponent<PropsT> = ({
   theme,
   ...rest
 }) => {
-  const composed = useTheme('Input', defaultTheme, theme);
+  const composed = useTheme('Input', defaultTheme, theme, {
+    composeAdhocTheme,
+  });
 
   // NOTE: As of now, it is only updated when "theme.focused" is defined,
   // as otherwise its value is not used.

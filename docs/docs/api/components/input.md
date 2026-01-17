@@ -11,6 +11,9 @@ and themed using [React Themes] library.
   wrapped into a `<div>` with `children` theme key, within the root element of
   [Input], but after all its other children.
 
+- `composeAdhocTheme` &mdash; [COMPOSE] &mdash; Optional. Changes the composition
+  mode of _ad hoc_ theme.
+
 - `error` &mdash; **ReactNode** &mdash; Optional. If a truthy value
   the `error` theme key is added to the root element of the component,
   and unless the value is _true_ it is also rendered right after
@@ -58,6 +61,7 @@ of [Input] component are:
 - `input` &mdash; The underlying HTML `<input>` element.
 - `label` &mdash; The label element.
 
+[COMPOSE]: https://dr.pogodin.studio/docs/react-themes/docs/api/enums/compose
 [getByTestId()]: https://testing-library.com/docs/queries/bytestid
 [Input]: #
 [InputTheme]: #inputtheme
