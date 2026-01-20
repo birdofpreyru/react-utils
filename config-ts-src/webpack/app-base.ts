@@ -196,7 +196,9 @@ export default function configFactory(ops: OptionsT): Configuration {
       (string[] | (() => string[]));
     if (isFunction(source)) source = source();
     const sm = new SitemapStream();
-    source.forEach((item: string) => sm.write(item));
+    source.forEach((item: string) => {
+      sm.write(item);
+    });
     sm.end();
     void streamToPromise(sm).then((sitemap) => {
       const outUrl = path.resolve(o.context, o.outputPath!);

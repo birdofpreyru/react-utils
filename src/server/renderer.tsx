@@ -554,7 +554,11 @@ export default function factory(
         ...ssrContext.chunks,
       ].forEach((chunk) => {
         const assets = chunkGroups[chunk];
-        if (assets) assets.forEach((asset) => chunkSet.add(asset));
+        if (assets) {
+          assets.forEach((asset) => {
+            chunkSet.add(asset);
+          });
+        }
       });
 
       let styleChunkString = '';

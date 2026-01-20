@@ -43,8 +43,7 @@ it('registers service worker with the correct URL', async () => {
   });
 
   const { log } = console;
-  // eslint-disable-next-line jest/prefer-spy-on
-  console.log = jest.fn();
+  console.log = () => undefined;
 
   await act(async () => {
     // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-call

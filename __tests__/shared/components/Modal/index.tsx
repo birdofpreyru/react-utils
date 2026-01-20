@@ -10,7 +10,7 @@ import Modal from 'components/Modal';
 import { type MountedSceneT, mount } from 'utils/jest';
 
 let scene: MountedSceneT | null;
-let onCancel: () => void;
+let onCancel: jest.Mock;
 
 const user = userEvent.setup();
 
@@ -20,7 +20,9 @@ beforeEach(() => {
     <div data-id="Modal Code Parent">
       <div data-id="Modal Code Sibling" />
       <Modal
-        onCancel={onCancel}
+        onCancel={() => {
+          onCancel();
+        }}
         theme={{
           ad: 'ad',
           container: 'container',

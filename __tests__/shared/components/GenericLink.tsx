@@ -106,7 +106,9 @@ test('onClick(..) callback in custom <Link>', async () => {
   const doc = mount((
     <GenericLink
       className="LINK"
-      onClick={clickHandler}
+      onClick={() => {
+        clickHandler();
+      }}
       routerLinkType={TestLink as unknown as LinkT}
       to="SOME/TEST/URL"
     >
