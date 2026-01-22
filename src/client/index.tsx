@@ -3,10 +3,10 @@
 
 import type { ComponentType } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
-import { HelmetProvider } from '@dr.pogodin/react-helmet';
 import { BrowserRouter } from 'react-router';
 
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
+import { HelmetProvider } from '@dr.pogodin/react-helmet';
 
 import getInj from './getInj';
 

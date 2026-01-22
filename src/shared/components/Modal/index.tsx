@@ -7,8 +7,8 @@ import {
   useRef,
 } from 'react';
 
-import { createPortal } from 'react-dom';
 import { type Theme, useTheme } from '@dr.pogodin/react-themes';
+import { createPortal } from 'react-dom';
 
 import defaultTheme from './base-theme.scss';
 import S from './styles.scss';

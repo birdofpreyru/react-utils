@@ -8,7 +8,7 @@ export enum MODES {
 }
 
 const Component = () => {
-  const { title, description } = use(MetaTags.Context);
+  const { description, title } = use(MetaTags.Context);
   return (
     <div>
       <p>A dummy internal component.</p>

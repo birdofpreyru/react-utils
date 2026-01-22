@@ -22,7 +22,7 @@ type PropsT = {
   disabled?: boolean;
   enforceA?: boolean;
   keepScrollPosition?: boolean;
-  onClick?: MouseEventHandler & KeyboardEventHandler;
+  onClick?: KeyboardEventHandler & MouseEventHandler;
   onKeyDown?: KeyboardEventHandler;
   onKeyUp?: KeyboardEventHandler;
   onMouseDown?: MouseEventHandler;

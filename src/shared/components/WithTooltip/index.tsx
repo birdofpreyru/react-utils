@@ -11,8 +11,8 @@ import {
 import { type Theme, useTheme } from '@dr.pogodin/react-themes';
 
 import Tooltip, {
-  type ThemeKeysT as TooltipThemeKeysT,
   PLACEMENTS,
+  type ThemeKeysT as TooltipThemeKeysT,
 } from './Tooltip';
 
 import defaultTheme from './default-theme.scss';
@@ -20,8 +20,8 @@ import defaultTheme from './default-theme.scss';
 type PropsT = {
   children?: ReactNode;
   placement?: PLACEMENTS;
-  tip?: ReactNode;
   theme?: Theme<'wrapper' | TooltipThemeKeysT>;
+  tip?: ReactNode;
 };
 
 type TooltipRefT = {
@@ -36,8 +36,8 @@ type TooltipRefT = {
 type HeapT = {
   lastCursorX: number;
   lastCursorY: number;
-  triggeredByTouch: boolean;
   timerId?: NodeJS.Timeout;
+  triggeredByTouch: boolean;
 };
 
 /**
@@ -57,8 +57,8 @@ type HeapT = {
 const WithTooltip: FunctionComponent<PropsT> = ({
   children,
   placement = PLACEMENTS.ABOVE_CURSOR,
-  tip,
   theme,
+  tip,
 }) => {
   const custom = useTheme('WithTooltip', defaultTheme, theme);
 
@@ -175,9 +175,9 @@ const WithTooltip: FunctionComponent<PropsT> = ({
   );
 };
 
-type ExportT = typeof WithTooltip & {
+type ExportT = {
   PLACEMENTS: typeof PLACEMENTS;
-};
+} & typeof WithTooltip;
 
 const e: ExportT = WithTooltip as ExportT;
 

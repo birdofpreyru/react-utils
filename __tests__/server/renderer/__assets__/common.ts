@@ -6,8 +6,8 @@ import type { Configuration } from 'webpack';
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 interface ResponseI extends Response {
   csrfToken: () => string;
-  nonce: string;
   info: string;
+  nonce: string;
   url: string;
 }
 

@@ -30,7 +30,7 @@ export function requireWeak<T extends object>(
   // TODO: For now `basePath` can be provided directly as a string here,
   // for backward compatibility. Deprecate it in future, if any other
   // breaking changes are done for requireWeak().
-  basePathOrOptions?: string | RequireWeakOptionsT,
+  basePathOrOptions?: RequireWeakOptionsT | string,
 ): RequireWeakResT<T> | null {
   if (IS_CLIENT_SIDE) return null;
 

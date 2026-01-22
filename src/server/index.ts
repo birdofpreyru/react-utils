@@ -31,9 +31,9 @@ export type {
 } from './renderer';
 
 export {
-  getDefaultCspSettings,
   SCRIPT_LOCATIONS,
   type ServerT,
+  getDefaultCspSettings,
 };
 
 /**

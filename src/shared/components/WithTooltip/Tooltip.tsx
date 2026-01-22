@@ -40,12 +40,12 @@ const ARROW_STYLE_UP = [
 ].join(';');
 
 type ComponentsT = {
-  container: HTMLDivElement;
   arrow: HTMLDivElement;
+  container: HTMLDivElement;
   content: HTMLDivElement;
 };
 
-export type ThemeKeysT = 'appearance' | 'arrow' | 'content' | 'container';
+export type ThemeKeysT = 'appearance' | 'arrow' | 'container' | 'content';
 
 type TooltipThemeT = Theme<ThemeKeysT>;
 

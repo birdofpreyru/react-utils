@@ -2,7 +2,7 @@ import { type NavLinkProps, NavLink as RrNavLink } from 'react-router';
 
 import GenericLink, { type PropsT as GenericLinkPropsT } from './GenericLink';
 
-type PropsT = Omit<GenericLinkPropsT, 'routerLinkType'> & NavLinkProps;
+type PropsT = NavLinkProps & Omit<GenericLinkPropsT, 'routerLinkType'>;
 
 const NavLink: React.FunctionComponent<PropsT>
   = (props) => (

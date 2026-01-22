@@ -4,7 +4,7 @@ import type { FunctionComponent } from 'react';
 
 import { useTheme } from '@dr.pogodin/react-themes';
 
-import { optionValueName, type PropsT } from '../common';
+import { type PropsT, optionValueName } from '../common';
 
 import defaultTheme from './theme.scss';
 

@@ -1,6 +1,6 @@
 import { serialize } from 'cookie';
-import { useEffect } from 'react';
 import dayjs from 'dayjs';
+import { useEffect } from 'react';
 
 import {
   DAY_MS,

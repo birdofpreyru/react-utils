@@ -35,10 +35,10 @@ type PropsT = {
   containerClass: string;
   containerStyle?: ContainerPosT;
   filter?: (item: OptionT<ReactNode> | ValueT) => boolean;
-  optionClass: string;
-  options: Readonly<OptionsT<ReactNode>>;
   onCancel: () => void;
   onChange: (value: ValueT) => void;
+  optionClass: string;
+  options: Readonly<OptionsT<ReactNode>>;
   ref?: RefObject<RefT | null>;
 };
 

@@ -4,13 +4,13 @@ import time from './time';
 import * as webpack from './webpack';
 
 export {
-  assertEmptyObject,
-  type Listener,
-  type ObjectKey,
   Barrier,
   Cached,
   Emitter,
+  type Listener,
+  type ObjectKey,
   Semaphore,
+  assertEmptyObject,
   withRetries,
 } from '@dr.pogodin/js-utils';
 

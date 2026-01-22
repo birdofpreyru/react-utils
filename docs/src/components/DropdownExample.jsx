@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { CustomDropdown, Dropdown } from '@dr.pogodin/react-utils';
 
 const SAMPLE_OPTIONS = [

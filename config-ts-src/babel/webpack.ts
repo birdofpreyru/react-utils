@@ -39,7 +39,7 @@ export type OptionsT = {
   modules?: ModuleT;
   noRR?: boolean;
   noStyling?: boolean;
-  targets?: string | string[] | Record<string, string>;
+  targets?: Record<string, string> | string | string[];
 
   // Set `true` to add into config pieces necessary for TypeScript processing.
   typescript?: boolean;
@@ -67,7 +67,7 @@ function newBaseConfig(options: OptionsT): TransformOptions {
     presets: [
       ['@babel/env', {
         bugfixes: true,
-        corejs: '3.47',
+        corejs: '3.48',
 
         // Leaves it to the Webpack to deal with modules.
         modules: options.modules ?? false,

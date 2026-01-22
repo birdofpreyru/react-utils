@@ -6,8 +6,8 @@
  */
 
 import type { ReactNode } from 'react';
-import { Route, Routes } from 'react-router';
 import { type ForceT, useGlobalState } from '@dr.pogodin/react-global-state';
+import { Route, Routes } from 'react-router';
 
 import './style.scss';
 

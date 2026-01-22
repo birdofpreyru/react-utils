@@ -18,10 +18,10 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import {
   type Configuration,
-  type RuleSetRule,
-  type WebpackPluginInstance,
   DefinePlugin,
   ProgressPlugin,
+  type RuleSetRule,
+  type WebpackPluginInstance,
 } from 'webpack';
 
 import WorkboxPlugin from 'workbox-webpack-plugin';
@@ -52,7 +52,7 @@ export type OptionsT = {
   dontUseProgressPlugin?: boolean;
   entry: string | string[];
   fs?: typeof nodeFs;
-  keepBuildInfo?: boolean | BuildInfoT;
+  keepBuildInfo?: BuildInfoT | boolean;
   mode: 'development' | 'none' | 'production';
   outputPath?: string;
   publicPath?: string;
@@ -193,7 +193,7 @@ export default function configFactory(ops: OptionsT): Configuration {
 
     // eslint-disable-next-line import/no-dynamic-require, @typescript-eslint/no-require-imports
     let source = require(sitemapUrl) as
-      (string[] | (() => string[]));
+      ((() => string[]) | string[]);
     if (isFunction(source)) source = source();
     const sm = new SitemapStream();
     source.forEach((item: string) => {

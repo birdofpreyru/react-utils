@@ -4,8 +4,8 @@ import { Checkbox } from '@dr.pogodin/react-utils';
 
 const CheckboxExample: FunctionComponent = () => {
   const [checkbox2, setCheckbox2] = useState<boolean>(true);
-  const [checkbox3a, setCheckbox3a] = useState<boolean | 'indeterminate'>('indeterminate');
-  const [checkbox3b, setCheckbox3b] = useState<boolean | 'indeterminate'>('indeterminate');
+  const [checkbox3a, setCheckbox3a] = useState<'indeterminate' | boolean>('indeterminate');
+  const [checkbox3b, setCheckbox3b] = useState<'indeterminate' | boolean>('indeterminate');
   return (
     <>
       <Checkbox
@@ -20,11 +20,11 @@ const CheckboxExample: FunctionComponent = () => {
         label="Managed three-states checkbox"
         onChange={() => {
           switch (checkbox3a) {
-            case true:
-              setCheckbox3a(false);
-              break;
             case 'indeterminate':
               setCheckbox3a(true);
+              break;
+            case true:
+              setCheckbox3a(false);
               break;
             case false:
             default:
@@ -38,11 +38,11 @@ const CheckboxExample: FunctionComponent = () => {
         label="Managed three-states checkbox"
         onChange={() => {
           switch (checkbox3b) {
-            case true:
-              setCheckbox3b(false);
-              break;
             case 'indeterminate':
               setCheckbox3b(true);
+              break;
+            case true:
+              setCheckbox3b(false);
               break;
             case false:
             default:

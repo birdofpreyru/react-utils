@@ -10,7 +10,7 @@ import { type LinkProps, Link as RrLink } from 'react-router';
 
 import GenericLink, { type PropsT as GenericLinkPropsT } from './GenericLink';
 
-type PropsT = Omit<GenericLinkPropsT, 'routerLinkType'> & LinkProps;
+type PropsT = LinkProps & Omit<GenericLinkPropsT, 'routerLinkType'>;
 
 const Link: React.FunctionComponent<PropsT>
   = (props) => (

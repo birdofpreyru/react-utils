@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { Switch } from '@dr.pogodin/react-utils';
 
 const OPTIONS = [{

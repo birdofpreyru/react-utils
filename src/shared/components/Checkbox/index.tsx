@@ -19,7 +19,7 @@ type PropT<ValueT> = {
   >;
 };
 
-const Checkbox = <ValueT extends boolean | 'indeterminate' = boolean>({
+const Checkbox = <ValueT extends 'indeterminate' | boolean = boolean>({
   checked,
   disabled,
   label,

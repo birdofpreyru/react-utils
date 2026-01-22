@@ -14,8 +14,8 @@ import type { ComponentType } from 'react';
 import type { Configuration, Stats } from 'webpack';
 import winston from 'winston';
 
-import { GlobalStateProvider, SsrContext } from '@dr.pogodin/react-global-state';
 import { timer } from '@dr.pogodin/js-utils';
+import { GlobalStateProvider, SsrContext } from '@dr.pogodin/react-global-state';
 
 import {
   cloneDeep,
@@ -26,8 +26,8 @@ import {
 
 import config from 'config';
 
-import { prerenderToNodeStream } from 'react-dom/static';
 import { type HelmetDataContext, HelmetProvider } from '@dr.pogodin/react-helmet';
+import { prerenderToNodeStream } from 'react-dom/static';
 import { StaticRouter } from 'react-router';
 import serializeJs from 'serialize-javascript';
 import { type BuildInfoT, setBuildInfo } from 'utils/isomorphy/buildInfo';
@@ -180,7 +180,7 @@ export function isBrotliAcceptable(req: Request): boolean {
  *  HEAD_OPEN: string[];
  * }}
  */
-function groupExtraScripts(scripts: Array<string | ScriptT> = []) {
+function groupExtraScripts(scripts: Array<ScriptT | string> = []) {
   const res = {
     [SCRIPT_LOCATIONS.BODY_OPEN]: '',
     [SCRIPT_LOCATIONS.DEFAULT]: '',
@@ -216,8 +216,8 @@ export function newDefaultLogger({
         ({
           level,
           message,
-          timestamp,
           stack,
+          timestamp,
           ...rest
         }) => {
           let res = `${level}\t(at ${timestamp as string}):\t${message as string}`;
@@ -263,9 +263,9 @@ export type OptionsT = {
   logger?: LoggerI;
   maxSsrRounds?: number;
   noCsp?: boolean;
-  staticCacheSize?: number;
   ssrTimeout?: number;
   staticCacheController?: (req: Request) => CacheRefT | null | undefined;
+  staticCacheSize?: number;
 };
 
 /**
@@ -321,7 +321,7 @@ export default function factory(
   setBuildInfo(buildInfo);
 
   // publicPath from webpack.output has a trailing slash at the end.
-  const { publicPath, path: outputPath } = webpackConfig.output!;
+  const { path: outputPath, publicPath } = webpackConfig.output!;
 
   const manifestLink = fs.existsSync(`${outputPath}/manifest.json`)
     ? `<link rel="manifest" href="${publicPath as string}manifest.json">` : '';

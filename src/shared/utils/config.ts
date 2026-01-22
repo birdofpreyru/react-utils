@@ -31,9 +31,9 @@ function injectCsrfToken(cfg: ConfigT): ConfigT {
 
 export function getConfig<T extends ConfigT>(sync: true): T;
 
-export function getConfig<T extends ConfigT>(sync?: boolean): T | Promise<T>;
+export function getConfig<T extends ConfigT>(sync?: boolean): Promise<T> | T;
 
-export function getConfig<T extends ConfigT>(sync?: boolean): T | Promise<T> {
+export function getConfig<T extends ConfigT>(sync?: boolean): Promise<T> | T {
   if (!config) {
     if (IS_CLIENT_SIDE) {
       const inj = clientGetInj();

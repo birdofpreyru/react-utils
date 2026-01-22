@@ -43,11 +43,11 @@ type PropsT = {
 const Application: React.FunctionComponent<PropsT> = ({ mode }) => {
   let component;
   switch (mode) {
-    case MODES.BASIC_WITH_OVERRIDE:
-      component = <Component />;
-      break;
     case MODES.ALL_TAGS_WITH_OVERRIDE:
       component = <AllTagsComponent />;
+      break;
+    case MODES.BASIC_WITH_OVERRIDE:
+      component = <Component />;
       break;
     case MODES.BASIC_NO_OVERRIDE:
     default: component = null;

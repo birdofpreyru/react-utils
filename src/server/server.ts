@@ -9,7 +9,6 @@ import { cloneDeep, mapValues, pick } from 'lodash-es';
 
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
-import csrf from '@dr.pogodin/csurf';
 
 import express, {
   type Express,
@@ -18,13 +17,15 @@ import express, {
   type Response,
 } from 'express';
 
-import favicon from 'serve-favicon';
 import helmet, { type HelmetOptions } from 'helmet';
 import loggerMiddleware from 'morgan';
 import requestIp from 'request-ip';
+import favicon from 'serve-favicon';
 import { v4 as uuid } from 'uuid';
 
 import type { Configuration } from 'webpack';
+
+import csrf from '@dr.pogodin/csurf';
 
 import rendererFactory, {
   type LoggerI,
@@ -107,7 +108,7 @@ export type ServerT = Express & {
 
 export type OptionsT = RendererOptionsT & {
   beforeExpressJsError?:
-  (server: ServerT) => boolean | Promise<boolean>;
+  (server: ServerT) => Promise<boolean> | boolean;
 
   beforeExpressJsSetup?: (server: ServerT) => Promise<void> | void;
   cookieSignatureSecret?: string;

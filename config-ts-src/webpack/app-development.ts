@@ -13,9 +13,9 @@ import { merge } from 'webpack-merge';
 import baseFactory, { type OptionsT as BaseOptionsT } from './app-base';
 
 type OptionsT = BaseOptionsT & {
+  cssExtractionOptions?: MiniCssExtractPlugin.PluginOptions;
   dontUseHmr?: boolean;
   dontUseReactGlobalStateDebugging?: boolean;
-  cssExtractionOptions?: MiniCssExtractPlugin.PluginOptions;
 };
 
 /**

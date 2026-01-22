@@ -1,7 +1,7 @@
 /** @jest-environment jsdom */
 
-import { mockClientSide } from 'utils/jest';
 import { setBuildInfo } from 'utils/isomorphy/buildInfo';
+import { mockClientSide } from 'utils/jest';
 
 import type * as IT from 'utils/isomorphy';
 

@@ -8,8 +8,8 @@ import type {
 
 import getWebpackBabelConfig, {
   type BabelCompilerI,
-  type OptionsT as WebpackConfigOptionsT,
   ENVIRONMENTS,
+  type OptionsT as WebpackConfigOptionsT,
 } from './webpack';
 
 // TODO: Double-check why .transformFunction is not present in TransformOptions?
