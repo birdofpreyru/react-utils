@@ -5,10 +5,10 @@ import { clone, defaults } from 'lodash-es';
 
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
-
 import webpack, { type Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
+
+import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 import baseFactory, { type OptionsT as BaseOptionsT } from './app-base';
 

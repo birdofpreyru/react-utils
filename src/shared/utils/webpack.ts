@@ -1,6 +1,6 @@
 import type PathNS from 'node:path';
 
-// eslint-disable-next-line import/enforce-node-protocol-usage
+// eslint-disable-next-line import/enforce-node-protocol-usage, perfectionist/sort-imports
 import { createRequire } from 'module';
 
 import { IS_CLIENT_SIDE, IS_SERVER_SIDE } from './isomorphy';

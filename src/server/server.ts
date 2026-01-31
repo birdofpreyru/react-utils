@@ -5,8 +5,6 @@
 import { sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import { cloneDeep, mapValues, pick } from 'lodash-es';
-
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 
@@ -18,6 +16,7 @@ import express, {
 } from 'express';
 
 import helmet, { type HelmetOptions } from 'helmet';
+import { cloneDeep, mapValues, pick } from 'lodash-es';
 import loggerMiddleware from 'morgan';
 import requestIp from 'request-ip';
 import favicon from 'serve-favicon';

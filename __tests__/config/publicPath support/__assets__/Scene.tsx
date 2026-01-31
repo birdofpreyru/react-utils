@@ -1,4 +1,5 @@
 import EmptyPng from './empty.png';
+
 import './style.scss';
 
 const Scene: React.FunctionComponent = () => (

@@ -1,4 +1,5 @@
 import type { FunctionComponent } from 'react';
+
 import { getSsrContext } from 'utils/globalState';
 
 const Scene: FunctionComponent = () => {

@@ -1,9 +1,9 @@
 import type { NextFunction, Request, Response } from 'express';
 
 import type ServeFaviconM from 'serve-favicon';
+import supertest from 'supertest';
 import type WebpackM from 'webpack';
 import type WebpackHotM from 'webpack-hot-middleware';
-import supertest from 'supertest';
 
 import type * as ServerNS from 'server/server';
 import type * as BuildInfoNS from 'utils/isomorphy/buildInfo';

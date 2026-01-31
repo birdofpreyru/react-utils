@@ -1,5 +1,6 @@
 import type { FunctionComponent } from 'react';
 import { Route, Routes } from 'react-router';
+
 import splitComponent from 'utils/splitComponent';
 
 // Note: this is not exactly how splitComponent() should be used to actually

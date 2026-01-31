@@ -16,23 +16,20 @@
 
 // TODO: We need to add correct typing for environment options.
 
-import path from 'node:path';
-
-import type { Request, Response } from 'express';
-
-import { defaults, set } from 'lodash-es';
-
-import type { ReactNode } from 'react';
-
 // As this environment is a part of the Jest testing utils,
 // we assume development dependencies are available when it is used.
 /* eslint-disable import/no-extraneous-dependencies */
-import register from '@babel/register/experimental-worker';
 
+import path from 'node:path';
+
+import type { Request, Response } from 'express';
 import JsdomEnv from 'jest-environment-jsdom';
+import { defaults, set } from 'lodash-es';
 import { Volume, createFsFromVolume } from 'memfs';
+import type { ReactNode } from 'react';
 import webpack, { type Configuration } from 'webpack';
-/* eslint-enable import/no-extraneous-dependencies */
+
+import register from '@babel/register/experimental-worker';
 
 import type {
   EnvironmentContext,

@@ -1,9 +1,8 @@
 /** @jest-environment jsdom */
 
+import type * as IT from 'utils/isomorphy';
 import { setBuildInfo } from 'utils/isomorphy/buildInfo';
 import { mockClientSide } from 'utils/jest';
-
-import type * as IT from 'utils/isomorphy';
 
 // TODO: It would be nicer to do all these tests with a proper Webpack build.
 

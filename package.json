@@ -1,5 +1,5 @@
 {
-  "version": "1.48.13",
+  "version": "1.48.14",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -17,7 +17,7 @@
     "@dr.pogodin/react-themes": "^1.10.2",
     "@jest/environment": "^30.2.0",
     "axios": "^1.13.4",
-    "commander": "^14.0.2",
+    "commander": "^14.0.3",
     "compression": "^1.8.1",
     "config": "^4.2.0",
     "cookie": "^1.1.0",
@@ -46,16 +46,16 @@
   "description": "Collection of generic ReactJS components and utils",
   "devDependencies": {
     "@babel/cli": "^7.28.6",
-    "@babel/core": "^7.28.6",
-    "@babel/node": "^7.28.6",
-    "@babel/plugin-transform-runtime": "^7.28.5",
-    "@babel/preset-env": "^7.28.6",
+    "@babel/core": "^7.29.0",
+    "@babel/node": "^7.29.0",
+    "@babel/plugin-transform-runtime": "^7.29.0",
+    "@babel/preset-env": "^7.29.0",
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@babel/register": "^7.28.6",
     "@dr.pogodin/babel-plugin-transform-assets": "^1.2.5",
     "@dr.pogodin/babel-preset-svgr": "^1.9.2",
-    "@dr.pogodin/eslint-configs": "^0.2.3",
+    "@dr.pogodin/eslint-configs": "^0.2.6",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
     "@standard-schema/spec": "^1.1.0",
     "@testing-library/dom": "^10.4.1",
@@ -80,7 +80,7 @@
     "@types/supertest": "^6.0.3",
     "@types/webpack": "^5.28.5",
     "@types/webpack-hot-middleware": "^2.25.12",
-    "autoprefixer": "^10.4.23",
+    "autoprefixer": "^10.4.24",
     "babel-jest": "^30.2.0",
     "babel-loader": "^10.0.0",
     "babel-plugin-add-import-extension": "^1.6.0",
@@ -105,11 +105,11 @@
     "sass-loader": "^16.0.6",
     "sitemap": "^9.0.0",
     "source-map-loader": "^5.0.0",
-    "stylelint": "^17.0.0",
+    "stylelint": "^17.1.0",
     "stylelint-config-standard-scss": "^17.0.0",
     "supertest": "^7.2.2",
     "tsc-alias": "1.8.16",
-    "tstyche": "^6.0.3",
+    "tstyche": "^6.1.0",
     "typed-scss-modules": "^8.1.1",
     "typescript": "^5.9.3",
     "webpack": "^5.104.1",
@@ -200,6 +200,6 @@
     "lint:code": "eslint",
     "lint:scss": "stylelint -- **/*.{css,scss}",
     "test": "npm run lint && npm run typecheck && npm run jest",
-    "typecheck": "tsc --project __tests__/tsconfig.json"
+    "typecheck": "tsc --noEmit"
   }
 }

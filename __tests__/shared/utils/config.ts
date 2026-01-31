@@ -3,11 +3,10 @@
 // TODO: Split client- and server-side tests into two separate test modules.
 
 import type ConfigM from 'config';
-import { mockClientSide, unmockClientSide } from 'utils/jest';
 
 import type * as ConfigUtilsNS from 'utils/config';
-
 import type * as IT from 'utils/isomorphy';
+import { mockClientSide, unmockClientSide } from 'utils/jest';
 
 test('Base test', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports

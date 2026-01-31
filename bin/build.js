@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-/* eslint-disable no-console */
+/* eslint-disable no-console, import/no-extraneous-dependencies */
 /* global console, process */
 
 import childProcess from 'node:child_process';
@@ -8,9 +8,8 @@ import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
-import { mapValues, merge } from 'lodash-es';
-
 import { program } from 'commander';
+import { mapValues, merge } from 'lodash-es';
 
 // TODO: Disabled, because ESLint still does not support "exports" declarations
 // in "package.json", and "rimraf" does not declare fallback entrance.
@@ -18,12 +17,10 @@ import { program } from 'commander';
 // and update, once that issue is resolved.
 import { rimraf } from 'rimraf';
 
-/* eslint-disable import/no-extraneous-dependencies */
+import webpack from 'webpack';
+
 // To support TS configs for Webpack.
 import register from '@babel/register/experimental-worker.js';
-
-import webpack from 'webpack';
-/* eslint-enable import/no-extraneous-dependencies */
 
 const BUILD_TYPES = {
   DEVELOPMENT: 'development',

@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import type { Request, RequestHandler } from 'express';
 import { cloneDeep } from 'lodash-es';
 import serializeJs from 'serialize-javascript';
+import type { Configuration } from 'webpack';
 
 import {
   type ForceT,
@@ -11,8 +12,6 @@ import {
 } from '@dr.pogodin/react-global-state';
 
 import { Helmet } from '@dr.pogodin/react-helmet';
-
-import type { Configuration } from 'webpack';
 
 import factory, {
   type ConfigT,

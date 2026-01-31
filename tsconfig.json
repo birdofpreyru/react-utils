@@ -15,6 +15,6 @@
     "paths": {
       "*": ["./src/shared/*", "./src/*", "./*"]
     },
-    "rootDirs": [".", "build/types-scss"],
+    "rootDirs": [".", "build/types-scss"]
   }
 }

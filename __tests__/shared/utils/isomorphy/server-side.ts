@@ -1,6 +1,5 @@
-import { setBuildInfo } from 'utils/isomorphy/buildInfo';
-
 import * as m from 'utils/isomorphy';
+import { setBuildInfo } from 'utils/isomorphy/buildInfo';
 
 setBuildInfo({
   key: '',

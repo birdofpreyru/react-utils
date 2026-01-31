@@ -13,13 +13,13 @@ import 'raf/polyfill.js';
 
 import type { Configuration } from 'webpack';
 
+import { SCRIPT_LOCATIONS, newDefaultLogger } from './renderer';
+
 import serverFactory, {
   type OptionsT as ServerOptionsT,
   type ServerT,
   getDefaultCspSettings,
 } from './server';
-
-import { SCRIPT_LOCATIONS, newDefaultLogger } from './renderer';
 
 export * from './utils';
 

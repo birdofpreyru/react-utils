@@ -10,6 +10,7 @@ import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpack, { type Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
+
 import baseFactory, { type OptionsT as BaseOptionsT } from './app-base';
 
 type OptionsT = BaseOptionsT & {

@@ -4,7 +4,7 @@ import { randomBytes } from 'node:crypto';
 import nodeFs from 'node:fs';
 import path from 'node:path';
 
-import { SitemapStream, streamToPromise } from 'sitemap';
+import autoprefixer from 'autoprefixer';
 
 import {
   clone,
@@ -13,8 +13,9 @@ import {
   isObject,
 } from 'lodash-es';
 
-import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+import { SitemapStream, streamToPromise } from 'sitemap';
 
 import {
   type Configuration,

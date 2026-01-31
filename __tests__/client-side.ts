@@ -1,9 +1,9 @@
 /** @jest-environment jsdom */
 
 import mockdate from 'mockdate';
-import { mockClientSide } from 'utils/jest';
 
 import type GetInJM from 'client/getInj';
+import { mockClientSide } from 'utils/jest';
 
 import type * as SrcM from '../src';
 

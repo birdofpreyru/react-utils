@@ -1,6 +1,5 @@
-import type { FunctionComponent } from 'react';
-
 import qs from 'qs';
+import type { FunctionComponent } from 'react';
 
 import { type Theme, useTheme } from '@dr.pogodin/react-themes';
 
