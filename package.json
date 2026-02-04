@@ -1,5 +1,5 @@
 {
-  "version": "1.48.14",
+  "version": "1.48.15",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -13,7 +13,7 @@
     "@dr.pogodin/csurf": "^1.16.8",
     "@dr.pogodin/js-utils": "^0.1.5",
     "@dr.pogodin/react-global-state": "^0.21.2",
-    "@dr.pogodin/react-helmet": "^3.0.5",
+    "@dr.pogodin/react-helmet": "^3.0.6",
     "@dr.pogodin/react-themes": "^1.10.2",
     "@jest/environment": "^30.2.0",
     "axios": "^1.13.4",
@@ -105,14 +105,14 @@
     "sass-loader": "^16.0.6",
     "sitemap": "^9.0.0",
     "source-map-loader": "^5.0.0",
-    "stylelint": "^17.1.0",
+    "stylelint": "^17.1.1",
     "stylelint-config-standard-scss": "^17.0.0",
     "supertest": "^7.2.2",
     "tsc-alias": "1.8.16",
-    "tstyche": "^6.1.0",
+    "tstyche": "^6.2.0",
     "typed-scss-modules": "^8.1.1",
     "typescript": "^5.9.3",
-    "webpack": "^5.104.1",
+    "webpack": "^5.105.0",
     "webpack-dev-middleware": "^7.4.5",
     "webpack-hot-middleware": "^2.26.1",
     "webpack-merge": "^6.0.1",
