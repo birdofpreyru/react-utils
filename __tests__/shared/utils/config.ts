@@ -11,7 +11,7 @@ import { mockClientSide, unmockClientSide } from 'utils/jest';
 test('Base test', () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const config = require('config') as typeof ConfigM;
-  expect(config).toMatchSnapshot();
+  expect(config.util.toObject(config)).toMatchSnapshot();
 });
 
 describe('Isomorphy behavior tests', () => {

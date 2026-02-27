@@ -37,7 +37,7 @@ import Cache from './Cache';
 
 // @ts-expect-error "Property 'SECRET' does not exist on type 'IConfig'."
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const { SECRET, ...sanitizedConfig } = config;
+const { SECRET, ...sanitizedConfig } = config.util.toObject(config);
 
 // Note: These type definitions for logger are copied from Winston logger,
 // then simplified to make it easier to fit an alternative logger into this

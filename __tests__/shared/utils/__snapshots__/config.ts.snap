@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Base test 1`] = `
-Config {
+{
   "SECRET": {
     "dummySecretKey": "Dummy Secret Value",
   },
