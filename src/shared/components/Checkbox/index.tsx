@@ -7,6 +7,7 @@ import defaultTheme from './theme.scss';
 type PropT<ValueT> = {
   checked?: ValueT;
   disabled?: boolean;
+  error?: ReactNode;
   label?: React.ReactNode;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   testId?: string;
@@ -14,6 +15,8 @@ type PropT<ValueT> = {
     | 'checkbox'
     | 'container'
     | 'disabled'
+    | 'error'
+    | 'errorMessage'
     | 'indeterminate'
     | 'label'
   >;
@@ -22,6 +25,7 @@ type PropT<ValueT> = {
 const Checkbox = <ValueT extends 'indeterminate' | boolean = boolean>({
   checked,
   disabled,
+  error,
   label,
   onChange,
   testId,
@@ -34,6 +38,8 @@ const Checkbox = <ValueT extends 'indeterminate' | boolean = boolean>({
 
   let checkboxClassName = composed.checkbox;
   if (checked === 'indeterminate') checkboxClassName += ` ${composed.indeterminate}`;
+
+  if (error) containerClassName += ` ${composed.error}`;
 
   return (
     <div className={containerClassName}>
@@ -50,6 +56,9 @@ const Checkbox = <ValueT extends 'indeterminate' | boolean = boolean>({
         }}
         type="checkbox"
       />
+      {error && error !== true
+        ? <div className={composed.errorMessage}>{error}</div>
+        : null}
     </div>
   );
 };
