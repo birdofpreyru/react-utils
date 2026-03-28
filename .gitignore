@@ -1,7 +1,8 @@
 /__coverage__
+/.eslintcache
+/bin/build.js
 /build/*
 /config/babel
 /config/webpack
 /dr.pogodin-react-utils-*.*.*.tgz
 /node_modules
-/.eslintcache

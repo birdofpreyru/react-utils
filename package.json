@@ -1,5 +1,5 @@
 {
-  "version": "1.49.1",
+  "version": "1.50.0",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.29.2",
+    "@commander-js/extra-typings": "^14.0.0",
     "@dr.pogodin/babel-plugin-react-css-modules": "^6.13.9",
     "@dr.pogodin/csurf": "^1.16.9",
     "@dr.pogodin/js-utils": "^0.1.6",
@@ -185,13 +186,9 @@
     "url": "git+https://github.com/birdofpreyru/react-utils.git"
   },
   "scripts": {
-    "build": "rimraf build && npm run build:configs && npm run build:types-scss && npm run build:types-code && npm run build:web && npm run build:dev && npm run build:prod",
+    "build": "rimraf build && npm run build:scripts && npm run build:configs && node bin/build -t library",
     "build:configs": "tsc --project tsconfig.configs.json",
-    "build:dev": "node bin/build -i build/web -t development --lib --babel-config babel.module.config.js --webpack-config webpack.config.ts --no-webpack",
-    "build:prod": "node bin/build -i build/web -t production --lib --babel-config babel.module.config.js --webpack-config webpack.config.ts --no-webpack",
-    "build:types-code": "rimraf build/types-code && tsc --project tsconfig.types.json && tsc-alias -p tsconfig.types.json",
-    "build:types-scss": "rimraf build/types-scss && typed-scss-modules .",
-    "build:web": "rimraf build/web && babel ./src --config-file ./babel.libweb.config.js --out-dir build/web -x .js,.jsx,.ts,.tsx --source-maps --copy-files",
+    "build:scripts": "babel ./bin-ts-src --config-file ./babel.scripts.config.js --out-dir bin -x .ts",
     "jest:1": "NODE_CONFIG_ENV=test jest --no-cache -w 1 --config config/jest/default.js --shard=1/2",
     "jest:2": "NODE_CONFIG_ENV=test jest --no-cache -w 1 --config config/jest/default.js --shard=2/2",
     "jest:types": "tstyche",
