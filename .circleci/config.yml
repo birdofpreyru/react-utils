@@ -41,6 +41,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
+            - bin
             - build
             - config
             - docs/build
