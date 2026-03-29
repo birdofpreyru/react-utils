@@ -6,6 +6,21 @@ if (global.REACT_UTILS_LIBRARY_LOADED) {
   throw Error('React utils library is already loaded');
 } else global.REACT_UTILS_LIBRARY_LOADED = true;
 
+declare global {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+  interface ImportMeta {
+    webpackHot?: {
+      dispose(cb: () => void): void;
+    };
+  }
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.dispose(() => {
+    delete global.REACT_UTILS_LIBRARY_LOADED;
+  });
+}
+
 export {
   type AsyncCollectionLoaderT,
   type AsyncCollectionT,

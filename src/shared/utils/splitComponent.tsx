@@ -205,7 +205,14 @@ export default function splitComponent<
   placeholder?: ReactNode;
 }): FunctionComponent<ComponentPropsT> {
   // The correct usage of splitComponent() assumes a single call per chunk.
-  if (usedChunkNames.has(chunkName)) {
+  if (usedChunkNames.has(chunkName)
+
+    // When HMR happens splitComponent() ends up getting called again for some
+    // chunks, thus we should not throw this error. Not sure, if we need to do
+    // some additional handling in that case, or just not throwing is all we
+    // need.
+    && !import.meta.webpackHot
+  ) {
     throw Error(`Repeated splitComponent() call for the chunk "${chunkName}"`);
   } else usedChunkNames.add(chunkName);
 

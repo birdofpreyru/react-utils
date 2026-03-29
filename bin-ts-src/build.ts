@@ -95,10 +95,8 @@ function assertBuildType(buildType: string): asserts buildType is BuildTypeT {
 
 /* Resolves the target build directory. */
 const cwd = process.cwd();
-const sourceDir = path.resolve(cwd, args.inDir);
-
 const buildDir = path.resolve(cwd, args.outDir);
-// if (args.lib) buildDir += `/${args.buildType}`;
+const sourceDir = path.resolve(cwd, args.inDir);
 
 /* Prepares output directory: cleans existing files, creates the folders. */
 rimraf.sync(buildDir);
@@ -164,8 +162,21 @@ function newWebpackCompiler() {
 
   if (!args.buildType) throw Error('Build type must be specified for Webpack build');
 
+  assertBuildType(args.buildType);
+  let webpackEnv: string;
+  switch (args.buildType) {
+    case 'app-development':
+      webpackEnv = 'development';
+      break;
+    case 'app-production':
+      webpackEnv = 'production';
+      break;
+    case 'library':
+    default: throw Error('Unexpected build type');
+  }
+
   const config = typeof configOrFactory === 'function'
-    ? configOrFactory(args.buildType) : configOrFactory;
+    ? configOrFactory(webpackEnv) : configOrFactory;
 
   merge(config, {
     output: { path: webpackOutDir },
@@ -232,7 +243,7 @@ function buildWebBundle() {
 
 type RunBabelOptionsT = {
   buildType: 'development' | 'production';
-  configPath: string;
+  configPath?: string;
   copyFiles?: boolean;
   extensions: Array<`.${string}`>;
   keepFileExtensions?: boolean;
@@ -312,18 +323,21 @@ async function buildLibIntermediates(watch?: boolean): Promise<void> {
 
 type BuildServerSideCodeOptionsT = {
   buildType: 'development' | 'production';
+  configPath?: string;
+  outDir: string;
+  srcDir: string;
 };
 
 /**
  * Builds with Babel the library code for server-side environment.
  */
-async function buildLibServerSide({
+async function buildWithBabelForServerSide({
   buildType,
+  configPath,
+  outDir,
+  srcDir,
 }: BuildServerSideCodeOptionsT): Promise<void> {
-  console.log(`Building the library code for server-side environment, and the "${buildType}" mode...`);
-  const configPath = 'babel.module.config.js';
-  const outDir = `${buildDir}/${buildType}`;
-  const srcDir = `${buildDir}/web`;
+  console.log(`Building with Babel for server-side environment in "${buildType}" mode...`);
   await runBabel({
     buildType,
     configPath,
@@ -357,32 +371,38 @@ function copyFromFolder(from: string, to: string, regex: RegExp) {
 }
 
 void (async () => {
-  let doCodeTypesBuild = false;
-  let doLibIntermediatesBuild = false;
-  let doLibServerSideBuild = false;
-  let doWebBundleBuild = false;
-
   assertBuildType(args.buildType);
-  switch (args.buildType) {
-    case 'app-development':
-    case 'app-production':
-      doWebBundleBuild = true;
-      break;
-    case 'library':
-      doCodeTypesBuild = true;
-      doLibIntermediatesBuild = true;
-      doLibServerSideBuild = true;
-      break;
-    default: Error('Unexpected build type value');
+  await buildScssTypes();
+
+  if (args.buildType === 'library') {
+    await buildCodeTypes();
+    await buildLibIntermediates();
+
+    await buildWithBabelForServerSide({
+      buildType: 'development',
+      configPath: 'babel.module.config.js',
+      outDir: `${buildDir}/development`,
+      srcDir: `${buildDir}/web`,
+    });
+
+    await buildWithBabelForServerSide({
+      buildType: 'production',
+      configPath: 'babel.module.config.js',
+      outDir: `${buildDir}/production`,
+      srcDir: `${buildDir}/web`,
+    });
   }
 
-  await buildScssTypes();
-  if (doCodeTypesBuild) await buildCodeTypes();
-  if (doLibIntermediatesBuild) await buildLibIntermediates();
-
-  if (doLibServerSideBuild) {
-    await buildLibServerSide({ buildType: 'development' });
-    await buildLibServerSide({ buildType: 'production' });
+  if (
+    args.buildType === 'app-development'
+    || args.buildType === 'app-production'
+  ) {
+    await buildWithBabelForServerSide({
+      buildType: 'development',
+      outDir: buildDir,
+      srcDir: sourceDir,
+    });
+    buildWebBundle();
   }
 
   if (args.copyFiles) {
@@ -390,10 +410,8 @@ void (async () => {
     copyFromFolder(sourceDir, buildDir, regex);
   }
 
-  if (doWebBundleBuild) buildWebBundle();
-
   if (args.watch) {
     console.log('Enabling the watch mode...');
-    if (doLibIntermediatesBuild) await buildLibIntermediates(true);
+    if (args.buildType === 'library') await buildLibIntermediates(true);
   }
 })();
