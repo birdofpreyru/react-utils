@@ -7,7 +7,7 @@ import type {
   NavLinkProps,
 } from 'react-router';
 
-import './style.scss';
+import S from './style.scss';
 
 type LinkT = typeof Link;
 type NavLinkT = typeof NavLink;
@@ -89,9 +89,12 @@ const GenericLink = ({
    * - It is anchor link (starts with #). */
   if (disabled || enforceA || openNewTab
     || (to as string).match(/^(#|(https?|mailto):)/)) {
+    let aClassName: string = S.link;
+    if (className) aClassName += ` ${className}`;
+
     return (
       <a
-        className={className}
+        className={aClassName}
         // TODO: This requires a fix: disabled is not really an attribute of <a>
         // tag, thus for disabled option we rather should render a plain text
         // styled as a link.
