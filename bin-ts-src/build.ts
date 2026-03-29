@@ -62,10 +62,10 @@ async function exec(command: string, options = {}): Promise<{
 
 /* Command-line config. */
 const args = program
-  .description('Library build script')
+  .description('Application / library build script')
   .requiredOption(
     '-t, --build-type <type>',
-    `build type: ${validBuildTypes.join(', ')}`,
+    `build type: ${validBuildTypes.map((type) => `"${type}"`).join(', ')}`,
   )
   .option('-c, --copy-files <regex>', 'copy files matching the pattern into the build folder')
   .option('-i, --in-dir <path>', 'input folder for the build', 'src')

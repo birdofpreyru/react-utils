@@ -1,7 +1,16 @@
 # Webpack
-The library provides several tuneable [Webpack] configs, intended for different
-kinds of target code (an [application][application config] or a [library][library config]), and environments
-(development or production).
+This library provides several tuneable [Webpack] configs, intended for bundling
+[web applications][application config] with different flavours (development,
+or production).
+
+<details>
+<summary>Changelog</summary>
+
+- Prior to [v1.50.0] we also provided [Webpack] configs for bundling libraries.
+  They have been removed, as we now prefer to build libraries exclusively with
+  [Babel], so that [Webpack] builds of host projects can tree-shake our
+  libraries, and optimize out any code unnecessary for particular end projects.
+</details>
 
 Common for every config variant, the library exposes it as a "config factory
 function", which generates the actual configuration once called with necessary
@@ -35,7 +44,7 @@ module.exports = function buildConfig(env) {
 }
 ```
 
-## Application Config
+## Application Configs {#application-config}
 
 ### Base {#app-base}
 ```js
@@ -308,16 +317,29 @@ The `keepBuildInfo` option of the [base app config factory][base app config]
 allows to reuse old "[build info]" data, which is inteded for development and
 test scenarious.
 
-:::info Changelog
-- In the library versions **v1.17.2** &div; **v1.17.4** the "[build info]"
+<details>
+<summary>Changelog</summary>
+
+- In the library versions [v1.17.2]&ndash;[v1.17.4] the "[build info]"
   object was also exposed via the `.buildInfo` field attached to the standard
-  config factories after each build. This was dropped in **v1.17.5** in favour
+  config factories after each build. This was dropped in [v1.17.5] in favour
   of passing it via a virtual filesystem (see `fs` option of
   the [config factory][base app config]).
+</details>
+
+## Library Configs {#library-configs}
+
+:::danger Deprecated & Removed
+[Webpack] configs for library builds were deprecated, and removed in the library
+[v1.50.0]. From now on we prefer to use exclusively [Babel] for library builds,
+and distribution, to allow [Webpack] builds in host projects to tree-shake our
+libraries, and to optimize out any code unnecessary for particular end projects.
 :::
 
-## Library Config
-### Base {#lib-base}
+<details>
+<summary>Original Documentation</summary>
+
+<h3>Base</h3>
 ```js
 const configFactory = require('@dr.pogodin/react-utils/config/webpack/lib-base');
 
@@ -325,7 +347,7 @@ configFactory(options) => object;
 ```
 This factory function creates
 base [Webpack] config for libraries, which contains the core setup common
-for [development](#lib-dev) and [production](#lib-prod) library targets.
+for **development** and **production** library targets.
 The `options` argument is an object with the following valid fields:
 
 - **Required**:
@@ -400,28 +422,29 @@ The generated config does the following:
   - `react-router-dom`
   - `uuid`
 
-### Development {#lib-dev}
+<h3>Development</h3>
 ```js
 const configFactory = require('@dr.pogodin/react-utils/config/webpack/lib-development');
 
 configFactory(options) => object;
 ```
-Extends and tunes the [base library config](#lib-base) for **development**
+Extends and tunes the base library config for **development**
 environment. This factory function accepts the same options, and does the same
 stuff. On top of that it modifies the template for generated classnames to equal
 `[path][name]___[local]___[hash:base64:6]` which is handy for debug purposes,
 and does some other small modifications of config.
 
-### Production {#lib-prod}
+<h3>Production</h3>
 ```js
 const configFactory = require('@dr.pogodin/react-utils/config/webpack/lib-production');
 
 configFactory(options) => object;
 ```
-Extends and tunes the [base library config](#lib-base) for **production**
+Extends and tunes the base library config for **production**
 environment. This factory function accepts the same options, and does all
 the same stuff, and on top of that slightly modifies the resulting config
 as required for production needs.
+</details>
 
 [source-map-loader]: https://www.npmjs.com/package/source-map-loader
 [Application Config]: #application-config
@@ -436,3 +459,7 @@ as required for production needs.
 [`sitemap` library]: https://www.npmjs.com/package/sitemap
 [getBuildInfo()]: /docs/api/utils/isomorphy#getbuildinfo
 [isomorphy]: /docs/api/utils/isomorphy
+[v1.17.2]: https://github.com/birdofpreyru/react-utils/releases/tag/v1.17.2
+[v1.17.4]: https://github.com/birdofpreyru/react-utils/releases/tag/v1.17.4
+[v1.17.5]: https://github.com/birdofpreyru/react-utils/releases/tag/v1.17.5
+[v1.50.0]: https://github.com/birdofpreyru/react-utils/releases/tag/v1.50.0

@@ -4,8 +4,7 @@
 - [Stylelint](/docs/api/configs/stylelint) &mdash; Configs for [Stylelint] code scans.
 - [TypeScript](/docs/api/configs/typescript) &mdash; Configs for [TypeScript]
   compiler.
-- [Webpack](/docs/api/configs/webpack) &mdash; Configs for [Webpack] builds of apps
-  and libs.
+- [Webpack](/docs/api/configs/webpack) &mdash; Configs for [Webpack] builds.
 
 <!-- links -->
 [Babel]: https://babeljs.io
