@@ -167,7 +167,7 @@ export function freeStyleSheets(
 }
 
 // Holds the set of chunk names already used for splitComponent() calls.
-const usedChunkNames = new Set();
+// const usedChunkNames = new Set();
 
 type ComponentOrModule<PropsT> = ComponentType<PropsT> | {
   default: ComponentType<PropsT>;
@@ -204,17 +204,25 @@ export default function splitComponent<
   getComponent: () => Promise<ComponentOrModule<ComponentPropsT>>;
   placeholder?: ReactNode;
 }): FunctionComponent<ComponentPropsT> {
-  // The correct usage of splitComponent() assumes a single call per chunk.
-  if (usedChunkNames.has(chunkName)
+  // TODO: For now I commented out this safeguard check, as I am not sure how
+  // to easily make it work: it should not be triggered in HMR mode, but if I
+  // add the code relying on import.meta, it fails in Jest environment, because
+  // Jest does not support ES modules yet, and import.meta is not support in
+  // CommonJS modules, and the "babel-plugin-transform-import-meta" plugin
+  // we use to workaround this issue for import.meta.dirname, etc. does not
+  // transform import.meta.webpackHot
 
-    // When HMR happens splitComponent() ends up getting called again for some
-    // chunks, thus we should not throw this error. Not sure, if we need to do
-    // some additional handling in that case, or just not throwing is all we
-    // need.
-    && !import.meta.webpackHot
-  ) {
-    throw Error(`Repeated splitComponent() call for the chunk "${chunkName}"`);
-  } else usedChunkNames.add(chunkName);
+  // The correct usage of splitComponent() assumes a single call per chunk.
+  // if (usedChunkNames.has(chunkName)
+
+  // When HMR happens splitComponent() ends up getting called again for some
+  // chunks, thus we should not throw this error. Not sure, if we need to do
+  // some additional handling in that case, or just not throwing is all we
+  // need.
+  //  && !import.meta.webpackHot
+  // ) {
+  //  throw Error(`Repeated splitComponent() call for the chunk "${chunkName}"`);
+  // } else usedChunkNames.add(chunkName);
 
   const LazyComponent = lazy(async () => {
     const clientChunkGroups = await getClientChunkGroups();
