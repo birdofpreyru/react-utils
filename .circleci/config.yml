@@ -11,7 +11,13 @@ install-build-test: &install-build-test
       paths:
         - docs/node_modules
         - node_modules
+  - restore_cache:
+      key: eslintcache
   - run: npm test
+  - save_cache:
+      key: eslintcache
+      paths:
+        - .eslintcache
   - run:
       name: Documentation build
       command: npm run build
