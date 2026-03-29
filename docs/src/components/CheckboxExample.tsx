@@ -35,7 +35,7 @@ const CheckboxExample: FunctionComponent = () => {
       <Checkbox
         checked={checkbox3b}
         disabled
-        label="Managed three-states checkbox"
+        label="Disabled checkbox"
         onChange={() => {
           switch (checkbox3b) {
             case 'indeterminate':

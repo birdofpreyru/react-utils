@@ -37,7 +37,14 @@ import CheckboxExample from '../../../src/components/CheckboxExample';
 
 - `disabled` &mdash; **boolean** | **undefined** &mdash; Disables the checkbox.
 
-- `label` &mdash; **React.ReactNode** &mdash; Checkbox label.
+- `error` &mdash; **ReactNode** &mdash; Optional. If a truthy value
+  the `error` theme key is added to the root element of the component,
+  and unless the value is _true_ it is also rendered right after
+  the inner `<input>` element, wrapped into a `<div>` with `errorMessage`
+  theme key (thus, setting it equal _true_ allows to apply `error` theme
+  ky to the root element, without adding the error message `<div>`).
+
+- `label` &mdash; **ReactNode** &mdash; Checkbox label.
 - `onChange` &mdash; **function** &mdash; State change handler.
 
 - `testId` &mdash; **string** | **undefined** &mdash; Sets `data-testid`
@@ -55,6 +62,12 @@ Valid theme keys are:
 
 - `disabled` &mdash; Applied to the root checkbox container if the component
   is disabled.
+
+- `error` &mdash; Added to the root component element when `error` prop value
+  is truthy.
+
+- `errorMessage` &mdash; Applied to the `<div>` wrapper of the error message,
+  when it is rendered (see `error` prop documentation for details).
 
 - `indeterminate` &mdash; Applied to the underlying `<input>` element when
   the component is in the &laquo;indeterminate&raquo; state.
