@@ -397,8 +397,18 @@ void (async () => {
     args.buildType === 'app-development'
     || args.buildType === 'app-production'
   ) {
+    let buildType: 'development' | 'production';
+    switch (args.buildType) {
+      case 'app-development':
+        buildType = 'development';
+        break;
+      case 'app-production':
+        buildType = 'production';
+        break;
+      default: throw Error('Unexpected build mode');
+    }
     await buildWithBabelForServerSide({
-      buildType: 'development',
+      buildType,
       outDir: buildDir,
       srcDir: sourceDir,
     });
