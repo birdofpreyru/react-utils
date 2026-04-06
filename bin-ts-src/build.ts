@@ -358,11 +358,16 @@ async function buildWithBabelForServerSide({
 /**
  * Copies the files matching the pattern into the build folder.
  */
-function copyFromFolder(from: string, to: string, regex: RegExp) {
-  console.log('Copying files...');
+function copyFromFolder(
+  from: string,
+  to: string,
+  regex: RegExp,
+  secondary?: boolean,
+) {
+  if (!secondary) console.log('Copying files...');
   fs.readdirSync(from, { withFileTypes: true }).forEach((item) => {
     if (item.isDirectory()) {
-      copyFromFolder(`${from}/${item.name}`, `${to}/${item.name}`, regex);
+      copyFromFolder(`${from}/${item.name}`, `${to}/${item.name}`, regex, true);
     } else if (item.isFile() && item.name.match(regex)) {
       fs.mkdirSync(to, { recursive: true });
       fs.copyFileSync(`${from}/${item.name}`, `${to}/${item.name}`);
