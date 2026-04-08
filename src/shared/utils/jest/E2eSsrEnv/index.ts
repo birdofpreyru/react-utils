@@ -20,25 +20,24 @@
 // we assume development dependencies are available when it is used.
 /* eslint-disable import/no-extraneous-dependencies */
 
+import { fork } from 'node:child_process';
 import path from 'node:path';
 
-import type { Request, Response } from 'express';
 import JsdomEnv from 'jest-environment-jsdom';
 import { defaults, set } from 'lodash-es';
 import { Volume, createFsFromVolume } from 'memfs';
-import type { ReactNode } from 'react';
-import webpack, { type Configuration } from 'webpack';
-
-import register from '@babel/register/experimental-worker';
+import webpack, { type Configuration, type Stats } from 'webpack';
 
 import type {
   EnvironmentContext,
   JestEnvironmentConfig,
 } from '@jest/environment';
 
-function noop() {
-  // NOOP
-}
+import { deduceChunkGroups } from 'server/renderer';
+
+import { setBuildInfo } from '../../isomorphy/buildInfo';
+
+import type { LaunchT, ResultT } from './ssr';
 
 export default class E2eSsrEnv extends JsdomEnv {
   pragmas: Record<string, string | string[]>;
@@ -51,7 +50,7 @@ export default class E2eSsrEnv extends JsdomEnv {
 
   withSsr: boolean;
 
-  webpackStats?: webpack.StatsCompilation;
+  webpackStats?: Stats;
 
   /**
    * Loads Webpack config, and exposes it to the environment via global
@@ -126,83 +125,46 @@ export default class E2eSsrEnv extends JsdomEnv {
   }
 
   async runSsr(): Promise<void> {
+    const cp = fork(`${import.meta.dirname}/ssr.ts`, [], {
+      // NOTE: This ensures the forked "ssr.ts" module is pre-processed by
+      // Babel, which is necessary to correctly resolve paths to modules it
+      // loads, as we rely on Babel aliasing module paths; and we need to have
+      // a little "register.ts" module (rather than just a command-line argument)
+      // because we need to specify to Babel that ".ts", ".tsx", etc. files
+      // need to be processed, in addition to the standard JS modules.
+      execArgv: ['-r', `${import.meta.dirname}/register.ts`],
+    });
+
     const optionsString = this.pragmas['ssr-options'] as string;
     const options = optionsString
       ? JSON.parse(optionsString) as Record<string, unknown>
       : {};
 
-    // TODO: This is temporary to shortcut the logging added to SSR.
-    options.logger ??= {
-      debug: noop,
-      info: noop,
-      log: noop,
-      warn: noop,
-    };
-
     options.buildInfo ??= this.global.buildInfo;
 
-    let cleanup: (() => void) | undefined;
+    if (!this.webpackStats) throw Error('Missing Webpack stats');
 
-    if (options.entry) {
-      const p = path.resolve(this.testFolder, options.entry as string);
-      const module = await import(/* webpackChunkName: "not-a-valid-chunk" */
-        p
-      ) as NodeJS.Module;
+    options.chunkGroups = deduceChunkGroups(this.webpackStats);
 
-      if ('cleanup' in module) cleanup = module.cleanup as () => void;
+    return new Promise((resolve) => {
+      cp.on('message', (message: ResultT) => {
+        this.global.ssrMarkup = message.markup;
+        this.global.ssrOptions = options;
+        this.global.ssrStatus = message.status;
+        cp.kill();
+        resolve();
+      });
 
-      const exportName = (options.entryExportName as string) || 'default';
-      if (exportName in module) {
-        options.Application = (
-          module as unknown as Record<string, unknown>
-        )[exportName] as ReactNode;
-      }
-    }
+      if (!this.global.webpackConfig) throw Error('Missing Webpack config');
 
-    const { default: ssrFactory } = await import(/* webpackChunkName: "not-a-valid-chunk" */ 'server/renderer');
-    const renderer = ssrFactory(this.global.webpackConfig!, options);
-    let status = 200; // OK
-    const markup = await new Promise<string>((done, fail) => {
-      void renderer(
-        this.ssrRequest as Request,
-
-        // TODO: This will do for now, with the current implementation of
-        // the renderer, but it will require a rework once the renderer is
-        // updated to do streaming.
-        ({
-          cookie: noop,
-          send: done,
-          set: noop,
-          status: (value: number) => {
-            status = value;
-          },
-
-          // This is how up-to-date Webpack stats are passed to the server in
-          // development mode, and we use this here always, instead of having
-          // to pass some information via filesystem.
-          locals: {
-            webpack: {
-              devMiddleware: {
-                stats: this.webpackStats,
-              },
-            },
-          },
-        } as unknown) as Response,
-
-        (error) => {
-          // TODO: Strictly speaking, that error as Error casting is not all
-          // correct, but it works, so no need to spend time on it right now.
-          if (error) fail(error as Error);
-          else done('');
-        },
-      );
+      cp.send({
+        options,
+        root: options.root === 'TEST' ? this.testFolder : process.cwd(),
+        ssrRequest: this.ssrRequest,
+        testFolder: this.testFolder,
+        webpackConfig: this.global.webpackConfig,
+      } satisfies LaunchT);
     });
-
-    this.global.ssrMarkup = markup;
-    this.global.ssrOptions = options;
-    this.global.ssrStatus = status;
-
-    if (cleanup) cleanup();
   }
 
   constructor(
@@ -217,7 +179,6 @@ export default class E2eSsrEnv extends JsdomEnv {
       : {};
 
     request.url ??= '/';
-    request.csrfToken = noop;
 
     // This ensures the initial JsDom URL matches the value we use for SSR.
     set(
@@ -238,53 +199,12 @@ export default class E2eSsrEnv extends JsdomEnv {
     this.withSsr = !pragmas['no-ssr'];
     this.ssrRequest = request;
     this.pragmas = pragmas;
-
-    // The usual "babel-jest" transformation setup does not apply to
-    // the environment code and imports from it, this workaround enables it.
-    const optionsString = this.pragmas['ssr-options'] as string;
-    const options = optionsString
-      ? JSON.parse(optionsString) as Record<string, unknown>
-      : {};
-    let root;
-    switch (options.root) {
-      case 'TEST':
-        root = this.testFolder;
-        break;
-      default: root = process.cwd();
-    }
-
-    // BEWARE: Anything imported prior to this register() call seems to be
-    // transpiled again by Babel if loaded after this call. This causes very
-    // confusing errors when testing the code dependent on some sort of contexts
-    // (because loading a module again effectively creates a new context object,
-    // which is not recognized by the code expecting another context instance).
-    // That's why below we prefer dynamic imports for some React Utils methods.
-    register({
-      envName: options.babelEnv as string,
-      extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
-      root,
-    });
   }
 
   async setup(): Promise<void> {
     await super.setup();
     await this.runWebpack();
 
-    // NOTE: It is possible that the Webpack run above, and the SSR run below
-    // load different versions of the same module (CommonJS, and ES), and it may
-    // cause very confusing problems (e.g. see:
-    // https://github.com/birdofpreyru/react-utils/issues/413).
-    // It seems we can't reset the cache of ES modules, and Jest's module reset
-    // does not reset modules loaded in this enviroment module, and also only
-    // replacing entire cache object by and empty {} seems to help (in contrast
-    // to deleting all entries by their keys, as it is done within .teardown()
-    // method below). Thus, for now we do this as a hotfix, and we also reset
-    // build info to undefined, because ES module version not beeing reset
-    // triggers an error on the subsequent test using the environment.
-    // TODO: Look for a cleaner solution.
-    require.cache = {};
-
-    const { setBuildInfo } = await import(/* webpackChunkName: "not-a-valid-chunk" */'../isomorphy/buildInfo');
     setBuildInfo(undefined, true);
 
     if (this.withSsr) await this.runSsr();
@@ -303,7 +223,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     Object.keys(require.cache).forEach((key) => {
       delete require.cache[key];
     });
-    register.revert();
+
     await super.teardown();
   }
 }

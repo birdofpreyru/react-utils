@@ -253,10 +253,28 @@ type CacheRefT = {
   maxage?: number;
 };
 
+/**
+ * Deduces the map of code chunk groups from the Webpack compilation Stats.
+ */
+export function deduceChunkGroups(stats: Stats): ChunkGroupsT {
+  return mapValues(
+    stats.toJson({
+      all: false,
+      chunkGroups: true,
+    }).namedChunkGroups,
+    (item) => item.assets?.map(({ name }: { name: string }) => name) ?? [],
+  );
+}
+
 export type OptionsT = {
   Application?: ComponentType;
   beforeRender?: BeforeRenderT;
   buildInfo?: BuildInfoT;
+
+  /** Allows to pass chunk groups explicitly, at the renderer creation time;
+   *  intended for test purposes. */
+  chunkGroups?: Record<string, string[]>;
+
   defaultLoggerLogLevel?: string;
   favicon?: string;
   logger?: LoggerI;
@@ -402,16 +420,9 @@ export default function factory(
       // the build (in prod mode).
       let chunkGroups: ChunkGroupsT;
       const webpackStats = get(res.locals, 'webpack.devMiddleware.stats') as Stats | undefined;
-      if (webpackStats) {
-        chunkGroups = mapValues(
-          webpackStats.toJson({
-            all: false,
-            chunkGroups: true,
-          }).namedChunkGroups,
-          (item) => item.assets?.map(({ name }: { name: string }) => name)
-            ?? [],
-        );
-      } else if (CHUNK_GROUPS) chunkGroups = CHUNK_GROUPS;
+      if (webpackStats) chunkGroups = deduceChunkGroups(webpackStats);
+      else if (options.chunkGroups) ({ chunkGroups } = options);
+      else if (CHUNK_GROUPS) chunkGroups = CHUNK_GROUPS;
       else chunkGroups = {};
 
       /* Optional server-side rendering. */
