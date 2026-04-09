@@ -74,6 +74,16 @@ launchServer(webpackConfig);
     Without this option provided it will be loaded from the `.build-info` file
     in the "context" folder of the Webpack build being served.
 
+  - `chunkGroups` &mdash; **ChunkGroupsT** &mdash; Optional. If provided, it is
+    passed down to the server-side renderer, and it is used to locate assets
+    necessary for different named code chunks. This option has a lower priority
+    than chunk groups information automatically extracted by the renderer from
+    the Webpack stats in the request's locals (where it is injected by Webpack's
+    devMiddleware, in development mode); but it has a higher priority than
+    the chunk groups information read from the disk (where it is output by
+    the normal Webpack compilation). This option is intended for internal use,
+    in utilities for Jest testing (_e.g._ [E2eSsrEnv]).
+
   - `cookieSignatureSecret` &mdash; **string** &mdash; If provided, it is passed
     into the `secret` argument of [cookie-parser](https://www.npmjs.com/package/cookie-parser),
     to enable support of signed cookies. When not provided signed cookies are not
@@ -346,6 +356,7 @@ cached, no matter the result of [staticCacheController()] call.
 [config]: /docs/api/utils/config
 [CSP]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 [@dr.pogodin/csurf]: https://www.npmjs.com/package/@dr.pogodin/csurf
+[E2eSsrEnv]: /docs/api/classes/E2eSsrEnv
 [ExpressJS]: https://expressjs.com
 [helmet]: https://github.com/helmetjs/helmet
 [getSsrContext()]: https://dr.pogodin.studio/docs/react-global-state/docs/api/hooks/getssrcontext

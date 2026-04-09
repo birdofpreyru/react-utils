@@ -273,7 +273,7 @@ export type OptionsT = {
 
   /** Allows to pass chunk groups explicitly, at the renderer creation time;
    *  intended for test purposes. */
-  chunkGroups?: Record<string, string[]>;
+  chunkGroups?: ChunkGroupsT;
 
   defaultLoggerLogLevel?: string;
   favicon?: string;
