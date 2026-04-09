@@ -10,6 +10,7 @@
     // statements in the code, thus breaking Webpack's code splitting.
     // See: https://davidea.st/articles/webpack-typescript-code-split-wont-work
     "module": "ESNext",
+    "moduleResolution": "Node",
 
     "paths": {
       "*": ["./src/shared/*", "./src/*", "./*"]
