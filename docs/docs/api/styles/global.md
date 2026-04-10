@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'production') {
 /* eslint-enable global-require */
 ```
 
-:::caution Beware
+:::caution[Beware]
 When module `import` and `require()` statements are mixed within the same JS
 module, `import`s are hoisted tot he top. This is a problem for the global CSS
 stylesheet, which should be loaded before any other styling. Thus, you should

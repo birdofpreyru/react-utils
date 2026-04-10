@@ -3,7 +3,7 @@ sidebar_class_name: deprecated
 ---
 
 # config
-:::danger Deprecated
+:::danger[Deprecated]
 The [config] export was deprecated and removed from the library in its [v1.47.0].
 Use the [getConfig()] function instead.
 

@@ -15,7 +15,7 @@ as a whole.
 
 See [the example](#example) to understand how to use it.
 
-:::caution History
+:::caution[History]
 - [v1.16.0](https://github.com/birdofpreyru/react-utils/releases/tag/v1.16.0) -
   multiple [splitComponent()] signature changes:
   - `getClientSide` option was renamed into `getComponent`.
@@ -36,7 +36,7 @@ See [the example](#example) to understand how to use it.
     ```jsx
     () => import(/* webpackChunkName: 'sample-code-chunk' */ 'path/to/SampleComponent')
     ```
-    :::tip Note
+    :::tip[Note]
     The matching `chunkName` argument and `webpackChunkName` magic comment are
     used to dynamically inject necessary CSS chunks into the page. The library
     will throw if the same chunk name is used for different split components.
@@ -86,7 +86,6 @@ To split it into a separate code chunk:
   code chunk, assuming you have removed all regular imports / required of that
   component from outside its chunk.
 
-<!-- Reusable links -->
 [Code Splitting]: https://developer.mozilla.org/en-US/docs/Glossary/Code_splitting
 [splitComponent()]: /docs/api/functions/splitComponent
 [webpack.requireWeak()]: /docs/api/utils/webpack#requireweak

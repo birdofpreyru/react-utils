@@ -9,7 +9,6 @@
 - [ServerSsrContext](/docs/api/classes/ServerSsrContext) &mdash;
   SSR context class being used by the library.
 
-<!-- Link -->
 [Barrier]: /docs/api/classes/Barrier
 [Cached]: /docs/api/classes/Cached
 [E2eSsrEnv]: /docs/api/classes/E2eSsrEnv

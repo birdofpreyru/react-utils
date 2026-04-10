@@ -4,7 +4,7 @@ sidebar_class_name: deprecated
 
 # CodeSplit
 
-:::danger DEPRECATED
+:::danger[DEPRECATED]
 The [CodeSplit] component was deprecated, and removed from the library
 in the release [v1.14.0](https://github.com/birdofpreyru/react-utils/releases/tag/v1.14.0).
 Use the [splitComponent()] function instead
@@ -140,7 +140,6 @@ export default function WrappedSampleComponent(props) {
 }
 ```
 
-<!-- Re-usable links -->
 [CodeSplit]: /docs/api/components/codesplit
 [Examples]: #examples
 [resolveRequire()]: #resolverequire

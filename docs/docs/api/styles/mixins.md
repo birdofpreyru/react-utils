@@ -4,7 +4,7 @@ them in a SCSS file import:
 ```scss
 @use "@dr.pogodin/react-utils/mixins" as *;
 ```
-:::info Note
+:::info[Note]
 It might be more convenient to have a local `mixin` file local to the host
 codebase, and import `react-utils` mixins into that file. Alongside that import
 it may contain any additional mixins specific to the project. Then that local

@@ -12,7 +12,7 @@ import CodeBlock from '@theme/CodeBlock';
 import TextAreaExample from '../../../src/components/TextAreaExample';
 import exampleCode from '!!raw-loader!../../../src/components/TextAreaExample';
 
-:::note Demo
+:::note[Demo]
 <TextAreaExample />
 :::
 <details>

@@ -7,7 +7,7 @@ import { WithTooltip } from '@dr.pogodin/react-utils';
 
 import Example from '../../../src/components/WithTooltipExample';
 
-:::note Demo
+:::note[Demo]
 <Example />
 
 Find [the source code below][Examples].

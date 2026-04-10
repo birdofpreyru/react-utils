@@ -30,7 +30,7 @@ from the dedicated server-side package export `@dr.pogodin/react-utils/server`.
 - [getDefaultCspSettings()](#getdefaultcspsettings) &mdash; Returns a deep copy of
   default [CSP] settings object used by **react-utils**.
 
-:::caution Deprecated
+:::caution[Deprecated]
 - [errors.joi](#errorsjoi) &mdash; Removed in **v1.44.0**; an alias for [Joi]
   library, which provides methods for HTTP request validation.
 :::
@@ -189,7 +189,7 @@ with exception of `nonce-xxx` clause in `script-src` directive, which is added
 dynamically for each request.
 
 ### errors.joi
-:::danger Deprecated
+:::danger[Deprecated]
 Removed in **v1.44.0**. The original documentation below is kept for reference.
 
 ---

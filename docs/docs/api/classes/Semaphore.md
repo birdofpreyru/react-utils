@@ -85,8 +85,6 @@ argument.
 
 <BewareNote01 />
 
-<!-- Re-usable links below -->
-
 [Barrier]: /docs/api/classes/Barrier
 [constructor()]: #constructor
 [JS Utils]: https://www.npmjs.com/package/@dr.pogodin/js-utils

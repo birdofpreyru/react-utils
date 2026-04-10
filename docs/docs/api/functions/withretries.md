@@ -47,7 +47,6 @@ withRetries(sampleAction).then(console.log);
   (without any further attempts after the success); or rejects with the error
   thrown from the last allowed, and failed attempt.
 
-<!-- References -->
 [JS Utils]: https://www.npmjs.com/package/@dr.pogodin/js-utils
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [withRetries()]: /docs/api/functions/withretries

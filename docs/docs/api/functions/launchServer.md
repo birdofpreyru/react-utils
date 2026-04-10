@@ -301,7 +301,7 @@ The signature for [launchServer()]'s `onExpressJsSetup` option.
 - Nothing
 - **Promise** &mdash; It will be awaited before [launchServer()] continues with the setup.
 
-### Script {#beforerender-script}
+### Script {/* #beforerender-script */}
 Describes a custom script to inject into the rendered HTML. It is intended for
 the optional `extraScripts` field of [BeforeRenderResT] type.
 A valid [Script] object has two fields:
@@ -334,7 +334,7 @@ HTML is returned by the server. Otherwise HTML markup is generated from scratch
 for the request, and stored into the cache under the given `key` for future
 reuse.
 
-:::caution WARNING
+:::caution[WARNING]
 If during SSR some component writes **5xx** value into `.status` field of
 **ssrContext** (see [getSsrContext()]) the generated HTML markup won't be
 cached, no matter the result of [staticCacheController()] call.

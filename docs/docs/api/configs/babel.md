@@ -52,7 +52,7 @@ This preset includes:
   required by HMR (Hot Module Resolving); see documentation of
   [React Refresh Webpack Plugin] for details.
 
-### Options {#client-side-options}
+### Options {/* #client-side-options */}
 These are client-side preset options:
 
 - `modules` &mdash; `amd` | `auto` | `cjs` | `commonjs` | `systemjs` | `umd`
@@ -105,7 +105,7 @@ configurations, and on top of that it:
   plugin to replace stylesheet imports with maps of generated classnames, and
   remove anonymous stylesheet imports.
 
-  :::info Info
+  :::info[Info]
   Prior to **v1.15.0**
   [@dr.pogodin/babel-plugin-css-modules-transform](https://www.npmjs.com/package/@dr.pogodin/babel-plugin-css-modules-transform)
   was included to achieve the same effects achived now by `replaceImport` option.
@@ -125,7 +125,7 @@ configurations, and on top of that it:
 
 
 
-### Options {#server-side-options}
+### Options {/* #server-side-options */}
 It accepts all [client-side preset option](#client-side-options), and on top of
 that:
 - `baseAssetsOutputPath` - **string** - Path prefix for emitted image assets.

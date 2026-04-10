@@ -17,7 +17,7 @@ import config from '@dr.pogodin/react-utils/config/eslint/default';
 export default config;
 ```
 
-:::warning History
+:::warning[History]
 - [v1.43.0](https://github.com/birdofpreyru/react-utils/releases/tag/v1.42.0) &mdash;
   we have replaced the two legacy [ESLint] configs (`default` and `jest`),
   exported by the library before, and based on AirBnB ESLint configurations,

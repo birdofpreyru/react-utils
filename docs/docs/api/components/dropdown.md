@@ -20,7 +20,7 @@ import CodeBlock from '@theme/CodeBlock';
 import Example from '../../../src/components/DropdownExample';
 import exampleCode from '!!raw-loader!../../../src/components/DropdownExample';
 
-:::note Demo
+:::note[Demo]
 <Example />
 :::
 

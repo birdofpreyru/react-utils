@@ -5,7 +5,7 @@ sidebar_class_name: deprecated
 # ScalableRect
 [ScalableRect]: /docs/api/components/scalablerect
 
-:::danger Deprecated
+:::danger[Deprecated]
 The [ScalableRect] component has been deprecated and removed from the library
 in its **v1.31.0** release. Use [aspect-ratio] CSS property instead.
 :::

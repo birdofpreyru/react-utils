@@ -1,7 +1,7 @@
 # Jest
 Default configuration for [Jest] testing framework.
 
-:::caution Beware
+:::caution[Beware]
 It does strong assumptions about the host project's code structure: the host
 [Jest] configuration in the `/config/jest` folder of host code; the source code
 in `/src` folder; build outputs in `/build` folder; _etc._

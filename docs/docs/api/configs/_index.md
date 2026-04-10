@@ -6,7 +6,6 @@
   compiler.
 - [Webpack](/docs/api/configs/webpack) &mdash; Configs for [Webpack] builds.
 
-<!-- links -->
 [Babel]: https://babeljs.io
 [ESLint]: https://eslint.org
 [Jest]: https://jestjs.io

@@ -4,7 +4,7 @@ sidebar_class_name: deprecated
 
 # newBarrier()
 
-:::danger Deprecated
+:::danger[Deprecated]
 The [newBarrier()] function was deprecated in **v1.23.9**, and removed in
 **v1.24.0**. Instead use [Barrier] constructor directly,
 _i.e._

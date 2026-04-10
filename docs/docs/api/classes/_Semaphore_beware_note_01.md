@@ -1,4 +1,4 @@
-:::caution BEWARE
+:::caution[BEWARE]
 Prior to the library version **v1.23.0** it was suggested that [seize()] is
 equivalent to
 ```js

@@ -52,7 +52,7 @@ To upgrade a project started from this starting pack:
   }
   /* eslint-enable global-require */
   ```
-  :::caution Beware
+  :::caution[Beware]
   If `import` and `require` statements are intermixed in the same module
   `import` statements are always hoisted on top. You should take a special
   care in such case to ensure that these global stylesheets are loaded before

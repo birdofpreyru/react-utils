@@ -10,7 +10,7 @@ import CodeBlock from '@theme/CodeBlock';
 import ModalExample from '../../../src/components/ModalExample';
 import exampleCode from '!!raw-loader!../../../src/components/ModalExample';
 
-:::note Demo
+:::note[Demo]
 <ModalExample />
 :::
 
@@ -55,7 +55,7 @@ to the window scrolling events when the modal is displayed,
 - `theme` &mdash; [ModalTheme] &mdash; _Ad hoc_ visual theme.
 - Other [props of themed components](https://www.npmjs.com/package/@dr.pogodin/react-themes#themed-component-properties)
 
-:::caution Deprecated Properties
+:::caution[Deprecated Properties]
 - `containerStyle` &mdash; **React.CSSProperties** &mdash; Inline style object
   to pass to the modal container &mdash; Use `style` property instead.
 :::

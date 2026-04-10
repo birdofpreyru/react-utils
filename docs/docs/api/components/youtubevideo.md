@@ -6,7 +6,7 @@ The [YouTubeVideo] component renders an embed [YouTube] video.
 
 import { YouTubeVideo } from '@dr.pogodin/react-utils';
 
-:::note Demo
+:::note[Demo]
 <YouTubeVideo src="https://youtu.be/NdF6Rmt6Ado" />
 :::
 

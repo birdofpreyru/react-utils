@@ -11,12 +11,14 @@
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids"
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "typecheck": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.10.0",
-    "@docusaurus/preset-classic": "^3.10.0",
-    "@docusaurus/theme-common": "^3.10.0",
+    "@docusaurus/core": "3.10.0",
+    "@docusaurus/faster": "3.10.0",
+    "@docusaurus/preset-classic": "3.10.0",
+    "@docusaurus/theme-common": "3.10.0",
     "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.51.0.tgz",
     "@mdx-js/react": "^3.1.1",
     "file-loader": "^6.2.0",
@@ -27,6 +29,13 @@
     "sass": "^1.99.0",
     "url-loader": "^4.1.1"
   },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "3.10.0",
+    "@docusaurus/tsconfig": "3.10.0",
+    "@docusaurus/types": "3.10.0",
+    "@types/react": "^19.2.14",
+    "typescript": "~6.0.2"
+  },
   "browserslist": {
     "production": [
       ">0.5%",
@@ -34,14 +43,12 @@
       "not op_mini all"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "last 3 chrome version",
+      "last 3 firefox version",
+      "last 5 safari version"
     ]
   },
-  "devDependencies": {
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "babel-plugin-transform-import-meta": "^2.3.3"
+  "engines": {
+    "node": ">=20.0"
   }
 }

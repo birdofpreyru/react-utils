@@ -88,7 +88,7 @@ as the build script argument. In these mode this script does the following:
 - Bundles with [Webpack] the production or development version of the code
   for client-side environment.
 
-:::caution Beware
+:::caution[Beware]
 To achieve required structure this build script overrides
 `context` and `publicPath` fields of the [Webpack] config you pass in.
 :::

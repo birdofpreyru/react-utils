@@ -58,7 +58,7 @@ The following docblock pragma parameters are recognized by the environment:
   logging from React Global State, and avoid problems with HMR incompatible
   with Jest testing setup without extra efforts.
 
-  :::info CHANGELOG
+  :::info[CHANGELOG]
   In the library versions **v1.17.2** &div; **v1.17.4** `.dontEmitBuildInfo`
   flag was automatically set **true**. Since **v1.17.5** the `.fs` option is
   used instead to collect in a virtual filesystem artifacts created during
@@ -92,7 +92,7 @@ The following docblock pragma parameters are recognized by the environment:
     This option allows to alter it. It currently accepts a single valid value:
     - "`TEST`" - To use the current test folder as the root.
 
-      :::tip TIP
+      :::tip[TIP]
       You may want to use this option to place a custom `babel.config.json` file
       into the test folder. Mind that to completely override Babel settings for
       the tested codebase, you probably should set to **false**
@@ -197,7 +197,6 @@ it('sample test', async ()= > {
 });
 ```
 
-<!-- links -->
 [build info]: /docs/api/configs/webpack#build-info
 [client()]: /docs/api/functions/client
 [E2eSsrEnv]: /docs/api/classes/E2eSsrEnv

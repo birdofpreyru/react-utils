@@ -9,7 +9,7 @@ import CodeBlock from '@theme/CodeBlock';
 import Example from '../../../src/components/SwitchExample';
 import exampleCode from '!!raw-loader!../../../src/components/SwitchExample';
 
-:::info Demo
+:::info[Demo]
 <Example />
 :::
 

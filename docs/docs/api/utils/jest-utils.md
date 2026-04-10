@@ -56,7 +56,7 @@ a very important part of Jest-testing utilities provided by the library.
 - [unmockClientSide()](#unmockclientside) - Reverts the effect of previous
   [mockClientSide()] call.
 
-:::caution Deprecated Methods
+:::caution[Deprecated Methods]
 - [render()](#render) &mdash; Removed in **v1.34.0**. Migrate to
   [render()] provided by [@testing-library/react].
 - [shallowRender()] &mdash; Removed in **v1.34.0**. Starting with React v19
@@ -181,24 +181,24 @@ an alias for `expect(scene).toMatchSnapshot()`).
   **.destroy()** and **.snapshot()** methods attached.
 
 ### render()
-:::danger Deprecated
+:::danger[Deprecated]
 Removed in **v1.34.0**. Migrate to [render()] provided by [@testing-library/react].
 :::
 
 ### shallowRender()
-:::danger Deprecated
+:::danger[Deprecated]
 Removed in **v1.34.0**. Starting with React v19 it is recommended to
 [avoid shallow rendering] in tests.
 :::
 
 ### shallowSnapshot()
-:::danger Deprecated
+:::danger[Deprecated]
 Removed in **v1.34.0**. Starting with React v19 it is recommended to
 [avoid shallow rendering] in tests.
 :::
 
 ### simulate()
-:::danger Deprecated
+:::danger[Deprecated]
 Removed in **v1.34.0**. Use instead [@testing-library/user-event],
 or the lower-level [fireEvent] from [@testing-library/dom].
 :::
@@ -233,7 +233,7 @@ test('A snapshot test', () => {
 ```
 </details>
 
-:::caution Beware
+:::caution[Beware]
 - It relies on [render()] function provided by [@testing-library/react],
   thus it renders provided component into DOM (**appends it to the current DOM
   content**), and snapshots HTML representation of the generated DOM node.

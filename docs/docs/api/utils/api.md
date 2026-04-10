@@ -3,7 +3,7 @@ sidebar_class_name: deprecated
 ---
 # api
 [api]: /docs/api/utils/api
-:::danger Deprecated
+:::danger[Deprecated]
 The [api] alias for [axios] library has been removed in **v1.39.0**
 because it turned out incompatible with the new [mockAxios()] helper
 in [Jest Utils] (it was causing a circular dependency in some tests),

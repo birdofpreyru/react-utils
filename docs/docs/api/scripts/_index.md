@@ -4,6 +4,5 @@
 - [react-utils-setup](/docs/api/scripts/react-utils-setup) &mdash; Library setup and
   upgrades.
 
-<!-- links -->
 [Babel]: https://babeljs.io
 [Webpack]: https://webpack.js.org

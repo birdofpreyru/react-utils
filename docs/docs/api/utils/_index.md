@@ -8,7 +8,7 @@
 - [time](/docs/api/utils/time) - Date & time utils.
 - [webpack](/docs/api/utils/webpack) - [Webpack]-related utils.
 
-:::warning Deprecated Utilities
+:::warning[Deprecated Utilities]
 - [api](/docs/api/utils/api) &mdash; It was just an alias for [axios] library;
   it has been removed in **v1.39.0**; use [axios] directly instead.
 - [config](/docs/api/utils/config) &mdash; Isomorphic app config. Removed in
@@ -21,7 +21,6 @@
   moved to [React Themes].
 :::
 
-<!-- links -->
 [axios]: https://www.npmjs.com/package/axios
 [ESLint]: https://eslint.org
 [getConfig()]: /docs/api/functions/getConfig

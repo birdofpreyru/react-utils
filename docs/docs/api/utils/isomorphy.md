@@ -7,7 +7,7 @@ aspects of code (mostly environment checks: client- or server-side, development
 or production, _etc._). All [constants](#constants) and [methods](#methods)
 documented below are exposed as key values of `isomorphy` object.
 
-:::caution Beware
+:::caution[Beware]
 This module relies on [Babel](/docs/api/configs/babel) and
 [Webpack](/docs/api/configs/webpack) configurations provided
 by **react-utils** library being used by the host code, along with provided
@@ -23,7 +23,7 @@ work correctly with a different app setup.
   the server-side (NodeJS) environment, and equals **false** at the client-side
   (browser).
 
-:::info INFO
+:::info[INFO]
 For the purpose of `.IS_CLIENT_SIDE` and `.IS_SERVER_SIDE` constants the client-
 and server-side are distinguished based on the presence in the environment of
 the `process` object with Node version stored at its `process.versions.node`
@@ -72,7 +72,6 @@ isomorphy.isProdBuild() => boolean
 Returns **boolean**: **true** if the production version of code is running,
 **false** otherwise.
 
-<!-- links -->
 [build info]: /docs/api/configs/webpack#build-info
 [JU]: /docs/api/utils/jest-utils#mockclientside
 [mockClientSide()]: /docs/api/utils/jest-utils#mockclientside

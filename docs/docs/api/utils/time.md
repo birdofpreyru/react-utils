@@ -210,7 +210,6 @@ methods of the [Barrier] after aborting the timer).
 - Returns [Barrier] which resolves after the given `timeout`. Additional
   **.abort()** method is attached to the [Barrier], as explained above.
 
-<!-- links -->
 [Barrier]: /docs/api/classes/Barrier
 [dayjs]: https://day.js.org/en
 [Date.now()]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now

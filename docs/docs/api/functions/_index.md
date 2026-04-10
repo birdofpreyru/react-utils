@@ -7,7 +7,7 @@
 - [withRetries()](/docs/api/functions/withretries) &mdash; Attempts an operation
   multiple times till the first success.
 
-:::caution Deprecated Functions
+:::caution[Deprecated Functions]
 - [client()] &mdash; Renamed into [launchClient()] in [v1.47.0-alpha.8],
   and also moved to a dedicated client-side package export.
 - [newBarrier()](/docs/api/functions/newbarrier) &mdash; Deprecated
@@ -17,7 +17,6 @@
   and also moved to a dedicated server-side package export.
 :::
 
-<!-- links -->
 [assertEmptyObject()]: /docs/api/functions/assertEmptyObject
 [Barrier]: /docs/api/classes/Barrier
 [client()]: /docs/api/functions/client

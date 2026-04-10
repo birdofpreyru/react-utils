@@ -38,7 +38,7 @@ prevents it from being bundled into the client-side code by Webpack.
 
 - **Client-side**: always returns **null**.
 
-:::info Changes across `dr.pogodin/react-utils` versions:
+:::info[Changes across `dr.pogodin/react-utils` versions:]
 - **v1.46.0**: On server side it now always throws an error in case of
   the module loading failure. Environments where it causes problems should
   set the global `REACT_UTILS_FORCE_CLIENT_SIDE` flag to _true_.
@@ -75,6 +75,5 @@ thus the same way the resolution works for the normal `require()`.
 - `modulePath` - **string** - Module path.
 - Returns **string** - The resolved relative path to the module.
 
-<!-- Reusable links. -->
 [path.resolve()]: https://nodejs.org/dist/latest-v16.x/docs/api/path.html#pathresolvepaths
 [requireWeak()]: #requireweak

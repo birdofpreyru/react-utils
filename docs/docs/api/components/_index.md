@@ -19,14 +19,13 @@
 - [WithTooltip](/docs/api/components/withtooltip) &mdash; Themed tooltip wrapper.
 - [YouTubeVideo](/docs/api/components/youtubevideo) &mdash; Embed YouTube video.
 
-:::caution Deprecated Components
+:::caution[Deprecated Components]
 - [CodeSplit] &mdash; Removed in **v1.14.0**, use [splitComponent()] instead
   ([migration guidelines][CodeSplit]).
 - [ScalableRect](/docs/api/components/scalablerect) &mdash; Removed in
   **v1.31.0**, use [aspect-ratio] CSS property instead.
 :::
 
-<!-- links -->
 [aspect-ratio]: https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
 [CodeSplit]: /docs/api/components/codesplit
 [CustomDropdown]: /docs/api/components/customdropdown

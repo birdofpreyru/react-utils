@@ -3,7 +3,7 @@ sidebar_class_name: deprecated
 ---
 # client()
 
-:::danger Deprecated
+:::danger[Deprecated]
 The [client()] function was renamed into [launchClient()] in the library
 [v1.47.0-alpha.8], and it was also moved to the dedicated package export
 `@dr.pogodin/react-utils/client`.
@@ -40,7 +40,7 @@ prior to loading the library.
 The `dontHydrate` option allows to opt for a pure client-side rendering, instead
 of the hydration.
 
-:::caution History
+:::caution[History]
 - [v1.47.0](https://github.com/birdofpreyru/react-utils/releases/tag/v1.47.0) &mdash;
   The previously synchronous [client()] function was turned into an asynchronous
   one in this version. It requires minor adjustments in the host code using it,
@@ -72,7 +72,6 @@ of the hydration.
     global state on the client-side, which is intended for server-less library
     use.
 
-<!-- links -->
 [beforeRender]: /docs/api/functions/server#arguments-beforerender
 [client()]: /docs/api/functions/client
 [BrowserRouter]: https://reactrouter.com/docs/en/v6/api#browserrouter
