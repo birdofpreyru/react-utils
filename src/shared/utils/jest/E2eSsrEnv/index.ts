@@ -28,14 +28,14 @@ import { defaults, set } from 'lodash-es';
 import { Volume, createFsFromVolume } from 'memfs';
 import webpack, { type Configuration, type Stats } from 'webpack';
 
+import register from '@babel/register/experimental-worker';
+
 import type {
   EnvironmentContext,
   JestEnvironmentConfig,
 } from '@jest/environment';
 
 import { deduceChunkGroups } from 'server/renderer';
-
-import { setBuildInfo } from '../../isomorphy/buildInfo';
 
 import type { LaunchT, ResultT } from './ssr';
 
@@ -203,12 +203,57 @@ export default class E2eSsrEnv extends JsdomEnv {
     this.withSsr = !pragmas['no-ssr'];
     this.ssrRequest = request;
     this.pragmas = pragmas;
+
+    // The usual "babel-jest" transformation setup does not apply to
+    // the environment code and imports from it, this workaround enables it.
+    const optionsString = this.pragmas['ssr-options'] as string;
+    const options = optionsString
+      ? JSON.parse(optionsString) as Record<string, unknown>
+      : {};
+    let root;
+    switch (options.root) {
+      case 'TEST':
+        root = this.testFolder;
+        break;
+      default: root = process.cwd();
+    }
+
+    // BEWARE: Anything imported prior to this register() call seems to be
+    // transpiled again by Babel if loaded after this call. This causes very
+    // confusing errors when testing the code dependent on some sort of contexts
+    // (because loading a module again effectively creates a new context object,
+    // which is not recognized by the code expecting another context instance).
+    // That's why below we prefer dynamic imports for some React Utils methods.
+    // BEWARE: Although we also do the registration inside SSR testing code,
+    // we still need it here to correctly process imported Webpack configurations
+    // (which are imported directly from this module).
+    register({
+      envName: options.babelEnv as string,
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
+      root,
+    });
   }
 
   async setup(): Promise<void> {
     await super.setup();
     await this.runWebpack();
 
+    // NOTE: It is possible that the Webpack run above, and the SSR run below
+    // load different versions of the same module (CommonJS, and ES), and it may
+    // cause very confusing problems (e.g. see:
+    // https://github.com/birdofpreyru/react-utils/issues/413).
+    // It seems we can't reset the cache of ES modules, and Jest's module reset
+    // does not reset modules loaded in this enviroment module, and also only
+    // replacing entire cache object by and empty {} seems to help (in contrast
+    // to deleting all entries by their keys, as it is done within .teardown()
+    // method below). Thus, for now we do this as a hotfix, and we also reset
+    // build info to undefined, because ES module version not beeing reset
+    // triggers an error on the subsequent test using the environment.
+    // TODO: Look for a cleaner solution.
+    require.cache = {};
+
+    // eslint-disable-next-line import/dynamic-import-chunkname
+    const { setBuildInfo } = await import('../../isomorphy/buildInfo');
     setBuildInfo(undefined, true);
 
     if (this.withSsr) await this.runSsr();
@@ -227,6 +272,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     Object.keys(require.cache).forEach((key) => {
       delete require.cache[key];
     });
+    register.revert();
 
     await super.teardown();
   }
