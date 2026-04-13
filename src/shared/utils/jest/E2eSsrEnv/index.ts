@@ -146,7 +146,11 @@ export default class E2eSsrEnv extends JsdomEnv {
 
     options.chunkGroups = deduceChunkGroups(this.webpackStats);
 
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+      cp.on('exit', (code) => {
+        if (code) reject(Error('SSR process crashed'));
+      });
+
       cp.on('message', (message: ResultT) => {
         this.global.ssrMarkup = message.markup;
         this.global.ssrOptions = options;

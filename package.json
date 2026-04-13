@@ -1,5 +1,5 @@
 {
-  "version": "1.51.1",
+  "version": "1.51.2",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -63,7 +63,6 @@
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@tsconfig/recommended": "^1.0.13",
-    "@types/babel__register": "^7.17.3",
     "@types/compression": "^1.8.1",
     "@types/config": "^3.3.5",
     "@types/cookie": "^0.6.0",
