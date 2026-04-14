@@ -1,12 +1,17 @@
 /* eslint-disable import/dynamic-import-chunkname, import/no-extraneous-dependencies */
 
-import { resolve } from 'node:path';
+import { readFileSync } from 'node:fs';
+import { registerHooks } from 'node:module';
+import { basename, dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import type { Request, Response } from 'express';
 import type { ReactNode } from 'react';
 import type { Configuration } from 'webpack';
 
-import register from '@babel/register';
+import { transformSync } from '@babel/core';
+
+import ssrFactory from 'server/renderer';
 
 export type LaunchT = {
   // TODO: Should it be typed as the renderer's options type?
@@ -34,15 +39,55 @@ async function run({
   testFolder,
   webpackConfig,
 }: LaunchT) {
-  register({
-    envName: options.babelEnv as string,
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
-    root,
+  // NOTE: It looks like @babel/register does not work for us here, because
+  // it only supports transpiling of modules loaded with require(), so here
+  // is, presumably, a temporary workaround relying on the new NodeJS module
+  // API, and Babel's core, to transpile all modules loaded further into
+  // CommonJS. I guess, later we'll be able to get rid of this, as Babel
+  // register supports runtime transformation of modules loaded with import().
+  registerHooks({
+    load(url, context, nextLoad) {
+      if (
+        url.startsWith('file://')
+        && !url.includes('/node_modules/')
+        && !url.includes('/config/babel/')
+        && url.match(/\.(js|jsx|ts|tsx|svg)$/)
+      ) {
+        const path = fileURLToPath(url);
+        let code = readFileSync(path, 'utf8');
+        code = transformSync(code, {
+          cwd: dirname(path),
+          envName: options.babelEnv as string,
+          filename: basename(path),
+          root,
+        })?.code ?? '';
+        return {
+          format: 'commonjs',
+          shortCircuit: true,
+          source: code,
+        };
+      }
+
+      return nextLoad(url, context);
+    },
   });
 
   if (options.entry) {
     const p = resolve(testFolder, options.entry as string);
-    const module = await import(p) as NodeJS.Module;
+    const babelModule = await import(p) as NodeJS.Module;
+
+    // TODO: This is basically a hotfix hack, which works both for the library
+    // itself, and for dependent projects... (those tested so far). It sure has
+    // to be reworked later.
+    /* eslint-disable no-underscore-dangle */
+    const module = (
+      '__esModule' in babelModule
+      && typeof babelModule.__esModule === 'boolean'
+      && babelModule.__esModule
+      && 'default' in babelModule
+        ? babelModule.default : babelModule
+    ) as NodeJS.Module;
+    /* eslint-enable no-underscore-dangle */
 
     const exportName = (options.entryExportName as string) || 'default';
     if (exportName in module) {
@@ -50,10 +95,9 @@ async function run({
       options.Application = (
         module as unknown as Record<string, unknown>
       )[exportName] as ReactNode;
-    }
+      // eslint-disable-next-line no-param-reassign
+    } else options.Application = module;
   }
-
-  const { default: ssrFactory } = await import('server/renderer');
 
   const renderer = ssrFactory(webpackConfig, options);
   let status = 200; // OK

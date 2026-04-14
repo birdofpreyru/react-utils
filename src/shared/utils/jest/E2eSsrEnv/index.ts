@@ -146,16 +146,20 @@ export default class E2eSsrEnv extends JsdomEnv {
   }
 
   async runSsr(): Promise<void> {
+    // NOTE: These are TS modules in the source code, and they turn into JS
+    // modules in the distributed code, after Babel compilation. As we rely
+    // on them for the forked NodeJS process, we need to resolve the correct
+    // extentions ourselves (as NodeJS will hit the given paths, without any
+    // additional resolutions / transformations).
     const regModulePath = await findModule(`${import.meta.dirname}/register`);
     const ssrModulePath = await findModule(`${import.meta.dirname}/ssr`);
 
     const cp = fork(ssrModulePath, [], {
-      // NOTE: This ensures the forked "ssr.ts" module is pre-processed by
-      // Babel, which is necessary to correctly resolve paths to modules it
-      // loads, as we rely on Babel aliasing module paths; and we need to have
-      // a little "register.ts" module (rather than just a command-line argument)
-      // because we need to specify to Babel that ".ts", ".tsx", etc. files
-      // need to be processed, in addition to the standard JS modules.
+      // NOTE: We have to preload this "register" module, to setup Babel
+      // transformation for the loaded "ssr.ts" module itself (I believe,
+      // it is relevant only when the source code is executed within
+      // the library codebase itself, as the distributed code already
+      // has "ssr.ts" transpiled).
       execArgv: ['-r', regModulePath],
     });
 
