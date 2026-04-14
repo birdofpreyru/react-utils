@@ -21,6 +21,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { fork } from 'node:child_process';
+import { access } from 'node:fs/promises';
 import path from 'node:path';
 
 import JsdomEnv from 'jest-environment-jsdom';
@@ -38,6 +39,26 @@ import type {
 import { deduceChunkGroups } from 'server/renderer';
 
 import type { LaunchT, ResultT } from './ssr';
+
+async function findModule(module: string): Promise<string> {
+  try {
+    const res = `${module}.ts`;
+    await access(res);
+    return res;
+  } catch {
+    // NOOP
+  }
+
+  try {
+    const res = `${module}.js`;
+    await access(res);
+    return res;
+  } catch {
+    // NOOP
+  }
+
+  throw Error(`Module "${module}" was not found, neither as TS, nor as JS`);
+}
 
 export default class E2eSsrEnv extends JsdomEnv {
   pragmas: Record<string, string | string[]>;
@@ -125,14 +146,17 @@ export default class E2eSsrEnv extends JsdomEnv {
   }
 
   async runSsr(): Promise<void> {
-    const cp = fork(`${import.meta.dirname}/ssr.ts`, [], {
+    const regModulePath = await findModule(`${import.meta.dirname}/register`);
+    const ssrModulePath = await findModule(`${import.meta.dirname}/ssr`);
+
+    const cp = fork(ssrModulePath, [], {
       // NOTE: This ensures the forked "ssr.ts" module is pre-processed by
       // Babel, which is necessary to correctly resolve paths to modules it
       // loads, as we rely on Babel aliasing module paths; and we need to have
       // a little "register.ts" module (rather than just a command-line argument)
       // because we need to specify to Babel that ".ts", ".tsx", etc. files
       // need to be processed, in addition to the standard JS modules.
-      execArgv: ['-r', `${import.meta.dirname}/register.ts`],
+      execArgv: ['-r', regModulePath],
     });
 
     const optionsString = this.pragmas['ssr-options'] as string;
