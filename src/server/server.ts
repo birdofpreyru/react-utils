@@ -20,7 +20,6 @@ import { cloneDeep, mapValues, pick } from 'lodash-es';
 import loggerMiddleware from 'morgan';
 import requestIp from 'request-ip';
 import favicon from 'serve-favicon';
-import { v4 as uuid } from 'uuid';
 
 import type { Configuration } from 'webpack';
 
@@ -175,7 +174,7 @@ export default async function factory(
       (req: Request, res: Response, next: NextFunction) => {
         const req2 = req as RequestT;
 
-        req2.nonce = uuid();
+        req2.nonce = globalThis.crypto.randomUUID();
 
         // TODO: This is deprecated, but it is kept for now for backward
         // compatibility. Should be removed sometime later.

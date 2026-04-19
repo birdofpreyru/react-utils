@@ -9,7 +9,6 @@ const modulesToTransform = [
   '@dr.pogodin/react-global-state',
   '@dr.pogodin/react-utils',
   'lodash-es',
-  'uuid',
 ];
 
 module.exports = {

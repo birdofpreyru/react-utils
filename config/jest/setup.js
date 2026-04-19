@@ -5,6 +5,8 @@ import { subtle } from 'node:crypto';
 // eslint-disable-next-line import/no-unassigned-import
 import 'raf/polyfill';
 
+import { getMockUuid } from 'utils/jest';
+
 // TODO: This is a temporary polyfill necessary for react-router,
 // as JSDom does not provide TextEncoder, see:
 // https://github.com/remix-run/react-router/issues/12363
@@ -19,3 +21,6 @@ if (typeof window !== 'undefined') {
   window.crypto.subtle = subtle;
   window.isSecureContext = true;
 }
+
+let state = 0;
+globalThis.crypto.randomUUID = () => getMockUuid(++state);
