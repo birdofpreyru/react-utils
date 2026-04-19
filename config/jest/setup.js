@@ -5,7 +5,7 @@ import { subtle } from 'node:crypto';
 // eslint-disable-next-line import/no-unassigned-import
 import 'raf/polyfill';
 
-import { getMockUuid } from 'utils/jest';
+import { getMockUuid } from '@dr.pogodin/react-utils/jest';
 
 // TODO: This is a temporary polyfill necessary for react-router,
 // as JSDom does not provide TextEncoder, see:
