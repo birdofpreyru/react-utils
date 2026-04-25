@@ -4,6 +4,7 @@ import {
   type FunctionComponent,
   type ReactNode,
   useEffect,
+  useEffectEvent,
   useRef,
   useState,
 } from 'react';
@@ -72,6 +73,8 @@ const WithTooltip: FunctionComponent<PropsT> = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [showTooltip, setShowTooltip] = useState(false);
 
+  const getHeap = useEffectEvent(() => heap);
+
   const updatePortalPosition = (cursorX: number, cursorY: number) => {
     if (showTooltip) {
       const wrapperRect = wrapperRef.current!.getBoundingClientRect();
@@ -111,6 +114,8 @@ const WithTooltip: FunctionComponent<PropsT> = ({
   };
 
   useEffect(() => {
+    const heap2 = getHeap();
+
     if (showTooltip && tip !== null) {
       // This is necessary to ensure that even when a single mouse event
       // arrives to a tool-tipped component, the tooltip is correctly positioned
@@ -119,8 +124,8 @@ const WithTooltip: FunctionComponent<PropsT> = ({
       // cycle due to the implementation).
       if (tooltipRef.current) {
         tooltipRef.current.pointTo(
-          heap.lastCursorX + window.scrollX,
-          heap.lastCursorY + window.scrollY,
+          heap2.lastCursorX + window.scrollX,
+          heap2.lastCursorY + window.scrollY,
           placement,
           wrapperRef.current!,
         );
@@ -136,8 +141,6 @@ const WithTooltip: FunctionComponent<PropsT> = ({
     }
     return undefined;
   }, [
-    heap.lastCursorX,
-    heap.lastCursorY,
     placement,
     showTooltip,
     tip,

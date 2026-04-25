@@ -314,7 +314,9 @@ export default async function factory(
       }
 
       const status = error.status ?? CODES.INTERNAL_SERVER_ERROR;
-      const serverSide = status >= (CODES.INTERNAL_SERVER_ERROR as number);
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+      const serverSide = status >= CODES.INTERNAL_SERVER_ERROR;
 
       // Log server-side errors always, client-side at debug level only.
       options.logger!.log(serverSide ? 'error' : 'debug', error.toString());

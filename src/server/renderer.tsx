@@ -37,7 +37,7 @@ import Cache from './Cache';
 
 // @ts-expect-error "Property 'SECRET' does not exist on type 'IConfig'."
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const { SECRET, ...sanitizedConfig } = config.util.toObject(config);
+const { SECRET, ...publicConfig } = config.util.toObject(config);
 
 // Note: These type definitions for logger are copied from Winston logger,
 // then simplified to make it easier to fit an alternative logger into this
@@ -407,7 +407,7 @@ export default function factory(
         }
       }
 
-      const brr = ops.beforeRender!(req, sanitizedConfig as unknown as ConfigT);
+      const brr = ops.beforeRender!(req, publicConfig);
       const { configToInject, extraScripts, initialState } = await brr;
 
       const [cipher, iv] = prepareCipher(buildInfo.key);
@@ -460,6 +460,8 @@ export default function factory(
                 throw Error('Internal error');
               }
               error = arg;
+
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
               rejectArg(arg as Error);
             };
 
@@ -536,7 +538,7 @@ export default function factory(
        * better than injection of a plain text. */
       const payload = serializeJs({
         CHUNK_GROUPS: chunkGroups,
-        CONFIG: configToInject ?? sanitizedConfig,
+        CONFIG: configToInject ?? publicConfig,
         ISTATE: ssrContext.state,
       }, {
         ignoreFunction: true,

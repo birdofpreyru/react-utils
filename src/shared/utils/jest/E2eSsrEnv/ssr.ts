@@ -6,7 +6,6 @@ import { basename, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import type { Request, Response } from 'express';
-import type { ReactNode } from 'react';
 import type { Configuration } from 'webpack';
 
 import { transformSync } from '@babel/core';
@@ -94,7 +93,7 @@ async function run({
       // eslint-disable-next-line no-param-reassign
       options.Application = (
         module as unknown as Record<string, unknown>
-      )[exportName] as ReactNode;
+      )[exportName];
       // eslint-disable-next-line no-param-reassign
     } else options.Application = module;
   }
