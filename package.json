@@ -193,7 +193,7 @@
     "jest:types": "tstyche",
     "jest": "npm run jest:types && npm run jest:logic",
     "lint": "npm run lint:code && npm run lint:scss",
-    "lint:code": "eslint --cache",
+    "lint:code": "eslint --cache --cache-strategy content",
     "lint:scss": "stylelint -- **/*.{css,scss}",
     "test": "npm run lint && npm run typecheck && npm run jest",
     "typecheck": "tsc --noEmit"
