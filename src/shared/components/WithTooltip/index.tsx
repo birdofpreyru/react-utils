@@ -2,7 +2,9 @@
 
 import {
   type FunctionComponent,
+  type HTMLAttributes,
   type ReactNode,
+  type RefObject,
   useEffect,
   useEffectEvent,
   useRef,
@@ -18,9 +20,10 @@ import Tooltip, {
 
 import defaultTheme from './default-theme.scss';
 
-type PropsT = {
+type PropsT = HTMLAttributes<HTMLDivElement> & {
   children?: ReactNode;
   placement?: PLACEMENTS;
+  ref?: RefObject<HTMLDivElement | null>;
   theme?: Theme<'wrapper' | TooltipThemeKeysT>;
   tip?: ReactNode;
 };
@@ -35,6 +38,7 @@ type TooltipRefT = {
 };
 
 type HeapT = {
+  ignoreMouseMove?: boolean;
   lastCursorX: number;
   lastCursorY: number;
   timerId?: NodeJS.Timeout;
@@ -57,9 +61,18 @@ type HeapT = {
  */
 const WithTooltip: FunctionComponent<PropsT> = ({
   children,
+  className: classNameProp,
+  onClick,
+  onContextMenu,
+  onMouseLeave,
+  onMouseMove,
+  onTouchStart,
   placement = PLACEMENTS.ABOVE_CURSOR,
+  ref,
+  style,
   theme,
   tip,
+  ...htmlAttributes
 }) => {
   const custom = useTheme('WithTooltip', defaultTheme, theme);
 
@@ -146,27 +159,78 @@ const WithTooltip: FunctionComponent<PropsT> = ({
     tip,
   ]);
 
+  let container = custom.wrapper;
+  if (classNameProp) container += ` ${classNameProp}`;
+
+  useEffect(() => {
+    const listener = () => {
+      setShowTooltip(false);
+      heap.triggeredByTouch = false;
+      if (heap.timerId) {
+        clearTimeout(heap.timerId);
+        heap.timerId = undefined;
+        heap.triggeredByTouch = false;
+      }
+    };
+    window.addEventListener('touchcancel', listener);
+    window.addEventListener('touchend', listener);
+    return () => {
+      window.removeEventListener('touchcancel', listener);
+      window.removeEventListener('touchend', listener);
+    };
+  }, []);
+
   return (
     <div
-      className={custom.wrapper}
-      onClick={() => {
+      className={container}
+      onClick={(e) => {
         if (heap.timerId) {
           clearTimeout(heap.timerId);
           heap.timerId = undefined;
           heap.triggeredByTouch = false;
         }
+        onClick?.(e);
       }}
-      onMouseLeave={() => {
+      onContextMenu={(e) => {
+        e.preventDefault();
+        onContextMenu?.(e);
+      }}
+      onMouseLeave={(e) => {
         setShowTooltip(false);
+        onMouseLeave?.(e);
       }}
       onMouseMove={(e) => {
-        updatePortalPosition(e.clientX, e.clientY);
+        // NOTE: Because on touch devices mouse move events are still fired
+        // after touch is released, to emulate mouse clicks for old websites.
+        // If we don't ignore it here, the tooltip will appear after the touch
+        // is released.
+        if (!heap.ignoreMouseMove) {
+          updatePortalPosition(e.clientX, e.clientY);
+        }
+        onMouseMove?.(e);
       }}
-      onTouchStart={() => {
+      onTouchStart={(e) => {
+        heap.ignoreMouseMove = true;
         heap.triggeredByTouch = true;
+
+        // TODO: I guess, it should be something more complex here,
+        // to actually respond to the first / whatever touch we need.
+        const touch = e.targetTouches.item(0);
+        updatePortalPosition(touch.clientX, touch.clientY);
+
+        onTouchStart?.(e);
       }}
-      ref={wrapperRef}
+      ref={(node) => {
+        wrapperRef.current = node;
+
+        // eslint-disable-next-line no-param-reassign
+        if (ref) ref.current = node;
+      }}
       role="presentation"
+      style={style}
+
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...htmlAttributes}
     >
       {
         showTooltip && tip !== null
