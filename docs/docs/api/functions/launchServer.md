@@ -64,6 +64,7 @@ launchServer(webpackConfig);
     at that point.
 
   - <Link id="arguments-beforerender" />
+    [`beforeRender` option]: #arguments-beforerender
     `beforeRender` &mdash; [BeforeRenderT] &mdash; Callback triggered in
     the beginning of server-side rendering for each incoming request, just before
     the HTML markup is generated. It allows to load and provide data necessary
@@ -103,8 +104,29 @@ launchServer(webpackConfig);
     which is created and used if no `logger` option is provided. Defaults to
     `info`.
   - `devMode` - **boolean** - Turns on development server mode.
-  - `favicon` - **string** - Path to the favicon to server by the server.
-    By default no favicon is served.
+
+  - `favicon` &mdash; **string** &mdash; Path to the favicon `.ico` file to be
+    served by the server. By default no favicon is served.
+
+    <details>
+    <summary>Details</summary>
+
+    The `.ico` file pointed by the `favicon` path (if any) is simply served from
+    the `/favicon.ico` endpoint, using the [serve-favicon] middleware; and
+    the corresponding [`<link rel="icon">` tag] is automatically injected into
+    the server-generated HTML pages.
+
+    Should you need a more complex, custom behavior, ignore the `favicon` option,
+    and setup your favicon handling from scratch. In particular:
+    - You can use the [`onExpressJsSetup` option] to configure a custom
+      `/favicon.ico` endpoint handling (_e.g._ serving different files for
+      different sub-domains).
+    - You can use the [`beforeRender` option] to inject custom
+      [`<link rel="icon">` tag]s into generated pages.
+
+    [`<link rel="icon">` tag]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel#icon
+    [serve-favicon]: https://www.npmjs.com/package/serve-favicon
+    </details>
 
   - `https` &mdash; **object** &mdash; If provided, HTTPS server will be created instead of
     the default HTTP one. The object should provide SSL sertificate and key via
@@ -122,10 +144,13 @@ launchServer(webpackConfig);
     [winston](https://www.npmjs.com/package/winston) logger with console
     transport is used. Provided logger, or the default **winston** logger,
     is attached to the created [ExpressJS] server object.
-  - [onExpressJsSetup](#onexpressjssetup) - **callback** triggered when the most
-    of server configuration is completed, and just before the server-side renderer
-    and the default error handler are attached. It can be used to mount custom
-    API routes to the server.
+
+  - [`onExpressJsSetup` option]: #option-on-expressjs-setup
+    <Link id="option-on-expressjs-setup" />[onExpressJsSetup](#onexpressjssetup)
+    &mdash; **callback** triggered when the most of server configuration is
+    completed, and just before the server-side renderer and the default error
+    handler are attached. It can be used to mount custom API routes to the server.
+
   - `port` - **number | string** - The port to start the server. Defaults to
     `3000`.
   - `staticCacheSize` - **number** - The maximum static cache size [bytes].

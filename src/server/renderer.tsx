@@ -591,7 +591,11 @@ export default function factory(
       const grouppedExtraScripts = groupExtraScripts(extraScripts);
 
       const faviconLink = ops.favicon
-        ? '<link rel="shortcut icon" href="/favicon.ico">'
+        // NOTE: It is not a mistake that the "/favicon.ico" path is hard-coded
+        // here! Note, that during the server setup the "favicon" middleware is
+        // configured to serve the given `ops.favicon` from the "/favicon.ico"
+        // path.
+        ? '<link rel="icon" href="/favicon.ico">'
         : '';
 
       const html = `<!DOCTYPE html>
