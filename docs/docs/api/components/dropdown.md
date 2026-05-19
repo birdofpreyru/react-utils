@@ -57,6 +57,11 @@ option can be modified via the `hiddenOption` theme key.
   _i.e._ you want to pass in something like `(v) => setValue(v)`, or just
   a `setValue` setter directly.
 
+- `onClick` &mdash; **MouseEventHandler** &mdash; Optional. In the case of
+  the native [Dropdown] it is passed down to the underlying `<select>` element,
+  and can be used, for example, to detect user selecting the already selected
+  value. It is not connected to anything for [CustomDropdown].
+
 - `options` &mdash; **Array&lt;[DropdownOption] | number | string&gt;** &mdash;
   An array of dropdown
   options. It is fine to intermix [DropdownOption] and string items within

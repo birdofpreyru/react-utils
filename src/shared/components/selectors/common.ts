@@ -1,5 +1,7 @@
 // The stuff common between different dropdown implementations.
 
+import type { ChangeEventHandler, MouseEventHandler, ReactNode } from 'react';
+
 import type { Theme } from '@dr.pogodin/react-themes';
 
 export type ThemeT = Theme<
@@ -33,11 +35,12 @@ export type OptionsT<NameT> = Readonly<Array<OptionT<NameT> | ValueT>>;
 
 export type PropsT<
   NameT,
-  OnChangeT = React.ChangeEventHandler<HTMLSelectElement>,
+  OnChangeT = ChangeEventHandler<HTMLSelectElement>,
 > = {
   filter?: (item: OptionT<NameT> | ValueT) => boolean;
-  label?: React.ReactNode;
+  label?: ReactNode;
   onChange?: OnChangeT;
+  onClick?: MouseEventHandler;
   options: Readonly<OptionsT<NameT>>;
   testId?: string;
   theme?: ThemeT;

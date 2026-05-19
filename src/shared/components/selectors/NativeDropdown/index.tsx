@@ -31,6 +31,7 @@ const Dropdown: FunctionComponent<PropsT<string>> = ({
   filter,
   label,
   onChange,
+  onClick,
   options,
   testId,
   theme,
@@ -80,6 +81,7 @@ const Dropdown: FunctionComponent<PropsT<string>> = ({
           className={selectClassName}
           data-testid={process.env.NODE_ENV === 'production' ? undefined : testId}
           onChange={onChange}
+          onClick={onClick}
           value={value}
         >
           {hiddenOption}

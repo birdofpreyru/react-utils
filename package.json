@@ -1,5 +1,5 @@
 {
-  "version": "1.52.5",
+  "version": "1.52.6",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -73,7 +73,7 @@
     "@types/lodash-es": "^4.17.12",
     "@types/morgan": "^1.9.10",
     "@types/pretty": "^2.0.3",
-    "@types/react": "^19.2.14",
+    "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "@types/request-ip": "^0.0.41",
     "@types/serialize-javascript": "^5.0.4",
@@ -96,7 +96,7 @@
     "mini-css-extract-plugin": "^2.10.2",
     "mockdate": "^3.0.5",
     "nodelist-foreach-polyfill": "^1.2.0",
-    "postcss": "^8.5.14",
+    "postcss": "^8.5.15",
     "postcss-loader": "^8.2.1",
     "postcss-scss": "^4.0.9",
     "pretty": "^2.0.0",
