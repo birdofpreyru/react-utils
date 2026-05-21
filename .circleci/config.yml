@@ -32,7 +32,7 @@ jobs:
       *install-build-test
   test-node-24: # Active LTS, EOL 2028.04.30
     docker:
-      - image: cimg/node:24.15
+      - image: cimg/node:24.16
     steps:
       - when:
           condition: true
@@ -45,9 +45,14 @@ jobs:
             - build
             - config
             - docs/build
-  test-node-25: # Current, EOL 2026.06.01
+  test-node-25: # Maintenance, EOL 2026.06.01
     docker:
       - image: cimg/node:25.9
+    steps:
+      *install-build-test
+  test-node-26: # Current, EOL 2029.04.30
+    docker:
+      - image: cimg/node:26.2
     steps:
       *install-build-test
   release:
@@ -74,6 +79,8 @@ workflows:
           <<: *test-filters
       - test-node-25:
           <<: *test-filters
+      - test-node-26:
+          <<: *test-filters
       - release:
           filters:
             branches:
@@ -84,3 +91,4 @@ workflows:
             - test-node-22
             - test-node-24
             - test-node-25
+            - test-node-26

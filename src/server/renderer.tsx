@@ -28,7 +28,7 @@ import winston from 'winston';
 
 import { timer } from '@dr.pogodin/js-utils';
 import { GlobalStateProvider, SsrContext } from '@dr.pogodin/react-global-state';
-import { type HelmetDataContext, HelmetProvider } from '@dr.pogodin/react-helmet';
+import { HelmetProvider, type HelmetServerState } from '@dr.pogodin/react-helmet';
 
 import type { ChunkGroupsT, SsrContextT } from 'utils/globalState';
 import { type BuildInfoT, setBuildInfo } from 'utils/isomorphy/buildInfo';
@@ -412,7 +412,7 @@ export default function factory(
 
       const [cipher, iv] = prepareCipher(buildInfo.key);
 
-      let helmet: HelmetDataContext['helmet'];
+      let helmetState: HelmetServerState | undefined;
 
       // Gets the mapping between code chunk names and their asset files.
       // These data come from the Webpack compilation, either from the stats
@@ -467,21 +467,23 @@ export default function factory(
 
             // TODO: prerenderToNodeStream has (abort) "signal" option,
             // and we should wire it up to the SSR timeout below.
-            const helmetContext = {} as HelmetDataContext;
             void prerenderToNodeStream(
               <GlobalStateProvider
                 initialState={ssrContext.state}
                 ssrContext={ssrContext}
               >
                 <StaticRouter location={req.url}>
-                  <HelmetProvider context={helmetContext}>
+                  <HelmetProvider
+                    onServerState={(state) => {
+                      helmetState = state;
+                    }}
+                  >
                     <App2 />
                   </HelmetProvider>
                 </StaticRouter>
               </GlobalStateProvider>,
               { onError: reject },
             ).then((result) => {
-              ({ helmet } = helmetContext);
               resolve(result.prelude);
             }).catch(reject);
           },
@@ -602,11 +604,11 @@ export default function factory(
         <html lang="en">
           <head>
             ${grouppedExtraScripts[SCRIPT_LOCATIONS.HEAD_OPEN]}
-            ${helmet?.title.toString() ?? ''}
-            ${helmet?.meta.toString() ?? ''}
+            ${helmetState?.title.toString() ?? ''}
+            ${helmetState?.meta.toString() ?? ''}
             <meta name="theme-color" content="#FFFFFF">
             ${manifestLink}
-            ${helmet?.link.toString() ?? ''}${styleChunkString}
+            ${helmetState?.link.toString() ?? ''}${styleChunkString}
             ${faviconLink}
             <meta charset="utf-8">
             <meta
