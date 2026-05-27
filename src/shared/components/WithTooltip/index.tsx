@@ -6,7 +6,6 @@ import {
   type ReactNode,
   type RefObject,
   useEffect,
-  useEffectEvent,
   useRef,
   useState,
 } from 'react';
@@ -76,17 +75,16 @@ const WithTooltip: FunctionComponent<PropsT> = ({
 }) => {
   const custom = useTheme('WithTooltip', defaultTheme, theme);
 
-  const { current: heap } = useRef<HeapT>({
+  const [heap, setHeap] = useState<HeapT>({
     lastCursorX: 0,
     lastCursorY: 0,
     timerId: undefined,
     triggeredByTouch: false,
   });
+
   const tooltipRef = useRef<TooltipRefT>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [showTooltip, setShowTooltip] = useState(false);
-
-  const getHeap = useEffectEvent(() => heap);
 
   const updatePortalPosition = (cursorX: number, cursorY: number) => {
     if (showTooltip) {
@@ -107,28 +105,37 @@ const WithTooltip: FunctionComponent<PropsT> = ({
         );
       }
     } else {
-      heap.lastCursorX = cursorX;
-      heap.lastCursorY = cursorY;
+      setHeap((prev) => {
+        const res: HeapT = {
+          ...prev,
+          lastCursorX: cursorX,
+          lastCursorY: cursorY,
+        };
 
-      // If tooltip was triggered by a touch, we delay its opening by a bit,
-      // to ensure it was not a touch-click - in the case of touch click we
-      // want to do the click, rather than show the tooltip, and the delay
-      // gives click handler a chance to abort the tooltip openning.
-      if (heap.triggeredByTouch) {
-        heap.timerId ??= setTimeout(() => {
-          heap.triggeredByTouch = false;
-          heap.timerId = undefined;
-          setShowTooltip(true);
-        }, 300);
+        // If tooltip was triggered by a touch, we delay its opening by a bit,
+        // to ensure it was not a touch-click - in the case of touch click we
+        // want to do the click, rather than show the tooltip, and the delay
+        // gives click handler a chance to abort the tooltip openning.
+        if (res.triggeredByTouch) {
+          res.timerId ??= setTimeout(() => {
+            setHeap((p) => ({
+              ...p,
+              timerId: undefined,
+              triggeredByTouch: false,
+            }));
 
-      // Otherwise we can just open the tooltip right away.
-      } else setShowTooltip(true);
+            setShowTooltip(true);
+          }, 300);
+
+        // Otherwise we can just open the tooltip right away.
+        } else setShowTooltip(true);
+
+        return res;
+      });
     }
   };
 
   useEffect(() => {
-    const heap2 = getHeap();
-
     if (showTooltip && tip !== null) {
       // This is necessary to ensure that even when a single mouse event
       // arrives to a tool-tipped component, the tooltip is correctly positioned
@@ -136,12 +143,15 @@ const WithTooltip: FunctionComponent<PropsT> = ({
       // the tooltip is fully mounted, and that is delayed to future rendering
       // cycle due to the implementation).
       if (tooltipRef.current) {
-        tooltipRef.current.pointTo(
-          heap2.lastCursorX + window.scrollX,
-          heap2.lastCursorY + window.scrollY,
-          placement,
-          wrapperRef.current!,
-        );
+        setHeap((prev) => {
+          tooltipRef.current?.pointTo(
+            prev.lastCursorX + window.scrollX,
+            prev.lastCursorY + window.scrollY,
+            placement,
+            wrapperRef.current!,
+          );
+          return prev;
+        });
       }
 
       const listener = () => {
@@ -178,7 +188,7 @@ const WithTooltip: FunctionComponent<PropsT> = ({
       window.removeEventListener('touchcancel', listener);
       window.removeEventListener('touchend', listener);
     };
-  }, []);
+  }, [heap]);
 
   return (
     <div
@@ -186,8 +196,12 @@ const WithTooltip: FunctionComponent<PropsT> = ({
       onClick={(e) => {
         if (heap.timerId) {
           clearTimeout(heap.timerId);
-          heap.timerId = undefined;
-          heap.triggeredByTouch = false;
+
+          setHeap({
+            ...heap,
+            timerId: undefined,
+            triggeredByTouch: false,
+          });
         }
         onClick?.(e);
       }}
@@ -210,8 +224,11 @@ const WithTooltip: FunctionComponent<PropsT> = ({
         onMouseMove?.(e);
       }}
       onTouchStart={(e) => {
-        heap.ignoreMouseMove = true;
-        heap.triggeredByTouch = true;
+        setHeap({
+          ...heap,
+          ignoreMouseMove: true,
+          triggeredByTouch: true,
+        });
 
         // TODO: I guess, it should be something more complex here,
         // to actually respond to the first / whatever touch we need.
