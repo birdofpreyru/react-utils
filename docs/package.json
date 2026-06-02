@@ -19,13 +19,13 @@
     "@docusaurus/faster": "3.10.1",
     "@docusaurus/preset-classic": "3.10.1",
     "@docusaurus/theme-common": "3.10.1",
-    "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.52.9.tgz",
+    "@dr.pogodin/react-utils": "file:../dr.pogodin-react-utils-1.52.10.tgz",
     "@mdx-js/react": "^3.1.1",
     "file-loader": "^6.2.0",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "sass": "^1.100.0",
     "url-loader": "^4.1.1"
   },
@@ -33,7 +33,7 @@
     "@docusaurus/module-type-aliases": "3.10.1",
     "@docusaurus/tsconfig": "3.10.1",
     "@docusaurus/types": "3.10.1",
-    "@types/react": "^19.2.15",
+    "@types/react": "^19.2.16",
     "typescript": "~6.0.3"
   },
   "browserslist": {
