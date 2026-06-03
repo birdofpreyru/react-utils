@@ -449,10 +449,16 @@ export default function factory(
             // if any.
             let error: unknown;
 
+            // TODO: I guess, if we refactor the rendering pass function
+            // (promise) using less Promises, but Barrier instead - it might
+            // become a better understandable.
             const resolve = (arg: NodeJS.ReadableStream) => {
-              if (error !== undefined) throw Error('Internal error');
-              error = null;
-              resolveArg(arg);
+              // NOTE: The error might be set via the `onError` handler passed
+              // into the prerenderToNodeStream() call below (which will reject
+              // the rendering pass promise), after which the this resolve()
+              // will be called from .then() handler, and we should just ignore
+              // it, and do nothing.
+              if (!error) resolveArg(arg);
             };
 
             const reject = (arg: unknown) => {
@@ -461,6 +467,7 @@ export default function factory(
               }
               error = arg;
 
+              // TODO: Perhaps assert "arg instanceof Error"?
               // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
               rejectArg(arg as Error);
             };
@@ -483,9 +490,12 @@ export default function factory(
                 </StaticRouter>
               </GlobalStateProvider>,
               { onError: reject },
-            ).then((result) => {
-              resolve(result.prelude);
-            }).catch(reject);
+            ).then(
+              (result) => {
+                resolve(result.prelude);
+              },
+              reject,
+            );
           },
         );
 
