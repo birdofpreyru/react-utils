@@ -1,5 +1,5 @@
 {
-  "version": "1.52.10",
+  "version": "1.52.11",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -17,7 +17,7 @@
     "@dr.pogodin/react-helmet": "^3.2.2",
     "@dr.pogodin/react-themes": "^1.10.4",
     "@jest/environment": "^30.4.1",
-    "axios": "^1.16.1",
+    "axios": "^1.17.0",
     "commander": "^15.0.0",
     "compression": "^1.8.1",
     "config": "^4.4.1",
@@ -30,7 +30,7 @@
     "helmet": "^8.2.0",
     "http-status-codes": "^2.3.0",
     "lodash-es": "^4.18.1",
-    "morgan": "^1.10.1",
+    "morgan": "^1.11.0",
     "qs": "^6.15.2",
     "raf": "^3.4.1",
     "react": "^19.2.7",
@@ -92,7 +92,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.4.2",
     "jest-environment-jsdom": "^30.4.1",
-    "memfs": "^4.57.3",
+    "memfs": "^4.57.6",
     "mini-css-extract-plugin": "^2.10.2",
     "mockdate": "^3.0.5",
     "nodelist-foreach-polyfill": "^1.2.0",
