@@ -319,7 +319,10 @@ export default async function factory(
       const serverSide = status >= CODES.INTERNAL_SERVER_ERROR;
 
       // Log server-side errors always, client-side at debug level only.
-      options.logger!.log(serverSide ? 'error' : 'debug', error.toString());
+      options.logger!.log(
+        serverSide ? 'error' : 'debug',
+        error.stack ?? error.toString(),
+      );
 
       let message = error.message || getErrorForCode(status);
       if (serverSide && process.env.NODE_ENV === 'production') {
