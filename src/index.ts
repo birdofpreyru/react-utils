@@ -74,10 +74,11 @@ export {
   assertEmptyObject,
   getConfig,
   getSsrContext,
-  isomorphy,
   splitComponent,
   time,
   useTheme,
   webpack,
   withRetries,
 } from 'utils';
+
+export * from 'utils/isomorphy';

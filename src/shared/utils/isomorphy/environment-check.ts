@@ -16,3 +16,13 @@ export const IS_CLIENT_SIDE: boolean = typeof process !== 'object'
  * `true` within the server-side environment (node), `false` at client-side.
  */
 export const IS_SERVER_SIDE: boolean = !IS_CLIENT_SIDE;
+
+/** Throws an error if executed not on the client side. */
+export function assertClientSide(): void {
+  if (!IS_CLIENT_SIDE) throw Error('Client-side only.');
+}
+
+/** Throws an error if executed not on the server side. */
+export function assertServerSide(): void {
+  if (!IS_SERVER_SIDE) throw Error('Server-side only');
+}

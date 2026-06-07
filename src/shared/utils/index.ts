@@ -1,7 +1,8 @@
 import { getConfig } from './config';
-import * as isomorphy from './isomorphy';
 import time from './time';
 import * as webpack from './webpack';
+
+export * from './isomorphy';
 
 export {
   Barrier,
@@ -25,9 +26,4 @@ export {
 export { getSsrContext } from './globalState';
 export { default as splitComponent } from './splitComponent';
 
-export {
-  getConfig,
-  isomorphy,
-  time,
-  webpack,
-};
+export { getConfig, time, webpack };

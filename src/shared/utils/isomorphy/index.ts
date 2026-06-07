@@ -1,5 +1,6 @@
 import { getBuildInfo } from './buildInfo';
-import { IS_CLIENT_SIDE, IS_SERVER_SIDE } from './environment-check';
+
+export * from './environment-check';
 
 /**
  * @ignore
@@ -33,4 +34,4 @@ export function buildTimestamp(): string {
   return getBuildInfo().timestamp;
 }
 
-export { IS_CLIENT_SIDE, IS_SERVER_SIDE, getBuildInfo };
+export { getBuildInfo };
