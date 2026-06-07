@@ -1,4 +1,15 @@
+---
+sidebar_class_name: deprecated
+---
+
 # isomorphy
+:::danger[Deprecated]
+Removed in [v1.53.0], all its constituents are now top-level library exports.
+:::
+
+## Original Documentation
+_Valid for library versions prior to [v1.53.0]_
+
 ```js
 import { isomorphy } from '@dr.pogodin/react-utils';
 ```
@@ -77,3 +88,4 @@ Returns **boolean**: **true** if the production version of code is running,
 [mockClientSide()]: /docs/api/utils/jest-utils#mockclientside
 [unmockClientSide()]: /docs/api/utils/jest-utils#unmockclientside
 [Isomorphy]: /docs/api/utils/isomorphy
+[v1.53.0]: https://github.com/birdofpreyru/react-utils/releases/tag/v1.53.0

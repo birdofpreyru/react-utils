@@ -7,6 +7,7 @@ title: Overview
 
 import ClassIndex from './classes/_index.md';
 import ComponentIndex from './components/_index.md';
+import ConstantsIndex from './constants/_index.md';
 import ConfigIndex from './configs/_index.md';
 import FunctionIndex from './functions/_index.md';
 import ScriptIndex from './scripts/_index.md';
@@ -22,6 +23,9 @@ import UtilsIndex from './utils/_index.md';
 
 ## Configs
 <ConfigIndex />
+
+## Constants
+<ConstantsIndex />
 
 ## Functions
 <FunctionIndex />
