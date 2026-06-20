@@ -1,4 +1,4 @@
-import type { TransformOptions } from '@babel/core';
+import type { PluginItem, TransformOptions } from '@babel/core';
 
 import type {
   PluginOptionsT as ReactCssModulesOptionsT,
@@ -38,6 +38,7 @@ type ModuleT = 'amd' | 'auto' | 'cjs' | 'commonjs' | 'systemjs' | 'umd' | false;
 export type OptionsT = {
   modules?: ModuleT;
   noRR?: boolean;
+  noReactCompiler?: boolean;
   noStyling?: boolean;
   targets?: Record<string, string> | string | string[];
 
@@ -51,19 +52,22 @@ export type OptionsT = {
  * @return Generated config.
  */
 function newBaseConfig(options: OptionsT): TransformOptions {
+  const plugins: PluginItem[] = [];
+
+  if (!options.noReactCompiler) plugins.push('babel-plugin-react-compiler');
+
+  plugins.push(
+    ['module-resolver', {
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      root: ['./src/shared', './src'],
+    }],
+    ['@babel/transform-runtime', {
+      useESModules: true,
+    }],
+  );
+
   return {
-    plugins: [
-      ['module-resolver', {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        root: [
-          './src/shared',
-          './src',
-        ],
-      }],
-      ['@babel/transform-runtime', {
-        useESModules: true,
-      }],
-    ],
+    plugins,
     presets: [
       ['@babel/env', {
         bugfixes: true,

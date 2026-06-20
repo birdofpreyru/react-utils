@@ -4,8 +4,17 @@
 
 import type { Request, RequestHandler } from 'express';
 
+import {
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+
 import factory from 'server/renderer';
-import { getSsrContext } from 'utils/globalState';
+import { useSsrContext } from 'utils/globalState';
 
 import {
   mockHttpRequest,
@@ -25,7 +34,7 @@ function noop() {
 beforeAll(() => {
   renderer = factory(mockWebpackConfig(), {
     Application: (): undefined => {
-      const context = getSsrContext()!;
+      const context = useSsrContext()!;
       context.status = mockStatus;
     },
     logger: {

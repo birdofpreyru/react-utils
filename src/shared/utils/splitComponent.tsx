@@ -12,7 +12,7 @@ import {
 
 import { Barrier } from '@dr.pogodin/js-utils';
 
-import { type ChunkGroupsT, getSsrContext } from './globalState';
+import { type ChunkGroupsT, useSsrContext } from './globalState';
 
 import {
   IS_CLIENT_SIDE,
@@ -249,10 +249,13 @@ export default function splitComponent<
       ref,
       ...rest
     }) => {
+      const ssrContext = useSsrContext(false);
+
       // On the server side we'll assert the chunk name here,
       // and also push it to the SSR chunks array.
       if (IS_SERVER_SIDE) {
-        const { chunkGroups, chunks } = getSsrContext()!;
+        if (!ssrContext) throw Error('Internal error');
+        const { chunkGroups, chunks } = ssrContext;
         assertChunkName(chunkName, chunkGroups);
         if (!chunks.includes(chunkName)) chunks.push(chunkName);
       }

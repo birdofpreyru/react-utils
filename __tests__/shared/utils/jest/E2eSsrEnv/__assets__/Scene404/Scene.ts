@@ -1,10 +1,13 @@
 import type { FunctionComponent } from 'react';
 
-import { getSsrContext } from 'utils/globalState';
+import { useSsrContext } from 'utils/globalState';
 
 const Scene: FunctionComponent = () => {
-  const context = getSsrContext(false);
+  const context = useSsrContext(false);
+
+  // eslint-disable-next-line react-hooks/immutability
   if (context) context.status = 404;
+
   return null;
 };
 

@@ -42,11 +42,11 @@ export {
   type UseAsyncDataResT,
   type UseGlobalStateResT,
   type ValueOrInitializerT,
-  getGlobalState,
   newAsyncDataEnvelope,
   useAsyncCollection,
   useAsyncData,
   useGlobalState,
+  useGlobalStateObject,
   withGlobalStateType,
 } from '@dr.pogodin/react-global-state';
 
@@ -73,9 +73,9 @@ export {
   ThemeProvider,
   assertEmptyObject,
   getConfig,
-  getSsrContext,
   splitComponent,
   time,
+  useSsrContext,
   useTheme,
   webpack,
   withRetries,

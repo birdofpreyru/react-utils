@@ -3,6 +3,7 @@
 exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -87,6 +88,7 @@ exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
 exports[`"development" environment "baseAssetsOutputPath" option 2`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -165,6 +167,7 @@ exports[`"development" environment "baseAssetsOutputPath" option 2`] = `
 exports[`"development" environment "noStyling" variation 1`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -236,6 +239,7 @@ exports[`"development" environment "noStyling" variation 1`] = `
 exports[`"development" environment "noStyling" variation 2`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -301,6 +305,7 @@ exports[`"development" environment "noStyling" variation 2`] = `
 exports[`"development" environment Default config 1`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -385,6 +390,7 @@ exports[`"development" environment Default config 1`] = `
 exports[`"development" environment Default config 2`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -463,6 +469,7 @@ exports[`"development" environment Default config 2`] = `
 exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -547,6 +554,7 @@ exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
 exports[`"production" environment "baseAssetsOutputPath" option 2`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -625,6 +633,7 @@ exports[`"production" environment "baseAssetsOutputPath" option 2`] = `
 exports[`"production" environment "noStyling" variation 1`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -696,6 +705,7 @@ exports[`"production" environment "noStyling" variation 1`] = `
 exports[`"production" environment "noStyling" variation 2`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -761,6 +771,7 @@ exports[`"production" environment "noStyling" variation 2`] = `
 exports[`"production" environment Default config 1`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -845,6 +856,7 @@ exports[`"production" environment Default config 1`] = `
 exports[`"production" environment Default config 2`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
