@@ -361,7 +361,7 @@ reuse.
 
 :::caution[WARNING]
 If during SSR some component writes **5xx** value into `.status` field of
-**ssrContext** (see [getSsrContext()]) the generated HTML markup won't be
+**ssrContext** (see [useSsrContext()]) the generated HTML markup won't be
 cached, no matter the result of [staticCacheController()] call.
 :::
 
@@ -384,7 +384,6 @@ cached, no matter the result of [staticCacheController()] call.
 [E2eSsrEnv]: /docs/api/classes/E2eSsrEnv
 [ExpressJS]: https://expressjs.com
 [helmet]: https://github.com/helmetjs/helmet
-[getSsrContext()]: https://dr.pogodin.studio/docs/react-global-state/docs/api/hooks/getssrcontext
 [http-status-codes]: https://www.npmjs.com/package/http-status-codes
 [Joi]: https://joi.dev/api/?v=17.4.2
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
@@ -392,8 +391,7 @@ cached, no matter the result of [staticCacheController()] call.
 [SCRIPT_LOCATIONS]: /docs/api/utils/server#script_locations
 [server()]: /docs/api/functions/server
 [staticCacheController()]: /docs/api/functions/server#staticcachecontroller
-
+[useSsrContext()]: https://dr.pogodin.studio/docs/react-global-state/docs/api/hooks/useSsrContext
 [v1.47.0-alpha.8]: https://github.com/birdofpreyru/react-utils/releases/tag/v1.47.0-alpha.8
-
 [YouTubeVideo]: /docs/api/components/youtubevideo
 [Webpack]: https://webpack.js.org

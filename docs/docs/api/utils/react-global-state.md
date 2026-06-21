@@ -9,13 +9,13 @@ import {
   type UseAsyncDataResT,
   type UseGlobalStateResT,
   type ValueOrInitializerT,
-  getGlobalState,
-  getSsrContext,
   GlobalStateProvider,
   newAsyncDataEnvelope,
   useAsyncCollection,
   useAsyncData,
   useGlobalState,
+  useGlobalStateObject,
+  useSsrContext,
   withGlobalStateType,
 } from '@dr.pogodin/react-utils';
 ```
@@ -34,9 +34,8 @@ incoming HTTP request object via SSR context, attaching it as `req` field to
 the context.
 
 :::info
-In case of the `getSsrContext()` hook the exported version has a modified typing,
-compared to that of the original
-[getSsrContext()](https://dr.pogodin.studio/docs/react-global-state/docs/api/hooks/getssrcontext),
+In case of the `useSsrContext()` hook the exported version has a modified typing,
+compared to that of the original [useSsrContext()],
 to reflect that it returns an extended version of
 [SsrContext](https://dr.pogodin.studio/docs/react-global-state/docs/api/classes/ssrcontext)
 class, with `chunkGroups`, `chunks`, `req`, and `status` fields added by
@@ -45,3 +44,4 @@ the library's SSR setup.
 
 [client]: /docs/api/functions/client
 [server]: /docs/api/functions/server
+[useSsrContext()](https://dr.pogodin.studio/docs/react-global-state/docs/api/hooks/useSsrContext)

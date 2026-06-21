@@ -36,9 +36,9 @@ export interface SsrContextT<StateT> extends SsrContext<StateT> {
 }
 
 const {
-  getSsrContext,
+  useSsrContext,
 } = withGlobalStateType<unknown, SsrContextT<unknown>>();
 
 export {
-  getSsrContext,
+  useSsrContext,
 };

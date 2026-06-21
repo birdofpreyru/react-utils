@@ -12,23 +12,20 @@ import {
 
 import { Barrier } from '@dr.pogodin/js-utils';
 
-import { type ChunkGroupsT, getSsrContext } from './globalState';
+import { type ChunkGroupsT, useSsrContext } from './globalState';
 
 import {
   IS_CLIENT_SIDE,
   IS_SERVER_SIDE,
+  assertClientSide,
   getBuildInfo,
 } from './isomorphy';
 
-function getClientChunkGroups(): Promise<ChunkGroupsT> | undefined {
-  if (!IS_CLIENT_SIDE) return undefined;
+let clientChunkGroups: ChunkGroupsT | undefined;
 
-  return (async () => {
-    const { default: getInj } = await import(/* webpackChunkName: "react-utils-client-side-code" */ '../../client/getInj');
-
-    const inj = await getInj();
-    return inj.CHUNK_GROUPS ?? {};
-  })();
+export function setClientChunkGroups(groups: ChunkGroupsT): void {
+  assertClientSide();
+  clientChunkGroups = groups;
 }
 
 const refCounts: Record<string, number> = {};
@@ -225,14 +222,6 @@ export default function splitComponent<
   // } else usedChunkNames.add(chunkName);
 
   const LazyComponent = lazy(async () => {
-    const clientChunkGroups = await getClientChunkGroups();
-
-    // On the client side we can check right away if the chunk name is known.
-    if (IS_CLIENT_SIDE) {
-      if (!clientChunkGroups) throw Error('Internal error');
-      assertChunkName(chunkName, clientChunkGroups);
-    }
-
     const resolved = await getComponent();
     const Component = 'default' in resolved ? resolved.default : resolved;
 
@@ -244,28 +233,23 @@ export default function splitComponent<
       await bookStyleSheets(chunkName, clientChunkGroups, false);
     }
 
-    const Wrapper: FunctionComponent<ComponentPropsT> = ({
+    const Wrapper: FunctionComponent<ComponentPropsT & {
+      chunkGroups: ChunkGroupsT;
+    }> = ({
       children,
+      chunkGroups,
       ref,
       ...rest
     }) => {
-      // On the server side we'll assert the chunk name here,
-      // and also push it to the SSR chunks array.
-      if (IS_SERVER_SIDE) {
-        const { chunkGroups, chunks } = getSsrContext()!;
-        assertChunkName(chunkName, chunkGroups);
-        if (!chunks.includes(chunkName)) chunks.push(chunkName);
-      }
-
       // This takes care about stylesheets management every time an instance of
       // this component is mounted / unmounted.
       useInsertionEffect(() => {
         if (!clientChunkGroups) throw Error('Internal error');
-        void bookStyleSheets(chunkName, clientChunkGroups, true);
+        void bookStyleSheets(chunkName, chunkGroups, true);
         return () => {
-          freeStyleSheets(chunkName, clientChunkGroups);
+          freeStyleSheets(chunkName, chunkGroups);
         };
-      }, []);
+      }, [chunkGroups]);
 
       return (
         <Component
@@ -281,19 +265,42 @@ export default function splitComponent<
     return { default: Wrapper };
   });
 
-  const CodeSplit: React.FunctionComponent<ComponentPropsT> = ({
+  const CodeSplit: FunctionComponent<ComponentPropsT> = ({
     children,
     ...rest
-  }: ComponentPropsT) => (
-    <Suspense fallback={placeholder}>
-      <LazyComponent
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...rest as Parameters<typeof LazyComponent>[0]}
-      >
-        {children}
-      </LazyComponent>
-    </Suspense>
-  );
+  }: ComponentPropsT) => {
+    let chunkGroups: ChunkGroupsT;
+
+    const ssrContext = useSsrContext(false);
+
+    // On the server side we'll assert the chunk name here,
+    // and also push it to the SSR chunks array.
+    if (IS_SERVER_SIDE) {
+      if (!ssrContext) throw Error('Internal error');
+      ({ chunkGroups } = ssrContext);
+      const { chunks } = ssrContext;
+
+      if (!chunks.includes(chunkName)) chunks.push(chunkName);
+    } else {
+      if (!clientChunkGroups) throw Error('Internal error');
+      chunkGroups = clientChunkGroups;
+    }
+
+    assertChunkName(chunkName, chunkGroups);
+
+    return (
+      <Suspense fallback={placeholder}>
+        <LazyComponent
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...rest as Parameters<typeof LazyComponent>[0]}
+
+          chunkGroups={chunkGroups}
+        >
+          {children}
+        </LazyComponent>
+      </Suspense>
+    );
+  };
 
   return CodeSplit;
 }

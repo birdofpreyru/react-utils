@@ -1,8 +1,69 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
+exports[`"development" environment "noReactCompiler" variation 1`] = `
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+        ],
+        "root": [
+          "./src/shared",
+          "./src",
+        ],
+      },
+    ],
+    [
+      "@babel/transform-runtime",
+      {
+        "useESModules": true,
+      },
+    ],
+    [
+      "@dr.pogodin/react-css-modules",
+      {
+        "autoResolveMultipleImports": true,
+        "filetypes": {
+          ".scss": {
+            "syntax": "postcss-scss",
+          },
+        },
+        "generateScopedName": [Function],
+      },
+    ],
+    "react-refresh/babel",
+  ],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "bugfixes": true,
+        "corejs": "3.49",
+        "modules": false,
+        "targets": "defaults",
+        "useBuiltIns": "usage",
+      },
+    ],
+    [
+      "@babel/react",
+      {
+        "runtime": "automatic",
+      },
+    ],
+    "@dr.pogodin/babel-preset-svgr",
+  ],
+}
+`;
+
 exports[`"development" environment "noStyling" variation 1`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -57,6 +118,7 @@ exports[`"development" environment "noStyling" variation 1`] = `
 exports[`"development" environment "noStyling" variation 2`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -105,6 +167,7 @@ exports[`"development" environment "noStyling" variation 2`] = `
 exports[`"development" environment Default config 1`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -171,6 +234,7 @@ exports[`"development" environment Default config 1`] = `
 exports[`"development" environment Default config 2`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -228,9 +292,69 @@ exports[`"development" environment Default config 2`] = `
 }
 `;
 
+exports[`"production" environment "noReactCompiler" variation 1`] = `
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+        ],
+        "root": [
+          "./src/shared",
+          "./src",
+        ],
+      },
+    ],
+    [
+      "@babel/transform-runtime",
+      {
+        "useESModules": true,
+      },
+    ],
+    [
+      "@dr.pogodin/react-css-modules",
+      {
+        "autoResolveMultipleImports": true,
+        "filetypes": {
+          ".scss": {
+            "syntax": "postcss-scss",
+          },
+        },
+        "generateScopedName": [Function],
+      },
+    ],
+  ],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "bugfixes": true,
+        "corejs": "3.49",
+        "modules": false,
+        "targets": "defaults",
+        "useBuiltIns": "usage",
+      },
+    ],
+    [
+      "@babel/react",
+      {
+        "runtime": "automatic",
+      },
+    ],
+    "@dr.pogodin/babel-preset-svgr",
+  ],
+}
+`;
+
 exports[`"production" environment "noStyling" variation 1`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -284,6 +408,7 @@ exports[`"production" environment "noStyling" variation 1`] = `
 exports[`"production" environment "noStyling" variation 2`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -331,6 +456,7 @@ exports[`"production" environment "noStyling" variation 2`] = `
 exports[`"production" environment Default config 1`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {
@@ -396,6 +522,7 @@ exports[`"production" environment Default config 1`] = `
 exports[`"production" environment Default config 2`] = `
 {
   "plugins": [
+    "babel-plugin-react-compiler",
     [
       "module-resolver",
       {

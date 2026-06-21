@@ -13,7 +13,7 @@ import {
 
 import { type ForceT, useGlobalState } from '@dr.pogodin/react-global-state';
 
-import { getSsrContext } from './globalState';
+import { useSsrContext } from './globalState';
 
 /**
  * This react hook wraps Date.now() function in a SSR friendly way,
@@ -66,7 +66,7 @@ export function useTimezoneOffset({
   cookieName = 'timezoneOffset',
   globalStatePath = 'timezoneOffset',
 } = {}): number {
-  const ssrContext = getSsrContext(false);
+  const ssrContext = useSsrContext(false);
   const [offset, setOffset] = useGlobalState<ForceT, number>(
     globalStatePath,
     () => {

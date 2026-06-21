@@ -7,11 +7,18 @@ import type { Configuration } from 'webpack';
 
 import {
   type ForceT,
-  getGlobalState,
   useGlobalState,
+  useGlobalStateObject,
 } from '@dr.pogodin/react-global-state';
 
 import { Helmet } from '@dr.pogodin/react-helmet';
+
+import {
+  afterEach,
+  expect,
+  jest,
+  test,
+} from '@jest/globals';
 
 import factory, {
   type ConfigT,
@@ -19,7 +26,7 @@ import factory, {
   isBrotliAcceptable,
 } from 'server/renderer';
 
-import { getSsrContext } from 'utils/globalState';
+import { useSsrContext } from 'utils/globalState';
 
 import { type BuildInfoT, getBuildInfo, setBuildInfo } from 'utils/isomorphy/buildInfo';
 
@@ -144,7 +151,7 @@ test('JS constructs in global state', async () => {
     // TODO: Could use State type, but not a big deal for now.
     useGlobalState<ForceT, string>('test.1', 'defaultValue');
     useGlobalState<ForceT, Set<number>>('set', new Set([1, 2]));
-    const state = getGlobalState().get();
+    const state = useGlobalStateObject().get();
     return <div>{serializeJs(state)}</div>;
   };
   await coreTest(mockWebpackConfig(), {
@@ -214,7 +221,7 @@ test(
   'Server-side rendering (SSR); injection of CSS chunks & Redux state',
   async () => coreTest(mockWebpackConfig(), {
     Application: () => {
-      const context = getSsrContext()!;
+      const context = useSsrContext()!;
       context.chunks.push('test-chunk-a');
       context.chunks.push('test-chunk-b');
       return <div>Hello Wold!</div>;
@@ -231,7 +238,7 @@ test(
   'Setting of response HTTP status the server-side rendering',
   async () => coreTest(mockWebpackConfig(), {
     Application: () => {
-      const context = getSsrContext()!;
+      const context = useSsrContext()!;
       context.status = 404;
       return <div>404 Error Test</div>;
     },

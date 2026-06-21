@@ -8,6 +8,8 @@ import { BrowserRouter } from 'react-router';
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
 import { HelmetProvider } from '@dr.pogodin/react-helmet';
 
+import { setClientChunkGroups } from 'utils/splitComponent';
+
 import getInj from './getInj';
 
 type OptionsT = {
@@ -25,6 +27,8 @@ export async function launchClient(
   options: OptionsT = {},
 ): Promise<void> {
   const inj = await getInj();
+
+  setClientChunkGroups(inj.CHUNK_GROUPS ?? {});
 
   const container = document.getElementById('react-view');
   if (!container) throw Error('Failed to find container for React app');

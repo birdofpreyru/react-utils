@@ -23,7 +23,7 @@ export {
   useTheme,
 } from '@dr.pogodin/react-themes';
 
-export { getSsrContext } from './globalState';
+export { useSsrContext } from './globalState';
 export { default as splitComponent } from './splitComponent';
 
 export { getConfig, time, webpack };
