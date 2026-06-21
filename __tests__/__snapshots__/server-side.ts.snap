@@ -45,6 +45,7 @@ exports[`Export at server side 1`] = `
   "isDevBuild": [Function],
   "isProdBuild": [Function],
   "newAsyncDataEnvelope": [Function],
+  "setClientChunkGroups": [Function],
   "splitComponent": [Function],
   "time": [Function],
   "useAsyncCollection": [Function],
