@@ -42,8 +42,6 @@ exports[`Export at server side 1`] = `
   "buildTimestamp": [Function],
   "getBuildInfo": [Function],
   "getConfig": [Function],
-  "getGlobalState": [Function],
-  "getSsrContext": [Function],
   "isDevBuild": [Function],
   "isProdBuild": [Function],
   "newAsyncDataEnvelope": [Function],
@@ -52,6 +50,8 @@ exports[`Export at server side 1`] = `
   "useAsyncCollection": [Function],
   "useAsyncData": [Function],
   "useGlobalState": [Function],
+  "useGlobalStateObject": [Function],
+  "useSsrContext": [Function],
   "useTheme": [Function],
   "webpack": {
     "requireWeak": [Function],

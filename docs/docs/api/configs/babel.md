@@ -25,6 +25,11 @@ Alternatively, to pass-in custom [options](#client-side-options):
 ```
 
 This preset includes:
+- [babel-plugin-react-compiler] &mdash; [React Compiler] optimizes React apps,
+  ensuring that only the minimal parts of components and hooks will re-render
+  when state changes. It also validates that components and hooks follow
+  the [Rules of React].
+
 - [@babel/preset-env] and [@babel/preset-react] &mdash; necessary to re-compile
   modern JS(X) code for older JS environments.
 
@@ -60,6 +65,9 @@ These are client-side preset options:
   [`modules` option](https://babeljs.io/docs/babel-preset-env#modules) of
   [@babel/preset-env]. By default it is set **false**, to let [Webpack] to take
   care of modules in the appropriate way.
+
+- `noReactCompiler` &mdash; **boolean** &mdash; Optional. Set _true_ to opt out
+  of [React Compiler] use.
 
 - `noRR` - **boolean** - Set **true** to opt out of `react-refresh/babel`
   inclusion in **development** (and any other) environment.
@@ -124,7 +132,6 @@ configurations, and on top of that it:
   if it was included by the client-side preset.
 
 
-
 ### Options {/* #server-side-options */}
 It accepts all [client-side preset option](#client-side-options), and on top of
 that:
@@ -134,6 +141,7 @@ that:
 [Babel]: https://babeljs.io
 
 [babel-plugin-module-resolver]: https://www.npmjs.com/package/babel-plugin-module-resolver
+[babel-plugin-react-compiler]: https://www.npmjs.com/package/babel-plugin-react-compiler
 
 [@babel/preset-env]: https://babeljs.io/docs/en/babel-preset-env
 
@@ -148,6 +156,9 @@ that:
 [@dr.pogodin/babel-preset-svgr]: https://www.npmjs.com/package/@dr.pogodin/babel-preset-svgr
 
 [Client-side]: #client-side
+
+[React Compiler]: https://react.dev/learn/react-compiler
+[Rules of React]: https://react.dev/reference/rules
 
 [Server-side]: #server-side
 

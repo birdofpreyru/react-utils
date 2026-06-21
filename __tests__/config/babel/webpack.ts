@@ -1,3 +1,5 @@
+import { describe, expect, test } from '@jest/globals';
+
 import getConfig from '../../../config/babel/webpack';
 
 test('Module exports', () => {
@@ -10,6 +12,10 @@ describe('"development" environment', () => {
   test('Default config', () => {
     expect(getConfig(babel, { typescript: true })).toMatchSnapshot();
     expect(getConfig(babel)).toMatchSnapshot();
+  });
+
+  test('"noReactCompiler" variation', () => {
+    expect(getConfig(babel, { noReactCompiler: true })).toMatchSnapshot();
   });
 
   test('"noStyling" variation', () => {
@@ -27,6 +33,10 @@ describe('"production" environment', () => {
   test('Default config', () => {
     expect(getConfig(babel, { typescript: true })).toMatchSnapshot();
     expect(getConfig(babel)).toMatchSnapshot();
+  });
+
+  test('"noReactCompiler" variation', () => {
+    expect(getConfig(babel, { noReactCompiler: true })).toMatchSnapshot();
   });
 
   test('"noStyling" variation', () => {
