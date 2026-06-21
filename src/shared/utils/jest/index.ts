@@ -1,4 +1,4 @@
-/* global jest, document */
+/* global document */
 /* eslint-disable import/no-extraneous-dependencies */
 
 import type {
@@ -12,6 +12,7 @@ import mockdate from 'mockdate';
 import { type ReactElement, type ReactNode, act } from 'react';
 import { type Root, createRoot } from 'react-dom/client';
 
+import { expect, jest } from '@jest/globals';
 import { type RenderResult, render } from '@testing-library/react';
 
 /**
@@ -176,7 +177,7 @@ export async function snapshot(
 ): Promise<RenderResult>;
 
 export function snapshot(
-  element: React.ReactElement,
+  element: ReactElement,
   options?: AsyncSnapshotOptionsT,
 ): Promise<RenderResult> | RenderResult {
   let res: RenderResult | undefined;
@@ -198,13 +199,28 @@ export function snapshot(
     // it is not an instance of proper Promise class, and returning it directly
     // breaks some async logic in Jest test or React test functions... thus, we
     // wrap it into Promise instance here.
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+      let rejected = false;
+
+      // BEWARE: The "promise" returned by act() does not behave as a regular
+      // Promise instance:
+      //  1.  In case of errors its .then() method both calls its "reject"
+      //      callback (first), and then its "resolve" callback second.
+      //  2.  It errors out if a rendering error happens, and there is no
+      //      "reject" argument provided.
       void promise.then(() => {
-        // TODO: These lines are the same as the lines below for sync variant of
-        // the function. We should split and reuse them in both places.
-        const nodes = res!.asFragment().childNodes;
-        expect(nodes.length > 1 ? [...nodes] : nodes[0]).toMatchSnapshot();
-        resolve(res!);
+        if (!rejected) {
+          // TODO: These lines are the same as the lines below for sync variant of
+          // the function. We should split and reuse them in both places.
+          const nodes = res!.asFragment().childNodes;
+          expect(nodes.length > 1 ? [...nodes] : nodes[0]).toMatchSnapshot();
+          resolve(res!);
+        }
+      }, (error: unknown) => {
+        rejected = true;
+
+        // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+        reject(error);
       });
     });
   }

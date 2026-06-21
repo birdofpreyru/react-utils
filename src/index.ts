@@ -73,6 +73,7 @@ export {
   ThemeProvider,
   assertEmptyObject,
   getConfig,
+  setClientChunkGroups,
   splitComponent,
   time,
   useSsrContext,

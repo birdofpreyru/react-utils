@@ -282,7 +282,9 @@ export default function splitComponent<
 
       if (!chunks.includes(chunkName)) chunks.push(chunkName);
     } else {
-      if (!clientChunkGroups) throw Error('Internal error');
+      if (!clientChunkGroups) {
+        throw Error('Missing client-side chunk groups data');
+      }
       chunkGroups = clientChunkGroups;
     }
 

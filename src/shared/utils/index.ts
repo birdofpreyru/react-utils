@@ -24,6 +24,10 @@ export {
 } from '@dr.pogodin/react-themes';
 
 export { useSsrContext } from './globalState';
-export { default as splitComponent } from './splitComponent';
+
+export {
+  setClientChunkGroups,
+  default as splitComponent,
+} from './splitComponent';
 
 export { getConfig, time, webpack };
