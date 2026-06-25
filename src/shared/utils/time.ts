@@ -1,4 +1,4 @@
-import { serialize } from 'cookie';
+import { stringifySetCookie } from 'cookie';
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
 
@@ -80,7 +80,11 @@ export function useTimezoneOffset({
     const value = date.getTimezoneOffset();
     setOffset(value);
     if (cookieName) {
-      document.cookie = serialize(cookieName, value.toString(), { path: '/' });
+      document.cookie = stringifySetCookie({
+        name: cookieName,
+        path: '/',
+        value: value.toString(),
+      });
     }
   }, [cookieName, setOffset]);
   return offset;

@@ -36,15 +36,20 @@ import exampleCode from '!!raw-loader!../../../src/components/TextAreaExample';
 
 - `label` &mdash; **string** &mdash; Text area label.
 
-- `onBlur` &mdash; **React.FocusEventHandler&lt;HTMLTextAreaElement&gt;**
-  &mdash; [FocusEvent handler](https://react.dev/reference/react-dom/components/common#focusevent-handler).
+- `onBlur` &mdash; [FocusEventHandler]&lt;[HTMLTextAreaElement]&gt;
+  &mdash; Focus event handler.
 
-- `onChange` &mdash; **React.ChangeEventHandler&lt;HTMLTextAreaElemen&gt;** &mdash;
-  [Event handler](https://react.dev/reference/react-dom/components/common#event-handler)
-  for area content changes. It should be provided for managed text area.
-- `onKeyDown` &mdash; **React.KeyboardEventHandler&lt;HTMLTextAreaElemen&gt;**
-  &mdash; [KeyboardEvent handler](https://react.dev/reference/react-dom/components/common#keyboardevent-handler).
+- `onChange` &mdash; [ChangeEventHandler]&lt;[HTMLTextAreaElement]&gt; &mdash;
+  Event handler for area content changes. It should be provided for managed text
+  area.
+
+- `onKeyDown` &mdash; [KeyboardEventHandler]&lt;[HTMLTextAreaElement]&gt;
+  &mdash; Keyboard event handler.
+
 - `placeholder` &mdash; **string** &mdash; Text area placeholder.
+
+- `ref` &mdash; [Ref]&lt;[HTMLTextAreaElement]&gt; &mdash; Reference
+  to the underlying `<textarea>` element.
 
 - `testId` &mdash; **string** &mdash; This value is assigned to
   the `data-testid` attribute of the underlying `<textarea>` element,
@@ -78,7 +83,12 @@ themed. The valid theme keys for [TextArea] are:
   applied to the second, hidden `<textarea>` element, which is used internally
   for measurement purposes.
 
+[ChangeEventHandler]: https://react.dev/reference/react-dom/components/common#event-handler
+[FocusEventHandler]: https://react.dev/reference/react-dom/components/common#focusevent-handler
+[HTMLTextAreaElement]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement
+[KeyboardEventHandler]: https://react.dev/reference/react-dom/components/common#keyboardevent-handler
 [React Themes]: https://dr.pogodin.studio/docs/react-themes
+[Ref]: https://react.dev/learn/referencing-values-with-refs
 [testing-library]: https://testing-library.com
 [TextArea]: /docs/api/components/textarea
 [ThemedComponent]: https://dr.pogodin.studio/docs/react-themes/docs/api/components#themedcomponent

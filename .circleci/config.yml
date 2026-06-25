@@ -27,12 +27,12 @@ version: 2.1
 jobs:
   test-node-22: # Maintenance LTS, EOL 2027.04.30
     docker:
-      - image: cimg/node:22.22
+      - image: cimg/node:22.23
     steps:
       *install-build-test
   test-node-24: # Active LTS, EOL 2028.04.30
     docker:
-      - image: cimg/node:24.16
+      - image: cimg/node:24.18
     steps:
       - when:
           condition: true

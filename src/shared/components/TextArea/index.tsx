@@ -4,6 +4,7 @@ import {
   type FunctionComponent,
   type KeyboardEventHandler,
   type ReactNode,
+  type Ref,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -25,6 +26,7 @@ type Props = {
   onChange?: ChangeEventHandler<HTMLTextAreaElement>;
   onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement>;
   placeholder?: string;
+  ref?: Ref<HTMLTextAreaElement>;
   testId?: string;
   theme?: Theme<ThemeKeyT>;
   value?: string;
@@ -38,6 +40,7 @@ const TextArea: FunctionComponent<Props> = ({
   onChange,
   onKeyDown,
   placeholder,
+  ref,
   testId,
   theme,
   value,
@@ -127,7 +130,16 @@ const TextArea: FunctionComponent<Props> = ({
         }
         onKeyDown={onKeyDown}
         placeholder={placeholder}
-        ref={textAreaRef}
+
+        ref={(node) => {
+          textAreaRef.current = node;
+
+          if (typeof ref === 'function') ref(node);
+
+          // eslint-disable-next-line no-param-reassign
+          else if (ref) ref.current = node;
+        }}
+
         style={{ height }}
         value={localValue}
       />

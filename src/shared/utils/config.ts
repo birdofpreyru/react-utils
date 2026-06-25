@@ -1,6 +1,6 @@
 /* global document */
 
-import { parse } from 'cookie';
+import { parseCookie } from 'cookie';
 
 import clientGetInj from '../../client/getInj';
 
@@ -23,7 +23,7 @@ function injectCsrfToken(cfg: ConfigT): ConfigT {
   // of other browser-world features are not available.
   if (IS_CLIENT_SIDE && typeof document !== 'undefined') {
     // eslint-disable-next-line no-param-reassign
-    cfg.CSRF = parse(document.cookie).csrfToken;
+    cfg.CSRF = parseCookie(document.cookie).csrfToken;
   }
 
   return cfg;
