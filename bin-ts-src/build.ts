@@ -9,19 +9,9 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 
 import { mapValues, merge } from 'lodash-es';
-
-// TODO: Disabled, because ESLint still does not support "exports" declarations
-// in "package.json", and "rimraf" does not declare fallback entrance.
-// See: https://github.com/import-js/eslint-plugin-import/issues/1810
-// and update, once that issue is resolved.
 import { rimraf } from 'rimraf';
-
 import withWebpackBuild, { type Configuration, type Stats } from 'webpack';
-
-// TODO: Double-check, do we need it still? Can we do something better?
-// To support TS configs for Webpack.
-// @ts-expect-error "No types for this module exist yet"
-import register from '@babel/register/experimental-worker.js';
+import register from '@babel/register';
 import { program } from '@commander-js/extra-typings';
 
 const validBuildTypes = [
@@ -135,13 +125,8 @@ function newWebpackCompiler() {
   if (!isRequireUpgraded) {
     isRequireUpgraded = true;
 
-    // TODO: We don't have types for this function, see a related comment
-    // earlier.
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     register({
-      envName: 'production',
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
-      root: process.cwd(),
     });
   }
 

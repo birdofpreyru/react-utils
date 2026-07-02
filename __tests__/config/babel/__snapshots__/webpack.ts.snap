@@ -146,10 +146,8 @@ exports[`"development" environment "noStyling" variation 2`] = `
     [
       "@babel/env",
       {
-        "bugfixes": true,
         "corejs": "3.49",
         "modules": false,
-        "targets": "defaults",
         "useBuiltIns": "usage",
       },
     ],

@@ -1,19 +1,13 @@
 // Babel config for compilation of helper scripts (bin-ts-src > bin).
 
-/* global module */
-
-module.exports = {
+export default {
   plugins: [
-    ['@babel/transform-runtime', { useESModules: true }],
+    '@babel/transform-runtime',
+    ['polyfill-corejs3', { method: 'usage-pure', version: '3.49' }],
   ],
   presets: [
-    ['@babel/env', {
-      bugfixes: true,
-      corejs: '3.49',
-      modules: false,
-      targets: 'maintained node versions',
-      useBuiltIns: 'usage',
-    }],
+    ['@babel/env', { modules: false }],
     '@babel/typescript',
   ],
+  targets: 'maintained node versions',
 };

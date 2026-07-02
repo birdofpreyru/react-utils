@@ -1,4 +1,4 @@
-import type { PluginItem, TransformOptions } from '@babel/core';
+import type { PluginItem, PresetItem } from '@babel/core';
 
 import type {
   PluginOptionsT as ReactCssModulesOptionsT,
@@ -15,6 +15,11 @@ const generateScopedNameDev = generateScopedNameFactory(
 const generateScopedNameProd = generateScopedNameFactory(
   '[hash:base64:6]',
 );
+
+export type ConfigurationT = {
+  plugins: PluginItem[];
+  presets: PresetItem[];
+};
 
 // TODO: Check it.
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
@@ -40,7 +45,6 @@ export type OptionsT = {
   noRR?: boolean;
   noReactCompiler?: boolean;
   noStyling?: boolean;
-  targets?: Record<string, string> | string | string[];
 
   // Set `true` to add into config pieces necessary for TypeScript processing.
   typescript?: boolean;
@@ -51,7 +55,7 @@ export type OptionsT = {
  * @param [options] Base config options.
  * @return Generated config.
  */
-function newBaseConfig(options: OptionsT): TransformOptions {
+function newBaseConfig(options: OptionsT): ConfigurationT {
   const plugins: PluginItem[] = [];
 
   if (!options.noReactCompiler) plugins.push('babel-plugin-react-compiler');
@@ -61,30 +65,18 @@ function newBaseConfig(options: OptionsT): TransformOptions {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       root: ['./src/shared', './src'],
     }],
-    ['@babel/transform-runtime', {
-      useESModules: true,
-    }],
+    '@babel/transform-runtime',
+    ['polyfill-corejs3', { method: 'usage-pure', version: '3.49' }],
   );
 
   return {
     plugins,
     presets: [
       ['@babel/env', {
-        bugfixes: true,
-        corejs: '3.49',
-
         // Leaves it to the Webpack to deal with modules.
         modules: options.modules ?? false,
-
-        targets: options.targets ?? 'defaults',
-        useBuiltIns: 'usage',
       }],
-
-      // TODO: Starting from Babel 8, "automatic" will be the default runtime,
-      // thus once upgraded to Babel 8, runtime should be removed from
-      // @babel/react options below.
-      ['@babel/react', { runtime: 'automatic' }],
-
+      '@babel/react',
       '@dr.pogodin/babel-preset-svgr',
     ],
   };
@@ -100,14 +92,14 @@ function newBaseConfig(options: OptionsT): TransformOptions {
  * @return {object} Returns mutated config for chaining.
  * @ignore
  */
-function addStyling(config: TransformOptions, env: ENVIRONMENTS) {
+function addStyling(config: ConfigurationT, env: ENVIRONMENTS) {
   const cssModulesOps: ReactCssModulesOptionsT = {
     autoResolveMultipleImports: true,
     filetypes: {
       '.scss': { syntax: 'postcss-scss' },
     },
   };
-  config.plugins!.push(['@dr.pogodin/react-css-modules', cssModulesOps]);
+  config.plugins.push(['@dr.pogodin/react-css-modules', cssModulesOps]);
   switch (env) {
     case ENVIRONMENTS.DEV:
     case ENVIRONMENTS.TEST:
@@ -129,27 +121,25 @@ function addStyling(config: TransformOptions, env: ENVIRONMENTS) {
  *  included into config, no matter the environment.
  * @param [ops.noStyling] If truthy all setup related to styling
  *  ((S)CSS processing) will be skipped.
- * @param [ops.targets=defaults] Targets for
- *  `@babel/preset-env`.
  * @return Generated config.
  */
 export default function getPreset(
   babel: BabelCompilerI,
   ops: OptionsT = {},
-): TransformOptions {
+): ConfigurationT {
   const env = babel.env();
 
   const res = newBaseConfig(ops);
 
   if (!ops.noStyling) addStyling(res, env as ENVIRONMENTS);
   if (env === (ENVIRONMENTS.DEV as string) && !ops.noRR) {
-    res.plugins!.push('react-refresh/babel');
+    res.plugins.push('react-refresh/babel');
   }
 
   // Conditional to not require non-TypeScript projects to install TypeScript-
   // specific dependencies for build process.
   if (ops.typescript) {
-    res.presets!.push(
+    res.presets.push(
       ['@babel/typescript', {
         // This ensures TypeScript compilation does not remove "unused" imports,
         // as in most cases it considers assets (e.g. stylesheet) imports as

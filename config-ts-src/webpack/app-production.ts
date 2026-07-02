@@ -11,7 +11,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpack, { type Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 
-import baseFactory, { type OptionsT as BaseOptionsT } from './app-base';
+import baseFactory, { type OptionsT as BaseOptionsT } from './app-base.js';
 
 type OptionsT = BaseOptionsT & {
   cssExtractionOptions?: MiniCssExtractPlugin.PluginOptions;

@@ -3,9 +3,7 @@
 // Module resolver to replace aliased paths. The rest of the bundling will be
 // performed by Webpack build of the host code.
 
-/* global module */
-
-module.exports = {
+export default {
   presets: [
     ['./config/babel/webpack', {
       noRR: true,

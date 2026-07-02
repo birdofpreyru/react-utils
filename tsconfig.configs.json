@@ -7,16 +7,21 @@
   ],
   "compilerOptions": {
     "declaration": true,
-    "rootDir": "config-ts-src",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "outDir": "config",
     "paths": {
       "*": ["./src/shared/*", "./src/*", "./*"]
     },
+    "rootDir": "config-ts-src",
 
     // TODO: Overriding the base config as configs are compiled into CommonJS
     // modules, and this flag leads to the following error in that case, if set:
     // ESM syntax is not allowed in a CommonJS module when 'verbatimModuleSyntax' is enabled.
     // Perhaps, there is a better workaround?
     "verbatimModuleSyntax": false
+  },
+  "tsc-alias": {
+    "resolveFullPaths": true
   }
 }

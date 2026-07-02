@@ -1,11 +1,8 @@
-/* eslint-disable import/no-commonjs */
-/* global module */
-
-module.exports = {
-  plugins: [['babel-plugin-transform-import-meta', { module: 'ES6' }]],
+export default {
   presets: [
     ['./config/babel/node-ssr', {
       typescript: true,
     }],
   ],
+  targets: 'maintained node versions',
 };

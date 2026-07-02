@@ -29,7 +29,7 @@ import { defaults, set } from 'lodash-es';
 import { Volume, createFsFromVolume } from 'memfs';
 import webpack, { type Configuration, type Stats } from 'webpack';
 
-import register from '@babel/register/experimental-worker';
+import register, { revert } from '@babel/register';
 
 import type {
   EnvironmentContext,
@@ -232,20 +232,6 @@ export default class E2eSsrEnv extends JsdomEnv {
     this.ssrRequest = request;
     this.pragmas = pragmas;
 
-    // The usual "babel-jest" transformation setup does not apply to
-    // the environment code and imports from it, this workaround enables it.
-    const optionsString = this.pragmas['ssr-options'] as string;
-    const options = optionsString
-      ? JSON.parse(optionsString) as Record<string, unknown>
-      : {};
-    let root;
-    switch (options.root) {
-      case 'TEST':
-        root = this.testFolder;
-        break;
-      default: root = process.cwd();
-    }
-
     // BEWARE: Anything imported prior to this register() call seems to be
     // transpiled again by Babel if loaded after this call. This causes very
     // confusing errors when testing the code dependent on some sort of contexts
@@ -256,9 +242,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     // we still need it here to correctly process imported Webpack configurations
     // (which are imported directly from this module).
     register({
-      envName: options.babelEnv as string,
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
-      root,
     });
   }
 
@@ -300,7 +284,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     Object.keys(require.cache).forEach((key) => {
       delete require.cache[key];
     });
-    register.revert();
+    revert();
 
     await super.teardown();
   }

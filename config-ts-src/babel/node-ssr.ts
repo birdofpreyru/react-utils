@@ -1,24 +1,15 @@
 import { pull } from 'lodash-es';
 
-import type { PluginOptions, PluginTarget, TransformOptions } from '@babel/core';
-
 import type {
   PluginOptionsT as ReactCssModulesOptionsT,
 } from '@dr.pogodin/babel-plugin-react-css-modules';
 
 import getWebpackBabelConfig, {
   type BabelCompilerI,
+  type ConfigurationT,
   ENVIRONMENTS,
   type OptionsT as WebpackConfigOptionsT,
-} from './webpack';
-
-// TODO: Double-check why .transformFunction is not present in TransformOptions?
-// should we do some correction of the typing?
-//
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-interface ModuleResolverOptionsI extends TransformOptions {
-  transformFunctions?: string[];
-}
+} from './webpack.js';
 
 type OptionsT = WebpackConfigOptionsT & {
   baseAssetsOutputPath?: string;
@@ -28,8 +19,7 @@ type OptionsT = WebpackConfigOptionsT & {
  * Creates a new base config.
  * @param babel Babel compiler.
  * @param [options] It supports all options of our Babel config for Webpack,
- *  but it overrides `targets` option with "current node" value, and further
- *  accepts the following:
+ *  and further accepts the following:
  * @param [options.baseAssetsOutputPath] Path prefix for emitted
  *  image assets.
  * @return Created config object.
@@ -44,13 +34,12 @@ function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
       // Jest relies on babel.config.js, which transpiles everything
       // into CJS).
       modules: 'cjs',
-      targets: 'node >= 22',
       ...options,
     },
   );
 
   const baseAssetsOutputPath = options.baseAssetsOutputPath ?? '';
-  config.plugins!.push(
+  config.plugins.push(
     ['@dr.pogodin/transform-assets', {
       extensions: ['gif', 'jpeg', 'jpg', 'png'],
       name: `${baseAssetsOutputPath}/images/[md4:hash:20].[ext]`,
@@ -58,13 +47,18 @@ function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
   );
 
   if (options.modules === false) {
-    config.plugins!.push('babel-plugin-add-import-extension');
+    config.plugins.push('@dr.pogodin/add-import-extension');
   }
 
-  const moduleResolverPluginOps = (config.plugins!.find(
+  const moduleResolverPlugin = config.plugins.find(
     (x) => Array.isArray(x) && x[0] === 'module-resolver',
-  ) as [PluginTarget, PluginOptions])[1] as ModuleResolverOptionsI;
-  moduleResolverPluginOps.transformFunctions = [
+  );
+  if (!Array.isArray(moduleResolverPlugin)) throw Error('Internal error');
+  const [, moduleResolverPluginOps] = moduleResolverPlugin;
+
+  (moduleResolverPluginOps as {
+    transformFunctions: string[];
+  }).transformFunctions = [
     'requireWeak',
     'resolveWeak',
     'webpack.requireWeak',
@@ -72,7 +66,7 @@ function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
   ];
 
   if (babel.env() === ENVIRONMENTS.DEV as string) {
-    pull(config.plugins!, 'react-refresh/babel');
+    pull(config.plugins, 'react-refresh/babel');
   }
 
   return config;
@@ -85,10 +79,12 @@ function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
  *
  * @param config
  */
-function addStyling(config: TransformOptions): TransformOptions {
-  const cssModulesOps = (config.plugins!.find(
+function addStyling(config: ConfigurationT): ConfigurationT {
+  const cssModule = config.plugins.find(
     (item) => Array.isArray(item) && item[0] === '@dr.pogodin/react-css-modules',
-  ) as [PluginTarget, PluginOptions])[1] as ReactCssModulesOptionsT;
+  );
+  if (!Array.isArray(cssModule)) throw Error('Internal error');
+  const cssModulesOps = cssModule[1] as ReactCssModulesOptionsT;
   cssModulesOps.replaceImport = true;
   return config;
 }
@@ -107,7 +103,7 @@ function addStyling(config: TransformOptions): TransformOptions {
 export default function getConfig(
   babel: BabelCompilerI,
   ops: OptionsT = {},
-): TransformOptions {
+): ConfigurationT {
   const config = newBase(babel, ops);
   if (!ops.noStyling) addStyling(config);
   return config;

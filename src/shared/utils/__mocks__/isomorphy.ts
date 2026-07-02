@@ -1,7 +1,6 @@
-/**
- * Mockup of the isomorphy module.
- */
-/* global jest */
+/* eslint-disable import/no-extraneous-dependencies */
+
+import { jest } from '@jest/globals';
 
 // NOTE: I believe, there is no way to mock it without CommonJS syntax,
 // or is there one now?

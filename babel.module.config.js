@@ -1,7 +1,7 @@
 /* eslint-disable import/no-commonjs */
 /* global module */
 
-module.exports = {
+export default {
   presets: [
     ['./config/babel/node-ssr', {
       modules: false,

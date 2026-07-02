@@ -10,7 +10,7 @@ import { merge } from 'webpack-merge';
 
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
-import baseFactory, { type OptionsT as BaseOptionsT } from './app-base';
+import baseFactory, { type OptionsT as BaseOptionsT } from './app-base.js';
 
 type OptionsT = BaseOptionsT & {
   cssExtractionOptions?: MiniCssExtractPlugin.PluginOptions;
