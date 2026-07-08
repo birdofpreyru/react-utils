@@ -1,6 +1,6 @@
 // Checks assumptions about TypeScript compiler behavior.
 
-import { expect } from 'tstyche';
+import { expect, test } from 'tstyche';
 
 test('array element types', () => {
   const array: number[] = [1];

@@ -4,6 +4,16 @@
 
 import type ConfigM from 'config';
 
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+  test,
+} from '@jest/globals';
+
 import type * as ConfigUtilsNS from 'utils/config';
 import type * as IT from 'utils/isomorphy';
 import { mockClientSide, unmockClientSide } from 'utils/jest';

@@ -1,5 +1,7 @@
 import type { Request } from 'express';
 
+import { test } from '@jest/globals';
+
 import factory from 'server/renderer';
 
 import { mockHttpRequest, mockHttpResponse, mockWebpackConfig } from './__assets__/common';

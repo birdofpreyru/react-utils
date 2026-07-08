@@ -2,6 +2,8 @@
 
 import { MemoryRouter } from 'react-router';
 
+import { test } from '@jest/globals';
+
 import Link from 'components/Link';
 import { snapshot } from 'utils/jest';
 

@@ -1,4 +1,4 @@
-import { expect } from 'tstyche';
+import { expect, test } from 'tstyche';
 
 import type {
   BeforeRenderResT,

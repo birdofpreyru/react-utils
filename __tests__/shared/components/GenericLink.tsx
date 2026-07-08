@@ -2,6 +2,7 @@
 
 import type { Link } from 'react-router';
 
+import { expect, jest, test } from '@jest/globals';
 import UserEvents from '@testing-library/user-event';
 
 import GenericLink from 'components/GenericLink';

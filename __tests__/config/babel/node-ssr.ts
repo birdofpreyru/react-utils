@@ -1,3 +1,5 @@
+import { describe, expect, test } from '@jest/globals';
+
 import getConfig from '../../../config/babel/node-ssr';
 
 test('Module exports', () => {

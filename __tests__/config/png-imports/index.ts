@@ -9,6 +9,8 @@
 
 import { act } from 'react';
 
+import { beforeEach, expect, it } from '@jest/globals';
+
 import { getGlobal } from 'utils/jest';
 
 const global = getGlobal();

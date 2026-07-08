@@ -1,6 +1,4 @@
-/* global module */
-
-module.exports = (path, options) => {
+export default (path, options) => {
   const ops = { ...options };
 
   // Appending "development" option we ensure that Jest tests use development

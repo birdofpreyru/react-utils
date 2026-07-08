@@ -18,10 +18,12 @@ exports[`"development" environment "noReactCompiler" variation 1`] = `
         ],
       },
     ],
+    "@babel/transform-runtime",
     [
-      "@babel/transform-runtime",
+      "polyfill-corejs3",
       {
-        "useESModules": true,
+        "method": "usage-pure",
+        "version": "3.49",
       },
     ],
     [
@@ -42,19 +44,10 @@ exports[`"development" environment "noReactCompiler" variation 1`] = `
     [
       "@babel/env",
       {
-        "bugfixes": true,
-        "corejs": "3.49",
         "modules": false,
-        "targets": "defaults",
-        "useBuiltIns": "usage",
       },
     ],
-    [
-      "@babel/react",
-      {
-        "runtime": "automatic",
-      },
-    ],
+    "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -79,10 +72,12 @@ exports[`"development" environment "noStyling" variation 1`] = `
         ],
       },
     ],
+    "@babel/transform-runtime",
     [
-      "@babel/transform-runtime",
+      "polyfill-corejs3",
       {
-        "useESModules": true,
+        "method": "usage-pure",
+        "version": "3.49",
       },
     ],
     "react-refresh/babel",
@@ -91,19 +86,10 @@ exports[`"development" environment "noStyling" variation 1`] = `
     [
       "@babel/env",
       {
-        "bugfixes": true,
-        "corejs": "3.49",
         "modules": false,
-        "targets": "defaults",
-        "useBuiltIns": "usage",
       },
     ],
-    [
-      "@babel/react",
-      {
-        "runtime": "automatic",
-      },
-    ],
+    "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
     [
       "@babel/typescript",
@@ -134,10 +120,12 @@ exports[`"development" environment "noStyling" variation 2`] = `
         ],
       },
     ],
+    "@babel/transform-runtime",
     [
-      "@babel/transform-runtime",
+      "polyfill-corejs3",
       {
-        "useESModules": true,
+        "method": "usage-pure",
+        "version": "3.49",
       },
     ],
     "react-refresh/babel",
@@ -146,17 +134,10 @@ exports[`"development" environment "noStyling" variation 2`] = `
     [
       "@babel/env",
       {
-        "corejs": "3.49",
         "modules": false,
-        "useBuiltIns": "usage",
       },
     ],
-    [
-      "@babel/react",
-      {
-        "runtime": "automatic",
-      },
-    ],
+    "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -181,10 +162,12 @@ exports[`"development" environment Default config 1`] = `
         ],
       },
     ],
+    "@babel/transform-runtime",
     [
-      "@babel/transform-runtime",
+      "polyfill-corejs3",
       {
-        "useESModules": true,
+        "method": "usage-pure",
+        "version": "3.49",
       },
     ],
     [
@@ -205,19 +188,10 @@ exports[`"development" environment Default config 1`] = `
     [
       "@babel/env",
       {
-        "bugfixes": true,
-        "corejs": "3.49",
         "modules": false,
-        "targets": "defaults",
-        "useBuiltIns": "usage",
       },
     ],
-    [
-      "@babel/react",
-      {
-        "runtime": "automatic",
-      },
-    ],
+    "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
     [
       "@babel/typescript",
@@ -248,10 +222,12 @@ exports[`"development" environment Default config 2`] = `
         ],
       },
     ],
+    "@babel/transform-runtime",
     [
-      "@babel/transform-runtime",
+      "polyfill-corejs3",
       {
-        "useESModules": true,
+        "method": "usage-pure",
+        "version": "3.49",
       },
     ],
     [
@@ -272,19 +248,10 @@ exports[`"development" environment Default config 2`] = `
     [
       "@babel/env",
       {
-        "bugfixes": true,
-        "corejs": "3.49",
         "modules": false,
-        "targets": "defaults",
-        "useBuiltIns": "usage",
       },
     ],
-    [
-      "@babel/react",
-      {
-        "runtime": "automatic",
-      },
-    ],
+    "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -308,10 +275,12 @@ exports[`"production" environment "noReactCompiler" variation 1`] = `
         ],
       },
     ],
+    "@babel/transform-runtime",
     [
-      "@babel/transform-runtime",
+      "polyfill-corejs3",
       {
-        "useESModules": true,
+        "method": "usage-pure",
+        "version": "3.49",
       },
     ],
     [
@@ -331,19 +300,10 @@ exports[`"production" environment "noReactCompiler" variation 1`] = `
     [
       "@babel/env",
       {
-        "bugfixes": true,
-        "corejs": "3.49",
         "modules": false,
-        "targets": "defaults",
-        "useBuiltIns": "usage",
       },
     ],
-    [
-      "@babel/react",
-      {
-        "runtime": "automatic",
-      },
-    ],
+    "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -368,10 +328,12 @@ exports[`"production" environment "noStyling" variation 1`] = `
         ],
       },
     ],
+    "@babel/transform-runtime",
     [
-      "@babel/transform-runtime",
+      "polyfill-corejs3",
       {
-        "useESModules": true,
+        "method": "usage-pure",
+        "version": "3.49",
       },
     ],
   ],
@@ -379,19 +341,10 @@ exports[`"production" environment "noStyling" variation 1`] = `
     [
       "@babel/env",
       {
-        "bugfixes": true,
-        "corejs": "3.49",
         "modules": false,
-        "targets": "defaults",
-        "useBuiltIns": "usage",
       },
     ],
-    [
-      "@babel/react",
-      {
-        "runtime": "automatic",
-      },
-    ],
+    "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
     [
       "@babel/typescript",
@@ -422,10 +375,12 @@ exports[`"production" environment "noStyling" variation 2`] = `
         ],
       },
     ],
+    "@babel/transform-runtime",
     [
-      "@babel/transform-runtime",
+      "polyfill-corejs3",
       {
-        "useESModules": true,
+        "method": "usage-pure",
+        "version": "3.49",
       },
     ],
   ],
@@ -433,19 +388,10 @@ exports[`"production" environment "noStyling" variation 2`] = `
     [
       "@babel/env",
       {
-        "bugfixes": true,
-        "corejs": "3.49",
         "modules": false,
-        "targets": "defaults",
-        "useBuiltIns": "usage",
       },
     ],
-    [
-      "@babel/react",
-      {
-        "runtime": "automatic",
-      },
-    ],
+    "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
 }
@@ -470,10 +416,12 @@ exports[`"production" environment Default config 1`] = `
         ],
       },
     ],
+    "@babel/transform-runtime",
     [
-      "@babel/transform-runtime",
+      "polyfill-corejs3",
       {
-        "useESModules": true,
+        "method": "usage-pure",
+        "version": "3.49",
       },
     ],
     [
@@ -493,19 +441,10 @@ exports[`"production" environment Default config 1`] = `
     [
       "@babel/env",
       {
-        "bugfixes": true,
-        "corejs": "3.49",
         "modules": false,
-        "targets": "defaults",
-        "useBuiltIns": "usage",
       },
     ],
-    [
-      "@babel/react",
-      {
-        "runtime": "automatic",
-      },
-    ],
+    "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
     [
       "@babel/typescript",
@@ -536,10 +475,12 @@ exports[`"production" environment Default config 2`] = `
         ],
       },
     ],
+    "@babel/transform-runtime",
     [
-      "@babel/transform-runtime",
+      "polyfill-corejs3",
       {
-        "useESModules": true,
+        "method": "usage-pure",
+        "version": "3.49",
       },
     ],
     [
@@ -559,19 +500,10 @@ exports[`"production" environment Default config 2`] = `
     [
       "@babel/env",
       {
-        "bugfixes": true,
-        "corejs": "3.49",
         "modules": false,
-        "targets": "defaults",
-        "useBuiltIns": "usage",
       },
     ],
-    [
-      "@babel/react",
-      {
-        "runtime": "automatic",
-      },
-    ],
+    "@babel/react",
     "@dr.pogodin/babel-preset-svgr",
   ],
 }

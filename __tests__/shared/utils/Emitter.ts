@@ -1,3 +1,10 @@
+import {
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
+
 import { Emitter } from 'index';
 
 describe('constructor()', () => {

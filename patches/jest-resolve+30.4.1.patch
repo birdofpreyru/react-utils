@@ -1,0 +1,29 @@
+diff --git a/node_modules/jest-resolve/build/index.js b/node_modules/jest-resolve/build/index.js
+index 2dbd326..f480209 100644
+--- a/node_modules/jest-resolve/build/index.js
++++ b/node_modules/jest-resolve/build/index.js
+@@ -1165,7 +1165,7 @@ function loadResolver(resolver) {
+   if (resolver == null) {
+     return _defaultResolver.default;
+   }
+-  const loadedResolver = require(resolver);
++  let loadedResolver = require(resolver);
+   if (loadedResolver == null) {
+     throw new Error(`Resolver located at ${resolver} does not export anything`);
+   }
+@@ -1175,6 +1175,15 @@ function loadResolver(resolver) {
+   if (typeof loadedResolver === 'object' && (loadedResolver.sync != null || loadedResolver.async != null)) {
+     return loadedResolver;
+   }
++  if (typeof loadedResolver === 'object' && loadedResolver.default) {
++    loadedResolver = loadedResolver.default;
++    if (typeof loadedResolver === 'function') {
++      return loadedResolver;
++    }
++    if (typeof loadedResolver === 'object' && (loadedResolver.sync != null || loadedResolver.async != null)) {
++      return loadedResolver;
++    }
++  }
+   throw new Error(`Resolver located at ${resolver} does not export a function or an object with "sync" and "async" props`);
+ }
+ 

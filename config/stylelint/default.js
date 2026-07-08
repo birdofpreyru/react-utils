@@ -1,5 +1,3 @@
-/* global module */
-
 const camelCaseRegex = /^[a-z][a-zA-Z0-9]+$/;
 const kebabCase = /^([a-z][a-z0-9]*)(-[a-z0-9]+)*$/;
 
@@ -7,8 +5,7 @@ const namePattern = new RegExp(
   `(${camelCaseRegex.source})|(${kebabCase.source})`,
 );
 
-// eslint-disable-next-line import/no-commonjs
-module.exports = {
+export default {
   extends: 'stylelint-config-standard-scss',
   rules: {
     'at-rule-no-unknown': [true, {

@@ -72,8 +72,8 @@ export function requireWeak<T extends object>(
  * Yes, the function itself just returns its argument to the caller, but Babel
  * is configured to resolve the first argument of resolveWeak(..) function, thus
  * the result will be the resolved path.
- * @param {string} modulePath
- * @return {string} Absolute or relative path to the module.
+ * @param modulePath
+ * @return Absolute or relative path to the module.
  */
 export function resolveWeak(modulePath: string): string {
   return modulePath;

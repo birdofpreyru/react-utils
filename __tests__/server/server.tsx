@@ -1,3 +1,5 @@
+import { createRequire } from 'node:module';
+
 import type { NextFunction, Request, Response } from 'express';
 
 import type ServeFaviconM from 'serve-favicon';
@@ -5,12 +7,22 @@ import supertest from 'supertest';
 import type WebpackM from 'webpack';
 import type WebpackHotM from 'webpack-hot-middleware';
 
+import {
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  jest,
+  test,
+} from '@jest/globals';
+
 import type * as ServerNS from 'server/server';
 import type * as BuildInfoNS from 'utils/isomorphy/buildInfo';
 
 jest.mock('node:crypto');
 
-/* eslint-disable @typescript-eslint/no-require-imports */
+const require = createRequire(import.meta.url);
+
 const { default: serverFactory } = require('server/server') as typeof ServerNS;
 const { setBuildInfo } = require('utils/isomorphy/buildInfo') as typeof BuildInfoNS;
 

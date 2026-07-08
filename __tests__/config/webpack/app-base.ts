@@ -2,6 +2,8 @@ import type nodeFs from 'node:fs';
 
 import { Volume, createFsFromVolume } from 'memfs';
 
+import { describe, expect, test } from '@jest/globals';
+
 import configFactory from '../../../config/webpack/app-base';
 
 describe('.build-info output', () => {

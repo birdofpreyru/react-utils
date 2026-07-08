@@ -12,6 +12,8 @@
 
 import { act } from 'react';
 
+import { expect, it, jest } from '@jest/globals';
+
 import { getGlobal } from 'utils/jest';
 
 const global = getGlobal();

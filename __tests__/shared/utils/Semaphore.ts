@@ -1,6 +1,13 @@
 
 import { timer } from '@dr.pogodin/js-utils';
 
+import {
+  describe,
+  expect,
+  it,
+  test,
+} from '@jest/globals';
+
 import { Semaphore } from 'utils';
 
 describe('constructor', () => {

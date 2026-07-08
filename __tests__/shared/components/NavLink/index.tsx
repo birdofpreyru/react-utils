@@ -2,6 +2,8 @@
 
 import { MemoryRouter } from 'react-router';
 
+import { test } from '@jest/globals';
+
 import NavLink from 'components/NavLink';
 
 import { snapshot } from 'utils/jest';

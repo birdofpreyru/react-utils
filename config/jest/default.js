@@ -1,9 +1,7 @@
-/* eslint-disable import/no-commonjs */
-/* global __dirname, module, process, require */
+import { resolve } from 'node:path';
+import { execPath } from 'node:process';
 
-const path = require('node:path');
-
-const globalLibDir = path.resolve(process.execPath, '../../lib/node_modules');
+const globalLibDir = resolve(execPath, '../../lib/node_modules');
 
 const modulesToTransform = [
   '@dr.pogodin/react-global-state',
@@ -12,12 +10,13 @@ const modulesToTransform = [
   'lodash-es',
 ];
 
-module.exports = {
+export default {
   collectCoverage: true,
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
   ],
   coverageDirectory: '__coverage__',
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   moduleDirectories: [
     'node_modules',
     globalLibDir,
@@ -26,7 +25,7 @@ module.exports = {
     '\\.(scss|css)$': 'identity-obj-proxy',
   },
   modulePathIgnorePatterns: ['<rootDir>/build/'],
-  resolver: `${__dirname}/resolver.js`,
+  resolver: `${import.meta.dirname}/resolver.js`,
   rootDir: '../..',
   setupFilesAfterEnv: [
     '<rootDir>/config/jest/setup.js',

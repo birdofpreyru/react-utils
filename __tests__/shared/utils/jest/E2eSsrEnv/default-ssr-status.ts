@@ -9,6 +9,8 @@
  *  "entry": "./__assets__/EmptyScene/Scene.ts" }
  */
 
+import { expect, test } from '@jest/globals';
+
 test('exposes 200 status to the test environment', () => {
   expect((global as unknown as { ssrStatus: number }).ssrStatus).toBe(200);
 });

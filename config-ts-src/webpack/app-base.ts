@@ -2,7 +2,7 @@
 
 import { randomBytes } from 'node:crypto';
 import nodeFs from 'node:fs';
-import path from 'node:path';
+import { resolve } from 'node:path';
 
 import autoprefixer from 'autoprefixer';
 
@@ -190,7 +190,7 @@ export default function configFactory(ops: OptionsT): Configuration {
   /* TODO: This works in practice, but being async and not awaited it is a bad
    * pattern. */
   if (o.sitemap) {
-    const sitemapUrl = path.resolve(o.context, o.sitemap);
+    const sitemapUrl = resolve(o.context, o.sitemap);
 
     // eslint-disable-next-line import/no-dynamic-require, @typescript-eslint/no-require-imports
     let source = require(sitemapUrl) as
@@ -202,10 +202,10 @@ export default function configFactory(ops: OptionsT): Configuration {
     });
     sm.end();
     void streamToPromise(sm).then((sitemap) => {
-      const outUrl = path.resolve(o.context, o.outputPath!);
+      const outUrl = resolve(o.context, o.outputPath!);
       if (!fs.existsSync(outUrl)) fs.mkdirSync(outUrl);
       fs.writeFileSync(
-        path.resolve(o.context, o.outputPath!, 'sitemap.xml'),
+        resolve(o.context, o.outputPath!, 'sitemap.xml'),
         new DataView(sitemap.buffer),
       );
     });
@@ -217,7 +217,7 @@ export default function configFactory(ops: OptionsT): Configuration {
   // timestamp, and any other similar information to the actual app, so it
   // can be used in some scenarious.
   let buildInfo;
-  const buildInfoUrl = path.resolve(o.context, '.build-info');
+  const buildInfoUrl = resolve(o.context, '.build-info');
 
   if (o.keepBuildInfo) {
     // If "true" - attempt to load from the filesystem.
@@ -274,7 +274,7 @@ export default function configFactory(ops: OptionsT): Configuration {
   if (o.workbox) {
     if (!isObject(o.workbox)) o.workbox = {};
     plugins.push(new WorkboxPlugin.InjectManifest({
-      swSrc: path.resolve(__dirname, '../workbox/default.js'),
+      swSrc: resolve(import.meta.dirname, '../workbox/default.js'),
       ...o.workbox,
       swDest: '__service-worker.js',
     }));
@@ -384,17 +384,17 @@ export default function configFactory(ops: OptionsT): Configuration {
     output: {
       chunkFilename: '[contenthash].js',
       filename: '[contenthash].js',
-      path: path.resolve(__dirname, o.context, o.outputPath!),
+      path: resolve(import.meta.dirname, o.context, o.outputPath!),
       publicPath: `${o.publicPath}/`,
     },
     plugins,
     resolve: {
       alias: {
         // Aliases to JS an JSX files are handled by Babel.
-        assets: path.resolve(o.context, 'src/assets'),
-        components: path.resolve(o.context, 'src/shared/components'),
-        fonts: path.resolve(o.context, 'src/assets/fonts'),
-        styles: path.resolve(o.context, 'src/styles'),
+        assets: resolve(o.context, 'src/assets'),
+        components: resolve(o.context, 'src/shared/components'),
+        fonts: resolve(o.context, 'src/assets/fonts'),
+        styles: resolve(o.context, 'src/styles'),
       },
       extensions: [
         '.ts',

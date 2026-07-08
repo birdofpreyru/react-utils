@@ -9,6 +9,8 @@
  *  "entry": "./__assets__/Scene404/Scene.ts" }
  */
 
+import { expect, test } from '@jest/globals';
+
 import { getGlobal } from 'utils/jest';
 
 const global = getGlobal();

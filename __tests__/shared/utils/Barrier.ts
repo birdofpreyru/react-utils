@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { Barrier } from 'utils';
 
 describe('Base usage', () => {

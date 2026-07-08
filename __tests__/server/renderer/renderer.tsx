@@ -16,6 +16,7 @@ import { Helmet } from '@dr.pogodin/react-helmet';
 import {
   afterEach,
   expect,
+  it,
   jest,
   test,
 } from '@jest/globals';

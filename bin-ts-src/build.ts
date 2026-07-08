@@ -370,14 +370,14 @@ void (async () => {
 
     await buildWithBabelForServerSide({
       buildType: 'development',
-      configPath: 'babel.module.config.js',
+      configPath: 'babel.config.js',
       outDir: `${buildDir}/development`,
       srcDir: `${buildDir}/web`,
     });
 
     await buildWithBabelForServerSide({
       buildType: 'production',
-      configPath: 'babel.module.config.js',
+      configPath: 'babel.config.js',
       outDir: `${buildDir}/production`,
       srcDir: `${buildDir}/web`,
     });

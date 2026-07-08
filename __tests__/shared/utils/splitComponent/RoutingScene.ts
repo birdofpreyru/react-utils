@@ -15,6 +15,8 @@
 import pretty from 'pretty';
 import { act } from 'react';
 
+import { expect, test } from '@jest/globals';
+
 import { getGlobal } from 'utils/jest';
 
 const global = getGlobal();

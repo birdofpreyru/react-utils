@@ -2,6 +2,14 @@
 
 import pretty from 'pretty';
 
+import {
+  afterEach,
+  beforeEach,
+  expect,
+  jest,
+  test,
+} from '@jest/globals';
+
 import { fireEvent } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 
