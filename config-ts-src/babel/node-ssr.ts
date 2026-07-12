@@ -12,6 +12,7 @@ import getWebpackBabelConfig, {
 } from './webpack.js';
 
 type OptionsT = WebpackConfigOptionsT & {
+  addImportExtensions?: boolean;
   baseAssetsOutputPath?: string;
 };
 
@@ -35,7 +36,7 @@ function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
     }],
   );
 
-  if (options.modules === false) {
+  if (options.addImportExtensions) {
     config.plugins.push('@dr.pogodin/add-import-extension');
   }
 

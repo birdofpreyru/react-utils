@@ -2,6 +2,7 @@
 
 import { randomBytes } from 'node:crypto';
 import nodeFs from 'node:fs';
+import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
 
 import autoprefixer from 'autoprefixer';
@@ -17,13 +18,10 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import { SitemapStream, streamToPromise } from 'sitemap';
 
-import {
-  type Configuration,
-  DefinePlugin,
-  ProgressPlugin,
-  type RuleSetRule,
-  type WebpackPluginInstance,
-} from 'webpack';
+// NOTE: As "webpack" is still distributed as CJS module, now that we have
+// switched to MJS, importing plugins from it in MJS import style does not work,
+// thus we need to import the default export, and use its fields.
+import webpack, { type Configuration, type RuleSetRule } from 'webpack';
 
 import WorkboxPlugin from 'workbox-webpack-plugin';
 
@@ -63,6 +61,8 @@ export type OptionsT = {
 };
 
 const COREJS_REGEX = /\/core-js/;
+
+const require = createRequire(import.meta.url);
 
 /**
  * Creates a new Webpack config object, and performs some auxiliary operations
@@ -192,7 +192,7 @@ export default function configFactory(ops: OptionsT): Configuration {
   if (o.sitemap) {
     const sitemapUrl = resolve(o.context, o.sitemap);
 
-    // eslint-disable-next-line import/no-dynamic-require, @typescript-eslint/no-require-imports
+    // eslint-disable-next-line import/no-dynamic-require
     let source = require(sitemapUrl) as
       ((() => string[]) | string[]);
     if (isFunction(source)) source = source();
@@ -264,11 +264,11 @@ export default function configFactory(ops: OptionsT): Configuration {
     ...Array.isArray(o.entry) ? o.entry : [o.entry],
   ];
 
-  const plugins: WebpackPluginInstance[] = [
-    new DefinePlugin({ BUILD_INFO: JSON.stringify(buildInfo) }),
+  const plugins: webpack.WebpackPluginInstance[] = [
+    new webpack.DefinePlugin({ BUILD_INFO: JSON.stringify(buildInfo) }),
   ];
 
-  if (!ops.dontUseProgressPlugin) plugins.push(new ProgressPlugin());
+  if (!ops.dontUseProgressPlugin) plugins.push(new webpack.ProgressPlugin());
 
   /* Adds InjectManifest plugin from WorkBox, if opted to. */
   if (o.workbox) {

@@ -2,18 +2,12 @@ import mockdate from 'mockdate';
 
 import { expect, test } from '@jest/globals';
 
-import type * as SrcM from '../src';
-import type * as ServerM from '../src/server';
-
 mockdate.set('2020-04-19Z');
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const lib = require('../src') as typeof SrcM;
+test('Export at server side', async () => {
+  const lib = await import('../src');
+  const server = await import('../src/server');
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const server = require('../src/server') as typeof ServerM;
-
-test('Export at server side', () => {
   expect(lib).toMatchSnapshot();
   expect(Object.keys(lib.time)).toMatchSnapshot();
 

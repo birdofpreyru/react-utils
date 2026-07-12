@@ -1,4 +1,4 @@
-import type { PluginItem, PresetItem } from '@babel/core';
+import type { InputOptions, PluginItem, PresetItem } from '@babel/core';
 
 import type {
   PluginOptionsT as ReactCssModulesOptionsT,
@@ -16,7 +16,7 @@ const generateScopedNameProd = generateScopedNameFactory(
   '[hash:base64:6]',
 );
 
-export type ConfigurationT = {
+export type ConfigurationT = InputOptions & {
   plugins: PluginItem[];
   presets: PresetItem[];
 };
@@ -70,6 +70,13 @@ function newBaseConfig(options: OptionsT): ConfigurationT {
   );
 
   return {
+    parserOpts: {
+      // TODO: This is a temporary workaround for babel-plugin-module-resolver
+      // not supporting Babel v8; see:
+      // https://github.com/tleunen/babel-plugin-module-resolver/issues/452,
+      // https://babeljs.io/docs/v8-migration-api#javascript-nodes.
+      createImportExpressions: false,
+    },
     plugins,
     presets: [
       ['@babel/env', {

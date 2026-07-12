@@ -4,10 +4,8 @@ import mockdate from 'mockdate';
 
 import { expect, jest, test } from '@jest/globals';
 
-import type GetInJM from 'client/getInj';
+import type * as GetInJM from 'client/getInj';
 import { mockClientSide } from 'utils/jest';
-
-import type * as SrcM from '../src';
 
 mockdate.set('2020-04-19Z');
 
@@ -22,12 +20,13 @@ function mockGetInj() {
 // Mocking getInj() is necessary to successfully load utils/config in
 // the mocked client-side environment, without proper server-side data
 // injections set up.
-jest.mock<typeof GetInJM>('../src/client/getInj', () => mockGetInj);
+jest.unstable_mockModule<typeof GetInJM>('../src/client/getInj', () => ({
+  default: mockGetInj,
+}));
 
-test('Export at client side', () => {
+test('Export at client side', async () => {
   mockClientSide();
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const lib = require('../src') as typeof SrcM;
+  const lib = await import('../src');
   expect(lib).toMatchSnapshot();
   expect(Object.keys(lib.time)).toMatchSnapshot();
 });

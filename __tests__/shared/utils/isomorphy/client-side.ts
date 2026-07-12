@@ -2,7 +2,6 @@
 
 import { afterEach, expect, test } from '@jest/globals';
 
-import type * as IT from 'utils/isomorphy';
 import { setBuildInfo } from 'utils/isomorphy/buildInfo';
 import { mockClientSide } from 'utils/jest';
 
@@ -17,30 +16,31 @@ setBuildInfo({
   useServiceWorker: false,
 });
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const m = require('utils/isomorphy') as typeof IT;
-
 afterEach(() => {
   process.env.NODE_ENV = 'test';
 });
 
-test('Client-side detection', () => {
-  expect(m.IS_CLIENT_SIDE).toBe(true);
-  expect(m.IS_SERVER_SIDE).toBe(false);
+test('Client-side detection', async () => {
+  const { IS_CLIENT_SIDE, IS_SERVER_SIDE } = await import('utils/isomorphy');
+  expect(IS_CLIENT_SIDE).toBe(true);
+  expect(IS_SERVER_SIDE).toBe(false);
 });
 
-test('Dev mode detection - client side', () => {
+test('Dev mode detection - client side', async () => {
   process.env.NODE_ENV = 'development';
-  expect(m.isDevBuild()).toBe(true);
-  expect(m.isProdBuild()).toBe(false);
+  const { isDevBuild, isProdBuild } = await import('utils/isomorphy');
+  expect(isDevBuild()).toBe(true);
+  expect(isProdBuild()).toBe(false);
 });
 
-test('Prod mode - client side', () => {
+test('Prod mode - client side', async () => {
   process.env.NODE_ENV = 'production';
-  expect(m.isDevBuild()).toBe(false);
-  expect(m.isProdBuild()).toBe(true);
+  const { isDevBuild, isProdBuild } = await import('utils/isomorphy');
+  expect(isDevBuild()).toBe(false);
+  expect(isProdBuild()).toBe(true);
 });
 
-test('Build timestamp - client-side', () => {
-  expect(m.buildTimestamp()).toBe('Test build timestamp');
+test('Build timestamp - client-side', async () => {
+  const { buildTimestamp } = await import('utils/isomorphy');
+  expect(buildTimestamp()).toBe('Test build timestamp');
 });

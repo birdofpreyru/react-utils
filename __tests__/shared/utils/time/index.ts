@@ -8,7 +8,6 @@ jest.useFakeTimers();
 mockdate.set(TEST_TIME_MS);
 
 test('Misc aliases', async () => {
-  // eslint-disable-next-line import/dynamic-import-chunkname
   const time = (await import('utils/time')).default;
 
   expect(time.SEC_MS).toBe(1000);

@@ -118,7 +118,7 @@ export function mockHttpResponse(): {
 
 export function mockWebpackConfig(): Configuration {
   return {
-    context: __dirname,
+    context: import.meta.dirname,
     output: {
       path: '/test/path',
       publicPath: '/test/public/path/',

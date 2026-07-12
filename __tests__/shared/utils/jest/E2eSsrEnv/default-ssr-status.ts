@@ -1,5 +1,5 @@
 /**
- * @jest-environment ./src/shared/utils/jest/E2eSsrEnv/index.ts
+ * @jest-environment ./build/production/shared/utils/jest/E2eSsrEnv
  * @webpack-config-factory ./config/webpack/app-production.js
  * @webpack-config-options {
  *  "entry": "./__assets__/EmptyScene/index.ts",

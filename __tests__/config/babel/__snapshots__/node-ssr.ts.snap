@@ -2,6 +2,9 @@
 
 exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
 {
+  "parserOpts": {
+    "createImportExpressions": false,
+  },
   "plugins": [
     "babel-plugin-react-compiler",
     [
@@ -80,6 +83,9 @@ exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
 
 exports[`"development" environment "baseAssetsOutputPath" option 2`] = `
 {
+  "parserOpts": {
+    "createImportExpressions": false,
+  },
   "plugins": [
     "babel-plugin-react-compiler",
     [
@@ -152,6 +158,9 @@ exports[`"development" environment "baseAssetsOutputPath" option 2`] = `
 
 exports[`"development" environment "noStyling" variation 1`] = `
 {
+  "parserOpts": {
+    "createImportExpressions": false,
+  },
   "plugins": [
     "babel-plugin-react-compiler",
     [
@@ -217,6 +226,9 @@ exports[`"development" environment "noStyling" variation 1`] = `
 
 exports[`"development" environment "noStyling" variation 2`] = `
 {
+  "parserOpts": {
+    "createImportExpressions": false,
+  },
   "plugins": [
     "babel-plugin-react-compiler",
     [
@@ -276,6 +288,9 @@ exports[`"development" environment "noStyling" variation 2`] = `
 
 exports[`"development" environment Default config 1`] = `
 {
+  "parserOpts": {
+    "createImportExpressions": false,
+  },
   "plugins": [
     "babel-plugin-react-compiler",
     [
@@ -354,6 +369,9 @@ exports[`"development" environment Default config 1`] = `
 
 exports[`"development" environment Default config 2`] = `
 {
+  "parserOpts": {
+    "createImportExpressions": false,
+  },
   "plugins": [
     "babel-plugin-react-compiler",
     [
@@ -426,6 +444,9 @@ exports[`"development" environment Default config 2`] = `
 
 exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
 {
+  "parserOpts": {
+    "createImportExpressions": false,
+  },
   "plugins": [
     "babel-plugin-react-compiler",
     [
@@ -504,6 +525,9 @@ exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
 
 exports[`"production" environment "baseAssetsOutputPath" option 2`] = `
 {
+  "parserOpts": {
+    "createImportExpressions": false,
+  },
   "plugins": [
     "babel-plugin-react-compiler",
     [
@@ -576,6 +600,9 @@ exports[`"production" environment "baseAssetsOutputPath" option 2`] = `
 
 exports[`"production" environment "noStyling" variation 1`] = `
 {
+  "parserOpts": {
+    "createImportExpressions": false,
+  },
   "plugins": [
     "babel-plugin-react-compiler",
     [
@@ -641,6 +668,9 @@ exports[`"production" environment "noStyling" variation 1`] = `
 
 exports[`"production" environment "noStyling" variation 2`] = `
 {
+  "parserOpts": {
+    "createImportExpressions": false,
+  },
   "plugins": [
     "babel-plugin-react-compiler",
     [
@@ -700,6 +730,9 @@ exports[`"production" environment "noStyling" variation 2`] = `
 
 exports[`"production" environment Default config 1`] = `
 {
+  "parserOpts": {
+    "createImportExpressions": false,
+  },
   "plugins": [
     "babel-plugin-react-compiler",
     [
@@ -778,6 +811,9 @@ exports[`"production" environment Default config 1`] = `
 
 exports[`"production" environment Default config 2`] = `
 {
+  "parserOpts": {
+    "createImportExpressions": false,
+  },
   "plugins": [
     "babel-plugin-react-compiler",
     [

@@ -2,5 +2,5 @@
   "$schema": "https://tstyche.org/schemas/config.json",
   "checkDeclarationFiles": true,
   "checkSuppressedErrors": true,
-  "testFileMatch": ["__tests__/**/*.{ts,tsx}"]
+  "testFileMatch": ["__type_tests__/**/*.{ts,tsx}"]
 }

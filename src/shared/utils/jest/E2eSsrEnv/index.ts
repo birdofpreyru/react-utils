@@ -146,22 +146,14 @@ export default class E2eSsrEnv extends JsdomEnv {
   }
 
   async runSsr(): Promise<void> {
-    // NOTE: These are TS modules in the source code, and they turn into JS
-    // modules in the distributed code, after Babel compilation. As we rely
-    // on them for the forked NodeJS process, we need to resolve the correct
-    // extentions ourselves (as NodeJS will hit the given paths, without any
+    // NOTE: This is a TS module in the source code, and it turn into JS
+    // module in the distributed code, after Babel compilation. As we rely
+    // on it for the forked NodeJS process, we need to resolve the correct
+    // extention ourselves (as NodeJS will hit the given path, without any
     // additional resolutions / transformations).
-    const regModulePath = await findModule(`${import.meta.dirname}/register`);
     const ssrModulePath = await findModule(`${import.meta.dirname}/ssr`);
 
-    const cp = fork(ssrModulePath, [], {
-      // NOTE: We have to preload this "register" module, to setup Babel
-      // transformation for the loaded "ssr.ts" module itself (I believe,
-      // it is relevant only when the source code is executed within
-      // the library codebase itself, as the distributed code already
-      // has "ssr.ts" transpiled).
-      execArgv: ['-r', regModulePath],
-    });
+    const cp = fork(ssrModulePath);
 
     const optionsString = this.pragmas['ssr-options'] as string;
     const options = optionsString
@@ -250,20 +242,6 @@ export default class E2eSsrEnv extends JsdomEnv {
     await super.setup();
     await this.runWebpack();
 
-    // NOTE: It is possible that the Webpack run above, and the SSR run below
-    // load different versions of the same module (CommonJS, and ES), and it may
-    // cause very confusing problems (e.g. see:
-    // https://github.com/birdofpreyru/react-utils/issues/413).
-    // It seems we can't reset the cache of ES modules, and Jest's module reset
-    // does not reset modules loaded in this enviroment module, and also only
-    // replacing entire cache object by and empty {} seems to help (in contrast
-    // to deleting all entries by their keys, as it is done within .teardown()
-    // method below). Thus, for now we do this as a hotfix, and we also reset
-    // build info to undefined, because ES module version not beeing reset
-    // triggers an error on the subsequent test using the environment.
-    // TODO: Look for a cleaner solution.
-    require.cache = {};
-
     // eslint-disable-next-line import/dynamic-import-chunkname
     const { setBuildInfo } = await import('../../isomorphy/buildInfo');
     setBuildInfo(undefined, true);
@@ -275,15 +253,6 @@ export default class E2eSsrEnv extends JsdomEnv {
   async teardown(): Promise<void> {
     delete this.global.REACT_UTILS_FORCE_CLIENT_SIDE;
 
-    // Resets module cache and @babel/register. Effectively this ensures that
-    // the next time an instance of this environment is set up, all modules are
-    // transformed by Babel from scratch, thus taking into account the latest
-    // Babel config (which may change between different environment instances,
-    // which does not seem to be taken into account by Babel / Node caches
-    // automatically).
-    Object.keys(require.cache).forEach((key) => {
-      delete require.cache[key];
-    });
     revert();
 
     await super.teardown();

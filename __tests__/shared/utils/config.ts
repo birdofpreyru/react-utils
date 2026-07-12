@@ -2,8 +2,6 @@
 
 // TODO: Split client- and server-side tests into two separate test modules.
 
-import type ConfigM from 'config';
-
 import {
   afterEach,
   beforeEach,
@@ -14,13 +12,10 @@ import {
   test,
 } from '@jest/globals';
 
-import type * as ConfigUtilsNS from 'utils/config';
-import type * as IT from 'utils/isomorphy';
 import { mockClientSide, unmockClientSide } from 'utils/jest';
 
-test('Base test', () => {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const config = require('config') as typeof ConfigM;
+test('Base test', async () => {
+  const config = await import('config');
   expect(config.util.toObject(config)).toMatchSnapshot();
 });
 
@@ -48,24 +43,18 @@ describe('Isomorphy behavior tests', () => {
   // of data by server differently, and simply assigning window.CONFIG does not
   // mock it in any way (one of the reason for the change affecting this test
   // was to get rid of objects attached to window by library).
-  it.skip('Serves injected config at the client side', () => {
+  it.skip('Serves injected config at the client side', async () => {
     mockClientSide();
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { IS_CLIENT_SIDE } = require('utils/isomorphy') as typeof IT;
+    const { IS_CLIENT_SIDE } = await import('utils/isomorphy');
     expect(IS_CLIENT_SIDE).toBe(true);
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    expect((require('utils/config') as {
-      default: typeof ConfigM;
-    }).default)
-      .toStrictEqual(CLIENT_SIDE_CONFIG);
+    await expect(import('utils/config'))
+      .resolves.toStrictEqual(CLIENT_SIDE_CONFIG);
   });
 
-  it('Serves node-config at the server side', () => {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { IS_SERVER_SIDE } = require('utils/isomorphy') as typeof IT;
+  it('Serves node-config at the server side', async () => {
+    const { IS_SERVER_SIDE } = await import('utils/isomorphy');
     expect(IS_SERVER_SIDE).toBe(true);
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { getConfig } = require('utils/config') as typeof ConfigUtilsNS;
+    const { getConfig } = await import('utils/config');
 
     expect(getConfig(true)).toStrictEqual(SERVER_SIDE_CONFIG);
   });

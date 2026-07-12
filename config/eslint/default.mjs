@@ -16,7 +16,7 @@ export default defineConfig([
   eslintConfigs.configs.react,
   {
     extends: [eslintConfigs.configs.jest],
-    files: ['__tests__/**'],
+    files: ['__tests__/**', '__type_tests__/**'],
     rules: {
       'jest/expect-expect': ['warn', {
         assertFunctionNames: ['expect', 'snapshot'],

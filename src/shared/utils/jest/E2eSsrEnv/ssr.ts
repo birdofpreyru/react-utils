@@ -61,7 +61,7 @@ async function run({
           root,
         })?.code ?? '';
         return {
-          format: 'commonjs',
+          format: 'module',
           shortCircuit: true,
           source: code,
         };
