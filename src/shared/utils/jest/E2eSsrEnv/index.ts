@@ -151,7 +151,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     // on it for the forked NodeJS process, we need to resolve the correct
     // extention ourselves (as NodeJS will hit the given path, without any
     // additional resolutions / transformations).
-    const ssrModulePath = await findModule(`${import.meta.dirname}/ssr`);
+    const ssrModulePath = await findModule(`${import.meta.dirname}/ssr-preload`);
 
     const cp = fork(ssrModulePath);
 
