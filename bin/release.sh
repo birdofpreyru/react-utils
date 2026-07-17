@@ -23,4 +23,4 @@ gsutil -m rsync -d -r docs/build gs://docs.pogodin.studio/react-utils
 
 # Library package release.
 export NPM_ID_TOKEN=$(circleci run oidc get --claims '{"aud": "npm:registry.npmjs.org"}')
-npm publish --access public
+npm publish --access public --tag alpha

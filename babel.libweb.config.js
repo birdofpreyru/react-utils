@@ -6,6 +6,7 @@
 export default {
   presets: [
     ['./config/babel/webpack', {
+      addImportExtensions: true,
       noRR: true,
       noStyling: true,
       typescript: true,

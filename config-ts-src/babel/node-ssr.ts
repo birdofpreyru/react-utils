@@ -12,7 +12,6 @@ import getWebpackBabelConfig, {
 } from './webpack.js';
 
 type OptionsT = WebpackConfigOptionsT & {
-  addImportExtensions?: boolean;
   baseAssetsOutputPath?: string;
 };
 
@@ -35,10 +34,6 @@ function newBase(babel: BabelCompilerI, options: OptionsT = {}) {
       name: `${baseAssetsOutputPath}/images/[md4:hash:20].[ext]`,
     }],
   );
-
-  if (options.addImportExtensions) {
-    config.plugins.push('@dr.pogodin/add-import-extension');
-  }
 
   const moduleResolverPlugin = config.plugins.find(
     (x) => Array.isArray(x) && x[0] === 'module-resolver',

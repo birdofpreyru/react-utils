@@ -41,6 +41,7 @@ export enum ENVIRONMENTS {
 type ModuleT = 'amd' | 'auto' | 'cjs' | 'commonjs' | 'systemjs' | 'umd' | false;
 
 export type OptionsT = {
+  addImportExtensions?: boolean;
   modules?: ModuleT;
   noRR?: boolean;
   noReactCompiler?: boolean;
@@ -68,6 +69,10 @@ function newBaseConfig(options: OptionsT): ConfigurationT {
     '@babel/transform-runtime',
     ['polyfill-corejs3', { method: 'usage-pure', version: '3.49' }],
   );
+
+  if (options.addImportExtensions) {
+    plugins.push('@dr.pogodin/add-import-extension');
+  }
 
   return {
     parserOpts: {
