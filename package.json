@@ -1,5 +1,5 @@
 {
-  "version": "1.55.0-alpha.1",
+  "version": "1.55.0-alpha.2",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -88,7 +88,6 @@
     "babel-plugin-module-resolver": "^5.0.3",
     "babel-plugin-polyfill-corejs3": "^1.0.0",
     "babel-plugin-react-compiler": "^1.0.0",
-    "babel-plugin-transform-import-meta": "^3.0.0",
     "css-loader": "^7.1.4",
     "css-minimizer-webpack-plugin": "^8.0.0",
     "identity-obj-proxy": "^3.0.0",
