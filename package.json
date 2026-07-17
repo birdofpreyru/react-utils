@@ -198,7 +198,7 @@
     "lint": "npm run lint:code && npm run lint:scss",
     "lint:code": "eslint --cache --cache-strategy content",
     "lint:scss": "stylelint -- **/*.{css,scss}",
-    "postinstall": "patch-package --no-error-on-fail",
+    "postinstall": "patch-package || true",
     "test": "npm run lint && npm run typecheck && npm run jest",
     "typecheck": "tsc --noEmit"
   },
