@@ -1,8 +1,6 @@
-import { createRequire } from 'node:module';
-
 import type { NextFunction, Request, Response } from 'express';
 
-import type ServeFaviconM from 'serve-favicon';
+import type * as ServeFaviconM from 'serve-favicon';
 import supertest from 'supertest';
 import type WebpackM from 'webpack';
 import type WebpackHotM from 'webpack-hot-middleware';
@@ -19,12 +17,14 @@ import {
 import type * as ServerNS from 'server/server';
 import type * as BuildInfoNS from 'utils/isomorphy/buildInfo';
 
-jest.mock('node:crypto');
+// eslint-disable-next-line jest/no-mocks-import
+import * as mockCrypto from '../../__mocks__/crypto';
 
-const require = createRequire(import.meta.url);
+jest.unstable_mockModule('node:crypto', () => mockCrypto);
 
-const { default: serverFactory } = require('server/server') as typeof ServerNS;
-const { setBuildInfo } = require('utils/isomorphy/buildInfo') as typeof BuildInfoNS;
+let serveFavicon: typeof ServeFaviconM;
+let serverFactory: typeof ServerNS.default;
+let setBuildInfo: typeof BuildInfoNS.setBuildInfo;
 
 function noop() {
   // NOOP
@@ -39,13 +39,15 @@ const logger = {
   warn: noop,
 };
 
-jest.mock<typeof ServeFaviconM>('serve-favicon', () => jest.fn(
-  () => (req: Request, res: Response, next: NextFunction) => {
-    next();
-  },
-));
+jest.unstable_mockModule<typeof ServeFaviconM>('serve-favicon', () => ({
+  default: jest.fn(
+    () => (req: Request, res: Response, next: NextFunction) => {
+      next();
+    },
+  ),
+}));
 
-jest.mock<typeof WebpackM>('webpack', () => {
+jest.unstable_mockModule<typeof WebpackM>('webpack', () => {
   const mock = () => ({
     apply: jest.fn(),
     plugin: jest.fn(),
@@ -55,7 +57,7 @@ jest.mock<typeof WebpackM>('webpack', () => {
   return mock as unknown as typeof WebpackM;
 });
 
-jest.mock<typeof WebpackHotM>(
+jest.unstable_mockModule<typeof WebpackHotM>(
   'webpack-hot-middleware',
   () => jest.fn(
     () => (req: Request, res: Response, next: NextFunction) => {
@@ -64,7 +66,13 @@ jest.mock<typeof WebpackHotM>(
   ) as unknown as typeof WebpackHotM,
 );
 
-const TEST_CONTEXT = `${__dirname}/test_data`;
+beforeAll(async () => {
+  serveFavicon = await import('serve-favicon');
+  serverFactory = (await import('server/server')).default;
+  ({ setBuildInfo } = await import('utils/isomorphy/buildInfo'));
+});
+
+const TEST_CONTEXT = `${import.meta.dirname}/test_data`;
 
 const TEST_FAVICON_PATH = '/path/to/favicon.ico';
 
@@ -87,7 +95,7 @@ test('Favicon support', async () => {
     favicon: TEST_FAVICON_PATH,
     logger,
   });
-  expect(require('serve-favicon')).toHaveBeenCalledWith(TEST_FAVICON_PATH);
+  expect(serveFavicon.default).toHaveBeenCalledWith(TEST_FAVICON_PATH);
   await server;
 });
 

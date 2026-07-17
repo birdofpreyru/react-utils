@@ -7,22 +7,33 @@ import supertest from 'supertest';
 
 import {
   afterEach,
+  beforeAll,
   describe,
   expect,
   jest,
   test,
 } from '@jest/globals';
 
-import serverFactory from 'server/server';
+import type * as ServerM from 'server/server';
+
 import { setBuildInfo } from 'utils/isomorphy/buildInfo';
+
+// eslint-disable-next-line jest/no-mocks-import
+import * as mockCrypto from '../../../../__mocks__/crypto';
 
 import Application, { MODES } from './__assets__/testcase/app';
 import Application2, { MODES as MODES2 } from './__assets__/testcase/app2';
 
-jest.mock('node:crypto');
+jest.unstable_mockModule('node:crypto', () => mockCrypto);
+
+let serverFactory: typeof ServerM.default;
+
+beforeAll(async () => {
+  serverFactory = (await import('server/server')).default;
+});
 
 const WEBPACK_CONFIG = {
-  context: `${__dirname}/__assets__/testcase`,
+  context: `${import.meta.dirname}/__assets__/testcase`,
   output: {
     path: '/path/to/assets',
     publicPath: '/test/public/path',

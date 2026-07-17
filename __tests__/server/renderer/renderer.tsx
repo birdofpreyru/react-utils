@@ -15,21 +15,21 @@ import { Helmet } from '@dr.pogodin/react-helmet';
 
 import {
   afterEach,
+  beforeAll,
   expect,
   it,
   jest,
   test,
 } from '@jest/globals';
 
-import factory, {
-  type ConfigT,
-  SCRIPT_LOCATIONS,
-  isBrotliAcceptable,
-} from 'server/renderer';
+import type * as ServerRendererM from 'server/renderer';
 
 import { useSsrContext } from 'utils/globalState';
 
 import { type BuildInfoT, getBuildInfo, setBuildInfo } from 'utils/isomorphy/buildInfo';
+
+// eslint-disable-next-line jest/no-mocks-import
+import * as mockCrypto from '../../../__mocks__/crypto';
 
 import {
   mockHttpRequest,
@@ -37,7 +37,13 @@ import {
   mockWebpackConfig,
 } from './__assets__/common';
 
-jest.mock('node:crypto');
+jest.unstable_mockModule('node:crypto', () => mockCrypto);
+
+let serverRenderer: typeof ServerRendererM;
+
+beforeAll(async () => {
+  serverRenderer = await import('server/renderer');
+});
 
 function noop() {
   // NOOP
@@ -50,7 +56,7 @@ declare namespace global {
 
 global.mockFailsForgeRandomGetBytesMethod = false;
 
-const TEST_CONTEXT = `${__dirname}/__assets__`;
+const TEST_CONTEXT = `${import.meta.dirname}/__assets__`;
 
 const TEST_INITIAL_STATE = {
   stateKey1: 'State Value #1',
@@ -83,7 +89,7 @@ async function coreTest(webpackConfig: Configuration, options = {}) {
 
   let renderer: RequestHandler | undefined;
   expect(() => {
-    renderer = factory(webpackConfig, {
+    renderer = serverRenderer.default(webpackConfig, {
       ...options,
       logger: {
         debug: noop,
@@ -133,7 +139,10 @@ test(
   'Config overriding for injection',
   async () => {
     await coreTest(mockWebpackConfig(), {
-      beforeRender: (req: Request, sanitizedConfig: ConfigT) => {
+      beforeRender: (
+        req: Request,
+        sanitizedConfig: ServerRendererM.ConfigT,
+      ) => {
         expect(sanitizedConfig).toBeInstanceOf(Object);
         expect(sanitizedConfig).not.toHaveProperty('SECRET');
         return {
@@ -195,23 +204,23 @@ test(
         '<script>Another Dummy JS Script</script>',
         {
           code: '<script>Yet another Dummy JS Script</script>',
-          location: SCRIPT_LOCATIONS.DEFAULT,
+          location: serverRenderer.SCRIPT_LOCATIONS.DEFAULT,
         },
         {
           code: '<script>1-st script after opening <head></script>',
-          location: SCRIPT_LOCATIONS.HEAD_OPEN,
+          location: serverRenderer.SCRIPT_LOCATIONS.HEAD_OPEN,
         },
         {
           code: '<script>1-st script after opening <body></script>',
-          location: SCRIPT_LOCATIONS.BODY_OPEN,
+          location: serverRenderer.SCRIPT_LOCATIONS.BODY_OPEN,
         },
         {
           code: '<script>2-nd script after opening <body></script>',
-          location: SCRIPT_LOCATIONS.BODY_OPEN,
+          location: serverRenderer.SCRIPT_LOCATIONS.BODY_OPEN,
         },
         {
           code: '<script>2-nd script after opening <head></script>',
-          location: SCRIPT_LOCATIONS.HEAD_OPEN,
+          location: serverRenderer.SCRIPT_LOCATIONS.HEAD_OPEN,
         },
       ],
     }),
@@ -254,7 +263,7 @@ test('Throws in case of forge.random.getBytes(..) failure', async () => {
 });
 
 it('correctly tests if brotli-encoded responses are acceptable', () => {
-  const res = (header: string) => isBrotliAcceptable({
+  const res = (header: string) => serverRenderer.isBrotliAcceptable({
     // TODO: It is fine to use for sure... should we declare it outside the test?
     // eslint-disable-next-line jest/no-conditional-in-test
     get: (name: string) => (name.toLowerCase() === 'accept-encoding'

@@ -16,7 +16,8 @@ import { mockClientSide, unmockClientSide } from 'utils/jest';
 
 test('Base test', async () => {
   const config = await import('config');
-  expect(config.util.toObject(config)).toMatchSnapshot();
+  const { Util } = await import('config/lib/util');
+  expect(Util.toObject(config.default)).toMatchSnapshot();
 });
 
 describe('Isomorphy behavior tests', () => {
