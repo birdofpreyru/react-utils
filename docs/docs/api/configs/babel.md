@@ -60,6 +60,14 @@ This preset includes:
 ### Options {/* #client-side-options */}
 These are client-side preset options:
 
+- `addImportExtensions` &mdash; [AddImportExtensionOptions] | **boolean**
+  &mdash; If truthy, [@dr.pogodin/babel-plugin-add-import-extension] plugin
+  is added to the configuration; with the given options if the value is
+  an object, otherwise with the default options:
+  ```js
+    { replacements: { svg: 'svg.js' } }
+  ```
+
 - `modules` &mdash; `amd` | `auto` | `cjs` | `commonjs` | `systemjs` | `umd`
   | **false** | **undefined** &mdash; Optional. It is forwarded to the
   [`modules` option](https://babeljs.io/docs/babel-preset-env#modules) of
@@ -75,13 +83,16 @@ These are client-side preset options:
 - `noStyling` - **boolean** - Set **true** to opt out of any setup related to
   styling ((S)CSS processing, CSS Modules).
 
-- `targets` - **object | string | string[]** - Compilation targets to pass into
-  [@babel/preset-env]. Defaults to `defaults`, which means
-  &laquo;Default targets recommended by
-  [Browserslist](https://github.com/browserslist/browserslist)&raquo;.
-
 - `typescript` &mdash; **bolean** | **undefined** &mdash; Optional. Enables
   TypeScript support.
+
+:::danger[Deprecated]
+- `targets` &mdash; **object** | **string** | **string[]** &mdash;
+  Removed in the library [v1.55.0], because of the migration to [Babel v8],
+  which changes to the target specification _via_ the top-level
+  [`targets`](https://babeljs.io/docs/options#targets) option in
+  the [Babel] config.
+:::
 
 ## Server-side
 To include the preset into [Babel] config:
@@ -138,7 +149,10 @@ that:
 - `baseAssetsOutputPath` - **string** - Path prefix for emitted image assets.
   Defaults to empty string.
 
+[AddImportExtensionOptions]: https://github.com/birdofpreyru/babel-plugin-add-import-extension#options
+
 [Babel]: https://babeljs.io
+[Babel v8]: https://babeljs.io/blog/2026/06/16/8.0.0
 
 [babel-plugin-module-resolver]: https://www.npmjs.com/package/babel-plugin-module-resolver
 [babel-plugin-react-compiler]: https://www.npmjs.com/package/babel-plugin-react-compiler
@@ -153,6 +167,8 @@ that:
 
 [@babel/plugin-transform-runtime]: https://babeljs.io/docs/en/babel-plugin-transform-runtime
 
+[@dr.pogodin/babel-plugin-add-import-extension]: https://www.npmjs.com/package/@dr.pogodin/babel-plugin-add-import-extension
+
 [@dr.pogodin/babel-preset-svgr]: https://www.npmjs.com/package/@dr.pogodin/babel-preset-svgr
 
 [Client-side]: #client-side
@@ -161,6 +177,8 @@ that:
 [Rules of React]: https://react.dev/reference/rules
 
 [Server-side]: #server-side
+
+[v1.55.0]: https://github.com/birdofpreyru/react-utils/releases/tag/v1.55.0
 
 [Webpack]: https://webpack.js.org
 

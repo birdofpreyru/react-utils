@@ -3,13 +3,6 @@ import { execPath } from 'node:process';
 
 const globalLibDir = resolve(execPath, '../../lib/node_modules');
 
-const modulesToTransform = [
-  '@dr.pogodin/react-global-state',
-  '@dr.pogodin/react-utils',
-  'cookie',
-  'lodash-es',
-];
-
 export default {
   collectCoverage: true,
   collectCoverageFrom: [
@@ -41,7 +34,4 @@ export default {
   transform: {
     '\\.((j|t)sx?|svg)$': 'babel-jest',
   },
-  transformIgnorePatterns: [
-    `/node_modules/(?!${modulesToTransform.join('|')})`,
-  ],
 };

@@ -326,3 +326,17 @@ exports[`Export at server side 11`] = `
   [Function],
 ]
 `;
+
+exports[`Export at server side 12`] = `
+[
+  "registerBabelLoader",
+  [Function],
+]
+`;
+
+exports[`Export at server side 13`] = `
+[
+  "registerResolver",
+  [Function],
+]
+`;

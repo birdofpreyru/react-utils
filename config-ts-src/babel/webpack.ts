@@ -1,6 +1,10 @@
 import type { InputOptions, PluginItem, PresetItem } from '@babel/core';
 
 import type {
+  OptionsT as AddImportExtensionOptions,
+} from '@dr.pogodin/babel-plugin-add-import-extension';
+
+import type {
   PluginOptionsT as ReactCssModulesOptionsT,
 } from '@dr.pogodin/babel-plugin-react-css-modules';
 
@@ -41,7 +45,7 @@ export enum ENVIRONMENTS {
 type ModuleT = 'amd' | 'auto' | 'cjs' | 'commonjs' | 'systemjs' | 'umd' | false;
 
 export type OptionsT = {
-  addImportExtensions?: boolean;
+  addImportExtensions?: AddImportExtensionOptions | boolean;
   modules?: ModuleT;
   noRR?: boolean;
   noReactCompiler?: boolean;
@@ -71,7 +75,14 @@ function newBaseConfig(options: OptionsT): ConfigurationT {
   );
 
   if (options.addImportExtensions) {
-    plugins.push('@dr.pogodin/add-import-extension');
+    plugins.push(
+      ['@dr.pogodin/add-import-extension',
+        typeof options.addImportExtensions === 'object'
+          ? options.addImportExtensions
+          : {
+            replacements: { svg: 'svg.js' },
+          }],
+    );
   }
 
   return {

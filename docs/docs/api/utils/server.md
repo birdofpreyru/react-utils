@@ -30,6 +30,13 @@ from the dedicated server-side package export `@dr.pogodin/react-utils/server`.
 - [getDefaultCspSettings()](#getdefaultcspsettings) &mdash; Returns a deep copy of
   default [CSP] settings object used by **react-utils**.
 
+- [registerBabelLoader()] &mdash; Registers a [Node module API hook] that
+  customizes ES module loading to run Babel transformation on them (essentially,
+  it is a functioning replacement for [@babel/node] and [@babel/register]).
+
+- [registerResolver()] &mdash; Registers a [Node module API hook] that customizes
+  ES module resolution to make mandatory file extensions optional.
+
 :::caution[Deprecated]
 - [errors.joi](#errorsjoi) &mdash; Removed in **v1.44.0**; an alias for [Joi]
   library, which provides methods for HTTP request validation.
@@ -188,6 +195,59 @@ Returns a deep copy of default [CSP] settings object used by **react-utils**,
 with exception of `nonce-xxx` clause in `script-src` directive, which is added
 dynamically for each request.
 
+### registerBabelLoader()
+[registerBabelLoader()]: #registerbabelloader
+```tsx
+import { registerBabelLoader } from '@dr.pogodin/react-utils/server';
+
+function registerBabelLoader(options: RegisterBabelLoaderArgT = {}): void
+
+// where
+type RegisterBabelLoaderArgT = {
+  envName?: string;
+  root?: string;
+};
+```
+
+Registers a [Node module API hook](https://nodejs.org/docs/latest/api/module.html#customization-hooks)
+that customizes ES module loading to run Babel transformation on `.js`, `.jsx`,
+`.svg`, `.ts`, and `.tsx` modules, located outside `node_modules` and
+`config/babel` folders. It is essentially the same feature provided by
+[@babel/node], and [@babel/register], that do not work with imported ES modules
+as of [Babel v8].
+
+It is intended for development (test) environment purposes, as it does
+the transformation &ldquo;on the fly&rdquo;, and caches transformation
+results in memory.
+
+:::caution[BEWARE]
+It depends on ['@babel/core'], which is declared as development-only dependency
+of this library.
+:::
+
+**Options**:
+- `envName` &mdash; **string** &mdash; Babel environment. Defaults `development`.
+- `root` &mdash; **string** &mdash; Babel root. Defaults the current working
+  directory.
+
+### registerResolver()
+[registerResolver()]: #registerresolver
+```tsx
+import { registerResolver } from '@dr.pogodin/react-utils/server';
+
+function registerResolver(): void;
+```
+
+Registers a [Node module API hook] that customizes ES module resolution
+to make mandatory file extensions optional.
+
+More specifically, it intercepts module resolution requests with `import`
+condition, and [relative import specifiers] (those starting with `.` or `/`),
+and attempts to resolve them by appending `.js`, `.jsx`, `.ts`, and `.tsx`
+extensions; and if the given specifier points to a directory, it attempts
+to resolve it by appending `/index.js`, `/index.jsx`, `/index.ts`,
+and `/index.tsx`.
+
 ### errors.joi
 :::danger[Deprecated]
 Removed in **v1.44.0**. The original documentation below is kept for reference.
@@ -211,15 +271,20 @@ const requestBodySchema = joi.object({
   sampleKey: joi.string().max(16).required(),
 });
 ```
-
 :::
 
+['@babel/core']: https://babeljs.io/docs/babel-core
+[@babel/node]: https://babeljs.io/docs/babel-node
+[@babel/register]: https://babeljs.io/docs/babel-register
+[Babel v8]: https://babeljs.io/blog/2026/06/16/8.0.0
 [CSP]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 [ExpressJS]: https://expressjs.com
 [helmet]: https://github.com/helmetjs/helmet
 [http-status-codes]: https://www.npmjs.com/package/http-status-codes
 [Joi]: https://joi.dev/api
 [launchServer()]: /docs/api/functions/launchServer
+[Node module API hook]: https://nodejs.org/docs/latest/api/module.html#customization-hooks
+[relative import specifiers]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#module_specifier_resolution
 [Script]: /docs/api/functions/server#beforerender-script
 [SCRIPT_LOCATIONS]: #script_locations
 [Standard Schema Specs]: https://standardschema.dev

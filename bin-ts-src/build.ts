@@ -231,8 +231,8 @@ type RunBabelOptionsT = {
   configPath?: string;
   copyFiles?: boolean;
   extensions: Array<`.${string}`>;
-  keepFileExtensions?: boolean;
   outDir: string;
+  outFileExtension?: string;
   srcDir: string;
   watch?: boolean;
 };
@@ -246,9 +246,8 @@ type RunBabelOptionsT = {
  * @param extensions - Optional. Array of extensions
  *  to transform, each starting with the leading dot (e.g. '.ts'). If absent,
  *  Babel will use its default set of extensions.
- * @param keepFileExtensions - Optional. If set, Babel will
- *  keep the original extensions for the transformed files; otherwise the will
- *  be turned into '.js' files.
+ * @param outFileExtension - Optional. Allows to set arbitrary file extension of
+ *  output files.
  * @param outDir - Output folder.
  * @param srcDir - Source folder.
  * @param watch - Optional. If set, Babel will be run in watch
@@ -259,8 +258,8 @@ async function runBabel({
   configPath,
   copyFiles,
   extensions,
-  keepFileExtensions,
   outDir,
+  outFileExtension,
   srcDir,
   watch,
 }: RunBabelOptionsT) {
@@ -277,7 +276,7 @@ async function runBabel({
   if (copyFiles) command += ' --copy-files';
 
   command += ` -x ${extensions.join(',')}`;
-  if (keepFileExtensions) command += ' --keep-file-extension';
+  if (outFileExtension) command += ` --out-file-extension ${outFileExtension}`;
   if (watch) command += ' --watch';
 
   await exec(command, {
@@ -334,8 +333,8 @@ async function buildWithBabelForServerSide({
     buildType,
     configPath,
     extensions: ['.svg'],
-    keepFileExtensions: true,
     outDir,
+    outFileExtension: '.svg.js',
     srcDir,
   });
 }

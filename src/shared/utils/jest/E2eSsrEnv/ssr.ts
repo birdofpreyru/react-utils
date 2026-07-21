@@ -1,15 +1,9 @@
-/* eslint-disable import/dynamic-import-chunkname, import/no-extraneous-dependencies */
-
-import { readFileSync } from 'node:fs';
-import { registerHooks } from 'node:module';
-import { basename, dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
 
 import type { Request, Response } from 'express';
 import type { Configuration } from 'webpack';
 
-import { transformSync } from '@babel/core';
-
+import { registerBabelLoader } from 'server';
 import ssrFactory from 'server/renderer';
 
 export type LaunchT = {
@@ -44,35 +38,11 @@ async function run({
   // API, and Babel's core, to transpile all modules loaded further into
   // CommonJS. I guess, later we'll be able to get rid of this, as Babel
   // register supports runtime transformation of modules loaded with import().
-  registerHooks({
-    load(url, context, nextLoad) {
-      if (
-        url.startsWith('file://')
-        && !url.includes('/node_modules/')
-        && !url.includes('/config/babel/')
-        && url.match(/\.(js|jsx|ts|tsx|svg)$/)
-      ) {
-        const path = fileURLToPath(url);
-        let code = readFileSync(path, 'utf8');
-        code = transformSync(code, {
-          cwd: dirname(path),
-          envName: options.babelEnv as string,
-          filename: basename(path),
-          root,
-        })?.code ?? '';
-        return {
-          format: 'module',
-          shortCircuit: true,
-          source: code,
-        };
-      }
-
-      return nextLoad(url, context);
-    },
-  });
+  registerBabelLoader({ envName: options.babelEnv as string, root });
 
   if (options.entry) {
     const p = resolve(testFolder, options.entry as string);
+    // eslint-disable-next-line import/dynamic-import-chunkname
     const babelModule = await import(p) as NodeJS.Module;
 
     // TODO: This is basically a hotfix hack, which works both for the library
