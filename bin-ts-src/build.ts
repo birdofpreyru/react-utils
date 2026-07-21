@@ -398,6 +398,7 @@ void (async () => {
     }
     await buildWithBabelForServerSide({
       buildType,
+      configPath: 'babel.build.config.js',
       outDir: buildDir,
       srcDir: sourceDir,
     });

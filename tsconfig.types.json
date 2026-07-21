@@ -36,6 +36,7 @@
 
       "components": ["./src/shared/components"],
       "components/*": ["./src/shared/components/*"],
+      "server": ["./src/server"],
       "server/*": ["./src/server/*"],
       "utils": ["./src/shared/utils"],
       "utils/*": ["./src/shared/utils/*"],

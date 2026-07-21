@@ -9,7 +9,7 @@ export default {
     'src/**/*.{js,jsx,ts,tsx}',
   ],
   coverageDirectory: '__coverage__',
-  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  extensionsToTreatAsEsm: ['.svg', '.ts', '.tsx'],
   moduleDirectories: [
     'node_modules',
     globalLibDir,
