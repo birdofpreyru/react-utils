@@ -1,5 +1,5 @@
 {
-  "version": "1.55.1",
+  "version": "1.55.2",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -14,10 +14,10 @@
     "@dr.pogodin/csurf": "^1.17.1",
     "@dr.pogodin/js-utils": "^0.2.0",
     "@dr.pogodin/react-global-state": "^0.25.0",
-    "@dr.pogodin/react-helmet": "^3.2.2",
+    "@dr.pogodin/react-helmet": "^3.2.3",
     "@dr.pogodin/react-themes": "^1.11.0",
     "@jest/environment": "^30.4.1",
-    "axios": "^1.18.1",
+    "axios": "^1.19.0",
     "commander": "^15.0.0",
     "compression": "^1.8.1",
     "config": "^4.4.2",
@@ -97,7 +97,7 @@
     "mockdate": "^3.0.5",
     "nodelist-foreach-polyfill": "^1.2.0",
     "patch-package": "^8.0.1",
-    "postcss": "^8.5.23",
+    "postcss": "^8.5.25",
     "postcss-loader": "^8.2.1",
     "postcss-scss": "^4.0.9",
     "pretty": "^2.0.0",
@@ -114,7 +114,7 @@
     "tstyche": "^7.2.2",
     "typed-scss-modules": "^8.1.1",
     "typescript": "^6.0.3",
-    "webpack": "5.109.0",
+    "webpack": "5.109.2",
     "webpack-dev-middleware": "^8.1.0",
     "webpack-hot-middleware": "^2.26.1",
     "webpack-merge": "^6.0.1",
