@@ -33,7 +33,7 @@ exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.49",
+        "version": "3.50",
       },
     ],
     [
@@ -114,7 +114,7 @@ exports[`"development" environment "baseAssetsOutputPath" option 2`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.49",
+        "version": "3.50",
       },
     ],
     [
@@ -189,7 +189,7 @@ exports[`"development" environment "noStyling" variation 1`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.49",
+        "version": "3.50",
       },
     ],
     [
@@ -257,7 +257,7 @@ exports[`"development" environment "noStyling" variation 2`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.49",
+        "version": "3.50",
       },
     ],
     [
@@ -319,7 +319,7 @@ exports[`"development" environment Default config 1`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.49",
+        "version": "3.50",
       },
     ],
     [
@@ -400,7 +400,7 @@ exports[`"development" environment Default config 2`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.49",
+        "version": "3.50",
       },
     ],
     [
@@ -475,7 +475,7 @@ exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.49",
+        "version": "3.50",
       },
     ],
     [
@@ -556,7 +556,7 @@ exports[`"production" environment "baseAssetsOutputPath" option 2`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.49",
+        "version": "3.50",
       },
     ],
     [
@@ -631,7 +631,7 @@ exports[`"production" environment "noStyling" variation 1`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.49",
+        "version": "3.50",
       },
     ],
     [
@@ -699,7 +699,7 @@ exports[`"production" environment "noStyling" variation 2`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.49",
+        "version": "3.50",
       },
     ],
     [
@@ -761,7 +761,7 @@ exports[`"production" environment Default config 1`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.49",
+        "version": "3.50",
       },
     ],
     [
@@ -842,7 +842,7 @@ exports[`"production" environment Default config 2`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.49",
+        "version": "3.50",
       },
     ],
     [

@@ -3,7 +3,7 @@
 export default {
   plugins: [
     '@babel/transform-runtime',
-    ['polyfill-corejs3', { method: 'usage-pure', version: '3.49' }],
+    ['polyfill-corejs3', { method: 'usage-pure', version: '3.50' }],
   ],
   presets: [
     ['@babel/env', { modules: false }],

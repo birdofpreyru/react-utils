@@ -71,7 +71,7 @@ function newBaseConfig(options: OptionsT): ConfigurationT {
       root: ['./src/shared', './src'],
     }],
     '@babel/transform-runtime',
-    ['polyfill-corejs3', { method: 'usage-pure', version: '3.49' }],
+    ['polyfill-corejs3', { method: 'usage-pure', version: '3.50' }],
   );
 
   if (options.addImportExtensions) {
