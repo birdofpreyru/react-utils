@@ -76,11 +76,18 @@ export class ServerSsrContext<StateT>
 
   chunks: string[] = [];
 
-  redirectTo?: string;
+  private pRedirectTo?: string;
+  private pStatus: number = 200;
 
   req: Request;
 
-  status: number = 200;
+  get redirectTo(): string | undefined {
+    return this.pRedirectTo;
+  }
+
+  get status(): number {
+    return this.pStatus;
+  }
 
   constructor(
     req: Request,
@@ -90,6 +97,14 @@ export class ServerSsrContext<StateT>
     super(cloneDeep(initialState) ?? ({} as StateT));
     this.chunkGroups = chunkGroups;
     this.req = req;
+  }
+
+  /**
+   * Sets status code and `redirectTo` value.
+   */
+  setStatus(status: number, redirectTo?: string): void {
+    this.pRedirectTo = redirectTo;
+    this.pStatus = status;
   }
 }
 

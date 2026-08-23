@@ -29,10 +29,12 @@ export interface SsrContextT<StateT> extends SsrContext<StateT> {
   /** If set at the end of SSR, the rendered will trigger
    *  server-side redirect to this URL (and use the status
    *  code). */
-  redirectTo?: string;
+  readonly redirectTo: string | undefined;
 
   req: Request;
-  status: number;
+  readonly status: number;
+
+  setStatus(status: number, redirectTo?: string): void;
 }
 
 const {

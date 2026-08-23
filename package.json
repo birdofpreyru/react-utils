@@ -1,5 +1,5 @@
 {
-  "version": "1.55.5",
+  "version": "1.56.0",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-setup": "bin/setup.js"
@@ -25,7 +25,7 @@
     "cookie-parser": "^1.4.7",
     "core-js-pure": "^3.50.0",
     "cross-env": "^10.1.0",
-    "dayjs": "^1.11.21",
+    "dayjs": "^1.11.22",
     "express": "^5.2.1",
     "helmet": "^8.3.0",
     "http-status-codes": "^2.3.0",

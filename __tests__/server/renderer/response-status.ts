@@ -35,7 +35,7 @@ beforeAll(() => {
   renderer = factory(mockWebpackConfig(), {
     Application: (): undefined => {
       const context = useSsrContext()!;
-      context.status = mockStatus;
+      context.setStatus(mockStatus);
     },
     logger: {
       debug: noop,

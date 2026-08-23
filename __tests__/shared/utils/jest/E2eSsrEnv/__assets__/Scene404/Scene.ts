@@ -4,10 +4,7 @@ import { useSsrContext } from 'utils/globalState';
 
 const Scene: FunctionComponent = () => {
   const context = useSsrContext(false);
-
-  // eslint-disable-next-line react-hooks/immutability
-  if (context) context.status = 404;
-
+  if (context) context.setStatus(404);
   return null;
 };
 

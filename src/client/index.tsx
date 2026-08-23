@@ -27,7 +27,7 @@ export async function launchClient(
   {
     dontHydrate,
     initialState,
-    ...rootOptions,
+    ...rootOptions
   }: OptionsT = {},
 ): Promise<void> {
   const inj = await getInj();

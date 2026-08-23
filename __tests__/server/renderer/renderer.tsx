@@ -249,7 +249,7 @@ test(
   async () => coreTest(mockWebpackConfig(), {
     Application: () => {
       const context = useSsrContext()!;
-      context.status = 404;
+      context.setStatus(404);
       return <div>404 Error Test</div>;
     },
     maxSsrRounds: 3,
