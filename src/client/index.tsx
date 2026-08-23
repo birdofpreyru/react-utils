@@ -2,7 +2,7 @@
 /* global document */
 
 import type { ComponentType } from 'react';
-import { createRoot, hydrateRoot } from 'react-dom/client';
+import { type RootOptions, createRoot, hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 
 import { GlobalStateProvider } from '@dr.pogodin/react-global-state';
@@ -12,7 +12,7 @@ import { setClientChunkGroups } from 'utils/splitComponent';
 
 import getInj from './getInj';
 
-type OptionsT = {
+type OptionsT = RootOptions & {
   dontHydrate?: boolean;
   initialState?: unknown;
 };
@@ -24,7 +24,11 @@ type OptionsT = {
  */
 export async function launchClient(
   Application: ComponentType,
-  options: OptionsT = {},
+  {
+    dontHydrate,
+    initialState,
+    ...rootOptions,
+  }: OptionsT = {},
 ): Promise<void> {
   const inj = await getInj();
 
@@ -33,7 +37,7 @@ export async function launchClient(
   const container = document.getElementById('react-view');
   if (!container) throw Error('Failed to find container for React app');
   const scene = (
-    <GlobalStateProvider initialState={inj.ISTATE ?? options.initialState}>
+    <GlobalStateProvider initialState={inj.ISTATE ?? initialState}>
       <BrowserRouter>
         <HelmetProvider>
           <Application />
@@ -42,8 +46,8 @@ export async function launchClient(
     </GlobalStateProvider>
   );
 
-  if (options.dontHydrate) {
-    const root = createRoot(container);
+  if (dontHydrate) {
+    const root = createRoot(container, rootOptions);
     root.render(scene);
-  } else hydrateRoot(container, scene);
+  } else hydrateRoot(container, scene, rootOptions);
 }
