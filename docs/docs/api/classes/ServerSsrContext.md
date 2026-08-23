@@ -18,14 +18,15 @@ factory as a part of SSR setup.
 - `chunkGroups` &mdash; **ChunkGroupsT**
 - `chunks` &mdash; **string[]** &mdash; Defaults empty array.
 
-- `redirectTo` &mdash; **string** | **undefined** &mdash; Undefined by default;
+- `redirectTo` &mdash; **readonly string** | **undefined** &mdash; Undefined
+  by default;
   if it is set by the app during SSR, the server will trigger redirect to this
   URL, instead of serving the generated HTML markup. Note, it will use `status`
   property (below) to set the redirect code, thus it also should be set to
   appropriate code to perform a redirect.
 
 - `req` &mdash; **Request** &mdash; ExpressJS request being handled.
-- `status` &mdash; **number** &mdash; HTTP status for the response.
+- `status` &mdash; **readonly number** &mdash; HTTP status for the response.
   Defaults 200 (OK).
 
 ## Methods
@@ -40,3 +41,13 @@ Creates a new [ServerSsrContext] instance.
 - `res` &mdash; **Request**
 - `chunkGroups` &mdash; **ChunkGroupsT**
 - `initialState` &mdash; **StateT** &mdash; Optional. Initial global state value.
+
+### setStatus()
+
+```ts
+.setStatus(status: number, redirectTo?: string): void;
+```
+
+Sets values of readonly `redirectTo` and `status` properties (they are readonly
+as `react-hooks/immutability` disallows direct assignment of properties on objects
+returned from hooks).
