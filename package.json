@@ -2,6 +2,7 @@
   "version": "1.56.1",
   "bin": {
     "react-utils-build": "bin/build.js",
+    "react-utils-run-with-babel": "bin/run-with-babel.js",
     "react-utils-setup": "bin/setup.js"
   },
   "bugs": {

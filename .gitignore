@@ -1,6 +1,7 @@
 /__coverage__
 /.eslintcache
 /bin/build.js
+/bin/run-with-babel.js
 /build/*
 /config/babel
 /config/webpack
