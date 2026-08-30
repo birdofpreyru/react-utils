@@ -1,3 +1,9 @@
+// TODO: It makes sense to move these to more generic JS Utils,
+// but it will probably require some rework of exports there, as these
+// are strictly for NodeJS environment, while current JS Utils are
+// generic JavaScript, environment-agnostic... thus, for now let's
+// keep it here, until we really need these outside a React app.
+
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { type LoadFnOutput, createRequire, registerHooks } from 'node:module';
 import { basename, dirname } from 'node:path';
