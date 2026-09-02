@@ -11,13 +11,6 @@ import { fileURLToPath } from 'node:url';
 
 import type * as BabelCore from '@babel/core';
 
-const CANDIDATE_EXTENSIONS = [
-  '.js',
-  '.jsx',
-  '.ts',
-  '.tsx',
-];
-
 const require = createRequire(import.meta.url);
 
 type RegisterBabelLoaderArgT = {
@@ -77,6 +70,22 @@ export function registerBabelLoader({
   });
 }
 
+const CANDIDATE_EXTENSIONS = [
+  '.js',
+  '.jsx',
+  '.ts',
+  '.tsx',
+];
+
+function resolveExtension(base: string): null | string {
+  for (const ext of CANDIDATE_EXTENSIONS) {
+    const path = base + ext;
+    if (existsSync(path)) return path;
+  }
+
+  return null;
+}
+
 /**
  * Registers a Node module API hook that customizes ES module resolution
  * to make mandatory file extensions optional.
@@ -84,28 +93,22 @@ export function registerBabelLoader({
 export function registerResolver(): void {
   registerHooks({
     resolve(specifier, context, next) {
-      let target = specifier;
+      let path = specifier;
 
-      if (
-        (target.startsWith('.') || target.startsWith('/'))
-        && context.conditions.includes('import')
-      ) {
-        target = new URL(target, context.parentURL).pathname;
+      const isAbsolute = path.startsWith('/');
+      const isRelative = path.startsWith('.');
 
-        if (existsSync(target) && statSync(target).isDirectory()) {
-          target += '/index';
-        }
-
-        for (const ext of CANDIDATE_EXTENSIONS) {
-          const resolved = target + ext;
-          if (existsSync(resolved)) {
-            target = resolved;
-            break;
-          }
+      if (isAbsolute || isRelative) {
+        if (isRelative) path = new URL(path, context.parentURL).pathname;
+        const stat = statSync(path, { throwIfNoEntry: false });
+        if (!stat?.isFile()) {
+          path = resolveExtension(path)
+            ?? (stat?.isDirectory() ? resolveExtension(`${path}/index`) : null)
+            ?? specifier;
         }
       }
 
-      return next(target, context);
+      return next(path, context);
     },
   });
 }
