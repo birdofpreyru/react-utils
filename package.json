@@ -1,5 +1,5 @@
 {
-  "version": "1.56.1",
+  "version": "1.56.2",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-run-with-babel": "bin/run-with-babel.js",
@@ -75,7 +75,7 @@
     "@types/morgan": "^1.9.10",
     "@types/pretty": "^2.0.3",
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
+    "@types/react-dom": "^19.2.5",
     "@types/request-ip": "^0.0.41",
     "@types/serialize-javascript": "^5.0.4",
     "@types/serve-favicon": "^2.5.7",
