@@ -241,8 +241,8 @@ function registerResolver(): void;
 Registers a [Node module API hook] that customizes ES module resolution
 to make mandatory file extensions optional.
 
-More specifically, it intercepts module resolution requests with `import`
-condition, and [relative import specifiers] (those starting with `.` or `/`),
+More specifically, it intercepts module resolution requests with
+[relative import specifiers] (those starting with `.` or `/`),
 and attempts to resolve them by appending `.js`, `.jsx`, `.ts`, and `.tsx`
 extensions; and if the given specifier points to a directory, it attempts
 to resolve it by appending `/index.js`, `/index.jsx`, `/index.ts`,
