@@ -238,7 +238,7 @@ the same stuff, with the following differences.
   - Enforces **development** [Babel] environment, and sets its `cssLocalIdent`
     argument equal `[path][name]___[local]___[hash:base64:6]` to generate verbose
     classnames for CSS modules, which are handy for debug purposes.
-  - Adds [`webpack-hot-middleware/client?reload=true`](https://github.com/glenjamin/webpack-hot-middleware)
+  - Adds [`webpack-dev-middleware/client?reload=true`](https://github.com/webpack/webpack-dev-middleware#hot-module-replacement-client)
     to entrypoints, which is necessary for HMR (Hot Module Reloading) setup.
   - Emulates the following environment variables:
     - **BABEL_ENV** and **NODE_ENV** are both set equal **development**.

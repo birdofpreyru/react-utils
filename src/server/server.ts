@@ -257,17 +257,13 @@ export default async function factory(
       /* webpackChunkName: "server-side-code" */ 'webpack-dev-middleware'
     );
 
-    const { default: webpackHotMiddleware } = await import(
-      /* webpackChunkName: "server-side-code" */ 'webpack-hot-middleware'
-    );
-
     const compiler = webpack(webpackConfig);
 
     server.use(webpackDevMiddleware(compiler, {
+      hot: true,
       publicPath,
       serverSideRender: true,
     }));
-    server.use(webpackHotMiddleware(compiler));
   }
   /* eslint-enable import/no-extraneous-dependencies */
 

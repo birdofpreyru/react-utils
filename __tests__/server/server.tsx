@@ -3,7 +3,6 @@ import type { NextFunction, Request, Response } from 'express';
 import type * as ServeFaviconM from 'serve-favicon';
 import supertest from 'supertest';
 import type WebpackM from 'webpack';
-import type WebpackHotM from 'webpack-hot-middleware';
 
 import {
   afterEach,
@@ -56,15 +55,6 @@ jest.unstable_mockModule<typeof WebpackM>('webpack', () => {
   mock.ProgressPlugin = Object;
   return mock as unknown as typeof WebpackM;
 });
-
-jest.unstable_mockModule<typeof WebpackHotM>(
-  'webpack-hot-middleware',
-  () => jest.fn(
-    () => (req: Request, res: Response, next: NextFunction) => {
-      next();
-    },
-  ) as unknown as typeof WebpackHotM,
-);
 
 beforeAll(async () => {
   serveFavicon = await import('serve-favicon');
