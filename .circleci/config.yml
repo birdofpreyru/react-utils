@@ -27,7 +27,7 @@ version: 2.1
 jobs:
   test-node-24: # Active LTS, EOL 2028.04.30
     docker:
-      - image: cimg/node:24.20
+      - image: cimg/node:24.21
     steps:
       - when:
           condition: true
