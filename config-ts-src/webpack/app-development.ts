@@ -29,7 +29,7 @@ export default function configFactory(ops: OptionsT): Configuration {
   });
 
   const entry = ['@dr.pogodin/react-utils/build/development/client/init'];
-  if (!o.dontUseHmr) entry.push('webpack-dev-middleware/client?reload=true');
+  if (!o.dontUseHmr) entry.push('webpack-dev-middleware/client');
   entry.push(...Array.isArray(o.entry) ? o.entry : [o.entry]);
 
   const plugins: webpack.WebpackPluginInstance[] = [

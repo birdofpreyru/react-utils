@@ -1,5 +1,5 @@
 {
-  "version": "1.56.4",
+  "version": "1.56.5",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-run-with-babel": "bin/run-with-babel.js",
