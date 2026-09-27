@@ -3,8 +3,6 @@
 
 import { clone, defaults } from 'lodash-es';
 
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-
 import webpack, { type Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 
@@ -13,7 +11,6 @@ import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import baseFactory, { type OptionsT as BaseOptionsT } from './app-base.js';
 
 type OptionsT = BaseOptionsT & {
-  cssExtractionOptions?: MiniCssExtractPlugin.PluginOptions;
   dontUseHmr?: boolean;
   dontUseReactGlobalStateDebugging?: boolean;
 };
@@ -25,7 +22,7 @@ type OptionsT = BaseOptionsT & {
  */
 export default function configFactory(ops: OptionsT): Configuration {
   const o = defaults(clone(ops), {
-    cssLocalIdent: '[package]___[path][name]___[local]___[hash:base64:6]',
+    cssLocalIdent: '[file]__[local]__[fullhash:base64:6]',
   });
 
   const entry = ['@dr.pogodin/react-utils/build/development/client/init'];
@@ -33,11 +30,6 @@ export default function configFactory(ops: OptionsT): Configuration {
   entry.push(...Array.isArray(o.entry) ? o.entry : [o.entry]);
 
   const plugins: webpack.WebpackPluginInstance[] = [
-    new MiniCssExtractPlugin({
-      chunkFilename: '[id].css',
-      filename: '[id].css',
-      ...ops.cssExtractionOptions,
-    }),
     new webpack.DefinePlugin({
       'process.env.BABEL_ENV': JSON.stringify('development'),
       'process.env.DEV_TOOLS': JSON.stringify(true),

@@ -6,7 +6,9 @@
  *  "dontUseHmr": true,
  *  "dontUseReactGlobalStateDebugging": true,
  *  "typescript": true }
- * @ssr-options { "entry": "./__assets__/SampleScene/SampleScene" }
+ * @ssr-options {
+ *  "entry": "./__assets__/SampleScene/SampleScene",
+ *  "root": "TEST" }
  */
 
 import pretty from 'pretty';

@@ -8,18 +8,6 @@ import type {
   PluginOptionsT as ReactCssModulesOptionsT,
 } from '@dr.pogodin/babel-plugin-react-css-modules';
 
-import {
-  generateScopedNameFactory,
-} from '@dr.pogodin/babel-plugin-react-css-modules/utils';
-
-const generateScopedNameDev = generateScopedNameFactory(
-  '[package]___[path][name]___[local]___[hash:base64:6]',
-);
-
-const generateScopedNameProd = generateScopedNameFactory(
-  '[hash:base64:6]',
-);
-
 export type ConfigurationT = InputOptions & {
   plugins: PluginItem[];
   presets: PresetItem[];
@@ -46,6 +34,10 @@ type ModuleT = 'amd' | 'auto' | 'cjs' | 'commonjs' | 'systemjs' | 'umd' | false;
 
 export type OptionsT = {
   addImportExtensions?: AddImportExtensionOptions | boolean;
+
+  /** Must match Webpack config context for  */
+  context?: string;
+
   modules?: ModuleT;
   noRR?: boolean;
   noReactCompiler?: boolean;
@@ -115,9 +107,14 @@ function newBaseConfig(options: OptionsT): ConfigurationT {
  * @return {object} Returns mutated config for chaining.
  * @ignore
  */
-function addStyling(config: ConfigurationT, env: ENVIRONMENTS) {
+function addStyling(
+  config: ConfigurationT,
+  env: ENVIRONMENTS,
+  context: string | undefined,
+) {
   const cssModulesOps: ReactCssModulesOptionsT = {
     autoResolveMultipleImports: true,
+    context,
     filetypes: {
       '.scss': { syntax: 'postcss-scss' },
     },
@@ -126,10 +123,10 @@ function addStyling(config: ConfigurationT, env: ENVIRONMENTS) {
   switch (env) {
     case ENVIRONMENTS.DEV:
     case ENVIRONMENTS.TEST:
-      cssModulesOps.generateScopedName = generateScopedNameDev;
+      cssModulesOps.generateScopedName = '[file]__[local]__[fullhash:base64:6]';
       break;
     case ENVIRONMENTS.PROD:
-      cssModulesOps.generateScopedName = generateScopedNameProd;
+      cssModulesOps.generateScopedName = '[fullhash:base64:6]';
       break;
     default:
   }
@@ -154,7 +151,10 @@ export default function getPreset(
 
   const res = newBaseConfig(ops);
 
-  if (!ops.noStyling) addStyling(res, env as ENVIRONMENTS);
+  if (!ops.noStyling) {
+    addStyling(res, env as ENVIRONMENTS, ops.context);
+  }
+
   if (env === (ENVIRONMENTS.DEV as string) && !ops.noRR) {
     res.plugins.push('react-refresh/babel');
   }

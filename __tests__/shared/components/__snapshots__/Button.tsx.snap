@@ -2,7 +2,7 @@
 
 exports[`Matches snapshots when active 1`] = `
 <div
-  class="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT AD_TAG HOC_TAG BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___MAe9O6 AD_TAG HOC_TAG ACTIVE_CLASS"
+  class="./src/shared/components/Button/style.scss__button__IjQROZ AD_TAG HOC_TAG BUTTON_CLASS ./src/shared/components/Button/style.scss__active__+S7U9j AD_TAG HOC_TAG ACTIVE_CLASS"
   role="button"
   tabindex="0"
 >
@@ -12,7 +12,7 @@ exports[`Matches snapshots when active 1`] = `
 
 exports[`Matches snapshots when disabled 1`] = `
 <div
-  class="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT AD_TAG HOC_TAG BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___disabled___Br9IWV AD_TAG HOC_TAG DISABLED_CLASS"
+  class="./src/shared/components/Button/style.scss__button__IjQROZ AD_TAG HOC_TAG BUTTON_CLASS ./src/shared/components/Button/style.scss__disabled__ZsURaG AD_TAG HOC_TAG DISABLED_CLASS"
 >
   BUTTON
 </div>
@@ -20,7 +20,7 @@ exports[`Matches snapshots when disabled 1`] = `
 
 exports[`Matches snapshots when disabled 2`] = `
 <div
-  class="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT AD_TAG HOC_TAG BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___disabled___Br9IWV"
+  class="./src/shared/components/Button/style.scss__button__IjQROZ AD_TAG HOC_TAG BUTTON_CLASS ./src/shared/components/Button/style.scss__disabled__ZsURaG"
 >
   BUTTON
 </div>
@@ -28,7 +28,7 @@ exports[`Matches snapshots when disabled 2`] = `
 
 exports[`Matches snapshots when rendered as link 1`] = `
 <a
-  class="-dr-pogodin-react-utils___src-shared-components-Button-style___button___E1FNQT AD_TAG HOC_TAG BUTTON_CLASS -dr-pogodin-react-utils___src-shared-components-Button-style___active___MAe9O6 AD_TAG HOC_TAG ACTIVE_CLASS"
+  class="./src/shared/components/Button/style.scss__button__IjQROZ AD_TAG HOC_TAG BUTTON_CLASS ./src/shared/components/Button/style.scss__active__+S7U9j AD_TAG HOC_TAG ACTIVE_CLASS"
   href="/SOME/TEST/URL"
 >
   BUTTON

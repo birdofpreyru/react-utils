@@ -30,6 +30,7 @@ export default {
   testPathIgnorePatterns: [
     '/__assets__/',
     '/node_modules/',
+    '/babel.config.js',
   ],
   transform: {
     '\\.((j|t)sx?|svg)$': 'babel-jest',

@@ -6,7 +6,8 @@
  *  "typescript": true }
  * @ssr-options {
  *  "babelEnv": "production",
- *  "entry": "./__assets__/Scene.tsx" }
+ *  "entry": "./__assets__/Scene.tsx",
+ *  "root": "TEST" }
  */
 
 import { act } from 'react';

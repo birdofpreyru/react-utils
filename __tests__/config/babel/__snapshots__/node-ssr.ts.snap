@@ -40,12 +40,13 @@ exports[`"development" environment "baseAssetsOutputPath" option 1`] = `
       "@dr.pogodin/react-css-modules",
       {
         "autoResolveMultipleImports": true,
+        "context": undefined,
         "filetypes": {
           ".scss": {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": [Function],
+        "generateScopedName": "[file]__[local]__[fullhash:base64:6]",
         "replaceImport": true,
       },
     ],
@@ -121,12 +122,13 @@ exports[`"development" environment "baseAssetsOutputPath" option 2`] = `
       "@dr.pogodin/react-css-modules",
       {
         "autoResolveMultipleImports": true,
+        "context": undefined,
         "filetypes": {
           ".scss": {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": [Function],
+        "generateScopedName": "[file]__[local]__[fullhash:base64:6]",
         "replaceImport": true,
       },
     ],
@@ -326,12 +328,13 @@ exports[`"development" environment Default config 1`] = `
       "@dr.pogodin/react-css-modules",
       {
         "autoResolveMultipleImports": true,
+        "context": undefined,
         "filetypes": {
           ".scss": {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": [Function],
+        "generateScopedName": "[file]__[local]__[fullhash:base64:6]",
         "replaceImport": true,
       },
     ],
@@ -407,12 +410,13 @@ exports[`"development" environment Default config 2`] = `
       "@dr.pogodin/react-css-modules",
       {
         "autoResolveMultipleImports": true,
+        "context": undefined,
         "filetypes": {
           ".scss": {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": [Function],
+        "generateScopedName": "[file]__[local]__[fullhash:base64:6]",
         "replaceImport": true,
       },
     ],
@@ -482,12 +486,13 @@ exports[`"production" environment "baseAssetsOutputPath" option 1`] = `
       "@dr.pogodin/react-css-modules",
       {
         "autoResolveMultipleImports": true,
+        "context": undefined,
         "filetypes": {
           ".scss": {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": [Function],
+        "generateScopedName": "[fullhash:base64:6]",
         "replaceImport": true,
       },
     ],
@@ -563,12 +568,13 @@ exports[`"production" environment "baseAssetsOutputPath" option 2`] = `
       "@dr.pogodin/react-css-modules",
       {
         "autoResolveMultipleImports": true,
+        "context": undefined,
         "filetypes": {
           ".scss": {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": [Function],
+        "generateScopedName": "[fullhash:base64:6]",
         "replaceImport": true,
       },
     ],
@@ -768,12 +774,13 @@ exports[`"production" environment Default config 1`] = `
       "@dr.pogodin/react-css-modules",
       {
         "autoResolveMultipleImports": true,
+        "context": undefined,
         "filetypes": {
           ".scss": {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": [Function],
+        "generateScopedName": "[fullhash:base64:6]",
         "replaceImport": true,
       },
     ],
@@ -849,12 +856,13 @@ exports[`"production" environment Default config 2`] = `
       "@dr.pogodin/react-css-modules",
       {
         "autoResolveMultipleImports": true,
+        "context": undefined,
         "filetypes": {
           ".scss": {
             "syntax": "postcss-scss",
           },
         },
-        "generateScopedName": [Function],
+        "generateScopedName": "[fullhash:base64:6]",
         "replaceImport": true,
       },
     ],

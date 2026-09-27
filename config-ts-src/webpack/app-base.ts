@@ -5,16 +5,12 @@ import nodeFs from 'node:fs';
 import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
 
-import autoprefixer from 'autoprefixer';
-
 import {
   clone,
   defaults,
   isFunction,
   isObject,
 } from 'lodash-es';
-
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import { SitemapStream, streamToPromise } from 'sitemap';
 
@@ -24,10 +20,6 @@ import { SitemapStream, streamToPromise } from 'sitemap';
 import webpack, { type Configuration, type RuleSetRule } from 'webpack';
 
 import WorkboxPlugin from 'workbox-webpack-plugin';
-
-import {
-  getLocalIdent,
-} from '@dr.pogodin/babel-plugin-react-css-modules/utils';
 
 // TODO: Copy-pasted from 'utils/isomorphy/buildInfo' to avoid including that,
 // (it requires some modifications of TS configs to work).
@@ -294,8 +286,21 @@ export default function configFactory(ops: OptionsT): Configuration {
   const res: Configuration = {
     context: o.context,
     entry,
+    experiments: { css: true },
     mode: o.mode,
     module: {
+      generator: {
+        'css/module': {
+          localIdentName: o.cssLocalIdent,
+        },
+      },
+      parser: {
+        'css/module': {
+          // We keep it "false" for now, as in our setup Babel plugins take care
+          // of injecting necessary CSS module identifiers into JS code.
+          namedExports: false,
+        },
+      },
       rules: [{
         /* Loads font resources from "src/assets/fonts" folder. */
         test: /\.(eot|otf|ttf|woff2?)$/,
@@ -322,6 +327,7 @@ export default function configFactory(ops: OptionsT): Configuration {
           configFile: false,
           envName: o.babelEnv,
           presets: [['@dr.pogodin/react-utils/config/babel/webpack', {
+            context: o.context,
             typescript: ops.typescript,
           }]],
           sourceType: 'unambiguous',
@@ -338,43 +344,14 @@ export default function configFactory(ops: OptionsT): Configuration {
       }, {
         /* Loads SCSS stylesheets. */
         test: /\.scss$/,
+        type: 'css/module',
         use: [
-          MiniCssExtractPlugin.loader, {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                getLocalIdent,
-                localIdentName: o.cssLocalIdent,
-
-                // This flag defaults `true` for ES module builds since css-loader@7.0.0:
-                // https://github.com/webpack-contrib/css-loader/releases/tag/v7.0.0
-                // We'll keep it `false` to avoid a breaking change for dependant
-                // projects, and I am also not sure what are the benefits of
-                // named CSS exports anyway.
-                namedExport: false,
-              },
-            },
-          }, {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [autoprefixer],
-              },
-            },
-          }, 'resolve-url-loader', {
+          {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
             },
           },
-        ],
-      }, {
-        /* Loads CSS stylesheets. It is assumed that CSS stylesheets come only
-        * from dependencies, as we use SCSS inside our own code. */
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
         ],
       }],
     },

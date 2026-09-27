@@ -6,16 +6,12 @@
 
 /* eslint-disable import/no-extraneous-dependencies */
 
-import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpack, { type Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 
 import baseFactory, { type OptionsT as BaseOptionsT } from './app-base.js';
 
-type OptionsT = BaseOptionsT & {
-  cssExtractionOptions?: MiniCssExtractPlugin.PluginOptions;
-};
+type OptionsT = BaseOptionsT;
 
 /**
  * @param {object} ops
@@ -40,31 +36,10 @@ export default function configFactory(ops: OptionsT): Configuration {
     entry,
     mode: 'production',
   }), {
-    optimization: {
-      minimizer: [
-        '...',
-        new CssMinimizerPlugin({
-          minimizerOptions: {
-            preset: ['default', {
-              /* Due to the way our styles are organized, these dangerous
-              * optimizations can break our styles, thus they are disabled. */
-              discardUnused: false,
-              reduceIdents: false,
-              zindex: false,
-            }],
-          },
-        }),
-      ],
-    },
     plugins: [
       new webpack.DefinePlugin({
         'process.env.BABEL_ENV': JSON.stringify('production'),
         'process.env.NODE_ENV': JSON.stringify('production'),
-      }),
-      new MiniCssExtractPlugin({
-        chunkFilename: '[contenthash].css',
-        filename: '[contenthash].css',
-        ...ops.cssExtractionOptions,
       }),
     ],
   });

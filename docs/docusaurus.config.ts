@@ -6,10 +6,6 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type * as Preset from '@docusaurus/preset-classic';
 import type { Config, Plugin } from '@docusaurus/types';
 
-import {
-  getLocalIdent,
-} from '@dr.pogodin/babel-plugin-react-css-modules/utils';
-
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 global.REACT_UTILS_FORCE_CLIENT_SIDE = true;
@@ -52,7 +48,7 @@ const config: Config = {
                 importLoaders: 4,
                 modules: {
                   exportOnlyLocals: isServer,
-                  getLocalIdent,
+                  // getLocalIdent,
                   localIdentName: '[hash:base64:6]',
 
                   // This flag defaults `true` for ES module builds since css-loader@7.0.0:

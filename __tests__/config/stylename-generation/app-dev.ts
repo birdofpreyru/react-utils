@@ -6,7 +6,9 @@
  *  "dontUseHmr": true,
  *  "dontUseReactGlobalStateDebugging": true,
  *  "typescript": true }
- * @ssr-options { "entry": "./__assets__/Scene.tsx" }
+ * @ssr-options {
+ *  "entry": "./__assets__/Scene.tsx",
+ *  "root": "TEST" }
  */
 
 import { act } from 'react';

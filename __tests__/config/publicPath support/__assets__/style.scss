@@ -1,5 +1,5 @@
 @use "../../../../src/styles/mixins" as *;
-@include font-family-ttf(Empty, 400, normal, "~empty");
+@include font-family-ttf(Empty, 400, normal, "./empty");
 
 .container {
   font: 12pt Empty, serif;
