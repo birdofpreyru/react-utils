@@ -14,6 +14,7 @@ describe('.build-info output', () => {
     const config = configFactory({
       babelEnv: 'test',
       context,
+      cssLocalIdent: '[hash]',
       entry: '',
       fs,
       mode: 'none',

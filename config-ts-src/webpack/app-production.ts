@@ -6,16 +6,13 @@
 
 /* eslint-disable import/no-extraneous-dependencies */
 
-import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import MinimizerPlugin from 'minimizer-webpack-plugin';
 import webpack, { type Configuration } from 'webpack';
 import { merge } from 'webpack-merge';
 
 import baseFactory, { type OptionsT as BaseOptionsT } from './app-base.js';
 
-type OptionsT = BaseOptionsT & {
-  cssExtractionOptions?: MiniCssExtractPlugin.PluginOptions;
-};
+type OptionsT = BaseOptionsT;
 
 /**
  * @param {object} ops
@@ -43,16 +40,29 @@ export default function configFactory(ops: OptionsT): Configuration {
     optimization: {
       minimizer: [
         '...',
-        new CssMinimizerPlugin({
-          minimizerOptions: {
-            preset: ['default', {
-              /* Due to the way our styles are organized, these dangerous
-              * optimizations can break our styles, thus they are disabled. */
-              discardUnused: false,
-              reduceIdents: false,
-              zindex: false,
-            }],
+        // TODO: This sets up (S)CSS minimization with CSS Nano minimizer
+        // (the same we relied upon in previous versions of Webpack setup);
+        // however, Webpack now includes its own, build-in CSS minimizer,
+        // and encourages to drop CSS Nano / PostCSS dependency for minimization.
+        // At the first glance, out of the box the built-in minimizer does not
+        // produce identical results (perhaps, because it does not handle .scss
+        // modules by default); because of this, and to be on the safer side,
+        // we'll keep CSS Nano in the pipeline for now, and look to get rid of
+        // it later.
+        new MinimizerPlugin({
+          minify: {
+            implementation: MinimizerPlugin.cssnanoMinify,
+            options: {
+              preset: ['default', {
+                // Due to the way our styles are organized, these dangerous
+                // optimizations can break our styles, thus they are disabled.
+                discardUnused: false,
+                reduceIdents: false,
+                zindex: false,
+              }],
+            },
           },
+          test: /\.s?css$/,
         }),
       ],
     },
@@ -60,11 +70,6 @@ export default function configFactory(ops: OptionsT): Configuration {
       new webpack.DefinePlugin({
         'process.env.BABEL_ENV': JSON.stringify('production'),
         'process.env.NODE_ENV': JSON.stringify('production'),
-      }),
-      new MiniCssExtractPlugin({
-        chunkFilename: '[contenthash].css',
-        filename: '[contenthash].css',
-        ...ops.cssExtractionOptions,
       }),
     ],
   });

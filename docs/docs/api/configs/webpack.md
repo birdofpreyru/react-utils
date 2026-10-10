@@ -223,17 +223,6 @@ the same stuff, with the following differences.
     and disabling that is intended for test scenarious, where these debug logs
     would unnecessary pollute test logs.
 
-  - `cssExtractionOptions` &mdash; **object** &mdash; Optional. Customizes
-    settings of [MiniCssExtractPlugin] (it emits CSS assets from the build),
-    which is included into the config with the following configuration:
-    ```js
-    {
-      chunkFilename: '[id].css',
-      filename: '[id].css',
-      ...ops.cssExtractionOptions,
-    }
-    ```
-
 - It also:
   - Enforces **development** [Babel] environment, and sets its `cssLocalIdent`
     argument equal `[path][name]___[local]___[hash:base64:6]` to generate verbose
@@ -266,24 +255,11 @@ and does the same stuff, then on top of that it:
   It also defaults `compact` option of [Babel] config to **true**, to avoid
   warnings about [Babel] resetting code layout style of 3rd party modules.
 
-- Accepts additional options:
-  - `cssExtractionOptions` &mdash; **object** &mdash; Optional. Customizes
-    settings of [MiniCssExtractPlugin] (it emits CSS assets from the build),
-    which is included into the config with the following configuration:
-    ```js
-    {
-      chunkFilename: '[contenthash].css',
-      filename: '[contenthash].css',
-      ...ops.cssExtractionOptions,
-    }
-    ```
-
 - It also:
   - Enforces **production** [Babel] environment.
   - Emulates the following environment variables:
     - **BABEL_ENV** and **NODE_ENV** are both set equal to **production**.
   - Adds the following plugins:
-    - [CSS Minimizer Webpack Plugin](https://www.npmjs.com/package/css-minimizer-webpack-plugin);
     - [UglifyJsPlugin](https://webpack.js.org/plugins/uglifyjs-webpack-plugin/).
 
 ### Build Info
@@ -369,16 +345,6 @@ The `options` argument is an object with the following valid fields:
     scenarious, to avoid polluting test logs with detailed console output from
     test [Webpack] builds.
 
-  - `cssExtractionOptions` &mdash; **object** &mdash; Customizes settings of
-    [MiniCssExtractPlugin] (it emits CSS assets from the build), which is
-    included into the config with the following configuration:
-    ```js
-    {
-      filename: 'style.css',
-      ...ops.cssExtractionOptions,
-    }
-    ```
-
   - `mode` - **string** - [Webpack mode](https://webpack.js.org/concepts/mode/).
   - `outputPath` - **string** - Build output path. Defaults `build`.
 
@@ -453,7 +419,6 @@ as required for production needs.
 [Build Info]: #build-info
 [Library Config]: #library-config
 [memfs]: https://www.npmjs.com/package/memfs
-[MiniCssExtractPlugin]: https://webpack.js.org/plugins/mini-css-extract-plugin/
 [ProgressPlugin]: https://webpack.js.org/plugins/progress-plugin/
 [Webpack]: https://webpack.js.org
 [`sitemap` library]: https://www.npmjs.com/package/sitemap

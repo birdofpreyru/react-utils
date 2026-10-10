@@ -9,16 +9,14 @@ import type {
 } from '@dr.pogodin/babel-plugin-react-css-modules';
 
 import {
-  generateScopedNameFactory,
+  localIdentNameFactory,
 } from '@dr.pogodin/babel-plugin-react-css-modules/utils';
 
-const generateScopedNameDev = generateScopedNameFactory(
+const localIdentNameDev = localIdentNameFactory(
   '[package]___[path][name]___[local]___[hash:base64:6]',
 );
 
-const generateScopedNameProd = generateScopedNameFactory(
-  '[hash:base64:6]',
-);
+const localIdentNameProd = localIdentNameFactory('[hash:base64:6]');
 
 export type ConfigurationT = InputOptions & {
   plugins: PluginItem[];
@@ -126,10 +124,10 @@ function addStyling(config: ConfigurationT, env: ENVIRONMENTS) {
   switch (env) {
     case ENVIRONMENTS.DEV:
     case ENVIRONMENTS.TEST:
-      cssModulesOps.generateScopedName = generateScopedNameDev;
+      cssModulesOps.localIdentName = localIdentNameDev;
       break;
     case ENVIRONMENTS.PROD:
-      cssModulesOps.generateScopedName = generateScopedNameProd;
+      cssModulesOps.localIdentName = localIdentNameProd;
       break;
     default:
   }

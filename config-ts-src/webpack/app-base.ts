@@ -5,16 +5,7 @@ import nodeFs from 'node:fs';
 import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
 
-import autoprefixer from 'autoprefixer';
-
-import {
-  clone,
-  defaults,
-  isFunction,
-  isObject,
-} from 'lodash-es';
-
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { isFunction } from 'lodash-es';
 
 import { SitemapStream, streamToPromise } from 'sitemap';
 
@@ -26,7 +17,7 @@ import webpack, { type Configuration, type RuleSetRule } from 'webpack';
 import WorkboxPlugin from 'workbox-webpack-plugin';
 
 import {
-  getLocalIdent,
+  localIdentNameFactory,
 } from '@dr.pogodin/babel-plugin-react-css-modules/utils';
 
 // TODO: Copy-pasted from 'utils/isomorphy/buildInfo' to avoid including that,
@@ -173,24 +164,30 @@ const require = createRequire(import.meta.url);
  *   - **`rndkey`** &mdash; The value set for `BUILD_RNDKEY`;
  *   - **`timestamp`** &mdash; The value set for `BUILD_TIMESTAMP`.
  */
-export default function configFactory(ops: OptionsT): Configuration {
-  const o: OptionsT & {
-    publicPath: string;
-  } = defaults(clone(ops), {
-    babelLoaderOptions: {},
-    cssLocalIdent: '[hash:base64:6]',
-    outputPath: 'build/web-public',
-    publicPath: '',
-  });
-
-  const fs = ops.fs ?? nodeFs;
-
+export default function configFactory({
+  babelEnv,
+  babelLoaderExclude,
+  babelLoaderOptions = {},
+  context,
+  cssLocalIdent = '[hash:base64:6]',
+  dontEmitBuildInfo,
+  dontUseProgressPlugin,
+  entry,
+  fs = nodeFs,
+  keepBuildInfo,
+  mode,
+  outputPath = 'build/web-public',
+  publicPath = '',
+  sitemap,
+  typescript,
+  workbox,
+}: OptionsT): Configuration {
   // TODO: Should it be improved and re-validated? Are we using it in any project
   // as is?
   /* TODO: This works in practice, but being async and not awaited it is a bad
    * pattern. */
-  if (o.sitemap) {
-    const sitemapUrl = resolve(o.context, o.sitemap);
+  if (sitemap) {
+    const sitemapUrl = resolve(context, sitemap);
 
     // eslint-disable-next-line import/no-dynamic-require
     let source = require(sitemapUrl) as
@@ -201,12 +198,12 @@ export default function configFactory(ops: OptionsT): Configuration {
       sm.write(item);
     });
     sm.end();
-    void streamToPromise(sm).then((sitemap) => {
-      const outUrl = resolve(o.context, o.outputPath!);
+    void streamToPromise(sm).then((sitemapRes) => {
+      const outUrl = resolve(context, outputPath);
       if (!fs.existsSync(outUrl)) fs.mkdirSync(outUrl);
       fs.writeFileSync(
-        resolve(o.context, o.outputPath!, 'sitemap.xml'),
-        new DataView(sitemap.buffer),
+        resolve(context, outputPath, 'sitemap.xml'),
+        new DataView(sitemapRes.buffer),
       );
     });
   }
@@ -217,18 +214,18 @@ export default function configFactory(ops: OptionsT): Configuration {
   // timestamp, and any other similar information to the actual app, so it
   // can be used in some scenarious.
   let buildInfo;
-  const buildInfoUrl = resolve(o.context, '.build-info');
+  const buildInfoUrl = resolve(context, '.build-info');
 
-  if (o.keepBuildInfo) {
+  if (keepBuildInfo) {
     // If "true" - attempt to load from the filesystem.
-    if (o.keepBuildInfo === true) {
+    if (keepBuildInfo === true) {
       if (fs.existsSync(buildInfoUrl)) {
         buildInfo = JSON.parse(fs.readFileSync(buildInfoUrl, 'utf8')) as BuildInfoT;
       }
 
     // Otherwise we assume .keepBuildInfo value itself is the build info object
     // to use in the build.
-    } else buildInfo = o.keepBuildInfo;
+    } else buildInfo = keepBuildInfo;
   }
 
   // Even if "keepBuildInfo" option was provided, we still generate a new
@@ -238,10 +235,10 @@ export default function configFactory(ops: OptionsT): Configuration {
     key: randomBytes(32).toString('base64'),
 
     /* Public path used during build. */
-    publicPath: o.publicPath,
+    publicPath,
 
     /* `true` if client-side code should setup a service worker. */
-    useServiceWorker: Boolean(o.workbox),
+    useServiceWorker: Boolean(workbox),
 
     // Build timestamp.
     timestamp: new Date().toISOString(),
@@ -250,52 +247,64 @@ export default function configFactory(ops: OptionsT): Configuration {
   // If not opted-out, we write the build info to the filesystem. We also attach
   // it to the factory function itself, so it can be easily accessed right after
   // the factory call in testing scenarios.
-  if (!o.dontEmitBuildInfo) {
+  if (!dontEmitBuildInfo) {
     // Note: this is needed if "fs" option is provided, to ensure the factory
     // does not crash if the folder is not created in that filesystem.
-    fs.mkdirSync(o.context, { recursive: true });
+    fs.mkdirSync(context, { recursive: true });
 
     fs.writeFileSync(buildInfoUrl, JSON.stringify(buildInfo));
   }
 
   /* Entry points normalization. */
-  const entry = [
+  const normalizedEntry = [
     'nodelist-foreach-polyfill',
-    ...Array.isArray(o.entry) ? o.entry : [o.entry],
+    ...Array.isArray(entry) ? entry : [entry],
   ];
 
   const plugins: webpack.WebpackPluginInstance[] = [
     new webpack.DefinePlugin({ BUILD_INFO: JSON.stringify(buildInfo) }),
   ];
 
-  if (!ops.dontUseProgressPlugin) plugins.push(new webpack.ProgressPlugin());
+  if (!dontUseProgressPlugin) plugins.push(new webpack.ProgressPlugin());
 
   /* Adds InjectManifest plugin from WorkBox, if opted to. */
-  if (o.workbox) {
-    if (!isObject(o.workbox)) o.workbox = {};
+  if (workbox) {
     plugins.push(new WorkboxPlugin.InjectManifest({
       swSrc: resolve(import.meta.dirname, '../workbox/default.js'),
-      ...o.workbox,
+      ...workbox === true ? {} : workbox,
       swDest: '__service-worker.js',
     }));
   }
 
-  let { babelLoaderExclude } = ops;
-  if (babelLoaderExclude) {
-    if (!Array.isArray(babelLoaderExclude)) throw Error('Not supported');
+  let babelLoaderExclude2 = babelLoaderExclude;
+  if (babelLoaderExclude2) {
+    if (!Array.isArray(babelLoaderExclude2)) throw Error('Not supported');
 
     // BEWARE: This ensures Babel loader does not process CoreJS library,
     // which would break it creating circular references in its code.
-    babelLoaderExclude = [...babelLoaderExclude, COREJS_REGEX];
+    babelLoaderExclude2 = [...babelLoaderExclude2, COREJS_REGEX];
   } else {
-    babelLoaderExclude = [COREJS_REGEX];
+    babelLoaderExclude2 = [COREJS_REGEX];
   }
 
   const res: Configuration = {
-    context: o.context,
-    entry,
-    mode: o.mode,
+    context,
+    entry: normalizedEntry,
+    experiments: { css: true },
+    mode,
     module: {
+      generator: {
+        'css/module': {
+          localIdentName: localIdentNameFactory(cssLocalIdent),
+        },
+      },
+      parser: {
+        'css/module': {
+          // We keep it "false" for now, as in our setup Babel plugins take care
+          // of injecting necessary CSS module identifiers into JS code.
+          namedExports: false,
+        },
+      },
       rules: [{
         /* Loads font resources from "src/assets/fonts" folder. */
         test: /\.(eot|otf|ttf|woff2?)$/,
@@ -315,17 +324,17 @@ export default function configFactory(ops: OptionsT): Configuration {
         // and SVG assets (.svg).
         test: /\.(cjs|js|jsx|mjs|svg|ts|tsx)$/,
 
-        exclude: babelLoaderExclude,
+        exclude: babelLoaderExclude2,
         loader: 'babel-loader',
         options: {
           babelrc: false,
           configFile: false,
-          envName: o.babelEnv,
+          envName: babelEnv,
           presets: [['@dr.pogodin/react-utils/config/babel/webpack', {
-            typescript: ops.typescript,
+            typescript,
           }]],
           sourceType: 'unambiguous',
-          ...o.babelLoaderOptions,
+          ...babelLoaderOptions,
         },
       }, {
         /* Loads image assets. */
@@ -338,44 +347,13 @@ export default function configFactory(ops: OptionsT): Configuration {
       }, {
         /* Loads SCSS stylesheets. */
         test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader, {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                getLocalIdent,
-                localIdentName: o.cssLocalIdent,
-
-                // This flag defaults `true` for ES module builds since css-loader@7.0.0:
-                // https://github.com/webpack-contrib/css-loader/releases/tag/v7.0.0
-                // We'll keep it `false` to avoid a breaking change for dependant
-                // projects, and I am also not sure what are the benefits of
-                // named CSS exports anyway.
-                namedExport: false,
-              },
-            },
-          }, {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [autoprefixer],
-              },
-            },
-          }, 'resolve-url-loader', {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
+        type: 'css/module',
+        use: {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: true,
           },
-        ],
-      }, {
-        /* Loads CSS stylesheets. It is assumed that CSS stylesheets come only
-        * from dependencies, as we use SCSS inside our own code. */
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-        ],
+        },
       }],
     },
     node: {
@@ -384,17 +362,17 @@ export default function configFactory(ops: OptionsT): Configuration {
     output: {
       chunkFilename: '[contenthash].js',
       filename: '[contenthash].js',
-      path: resolve(import.meta.dirname, o.context, o.outputPath!),
-      publicPath: `${o.publicPath}/`,
+      path: resolve(import.meta.dirname, context, outputPath),
+      publicPath: `${publicPath}/`,
     },
     plugins,
     resolve: {
       alias: {
         // Aliases to JS an JSX files are handled by Babel.
-        assets: resolve(o.context, 'src/assets'),
-        components: resolve(o.context, 'src/shared/components'),
-        fonts: resolve(o.context, 'src/assets/fonts'),
-        styles: resolve(o.context, 'src/styles'),
+        assets: resolve(context, 'src/assets'),
+        components: resolve(context, 'src/shared/components'),
+        fonts: resolve(context, 'src/assets/fonts'),
+        styles: resolve(context, 'src/styles'),
       },
       extensions: [
         '.ts',
