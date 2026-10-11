@@ -5,6 +5,7 @@ import nodeFs from 'node:fs';
 import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
 
+import autoprefixer from 'autoprefixer';
 import { isFunction } from 'lodash-es';
 
 import { SitemapStream, streamToPromise } from 'sitemap';
@@ -348,12 +349,19 @@ export default function configFactory({
         /* Loads SCSS stylesheets. */
         test: /\.scss$/,
         type: 'css/module',
-        use: {
+        use: [{
+          loader: 'postcss-loader',
+          options: {
+            postcssOptions: {
+              plugins: [autoprefixer],
+            },
+          },
+        }, {
           loader: 'sass-loader',
           options: {
             sourceMap: true,
           },
-        },
+        }],
       }],
     },
     node: {
@@ -361,6 +369,8 @@ export default function configFactory({
     },
     output: {
       chunkFilename: '[contenthash].js',
+      cssChunkFilename: '[contenthash].css',
+      cssFilename: '[contenthash].css',
       filename: '[contenthash].js',
       path: resolve(import.meta.dirname, context, outputPath),
       publicPath: `${publicPath}/`,

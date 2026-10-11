@@ -63,6 +63,8 @@ export default function configFactory(ops: OptionsT): Configuration {
   }), {
     output: {
       chunkFilename: '[id].js',
+      cssChunkFilename: '[id].css',
+      cssFilename: '[id].css',
       filename: '[id].js',
     },
     plugins,

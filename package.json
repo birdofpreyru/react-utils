@@ -1,5 +1,5 @@
 {
-  "version": "1.57.0",
+  "version": "1.57.1",
   "bin": {
     "react-utils-build": "bin/build.js",
     "react-utils-run-with-babel": "bin/run-with-babel.js",
@@ -81,6 +81,7 @@
     "@types/serve-favicon": "^2.5.7",
     "@types/supertest": "^7.2.1",
     "@types/webpack": "^5.28.5",
+    "autoprefixer": "^10.6.1",
     "babel-jest": "^30.5.2",
     "babel-loader": "^10.1.1",
     "babel-plugin-module-resolver": "^5.0.3",
@@ -95,6 +96,7 @@
     "mockdate": "^3.0.5",
     "nodelist-foreach-polyfill": "^1.2.0",
     "postcss": "^8.5.28",
+    "postcss-loader": "^8.2.1",
     "postcss-scss": "^4.0.9",
     "pretty": "^2.0.0",
     "react-refresh": "^0.19.0",
