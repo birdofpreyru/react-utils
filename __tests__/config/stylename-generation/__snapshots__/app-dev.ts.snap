@@ -11,6 +11,9 @@ exports[`emits expected CSS 1`] = `
   background: red;
   width: 10px;
   height: 10px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 /*!**************************************************************!*\\
   !*** css ./__assets__/MockPackageB/TestComponent/style.scss ***!

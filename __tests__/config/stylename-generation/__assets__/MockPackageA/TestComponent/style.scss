@@ -8,4 +8,7 @@
   background: red;
   width: 10px;
   height: 10px;
+
+  // This one is to check vendor prefixes are added by our setup.
+  appearance: none;
 }
