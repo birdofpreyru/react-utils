@@ -21,7 +21,8 @@ document.write(global.ssrMarkup ?? '');
 const container = document.querySelector('#react-view');
 
 const fs = global.webpackOutputFs;
-const outputPath = global.webpackConfig!.output!.path;
+const outputPath = global.webpackConfig?.output?.path;
+if (!outputPath) throw Error('Missing output path');
 
 let jsFile: string | undefined;
 let cssFile: string | undefined;
@@ -35,6 +36,7 @@ it('emits expected number of assets', () => {
 });
 
 it('emits expected CSS', () => {
+  if (!cssFile) throw Error('Missing CSS filename');
   const css = fs.readFileSync(`${outputPath}/${cssFile}`, 'utf8');
   expect(css).toMatchSnapshot();
 });
@@ -45,6 +47,7 @@ it('generates expected markup during SSR', () => {
 
 it('conserves expected markup after hydration', async () => {
   const markup = container?.innerHTML;
+  if (!jsFile) throw Error('Missing JS file');
   const js = fs.readFileSync(`${outputPath}/${jsFile}`, 'utf8') as string;
 
   await act(async () => {

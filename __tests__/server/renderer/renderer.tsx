@@ -231,7 +231,8 @@ test(
   'Server-side rendering (SSR); injection of CSS chunks & Redux state',
   async () => coreTest(mockWebpackConfig(), {
     Application: () => {
-      const context = useSsrContext()!;
+      const context = useSsrContext();
+      if (!context) throw Error('Missing context');
       context.chunks.push('test-chunk-a');
       context.chunks.push('test-chunk-b');
       return <div>Hello Wold!</div>;
@@ -248,7 +249,8 @@ test(
   'Setting of response HTTP status the server-side rendering',
   async () => coreTest(mockWebpackConfig(), {
     Application: () => {
-      const context = useSsrContext()!;
+      const context = useSsrContext();
+      if (!context) throw Error('Missing context');
       context.setStatus(404);
       return <div>404 Error Test</div>;
     },
@@ -265,7 +267,6 @@ test('Throws in case of forge.random.getBytes(..) failure', async () => {
 it('correctly tests if brotli-encoded responses are acceptable', () => {
   const res = (header: string) => serverRenderer.isBrotliAcceptable({
     // TODO: It is fine to use for sure... should we declare it outside the test?
-    // eslint-disable-next-line jest/no-conditional-in-test
     get: (name: string) => (name.toLowerCase() === 'accept-encoding'
       ? header : undefined),
   } as Request);

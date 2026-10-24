@@ -74,7 +74,8 @@ const CustomDropdown: FunctionComponent<
     e: React.KeyboardEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>,
   ) => {
     const view = window.visualViewport;
-    const rect = dropdownRef.current!.getBoundingClientRect();
+    if (!dropdownRef.current) throw Error('Missing dropdown reference');
+    const rect = dropdownRef.current.getBoundingClientRect();
     setActive(true);
 
     // NOTE: This first opens the dropdown off-screen, where it is measured
@@ -103,13 +104,13 @@ const CustomDropdown: FunctionComponent<
     }
   }
 
-  let containerClassName = custom.container;
-  if (active) containerClassName += ` ${custom.active}`;
+  let containerClassName = custom.container ?? '';
+  if (active) containerClassName += ` ${custom.active ?? ''}`;
 
   let opsContainerClass = custom.select ?? '';
   if (upward) {
-    containerClassName += ` ${custom.upward}`;
-    opsContainerClass += ` ${custom.upward}`;
+    containerClassName += ` ${custom.upward ?? ''}`;
+    opsContainerClass += ` ${custom.upward ?? ''}`;
   }
 
   return (

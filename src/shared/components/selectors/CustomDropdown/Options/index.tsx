@@ -59,7 +59,8 @@ const Options: FunctionComponent<PropsT> = ({
       const e = opsRef.current?.parentElement;
       if (!e) return undefined;
 
-      const rect = opsRef.current!.getBoundingClientRect();
+      if (!opsRef.current) throw Error('Missing reference');
+      const rect = opsRef.current.getBoundingClientRect();
       const style = window.getComputedStyle(e);
       const mBottom = parseFloat(style.marginBottom);
       const mTop = parseFloat(style.marginTop);

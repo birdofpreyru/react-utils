@@ -119,7 +119,7 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     footer: {
-      copyright: `Copyright © 2019&ndash;${new Date().getFullYear()}, Dr. Sergey Pogodin`,
+      copyright: `Copyright © 2019&ndash;${new Date().getFullYear().toString()}, Dr. Sergey Pogodin`,
       links: [
         {
           items: [

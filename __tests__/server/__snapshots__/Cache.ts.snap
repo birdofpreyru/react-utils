@@ -2,7 +2,7 @@
 
 exports[`works as expected 1`] = `
 Cache {
-  "items": {},
+  "items": Map {},
   "maxSize": 18,
   "size": 0,
 }
@@ -10,13 +10,13 @@ Cache {
 
 exports[`works as expected 2`] = `
 Cache {
-  "items": {
-    "A": {
+  "items": Map {
+    "A" => {
       "data": "123",
       "size": 6,
       "timestamp": 1617580800000,
     },
-    "B": {
+    "B" => {
       "data": "123456",
       "size": 12,
       "timestamp": 1617580801000,
@@ -29,13 +29,13 @@ Cache {
 
 exports[`works as expected 3`] = `
 Cache {
-  "items": {
-    "A": {
+  "items": Map {
+    "A" => {
       "data": "ab",
       "size": 4,
       "timestamp": 1617580802000,
     },
-    "B": {
+    "B" => {
       "data": "123456",
       "size": 12,
       "timestamp": 1617580801000,
@@ -48,13 +48,13 @@ Cache {
 
 exports[`works as expected 4`] = `
 Cache {
-  "items": {
-    "A": {
+  "items": Map {
+    "A" => {
       "data": "ab",
       "size": 4,
       "timestamp": 1617580802000,
     },
-    "C": {
+    "C" => {
       "data": "21",
       "size": 4,
       "timestamp": 1617580803000,

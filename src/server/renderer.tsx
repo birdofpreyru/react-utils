@@ -349,11 +349,14 @@ export default function factory(
     defaultLogLevel: ops.defaultLoggerLogLevel,
   });
 
-  const buildInfo = ops.buildInfo ?? getBuildInfo(webpackConfig.context!);
+  if (!webpackConfig.context) throw Error('Missing Webpack context');
+  const buildInfo = ops.buildInfo ?? getBuildInfo(webpackConfig.context);
   setBuildInfo(buildInfo);
 
+  if (!webpackConfig.output) throw Error('Missing Webpack output config');
   // publicPath from webpack.output has a trailing slash at the end.
-  const { path: outputPath, publicPath } = webpackConfig.output!;
+  const { path: outputPath, publicPath } = webpackConfig.output;
+  if (!outputPath) throw Error('Missing output path');
 
   const manifestLink = fs.existsSync(`${outputPath}/manifest.json`)
     ? `<link rel="manifest" href="${publicPath as string}manifest.json">` : '';
@@ -363,14 +366,16 @@ export default function factory(
     nonce: string;
   }
 
+  if (ops.staticCacheSize === undefined) throw Error('Missing staticCacheSize');
+
   const cache = ops.staticCacheController
     ? new Cache<{
       buffer: BufferWithNonce;
       status: number;
-    }>(ops.staticCacheSize!)
+    }>(ops.staticCacheSize)
     : null;
 
-  const CHUNK_GROUPS = readChunkGroupsJson(outputPath!);
+  const CHUNK_GROUPS = readChunkGroupsJson(outputPath);
 
   // TODO: Look at it later.
   // eslint-disable-next-line complexity
@@ -383,7 +388,8 @@ export default function factory(
 
       let cacheRef: CacheRefT | null | undefined;
       if (cache) {
-        cacheRef = ops.staticCacheController!(req);
+        if (!ops.staticCacheController) throw Error('Missing staticCacheController');
+        cacheRef = ops.staticCacheController(req);
         if (cacheRef) {
           const data = cache.get(cacheRef);
           if (data !== null) {
@@ -422,7 +428,8 @@ export default function factory(
         }
       }
 
-      const brr = ops.beforeRender!(req, publicConfig);
+      if (!ops.beforeRender) throw Error('Missing beforeRender');
+      const brr = ops.beforeRender(req, publicConfig);
       const { configToInject, extraScripts, initialState } = await brr;
 
       const [cipher, iv] = prepareCipher(buildInfo.key);
@@ -516,12 +523,14 @@ export default function factory(
 
         let ssrRound = 0;
         let bailed = false;
-        for (; ssrRound < ops.maxSsrRounds!; ++ssrRound) {
+        if (ops.maxSsrRounds === undefined) throw Error('Missing maxSsrRounds');
+        for (; ssrRound < ops.maxSsrRounds; ++ssrRound) {
           stream = await renderPass();
 
           if (!ssrContext.dirty) break;
 
-          const timeout = ops.ssrTimeout! + ssrStart - Date.now();
+          if (ops.ssrTimeout === undefined) throw Error('Missing SSR timeout');
+          const timeout = ops.ssrTimeout + ssrStart - Date.now();
           bailed = timeout <= 0 || !await Promise.race([
             Promise.allSettled(ssrContext.pending),
             timer(timeout).then(() => false),
@@ -536,11 +545,13 @@ export default function factory(
           // resolved and placed their data into the initial global state.
           stream = await renderPass();
 
-          logMsg = bailed ? `SSR timed out after ${ops.ssrTimeout} second(s)`
-            : `SSR bailed out after ${ops.maxSsrRounds} round(s)`;
-        } else logMsg = `SSR completed in ${ssrRound + 1} round(s)`;
+          if (ops.ssrTimeout === undefined) throw Error('Missing SSR timeout');
+          logMsg = bailed ? `SSR timed out after ${ops.ssrTimeout.toString()} second(s)`
+            : `SSR bailed out after ${ops.maxSsrRounds.toString()} round(s)`;
+        } else logMsg = `SSR completed in ${(ssrRound + 1).toString()} round(s)`;
 
-        ops.logger!.log(ssrContext.dirty ? 'warn' : 'info', logMsg);
+        if (!ops.logger) throw Error('Missing logger');
+        ops.logger.log(ssrContext.dirty ? 'warn' : 'info', logMsg);
 
         if (ssrContext.redirectTo) {
           res.redirect(ssrContext.status, ssrContext.redirectTo);
@@ -548,7 +559,7 @@ export default function factory(
         }
 
         await new Promise((ready) => {
-          stream!.pipe(new Writable({
+          stream.pipe(new Writable({
             destroy: ready,
             write: (chunk: { toString: () => string }, _, done) => {
               appHtmlMarkup += chunk.toString();
@@ -664,7 +675,8 @@ export default function factory(
               b.nonce = (req as unknown as {
                 nonce: string;
               }).nonce;
-              cache!.add({ buffer: b, status }, cacheRef.key, buffer.length);
+              if (cache === null) throw Error('Missing cache');
+              cache.add({ buffer: b, status }, cacheRef.key, buffer.length);
               done();
             }
           });

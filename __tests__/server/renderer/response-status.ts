@@ -34,7 +34,8 @@ function noop() {
 beforeAll(() => {
   renderer = factory(mockWebpackConfig(), {
     Application: (): undefined => {
-      const context = useSsrContext()!;
+      const context = useSsrContext();
+      if (!context) throw Error('Missing context');
       context.setStatus(mockStatus);
     },
     logger: {

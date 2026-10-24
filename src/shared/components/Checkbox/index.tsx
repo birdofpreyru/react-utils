@@ -33,13 +33,13 @@ const Checkbox = <ValueT extends 'indeterminate' | boolean = boolean>({
 }: PropT<ValueT>): ReactNode => {
   const composed = useTheme('Checkbox', defaultTheme, theme);
 
-  let containerClassName = composed.container;
-  if (disabled) containerClassName += ` ${composed.disabled}`;
+  let containerClassName = composed.container ?? '';
+  if (disabled) containerClassName += ` ${composed.disabled ?? ''}`;
 
-  let checkboxClassName = composed.checkbox;
-  if (checked === 'indeterminate') checkboxClassName += ` ${composed.indeterminate}`;
+  let checkboxClassName = composed.checkbox ?? '';
+  if (checked === 'indeterminate') checkboxClassName += ` ${composed.indeterminate ?? ''}`;
 
-  if (error) containerClassName += ` ${composed.error}`;
+  if (error) containerClassName += ` ${composed.error ?? ''}`;
 
   return (
     <div className={containerClassName}>

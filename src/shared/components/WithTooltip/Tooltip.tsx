@@ -219,10 +219,10 @@ function setComponentPositions(
     pos.baseArrowStyle = ARROW_STYLE_UP;
   }
 
-  const containerStyle = `left:${pos.containerX}px;top:${pos.containerY}px`;
+  const containerStyle = `left:${pos.containerX.toString()}px;top:${pos.containerY.toString()}px`;
   tooltip.container.setAttribute('style', containerStyle);
 
-  const arrowStyle = `${pos.baseArrowStyle};left:${pos.arrowX}px;top:${pos.arrowY}px`;
+  const arrowStyle = `${pos.baseArrowStyle};left:${pos.arrowX.toString()}px;top:${pos.arrowY.toString()}px`;
   tooltip.arrow.setAttribute('style', arrowStyle);
 }
 

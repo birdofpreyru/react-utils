@@ -51,15 +51,15 @@ const Input: FunctionComponent<PropsT> = ({
 
   const localRef = useRef<HTMLInputElement>(null);
 
-  let containerClassName = composed.container;
+  let containerClassName = composed.container ?? '';
 
   // NOTE: As of now, "focused" can be true only when "theme.focused"
   // is provided.
-  if (focused /* && theme.focused */) containerClassName += ` ${composed.focused}`;
+  if (focused /* && theme.focused */) containerClassName += ` ${composed.focused ?? ''}`;
 
   if (!rest.value && composed.empty) containerClassName += ` ${composed.empty}`;
 
-  if (error) containerClassName += ` ${composed.error}`;
+  if (error) containerClassName += ` ${composed.error ?? ''}`;
 
   return (
     <div

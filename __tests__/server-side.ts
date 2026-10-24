@@ -26,11 +26,9 @@ test('Export at server side', async () => {
     // TODO: Actually, this comparison function should be moved to the top
     // level of the module, to avoid these lint rules triggering in the first
     // place.
-    /* eslint-disable jest/no-conditional-in-test */
     if (oA && oB) return oA - oB;
     if (oA) return -1;
     if (oB) return 1;
-    /* eslint-enable jest/no-conditional-in-test */
     return a[0].localeCompare(b[0]);
   });
 

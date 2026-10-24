@@ -34,6 +34,8 @@ export function requireWeak<T extends object>(
 ): RequireWeakResT<T> | null {
   if (IS_CLIENT_SIDE) return null;
 
+  if (!require) throw Error('Internal error (missing require)');
+
   let basePath: string | undefined;
   let ops: RequireWeakOptionsT;
   if (typeof basePathOrOptions === 'string') {
@@ -44,11 +46,12 @@ export function requireWeak<T extends object>(
   }
 
   // eslint-disable-next-line @typescript-eslint/unbound-method
-  const { resolve } = require!('node:path') as typeof PathNS;
+  const { resolve } = require('node:path') as typeof PathNS;
 
   const path = basePath ? resolve(basePath, modulePath) : modulePath;
 
-  const module = require!(path) as T;
+  // eslint-disable-next-line import/no-dynamic-require
+  const module = require(path) as T;
 
   if (!('default' in module) || !module.default) return module as RequireWeakResT<T>;
 

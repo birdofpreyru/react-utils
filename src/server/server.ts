@@ -136,7 +136,8 @@ export default async function factory(
     'staticCacheSize',
   ]);
   const renderer = rendererFactory(webpackConfig, rendererOps);
-  const { publicPath } = webpackConfig.output!;
+  if (!webpackConfig.output) throw Error('Missing output config');
+  const { publicPath } = webpackConfig.output;
 
   const server = express() as ServerT;
 
@@ -150,6 +151,7 @@ export default async function factory(
     server.use((req, res, next) => {
       const schema = req.headers['x-forwarded-proto'];
       if (schema === 'http') {
+        if (!req.headers.host) throw Error('Missing host name');
         let url = `https://${req.headers.host}`;
         if (req.originalUrl !== '/') url += req.originalUrl;
         res.redirect(url);
@@ -214,12 +216,13 @@ export default async function factory(
     'ip',
     (req: Request & { clientIp: string }) => req.clientIp,
   );
+  if (!options.logger) throw Error('Missing logger');
   const FORMAT = ':ip > :status :method :url :response-time ms :res[content-length] :referrer :user-agent';
   server.use(loggerMiddleware(FORMAT, {
     stream: {
       // TODO: This implies the logger is always set. Is it on a higher level?
       // then mark it as always present.
-      write: options.logger!.info.bind(options.logger),
+      write: options.logger.info.bind(options.logger),
     },
   }));
 
@@ -228,7 +231,7 @@ export default async function factory(
   // Thus, this setup to serve it. Probably, need some more configuration
   // for special cases, but this will do for now.
   server.get('/__service-worker.js', express.static(
-    webpackConfig.output?.path ?? '',
+    webpackConfig.output.path ?? '',
     {
       setHeaders: (res) => res.set('Cache-Control', 'no-cache'),
     },
@@ -267,7 +270,9 @@ export default async function factory(
   }
   /* eslint-enable import/no-extraneous-dependencies */
 
-  server.use(publicPath as string, express.static(webpackConfig.output!.path!));
+  const outputPath = webpackConfig.output.path;
+  if (!outputPath) throw Error('Missing output path');
+  server.use(publicPath as string, express.static(outputPath));
 
   if (options.onExpressJsSetup) {
     await options.onExpressJsSetup(server);
@@ -314,8 +319,9 @@ export default async function factory(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
       const serverSide = status >= CODES.INTERNAL_SERVER_ERROR;
 
+      if (!options.logger) throw Error('Missing logger');
       // Log server-side errors always, client-side at debug level only.
-      options.logger!.log(
+      options.logger.log(
         serverSide ? 'error' : 'debug',
         error.stack ?? error.toString(),
       );

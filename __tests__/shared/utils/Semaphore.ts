@@ -75,7 +75,7 @@ describe('concurrent use', () => {
     const newFlow = async (signal: string) => {
       for (let i = 1; i <= 2; ++i) {
         await sem.waitReady(true);
-        signals.push(`${signal}-${i}`);
+        signals.push(`${signal}-${i.toString()}`);
         await timer(dT);
         sem.setReady(true);
       }
@@ -105,7 +105,7 @@ describe('concurrent use', () => {
       for (let i = 1; i <= 2; ++i) {
         await sem.seize();
         expect(sem.ready).toBe(false);
-        signals.push(`${signal}-${i}`);
+        signals.push(`${signal}-${i.toString()}`);
         await timer(dT);
         sem.setReady(true);
       }

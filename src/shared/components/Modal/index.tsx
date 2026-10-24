@@ -86,7 +86,8 @@ const BaseModal: FunctionComponent<PropsT> = ({
   const focusLast = useMemo(() => (
     <div
       onFocus={() => {
-        const elems = containerRef.current!.querySelectorAll('*');
+        if (!containerRef.current) throw Error('Missing container reference');
+        const elems = containerRef.current.querySelectorAll('*');
         for (let i = elems.length - 1; i >= 0; --i) {
           (elems[i] as HTMLElement).focus();
           if (document.activeElement === elems[i]) return;

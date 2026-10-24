@@ -88,7 +88,8 @@ const WithTooltip: FunctionComponent<PropsT> = ({
 
   const updatePortalPosition = (cursorX: number, cursorY: number) => {
     if (showTooltip) {
-      const wrapperRect = wrapperRef.current!.getBoundingClientRect();
+      if (!wrapperRef.current) throw Error('Missing reference');
+      const wrapperRect = wrapperRef.current.getBoundingClientRect();
       if (
         cursorX < wrapperRect.left
         || cursorX > wrapperRect.right
@@ -101,7 +102,7 @@ const WithTooltip: FunctionComponent<PropsT> = ({
           cursorX + window.scrollX,
           cursorY + window.scrollY,
           placement,
-          wrapperRef.current!,
+          wrapperRef.current,
         );
       }
     } else {
@@ -144,11 +145,12 @@ const WithTooltip: FunctionComponent<PropsT> = ({
       // cycle due to the implementation).
       if (tooltipRef.current) {
         setHeap((prev) => {
+          if (!wrapperRef.current) throw Error('Missing reference');
           tooltipRef.current?.pointTo(
             prev.lastCursorX + window.scrollX,
             prev.lastCursorY + window.scrollY,
             placement,
-            wrapperRef.current!,
+            wrapperRef.current,
           );
           return prev;
         });
@@ -169,7 +171,7 @@ const WithTooltip: FunctionComponent<PropsT> = ({
     tip,
   ]);
 
-  let container = custom.wrapper;
+  let container = custom.wrapper ?? '';
   if (classNameProp) container += ` ${classNameProp}`;
 
   useEffect(() => {

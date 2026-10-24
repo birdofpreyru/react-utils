@@ -21,9 +21,11 @@ import { getGlobal } from 'utils/jest';
 
 const global = getGlobal();
 
-const outputPath = global.webpackConfig!.output!.path;
+const outputPath = global.webpackConfig?.output?.path;
+if (!outputPath) throw Error('Missing output path');
 
-document.write(global.ssrMarkup!);
+if (!global.ssrMarkup) throw Error('Missing SSR markup');
+document.write(global.ssrMarkup);
 
 const INJ_REGEX = /<meta itemprop="drpruinj" content="[a-zA-Z0-9+/=]+">/;
 
@@ -33,7 +35,8 @@ test('generates expected head markup during SSR', () => {
   // TODO: Should be improved, to ensure the injection part is the same between
   // test invocations, and thus entire header can be snapshotted.
   const headMarkup = document.head.innerHTML;
-  const inj = document.querySelector('meta[itemprop="drpruinj"]')!.outerHTML;
+  const inj = document.querySelector('meta[itemprop="drpruinj"]')?.outerHTML;
+  if (!inj) throw Error('Missing injection');
   expect(!!inj.match(INJ_REGEX)).toBe(true);
   headMarkupWithoutInj = headMarkup.replace(inj, '');
   expect(pretty(headMarkupWithoutInj)).toMatchSnapshot();
@@ -45,24 +48,31 @@ test('generates expected markup during SSR', () => {
   // to the header (see a comment above), thus this can be simplified:
   // snapshot entire body, or better ensure injected data do not change
   // between test invocations, and snapshot entire document.
-  const container = document.querySelector('#react-view')!;
+  const container = document.querySelector('#react-view');
+  if (!container) throw Error('Missing container');
   expect(pretty(container.innerHTML)).toMatchSnapshot();
 });
 
 test('hydration works as expected', async () => {
-  const viewMarkup = document.querySelector('#react-view')!.innerHTML;
+  const viewMarkup = document.querySelector('#react-view')?.innerHTML;
+  if (!viewMarkup) throw Error('Missing view markup');
 
   const fs = global.webpackOutputFs;
 
-  const chunks = global.webpackStats!.namedChunkGroups!;
+  const chunks = global.webpackStats?.namedChunkGroups;
+  if (!chunks) throw Error('Missing chunks');
 
+  const jsMainFile = chunks.main?.assets?.[0]?.name;
+  if (!jsMainFile) throw Error('Missing main JS file name');
   const mainJs = fs.readFileSync(
-    `${outputPath}/${chunks.main!.assets![0]!.name}`,
+    `${outputPath}/${jsMainFile}`,
     'utf8',
   ) as string;
 
+  const jsSplitFile = chunks.split?.assets?.[0]?.name;
+  if (!jsSplitFile) throw Error('Missing split JS file name');
   const splitJs = fs.readFileSync(
-    `${outputPath}/${chunks.split!.assets![0]!.name}`,
+    `${outputPath}/${jsSplitFile}`,
     'utf8',
   ) as string;
 
@@ -78,5 +88,7 @@ test('hydration works as expected', async () => {
   });
 
   expect(document.head.innerHTML).toBe(headMarkupWithoutInj);
-  expect(document.querySelector('#react-view')!.innerHTML).toBe(viewMarkup);
+
+  const finalMarkup = document.querySelector('#react-view')?.innerHTML;
+  expect(finalMarkup).toBe(viewMarkup);
 });

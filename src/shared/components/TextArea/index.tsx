@@ -83,8 +83,8 @@ const TextArea: FunctionComponent<Props> = ({
     if (el) setHeight(el.scrollHeight);
   }, [localValue]);
 
-  let containerClassName = custom.container;
-  if (error) containerClassName += ` ${custom.error}`;
+  let containerClassName = custom.container ?? '';
+  if (error) containerClassName += ` ${custom.error ?? ''}`;
 
   return (
     <div
@@ -95,7 +95,7 @@ const TextArea: FunctionComponent<Props> = ({
     >
       {label === undefined ? null : <div className={custom.label}>{label}</div>}
       <textarea
-        className={`${custom.textarea} ${custom.hidden}`}
+        className={`${custom.textarea ?? ''} ${custom.hidden ?? ''}`}
 
         // This text area is hidden underneath the primary one below,
         // and it is used for text measurements, to implement auto-scaling

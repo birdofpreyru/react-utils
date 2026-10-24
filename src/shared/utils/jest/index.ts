@@ -212,9 +212,10 @@ export function snapshot(
         if (!rejected) {
           // TODO: These lines are the same as the lines below for sync variant of
           // the function. We should split and reuse them in both places.
-          const nodes = res!.asFragment().childNodes;
+          if (!res) throw Error('Missing render result');
+          const nodes = res.asFragment().childNodes;
           expect(nodes.length > 1 ? [...nodes] : nodes[0]).toMatchSnapshot();
-          resolve(res!);
+          resolve(res);
         }
       }, (error: unknown) => {
         rejected = true;

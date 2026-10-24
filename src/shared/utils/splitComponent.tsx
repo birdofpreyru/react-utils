@@ -28,7 +28,7 @@ export function setClientChunkGroups(groups: ChunkGroupsT): void {
   clientChunkGroups = groups;
 }
 
-const refCounts: Record<string, number> = {};
+const refCounts = new Map<string, number>();
 
 function getPublicPath() {
   return getBuildInfo().publicPath;
@@ -74,8 +74,8 @@ function bookStyleSheet(
   }
 
   if (refCount) {
-    const current = refCounts[path] ?? 0;
-    refCounts[path] = 1 + current;
+    const current = refCounts.get(path) ?? 0;
+    refCounts.set(path, 1 + current);
   }
 
   return res;
@@ -152,12 +152,14 @@ export function freeStyleSheets(
     if (asset.endsWith('.css')) {
       const path = `${getPublicPath()}/${asset}`;
 
-      const pathRefCount = refCounts[path];
+      const pathRefCount = refCounts.get(path);
       if (pathRefCount) {
         if (pathRefCount <= 1) {
-          document.head.querySelector(`link[href="${path}"]`)!.remove();
-          delete refCounts[path];
-        } else refCounts[path] = pathRefCount - 1;
+          const node = document.head.querySelector(`link[href="${path}"]`);
+          if (!node) throw Error('Missing node');
+          node.remove();
+          refCounts.delete(path);
+        } else refCounts.set(path, pathRefCount - 1);
       }
     }
   }

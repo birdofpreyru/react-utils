@@ -26,7 +26,8 @@ exports[`"development" environment "noReactCompiler" variation 1`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.50",
+        "proposals": true,
+        "version": "3.50.0",
       },
     ],
     [
@@ -83,7 +84,8 @@ exports[`"development" environment "noStyling" variation 1`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.50",
+        "proposals": true,
+        "version": "3.50.0",
       },
     ],
     "react-refresh/babel",
@@ -134,7 +136,8 @@ exports[`"development" environment "noStyling" variation 2`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.50",
+        "proposals": true,
+        "version": "3.50.0",
       },
     ],
     "react-refresh/babel",
@@ -179,7 +182,8 @@ exports[`"development" environment Default config 1`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.50",
+        "proposals": true,
+        "version": "3.50.0",
       },
     ],
     [
@@ -242,7 +246,8 @@ exports[`"development" environment Default config 2`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.50",
+        "proposals": true,
+        "version": "3.50.0",
       },
     ],
     [
@@ -298,7 +303,8 @@ exports[`"production" environment "noReactCompiler" variation 1`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.50",
+        "proposals": true,
+        "version": "3.50.0",
       },
     ],
     [
@@ -354,7 +360,8 @@ exports[`"production" environment "noStyling" variation 1`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.50",
+        "proposals": true,
+        "version": "3.50.0",
       },
     ],
   ],
@@ -404,7 +411,8 @@ exports[`"production" environment "noStyling" variation 2`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.50",
+        "proposals": true,
+        "version": "3.50.0",
       },
     ],
   ],
@@ -448,7 +456,8 @@ exports[`"production" environment Default config 1`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.50",
+        "proposals": true,
+        "version": "3.50.0",
       },
     ],
     [
@@ -510,7 +519,8 @@ exports[`"production" environment Default config 2`] = `
       "polyfill-corejs3",
       {
         "method": "usage-pure",
-        "version": "3.50",
+        "proposals": true,
+        "version": "3.50.0",
       },
     ],
     [

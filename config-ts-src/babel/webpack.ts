@@ -158,7 +158,7 @@ export default function getPreset(
 
   const res = newBaseConfig(ops);
 
-  if (!ops.noStyling) addStyling(res, env as ENVIRONMENTS);
+  if (!ops.noStyling) addStyling(res, env as unknown as ENVIRONMENTS);
   if (env === (ENVIRONMENTS.DEV as string) && !ops.noRR) {
     res.plugins.push('react-refresh/babel');
   }

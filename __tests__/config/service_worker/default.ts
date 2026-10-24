@@ -19,8 +19,12 @@ import { getGlobal } from 'utils/jest';
 const global = getGlobal();
 
 const fs = global.webpackOutputFs;
-const outputPath = global.webpackConfig!.output!.path;
+
+const outputPath = global.webpackConfig?.output?.path;
+if (!outputPath) throw Error('Missing output path');
+
 const jsPath = global.webpackStats?.assetsByChunkName?.main?.[0];
+if (!jsPath) throw Error('Missing JS path');
 
 document.write(global.ssrMarkup ?? '');
 
@@ -39,7 +43,6 @@ it('registers service worker with the correct URL', async () => {
   const originalWindowAddEventListener = window.addEventListener;
 
   jest.spyOn(window, 'addEventListener').mockImplementation((event, callback) => {
-    // eslint-disable-next-line jest/no-conditional-in-test
     if (event === 'load') onLoad = callback as EventListener;
     originalWindowAddEventListener(event, callback);
   });
@@ -54,7 +57,6 @@ it('registers service worker with the correct URL', async () => {
   });
 
   act(() => {
-    // eslint-disable-next-line jest/no-conditional-in-test
     if (onLoad) onLoad(new Event('load'));
   });
 

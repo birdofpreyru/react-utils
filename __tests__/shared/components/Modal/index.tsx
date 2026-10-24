@@ -56,7 +56,8 @@ test('Snapshot match', () => {
 });
 
 test('onCancel', async () => {
-  const overlay = document.querySelector('div[aria-label=Cancel]')!;
+  const overlay = document.querySelector('div[aria-label=Cancel]');
+  if (!overlay) throw Error('Missing overlay');
   await user.click(overlay);
   expect(onCancel).toHaveBeenCalledWith();
 });
@@ -68,7 +69,8 @@ test.skip('onWheel', () => {
   expect(container).toHaveLength(1);
   const stopPropagation = jest.fn();
 
-  const target = container[0]!;
+  const [target] = container;
+  if (!target) throw Error('Missing target');
   fireEvent.wheel(target, { stopPropagation });
 
   expect(stopPropagation).toHaveBeenCalledWith();

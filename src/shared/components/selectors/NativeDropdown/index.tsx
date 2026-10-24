@@ -69,8 +69,8 @@ const Dropdown: FunctionComponent<PropsT<string>> = ({
     </option>
   );
 
-  let selectClassName = composed.select;
-  if (!isValidValue) selectClassName += ` ${composed.invalid}`;
+  let selectClassName = composed.select ?? '';
+  if (!isValidValue) selectClassName += ` ${composed.invalid ?? ''}`;
 
   return (
     <div className={composed.container}>

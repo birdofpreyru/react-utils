@@ -43,6 +43,9 @@ This preset includes:
 - [babel-plugin-module-resolver] &mdash; attempts to resolve relative module
   imports against `/src/shared` and `/src` roots in the host codebase.
 
+- [babel-plugin-polyfill-corejs3] &mdash; polyfills latest JS features missing
+  in the target environments.
+
 - [@babel/plugin-transform-runtime] &mdash; enables re-use of
   Babel&ndash;injected helper code (to minimize generated code size).
 
@@ -155,6 +158,7 @@ that:
 [Babel v8]: https://babeljs.io/blog/2026/06/16/8.0.0
 
 [babel-plugin-module-resolver]: https://www.npmjs.com/package/babel-plugin-module-resolver
+[babel-plugin-polyfill-corejs3]: https://www.npmjs.com/package/babel-plugin-polyfill-corejs3
 [babel-plugin-react-compiler]: https://www.npmjs.com/package/babel-plugin-react-compiler
 
 [@babel/preset-env]: https://babeljs.io/docs/en/babel-preset-env

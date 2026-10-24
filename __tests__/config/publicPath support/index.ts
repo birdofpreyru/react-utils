@@ -20,7 +20,9 @@ import { getGlobal } from 'utils/jest';
 
 const global = getGlobal();
 
-const { path: outPath, publicPath } = global.webpackConfig!.output!;
+if (!global.webpackConfig?.output) throw Error('Missing output config');
+const { path: outPath, publicPath } = global.webpackConfig.output;
+if (!outPath) throw Error('Missing output path');
 
 const baseUrl = `http://localhost${publicPath as string}`;
 
@@ -47,12 +49,14 @@ it('relies on the expected base URL', () => {
 
 it('generates expected view', () => {
   const markup = document.querySelector('#react-view')?.innerHTML;
-  expect(pretty(markup!)).toMatchSnapshot();
+  if (!markup) throw Error('Missing mark-up');
+  expect(pretty(markup)).toMatchSnapshot();
 });
 
 it('matches SSR markup in hydration', async () => {
   const inj = document.querySelector('meta[itemprop="drpruinj"]')?.outerHTML;
-  const ssrMarkup = document.documentElement.innerHTML.replace(inj!, '');
+  if (!inj) throw Error('Missing injection');
+  const ssrMarkup = document.documentElement.innerHTML.replace(inj, '');
   const js = fs.readFileSync(`${outPath}/${jsFileName}`, 'utf8') as string;
 
   await act(async () => {
@@ -81,7 +85,9 @@ it('uses the correct CSS URL', () => {
 it('uses the correct PNG URL', () => {
   const element = document.querySelector<HTMLImageElement>('[alt="Empty PNG"]');
   expect(element?.src.startsWith(baseUrl)).toBe(true);
-  const path = `${outPath}/${element?.src.slice(baseUrl.length)}`;
+  const file = element?.src.slice(baseUrl.length);
+  if (!file) throw Error('Missing file name');
+  const path = `${outPath}/${file}`;
   expect(fs.existsSync(path)).toBe(true);
 });
 
@@ -89,6 +95,7 @@ it('emits correct CSS', () => {
   const css = fs.readFileSync(`${outPath}/${cssFileName}`, 'utf8') as string;
   expect(css).toMatchSnapshot();
   let ttfUrl = css.match(/src:url\((.*)\.ttf\)/)?.[1];
+  if (!ttfUrl) throw Error('Missing TTF URL.');
   ttfUrl = `http://localhost${ttfUrl}.ttf`;
   expect(ttfUrl.startsWith(baseUrl)).toBe(true);
   const path = `${outPath}/${ttfUrl.slice(baseUrl.length)}`;

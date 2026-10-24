@@ -17,13 +17,19 @@ import { getGlobal } from 'utils/jest';
 
 const global = getGlobal();
 
-document.write(global.ssrMarkup!);
-const container = document.querySelector('#react-view')!;
+const { ssrMarkup } = global;
+if (!ssrMarkup) throw Error('Missing SSR markup');
+
+document.write(ssrMarkup);
+const container = document.querySelector('#react-view');
+if (!container) throw Error('Missing container');
+
 const fs = global.webpackOutputFs;
-const outputPath = global.webpackConfig!.output!.path;
+const outputPath = global.webpackConfig?.output?.path;
+if (!outputPath) throw Error('Missing output path');
 
 let jsFile: string;
-global.webpackStats!.assets!.forEach(({ name }) => {
+global.webpackStats?.assets?.forEach(({ name }) => {
   if (name.endsWith('.js')) jsFile = name;
 });
 
@@ -37,5 +43,5 @@ test('matches SSR render during hydration', async () => {
     await SCENE_INIT_PROMISE;
   });
 
-  expect(document.querySelector('#react-view')!.innerHTML).toBe(markup);
+  expect(document.querySelector('#react-view')?.innerHTML).toBe(markup);
 });

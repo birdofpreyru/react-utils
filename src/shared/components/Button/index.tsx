@@ -57,7 +57,7 @@ export const BaseButton: FunctionComponent<PropsT> = ({
   theme,
   to,
 }) => {
-  let className = theme.button;
+  let className = theme.button ?? '';
   if (active && theme.active) className += ` ${theme.active}`;
   if (disabled) {
     if (theme.disabled) className += ` ${theme.disabled}`;

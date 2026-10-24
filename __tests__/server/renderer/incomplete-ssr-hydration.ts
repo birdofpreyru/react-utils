@@ -26,9 +26,13 @@ document.write(global.ssrMarkup ?? '');
 const markup = document.querySelector('#react-view')?.innerHTML;
 
 const fs = global.webpackOutputFs;
-const outputPath = global.webpackConfig!.output!.path;
+
+const outputPath = global.webpackConfig?.output?.path;
+if (!outputPath) throw Error('Missing output path');
+
 const jsFilename = global.webpackStats
   ?.namedChunkGroups?.main?.assets?.[0]?.name;
+if (!jsFilename) throw Error('Missing JS filename');
 
 it('generates expected SSR markup', () => {
   expect(markup).toMatchSnapshot();

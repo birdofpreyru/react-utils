@@ -29,7 +29,7 @@ function injectCsrfToken(cfg: ConfigT): ConfigT {
   return cfg;
 }
 
-export function getConfig<T extends ConfigT>(sync: true): T;
+export function getConfig(sync: true): ConfigT;
 
 export function getConfig<T extends ConfigT>(sync?: boolean): Promise<T> | T;
 

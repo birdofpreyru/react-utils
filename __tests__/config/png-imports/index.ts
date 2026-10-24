@@ -15,7 +15,8 @@ import { getGlobal } from 'utils/jest';
 
 const global = getGlobal();
 
-const outputPath = global.webpackConfig!.output!.path;
+const outputPath = global.webpackConfig?.output?.path;
+if (!outputPath) throw Error('Missing output path');
 
 let container: HTMLElement | null;
 
@@ -35,12 +36,16 @@ it('generates expected markup during SSR', () => {
 
 it('emits the PNG file to the expected path', () => {
   const path = container?.innerHTML.match(/src="(.*\.png)"/)?.[1];
+  if (!path) throw Error('Missing path');
+
   expect(global.webpackOutputFs.existsSync(`${outputPath}/${path}`)).toBe(true);
 });
 
 it('generates expected markup at the client-side', async () => {
   const ssrMarkup = container?.innerHTML;
   let js = global.webpackStats?.entrypoints?.main?.assets?.[0]?.name;
+  if (!js) throw Error('Missing JS path');
+
   js = global.webpackOutputFs.readFileSync(`${outputPath}/${js}`, 'utf8') as string;
 
   await act(async () => {

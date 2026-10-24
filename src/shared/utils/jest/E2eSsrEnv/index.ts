@@ -101,6 +101,7 @@ export default class E2eSsrEnv extends JsdomEnv {
     this.global.webpackConfig = factory(options);
 
     const fs = this.global.webpackOutputFs;
+    if (!options.context) throw Error('Missing context');
     let buildInfo = `${options.context}/.build-info`;
     if (fs.existsSync(buildInfo)) {
       buildInfo = fs.readFileSync(buildInfo, 'utf8') as string;

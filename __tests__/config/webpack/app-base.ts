@@ -20,6 +20,6 @@ describe('.build-info output', () => {
       mode: 'none',
     });
     expect(fs.existsSync(`${context}/.build-info`)).toBe(true);
-    expect('[contenthash].js').toBe(config.output!.filename);
+    expect('[contenthash].js').toBe(config.output?.filename);
   });
 });

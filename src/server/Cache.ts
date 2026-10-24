@@ -8,7 +8,7 @@ type CachedItemT<DatumT> = {
  * Implements the static cache.
  */
 export default class Cache<DatumT> {
-  private items: Record<string, CachedItemT<DatumT>> = {};
+  private items = new Map<string, CachedItemT<DatumT>>();
 
   private size = 0;
 
@@ -29,7 +29,7 @@ export default class Cache<DatumT> {
     key: string;
     maxage?: number;
   }): DatumT | null {
-    const item = this.items[key];
+    const item = this.items.get(key);
     return item && Date.now() - item.timestamp < maxage ? item.data : null;
   }
 
@@ -40,19 +40,19 @@ export default class Cache<DatumT> {
    * @param size Byte size of the item.
    */
   add(data: DatumT, key: string, size: number): void {
-    const cached = this.items[key];
+    const cached = this.items.get(key);
     if (cached) this.size -= cached.size;
 
-    this.items[key] = { data, size, timestamp: Date.now() };
+    this.items.set(key, { data, size, timestamp: Date.now() });
     this.size += size;
 
     if (this.size > this.maxSize) {
-      const entries = Object.entries(this.items);
+      const entries = [...this.items.entries()];
       entries.sort((a, b) => a[1].timestamp - b[1].timestamp);
 
       for (const entry of entries) {
         const [itemKey, item] = entry;
-        delete this.items[itemKey];
+        this.items.delete(itemKey);
         this.size -= item.size;
         if (this.size < this.maxSize / 2) break;
       }

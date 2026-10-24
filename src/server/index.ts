@@ -210,15 +210,19 @@ export async function launchServer(
   /* Sets error handler for HTTP(S) server. */
   httpServer.on('error', (error: Error) => {
     if ((error as { syscall?: string }).syscall !== 'listen') throw error;
-    const bind = typeof ops.port === 'string' ? `Pipe ${ops.port}` : `Port ${ops.port}`;
+    const bind = typeof ops.port === 'string'
+      ? `Pipe ${ops.port}`
+      : `Port ${ops.port ? ops.port.toString() : 'undefined'}`;
+
+    if (!ops.logger) throw Error('Missing logger');
 
     /* Human-readable message for some specific listen errors. */
     switch ((error as { code?: string }).code) {
       case 'EACCES':
-        ops.logger!.error(`${bind} requires elevated privileges`);
+        ops.logger.error(`${bind} requires elevated privileges`);
         return process.exit(1);
       case 'EADDRINUSE':
-        ops.logger!.error(`${bind} is already in use`);
+        ops.logger.error(`${bind} is already in use`);
         return process.exit(1);
       case undefined:
       default:
@@ -228,10 +232,15 @@ export async function launchServer(
 
   /* Listening event handler for HTTP(S) server. */
   httpServer.on('listening', () => {
-    const addr = httpServer.address()!;
-    const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-    ops.logger!.info(`Server listening on ${bind} in ${
-      process.env.NODE_ENV} mode`);
+    const addr = httpServer.address();
+    if (!addr) throw Error('Missing address');
+
+    const bind = typeof addr === 'string'
+      ? `pipe ${addr}` : `port ${addr.port.toString()}`;
+
+    if (!ops.logger) throw Error('Missing logger');
+    ops.logger.info(`Server listening on ${bind} in ${
+      process.env.NODE_ENV ?? 'undefined'} mode`);
   });
 
   httpServer.listen(ops.port);

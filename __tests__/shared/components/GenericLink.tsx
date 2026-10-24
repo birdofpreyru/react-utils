@@ -117,7 +117,9 @@ test('onClick(..) callback in custom <Link>', async () => {
     </GenericLink>
   ));
 
-  const link = doc.querySelector('.LINK')!;
+  const link = doc.querySelector('.LINK');
+  // jest/no-conditional-in-test
+  if (!link) throw Error('Missing link');
   await user.click(link);
 
   expect(clickHandler).toHaveBeenCalledTimes(1);

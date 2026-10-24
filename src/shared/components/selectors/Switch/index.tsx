@@ -37,7 +37,7 @@ export const Switch: FunctionComponent<PropsT> = ({
 
     let className: string = composed.option;
     let onPress: (() => void) | undefined;
-    if (iValue === value) className += ` ${composed.selected}`;
+    if (iValue === value) className += ` ${composed.selected ?? ''}`;
     else if (onChange) {
       onPress = () => {
         onChange(iValue);
