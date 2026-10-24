@@ -1,3 +1,5 @@
+import coreJsPackage from 'core-js-pure/package.json' with { type: 'json' };
+
 import type { InputOptions, PluginItem, PresetItem } from '@babel/core';
 
 import type {
@@ -69,7 +71,11 @@ function newBaseConfig(options: OptionsT): ConfigurationT {
       root: ['./src/shared', './src'],
     }],
     '@babel/transform-runtime',
-    ['polyfill-corejs3', { method: 'usage-pure', version: '3.50' }],
+    ['polyfill-corejs3', {
+      method: 'usage-pure',
+      proposals: true,
+      version: coreJsPackage.version,
+    }],
   );
 
   if (options.addImportExtensions) {
