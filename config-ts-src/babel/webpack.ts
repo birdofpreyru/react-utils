@@ -1,4 +1,4 @@
-import coreJsPackage from 'core-js-pure/package.json' with { type: 'json' };
+import coreJsPackage from 'core-js/package.json' with { type: 'json' };
 
 import type { InputOptions, PluginItem, PresetItem } from '@babel/core';
 
@@ -72,7 +72,17 @@ function newBaseConfig(options: OptionsT): ConfigurationT {
     }],
     '@babel/transform-runtime',
     ['polyfill-corejs3', {
-      method: 'usage-pure',
+      // BEWARE: On paper, "usage-pure" is the best option we want here;
+      // in practice, it seems to fail sometimes in obscure ways, e.g. I saw
+      // the polyfilled code crashing when calling Promise.allSettled, which was
+      // supposed to be polyfilled for the target environment, while the same
+      // code built with "usage-global" worked just fine (the polyfilled
+      // Promise.allSettled worked as designed). I don't have time to deep dive
+      // into it right now, let's just pin this option for "usage-global" for
+      // now, and look into it more later.
+      // TODO: Investigate more!
+      method: 'usage-global',
+
       proposals: true,
       version: coreJsPackage.version,
     }],
