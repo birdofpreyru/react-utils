@@ -29,7 +29,10 @@ function injectCsrfToken(cfg: ConfigT): ConfigT {
   return cfg;
 }
 
-export function getConfig(sync: true): ConfigT;
+// BEWARE: Removing generic type from this override messes up
+// type resolution in the host code in some scenarios.
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
+export function getConfig<T extends ConfigT>(sync: true): T;
 
 export function getConfig<T extends ConfigT>(sync?: boolean): Promise<T> | T;
 
