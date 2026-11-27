@@ -265,6 +265,9 @@ test('Throws in case of forge.random.getBytes(..) failure', async () => {
 });
 
 it('correctly tests if brotli-encoded responses are acceptable', () => {
+  // TODO: Revise - it is flagged as error now, but it did not cause any
+  // notable issues before.
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-class-instance-assignment
   const res = (header: string) => serverRenderer.isBrotliAcceptable({
     // TODO: It is fine to use for sure... should we declare it outside the test?
     get: (name: string) => (name.toLowerCase() === 'accept-encoding'

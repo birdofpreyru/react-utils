@@ -244,6 +244,10 @@ export function newDefaultLogger({
       ),
     ),
     level: defaultLogLevel,
+
+    // TODO: Revise - it is flagged as error now, but it did not cause any
+    // notable issues before.
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-class-instance-assignment
     transports: [new transports.Console()],
   });
 }
