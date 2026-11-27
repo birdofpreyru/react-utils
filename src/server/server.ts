@@ -106,7 +106,7 @@ export type ServerT = Express & {
 
 export type OptionsT = RendererOptionsT & {
   beforeExpressJsError?:
-  (server: ServerT) => Promise<boolean> | boolean;
+    (server: ServerT) => Promise<boolean> | boolean;
 
   beforeExpressJsSetup?: (server: ServerT) => Promise<void> | void;
   cookieSignatureSecret?: string;

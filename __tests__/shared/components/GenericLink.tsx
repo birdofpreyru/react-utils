@@ -27,72 +27,72 @@ const TestLink: React.FunctionComponent<{
 };
 
 test('Absolute link, starting with http://', () => {
-  snapshot((
+  snapshot(
     <GenericLink
       routerLinkType={TestLink as unknown as LinkT}
       to="http://www.domain.com/test"
     >
       ABSOLUTE LINK
-    </GenericLink>
-  ));
+    </GenericLink>,
+  );
 });
 
 test('Absolute link, starting with https://', () => {
-  snapshot((
+  snapshot(
     <GenericLink
       onClick={() => undefined}
       routerLinkType={TestLink as unknown as LinkT}
       to="https://www.domain.com/test"
     >
       ABSOLUTE LINK
-    </GenericLink>
-  ));
+    </GenericLink>,
+  );
 });
 
 test('Relative link', () => {
-  snapshot((
+  snapshot(
     <GenericLink
       routerLinkType={TestLink as unknown as LinkT}
       to="http/relative/link"
     >
       RELATIVE LINK
-    </GenericLink>
-  ));
+    </GenericLink>,
+  );
 });
 
 test('Relative link, with `enforceA`', () => {
-  snapshot((
+  snapshot(
     <GenericLink
       enforceA
       routerLinkType={TestLink as unknown as LinkT}
       to="/relative/link"
     >
       RELATIVE LINK
-    </GenericLink>
-  ));
+    </GenericLink>,
+  );
 });
 
 test('Relative link, with `openNewTab`', () => {
-  snapshot((
+  snapshot(
     <GenericLink
       openNewTab
       routerLinkType={TestLink as unknown as LinkT}
       to="relative/link"
     >
       RELATIVE LINL
-    </GenericLink>
-  ));
+    </GenericLink>,
+  );
 });
 
 test('Anchor link', () => {
-  snapshot((
+  snapshot(
     <GenericLink
       routerLinkType={TestLink as unknown as LinkT}
       to="#anchor"
     >
       ANCHOR LINK
-    </GenericLink>
-  ));
+    </GenericLink>,
+  );
 });
 
 test('onClick(..) callback in custom <Link>', async () => {
@@ -104,7 +104,7 @@ test('onClick(..) callback in custom <Link>', async () => {
   window.scroll = jest.fn();
 
   const clickHandler = jest.fn();
-  const doc = mount((
+  const doc = mount(
     <GenericLink
       className="LINK"
       onClick={() => {
@@ -114,8 +114,8 @@ test('onClick(..) callback in custom <Link>', async () => {
       to="SOME/TEST/URL"
     >
       LINK
-    </GenericLink>
-  ));
+    </GenericLink>,
+  );
 
   const link = doc.querySelector('.LINK');
   // jest/no-conditional-in-test

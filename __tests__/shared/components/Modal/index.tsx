@@ -24,7 +24,7 @@ const user = userEvent.setup();
 
 beforeEach(() => {
   onCancel = jest.fn();
-  scene = mount((
+  scene = mount(
     <div data-id="Modal Code Parent">
       <div data-id="Modal Code Sibling" />
       <Modal
@@ -40,8 +40,8 @@ beforeEach(() => {
       >
         Modal Content
       </Modal>
-    </div>
-  ));
+    </div>,
+  );
 });
 
 afterEach(() => {

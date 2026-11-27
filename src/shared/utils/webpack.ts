@@ -10,7 +10,7 @@ type RequireWeakOptionsT = {
 };
 
 type RequireWeakResT<T> = T extends { default: infer D }
-  ? (D extends null | undefined ? T : D & Omit<T, 'default'>)
+  ? D extends null | undefined ? T : D & Omit<T, 'default'>
   : T;
 
 let require: ((url: string) => unknown) | undefined;

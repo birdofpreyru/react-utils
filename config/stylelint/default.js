@@ -25,8 +25,8 @@ export default {
     'scss/at-mixin-pattern': namePattern,
     'scss/dollar-variable-pattern': namePattern,
     'selector-class-pattern': null,
-    'selector-pseudo-class-no-unknown': [
-      true, { ignorePseudoClasses: ['global'] },
-    ],
+    'selector-pseudo-class-no-unknown': [true, {
+      ignorePseudoClasses: ['global'],
+    }],
   },
 };

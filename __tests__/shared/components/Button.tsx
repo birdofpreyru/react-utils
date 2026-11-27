@@ -23,40 +23,40 @@ const testTheme = {
 
 describe('Matches snapshots', () => {
   test('when active', () => {
-    snapshot((
+    snapshot(
       <Button
         active
         onClick={noop}
         theme={testTheme}
       >
         BUTTON
-      </Button>
-    ));
+      </Button>,
+    );
   });
 
   test('when disabled', () => {
-    snapshot((
+    snapshot(
       <Button
         disabled
         onClick={noop}
         theme={testTheme}
       >
         BUTTON
-      </Button>
-    ));
-    snapshot((
+      </Button>,
+    );
+    snapshot(
       <Button
         disabled
         onClick={noop}
         theme={omit(testTheme, 'disabled')}
       >
         BUTTON
-      </Button>
-    ));
+      </Button>,
+    );
   });
 
   test('when rendered as link', () => {
-    snapshot((
+    snapshot(
       <StaticRouter location="">
         <Button
           active
@@ -65,7 +65,7 @@ describe('Matches snapshots', () => {
         >
           BUTTON
         </Button>
-      </StaticRouter>
-    ));
+      </StaticRouter>,
+    );
   });
 });

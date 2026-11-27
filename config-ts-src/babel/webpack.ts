@@ -89,14 +89,14 @@ function newBaseConfig(options: OptionsT): ConfigurationT {
   );
 
   if (options.addImportExtensions) {
-    plugins.push(
-      ['@dr.pogodin/add-import-extension',
-        typeof options.addImportExtensions === 'object'
-          ? options.addImportExtensions
-          : {
-            replacements: { svg: 'svg.js' },
-          }],
-    );
+    plugins.push([
+      '@dr.pogodin/add-import-extension',
+      typeof options.addImportExtensions === 'object'
+        ? options.addImportExtensions
+        : {
+          replacements: { svg: 'svg.js' },
+        },
+    ]);
   }
 
   return {
